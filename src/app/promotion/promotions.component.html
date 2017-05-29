@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="goldgradient beigeborder subnav">
+    <button class="subnav-btnleft" (click)="goBack()"><i class="fa fa-chevron-left"></i></button>
+    <h3 style="text-align: center;">Promotions</h3>
+    <button *ngIf="isAdmin()" class="subnav-btnright" [routerLink]="['/promotion/singlepromotion']" routerLinkActive="active"><i class="fa fa-plus"></i></button>
+  </div>
+  <table class="table table-hover table-responsive table-condensed prm-tbl">
+    <tbody>
+    <tr *ngFor="let promotion of fetchedPromotions | paginate: { id: 'server', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }" class="prm-ctnr">
+      <div class="prm-wrpr">
+        <td class="promo-cnt">
+          <button *ngIf="isAdmin()" class="editicon" [routerLink]="['/promotion/singlepromotion/' + promotion._id]" routerLinkActive="active"><span class="glyphicon glyphicon-edit"></span></button>
+          <div *ngFor="let singleForm of promotion.form">
+            <img class="promo-img" src="./uploads/forms/{{singleForm.owner}}/{{singleForm.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
+          </div>
+        </td>
+      </div>
+      <td class="dspl-nn"><a [routerLink]="['/promotion/' + promotion._id]" routerLinkActive="active">{{promotion.email}}</a></td>
+    </tr>
+    </tbody>
+  </table>
+  <div class="see-all">
+    <button *ngIf="isAdmin()" [routerLink]="['/promotion/seeInactive']"  class="see-allbtn">See Inactive Promotions</button>
+  </div>
+  <div class="has-text-centered">
+
+    <div>
+      <div [ngClass]="{ 'hidden': !loading }">Loading...</div>
+      <button
+        *ngIf="paginationData.currentPage * paginationData.itemsPerPage < paginationData.totalItems"
+        type="button" (click)="loadMore()" class="ldmre">
+        Load More
+      </button>
+    </div>
+
+
+  </div>
+</div>

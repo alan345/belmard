@@ -1,0 +1,132 @@
+<div class="container">
+  <div class="goldgradient beigeborder subnav">
+    <button class="subnav-btnleft" (click)="goBack()"><i class="fa fa-chevron-left"></i></button>
+    <h3 style="text-align: center;">My Salon</h3>
+    <div *ngIf="isHQcompanie()">
+      <div *ngIf="isAdmin()">
+        <button class="subnav-btnright" [routerLink]="['/companie/edit/' + fetchedCompanie._id]" routerLinkActive="active"><span class="glyphicon glyphicon-edit"></span><div class="edt-slntxt">Edit Salon</div></button>
+      </div>
+    </div>
+    <div *ngIf="!isHQcompanie()">
+      <div *ngIf="isAdmin() || isManager() || isSalesRep()">
+        <button *ngIf="isAdmin()" class="subnav-btnright" [routerLink]="['/companie/edit/' + fetchedCompanie._id]" routerLinkActive="active"><span class="glyphicon glyphicon-edit"></span><div class="edt-slntxt">Edit Salon</div></button>
+      </div>
+    </div>
+  </div>
+  <div class="beigeback phyto-ctnr">
+    <div class="sln-adrs">
+      <h3>Welcome to {{fetchedCompanie.name}}</h3>
+      <h6>{{fetchedCompanie.address.address}}, {{fetchedCompanie.address.city}}, {{fetchedCompanie.address.state}} {{fetchedCompanie.address.zip}} - {{fetchedCompanie.phoneNumber}}</h6>
+    </div>
+    <div class="sln-sty phyto-ctnr">
+      <div *ngFor="let user of fetchedCompanie._users">
+          <div *ngIf="!isHQcompanie()">
+            <div *ngIf="user.role == 'stylist' || user.role == 'manager'">
+              <div *ngIf="user.role != 'client'">
+                <div [routerLink]="['/user/profile/' + user._id]" routerLinkActive="active" class="one-sty">
+                  <div class="one-stypic" *ngIf="user.profile._profilePicture.length == 0">
+                    <img src="assets/images/prof-pic-placeholder.png">
+                  </div>
+                  <div *ngFor="let profilePicture of user.profile._profilePicture" class="one-stypic">
+                    <img src="./uploads/forms/{{profilePicture.owner}}/{{profilePicture.imagePath}}"
+                      onerror="this.src ='assets/images/no-image-found.jpg'">
+                  </div>
+                  <div class="sty-ttl">
+                    <label>{{ user.profile.name}}</label>
+                    <p>{{ user.profile.title}}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="isHQcompanie()">
+            <div *ngIf="user.role != 'client'">
+              <div [routerLink]="['/user/profile/' + user._id]" routerLinkActive="active" class="one-sty">
+                <div class="one-stypic" *ngIf="user.profile._profilePicture.length == 0">
+                  <img src="assets/images/prof-pic-placeholder.png">
+                </div>
+                <div *ngFor="let profilePicture of user.profile._profilePicture" class="one-stypic">
+                  <img src="./uploads/forms/{{profilePicture.owner}}/{{profilePicture.imagePath}}"
+                    onerror="this.src ='assets/images/no-image-found.jpg'">
+                </div>
+                <div class="sty-ttl">
+                  <label>{{ user.profile.name}}</label>
+                  <p>{{ user.profile.title}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </div>
+  </div>
+  <div class="img-row phyto-ctnr">
+    <form [formGroup]="myForm" novalidate (ngSubmit)="save()" class="img-frm phyto-ctnr">
+      <div class="phyto-ctnr">
+        <div *ngIf = "isHQcompanie()">
+          <div class="col-sm-3">
+            <button type="button" md-button (click)="openDialog('img')" class="addpic-squr">Add Picture<br><i class="fa fa-plus"></i></button>
+          </div>
+        </div>
+        <div *ngIf = "!isHQcompanie() && (isAdmin() || isManager() || isSalesRep())">
+          <div *ngIf="!isStylist()" class="col-sm-3">
+            <button type="button" md-button (click)="openDialog('img')" class="addpic-squr">Add Picture<br><i class="fa fa-plus"></i></button>
+          </div>
+        </div>
+        <div class="col-sm-9">
+          <div formArrayName="forms" class="phyto-ctnr">
+            <div *ngFor="let form of getObjects(myForm); let i=index" class="pic-wrpr">
+              <div *ngIf="i < maxPictureToShow">
+                <div [formGroupName]="i" class="pic-list">
+                  <img width="150" src="./uploads/forms/{{fetchedCompanie.forms[i].owner}}/{{fetchedCompanie.forms[i].imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
+                  <i *ngIf = "isHQcompanie() && isAdmin()" class="fa fa-times pull-right dlt-img" (click)="removeForm(i)"></i>
+                  <i *ngIf = "!isHQcompanie() && (isAdmin() || isManager() || isSalesRep())" class="fa fa-times pull-right dlt-img" (click)="removeForm(i)"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="fetchedCompanie.forms.length>maxPictureToShow" class="phyto-ctnr">
+        <a class="seemre" (click)="seeAllPicture()">See All</a>
+      </div>
+    </form>
+  </div>
+  <div *ngIf="!isStylist()" class="beigeback phyto-ctnr">
+    <div *ngIf="!isHQcompanie()" class="sln-inf">
+      <h6> Your Phyto Sales Representative</h6>
+      <div *ngFor="let user of users; let i=index">
+        <div *ngIf="i==0" [routerLink]="['/user/profile/' + user._id]" routerLinkActive="active">
+            <p>{{ user.profile.name}}</p>
+            <p>{{ user.profile.phoneNumber}}</p>
+            <p>{{ user.email}}</p>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="isHQcompanie()" class="sln-inf">
+      <h6>Your My Chair App Administrator</h6>
+      <div *ngFor="let user of userAdmins; let i=index">
+        <div *ngIf="i==0" [routerLink]="['/user/profile/' + user._id]" routerLinkActive="active">
+            <p>{{ user.profile.name}}</p>
+            <p>{{ user.profile.phoneNumber}}</p>
+            <p>{{ user.email}}</p>
+        </div>
+      </div>
+    </div>
+    <div class="sln-mng">
+      <div *ngIf="!isHQcompanie()">
+        <div *ngFor="let user of users; let i=index">
+          <div *ngIf="i==0">
+              <button type="button" class="done"><a href="mailto:{{ user.email}}">Contact Sales</a></button>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="isHQcompanie()">
+        <div *ngFor="let user of userAdmins; let i=index">
+          <div *ngIf="i==0">
+              <button type="button" class="done"><a href="mailto:{{ user.email}}">Contact Admin</a></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,117 @@
+<div class="container goldgradient beigeborder subnav" style="position: relative;">
+  <div *ngIf="isAdmin()" class="flt-lft">
+    <button *ngIf="!isEditTitle" type="button" (click)="editTitleHomePage()" class="edtttl-btn">Edit</button>
+  </div>
+  <input *ngIf="isEditTitle" type="text" [(ngModel)]="options.design.mainPage.titleHomePage" class="edtttl-txt">
+  <h3 *ngIf="!isEditTitle" class="topnav-ad">{{options.design.mainPage.titleHomePage}}</h3>
+  <input *ngIf="isEditTitle" type="text" [(ngModel)]="options.design.mainPage.buttonHomePage" class="edtttl-lnk">
+  <input *ngIf="isEditTitle" type="text" [(ngModel)]="options.design.mainPage.linkButtonHomePage" class="edtttl-lnk">
+  <a href="{{options.design.mainPage.linkButtonHomePage}}" class="btn shopbutton" target="_blank">{{options.design.mainPage.buttonHomePage}}</a>
+  <button *ngIf="isEditTitle" type="button" (click)="editTitleHomePage()" class="edtttl-ok">DONE</button>
+</div>
+<div class="container beigeback">
+  <form #f="ngForm" novalidate (ngSubmit)="save()">
+    <div class="form-group">
+      <div ngModelGroup="options">
+        <div ngModelGroup="design">
+          <div ngModelGroup="mainPage">
+            <div class="row">
+              <div class="col-xs-6 boxpadding">
+                <div class="homeimage">
+                  <div *ngFor="let img of options.design.mainPage._imgHome1">
+                    <a (click)="goTo('product')" routerLinkActive="active">
+                      <img class="img-thumbnail img-responsive" src="./uploads/forms/{{img.owner}}/{{img.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
+                    </a>
+                  </div>
+                  <button *ngIf="isAdmin()" type="button" (click)="openDialog('_imgHome1')" class="editicon"><span class="glyphicon glyphicon-edit"></span></button>
+                </div>
+                <a (click)="goTo('product')" routerLinkActive="active">
+                  <label class="homelabel">Products</label>
+                </a>
+              </div>
+              <div class="col-xs-6 boxpadding">
+                <div class="homeimage">
+                  <div *ngFor="let img of options.design.mainPage._imgHome5">
+                    <a (click)="goTo('video')" routerLinkActive="active">
+                      <img class="img-thumbnail img-responsive" src="./uploads/forms/{{img.owner}}/{{img.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
+                    </a>
+                  </div>
+                  <button *ngIf="isAdmin()" type="button" (click)="openDialog('_imgHome5')" class="editicon"><span class="glyphicon glyphicon-edit"></span></button>
+                </div>
+                <a (click)="goTo('video')" routerLinkActive="active">
+                  <label class="homelabel">
+                    <div style="float:right;">Videos</div>
+                    <div *ngIf="trackinPage.lastVisitPageVideoCount.length > 0" class="notif">
+                      {{trackinPage.lastVisitPageVideoCount.length }}
+                    </div>
+                  </label>
+                </a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-6 boxpadding">
+                <div class="homeimage">
+                  <div *ngFor="let img of options.design.mainPage._imgHome3">
+                    <a (click)="goTo('social')" routerLinkActive="active">
+                      <img class="img-thumbnail img-responsive" src="./uploads/forms/{{img.owner}}/{{img.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
+                    </a>
+                  </div>
+                  <button *ngIf="isAdmin()" type="button" (click)="openDialog('_imgHome3')" class="editicon"><span class="glyphicon glyphicon-edit"></span></button>
+                </div>
+                <a (click)="goTo('social')" routerLinkActive="active">
+                  <label class="homelabel">Get Featured</label>
+                </a>
+              </div>
+              <div class="col-xs-6 boxpadding">
+                <div class="homeimage">
+                  <div *ngFor="let img of options.design.mainPage._imgHome4">
+                    <a (click)="goTo('press')" routerLinkActive="active">
+                      <img class="img-thumbnail img-responsive" src="./uploads/forms/{{img.owner}}/{{img.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
+                    </a>
+                  </div>
+                  <button *ngIf="isAdmin()" type="button" (click)="openDialog('_imgHome4')" class="editicon"><span class="glyphicon glyphicon-edit"></span></button>
+                </div>
+                <a (click)="goTo('press')" routerLinkActive="active">
+                  <label class="homelabel">
+                    <div style="float:right;">Press</div>
+                    <div *ngIf="trackinPage.lastVisitPagePressCount.length > 0" class="notif">
+                      {{trackinPage.lastVisitPagePressCount.length }}
+                    </div>
+                  </label>
+                </a>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-6 boxpadding">
+                <div class="homeimage">
+                  <div *ngFor="let img of options.design.mainPage._imgHome2">
+                    <a (click)="goTo('promotion')" routerLinkActive="active">
+                      <img class="img-thumbnail img-responsive" src="./uploads/forms/{{img.owner}}/{{img.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
+                    </a>
+                  </div>
+                  <button *ngIf="isAdmin()" type="button" (click)="openDialog('_imgHome2')" class="editicon"><span class="glyphicon glyphicon-edit"></span></button>
+                </div>
+                <a (click)="goTo('promotion')" routerLinkActive="active">
+                  <label class="homelabel">Promotions</label>
+                </a>
+              </div>
+              <div class="col-xs-6 boxpadding">
+                <div class="homeimage">
+                  <div *ngFor="let img of options.design.mainPage._imgHome6">
+                    <a (click)="goTo('user')" routerLinkActive="active">
+                      <img class="img-thumbnail img-responsive" src="./uploads/forms/{{img.owner}}/{{img.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
+                    </a>
+                  </div>
+                  <button *ngIf="isAdmin()" type="button" (click)="openDialog('_imgHome6')" class="editicon"><span class="glyphicon glyphicon-edit"></span></button>
+                </div>
+                <a (click)="goTo('user')" routerLinkActive="active">
+                  <label class="homelabel">Clients</label>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,130 @@
+a.shopbutton {
+    box-shadow: none !important;
+    border: 1px solid #0a2f87;
+    color: #0a2f87 !important;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.homelabel {
+    text-align: right !important;
+    width: 100%;
+    color: #0a2f87;
+    margin: 0 !important;
+    background-color: #fff;
+    font-weight: 100;
+    cursor: pointer;
+    display: inline-table;
+}
+.homeimage {
+    overflow: hidden;
+}
+.homeimage img {
+    padding: 0;
+    border: none;
+    border-radius: 0;
+}
+.boxpadding {
+    padding: 1px !important;
+}
+.topnav-ad {
+    text-align: center;
+}
+.notif {
+    background-color: #FB8417;
+    float: right;
+    padding: 2px 7.5px 0 !important;
+    margin: 4px 15px;
+    color: #fff;
+    font-size: 16px;
+    border-radius: 25px;
+}
+.edtttl-btn {
+    background: none !important;
+    border: none !important;
+    color: #999999 !important;
+    position: absolute;
+    font-size: 16px;
+    max-width: 75px !important;
+    float: right;
+    right: 5px;
+    bottom: 18px;
+}
+.edtttl-txt {
+  max-width: none !important;
+}
+.edtttl-txt, .edtttl-lnk {
+  margin: 5px 15px !important;
+  width: 90%;
+}
+.edtttl-ok {
+  width: 90px;
+  height: 40px;
+  background-color: #0A2F87 !important;
+  border: none !important;
+  color: #ffffff !important;
+  text-transform: uppercase !important;
+}
+
+@media screen and (min-width: 768px) {
+
+.topnav-ad {
+  width: 80%;
+  float: left;
+  margin: 19px auto;
+}
+a.shopbutton {
+  margin: 15px 0;
+}
+.edtttl-ok {
+  margin: 0 20px;
+}
+.homelabel {
+    font-size: 23px;
+    padding: 4% 4% 4% 0;
+}
+.homeimage {
+  max-height: 210px !important;
+}
+}
+
+@media screen and (max-width: 767px) {
+
+.topnav-ad {
+  width: 90%;
+  margin: 8px auto;
+}
+a.shopbutton {
+  width: 150px;
+  margin: 0 auto 15px;
+  display: block;
+}
+.edtttl-ok {
+  margin: 15px;
+  float: right;
+}
+.homelabel {
+    font-size: 18px;
+    padding: 4% 8%;
+}
+}
+
+@media screen and (min-width: 565px) and (max-width: 767px) {
+  
+.homeimage {
+  max-height: 150px !important;
+}
+}
+
+@media screen and (min-width: 375px) and (max-width: 564px) {
+  
+.homeimage {
+  max-height: 95px !important;
+}
+}
+
+@media screen and (max-width: 374px) {
+  
+.homeimage {
+  max-height: 80px !important;
+}
+}

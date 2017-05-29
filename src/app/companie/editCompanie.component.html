@@ -1,0 +1,129 @@
+<div class="container">
+  <div class="goldgradient beigeborder subnav">
+    <button class="subnav-btnleft" (click)="goBack()"><i class="fa fa-chevron-left"></i></button>
+    <h3 style="text-align: center;">My Salon</h3>
+  </div>
+  <div class="beigeback single-wrpr">
+    <h4 class="dspl-nn">id: {{fetchedCompanie._id}}</h4>
+    <!-- <form #f="ngForm" novalidate (ngSubmit)="save(f.value, f.valid)"> -->
+    <form [formGroup]="myForm" novalidate (ngSubmit)="save(true)">
+      <div class="form-group sln-inffrm">
+        <!-- <div formGroupName="fetchedCompanie"> -->
+        <!-- <div ngModelGroup="fetchedCompanie"> -->
+          <input
+            type="text"
+            class="form-control"
+            formControlName="name"
+            [(ngModel)]="fetchedCompanie.name"
+            required
+            minlength="5"
+            placeholder="Name of Your Salon"
+          >
+          <input
+            type="text"
+            class="form-control"
+            formControlName="phoneNumber"
+            [(ngModel)]="fetchedCompanie.phoneNumber"
+            required
+            minlength="5"
+            placeholder="Phone Number"
+          >
+          <!-- <div ngModelGroup="address"> -->
+          <div formGroupName="address">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="address"
+              [(ngModel)]="fetchedCompanie.address.address"
+              required
+              minlength="5"
+              placeholder="Street Address"
+            >
+            <input
+              type="text"
+              class="form-control"
+              formControlName="city"
+              [(ngModel)]="fetchedCompanie.address.city"
+              required
+              minlength="2"
+              placeholder="City"
+            >
+              <input
+                type="text"
+                class="form-control"
+                formControlName="state"
+                [(ngModel)]="fetchedCompanie.address.state"
+                required
+                minlength="5"
+                placeholder="State Code"
+              >
+              <input
+                type="text"
+                class="form-control"
+                formControlName="zip"
+                [(ngModel)]="fetchedCompanie.address.zip"
+                required
+                minlength="5"
+                placeholder="Zip Code"
+              >
+          </div>
+        <!-- </div> -->
+      </div>
+      <h4 style="margin-top:35px !important;">Manage Users:</h4>
+      <div *ngIf="fetchedCompanie._id">
+        <button type="button" [routerLink]="['/companie/edit/addUser/' + fetchedCompanie._id]" routerLinkActive="active" class="sln-styadd">Add New <i class="fa fa-plus"></i></button>
+        <div *ngIf="isAdmin() || isManager() || isSalesRep()" class="sln-stymng phyto-ctnr">
+          <p>Managers:</p>
+          <div *ngFor="let user of userManagers; let i=index">
+            <div class="sln-styone">
+              <button type="button" (click)="move(i, -1, 'userManagers')" class="updn-btn"><i class="fa fa-chevron-up"></i></button>
+              <button type="button" (click)="move(i, 1, 'userManagers')" class="updn-btn"><i class="fa fa-chevron-down"></i></button>
+              {{ user.profile.name}}
+              <button type="button" (click)="removeUserFromCompanie(i, 'userManagers')" class="dlt-sty"><i class="fa fa-times"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="sln-stymng phyto-ctnr">
+          <p>Stylists:</p>
+          <div *ngFor="let user of userStylists; let i=index">
+            <div class="sln-styone">
+              <button type="button" (click)="move(i, -1, 'userStylists')" class="updn-btn"><i class="fa fa-chevron-up"></i></button>
+              <button type="button" (click)="move(i, 1, 'userStylists')" class="updn-btn"><i class="fa fa-chevron-down"></i></button>
+              {{ user.profile.name}}
+              <button type="button" (click)="removeUserFromCompanie(i, 'userStylists')" class="dlt-sty"><i class="fa fa-times"></i></button>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="isAdmin()" class="sln-stymng phyto-ctnr">
+          <p>SalesRep:</p>
+          <div *ngFor="let user of usersSalesRep; let i=index">
+            <div class="sln-styone">
+              <button type="button" (click)="move(i, -1, 'users')" class="updn-btn"><i class="fa fa-chevron-up"></i></button>
+              <button type="button" (click)="move(i, 1, 'users')" class="updn-btn"><i class="fa fa-chevron-down"></i></button>
+              <p style="float:left;">{{ user.profile.name}}</p>
+              <button type="button" (click)="removeUserFromCompanie(i, 'users')" class="dlt-sty"><i class="fa fa-times"></i></button>
+              <div *ngIf="i==0" class="sales-star"><i class="fa fa-star"></i></div>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="isHQcompanie()">
+          <div *ngIf="isAdmin()" class="sln-stymng phyto-ctnr">
+            <p>Admins:</p>
+            <div *ngFor="let user of userAdmins; let i=index">
+              <div class="sln-styone">
+                <button type="button" (click)="move(i, -1, 'userAdmins')" class="updn-btn"><i class="fa fa-chevron-up"></i></button>
+                <button type="button" (click)="move(i, 1, 'userAdmins')" class="updn-btn"><i class="fa fa-chevron-down"></i></button>
+                <p style="float:left;">{{ user.profile.name}}</p>
+                <button type="button" (click)="removeUserFromCompanie(i, 'userAdmins')" class="dlt-sty"><i class="fa fa-times"></i></button>
+                <div *ngIf="i==0" class="sales-star"><i class="fa fa-star"></i></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="valid-edit">
+        <button type="submit" class="sln-edt done">Done</button>
+      </div>
+    </form>
+  </div>
+</div>

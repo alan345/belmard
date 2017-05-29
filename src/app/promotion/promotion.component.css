@@ -1,0 +1,122 @@
+.prm-wrpr {
+    position: relative;
+    margin: 2.5px 2.5px 0;
+}
+.promo-cnt {
+    width: 100% !important;
+    display: block;
+}
+.dlticon {
+    position: relative;
+    top: 3px;
+    right: 3px;
+    padding: 8px 13px 7px;
+    background-color: red;
+    color: #ffffff;
+    outline: none !important;
+    border: none;
+    float: right;
+}
+img.promo-img {
+    width: 100% !important;
+    vertical-align: top !important;
+    top: 0 !important;
+    cursor: default !important;
+}
+.prmimg-cnt img {
+    max-width: 100%;
+}
+.prmimg-cnt .addpic-squr {
+    margin-top: 15px !important;
+    height: auto !important;
+    width: 100% !important;
+}
+subsubnav-clients {
+    background-color: #0a2f87;
+    padding: 15px;
+}
+.subsubnav-clients input {
+    margin-bottom: 0 !important;
+}
+.newclientbig-btn, .newclientsml-btn {
+    background: none;
+    border: 1px solid;
+    color: #fff;
+    font-size: 12px;
+    padding: 12px 20px;
+    float: right;
+}
+.newclientbig-btn:hover, .newclientbig-btn:active, .newclientsml-btn:hover, .newclientsml-btn:active {
+    color: #0a2f87;
+    background: #ffffff;
+}
+p.tblnav-cl {
+    margin: inherit !important;
+}
+.tbl-right p.tblnav-cl {
+    text-align: right;
+}
+.updownbtn {
+    background-color: #ffffff;
+    border: none;
+    padding: 2px 8px;
+    margin: 11px 5px;
+    color: #0a2f87;
+    font-size: 19px;
+    outline: none !important;
+}
+.tbl-right .updownbtn {
+    float:right;
+}
+.clienttbl tr {
+    background-color: #fff;
+}
+.clienttbl td {
+    border-bottom: 2px solid #efe9df !important;
+    border-top: none !important;
+    padding: 20px 15px !important;
+}
+td.rightdate {
+    text-align: right;
+    color: #999999;
+    font-size: 11px;
+    padding: 22px 15px !important;
+}
+button.see-allbtn {
+    width: 100%;
+    padding: 15px;
+    margin: 0 auto 15px !important;
+    background: #999999;
+    border: none !important;
+    outline: none !important;
+    color: #fff;
+}
+.see-all {
+    margin: 0 3px;
+}
+.subsubnav-promos {
+  background-color: #0A2F87;
+  padding: 15px 15px 0;
+}
+.tbl-right {
+    width: 215px;
+    display: block;
+    float: right;
+    max-width: 50%;
+}
+@media screen and (min-width: 768px) {
+  
+#strt-dt {
+  padding-left: 0 !important;
+}
+#end-dt {
+  padding-right: 0 !important;
+}
+}
+
+@media screen and (max-width: 767px) {
+  
+#strt-dt, #end-dt {
+  padding: 0 !important;
+}
+}

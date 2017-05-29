@@ -1,0 +1,81 @@
+<div class="container">
+  <div class="goldgradient beigeborder subnav">
+    <button class="subnav-btnleft" (click)="goBack()"><i class="fa fa-chevron-left"></i></button>
+    <h3 style="text-align: center;">Clients</h3>
+  </div>
+  <div class="subsubnav-clients">
+    <div>
+      <div [ngClass]="{ 'hidden': fetchedCompanies.length<2 }">
+        <select
+          [ngClass]="{ 'hidden': isSalesRep()}"
+          class="form-control"
+          [(ngModel)]="companieIdToSelect"
+          (ngModelChange)="onChangeCompanie($event)"
+          >
+          <option value="" disabled selected>Select Salon</option>
+          <option *ngFor="let companie of fetchedCompanies" value="{{companie._id}}">{{companie.name}}</option>
+        </select>
+      </div>
+    </div>
+    <input
+      type="text"
+      name="Search"
+      placeholder="Search"
+      [(ngModel)]="search.search"
+      (ngModelChange)="searchInput()"
+    >
+    <button class="newclientbig-btn" [routerLink]="['/user/newuser']" routerLinkActive="active">ADD A NEW CLIENT</button>
+    <button class="newclientsml-btn" [routerLink]="['/user/newuser']" routerLinkActive="active"><i class="fa fa-plus" aria-hidden="true"></i></button>
+  </div>
+  <div class="beigeback">
+    <table class="table table-hover table-responsive table-condensed">
+      <thead class="head-clts">
+        <tr>
+          <th>
+            <div class="tbl-left">
+              <p class="tblnav-cl">Client</p>
+              <button class="updownbtn" (click)="orderBy('-client')"><i class="fa fa-chevron-up"></i></button>
+              <button class="updownbtn" (click)="orderBy('client')"><i class="fa fa-chevron-down"></i></button>
+            </div>
+          </th>
+          <th *ngIf="showColumnStylist()">
+            <div class="tbl-center">
+              <p class="tblnav-cl">Stylist</p>
+              <button class="updownbtn" (click)="orderBy('stylist')"><i class="fa fa-chevron-up"></i></button>
+              <button class="updownbtn" (click)="orderBy('-stylist')"><i class="fa fa-chevron-down"></i></button>
+            </div>
+          </th>
+          <th>
+            <div class="tbl-right">
+              <p class="tblnav-cl">Last Visit</p>
+              <button class="updownbtn" (click)="orderBy('lastVisit')"><i class="fa fa-chevron-up"></i></button>
+              <button class="updownbtn" (click)="orderBy('-lastVisit')"><i class="fa fa-chevron-down"></i></button>
+            </div>
+          </th>
+        </tr>
+      </thead>
+      <tbody class="clienttbl">
+        <tr *ngFor="let user of (fetchedCompanie._users | companieFilter: search.search : search.orderBy )">
+          <td *ngIf="user.role == 'client'" [routerLink]="['/user/' + user._id]" routerLinkActive="active">
+              {{user.profile.name }}
+          </td>
+          <td *ngIf="user.role == 'client' && showColumnStylist()" [routerLink]="['/user/' + user._id]" routerLinkActive="active">
+            <div *ngFor="let parentUser of user.profile.parentUser" class="mdl-sty">
+              {{parentUser.profile.name}}
+            </div>
+          </td>
+          <td *ngIf="user.role == 'client'" [routerLink]="['/user/' + user._id]" routerLinkActive="active">
+            <div *ngFor="let parentUser of user.profile.parentUser" class="rightdate">
+              {{user.lastVisit |  date :'dd-MMM-yyyy'}}
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- <div class="has-text-centered">
+        <div class="spinner" [ngClass]="{ 'hidden': !loading }">Loading...</div>
+        <pagination-controls (pageChange)="getPage($event)" id="server" class="change-page"></pagination-controls>
+    </div> -->
+  </div>
+</div>

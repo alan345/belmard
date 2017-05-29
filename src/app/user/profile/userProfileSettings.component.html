@@ -1,0 +1,114 @@
+<div class="container">
+  <div class="goldgradient beigeborder subnav">
+    <button class="subnav-btnleft" (click)="goBack()"><i class="fa fa-chevron-left"></i></button>
+    <h3 style="text-align: center;">Profile</h3>
+  </div>
+  <form [formGroup]="myForm" novalidate (ngSubmit)="save()" style="position: relative;">
+    <div *ngIf="isEditMode" class="ovrl"></div>
+    <div class="beigeback phyto-ctnr" id="stypro">
+      <div class="prf-basic">
+        <div formGroupName="profile" style="position: relative;">
+          <div *ngIf="isEditMode" class="beigeback updt-prof">
+            <div class="chng-pic">
+              <div formGroupName="_profilePicture">
+               <img *ngIf="fetchedUser.profile._profilePicture.length == 0" src="assets/images/profilePicture.jpg" >
+                <div *ngFor="let profilePicture of fetchedUser.profile._profilePicture">
+                  <input type="hidden" class="form-control" formControlName="_id" [(ngModel)]="profilePicture._id">
+                  <img src="./uploads/forms/{{profilePicture.owner}}/{{profilePicture.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
+                </div>
+              </div>
+              <p>Change Profile picture</p>
+              <button type="button" md-button (click)="openDialog('_profilePicture')" class="browse">Browse</button>
+            </div>
+            <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedUser.profile.name" placeholder="Name">
+            <input type="text" class="form-control" formControlName="lastName" [(ngModel)]="fetchedUser.profile.lastName" placeholder="lastName">
+            <input type="text" class="form-control" formControlName="title" [(ngModel)]="fetchedUser.profile.title" placeholder="Title">
+            <button type="submit" class="done">Done</button>
+          </div>
+          <div formGroupName="_profilePicture">
+            <img *ngIf="fetchedUser.profile._profilePicture.length == 0" src="assets/images/profilePicture.jpg" >
+            <div *ngFor="let profilePicture of fetchedUser.profile._profilePicture">
+              <input type="hidden" class="form-control" formControlName="_id" [(ngModel)]="profilePicture._id">
+              <img src="./uploads/forms/{{profilePicture.owner}}/{{profilePicture.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
+            </div>
+            <div class="prf-cpt">
+              <label>{{fetchedUser.profile.name}} {{fetchedUser.profile.lastName}}</label>
+              <p>{{fetchedUser.profile.title}}</p>
+              <button *ngIf="!isEditMode" type="button" md-button (click)="editMode()" class="editicon">
+                <span class="glyphicon glyphicon-edit"></span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="form-group prf-chal">
+        <div class="prf-chalcnt">
+          <div *ngFor="let companie of companies" class="act-chal">
+            <h3>{{companie.name}}</h3>
+            <h6>{{companie.address.address}}, {{companie.address.city}}, {{companie.address.state}} {{companie.address.zip}}</h6>
+          </div>
+          <div class="chal-rslt"><p>More Features coming soon!</p></div>
+        </div>
+      </div> -->
+    </div>
+
+    <!--ALAN: These should be added in a modal:
+    <div>
+      <div>
+        <button type="button" md-button (click)="openDialog('_profilePicture')" class="addpic-squr">Add Picture<br><i class="fa fa-plus"></i></button>
+      </div>
+      <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedUser.profile.name" placeholder="Name">
+      <input type="text" class="form-control" formControlName="lastName" [(ngModel)]="fetchedUser.profile.lastName" placeholder="lastName">
+      <input type="text" class="form-control" formControlName="title" [(ngModel)]="fetchedUser.profile.title" placeholder="Title">
+      <button type="submit" class="done">Done</button>
+    </div>-->
+<!--
+    <div class="img-row phyto-ctnr">
+      <h3 style="padding: 0 15px !important;">Your Photos (Tap to Expand)</h3>
+      <div class="phyto-ctnr">
+        <div class="col-sm-3">
+          <button type="button" md-button (click)="openDialog('img')" class="addpic-squr">Add Picture<br><i class="fa fa-plus"></i></button>
+        </div>
+        <div class="flt-lft">
+          <div formArrayName="forms" class="phyto-ctnr">
+            <div *ngFor="let form of getObjects(myForm); let i=index" class="pic-list">
+              <div *ngIf="i < maxPictureToShow">
+                <div [formGroupName]="i">
+                  <input type="text" class="form-control dspl-nn" formControlName="_id" [(ngModel)]="fetchedUser.forms[i]._id">
+                  <input type="hidden" class="form-control" formControlName="owner" [(ngModel)]="fetchedUser.forms[i].owner">
+                  <input type="hidden" class="form-control" formControlName="imagePath" [(ngModel)]="fetchedUser.forms[i].imagePath">
+                  <img src="./uploads/forms/{{fetchedUser.forms[i].owner}}/{{fetchedUser.forms[i].imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
+                  <span class="glyphicon glyphicon-remove pull-right  dlt-img"  (click)="removeForm(i)"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="fetchedUser.forms.length>maxPictureToShow" class="phyto-ctnr single-wrpr">
+        <a class="seemre" (click)="seeAllPicture()">See All</a>
+      </div>
+    </div> -->
+    <!-- <div class="phyto-ctnr insta-promo">
+      <div formArrayName="forms" class="phyto-ctnr insta-pic goldgradient">
+        <div *ngFor="let form of getObjects(myForm); let i=index">
+          <div *ngIf="i < instapic">
+            <div [formGroupName]="i">
+              <input type="text" class="form-control dspl-nn" formControlName="_id" [(ngModel)]="fetchedUser.forms[i]._id">
+              <input type="hidden" class="form-control" formControlName="owner" [(ngModel)]="fetchedUser.forms[i].owner">
+              <input type="hidden" class="form-control" formControlName="imagePath" [(ngModel)]="fetchedUser.forms[i].imagePath">
+              <img width="150" src="./uploads/forms/{{fetchedUser.forms[i].owner}}/{{fetchedUser.forms[i].imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="insta-txt">
+        <h3>Be The Next Phyto Feature!</h3>
+        <p>Submit on of your pictures to the Picture of the Month Phyto Challenge and your photo may be selected and promoted on all the Phyto Social Media channels. A great way to get yourself visibility!</p>
+        <button class="see"><a [routerLink]="['/social']">See this month's winner</a></button>
+        <button type="button" class="submit" (click)="openDialogSocial()">Submit your picture</button>
+      </div>
+    </div> -->
+    <div class="clearfix"></div>
+  </form>
+</div>

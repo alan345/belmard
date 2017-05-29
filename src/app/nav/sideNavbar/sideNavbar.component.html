@@ -1,0 +1,40 @@
+<div class="sidenav-content">
+  <div class="sidenav-title">
+    <h3>My Chair App</h3>
+  </div>
+  <div class="sidenav-menu">
+    <ul class="sidenav-list">
+      <!-- ADMIN CASE -->
+      <div *ngIf="isAdmin() || isSalesRep()">
+        <li *ngIf="HQCompanie._id">
+          <a (click)="goTo('/companie/' + HQCompanie._id)">My Salon</a>
+        </li>
+      </div>
+      <div *ngIf="!(isAdmin() || isSalesRep())">
+        <li *ngFor="let companie of companies">
+          <a *ngIf="companies.length>1" (click)="goTo('/companie/' + companie._id)">{{companie.name}}</a>
+          <a *ngIf="companies.length==1" (click)="goTo('/companie/' + companie._id)">My Salon</a>
+        </li>
+      </div>
+      <li><a (click)="goTo('/companie/addUserByCompanie')">Find Salon</a></li>
+      <li *ngIf="fetchedUser._id"><a (click)="goTo('/user/profile/' + fetchedUser._id)">My Profile</a></li>
+      <li><a (click)="goTo('/user/profile/password')">My Account Settings</a></li>
+      <li><a (click)="goTo('/userForms')">Manage Pictures</a></li>
+      <li (click)="toogleFilters()" class="adminmenu">Admin<i class="fa fa-chevron-down"></i></li>
+      <div [ngClass]="{'admin-opn': showAdminMenu, 'admin-cls': !showAdminMenu }" >
+        <!-- {{showAdminMenu|json}} -->
+        <li><a *ngIf="isAdmin()" (click)="goTo('/admin/user')" class="admn-btn">Admin Users</a></li>
+        <li><a *ngIf="isAdmin() || isSalesRep()" (click)="goTo('/companie/admin')" class="admn-btn">Admin Salons</a></li>
+        <li><a *ngIf="isAdmin()" (click)="goTo('/product/admin')" class="admn-btn">Admin Products</a></li>
+        <li><a *ngIf="isAdmin()" (click)="goTo('/productBatch')" class="admn-btn">Products Batch</a></li>
+      </div>
+      <li style="margin-bottom: 30px;"><a (click)="logout()" *ngIf="isLoggedIn()">Log out</a></li>
+    </ul>
+  </div>
+  <div class="sidenav-footer">
+    <p>
+      <a (click)="goToExterne('https://www.phyto.com/terms-of-use/terms-conditions.html')">Terms and Conditions</a>
+       -
+       <a (click)="goToExterne('https://www.phyto.com/terms-of-use/privacy-policy.html')">Privacy Policy</a></p>
+    <p>© 2017 - Ales Group USA</p>
+</div>

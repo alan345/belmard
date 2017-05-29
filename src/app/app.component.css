@@ -1,0 +1,9 @@
+.phyto-menu {
+  max-width: 950px;
+  margin: 0 auto;
+  height: 100% !important;
+}
+.phyto-sidenav {
+  box-shadow: none !important;
+  bottom: initial !important;
+}

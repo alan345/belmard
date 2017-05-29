@@ -1,0 +1,32 @@
+<div class="container beigeback">
+  <div class="goldgradient beigeborder subnav">
+    <button class="subnav-btnleft" (click)="goBack()"><i class="fa fa-chevron-left"></i></button>
+    <h3 style="text-align: center;">Salons</h3>
+    <button *ngIf="isAdmin()" class="subnav-btnright" (click)="openDialog()"><i class="fa fa-upload"></i></button>
+  </div>
+  <div class="subsubnav-salons">
+    <input type="text" name="Search" placeholder="Search" [(ngModel)]="search.search" (ngModelChange)="searchInput()">
+  </div>
+  <div class="beigeback">
+    <table class="table table-hover table-responsive table-condensed">
+      <thead>
+      <tr>
+        <th class="tbl-left">
+          <p class="tblnav-cl">Name</p>
+          <button class="updownbtn" (click)="orderBy('name')"><i class="fa fa-chevron-down"></i></button>
+          <button class="updownbtn" (click)="orderBy('-name')"><i class="fa fa-chevron-up"></i></button>
+        </th>
+      </tr>
+      </thead>
+      <tbody class="clienttbl">
+        <tr *ngFor="let companie of fetchedCompanies | paginate: { id: 'server', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }">
+          <a [routerLink]="['/companie/' + companie._id]" routerLinkActive="active"><td>{{companie.name}}</td></a>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="has-text-centered">
+      <div class="spinner" [ngClass]="{ 'hidden': !loading }">Loading...</div>
+      <pagination-controls (pageChange)="getPage($event)" id="server" class="change-page"></pagination-controls>
+  </div>
+</div>

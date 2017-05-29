@@ -1,0 +1,48 @@
+<div class="container beigeback">
+  <div class="goldgradient beigeborder subnav">
+    <button class="subnav-btnleft" (click)="goBack()"><i class="fa fa-chevron-left"></i></button>
+    <h3 style="text-align: center;">All Promotions</h3>
+  </div>
+  <div class="subsubnav-promos">
+    <input type="text" name="Search" placeholder="Search" [(ngModel)]="search.search" (ngModelChange)="searchInput()">
+  </div>
+  <div class="beigeback">
+    <table class="table table-hover table-responsive table-condensed">
+      <thead>
+        <tr>
+          <th class="tbl-left">
+            <p class="tblnav-cl">Title</p>
+            <button class="updownbtn" (click)="orderBy('name')"><i class="fa fa-chevron-down"></i></button>
+            <button class="updownbtn" (click)="orderBy('-name')"><i class="fa fa-chevron-up"></i></button>
+          </th>
+          <th class="tbl-right">
+            <p class="tblnav-cl">Start Date</p>
+            <button class="updownbtn" (click)="orderBy('date.dateBegin')"><i class="fa fa-chevron-down"></i></button>
+            <button class="updownbtn" (click)="orderBy('-date.dateBegin')"><i class="fa fa-chevron-up"></i></button>
+          </th>
+        </tr>
+      </thead>
+      <tbody class="clienttbl">
+        <tr *ngFor="let promotion of fetchedPromotions| paginate: { id: 'server', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }">
+
+          <td [routerLink]="['/promotion/singlepromotion/' + promotion._id]" routerLinkActive="active">{{promotion.name}}</td>
+          <td class="rightdate">{{promotion.date.dateBegin | date :'dd-MMM-yyyy'}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="has-text-centered">
+    <div class="has-text-centered">
+        <div class="spinner" [ngClass]="{ 'hidden': !loading }">Loading...</div>
+        <pagination-controls (pageChange)="getPage($event)" id="server" class="change-page"></pagination-controls>
+    </div>
+    <!-- <div>
+      <div [ngClass]="{ 'hidden': !loading }">Loading...</div>
+      <button
+        *ngIf="paginationData.currentPage * paginationData.itemsPerPage < paginationData.totalItems"
+        type="button" (click)="loadMore()" class="ldmre">
+        Load More
+      </button>
+    </div> -->
+  </div>
+</div>

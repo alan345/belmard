@@ -1,0 +1,90 @@
+<div class="container">
+  <div class="goldgradient beigeborder subnav">
+    <button class="subnav-btnleft" (click)="goBack()"><i class="fa fa-chevron-left"></i></button>
+    <h3 style="text-align: center;">Add Client</h3>
+  </div>
+  <div class="single-wrpr beigeback">
+    <form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm)">
+      <div [ngClass]="{ 'hidden': fetchedUser._id }" class="form-group col-sm-4" id="lfthair">
+          <select
+            class="form-control"
+            formControlName="companieIndexToSelect"
+            [(ngModel)]="companieIndexToSelect"
+            >
+            <option value="" disabled selected>Select Salon</option>
+            <option *ngFor="let companie of fetchedCompanies; let i=index" value="{{companie._id}}">{{companie.name}}</option>
+          </select>
+      </div>
+      <div class="form-group col-sm-12">
+        <input
+          type="text"
+          class="form-control"
+          formControlName="email"
+          [(ngModel)]="fetchedUser.email"
+          placeholder="Email">
+      </div>
+      <div formGroupName="profile">
+        <div class="form-group col-sm-12">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="name"
+            [(ngModel)]="fetchedUser.profile.name"
+            placeholder="Client's Name">
+        </div>
+        <div class="form-group col-sm-12">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="phoneNumber"
+            [(ngModel)]="fetchedUser.profile.phoneNumber"
+            placeholder="Phone Number">
+        </div>
+        <div formGroupName="hair">
+          <div class="form-group col-sm-4" id="lfthair">
+            <label>Hair Texture</label>
+              <select
+                class="form-control"
+                formControlName="hairTexture"
+                [(ngModel)]="fetchedUser.profile.hair.hairTexture">
+                <option value="Fine">Fine</option>
+                <option value="Medium">Medium</option>
+                <option value="Coarse">Coarse</option>
+              </select>
+          </div>
+          <div class="form-group col-sm-4" id="mdlhair">
+            <label>Scalp Condition</label>
+            <select
+              class="form-control"
+              formControlName="scalpCondition"
+              [(ngModel)]="fetchedUser.profile.hair.scalpCondition">
+              <option value="Healthy">Healthy</option>
+              <option value="Sensitive/Itchy">Sensitive/Itchy</option>
+              <option value="Dry">Dry</option>
+              <option value="Dandruff">Dandruff</option>
+              <option value="Oily">Oily</option>
+            </select>
+          </div>
+          <div class="form-group col-sm-4" id="rghthair">
+            <label>Hair Condition</label>
+            <select
+              class="form-control"
+              formControlName="hairCondition"
+              [(ngModel)]="fetchedUser.profile.hair.hairCondition">
+              <option value="Normal">Normal</option>
+              <option value="Dry">Dry</option>
+              <option value="Lifeless">Lifeless</option>
+              <option value="Aging">Aging</option>
+              <option value="Damaged">Damaged</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="valid-edit">
+        <button type="submit" [disabled]="!myForm.valid" [ngClass]="{'done':myForm.valid,'pas-done':!myForm.valid}">Done</button>
+        <button type="button" *ngIf="fetchedUser._id" class="delete" md-button (click)="openDialogDelete()">Delete</button>
+      </div>
+      <div class="clearfix"></div>
+    </form>
+  </div>
+</div>

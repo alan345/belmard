@@ -1,0 +1,82 @@
+<div class="container">
+  <div class="goldgradient beigeborder subnav">
+    <button class="subnav-btnleft" (click)="goBack()"><i class="fa fa-chevron-left"></i></button>
+    <h3 style="text-align: center;">Videos</h3>
+    <button *ngIf="isAdmin()" class="subnav-btnright" [routerLink]="['/video/videoSingle']" routerLinkActive="active"><i class="fa fa-plus"></i></button>
+  </div>
+  <div class="subsubnav-video beigeback">
+    <div class="video-srchrow">
+      <div class="srchbar">
+        <input
+          [(ngModel)]="search.search"
+          placeholder="Search"
+          (ngModelChange)="addSearchInput()"
+        >
+      </div>
+    </div>
+    <div class="video-catrow">
+      <div *ngFor="let categorie1 of categories1">
+        <button
+          [ngClass]="{'cat-btn-on':categorie1.selected,'cat-btn':!categorie1.selected}"
+          (click)="changeCateg1(categorie1.name)">
+          {{categorie1.name}}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <md-tab-group (selectChange)="onSelectChange($event)" class="beigeback vid-tabs">
+    <md-tab label="what's new" textLabel="what's new" class="vid-tab"></md-tab>
+
+
+    <md-tab *ngFor="let categorieHard2 of categoriesHard2" [label]="categorieHard2.name" class="vid-tab"></md-tab>
+    <!-- <md-tab label="How to" textLabel="howTo" class="vid-tab"></md-tab>
+    <md-tab label="Fashion" textLabel="fashion" class="vid-tab"></md-tab>
+    <md-tab label="Merchandising" textLabel="merchandising" class="vid-tab"></md-tab>
+    <md-tab label="Behind the Scene & Testimonials" textLabel="behindTheSceneTestimonials" class="vid-tab"></md-tab> -->
+  </md-tab-group>
+
+  <table class="table table-hover table-responsive table-condensed vid-tbl">
+    <tbody>
+      <tr *ngFor="let video of fetchedVideos | paginate: { id: 'server', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }" class="vid-ctnr">
+        <td class="vid-cnt">
+          <!-- <iframe [src]="video['[object Object]'].embedSecure" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen></iframe> -->
+          <div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
+            <div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">
+
+              <iframe
+                [src]="video.embedSecure"
+                width="100%"
+                height="100%"
+                frameborder="0"
+                webkitallowfullscreen
+                mozallowfullscreen
+                allowfullscreen
+              ></iframe>
+
+              <!-- <iframe [src]="video.embedSecure" title="Wistia video player" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen width="100%" height="100%">
+              </iframe> -->
+              <p>{{video.title}}</p>
+              <div *ngIf="video.isNewVideo" class="new-ntf">NEW!</div>
+              <button *ngIf="isAdmin()" class="editicon" [routerLink]="['/video/videoSingle/' + video._id]" routerLinkActive="active"><span class="glyphicon glyphicon-edit"></span></button>
+            </div>
+          </div>
+        </td>
+        <!-- <td>{{video._id }} </td> -->
+        <td><a [routerLink]="['/video/' + video._id]" routerLinkActive="active">{{video.email}}</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+
+
+
+  <div class="has-text-centered">
+    <div [ngClass]="{ 'hidden': !loading }">Loading...</div>
+    <button
+      *ngIf="paginationData.currentPage * paginationData.itemsPerPage < paginationData.totalItems"
+      type="button" (click)="loadMore()" class="ldmre">
+      Load More
+    </button>
+  </div>
+</div>
