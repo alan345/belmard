@@ -18,7 +18,8 @@ var schedule = require('node-schedule');
     exports.jobScedule = jobScedule;
 
 
-    const optionsBatch = config.optionsBatch
+
+    //const optionsBatch = config.optionsBatch
     const optionsBatch = {
       url: null,
       store: 'default', //set a store to contextualise in
