@@ -9,19 +9,15 @@ html, body {
   height: 100% !important;
 }
 body {
-  font-family: "Montserrat", sans-serif;
-  background-color: #000000;
+  font-family: "open-sans", sans-serif;
+  background-color: #fff;
 }
 .container {
   width: 100% !important;
-  max-width: 950px !important;
   padding: 0 !important;
   background-color: #ffffff;
 }
-.phyto-ctnr {
-  float: left;
-  width: 100%;
-}
+
 img {
   max-width: 100%;
 }
