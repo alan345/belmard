@@ -7,11 +7,11 @@
   width: 100%;
   top: 0;
 }
-.hamburger {
+/*.hamburger {
   float: right;
   font-size: 20px;
   color: #0a2f87;
-}
+}*/
 
 @media screen and (min-width: 950px) {
 .phytologo {
@@ -25,9 +25,9 @@
 .phytologo, .phytologo img {
   height: 70px!important;
 }
-.hamburger {
+/*.hamburger {
   padding: 25px;
-}
+}*/
 }
 
 @media screen and (max-width: 767px) {
@@ -35,7 +35,7 @@
 .phytologo, .phytologo img {
   height: 50px!important;
 }
-.hamburger {
+/*.hamburger {
   padding: 15px;
-}
+}*/
 }
