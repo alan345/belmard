@@ -2,7 +2,7 @@
   padding: 10px 15px;
 }
 .phytologo {
-  background-color: #ffffff;
+  background-color: #636363;
   position: fixed;
   width: 100%;
   top: 0;
@@ -24,7 +24,7 @@
 @media screen and (min-width: 768px) {
 
 .phytologo, .phytologo img {
-  height: 70px!important;
+  height: 150px!important;
 }
 /*.hamburger {
   padding: 25px;
@@ -34,7 +34,7 @@
 @media screen and (max-width: 767px) {
 
 .phytologo, .phytologo img {
-  height: 50px!important;
+  height: 150px!important;
 }
 /*.hamburger {
   padding: 15px;
