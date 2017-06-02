@@ -12,12 +12,6 @@ body {
   font-family: "open-sans", sans-serif;
   background-color: #fff;
 }
-.container {
-  width: 100% !important;
-  padding: 0 !important;
-  background-color: #ffffff;
-}
-
 img {
   max-width: 100%;
 }
