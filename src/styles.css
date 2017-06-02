@@ -146,9 +146,6 @@ th, td {
 .beigeborder {
     border: 1px solid #c9bda5;
 }
-.beigeback, .mat-sidenav-content {
-    background-color: #fff;
-}
 .subnav {
     padding: 0 15px;
 }
