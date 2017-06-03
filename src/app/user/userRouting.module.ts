@@ -19,8 +19,8 @@ import {SingleUserComponent} from './singleUser/singleUser.component';
 import {AddNoteComponent} from './singleUser/addNote.component';
 import {ChooseDateComponent} from './singleUser/chooseDate.component';
 import {UserPicturesComponent} from './singleUser/userPictures.component';
-import {AddProductsToUserComponent} from './singleUser/addProductsToUser.component';
-import { UserProductsHistory} from './singleUser/userProductsHistory.component';
+// import {AddProductsToUserComponent} from './singleUser/addProductsToUser.component';
+// import { UserProductsHistory} from './singleUser/userProductsHistory.component';
 import {NewUserComponent} from './singleUser/newUser.component';
 
 
@@ -41,8 +41,8 @@ export const routes: Routes = [
   {path: ':id/addnote', component: AddNoteComponent},
   {path: ':id/choosedate', component: ChooseDateComponent},
   {path: ':id/userPictures', component: UserPicturesComponent},
-  {path: ':id/addProductsToUser', component: AddProductsToUserComponent},
-  {path: ':id/productsHistory', component: UserProductsHistory},
+  // {path: ':id/addProductsToUser', component: AddProductsToUserComponent},
+  // {path: ':id/productsHistory', component: UserProductsHistory},
 
 ];
 

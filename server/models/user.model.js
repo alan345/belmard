@@ -1,7 +1,7 @@
 var mongoose                = require('mongoose'),
     Schema                  = mongoose.Schema,
     Form                    = require('../models/form.model'),
-    Product                 = require('../models/product.model'),
+
     mongooseUniqueValidator = require('mongoose-unique-validator')
 
 var user = new Schema({

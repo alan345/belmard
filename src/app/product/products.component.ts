@@ -1,14 +1,14 @@
-import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../auth/auth.service';
-import {ProductService} from './product.service';
-import {Product, categPhyto, categPhytoSpecific, categSubtil} from './product.model';
-import {ToastsManager} from 'ng2-toastr';
-import {MdDialog } from '@angular/material';
-import {Router} from '@angular/router';
+import { Component, OnInit} from '@angular/core';
+import { AuthService} from '../auth/auth.service';
+import { ProductService} from './product.service';
+import { Product} from './product.model';
+import { ToastsManager} from 'ng2-toastr';
+import { MdDialog} from '@angular/material';
+import { Router} from '@angular/router';
 import { Location } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
-import {ViewEncapsulation} from '@angular/core';
-
+import { ViewEncapsulation} from '@angular/core';
+import { UserService} from '../user/user.service';
 
 
 @Component({
@@ -21,14 +21,11 @@ import {ViewEncapsulation} from '@angular/core';
 export class ProductsComponent implements OnInit {
   token: string = localStorage.getItem('id_token');
   fetchedProducts: Product[] = [];
-
-  urlMagento = 'http://52.2.61.43/pub/media/catalog/product'
-  search : any = {
+  search: any = {
     categories : [],
-    search:''
-  }
-  loading: boolean
-  //inputSearch:''
+    search: ''
+  };
+  loading: boolean;
 
   paginationData = {
     currentPage: 1,
@@ -36,57 +33,34 @@ export class ProductsComponent implements OnInit {
     totalItems: 0
   };
 
+  categories1 = [{
+      name: 'phyto',
+      selected: false
+    },
+    {
+      name: 'phytoSpecific',
+      selected: false
+    },
+    {
+      name: 'subtil',
+      selected: false
+    }];
 
-  categoriesHard1 = [
-    { name:'Phyto', selected : false },
-    { name:'Phyto Specific', selected : false },
-    { name:'Subtil', selected : false }
+  categories2 = '';
+
+
+  categoriesHard2 = [
+    { name:'Through your eyes', selected : false },
+    { name:'How to', selected : false },
+    { name:'Fashion', selected : false },
+    { name:'Merchandising', selected : false },
+    { name:'Behind the Scene & Testimonials', selected : false }
   ]
 
-  categoriesHard2 : any = []
-
-  //categPhyto: any = categPhyto
-
-  categories2Dynamic = [
-      categPhyto,
-      categPhytoSpecific,
-      categSubtil,
-  ]
-
-  //
-  // categories2PhytoSpecific =
-  //
-  // categories2Subtil =
-  categories3 = [
-    { name:'COLORED', selected : false},
-    { name:'FINE', selected : false },
-    { name:'GRAY/PLATINUM', selected : false },
-    { name:'CURLY', selected : false },
-    { name:'NORMAL', selected : false },
-    { name:'RELAXED', selected : false },
-    { name:'UNRULY', selected : false },
-  ]
-
-
-
-  categories4 = [
-    { name:'DAMAGED', selected : false},
-    { name:'AGING', selected : false },
-    { name:'DRY', selected : false },
-    { name:'DANDRUFF', selected : false },
-    { name:'UNBALANCED SCALP', selected : false },
-    { name:'SENSITIVE SCALP', selected : false },
-    { name:'THINNING', selected : false },
-    { name:'LIFE-STRESSED', selected : false },
-  ]
-
-
-  showFilters : boolean = false
-
-  categories2 = ''
-  categories1 = ''
-
-
+  trackinPage : any = {
+    lastVisitPagePressCount:[],
+    lastVisitPageProductCount:[]
+  }
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -96,6 +70,8 @@ export class ProductsComponent implements OnInit {
     private router: Router,
     private location: Location,
     private authService: AuthService,
+    private userService: UserService,
+
   ) {
   }
 
@@ -105,61 +81,35 @@ export class ProductsComponent implements OnInit {
   }
 
   onSelectChange = ($event: any): void => {
+//    console.log($event)
     this.categories2 = $event.tab.textLabel
     this.updateCategerories()
-  }
-
-  onSelectChange1 = ($event: any): void => {
-    if($event.tab.textLabel === this.categoriesHard1[0].name)
-      this.categoriesHard2 = this.categories2Dynamic[0]
-    if($event.tab.textLabel === this.categoriesHard1[1].name)
-      this.categoriesHard2 = this.categories2Dynamic[1]
-    if($event.tab.textLabel === this.categoriesHard1[2].name)
-      this.categoriesHard2 = this.categories2Dynamic[2]
-
-
-
-    this.categories1 = $event.tab.textLabel
-    this.updateCategerories()
-
-
+    // this.search.categories = []
+    // this.search.categories.push({name:$event.tab.textLabel})
+    // this.getProducts(this.paginationData.currentPage, this.search)
 
   }
 
   updateCategerories(){
     this.search.categories = []
     this.search.categories.push({name:this.categories2})
-    this.search.categories.push({name:this.categories1})
     // if(this.inputSearch)
     //   this.search.categories.push({name:this.inputSearch})
-    this.categories3.forEach((categorie3)=>{
-      if(categorie3.selected == true) {
-        this.search.categories.push({name : categorie3.name})
+    this.categories1.forEach((categorie1)=>{
+      if(categorie1.selected == true) {
+        this.search.categories.push({name : categorie1.name})
       }
     })
-
-    this.categories4.forEach((categorie4)=>{
-      if(categorie4.selected == true) {
-        this.search.categories.push({name : categorie4.name})
-      }
-    })
-
+//    console.log(this.search.categories)
     this.fetchedProducts = []
     this.getProducts(1, this.search)
   }
 
-  changeCateg3(nameCateg : string){
-    this.categories3.forEach((categ, index)=>{
+  changeCateg1(nameCateg: string){
+    //this.categories1[nameCateg] = !this.categories1[nameCateg]
+    this.categories1.forEach((categ, index)=>{
       if(categ.name === nameCateg) {
-        this.categories3[index].selected = !this.categories3[index].selected
-      }
-    })
-    this.updateCategerories()
-  }
-  changeCateg4(nameCateg : string){
-    this.categories4.forEach((categ, index)=>{
-      if(categ.name === nameCateg) {
-        this.categories4[index].selected = !this.categories4[index].selected
+        this.categories1[index].selected = !this.categories1[index].selected
       }
     })
     this.updateCategerories()
@@ -170,9 +120,7 @@ export class ProductsComponent implements OnInit {
     this.updateCategerories()
     // this.search.categories.pop()
   }
-  toogleFilters() {
-    this.showFilters = !this.showFilters
-  }
+
   onDelete(id: string) {
     this.productService.deleteProduct(id)
       .subscribe(
@@ -197,23 +145,25 @@ export class ProductsComponent implements OnInit {
   }
 
 
-
   getProducts(page : number, search: any) {
     //this.fetchedProducts =[]
     this.loading = true;
     this.productService.getProducts(page, search)
       .subscribe(
         res => {
-          if(page === 1)
-            this.fetchedProducts =[]
           this.paginationData = res.paginationData;
           let fetchedProductsNotSecure =  res.data
           fetchedProductsNotSecure.forEach((product: Product) => {
-            product['categoriesTag'] = []
-            product.categories.forEach((categorie: any) => {
-              if(categorie.type === 'tag') {
-                product['categoriesTag'].push(categorie)
-              }
+            //isNewProduct = false
+            //product['embedSecure'] = this.sanitizer.bypassSecurityTrustResourceUrl('//fast.wistia.net/embed/iframe/' + product['embed'])
+            //product['embedSecure'] = this.sanitizer.bypassSecurityTrustResourceUrl('https://player.vimeo.com/product/' + product['embed'] )
+
+
+
+            product['isNewProduct'] = false
+            this.trackinPage.lastVisitPageProductCount.forEach((productNotRead: Product) => {
+                if(productNotRead._id == product._id)
+                  product['isNewProduct'] = true
             })
             this.fetchedProducts.push(product)
           })
@@ -226,9 +176,32 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.categoriesHard2 = this.categories2Dynamic[0]
-    this.categories1 = this.categoriesHard1[0].name
-    this.categories2 = this.categoriesHard2[0].name
+    let userId = this.authService.currentUser.userId
+    this.productService.countNewItemForUser()
+    .subscribe(
+      data => {
+        this.trackinPage.lastVisitPageProductCount = data.item
+        this.userService.getUser(userId)
+        .subscribe(
+        res => {
+          res.user.trackinPage.lastVisitPageProduct = new Date()
+          this.userService.updateUser(res.user)
+            .subscribe(
+              res => {},
+              error => {
+                console.log(error);
+              }
+            )
+        },
+        error => {
+          console.log(error);
+        }
+        )
+
+      },
+      error => console.log(error)
+    )
+    this.categories2 = 'what\'s new'
     this.updateCategerories()
   }
 

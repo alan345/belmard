@@ -18,13 +18,9 @@ var adminPage    = require('./routes/admin')
 var options    = require('./routes/options')
 var presses    = require('./routes/press')
 var videos    = require('./routes/video')
-var products    = require('./routes/product')
-var productsBatch    = require('./routes/productBatch')
-var productBatchServ    = require('./routes/productBatchServ')
 
 
 var app = express()
-productBatchServ.jobScedule()
 
 mongoose.Promise = global.Promise  // gets rid of the mongoose promise deprecated warning
 mongoose.connect(config.database)
@@ -61,9 +57,6 @@ app.use('/press', presses)
 app.use('/video', videos)
 app.use('/admin', adminPage)
 app.use('/options', options)
-app.use('/product', products)
-app.use('/productBatch', productsBatch)
-
 
 
 

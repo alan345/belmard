@@ -5,7 +5,7 @@ import { ToastsManager} from 'ng2-toastr';
 import { MdDialog} from '@angular/material';
 import { EditOptionsComponentDialog }  from '../modalLibrary/modalLibrary.component';
 import { AdminService} from '../admin/services/admin.service';
-import { VideoService} from '../video/video.service';
+
 import { PressService} from '../press/press.service';
 import { Options } from './options.model';
 import { Router} from '@angular/router';
@@ -49,7 +49,7 @@ export class MainPageHomeComponent implements OnInit {
     private mainPageHomeService: MainPageHomeService,
     private toastr: ToastsManager,
     public dialog: MdDialog,
-    public videoService: VideoService,
+
     public pressService: PressService,
     private authService: AuthService,
   ) {}
@@ -130,11 +130,7 @@ export class MainPageHomeComponent implements OnInit {
     )
 
 
-    this.videoService.countNewItemForUser()
-    .subscribe(
-      data => this.trackinPage.lastVisitPageVideoCount = data.item,
-      error => console.log(error)
-    )
+
     this.pressService.countNewItemForUser()
     .subscribe(
       data => this.trackinPage.lastVisitPagePressCount = data.item,

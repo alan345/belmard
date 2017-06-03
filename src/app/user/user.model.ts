@@ -1,5 +1,5 @@
 import { Form } from '../form/form.model';
-import { Product } from '../product/product.model';
+//import { Product } from '../product/product.model';
 
 
 export class User {
@@ -16,7 +16,7 @@ export class User {
 
 export class ProductBought {
   dateProductAdded: Date = new Date;
-  product: Product;
+//  product: Product;
 }
 
 

@@ -2,93 +2,75 @@
   <div class="goldgradient beigeborder subnav">
     <button class="subnav-btnleft" (click)="goBack()"><i class="fa fa-chevron-left"></i></button>
     <h3 style="text-align: center;">Products</h3>
+    <button *ngIf="isAdmin()" class="subnav-btnright" [routerLink]="['/product/productSingle']" routerLinkActive="active"><i class="fa fa-plus"></i></button>
   </div>
-  <div>
-    <div class="prdts-ln">
-      <md-tab-group (selectChange)="onSelectChange1($event)" class="beigeback phyto-ctnr">
-        <md-tab *ngFor="let categorieHard1 of categoriesHard1"
-        [ngClass]="{'bigcat-btn-on':categorieHard1.selected,'bigcat-btn':!categorieHard1.selected}"
-        [label]="categorieHard1.name"></md-tab>
-      </md-tab-group>
-    </div>
-    <div class="subsubnav-product beigeback">
-      <div class="product-srchrow">
-        <div class="srchbar">
-          <input
-            [(ngModel)]="search.search"
-            placeholder="Search"
-            (ngModelChange)="addSearchInput()"
-          >
-        </div>
+  <div class="subsubnav-product beigeback">
+    <div class="product-srchrow">
+      <div class="srchbar">
+        <input
+          [(ngModel)]="search.search"
+          placeholder="Search"
+          (ngModelChange)="addSearchInput()"
+        >
       </div>
     </div>
+    <div class="product-catrow">
+      <div *ngFor="let categorie1 of categories1">
+        <button
+          [ngClass]="{'cat-btn-on':categorie1.selected,'cat-btn':!categorie1.selected}"
+          (click)="changeCateg1(categorie1.name)">
+          {{categorie1.name}}
+        </button>
+      </div>
+    </div>
+  </div>
 
-    <div class="phyto-ctnr beigeback filtertoggle">
-      <button (click)="toogleFilters()" class="ctrl-hidit">
-        <i [ngClass]="{'fa-chevron-down':!showFilters,'fa-chevron-up':showFilters}" class="fa"></i>
-        <div [ngClass]="{'dspl-nn':showFilters, 'mr-lss':!showFilters}">MORE</div>
-        <div [ngClass]="{'dspl-nn':!showFilters, 'mr-lss':showFilters}">LESS</div>
-        <div class="fltr-txt">FILTERS</div>
-      </button>
-      <div [ngClass]="{'open phyto-ctnr': showFilters, 'hidit phyto-ctnr': !showFilters }" >
-        <!-- <div class="hidit phyto-ctnr"> -->
-        <div class="phyto-ctnr">
-          <p>Filter Your Search (Tap to Select):</p>
-          <div class="phyto-ctnr">
-            <h4>Hair Type</h4>
-            <div *ngFor="let categorie3 of categories3">
-              <button
-                [ngClass]="{'cat-btn-on':categorie3.selected,'cat-btn':!categorie3.selected}"
-                (click)="changeCateg3(categorie3.name)"
-                >{{categorie3.name}}
-              </button>
-            </div>
-          </div>
-          <div class="phyto-ctnr">
-            <h4>Concerns</h4>
-            <div *ngFor="let categorie4 of categories4">
-              <button
-                [ngClass]="{'cat-btn-on':categorie4.selected,'cat-btn':!categorie4.selected}"
-                (click)="changeCateg4(categorie4.name)"
-                >{{categorie4.name}}
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <md-tab-group (selectChange)="onSelectChange($event)" class="beigeback phyto-ctnr pdt-tabs">
-    <md-tab *ngFor="let categorieHard2 of categoriesHard2" [label]="categorieHard2.name"></md-tab>
+  <md-tab-group (selectChange)="onSelectChange($event)" class="beigeback vid-tabs">
+    <md-tab label="what's new" textLabel="what's new" class="vid-tab"></md-tab>
+
+
+    <md-tab *ngFor="let categorieHard2 of categoriesHard2" [label]="categorieHard2.name" class="vid-tab"></md-tab>
+    <!-- <md-tab label="How to" textLabel="howTo" class="vid-tab"></md-tab>
+    <md-tab label="Fashion" textLabel="fashion" class="vid-tab"></md-tab>
+    <md-tab label="Merchandising" textLabel="merchandising" class="vid-tab"></md-tab>
+    <md-tab label="Behind the Scene & Testimonials" textLabel="behindTheSceneTestimonials" class="vid-tab"></md-tab> -->
   </md-tab-group>
-  <table class="table table-hover table-responsive table-condensed pdt-tbl">
+
+  <table class="table table-hover table-responsive table-condensed vid-tbl">
     <tbody>
-      <tr *ngFor="let product of fetchedProducts | paginate: { id: 'server', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }" class="pdt-ctnr">
-        <td class="pdt-cnt">
-          <a [routerLink]="['/product/' + product._id]">
-            <div class="pdt-nm">{{product.magento.name}}</div>
-            <div *ngFor="let custom_attribute of product.magento.custom_attributes">
-              <div *ngIf="custom_attribute.attribute_code == 'description'">
-                <div class="pdt-desc">{{custom_attribute.value | smallDescription}}</div>
-              </div>
-            </div>
-            <div class="pdt-tagzctnr">
-              <div *ngFor="let categorieTag of product.categoriesTag; let i=index " class="pdt-tagz">
-                  <div class="pdt-tag">{{categorieTag.name}}<b *ngIf="product.categoriesTag.length!== i +1">,&nbsp;</b></div>
-              </div>
-            </div>
-          </a>
-          <div *ngFor="let custom_attribute of product.magento.custom_attributes" class="pdt-subcnt">
-            <div *ngIf="custom_attribute.attribute_code == 'image'" class="pdt-img">
-              <a [routerLink]="['/product/' + product._id]"><img src="{{urlMagento}}{{custom_attribute.value}}" onerror="this.src ='assets/images/no-image-found.jpg'"></a>
+      <tr *ngFor="let product of fetchedProducts | paginate: { id: 'server', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }" class="vid-ctnr">
+        <td class="vid-cnt">
+          <!-- <iframe [src]="product['[object Object]'].embedSecure" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen></iframe> -->
+          <div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
+            <div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">
+
+              <iframe
+                [src]="product.embedSecure"
+                width="100%"
+                height="100%"
+                frameborder="0"
+                webkitallowfullscreen
+                mozallowfullscreen
+                allowfullscreen
+              ></iframe>
+
+              <!-- <iframe [src]="product.embedSecure" title="Wistia product player" allowtransparency="true" frameborder="0" scrolling="no" class="wistia_embed" name="wistia_embed" allowfullscreen mozallowfullscreen webkitallowfullscreen oallowfullscreen msallowfullscreen width="100%" height="100%">
+              </iframe> -->
+              <p>{{product.title}}</p>
+              <div *ngIf="product.isNewProduct" class="new-ntf">NEW!</div>
+              <button *ngIf="isAdmin()" class="editicon" [routerLink]="['/product/productSingle/' + product._id]" routerLinkActive="active"><span class="glyphicon glyphicon-edit"></span></button>
             </div>
           </div>
         </td>
+        <!-- <td>{{product._id }} </td> -->
         <td><a [routerLink]="['/product/' + product._id]" routerLinkActive="active">{{product.email}}</a></td>
       </tr>
     </tbody>
   </table>
+
+
+
+
   <div class="has-text-centered">
     <div [ngClass]="{ 'hidden': !loading }">Loading...</div>
     <button

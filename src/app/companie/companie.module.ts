@@ -18,7 +18,7 @@ import { Ng2PaginationModule} from 'ng2-pagination';
 
 @NgModule({
   imports:      [
-//    VideoRouting,
+
     CompanieRouting,
     CommonModule,
     FormsModule,

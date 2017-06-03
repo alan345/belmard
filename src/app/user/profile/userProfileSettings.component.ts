@@ -11,7 +11,6 @@ import { Companie } from '../../companie/companie.model';
 import { EditOptionsComponentDialog } from '../../modalLibrary/modalLibrary.component';
 import { FormBuilder, FormGroup, FormArray, Validators} from '@angular/forms';
 import { CompanieService} from '../../companie/companie.service';
-import { SubmitPicDialog } from '../../social/submitPicDialog.component';
 
 
 
@@ -124,11 +123,7 @@ export class UserProfileSettingsComponent implements OnInit {
     this.router.navigate(['user/profile/' + this.fetchedUser._id + "/userProfilePictures"]);
   }
 
-  openDialogSocial(){
-    let dialogRef = this.dialog.open(SubmitPicDialog)
-    dialogRef.afterClosed().subscribe(result => {
-    })
-  }
+
   openDialog(positionImage: string) {
     if(positionImage == '_profilePicture') {
       let dialogRef = this.dialog.open(EditOptionsComponentDialog);

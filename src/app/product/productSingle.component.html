@@ -1,72 +1,104 @@
-<div class="container">
-  <div class="goldgradient beigeborder subnav">
+<div>
+  <!-- <div class="goldgradient beigeborder subnav">
     <button class="subnav-btnleft" (click)="goBack()"><i class="fa fa-chevron-left"></i></button>
-    <h3 style="text-align: center;">Phyto Products</h3>
-  </div>
-  <div class="beigeback">
+    <h3 style="text-align: center;">Add/Edit Product</h3>
+  </div> -->
+  <div>
+
+    <p> Fil d'ariane: {{categ}}  / {{subCateg}}</p>
+
+    <div>
+      <select [ngModel]="categ" (ngModelChange)="categ = $event; second.selectedIndex = 0" class="ui fluid search selection dropdown" #first>
+        <option *ngFor="let n of data" [attr.value]="n.x">{{n.categ}}</option>
+      </select>
+    </div>
+    <div>
+      <select [(ngModel)]="subCateg"  #second>
+        <option *ngFor="let n of data[first.selectedIndex].subCategD" [attr.value]="n">{{n}}</option>
+      </select>
+    </div>
+
+
     <form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm.value)" (keydown.enter)="$event.preventDefault()">
-      <input type="hidden" class="form-control" formControlName="_id" [(ngModel)]="fetchedProduct._id">
+
+
       <div class="form-group">
-        <div class="phyto-ctnr first-half">
-          <div style="float:left;">
-            <div *ngFor="let custom_attribute of fetchedProduct.magento.custom_attributes">
-              <div *ngIf="custom_attribute.attribute_code == 'image'" class="mgtpdt-img">
-                <img src="{{urlMagento}}{{custom_attribute.value}}" onerror="this.src ='assets/images/no-image-found.jpg'">
-              </div>
-            </div>
-            <div class=" single-wrpr mgtpdt-txtcnt">
-              <div class="pdt-nm">{{fetchedProduct.magento.name}}</div>
-              <div *ngFor="let custom_attribute of fetchedProduct.magento.custom_attributes">
-                <p *ngIf="custom_attribute.attribute_code == 'description'" class="mgtpdt-desc">
-                  {{custom_attribute.value}}
-                </p>
-              </div>
-              <div class="pronunciation">
-                <div class="hlf-wdth">
-                  <h4>Pronunciation</h4>
-                  <p class="pron-txt">{{fetchedProduct.description.title.prononciation}}</p>
+
+        <div class="phyto-ctnr ttl-cde">
+          <label>Nom de la reference</label>
+          <input type="text" class="form-control" formControlName="embed" [(ngModel)]="fetchedProduct.embed" placeholder="Ref">
+        </div>
+      </div>
+      <div class="form-group phyto-ctnr ttl-cde">
+        <label>Référence</label>
+        <input type="text" class="form-control" formControlName="title" placeholder="Add Product Title" [(ngModel)]="fetchedProduct.title">
+      </div>
+
+
+
+      <div class="form-group prmimg-cnt">
+
+        <!-- <input type="hidden" class="form-control" formControlName="_id" [(ngModel)]="fetchedProduct.form._id"> -->
+        <div *ngFor="let singleForm of fetchedProduct.form">
+          <img class="promo-img" src="./uploads/forms/{{singleForm.owner}}/{{singleForm.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
+        </div>
+        <div>
+          <button type="button" md-button (click)="openDialog('img')" class="addpic-squr">Add Picture<br><i class="fa fa-plus"></i></button>
+        </div>
+      </div>
+
+
+
+
+      <div class="lft-form">
+        <label>Select Categories For This Product:</label>
+        <div *ngFor="let categorieHard of categoriesHard2; let i=index">
+          <md-checkbox
+            (click)="togglCategorieButton(categorieHard.name, 'categ2')"
+            [ngModelOptions]="{standalone: true}"
+            [(ngModel)]="categoriesHard2[i].selected"
+          ></md-checkbox>
+          {{categorieHard.name}}
+        </div>
+        <label>Select Product Line For This Product:</label>
+        <div *ngFor="let categorieHard of categoriesHard1; let i=index">
+          <md-checkbox
+            (click)="togglCategorieButton(categorieHard.name, 'categ1')"
+            [ngModelOptions]="{standalone: true}"
+            [(ngModel)]="categoriesHard1[i].selected"
+          ></md-checkbox>
+          {{categorieHard.name}}
+        </div>
+      </div>
+
+      <div class="rght-form">
+        <input
+          [ngModelOptions]="{standalone: true}"
+          [(ngModel)]="inputCategorie"
+          placeholder="Add Tags to Product"
+          (keyup.enter)="addCategorieInput()"
+          mdInput
+        >
+        <div formArrayName="categories">
+          <div *ngFor="let categorie of getObjects(myForm); let i=index" class="tagz">
+            <div [formGroupName]="i">
+              <input type="hidden" class="form-control" formControlName="name" [(ngModel)]="fetchedProduct.categories[i].name">
+              <input type="hidden" class="form-control" formControlName="type" [(ngModel)]="fetchedProduct.categories[i].type">
+              <div class="tagz-cnt" *ngIf="fetchedProduct.categories[i].type=='tag'">
+                <div class="tagz">
+                  <span class="tagz-name">{{fetchedProduct.categories[i].name}}</span>
+                  <i class="tagz-icn fa fa-times pull-right" (click)="removeCategorie(i)"></i>
                 </div>
-                <div class="hlf-wdth">
-                  <iframe width="62" height="85" scrolling="no" frameborder="no" [src]="fetchedProduct.description.title.embedSecure"></iframe>
-                </div>
               </div>
-              <h4>Keywords</h4>
-                <div *ngFor="let categorieTag of fetchedProduct.categoriesTag; let i=index " class="pdt-tagz">
-                  <div class="pdt-tag">{{categorieTag.name}}<b *ngIf="fetchedProduct.categoriesTag.length!== i +1">,&nbsp;</b></div>
-                </div>
             </div>
           </div>
         </div>
       </div>
-      <md-tab-group (selectChange)="onSelectChange($event)" class="beigeback phyto-ctnr pdtind-tabs">
-        <md-tab *ngFor="let categorie of categories5 ; let i=index" [label]="categorie.name">
-          <div *ngIf="i == 0">{{fetchedProduct.description.benefitsAndResults}}</div>
-          <div *ngIf="i == 1">{{fetchedProduct.description.howToApply}}</div>
-          <div *ngIf="i == 2">{{fetchedProduct.description.activeIngredients}}</div>
-        </md-tab>
-      </md-tab-group>
-      <div class="rlt-pdts beigeback phyto-ctnr">
-        <h4 style="text-align: center;">Related Products</h4>
-        <div *ngFor="let relatedProduct of fetchedProduct.relatedProducts" class="rltpdt-ctnr">
-          <a [routerLink]="['/product/' + relatedProduct._id]">
-            <div class="rltpdt-cnt">
-              <div class="pdt-nm">{{relatedProduct.magento.name}}</div>
-              <div *ngFor="let custom_attribute of relatedProduct.magento.custom_attributes">
-                <div *ngIf="custom_attribute.attribute_code == 'image'">
-                  <img src="{{urlMagento}}{{custom_attribute.value}}" onerror="this.src ='assets/images/no-image-found.jpg'">
-                </div>
-                <div *ngIf="custom_attribute.attribute_code == 'description'">
-                  <div class="pdt-desc">{{custom_attribute.value | smallDescription}}</div>
-                </div>
-              </div>
-            </div>
-            <div *ngFor="let categorieTag of relatedProduct.categoriesTag; let i=index " class="pdt-tagz">
-              <div class="pdt-tag">{{categorieTag.name}}<b *ngIf="product.categoriesTag.length!== i +1">,&nbsp;</b></div>
-            </div>
-          </a>
-        </div>
-      </div>
-      <div class="clearfix"></div>
-    </form>
-  </div>
+
+    <div class="valid-edit">
+      <button type="submit" class="done" [disabled]="!myForm.valid">Done</button>
+      <button *ngIf="fetchedProduct._id" type="button" class="delete" md-button (click)="openDialogDelete()">Delete Product</button>
+    </div>
+    <div class="clearfix"></div>
+  </form>
 </div>

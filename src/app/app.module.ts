@@ -59,11 +59,10 @@ import { PressService} from './press/press.service';
 
 
 
-import { VideoModule} from './video/video.module';
-import { UserModule} from './user/user.module';
 import { ProductModule} from './product/product.module';
+import { UserModule} from './user/user.module';
+// import { ProductModule} from './product/product.module';
 import { CompanieModule} from './companie/companie.module';
-import { ProductBatchModule} from './productBatch/productBatch.module';
 
 
 import { PromotionsSeeInactiveComponent} from './promotion/promotionsSeeInactive.component';
@@ -75,9 +74,6 @@ import { PromotionService} from './promotion/promotion.service';
 
 
 
-import { SubmitPicDialog} from './social/submitPicDialog.component';
-import { SocialComponent} from './social/social.component';
-import { SocialsComponent} from './social/socials.component';
 
 
 
@@ -148,21 +144,17 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     PressSingleComponent,
 
 
-    // VideoDeleteDialog,
-    // VideoWhereDialogComponent,
-    // VideoComponent,
-    // VideosComponent,
-    // VideoSingleComponent,
+    // ProductDeleteDialog,
+    // ProductWhereDialogComponent,
+    // ProductComponent,
+    // ProductsComponent,
+    // ProductSingleComponent,
 
     PromotionDeleteDialog,
     PromotionsSeeInactiveComponent,
     PromotionComponent,
     PromotionsComponent,
     SinglePromotionComponent,
-
-    SubmitPicDialog,
-    SocialComponent,
-    SocialsComponent,
 
 
 
@@ -204,7 +196,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     UserFormsComponent,
     UserFormsUploadAndList,
     FormComponent,
-    
+
     ErrorPageComponent,
 
     AdminUsersComponent,
@@ -233,10 +225,10 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 
 
     UserModule,
-    VideoModule,
     ProductModule,
+    // ProductModule,
     CompanieModule,
-    ProductBatchModule,
+
 
   ],
   providers: [
@@ -245,7 +237,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     AuthService,
     ErrorService,
 //    CompanieService,
-    //VideoService,
+    //ProductService,
     MainPageHomeService,
     PressService,
     FormService,
@@ -265,11 +257,11 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   entryComponents: [
   //  CompanieAddUserDialog,
     DeleteDialog,
-    SubmitPicDialog,
+
     PromotionDeleteDialog,
     EditOptionsComponentDialog,
-    // VideoDeleteDialog,
-    // VideoWhereDialogComponent,
+    // ProductDeleteDialog,
+    // ProductWhereDialogComponent,
     SeePictureDialogComponent,
   ],
 

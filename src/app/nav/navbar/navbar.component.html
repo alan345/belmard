@@ -37,7 +37,11 @@
                                 <li role="presentation"><a href="#">Third Item</a></li>
                             </ul>
                         </li>
-                    <li><a (click)="goTo('/product/admin')" class="admn-btn">Produits</a></li>
+                    <li>
+                      <a [routerLink]="['/video']" routerLinkActive="active" class="admn-btn">
+                        Produits
+                      </a>
+                    </li>
                    </ul>
                 </div>
             </div>

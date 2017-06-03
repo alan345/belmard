@@ -1,13 +1,15 @@
 import { Component, OnInit} from '@angular/core';
 import { ProductService} from './product.service';
 import { ToastsManager} from 'ng2-toastr';
-import { MdDialog} from '@angular/material';
+import { MdDialog } from '@angular/material';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { Location }               from '@angular/common';
+import { Location } from '@angular/common';
 import { Product } from './product.model';
 import { EditOptionsComponentDialog } from '../modalLibrary/modalLibrary.component';
-import { FormBuilder, FormGroup, FormArray} from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray, Validators} from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
+
+
 
 @Component({
   selector: 'app-products',
@@ -18,63 +20,44 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 export class ProductSingleComponent implements OnInit {
 
-  urlMagento: string = 'http://52.2.61.43/pub/media/catalog/product';
-  fetchedProduct: Product = new Product(this.sanitizer);
+  categ: string = 'Electricité';
+
+  subCateg: string = 'file';
+
+  data:Array<Object> =
+  [
+    {
+      'categ':'Plomberie',
+      'subCategD': ['robinet', 'douche', 'joint']},
+    {
+      'categ':'Electricité',
+      'subCategD': ['lampe', 'file', 'douille']},
+    {
+      'categ':'Serrurerie',
+      'subCategD': ['cle', 'verou', 'porte']}
+  ];
 
   // fetchedProduct: Product = {
   //   _id: '',
+  //   title: '',
+  //   embed: '',
+  //   embedSecure: this.sanitizer.bypassSecurityTrustResourceUrl(''),
   //   categories: [],
-  //   categoriesTag: [],
-  //   description: {
-  //     benefitsAndResults: '',
-  //     howToApply: '',
-  //     activeIngredients: '',
-  //     title : {
-  //       prononciation: '',
-  //       embed: '',
-  //       embedSecure: this.sanitizer.bypassSecurityTrustResourceUrl(''),
-  //     }
-  //   },
-  //   magento : {
-  //     id: '',
-  //     sku: '',
-  //     name: '',
-  //     price: 0,
-  //     weight: '',
-  //     custom_attributes: [],
-  //   }
-  // };
+  //   owner: []
+  // }
 
-  categories5 = [
-    { name: 'Benefits & Results', selected : false},
-    { name: 'How to apply', selected : false },
-    { name: 'Active Ingredients', selected : false },
 
-  ]
-
+  fetchedProduct: Product = new Product();
 
   categoriesHard2 = [
-    {
-      name:'treatments',
-      selected : false
-    },
-    {
-      name:'knowledges',
-      selected : false
-    },
-    {
-      name:'testimonials',
-      selected : false
-    },
-    {
-      name:'merchandising',
-      selected : false
-    },
-    {
-      name:'promotions',
-      selected : false
-    }
+    { name:'Through your eyes', selected : false },
+    { name:'How to', selected : false },
+    { name:'Fashion', selected : false },
+    { name:'Merchandising', selected : false },
+    { name:'Behind the Scene & Testimonials', selected : false }
   ]
+
+
 
   categoriesHard1 = [{
       name:'phyto',
@@ -111,14 +94,17 @@ export class ProductSingleComponent implements OnInit {
 
 
   getObjects(myForm: any){
-    //console.log(myForm.get('categories').controls)
      return myForm.get('categories').controls
    }
 
   ngOnInit() {
+
+
+
     this.myForm = this._fb.group({
       _id: [''],
-
+      title: ['', [Validators.required, Validators.minLength(5)]],
+      embed: ['', [Validators.required, Validators.minLength(5)]],
       categories: this._fb.array([])
     });
 
@@ -128,9 +114,6 @@ export class ProductSingleComponent implements OnInit {
     })
   }
 
-  onSelectChange = ($event: any): void => {
-    //
-  }
 
   removeCategorie(i: number) {
       this.fetchedProduct.categories.splice(i, 1)
@@ -145,23 +128,19 @@ export class ProductSingleComponent implements OnInit {
       //this.updatecategoriesHard2()
   }
   addCategorie() {
-    //console.log('addCategorie')
     const control = <FormArray>this.myForm.controls['categories'];
     const addrCtrl = this._fb.group({
         name: [''],
         type:['']
     });
     control.push(addrCtrl);
-
   }
   addCategorieInput() {
-    //console.log('addCategorieInput')
     this.togglCategorieButton(this.inputCategorie, 'tag')
     this.inputCategorie=''
   }
   togglCategorieButton(nameCateg: string, type: string) {
-    //console.log('togglCategorieButton')
-    var indexFound:number;
+    var indexFound: number
     this.fetchedProduct.categories.forEach((categorie, index) => {
       if(categorie.name == nameCateg)
         indexFound = index
@@ -183,43 +162,26 @@ export class ProductSingleComponent implements OnInit {
   goBack() {
     this.location.back();
   }
-  // openDialogWhereProduct(){
-  //   let dialogRefDelete = this.dialog.open(ProductWhereDialogComponent)
-  //   dialogRefDelete.afterClosed().subscribe(result => {
-  //     // if(result) {
-  //     //   this.onDelete(this.fetchedProduct._id)
-  //     //   this.router.navigate(['product']);
-  //     // }
-  //   })
-  // }
+
   openDialog(positionImage: string) {
-    let dialogRef = this.dialog.open(EditOptionsComponentDialog)
+    let dialogRef = this.dialog.open(EditOptionsComponentDialog);
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        this.fetchedProduct[positionImage] = result
+        console.log(result)
+        this.fetchedProduct.forms.push( result)
       }
     })
   }
 
-  // openDialogDelete(){
-  //   let dialogRefDelete = this.dialog.open(ProductDeleteDialog)
-  //   dialogRefDelete.afterClosed().subscribe(result => {
-  //     if(result) {
-  //       this.onDelete(this.fetchedProduct._id)
-  //       this.router.navigate(['product']);
-  //     }
-  //   })
-  // }
 
   save(product : Product) {
-    //console.log(this.fetchedProduct)
     if(!this.fetchedProduct.categories.length){
       this.toastr.error('Error!', 'Please select at least one categorie')
       return
     }
 
-    if(this.fetchedProduct._id) {
-      this.productService.updateProduct(this.fetchedProduct)
+    if(product._id) {
+      this.productService.updateProduct(product)
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
@@ -228,7 +190,7 @@ export class ProductSingleComponent implements OnInit {
           error => {console.log(error)}
         );
     } else {
-      this.productService.saveProduct(this.fetchedProduct)
+      this.productService.saveProduct(product)
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
@@ -273,30 +235,13 @@ export class ProductSingleComponent implements OnInit {
     this.productService.getProduct(id)
       .subscribe(
         res => {
-
           this.fetchedProduct = <Product>res
 
-        //  this.fetchedProduct.embedSecure = this.sanitizer.bypassSecurityTrustResourceUrl('https://player.vimeo.com/product/' + res.embed )
+          //this.fetchedProduct.embedSecure = this.sanitizer.bypassSecurityTrustResourceUrl('https://player.vimeo.com/product/' + res.embed )
           //this.fetchedProduct.embedSecure = this.sanitizer.bypassSecurityTrustResourceUrl('//fast.wistia.net/embed/iframe/' + res.embed)
-
-
-            this.fetchedProduct.description.title.embedSecure = this.sanitizer.bypassSecurityTrustResourceUrl('https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/' + this.fetchedProduct.description.title.embed )
-
-            this.fetchedProduct['categoriesTag'] = []
-            this.fetchedProduct.categories.forEach((categorie) => {
-              this.addCategorie()
-              if(categorie.type === 'tag') {
-                this.fetchedProduct['categoriesTag'].push(categorie)
-              }
-            })
-            //this.fetchedProducts.push(product)
-
-
-
-
-          // this.fetchedProduct.categories.forEach((categorie) => {
-          //   this.addCategorie()
-          // })
+          this.fetchedProduct.categories.forEach((categorie) => {
+            this.addCategorie()
+          })
           this.refreshHardCategories()
         },
         error => {

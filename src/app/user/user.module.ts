@@ -19,8 +19,8 @@ import { NewUserComponent} from './singleUser/newUser.component';
 import { SingleUserComponent} from './singleUser/singleUser.component';
 import { AddNoteComponent} from './singleUser/addNote.component';
 import { ChooseDateComponent} from './singleUser/chooseDate.component';
-import { AddProductsToUserComponent} from './singleUser/addProductsToUser.component';
-import { UserProductsHistory} from './singleUser/userProductsHistory.component';
+// import { AddProductsToUserComponent} from './singleUser/addProductsToUser.component';
+// import { UserProductsHistory} from './singleUser/userProductsHistory.component';
 
 
 import { UserProfileSettingsComponent } from './profile/userProfileSettings.component';
@@ -59,8 +59,8 @@ import { LoginComponent} from './login/login.component';
     AddNoteComponent,
     ChooseDateComponent,
     UserPicturesComponent,
-    AddProductsToUserComponent,
-    UserProductsHistory,
+    // AddProductsToUserComponent,
+    // UserProductsHistory,
 
     LoginComponent,
     ResetPasswordComponent,

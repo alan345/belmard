@@ -18,8 +18,6 @@ import {MainPageHomeComponent} from './mainPageHome/mainPageHome.component';
 //import {USER_COMPANIES} from './companie/companie.routes';
 import {CompanieComponent} from './companie/companie.component';
 
-import {SOCIAL} from './social/social.routes';
-import {SocialComponent} from './social/social.component';
 
 
 
@@ -29,11 +27,6 @@ import {PromotionComponent} from './promotion/promotion.component';
 import {USER_PRESSES} from './press/press.routes';
 import {PressComponent} from './press/press.component';
 
-//import {VIDEOS} from './video/video.routes';
-//import {VideoComponent} from './video/video.component';
-
-//import {USER_PRODUCTS} from './product/product.routes';
-import {ProductComponent} from './product/product.component';
 
 import {AdminComponent} from './admin/admin.component';
 import {ErrorPageComponent} from './errorPage/errorPage.component';
@@ -46,17 +39,14 @@ import { NgModule }             from '@angular/core';
 export const routes: Routes = [
 //  {path: '', component: MainPageHomeComponent, pathMatch: 'full'},
   {path: '', component: MainPageHomeComponent, canActivate: [AuthGuardService], pathMatch: 'full'},
-  {path: 'social', component: SocialComponent, canActivate: [AuthGuardService], children: SOCIAL},
+
 //  {path: 'home2', component: MainPageComponent, pathMatch: 'full'},
 
   {path: 'press', component: PressComponent, canActivate: [AuthGuardService], children: USER_PRESSES},
   //{path: 'product', component: ProductComponent, canActivate: [AuthGuardService], children: USER_PRODUCTS},
-//  {path: 'video', component: VideoComponent, canActivate: [AuthGuardService], children: VIDEOS},
-  //{path: 'companie', component: CompanieComponent, canActivate: [AuthGuardService], children: USER_COMPANIES},
+
   {path: 'companie', loadChildren: 'app/companie/companie.module#CompanieModule'},
-  {path: 'video', loadChildren: 'app/video/video.module#VideoModule'},
   {path: 'product', loadChildren: 'app/product/product.module#ProductModule'},
-  {path: 'productBatch', loadChildren: 'app/productBatch/productBatch.module#ProductBatchModule'},
   {path: 'user', loadChildren: 'app/user/user.module#UserModule'},
   {path: 'promotion', component: PromotionComponent, canActivate: [AuthGuardService], children: USER_PROMOTIONS},
 //  {path: 'companie/:id', component: CompanieDetailComponent},
