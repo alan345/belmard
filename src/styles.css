@@ -134,12 +134,10 @@ th, td {
 }
 .form-group {
     width: 300px;
-    margin-left: 20px;
     margin-bottom: 0 !important;
 }
 .form-group.col-sm-12 {
     width: 300px;
-    margin-left: 20px;
     padding: 0;
 }
 .goldgradient {
