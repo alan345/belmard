@@ -1,3 +1,9 @@
+#global {
+  margin-left: auto;
+  margin-right: auto;
+  width: 950px;
+}
+
 .vid-tabs .mat-tab-label {
   text-transform: uppercase!important;
   color: #252525 !important;
