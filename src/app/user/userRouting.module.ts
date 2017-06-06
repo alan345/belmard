@@ -22,9 +22,11 @@ import {UserPicturesComponent} from './singleUser/userPictures.component';
 // import {AddProductsToUserComponent} from './singleUser/addProductsToUser.component';
 // import { UserProductsHistory} from './singleUser/userProductsHistory.component';
 import {NewUserComponent} from './singleUser/newUser.component';
+import{ AdminUsersComponent } from './users/adminUsers.component';
 
 
 export const routes: Routes = [
+  {path: '', component: AdminUsersComponent},
   {path: 'newuser', component: NewUserComponent},
   {path: 'newuser/:id', component: NewUserComponent},
   {path: 'login', component: LoginComponent},

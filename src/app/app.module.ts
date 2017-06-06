@@ -99,7 +99,7 @@ import { ErrorPageComponent} from './errorPage/errorPage.component';
 
 
 
-import { AdminUsersComponent} from './admin/user/adminUsers.component';
+//import { AdminUsersComponent} from './admin/user/adminUsers.component';
 import { AdminService} from './admin/services/admin.service';
 
 
@@ -199,7 +199,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 
     ErrorPageComponent,
 
-    AdminUsersComponent,
+  //  AdminUsersComponent,
 
     EditOptionsComponentDialog,
     AdminComponent,

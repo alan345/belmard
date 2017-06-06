@@ -17,7 +17,7 @@ var userProfile  = require('./routes/userProfile')
 var adminPage    = require('./routes/admin')
 var options    = require('./routes/options')
 var presses    = require('./routes/press')
-var videos    = require('./routes/video')
+var products    = require('./routes/product')
 
 
 var app = express()
@@ -54,7 +54,7 @@ app.use('/user/reset', resetRoutes)
 app.use('/uploads', uploadRoute)
 app.use('/forms', userForms)
 app.use('/press', presses)
-app.use('/video', videos)
+app.use('/product', products)
 app.use('/admin', adminPage)
 app.use('/options', options)
 

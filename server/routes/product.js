@@ -2,7 +2,7 @@ var express = require('express'),
     router  = express.Router(),
     config  = require('../config/config'),
     User    = require('../models/user.model'),
-    Video    = require('../models/video.model'),
+    Product    = require('../models/product.model'),
     Form    = require('../models/form.model'),
     fs      = require('fs'),
     jwt     = require('jsonwebtoken')
@@ -55,7 +55,7 @@ router.use('/', function (req, res, next) {
 
 //update
 router.put('/:id', function (req, res, next) {
-  Video.findById(({_id: req.params.id}), function (err, item) {
+  Product.findById(({_id: req.params.id}), function (err, item) {
     if (err) {
       return res.status(404).json({
         message: '',
@@ -87,11 +87,11 @@ router.put('/:id', function (req, res, next) {
 
 router.post('/', function (req, res, next) {
   console.log(req.body)
-  //var Video = new Video(req.body)
-  var video = new Video(req.body)
+  //var Product = new Product(req.body)
+  var product = new Product(req.body)
 
 
-  video.save(function (err, result) {
+  product.save(function (err, result) {
     if (err) {
       console.log(err)
       return res.status(403).json({
@@ -161,7 +161,7 @@ router.get('/page/:page', function (req, res, next) {
   // console.log(hasWhatsNewCateg)
   // console.log(searchQuery)
 
-  Video
+  Product
   .find(searchQuery)
   .sort('-createdAt')
   .limit(itemsPerPage)
@@ -173,7 +173,7 @@ router.get('/page/:page', function (req, res, next) {
         err: err
       })
     } else {
-      Video
+      Product
       .find(searchQuery)
       .count()
       .exec(function (err, count) {
@@ -195,7 +195,7 @@ router.get('/page/:page', function (req, res, next) {
 
 // getting user forms to display them on front end
 router.get('/:id', function (req, res, next) {
-  Video
+  Product
   .findById({_id: req.params.id})
   .exec(function (err, item) {
     if (err) {
@@ -225,8 +225,8 @@ router.get('/countNewItemForUser/:id', function (req, res, next) {
         error: err
       });
     } else {
-      Video
-      .find({createdAt:{"$gt": user.trackinPage.lastVisitPageVideo}})
+      Product
+      .find({createdAt:{"$gt": user.trackinPage.lastVisitPageProduct}})
       .exec(function (err, item) {
         if (err) {
           return res.status(404).json({
@@ -246,7 +246,7 @@ router.get('/countNewItemForUser/:id', function (req, res, next) {
 
 
 router.delete('/:id', function (req, res, next) {
-  Video.findById((req.params.id), function (err, item) {
+  Product.findById((req.params.id), function (err, item) {
     if (err) {
       return res.status(500).json({
         message: 'An error occured',

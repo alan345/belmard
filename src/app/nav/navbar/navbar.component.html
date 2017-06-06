@@ -42,6 +42,12 @@
                         Produits
                       </a>
                     </li>
+                    <li>
+                      <a [routerLink]="['/user']" routerLinkActive="active" class="admn-btn">
+                        Users
+                      </a>
+                    </li>
+                    <li style="margin-bottom: 30px;"><a (click)="logout()" *ngIf="isLoggedIn()">Log out</a></li>
                    </ul>
                 </div>
             </div>

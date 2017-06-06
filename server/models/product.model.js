@@ -4,7 +4,7 @@ var mongoose                = require('mongoose'),
     User                    = require('../models/user.model'),
     mongooseUniqueValidator = require('mongoose-unique-validator')
 
-var video = new Schema({
+var product = new Schema({
     title: {type: String},
     embed: {type: String},
     categories: [{name: {type: String}, type:{type: String}}],
@@ -14,6 +14,6 @@ var video = new Schema({
     timestamps: true
   })
 
-video.plugin(mongooseUniqueValidator)
+product.plugin(mongooseUniqueValidator)
 
-module.exports = mongoose.model('Video', video)
+module.exports = mongoose.model('Product', product)

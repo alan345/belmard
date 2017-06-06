@@ -35,6 +35,7 @@ import { UserService} from './user.service';
 import { LoginComponent} from './login/login.component';
 //import { UserFormsComponent} from '../form/userForms.component';
 
+import{ AdminUsersComponent } from './users/adminUsers.component';
 
 
 @NgModule({
@@ -62,6 +63,8 @@ import { LoginComponent} from './login/login.component';
     // AddProductsToUserComponent,
     // UserProductsHistory,
 
+
+    AdminUsersComponent,
     LoginComponent,
     ResetPasswordComponent,
     ForgetPasswordComponent,
