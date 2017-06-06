@@ -79,7 +79,7 @@ th, td {
 .form-control {
   border-radius: 0 !important;
   width: 300px;
-  margin-left: 20px;
+  margin-left: 0px;
 }
 .form {
   position: relative;
