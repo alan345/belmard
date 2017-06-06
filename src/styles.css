@@ -131,10 +131,14 @@ th, td {
   display: none;
 }
 .form-group {
+    margin: 0 auto 100px !important;
+    padding: 250px !important;
     margin-bottom: 0 !important;
 }
 .form-group.col-sm-12 {
-  padding: 0;
+    margin: 0 auto 100px !important;
+    padding: 250px !important;
+    padding: 0;
 }
 .goldgradient {
     background: #c9bda5;
