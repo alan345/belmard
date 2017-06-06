@@ -78,6 +78,8 @@ th, td {
 }
 .form-control {
   border-radius: 0 !important;
+  width: 300px;
+  margin-left: 20px;
 }
 .form {
   position: relative;
@@ -131,13 +133,13 @@ th, td {
   display: none;
 }
 .form-group {
-    margin: 0 auto 100px !important;
-    padding: 250px !important;
+    width: 300px;
+    margin-left: 20px;
     margin-bottom: 0 !important;
 }
 .form-group.col-sm-12 {
-    margin: 0 auto 100px !important;
-    padding: 250px !important;
+    width: 300px;
+    margin-left: 20px;
     padding: 0;
 }
 .goldgradient {
