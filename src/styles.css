@@ -138,13 +138,13 @@ th, td {
 }
 .goldgradient {
     background: #c9bda5;
-    background: -webkit-radial-gradient(#ffffff, #c9bda5); /* Safari */
-    background: -o-radial-gradient(#ffffff, #c9bda5); /* Opera */
-    background: -moz-radial-gradient(#ffffff, #c9bda5); /* Firefox */
-    background: radial-gradient(#ffffff, #c9bda5); /* Standard syntax */
+    background: -webkit-radial-gradient(#ffffff, #969494); /* Safari */
+    background: -o-radial-gradient(#ffffff, #969494); /* Opera */
+    background: -moz-radial-gradient(#ffffff, #969494); /* Firefox */
+    background: radial-gradient(#ffffff, #969494); /* Standard syntax */
 }
 .beigeborder {
-    border: 1px solid #c9bda5;
+    border: 1px solid #969494;
 }
 .subnav {
     padding: 0 15px;
