@@ -18,6 +18,7 @@ var adminPage    = require('./routes/admin')
 var options    = require('./routes/options')
 var presses    = require('./routes/press')
 var products    = require('./routes/product')
+var projects    = require('./routes/project')
 
 
 var app = express()
@@ -55,6 +56,7 @@ app.use('/uploads', uploadRoute)
 app.use('/forms', userForms)
 app.use('/press', presses)
 app.use('/product', products)
+app.use('/project', projects)
 app.use('/admin', adminPage)
 app.use('/options', options)
 

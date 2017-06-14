@@ -6,7 +6,7 @@ import { MdDialog} from '@angular/material';
 import { EditOptionsComponentDialog }  from '../modalLibrary/modalLibrary.component';
 import { AdminService} from '../admin/services/admin.service';
 
-import { PressService} from '../press/press.service';
+
 import { Options } from './options.model';
 import { Router} from '@angular/router';
 import { CompanieService} from '../companie/companie.service';
@@ -50,7 +50,6 @@ export class MainPageHomeComponent implements OnInit {
     private toastr: ToastsManager,
     public dialog: MdDialog,
 
-    public pressService: PressService,
     private authService: AuthService,
   ) {}
 
@@ -131,11 +130,6 @@ export class MainPageHomeComponent implements OnInit {
 
 
 
-    this.pressService.countNewItemForUser()
-    .subscribe(
-      data => this.trackinPage.lastVisitPagePressCount = data.item,
-      error => console.log(error)
-    )
     this.mainPageHomeService.getOptions()
       .subscribe(
         options => this.options = <Options>options.obj,
@@ -148,7 +142,7 @@ export class MainPageHomeComponent implements OnInit {
   isStylist() {
     return this.authService.isStylist();
   }
-  isSalesRep(){
+  isSalesRep() {
     return this.authService.isSalesRep();
   }
   isManager(){

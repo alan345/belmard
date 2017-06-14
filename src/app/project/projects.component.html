@@ -1,14 +1,12 @@
 <div class="container">
   <div class="goldgradient beigeborder subnav">
     <button class="subnav-btnleft" (click)="goBack()"><i class="fa fa-chevron-left"></i></button>
-    <h3 style="text-align: center;">Products</h3>
+    <h3 style="text-align: center;">Projects</h3>
   </div>
   <div class="subsubnav-clients">
     <input type="text" name="Search" placeholder="Search" [(ngModel)]="search.search" (ngModelChange)="searchInput()">
   </div>
-
-  <button class="subnav-btnleft" [routerLink]="['/product/productEdit/']" routerLinkActive="active"><i class="fa fa-chevron-left"></i>ADD PRODUCT</button>
-
+  <button class="subnav-btnleft" [routerLink]="['/project/projectEdit/']" routerLinkActive="active"><i class="fa fa-chevron-left"></i>ADD Project</button>
 
 
   <div class="beigeback">
@@ -23,8 +21,8 @@
       </tr>
       </thead>
       <tbody class="clienttbl">
-      <tr *ngFor="let product of fetchedProducts | paginate: { id: 'server', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }" [routerLink]="['/product/profile/' + product._id]" routerLinkActive="active">
-        <td>{{product.magento.name }}</td>
+      <tr *ngFor="let project of fetchedProjects | paginate: { id: 'server', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }" [routerLink]="['/project/profile/' + project._id]" routerLinkActive="active">
+        <td>{{project.magento.name }}</td>
       </tr>
       </tbody>
     </table>

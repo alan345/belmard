@@ -19,13 +19,13 @@ import {MainPageHomeComponent} from './mainPageHome/mainPageHome.component';
 import {CompanieComponent} from './companie/companie.component';
 
 
-
-
-import {USER_PROMOTIONS} from './promotion/promotion.routes';
-import {PromotionComponent} from './promotion/promotion.component';
-
-import {USER_PRESSES} from './press/press.routes';
-import {PressComponent} from './press/press.component';
+//
+//
+// import {USER_PROMOTIONS} from './promotion/promotion.routes';
+// import {PromotionComponent} from './promotion/promotion.component';
+//
+// import {USER_PRESSES} from './press/press.routes';
+// import {PressComponent} from './press/press.component';
 
 
 import {AdminComponent} from './admin/admin.component';
@@ -42,13 +42,14 @@ export const routes: Routes = [
 
 //  {path: 'home2', component: MainPageComponent, pathMatch: 'full'},
 
-  {path: 'press', component: PressComponent, canActivate: [AuthGuardService], children: USER_PRESSES},
+  //{path: 'press', component: PressComponent, canActivate: [AuthGuardService], children: USER_PRESSES},
   //{path: 'product', component: ProductComponent, canActivate: [AuthGuardService], children: USER_PRODUCTS},
 
   {path: 'companie', loadChildren: 'app/companie/companie.module#CompanieModule'},
   {path: 'product', loadChildren: 'app/product/product.module#ProductModule'},
+  {path: 'project', loadChildren: 'app/project/project.module#ProjectModule'},
   {path: 'user', loadChildren: 'app/user/user.module#UserModule'},
-  {path: 'promotion', component: PromotionComponent, canActivate: [AuthGuardService], children: USER_PROMOTIONS},
+//  {path: 'promotion', component: PromotionComponent, canActivate: [AuthGuardService], children: USER_PROMOTIONS},
 //  {path: 'companie/:id', component: CompanieDetailComponent},
 //  {path: 'companie/edit/:id', component: EditCompanieComponent},
 //  {path: 'map', component: MapComponent, pathMatch: 'full'},

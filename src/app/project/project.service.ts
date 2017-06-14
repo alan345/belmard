@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Response, Headers, Http, RequestOptions} from '@angular/http';
 import {ErrorService} from '../errorHandler/error.service';
-import {Press} from './press.model';
+import {Project} from './project.model';
 import {ToastsManager} from 'ng2-toastr';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -10,13 +10,13 @@ import { AuthService } from '../auth/auth.service';
 
 
 @Injectable()
-export class PressService {
+export class ProjectService {
 
   private url: string = '/';
-  // private token: string = localStorage.getItem('id_token');
-  // private pressId: string = localStorage.getItem('pressId');
-  private presses: Press[] = [];
-  private singlePress = Object;
+//  private token: string = localStorage.getItem('id_token');
+//  private projectId: string = localStorage.getItem('projectId');
+  // private projects = [];
+  // private singleProject = Object;
 
   constructor(
     private http: Http,
@@ -24,32 +24,35 @@ export class PressService {
     private toastr: ToastsManager,
     private authService: AuthService) {}
 
-  // get press forms from backend in order to display them in the front end
-  getPresses(page: number) {
+
+
+  getProjects(page: number, search: any) {
     let headers = new Headers({'Content-Type': 'application/json'});
     headers.append('Authorization', '' + this.authService.currentUser.token);
-    return this.http.get(this.url + 'press/page/' + page , {headers: headers})
+    let options = new RequestOptions({ headers: headers, search: search});
+    return this.http.get(this.url + 'project/page/' + page , options)
       .timeout(9000)
       .map((response: Response) => {
-        const presses = response.json();
-        return presses;
+
+        const projects = response.json();
+
+        return projects;
       })
       .catch((error: Response) => {
         this.errorService.handleError(error.json());
         return Observable.throw(error.json());
       });
   }
-
 
   countNewItemForUser(){
     let headers = new Headers({'Content-Type': 'application/json'});
     headers.append('Authorization', '' + this.authService.currentUser.token);
     let options = new RequestOptions({ headers: headers});
-    return this.http.get(this.url + 'press/countNewItemForUser/' + this.authService.currentUser.userId, options)
+    return this.http.get(this.url + 'project/countNewItemForUser/' + this.authService.currentUser.userId, options)
       .timeout(9000)
       .map((response: Response) => {
-        const videos = response.json();
-        return videos;
+        const projects = response.json();
+        return projects;
       })
       .catch((error: Response) => {
         this.errorService.handleError(error.json());
@@ -57,13 +60,13 @@ export class PressService {
       });
   }
 
-
-  //getPress(id: string) : Observable<Press> {
-  getPress(id: string) : Observable<Press>{
+  //getProject(id: string) : Observable<Project> {
+  getProject(id: string) {
     let headers = new Headers({'Content-Type': 'application/json'});
     headers.append('Authorization', '' + this.authService.currentUser.token);
-    return this.http.get(this.url + 'press/' + id, {headers: headers})
+    return this.http.get(this.url + 'project/' + id, {headers: headers})
       .map((response: Response) => {
+        //console.log(response.json().item)
         return response.json().item;
       //  this.singleForm = response.json();
         //return this.singleForm;
@@ -77,10 +80,10 @@ export class PressService {
 
 
 
-  deletePress(id: string) {
+  deleteProject(id: string) {
     let headers = new Headers({'Content-Type': 'application/json'});
     headers.append('Authorization', '' + this.authService.currentUser.token);
-    return this.http.delete(this.url + 'press/' + id, {headers: headers})
+    return this.http.delete(this.url + 'project/' + id, {headers: headers})
       .map((response: Response) => {
       //  console.log("delete",response)
         return response.json();
@@ -93,15 +96,15 @@ export class PressService {
       });
   }
 
-  savePress(press: Press) {
+  saveProject(project : Project) {
   //  console.log("this.authService.currentUser.token",this.authService.currentUser.token);
-  //  delete press._id;
-  delete press._id
-  console.log(press)
-    const body = JSON.stringify(press);
+  //  delete project._id;
+  delete project._id
+  //console.log(project)
+    const body = JSON.stringify(project);
     const headers = new Headers({'Content-Type': 'application/json'});
     headers.append('Authorization', '' + this.authService.currentUser.token);
-    return this.http.post(this.url + 'press/',body, {headers: headers})
+    return this.http.post(this.url + 'project/',body, {headers: headers})
       .map(response => response.json())
       .catch((error: Response) => {
         this.errorService.handleError(error.json());
@@ -109,11 +112,11 @@ export class PressService {
       });
   }
 
-  updatePress(press: Press) {
-    const body = JSON.stringify(press);
+  updateProject(project : Project) {
+    const body = JSON.stringify(project);
     const headers = new Headers({'Content-Type': 'application/json'});
     headers.append('Authorization', '' + this.authService.currentUser.token);
-    return this.http.put(this.url + 'press/' + press._id, body, {headers: headers})
+    return this.http.put(this.url + 'project/' + project._id, body, {headers: headers})
       .map(response => response.json())
       .catch((error: Response) => {
         this.errorService.handleError(error.json());
