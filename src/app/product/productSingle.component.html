@@ -111,17 +111,12 @@
               >
               <div *ngFor="let fetchedCompanie of fetchedCompanies; let i=index">
                 {{fetchedCompanie.name}} - {{fetchedCompanie.name}}
-                <button type="button" (click)="selectProduct(fetchedCompanie)">select</button>
+                <button type="button" (click)="selectCompanie(fetchedCompanie)">select</button>
               </div>
               <div *ngFor="let vendor of fetchedProduct.vendors; let i=index">
-                {{vendor|json}}
-                <!-- <div *ngFor="let custom_attribute of productFetch.product.magento.custom_attributes" class="rltpdt-ctnr">
-                  <div *ngIf="custom_attribute.attribute_code == 'image'" class="rltpdt-cnt">
-                    {{productFetch.product.magento.sku}} - {{productFetch.product.magento.name}}
-                    <img src="{{urlMagento}}{{custom_attribute.value}}" onerror="this.src ='assets/images/no-image-found.jpg'">
-                    <button type="button" (click)="removeProduct(i)"><i class="fa fa-times"></i></button>
-                  </div>
-                </div> -->
+                {{vendor.name}}
+                <button type="button" (click)="removeCompanie(i)"><i class="fa fa-times"></i></button>
+
               </div>
 
 

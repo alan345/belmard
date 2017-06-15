@@ -131,6 +131,10 @@ export class ProductSingleComponent implements OnInit {
     this.fetchedProduct.vendors.push(companie)
   }
 
+  removeCompanie(i: number) {
+    this.fetchedProduct.vendors.splice(i, 1);
+  }
+
   getCompanies(page: number, search: any) {
     this.companieService.getCompanies(page, search)
       .subscribe(
