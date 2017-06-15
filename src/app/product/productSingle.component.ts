@@ -1,12 +1,16 @@
 import { Component, OnInit} from '@angular/core';
 import { ProductService} from './product.service';
+import { CompanieService} from '../companie/companie.service';
+
+
 import { ToastsManager} from 'ng2-toastr';
 import { MdDialog } from '@angular/material';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
-import { Product } from './product.model';
+import { Product, ProductSteps } from './product.model';
+import { Companie } from '../companie/companie.model';
 import { EditOptionsComponentDialog } from '../modalLibrary/modalLibrary.component';
-import { FormBuilder, FormGroup, FormArray, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 
 
@@ -23,44 +27,8 @@ export class ProductSingleComponent implements OnInit {
   categ1: string = 'Serrurerie';
   categ2: string = 'Serrurerie de bâtiment';
   categ3: string = 'Clés';
-
-  data:Array<Object> =
-  [
-    {
-      'categ':'Serrurerie',
-      'subCateg': [
-        {
-          'categ':'Serrurerie de bâtiment',
-          'subCateg': [
-            {categ: 'Clés'},
-            {categ: 'Cylindres'},
-            {categ:'Verrous'}
-          ]
-        },
-        {
-          'categ':'Ferme-portes',
-          'subCateg': [
-            {categ: 'Ferme-portes contemporains'},
-            {categ: 'Ferme-portes technologies à came'},
-            {categ: 'Ferme-portes technologies pignons à crémaillère'}
-          ]
-        },
-      ]
-    },
-    {
-      'categ':'Menuiserie',
-      'subCateg': [
-        {
-          'categ':'Portes',
-          'subCateg': [
-            {categ: 'Fenêtres bois ou PVC'},
-            {categ: 'Portes et portes fenêtres'},
-            {categ: 'Coulissants bois ou PVC'},
-          ]
-        }
-      ]
-    }
-  ]
+  autocompleteCompanie: string = '';
+  productSteps = ProductSteps;
 
 
 
@@ -75,7 +43,7 @@ export class ProductSingleComponent implements OnInit {
 
 
   fetchedProduct: Product = new Product();
-
+  fetchedCompanies: Companie[] = []
   // categoriesHard2 = [
   //   { name:'Through your eyes', selected : false },
   //   { name:'How to', selected : false },
@@ -114,28 +82,32 @@ export class ProductSingleComponent implements OnInit {
     private location: Location,
     private activatedRoute: ActivatedRoute,
     private _fb: FormBuilder,
+    private companieService: CompanieService,
   ) {
   }
 
 
 
 
-  getObjects(myForm: any){
-     return myForm.get('categories').controls
-   }
+  // getObjects(myForm: any){
+  //    return myForm.get('categories').controls
+  //  }
 
   ngOnInit() {
-
-
-
     this.myForm = this._fb.group({
 
       details: this._fb.group({
         referenceName: ['', [Validators.required, Validators.minLength(2)]],
         reference: ['', [Validators.required, Validators.minLength(2)]],
+        description: [''],
         price: this._fb.group({
-          costPrice: ['', [Validators.required, Validators.minLength(5)]],
-          sellingPrice: ['', [Validators.required, Validators.minLength(5)]],
+          costPrice: ['', [Validators.required, Validators.minLength(1)]],
+          sellingPrice: ['', [Validators.required, Validators.minLength(1)]],
+        }),
+        dimension: this._fb.group({
+          height: ['', [Validators.required, Validators.minLength(1)]],
+          width: ['', [Validators.required, Validators.minLength(1)]],
+          depth: ['', [Validators.required, Validators.minLength(1)]],
         }),
       })
     })
@@ -148,49 +120,30 @@ export class ProductSingleComponent implements OnInit {
     })
   }
 
-
-  // removeCategorie(i: number) {
-  //     this.fetchedProduct.categories.splice(i, 1)
-  //     const control = <FormArray>this.myForm.controls['categories'];
-  //     control.removeAt(i);
-  //     let _2this = this
-  //   //  setTimeout(function(){
-  //         _2this.refreshHardCategories()
-  //   //  }, 10);
-  //
-  //
-  //     //this.updatecategoriesHard2()
-  // }
-  addCategorie() {
-    const control = <FormArray>this.myForm.controls['categories'];
-    const addrCtrl = this._fb.group({
-        name: [''],
-        type:['']
-    });
-    control.push(addrCtrl);
+  searchCompanies() {
+    let search = {
+        search: this.autocompleteCompanie,
+      };
+    this.getCompanies(1, search)
   }
-  // addCategorieInput() {
-  //   this.togglCategorieButton(this.inputCategorie, 'tag')
-  //   this.inputCategorie=''
-  // }
-  // togglCategorieButton(nameCateg: string, type: string) {
-  //   var indexFound: number
-  //   this.fetchedProduct.categories.forEach((categorie, index) => {
-  //     if(categorie.name == nameCateg)
-  //       indexFound = index
-  //   })
-  //
-  //   if(indexFound || indexFound== 0 ) {
-  //     let _2this = this
-  //     setTimeout(function(){
-  //         _2this.removeCategorie(+indexFound)
-  //     }, 10);
-  //
-  //   } else {
-  //     this.fetchedProduct.categories.push({name:nameCateg, type:type})
-  //     this.addCategorie()
-  //   }
-  // }
+
+  selectCompanie(companie: Companie){
+    this.fetchedProduct.vendors.push(companie)
+  }
+
+  getCompanies(page: number, search: any) {
+    this.companieService.getCompanies(page, search)
+      .subscribe(
+        res => {
+          this.fetchedCompanies = res.data
+        },
+        error => {
+          console.log(error);
+        }
+      );
+  }
+
+
 
 
   goBack() {
@@ -208,12 +161,15 @@ export class ProductSingleComponent implements OnInit {
   }
 
 
-  save(product : Product) {
+  save() {
 
+    // this.fetchedProduct.categorie.categ1[0].name = this.categ1
+    // this.fetchedProduct.categorie.categ2[0].name = this.categ2
+    // this.fetchedProduct.categorie.categ3[0].name = this.categ3
 
-    if(product._id) {
-      console.log('update')
-      this.productService.updateProduct(product)
+    if(this.fetchedProduct._id) {
+
+      this.productService.updateProduct(this.fetchedProduct)
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
@@ -222,8 +178,8 @@ export class ProductSingleComponent implements OnInit {
           error => {console.log(error)}
         );
     } else {
-      console.log('save')
-      this.productService.saveProduct(product)
+
+      this.productService.saveProduct(this.fetchedProduct)
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
@@ -234,37 +190,10 @@ export class ProductSingleComponent implements OnInit {
     }
   }
 
-  //
-  // refreshHardCategories(){
-  //   this.categoriesHard2.forEach((HardCategorie, indexHard) => {
-  //     this.categoriesHard2[indexHard].selected = false
-  //   })
-  //
-  //   this.categoriesHard2.forEach((HardCategorie, indexHard) => {
-  //     this.fetchedProduct.categories.forEach((fetchedCategorie, indexFetched) => {
-  //       if(HardCategorie.name == fetchedCategorie.name) {
-  //         this.categoriesHard2[indexHard].selected = true
-  //       }
-  //     })
-  //   })
-  //
-  //   this.categoriesHard1.forEach((HardCategorie, indexHard) => {
-  //     this.categoriesHard1[indexHard].selected = false
-  //   })
-  //
-  //   this.categoriesHard1.forEach((HardCategorie, indexHard) => {
-  //     this.fetchedProduct.categories.forEach((fetchedCategorie, indexFetched) => {
-  //       if(HardCategorie.name == fetchedCategorie.name) {
-  //         this.categoriesHard1[indexHard].selected = true
-  //       }
-  //     })
-  //   })
-  // }
 
 
 
-
-  getProduct(id : string) {
+  getProduct(id: string) {
     this.productService.getProduct(id)
       .subscribe(
         res => {

@@ -5,11 +5,11 @@
   </div> -->
   <div id="product-container">
 
-    <p> Fil d'ariane: {{categ}}  /</p>
+
 
     <div>
       <select [ngModel]="categ1" (ngModelChange)="categ1 = $event; second.selectedIndex = 0" #first>
-        <option *ngFor="let n of data" [attr.value]="n.x">{{n.categ}}</option>
+        <option *ngFor="let n of productSteps" [attr.value]="n.x">{{n.categ}}</option>
       </select>
     </div>
     <div>
@@ -17,7 +17,7 @@
         {{n|json}}<br>
       </div> -->
       <select [(ngModel)]="categ2" (ngModelChange)="categ2 = $event; third.selectedIndex = 0" #second>
-        <option *ngFor="let n of data[first.selectedIndex].subCateg" [attr.value]="n.categ">{{n.categ}}</option>
+        <option *ngFor="let n of productSteps[first.selectedIndex].subCateg" [attr.value]="n.categ">{{n.categ}}</option>
       </select>
     </div>
 
@@ -25,7 +25,7 @@
     <!-- {{data[first.selectedIndex].subCateg |json}} -->
     <div>
       <select [(ngModel)]="categ3" #third>
-        <option *ngFor="let n of data[first.selectedIndex].subCateg[second.selectedIndex].subCateg" [attr.value]="n.categ">{{n.categ}}</option>
+        <option *ngFor="let n of productSteps[first.selectedIndex].subCateg[second.selectedIndex].subCateg" [attr.value]="n.categ">{{n.categ}}</option>
       </select>
     </div>
 
@@ -33,7 +33,7 @@
 
 
 
-    <form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm.value)" (keydown.enter)="$event.preventDefault()">
+    <form [formGroup]="myForm" novalidate (ngSubmit)="save()" (keydown.enter)="$event.preventDefault()">
 
       <div formGroupName="details">
         <div>
@@ -55,6 +55,78 @@
             placeholder="reference"
             [(ngModel)]="fetchedProduct.details.reference">
         </div>
+
+        <div>
+          <label>description</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="description"
+            placeholder="description"
+            [(ngModel)]="fetchedProduct.details.description">
+        </div>
+
+        <div formGroupName="dimension">
+          <div>
+            <label>height</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="height"
+              placeholder="height"
+              [(ngModel)]="fetchedProduct.details.dimension.height">
+          </div>
+          <div>
+            <label>width</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="width"
+              placeholder="width"
+              [(ngModel)]="fetchedProduct.details.dimension.width">
+          </div>
+
+          <div>
+            <label>depth</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="depth"
+              placeholder="depth"
+              [(ngModel)]="fetchedProduct.details.dimension.depth">
+          </div>
+        </div>
+
+
+
+
+              <!-- Autocomplete -->
+              <label>Vendor</label>
+              <input
+                [ngModelOptions]="{standalone: true}"
+                [(ngModel)]="autocompleteCompanie"
+                placeholder="Select"
+                (ngModelChange)="searchCompanies()"
+                mdInput
+              >
+              <div *ngFor="let fetchedCompanie of fetchedCompanies; let i=index">
+                {{fetchedCompanie.name}} - {{fetchedCompanie.name}}
+                <button type="button" (click)="selectProduct(fetchedCompanie)">select</button>
+              </div>
+              <div *ngFor="let vendor of fetchedProduct.vendors; let i=index">
+                {{vendor|json}}
+                <!-- <div *ngFor="let custom_attribute of productFetch.product.magento.custom_attributes" class="rltpdt-ctnr">
+                  <div *ngIf="custom_attribute.attribute_code == 'image'" class="rltpdt-cnt">
+                    {{productFetch.product.magento.sku}} - {{productFetch.product.magento.name}}
+                    <img src="{{urlMagento}}{{custom_attribute.value}}" onerror="this.src ='assets/images/no-image-found.jpg'">
+                    <button type="button" (click)="removeProduct(i)"><i class="fa fa-times"></i></button>
+                  </div>
+                </div> -->
+              </div>
+
+
+
+
         <div formGroupName="price">
           <div>
             <label>costPrice</label>
@@ -63,7 +135,7 @@
               class="form-control"
               formControlName="costPrice"
               placeholder="costPrice"
-              [(ngModel)]="fetchedProduct.details.costPrice">
+              [(ngModel)]="fetchedProduct.details.dimension.costPrice">
           </div>
           <div>
             <label>sellingPrice</label>
@@ -72,17 +144,17 @@
               class="form-control"
               formControlName="sellingPrice"
               placeholder="reference"
-              [(ngModel)]="fetchedProduct.details.sellingPrice">
+              [(ngModel)]="fetchedProduct.details.dimension.sellingPrice">
           </div>
         </div>
       </div>
 
-
+{{fetchedProduct.forms|json}}
 
       <div class="form-group prmimg-cnt">
 
         <!-- <input type="hidden" class="form-control" formControlName="_id" [(ngModel)]="fetchedProduct.form._id"> -->
-        <div *ngFor="let singleForm of fetchedProduct.form">
+        <div *ngFor="let singleForm of fetchedProduct.forms">
           <img class="promo-img" src="./uploads/forms/{{singleForm.owner}}/{{singleForm.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
         </div>
         <div>

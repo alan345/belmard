@@ -90,7 +90,7 @@ router.post('/', function (req, res, next) {
   //var Product = new Product(req.body)
   var product = new Product(req.body)
 
-
+  product.owner = req.user._id
   product.save(function (err, result) {
     if (err) {
       console.log(err)

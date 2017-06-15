@@ -27,7 +27,7 @@ var product = new Schema({
       categ2:[{name: {type: String}}],
       categ3:[{name: {type: String}}],
     },
-    vendor: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
+    vendors: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
     form: [{type: Schema.Types.ObjectId, ref: 'Form'}],
     categories: [{name: {type: String}, type:{type: String}}],
     owner: [{type: Schema.Types.ObjectId, ref: 'User'}]
