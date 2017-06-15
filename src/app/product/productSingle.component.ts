@@ -166,11 +166,9 @@ export class ProductSingleComponent implements OnInit {
 
 
   save() {
-
-    // this.fetchedProduct.categorie.categ1[0].name = this.categ1
-    // this.fetchedProduct.categorie.categ2[0].name = this.categ2
-    // this.fetchedProduct.categorie.categ3[0].name = this.categ3
-
+    this.fetchedProduct.categorie.categ1 = [{name: this.categ1}]
+    this.fetchedProduct.categorie.categ2 = [{name: this.categ2}]
+    this.fetchedProduct.categorie.categ3 = [{name: this.categ3}]
     if(this.fetchedProduct._id) {
 
       this.productService.updateProduct(this.fetchedProduct)
@@ -201,14 +199,12 @@ export class ProductSingleComponent implements OnInit {
     this.productService.getProduct(id)
       .subscribe(
         res => {
-          this.fetchedProduct = <Product>res
 
-          //this.fetchedProduct.embedSecure = this.sanitizer.bypassSecurityTrustResourceUrl('https://player.vimeo.com/product/' + res.embed )
-          //this.fetchedProduct.embedSecure = this.sanitizer.bypassSecurityTrustResourceUrl('//fast.wistia.net/embed/iframe/' + res.embed)
-          // this.fetchedProduct.categories.forEach((categorie) => {
-          //   this.addCategorie()
-          // })
-          // this.refreshHardCategories()
+          this.fetchedProduct = <Product>res
+          this.categ1 = this.fetchedProduct.categorie.categ1[0].name
+          this.categ2 = this.fetchedProduct.categorie.categ2[0].name
+          this.categ3 = this.fetchedProduct.categorie.categ3[0].name
+
         },
         error => {
           console.log(error);

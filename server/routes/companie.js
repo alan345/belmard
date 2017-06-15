@@ -268,12 +268,12 @@ router.get('/byuserid/:id', function (req, res, next) {
 
 router.get('/:id', function (req, res, next) {
 
-  if(req.user.role[0] === 'client') {
-    return res.status(404).json({
-      title: 'No obj found',
-      error: {message: 'Not found!'}
-    })
-  }
+  // if(req.user.role[0] === 'client') {
+  //   return res.status(404).json({
+  //     title: 'No obj found',
+  //     error: {message: 'Not found!'}
+  //   })
+  // }
   Companie.findById((req.params.id), function (err, obj) {
     if (err) {
       return res.status(500).json({

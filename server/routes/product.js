@@ -63,9 +63,12 @@ router.put('/:id', function (req, res, next) {
       })
     } else {
       //console.log(req.body)
-        item.title = req.body.title
-        item.embed = req.body.embed
-        item.categories = req.body.categories
+        item.details = req.body.details
+        item.categorie = req.body.categorie
+        item.vendors = req.body.vendors
+        item.forms = req.body.forms
+
+
 
 
         item.save(function (err, result) {
@@ -197,6 +200,8 @@ router.get('/page/:page', function (req, res, next) {
 router.get('/:id', function (req, res, next) {
   Product
   .findById({_id: req.params.id})
+  .populate('vendors')
+  .populate('forms')
   .exec(function (err, item) {
     if (err) {
       return res.status(404).json({

@@ -46,14 +46,14 @@ export class NavbarComponent implements OnInit {
 
   // this calls the logout function from our authentication service, it's activated when user clicks logout in front end.
   // It's called by the (click)='logout()' when the user presses the button
-  // logout() {
-  //   this.authService.logout();
-  //   let this2 = this
-  //   setTimeout(function(){
-  //       this2.router.navigate(['/user/login']);
-  //   }, 150);
-  //
-  // }
+  logout() {
+    this.authService.logout();
+    let this2 = this
+    setTimeout(function(){
+        this2.router.navigate(['/user/login']);
+    }, 150);
+
+  }
   sideNavOpen(){
     //this.sidenav.open()
     this.sidenav.toggle()

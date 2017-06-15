@@ -6,8 +6,7 @@ import { CompanieFilterPipe} from './companieFilter.pipe';
 import { CompanieDetailUsersComponent} from './companieDetailUsers.component';
 import { CompaniePicturesComponent} from './companiePictures.component';
 import { AddUserByCompanieComponent} from './addUser/addUserByCompanie.component';
-import { CompaniesComponent} from './admin/companies.component';
-import { CompanieComponent} from './companie.component';
+import { CompaniesComponent} from './companies/companies.component';
 import { EditCompanieComponent} from './editCompanie.component';
 import { EditAddUserToCompanieComponent} from './addUser/editAddUserToCompanie.component';
 import { CompanieDetailComponent} from './companieDetail.component';
@@ -31,7 +30,6 @@ import { Ng2PaginationModule} from 'ng2-pagination';
     CompanieDetailUsersComponent,
     CompaniePicturesComponent,
     CompaniesComponent,
-    CompanieComponent,
     EditCompanieComponent,
     EditAddUserToCompanieComponent,
     CompanieDetailComponent,

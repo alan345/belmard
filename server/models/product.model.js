@@ -2,6 +2,7 @@ var mongoose                = require('mongoose'),
     Schema                  = mongoose.Schema,
     Form                    = require('../models/form.model'),
     User                    = require('../models/user.model'),
+    Companie                    = require('../models/companie.model'),
     mongooseUniqueValidator = require('mongoose-unique-validator')
 
 var product = new Schema({
@@ -13,7 +14,7 @@ var product = new Schema({
         sellingPrice: { type: Number},
       },
       description: {type: String},
-      Dimension: {
+      dimension: {
         height: {type: Number},
         width: {type: Number},
         depth: {type: Number},
@@ -28,7 +29,7 @@ var product = new Schema({
       categ3:[{name: {type: String}}],
     },
     vendors: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
-    form: [{type: Schema.Types.ObjectId, ref: 'Form'}],
+    forms: [{type: Schema.Types.ObjectId, ref: 'Form'}],
     categories: [{name: {type: String}, type:{type: String}}],
     owner: [{type: Schema.Types.ObjectId, ref: 'User'}]
   },
