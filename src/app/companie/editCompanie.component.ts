@@ -82,29 +82,21 @@ export class EditCompanieComponent implements OnInit {
     dialogRefDelete.afterClosed().subscribe(result => {
       if(result) {
         this[typeUser].splice(i, 1)
-        this.save(false)
+        this.save()
       }
     })
   }
 
-  save(redirect:boolean) {
-    this.fetchedCompanie._users = []
-    this.userAdmins.forEach(user => this.fetchedCompanie._users.push(user))
-    this.userManagers.forEach(user => this.fetchedCompanie._users.push(user))
-    this.userClients.forEach(user => this.fetchedCompanie._users.push(user))
-    this.userStylists.forEach(user => this.fetchedCompanie._users.push(user))
-    this.usersSalesRep.forEach(user => this.fetchedCompanie._users.push(user))
+  save() {
 
     if(this.fetchedCompanie._id) {
       this.companieService.updateCompanie(this.fetchedCompanie)
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
-            if(redirect)
-              this.router.navigate(['companie/' + this.fetchedCompanie._id])
+            this.router.navigate(['companie/' + this.fetchedCompanie._id])
           },
           error => {
-            //console.log(error)
             this.toastr.error('error!', error)
           }
         )
@@ -113,7 +105,6 @@ export class EditCompanieComponent implements OnInit {
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
-            if(redirect)
               this.router.navigate(['companie/' + res.obj._id])
           },
           error => {console.log(error)}
@@ -127,7 +118,7 @@ export class EditCompanieComponent implements OnInit {
       var tmp = this[typeUser][i];
       this[typeUser][i] = this[typeUser][i + incremet]
       this[typeUser][i + incremet] = tmp
-      this.save(false)
+      this.save()
     }
   }
 
