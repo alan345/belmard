@@ -22,13 +22,7 @@
     <form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm.value)" (keydown.enter)="$event.preventDefault()">
 
 
-      <div class="form-group">
 
-        <div class="phyto-ctnr ttl-cde">
-          <label>Nom de la reference</label>
-          <input type="text" class="form-control" formControlName="embed" [(ngModel)]="fetchedProduct.embed" placeholder="Ref">
-        </div>
-      </div>
       <div class="form-group phyto-ctnr ttl-cde">
         <label>Référence</label>
         <input type="text" class="form-control" formControlName="title" placeholder="Add Product Title" [(ngModel)]="fetchedProduct.title">
@@ -60,7 +54,7 @@
           ></md-checkbox>
           {{categorieHard.name}}
         </div>
-        <label>Select Product Line For This Product:</label>
+        <!-- <label>Select Product Line For This Product:</label>
         <div *ngFor="let categorieHard of categoriesHard1; let i=index">
           <md-checkbox
             (click)="togglCategorieButton(categorieHard.name, 'categ1')"
@@ -68,7 +62,7 @@
             [(ngModel)]="categoriesHard1[i].selected"
           ></md-checkbox>
           {{categorieHard.name}}
-        </div>
+        </div> -->
       </div>
 
       <div class="rght-form">

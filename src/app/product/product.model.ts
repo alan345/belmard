@@ -1,34 +1,53 @@
 import { Form } from '../form/form.model';
+import { Companie } from '../companie/companie.model';
+import { User } from '../user/user.model';
+
 export class Product {
     _id: string = '';
-    title: string = '';
-    embed: string = '';
+    details: Details = new Details();
+    referenceName: string = '';
+    reference: string = '';
     forms: Form[] = [];
-    embedSecure : string;
-    categories:Categorie[] = [];
-    owner: Owner[] = [];
-    constructor() {
-      
-    }
+    categorie: Categorie[] = [];
+    owner: User[] = [];
+    vendor: Companie[] = [];
 }
-
-
-//
-// export interface Product {
-//   _id: string;
-//   title: string;
-//   embed: string;
-//   embedSecure: {};
-//   categories:Categorie[];
-//   owner: Owner[];
-// }
-
-
 
 export class Categorie {
-  name: string= '';
-  type: string= '';
+  categ1: Categ[] = [];
+  categ2: Categ[] = [];
+  categ3: Categ[] = [];
 }
-export interface Owner {
-  _id: string;
+
+
+export class Categ {
+  categ1: CategDetail[] = [];
+  categ2: CategDetail[] = [];
+  categ3: CategDetail[] = [];
+}
+
+export class CategDetail {
+  name: string = '';
+}
+
+export class Details {
+  referenceName: string = '';
+  reference: string = '';
+  price: Price = new Price();
+  description: string = '';
+  dimension: Dimension = new Dimension();
+  stock: Stock = new Stock();
+}
+
+export class Price {
+  costPrice: number = 0;
+  sellingPrice: number = 0;
+}
+export class Dimension {
+  height: number = 0;
+  width: number = 0;
+  depth: number = 0;
+}
+export class Stock {
+  quantity: number = 0;
 }

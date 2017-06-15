@@ -104,7 +104,6 @@ export class ProductSingleComponent implements OnInit {
     this.myForm = this._fb.group({
       _id: [''],
       title: ['', [Validators.required, Validators.minLength(5)]],
-      embed: ['', [Validators.required, Validators.minLength(5)]],
       categories: this._fb.array([])
     });
 
@@ -181,6 +180,7 @@ export class ProductSingleComponent implements OnInit {
     }
 
     if(product._id) {
+      console.log('update')
       this.productService.updateProduct(product)
         .subscribe(
           res => {
@@ -190,6 +190,7 @@ export class ProductSingleComponent implements OnInit {
           error => {console.log(error)}
         );
     } else {
+      console.log('save')
       this.productService.saveProduct(product)
         .subscribe(
           res => {

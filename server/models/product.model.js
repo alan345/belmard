@@ -5,8 +5,30 @@ var mongoose                = require('mongoose'),
     mongooseUniqueValidator = require('mongoose-unique-validator')
 
 var product = new Schema({
-    title: {type: String},
-    embed: {type: String},
+    details: {
+      referenceName: {type: String},
+      reference: {type: String},
+      price: {
+        costPrice: {type: Number},
+        sellingPrice: { type: Number},
+      },
+      description: {type: String},
+      Dimension: {
+        height: {type: Number},
+        width: {type: Number},
+        depth: {type: Number},
+      },
+      stock: {
+        quantity:{type: Number},
+      }
+    },
+    categorie: {
+      categ1:[{name: {type: String}}],
+      categ2:[{name: {type: String}}],
+      categ3:[{name: {type: String}}],
+    },
+    vendor: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
+    form: [{type: Schema.Types.ObjectId, ref: 'Form'}],
     categories: [{name: {type: String}, type:{type: String}}],
     owner: [{type: Schema.Types.ObjectId, ref: 'User'}]
   },
