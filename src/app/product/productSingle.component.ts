@@ -20,22 +20,49 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 export class ProductSingleComponent implements OnInit {
 
-  categ: string = 'Electricité';
-
-  subCateg: string = 'file';
+  categ1: string = 'Serrurerie';
+  categ2: string = 'Serrurerie de bâtiment';
+  categ3: string = 'Clés';
 
   data:Array<Object> =
   [
     {
-      'categ':'Plomberie',
-      'subCategD': ['robinet', 'douche', 'joint']},
-    {
-      'categ':'Electricité',
-      'subCategD': ['lampe', 'file', 'douille']},
-    {
       'categ':'Serrurerie',
-      'subCategD': ['cle', 'verou', 'porte']}
-  ];
+      'subCateg': [
+        {
+          'categ':'Serrurerie de bâtiment',
+          'subCateg': [
+            {categ: 'Clés'},
+            {categ: 'Cylindres'},
+            {categ:'Verrous'}
+          ]
+        },
+        {
+          'categ':'Ferme-portes',
+          'subCateg': [
+            {categ: 'Ferme-portes contemporains'},
+            {categ: 'Ferme-portes technologies à came'},
+            {categ: 'Ferme-portes technologies pignons à crémaillère'}
+          ]
+        },
+      ]
+    },
+    {
+      'categ':'Menuiserie',
+      'subCateg': [
+        {
+          'categ':'Portes',
+          'subCateg': [
+            {categ: 'Fenêtres bois ou PVC'},
+            {categ: 'Portes et portes fenêtres'},
+            {categ: 'Coulissants bois ou PVC'},
+          ]
+        }
+      ]
+    }
+  ]
+
+
 
   // fetchedProduct: Product = {
   //   _id: '',
@@ -49,28 +76,28 @@ export class ProductSingleComponent implements OnInit {
 
   fetchedProduct: Product = new Product();
 
-  categoriesHard2 = [
-    { name:'Through your eyes', selected : false },
-    { name:'How to', selected : false },
-    { name:'Fashion', selected : false },
-    { name:'Merchandising', selected : false },
-    { name:'Behind the Scene & Testimonials', selected : false }
-  ]
+  // categoriesHard2 = [
+  //   { name:'Through your eyes', selected : false },
+  //   { name:'How to', selected : false },
+  //   { name:'Fashion', selected : false },
+  //   { name:'Merchandising', selected : false },
+  //   { name:'Behind the Scene & Testimonials', selected : false }
+  // ]
 
 
-
-  categoriesHard1 = [{
-      name:'phyto',
-      selected : false
-    },
-    {
-      name:'phytoSpecific',
-      selected : false
-    },
-    {
-      name:'subtil',
-      selected : false
-    }]
+  //
+  // categoriesHard1 = [{
+  //     name:'phyto',
+  //     selected : false
+  //   },
+  //   {
+  //     name:'phytoSpecific',
+  //     selected : false
+  //   },
+  //   {
+  //     name:'subtil',
+  //     selected : false
+  //   }]
 
   inputCategorie = ''
 
@@ -102,10 +129,18 @@ export class ProductSingleComponent implements OnInit {
 
 
     this.myForm = this._fb.group({
-      _id: [''],
-      title: ['', [Validators.required, Validators.minLength(5)]],
-      categories: this._fb.array([])
-    });
+
+      details: this._fb.group({
+        referenceName: ['', [Validators.required, Validators.minLength(2)]],
+        reference: ['', [Validators.required, Validators.minLength(2)]],
+        price: this._fb.group({
+          costPrice: ['', [Validators.required, Validators.minLength(5)]],
+          sellingPrice: ['', [Validators.required, Validators.minLength(5)]],
+        }),
+      })
+    })
+
+
 
     this.activatedRoute.params.subscribe((params: Params) => {
       if(params['id'])
@@ -114,18 +149,18 @@ export class ProductSingleComponent implements OnInit {
   }
 
 
-  removeCategorie(i: number) {
-      this.fetchedProduct.categories.splice(i, 1)
-      const control = <FormArray>this.myForm.controls['categories'];
-      control.removeAt(i);
-      let _2this = this
-    //  setTimeout(function(){
-          _2this.refreshHardCategories()
-    //  }, 10);
-
-
-      //this.updatecategoriesHard2()
-  }
+  // removeCategorie(i: number) {
+  //     this.fetchedProduct.categories.splice(i, 1)
+  //     const control = <FormArray>this.myForm.controls['categories'];
+  //     control.removeAt(i);
+  //     let _2this = this
+  //   //  setTimeout(function(){
+  //         _2this.refreshHardCategories()
+  //   //  }, 10);
+  //
+  //
+  //     //this.updatecategoriesHard2()
+  // }
   addCategorie() {
     const control = <FormArray>this.myForm.controls['categories'];
     const addrCtrl = this._fb.group({
@@ -134,28 +169,28 @@ export class ProductSingleComponent implements OnInit {
     });
     control.push(addrCtrl);
   }
-  addCategorieInput() {
-    this.togglCategorieButton(this.inputCategorie, 'tag')
-    this.inputCategorie=''
-  }
-  togglCategorieButton(nameCateg: string, type: string) {
-    var indexFound: number
-    this.fetchedProduct.categories.forEach((categorie, index) => {
-      if(categorie.name == nameCateg)
-        indexFound = index
-    })
-
-    if(indexFound || indexFound== 0 ) {
-      let _2this = this
-      setTimeout(function(){
-          _2this.removeCategorie(+indexFound)
-      }, 10);
-
-    } else {
-      this.fetchedProduct.categories.push({name:nameCateg, type:type})
-      this.addCategorie()
-    }
-  }
+  // addCategorieInput() {
+  //   this.togglCategorieButton(this.inputCategorie, 'tag')
+  //   this.inputCategorie=''
+  // }
+  // togglCategorieButton(nameCateg: string, type: string) {
+  //   var indexFound: number
+  //   this.fetchedProduct.categories.forEach((categorie, index) => {
+  //     if(categorie.name == nameCateg)
+  //       indexFound = index
+  //   })
+  //
+  //   if(indexFound || indexFound== 0 ) {
+  //     let _2this = this
+  //     setTimeout(function(){
+  //         _2this.removeCategorie(+indexFound)
+  //     }, 10);
+  //
+  //   } else {
+  //     this.fetchedProduct.categories.push({name:nameCateg, type:type})
+  //     this.addCategorie()
+  //   }
+  // }
 
 
   goBack() {
@@ -174,10 +209,7 @@ export class ProductSingleComponent implements OnInit {
 
 
   save(product : Product) {
-    if(!this.fetchedProduct.categories.length){
-      this.toastr.error('Error!', 'Please select at least one categorie')
-      return
-    }
+
 
     if(product._id) {
       console.log('update')
@@ -202,32 +234,32 @@ export class ProductSingleComponent implements OnInit {
     }
   }
 
-
-  refreshHardCategories(){
-    this.categoriesHard2.forEach((HardCategorie, indexHard) => {
-      this.categoriesHard2[indexHard].selected = false
-    })
-
-    this.categoriesHard2.forEach((HardCategorie, indexHard) => {
-      this.fetchedProduct.categories.forEach((fetchedCategorie, indexFetched) => {
-        if(HardCategorie.name == fetchedCategorie.name) {
-          this.categoriesHard2[indexHard].selected = true
-        }
-      })
-    })
-
-    this.categoriesHard1.forEach((HardCategorie, indexHard) => {
-      this.categoriesHard1[indexHard].selected = false
-    })
-
-    this.categoriesHard1.forEach((HardCategorie, indexHard) => {
-      this.fetchedProduct.categories.forEach((fetchedCategorie, indexFetched) => {
-        if(HardCategorie.name == fetchedCategorie.name) {
-          this.categoriesHard1[indexHard].selected = true
-        }
-      })
-    })
-  }
+  //
+  // refreshHardCategories(){
+  //   this.categoriesHard2.forEach((HardCategorie, indexHard) => {
+  //     this.categoriesHard2[indexHard].selected = false
+  //   })
+  //
+  //   this.categoriesHard2.forEach((HardCategorie, indexHard) => {
+  //     this.fetchedProduct.categories.forEach((fetchedCategorie, indexFetched) => {
+  //       if(HardCategorie.name == fetchedCategorie.name) {
+  //         this.categoriesHard2[indexHard].selected = true
+  //       }
+  //     })
+  //   })
+  //
+  //   this.categoriesHard1.forEach((HardCategorie, indexHard) => {
+  //     this.categoriesHard1[indexHard].selected = false
+  //   })
+  //
+  //   this.categoriesHard1.forEach((HardCategorie, indexHard) => {
+  //     this.fetchedProduct.categories.forEach((fetchedCategorie, indexFetched) => {
+  //       if(HardCategorie.name == fetchedCategorie.name) {
+  //         this.categoriesHard1[indexHard].selected = true
+  //       }
+  //     })
+  //   })
+  // }
 
 
 
@@ -240,10 +272,10 @@ export class ProductSingleComponent implements OnInit {
 
           //this.fetchedProduct.embedSecure = this.sanitizer.bypassSecurityTrustResourceUrl('https://player.vimeo.com/product/' + res.embed )
           //this.fetchedProduct.embedSecure = this.sanitizer.bypassSecurityTrustResourceUrl('//fast.wistia.net/embed/iframe/' + res.embed)
-          this.fetchedProduct.categories.forEach((categorie) => {
-            this.addCategorie()
-          })
-          this.refreshHardCategories()
+          // this.fetchedProduct.categories.forEach((categorie) => {
+          //   this.addCategorie()
+          // })
+          // this.refreshHardCategories()
         },
         error => {
           console.log(error);

@@ -5,27 +5,76 @@
   </div> -->
   <div id="product-container">
 
-    <p> Fil d'ariane: {{categ}}  / {{subCateg}}</p>
+    <p> Fil d'ariane: {{categ}}  /</p>
 
     <div>
-      <select [ngModel]="categ" (ngModelChange)="categ = $event; second.selectedIndex = 0" class="ui fluid search selection dropdown" #first>
+      <select [ngModel]="categ1" (ngModelChange)="categ1 = $event; second.selectedIndex = 0" #first>
         <option *ngFor="let n of data" [attr.value]="n.x">{{n.categ}}</option>
       </select>
     </div>
     <div>
-      <select [(ngModel)]="subCateg"  #second>
-        <option *ngFor="let n of data[first.selectedIndex].subCategD" [attr.value]="n">{{n}}</option>
+      <!-- <div *ngFor="let n of data[first.selectedIndex].subCateg">
+        {{n|json}}<br>
+      </div> -->
+      <select [(ngModel)]="categ2" (ngModelChange)="categ2 = $event; third.selectedIndex = 0" #second>
+        <option *ngFor="let n of data[first.selectedIndex].subCateg" [attr.value]="n.categ">{{n.categ}}</option>
+      </select>
+    </div>
+
+    <!-- {{second.selectedIndex |json}} -->
+    <!-- {{data[first.selectedIndex].subCateg |json}} -->
+    <div>
+      <select [(ngModel)]="categ3" #third>
+        <option *ngFor="let n of data[first.selectedIndex].subCateg[second.selectedIndex].subCateg" [attr.value]="n.categ">{{n.categ}}</option>
       </select>
     </div>
 
 
+
+
+
     <form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm.value)" (keydown.enter)="$event.preventDefault()">
 
+      <div formGroupName="details">
+        <div>
+          <label>referenceName</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="referenceName"
+            placeholder="referenceName"
+            [(ngModel)]="fetchedProduct.details.referenceName">
+        </div>
 
-
-      <div class="form-group phyto-ctnr ttl-cde">
-        <label>Référence</label>
-        <input type="text" class="form-control" formControlName="title" placeholder="Add Product Title" [(ngModel)]="fetchedProduct.title">
+        <div>
+          <label>reference</label>
+          <input
+            type="text"
+            class="form-control"
+            formControlName="reference"
+            placeholder="reference"
+            [(ngModel)]="fetchedProduct.details.reference">
+        </div>
+        <div formGroupName="price">
+          <div>
+            <label>costPrice</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="costPrice"
+              placeholder="costPrice"
+              [(ngModel)]="fetchedProduct.details.costPrice">
+          </div>
+          <div>
+            <label>sellingPrice</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="sellingPrice"
+              placeholder="reference"
+              [(ngModel)]="fetchedProduct.details.sellingPrice">
+          </div>
+        </div>
       </div>
 
 
@@ -44,7 +93,7 @@
 
 
 
-      <div class="lft-form">
+      <!-- <div class="lft-form">
         <label>Select Categories For This Product:</label>
         <div *ngFor="let categorieHard of categoriesHard2; let i=index">
           <md-checkbox
@@ -54,7 +103,7 @@
           ></md-checkbox>
           {{categorieHard.name}}
         </div>
-        <!-- <label>Select Product Line For This Product:</label>
+        <label>Select Product Line For This Product:</label>
         <div *ngFor="let categorieHard of categoriesHard1; let i=index">
           <md-checkbox
             (click)="togglCategorieButton(categorieHard.name, 'categ1')"
@@ -62,10 +111,10 @@
             [(ngModel)]="categoriesHard1[i].selected"
           ></md-checkbox>
           {{categorieHard.name}}
-        </div> -->
-      </div>
+        </div>
+      </div> -->
 
-      <div class="rght-form">
+      <!-- <div class="rght-form">
         <input
           [ngModelOptions]="{standalone: true}"
           [(ngModel)]="inputCategorie"
@@ -87,7 +136,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
 
     <div class="valid-edit">
       <button type="submit" class="done" [disabled]="!myForm.valid">Done</button>
