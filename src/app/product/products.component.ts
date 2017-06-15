@@ -134,15 +134,15 @@ export class ProductsComponent implements OnInit {
       );
   }
 
-  // getPage(page: number) {
-  //   this.getProducts(page, this.search);
-  // }
-
-
-  loadMore(){
-    this.paginationData.currentPage = this.paginationData.currentPage+1
-    this.getProducts(this.paginationData.currentPage, this.search)
+  getPage(page: number) {
+    this.getProducts(page, this.search);
   }
+
+
+  // loadMore(){
+  //   this.paginationData.currentPage = this.paginationData.currentPage+1
+  //   this.getProducts(this.paginationData.currentPage, this.search)
+  // }
 
 
   getProducts(page : number, search: any) {

@@ -12,6 +12,7 @@ import { Companie } from '../companie/companie.model';
 import { EditOptionsComponentDialog } from '../modalLibrary/modalLibrary.component';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
+import { DeleteDialog } from '../deleteDialog/deleteDialog.component'
 
 
 
@@ -32,42 +33,13 @@ export class ProductSingleComponent implements OnInit {
 
 
 
-  // fetchedProduct: Product = {
-  //   _id: '',
-  //   title: '',
-  //   embed: '',
-  //   embedSecure: this.sanitizer.bypassSecurityTrustResourceUrl(''),
-  //   categories: [],
-  //   owner: []
-  // }
 
 
   fetchedProduct: Product = new Product();
   fetchedCompanies: Companie[] = []
-  // categoriesHard2 = [
-  //   { name:'Through your eyes', selected : false },
-  //   { name:'How to', selected : false },
-  //   { name:'Fashion', selected : false },
-  //   { name:'Merchandising', selected : false },
-  //   { name:'Behind the Scene & Testimonials', selected : false }
-  // ]
-
 
   //
-  // categoriesHard1 = [{
-  //     name:'phyto',
-  //     selected : false
-  //   },
-  //   {
-  //     name:'phytoSpecific',
-  //     selected : false
-  //   },
-  //   {
-  //     name:'subtil',
-  //     selected : false
-  //   }]
-
-  inputCategorie = ''
+  // inputCategorie = ''
 
 
 
@@ -88,10 +60,6 @@ export class ProductSingleComponent implements OnInit {
 
 
 
-
-  // getObjects(myForm: any){
-  //    return myForm.get('categories').controls
-  //  }
 
   ngOnInit() {
     this.myForm = this._fb.group({
@@ -127,7 +95,8 @@ export class ProductSingleComponent implements OnInit {
     this.getCompanies(1, search)
   }
 
-  selectCompanie(companie: Companie){
+  selectCompanie(companie: Companie) {
+    this.fetchedCompanies = []
     this.fetchedProduct.vendors.push(companie)
   }
 
@@ -147,7 +116,18 @@ export class ProductSingleComponent implements OnInit {
       );
   }
 
+  openDialogDelete(){
+    let this2 = this
+    let dialogRefDelete = this.dialog.open(DeleteDialog)
+    dialogRefDelete.afterClosed().subscribe(result => {
+      if(result) {
+        this.onDelete(this.fetchedProduct._id).then(function(){
+          this2.router.navigate(['user']);
+        })
 
+      }
+    })
+  }
 
 
   goBack() {
@@ -158,7 +138,6 @@ export class ProductSingleComponent implements OnInit {
     let dialogRef = this.dialog.open(EditOptionsComponentDialog);
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        console.log(result)
         this.fetchedProduct.forms.push( result)
       }
     })
@@ -212,15 +191,23 @@ export class ProductSingleComponent implements OnInit {
       )
   }
 
+
   onDelete(id: string) {
-    this.productService.deleteProduct(id)
-      .subscribe(
-        res => {
-          this.toastr.success('Great!', res.message);
-        },
-        error => {
-          console.log(error);
-        }
-      )
+    let this2 = this
+    return new Promise(function(resolve, reject) {
+      this2.productService.deleteProduct(id)
+        .subscribe(
+          res => {
+            this2.toastr.success('Great!', res.message);
+            resolve(res)
+          },
+          error => {
+            console.log(error);
+            reject(error)
+          }
+        )
+      })
   }
+
+
 }

@@ -24,7 +24,7 @@
       </thead>
       <tbody class="clienttbl">
       <tr *ngFor="let product of fetchedProducts | paginate: { id: 'server', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }"
-        [routerLink]="['/product/' + product._id]" 
+        [routerLink]="['/product/' + product._id]"
         routerLinkActive="active">
         <td>{{product.details.referenceName}}</td>
       </tr>
@@ -32,7 +32,7 @@
     </table>
     <div class="has-text-centered">
         <div [ngClass]="{ 'hidden': !loading }">Loading...</div>
-        <!-- <pagination-controls (pageChange)="getPage($event)" id="server" class="change-page"></pagination-controls> -->
+        <pagination-controls (pageChange)="getPage($event)" id="server" class="change-page"></pagination-controls>
     </div>
   </div>
 </div>
