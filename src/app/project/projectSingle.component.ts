@@ -109,6 +109,7 @@ export class ProjectSingleComponent implements OnInit {
   }
 
 
+
   removeCategorie(i: number) {
       this.fetchedProject.categories.splice(i, 1)
       const control = <FormArray>this.myForm.controls['categories'];
