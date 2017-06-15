@@ -6,8 +6,9 @@ import { ProjectSingleComponent} from './projectSingle.component';
 
 export const routes: Routes = [
   {path: '', component: ProjectsComponent},
-  {path: 'projectSingle', component: ProjectSingleComponent},
-  {path: 'projectSingle/:id', component: ProjectSingleComponent},
+  // {path: 'projectSingle', component: ProjectSingleComponent},
+  // {path: 'projectSingle/:id', component: ProjectSingleComponent},
+  {path: 'new', component: ProjectSingleComponent},
   {path: ':id', component: ProjectSingleComponent},
 ];
 

@@ -8,6 +8,9 @@ import { Project } from './project.model';
 import { EditOptionsComponentDialog } from '../modalLibrary/modalLibrary.component';
 import { FormBuilder, FormGroup, FormArray, Validators} from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
+import { DeleteDialog } from '../deleteDialog/deleteDialog.component'
+
+
 
 
 
@@ -110,9 +113,9 @@ export class ProjectSingleComponent implements OnInit {
       this.fetchedProject.categories.splice(i, 1)
       const control = <FormArray>this.myForm.controls['categories'];
       control.removeAt(i);
-      let _2this = this
+      //let _2this = this
     //  setTimeout(function(){
-          _2this.refreshHardCategories()
+        //  _2this.refreshHardCategories()
     //  }, 10);
 
 
@@ -145,28 +148,28 @@ export class ProjectSingleComponent implements OnInit {
   //   });
   //   control.push(addrCtrl);
   // }
-  addCategorieInput() {
-    this.togglCategorieButton(this.inputCategorie, 'tag')
-    this.inputCategorie=''
-  }
-  togglCategorieButton(nameCateg: string, type: string) {
-    var indexFound: number
-    this.fetchedProject.categories.forEach((categorie, index) => {
-      if(categorie.name == nameCateg)
-        indexFound = index
-    })
-
-    if(indexFound || indexFound== 0 ) {
-      let _2this = this
-      setTimeout(function(){
-          _2this.removeCategorie(+indexFound)
-      }, 10);
-
-    } else {
-      this.fetchedProject.categories.push({name:nameCateg, type:type})
-    //  this.addCategorie()
-    }
-  }
+  // addCategorieInput() {
+  //   this.togglCategorieButton(this.inputCategorie, 'tag')
+  //   this.inputCategorie=''
+  // }
+  // togglCategorieButton(nameCateg: string, type: string) {
+  //   var indexFound: number
+  //   this.fetchedProject.categories.forEach((categorie, index) => {
+  //     if(categorie.name == nameCateg)
+  //       indexFound = index
+  //   })
+  //
+  //   if(indexFound || indexFound== 0 ) {
+  //     let _2this = this
+  //     setTimeout(function(){
+  //         _2this.removeCategorie(+indexFound)
+  //     }, 10);
+  //
+  //   } else {
+  //     this.fetchedProject.categories.push({name:nameCateg, type:type})
+  //   //  this.addCategorie()
+  //   }
+  // }
 
 
   goBack() {
@@ -184,14 +187,12 @@ export class ProjectSingleComponent implements OnInit {
   }
 
 
-  save(project : Project) {
-    if(!this.fetchedProject.categories.length){
-      this.toastr.error('Error!', 'Please select at least one categorie')
-      return
-    }
+  save() {
 
-    if(project._id) {
-      this.projectService.updateProject(project)
+
+    if(this.fetchedProject._id) {
+
+      this.projectService.updateProject(this.fetchedProject)
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
@@ -200,7 +201,8 @@ export class ProjectSingleComponent implements OnInit {
           error => {console.log(error)}
         );
     } else {
-      this.projectService.saveProject(project)
+
+      this.projectService.saveProject(this.fetchedProject)
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
@@ -211,32 +213,46 @@ export class ProjectSingleComponent implements OnInit {
     }
   }
 
+  openDialogDelete(){
+    let this2 = this
+    let dialogRefDelete = this.dialog.open(DeleteDialog)
+    dialogRefDelete.afterClosed().subscribe(result => {
+      if(result) {
+        this.onDelete(this.fetchedProject._id).then(function(){
+          this2.router.navigate(['user']);
+        })
 
-  refreshHardCategories(){
-    this.categoriesHard2.forEach((HardCategorie, indexHard) => {
-      this.categoriesHard2[indexHard].selected = false
-    })
-
-    this.categoriesHard2.forEach((HardCategorie, indexHard) => {
-      this.fetchedProject.categories.forEach((fetchedCategorie, indexFetched) => {
-        if(HardCategorie.name == fetchedCategorie.name) {
-          this.categoriesHard2[indexHard].selected = true
-        }
-      })
-    })
-
-    this.categoriesHard1.forEach((HardCategorie, indexHard) => {
-      this.categoriesHard1[indexHard].selected = false
-    })
-
-    this.categoriesHard1.forEach((HardCategorie, indexHard) => {
-      this.fetchedProject.categories.forEach((fetchedCategorie, indexFetched) => {
-        if(HardCategorie.name == fetchedCategorie.name) {
-          this.categoriesHard1[indexHard].selected = true
-        }
-      })
+      }
     })
   }
+
+
+  //
+  // refreshHardCategories(){
+  //   this.categoriesHard2.forEach((HardCategorie, indexHard) => {
+  //     this.categoriesHard2[indexHard].selected = false
+  //   })
+  //
+  //   this.categoriesHard2.forEach((HardCategorie, indexHard) => {
+  //     this.fetchedProject.categories.forEach((fetchedCategorie, indexFetched) => {
+  //       if(HardCategorie.name == fetchedCategorie.name) {
+  //         this.categoriesHard2[indexHard].selected = true
+  //       }
+  //     })
+  //   })
+  //
+  //   this.categoriesHard1.forEach((HardCategorie, indexHard) => {
+  //     this.categoriesHard1[indexHard].selected = false
+  //   })
+  //
+  //   this.categoriesHard1.forEach((HardCategorie, indexHard) => {
+  //     this.fetchedProject.categories.forEach((fetchedCategorie, indexFetched) => {
+  //       if(HardCategorie.name == fetchedCategorie.name) {
+  //         this.categoriesHard1[indexHard].selected = true
+  //       }
+  //     })
+  //   })
+  // }
 
 
 
@@ -249,10 +265,10 @@ export class ProjectSingleComponent implements OnInit {
 
           //this.fetchedProject.embedSecure = this.sanitizer.bypassSecurityTrustResourceUrl('https://player.vimeo.com/project/' + res.embed )
           //this.fetchedProject.embedSecure = this.sanitizer.bypassSecurityTrustResourceUrl('//fast.wistia.net/embed/iframe/' + res.embed)
-          this.fetchedProject.categories.forEach((categorie) => {
-            //this.addCategorie()
-          })
-          this.refreshHardCategories()
+          // this.fetchedProject.categories.forEach((categorie) => {
+          //   //this.addCategorie()
+          // })
+          //this.refreshHardCategories()
         },
         error => {
           console.log(error);
@@ -260,15 +276,23 @@ export class ProjectSingleComponent implements OnInit {
       )
   }
 
-  onDelete(id: string) {
-    this.projectService.deleteProject(id)
-      .subscribe(
-        res => {
-          this.toastr.success('Great!', res.message);
-        },
-        error => {
-          console.log(error);
-        }
-      )
-  }
+
+    onDelete(id: string) {
+      let this2 = this
+      return new Promise(function(resolve, reject) {
+        this2.projectService.deleteProject(id)
+          .subscribe(
+            res => {
+              this2.toastr.success('Great!', res.message);
+              resolve(res)
+            },
+            error => {
+              console.log(error);
+              reject(error)
+            }
+          )
+        })
+    }
+
+
 }

@@ -8,7 +8,7 @@
 
 
 
-    <form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm.value)" (keydown.enter)="$event.preventDefault()">
+    <form [formGroup]="myForm" novalidate (ngSubmit)="save()" (keydown.enter)="$event.preventDefault()">
 
 
       <div class="form-group">
@@ -39,7 +39,7 @@
 
 
 
-
+<!--
       <label class="phyto-ctnr">Users</label>
       <input
         [ngModelOptions]="{standalone: true}"
@@ -60,7 +60,7 @@
             <button type="button" (click)="removeProduct(i)"><i class="fa fa-times"></i></button>
           </div>
         </div>
-      </div>
+      </div> -->
 
 
 
