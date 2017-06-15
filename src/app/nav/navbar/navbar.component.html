@@ -18,7 +18,7 @@
         <h1 class="text-center" style="margin-bottom:0px;color:#ffffff;">Logiciel de Comptabilité</h1></div>
     </div>
 
-    
+
     <div>
         <nav class="navbar navbar-default navigation-clean">
             <div class="container">
@@ -42,14 +42,19 @@
                     </li>
 
                     <li>
-                      <a [routerLink]="['/project']" class="admn-btn">
+                      <a [routerLink]="['/project']" routerLinkActive="active"  class="admn-btn">
                         projects
                       </a>
                     </li>
 
                     <li>
-                      <a [routerLink]="['/companie']" class="admn-btn">
+                      <a [routerLink]="['/companie']" routerLinkActive="active"  class="admn-btn">
                         Companies
+                      </a>
+                    </li>
+                    <li>
+                      <a [routerLink]="['/user/profile']" routerLinkActive="active"  class="admn-btn">
+                        My Profile
                       </a>
                     </li>
 
@@ -58,7 +63,7 @@
                         Users
                       </a>
                     </li>
-                    <li style="margin-bottom: 30px;"><a (click)="logout()" *ngIf="isLoggedIn()">Log out</a></li>
+                    <li><a (click)="logout()" *ngIf="isLoggedIn()">Log out</a></li>
                    </ul>
                 </div>
             </div>

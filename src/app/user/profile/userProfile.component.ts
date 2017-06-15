@@ -80,6 +80,10 @@ export class UserProfileComponent implements OnInit {
 
     this.activatedRoute.params.subscribe((params: Params) => {
       let userId = params['id']
+
+      if(!userId)
+        userId = this.authService.currentUser.userId
+
       this.getUser(userId)
       this.companieService.getCompanieByUserId(userId)
       .subscribe(

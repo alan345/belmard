@@ -55,7 +55,7 @@
         </tr>
       </thead>
       <tbody class="clienttbl">
-        <tr *ngFor="let user of (fetchedCompanie._users | companieFilter: search.search : search.orderBy )">
+        <!-- <tr *ngFor="let user of (fetchedCompanie._users | companieFilter: search.search : search.orderBy )">
           <td *ngIf="user.role == 'client'" [routerLink]="['/user/' + user._id]" routerLinkActive="active">
               {{user.profile.name }}
           </td>
@@ -69,7 +69,7 @@
               {{user.lastVisit |  date :'dd-MMM-yyyy'}}
             </div>
           </td>
-        </tr>
+        </tr> -->
       </tbody>
     </table>
 

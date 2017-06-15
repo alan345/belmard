@@ -35,6 +35,7 @@ export const routes: Routes = [
   {path: 'reset/:token', component: ResetPasswordComponent},
   //{path: 'forms', component: UserFormsComponent, canActivate: [AuthGuardService]},
   {path: 'profile/password', component: ChangePasswordComponent, canActivate: [AuthGuardService]},
+  {path: 'profile', component: UserProfileComponent},
   {path: 'profile/:id', component: UserProfileComponent, canActivate: [AuthGuardService]},
 
   {path: 'profile/:id/userProfileSettings', component: UserProfileSettingsComponent, canActivate: [AuthGuardService]},

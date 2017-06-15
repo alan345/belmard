@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RouterModule} from '@angular/router';
-import { CompanieFilterPipe} from './companieFilter.pipe';
+
 import { CompanieDetailUsersComponent} from './companieDetailUsers.component';
 import { CompaniePicturesComponent} from './companiePictures.component';
 import { AddUserByCompanieComponent} from './addUser/addUserByCompanie.component';
@@ -33,7 +33,6 @@ import { Ng2PaginationModule} from 'ng2-pagination';
     EditCompanieComponent,
     EditAddUserToCompanieComponent,
     CompanieDetailComponent,
-    CompanieFilterPipe,
     AddUserByCompanieComponent,
   ],
   exports:      [ ],

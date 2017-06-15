@@ -79,24 +79,24 @@ router.put('/:id', function (req, res, next) {
       })
     }
 
-    if( req.user.role[0] !== 'admin') {
-      let belongToThisCompanie = false
-      item._users.forEach(user => {
-          //console.log(user,req.user._id.toString())
-        if(user.toString() === req.user._id.toString()){
-      //    console.log('aa')
-          belongToThisCompanie = true
-        }
-
-      })
-      //console.log(belongToThisCompanie)
-      if(!belongToThisCompanie) {
-        return res.status(404).json({
-          message: 'Not your companie',
-          err: 'Not your companie'
-        })
-      }
-    }
+    // if( req.user.role[0] !== 'admin') {
+    //   let belongToThisCompanie = false
+    //   item._users.forEach(user => {
+    //       //console.log(user,req.user._id.toString())
+    //     if(user.toString() === req.user._id.toString()){
+    //   //    console.log('aa')
+    //       belongToThisCompanie = true
+    //     }
+    //
+    //   })
+    //   //console.log(belongToThisCompanie)
+    //   if(!belongToThisCompanie) {
+    //     return res.status(404).json({
+    //       message: 'Not your companie',
+    //       err: 'Not your companie'
+    //     })
+    //   }
+    // }
 
     for (var prop in req.body) {
       if(prop !== '__v' && prop !== 'updatedAt' && prop !== 'createdAt')
