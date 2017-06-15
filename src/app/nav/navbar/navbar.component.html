@@ -25,11 +25,7 @@
                 </div>
                 <div class="collapse navbar-collapse" id="navcol-1">
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="active" role="presentation"><a href="#">DEVIS </a></li>
-                        <li role="presentation"><a href="#">Compte de Résultat</a></li>
-                        <li role="presentation"><a href="#">Tâches </a></li>
-                        <li role="presentation"><a href="#">Dossiers </a></li>
-                        <li role="presentation"><a href="#">Planning </a></li>
+            
                         <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Dropdown <span class="caret"></span></a>
                             <ul class="dropdown-menu" role="menu">
                                 <li role="presentation"><a href="#">First Item</a></li>
@@ -49,6 +45,11 @@
                       </a>
                     </li>
 
+                    <li>
+                      <a [routerLink]="['/companie']" class="admn-btn">
+                        Companies
+                      </a>
+                    </li>
 
                     <li>
                       <a [routerLink]="['/user']" routerLinkActive="active" class="admn-btn">
