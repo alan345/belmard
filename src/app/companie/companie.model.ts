@@ -12,6 +12,7 @@ export class Companie {
 }
 
 
+
 export class Address {
   address: string = '';
   city: string = '';
