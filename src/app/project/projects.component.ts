@@ -134,9 +134,9 @@ export class ProjectsComponent implements OnInit {
       );
   }
 
-  // getPage(page: number) {
-  //   this.getProjects(page, this.search);
-  // }
+  getPage(page: number) {
+    this.getProjects(page, this.search);
+  }
 
 
   loadMore(){

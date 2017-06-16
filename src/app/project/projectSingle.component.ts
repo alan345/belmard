@@ -44,28 +44,28 @@ export class ProjectSingleComponent implements OnInit {
 
   fetchedProject: Project = new Project();
 
-  categoriesHard2 = [
-    { name:'Through your eyes', selected : false },
-    { name:'How to', selected : false },
-    { name:'Fashion', selected : false },
-    { name:'Merchandising', selected : false },
-    { name:'Behind the Scene & Testimonials', selected : false }
-  ]
+  // categoriesHard2 = [
+  //   { name:'Through your eyes', selected : false },
+  //   { name:'How to', selected : false },
+  //   { name:'Fashion', selected : false },
+  //   { name:'Merchandising', selected : false },
+  //   { name:'Behind the Scene & Testimonials', selected : false }
+  // ]
 
 
-
-  categoriesHard1 = [{
-      name:'phyto',
-      selected : false
-    },
-    {
-      name:'phytoSpecific',
-      selected : false
-    },
-    {
-      name:'subtil',
-      selected : false
-    }]
+  //
+  // categoriesHard1 = [{
+  //     name:'phyto',
+  //     selected : false
+  //   },
+  //   {
+  //     name:'phytoSpecific',
+  //     selected : false
+  //   },
+  //   {
+  //     name:'subtil',
+  //     selected : false
+  //   }]
 
   inputCategorie = ''
 
@@ -88,13 +88,11 @@ export class ProjectSingleComponent implements OnInit {
 
 
 
-  getObjects(myForm: any){
-     return myForm.get('categories').controls
-   }
+  // getObjects(myForm: any){
+  //    return myForm.get('categories').controls
+  //  }
 
   ngOnInit() {
-
-
 
     this.myForm = this._fb.group({
 
@@ -110,18 +108,18 @@ export class ProjectSingleComponent implements OnInit {
 
 
 
-  removeCategorie(i: number) {
-      this.fetchedProject.categories.splice(i, 1)
-      const control = <FormArray>this.myForm.controls['categories'];
-      control.removeAt(i);
-      //let _2this = this
-    //  setTimeout(function(){
-        //  _2this.refreshHardCategories()
-    //  }, 10);
-
-
-      //this.updatecategoriesHard2()
-  }
+  // removeCategorie(i: number) {
+  //     this.fetchedProject.categories.splice(i, 1)
+  //     const control = <FormArray>this.myForm.controls['categories'];
+  //     control.removeAt(i);
+  //     //let _2this = this
+  //   //  setTimeout(function(){
+  //       //  _2this.refreshHardCategories()
+  //   //  }, 10);
+  //
+  //
+  //     //this.updatecategoriesHard2()
+  // }
 
   searchUsers(){
     //this.getUsers(1,

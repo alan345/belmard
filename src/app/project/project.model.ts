@@ -1,34 +1,12 @@
 import { Form } from '../form/form.model';
+import { User } from '../user/user.model';
+
 export class Project {
     _id: string = '';
-    title: string = '';
-    embed: string = '';
+    name: string = '';
+    description: string = '';
+    clients: User[] = [];
+    assignedTo: User[] = [];
+    status: string = '';
     forms: Form[] = [];
-    embedSecure : string;
-    categories:Categorie[] = [];
-    owner: Owner[] = [];
-    constructor() {
-      
-    }
-}
-
-
-//
-// export interface Project {
-//   _id: string;
-//   title: string;
-//   embed: string;
-//   embedSecure: {};
-//   categories:Categorie[];
-//   owner: Owner[];
-// }
-
-
-
-export class Categorie {
-  name: string= '';
-  type: string= '';
-}
-export interface Owner {
-  _id: string;
 }

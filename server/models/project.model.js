@@ -8,9 +8,10 @@ var mongoose                = require('mongoose'),
 var project = new Schema({
     name: {type: String},
     description: {type: String},
-    client: [{type: Schema.Types.ObjectId, ref: 'User'}],
+    clients: [{type: Schema.Types.ObjectId, ref: 'User'}],
     assignedTo: [{type: Schema.Types.ObjectId, ref: 'User'}],
     status: {type: String},
+    forms: [{type: Schema.Types.ObjectId, ref: 'Form'}],
   },
   {
     timestamps: true
