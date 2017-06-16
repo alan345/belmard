@@ -13,7 +13,6 @@ import { DeleteDialog } from '../deleteDialog/deleteDialog.component'
 
 
 
-
 @Component({
   selector: 'app-projects',
   templateUrl: './projectSingle.component.html',
