@@ -228,6 +228,8 @@ label.vid-lableft {
     background-color: #424040;
     color: #ffffff;
     border: 2px solid #424242;
+    padding: 12px 28px;
+    border-radius: 4px;
   -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
 }
