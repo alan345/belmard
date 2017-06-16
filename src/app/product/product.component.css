@@ -225,14 +225,14 @@ label.vid-lableft {
     width: 970px;
 }
 .button-product-add {
-    background-color: white;
-    color: black;
+    background-color: #000000;
+    color: #ffffff;
     border: 2px solid #4CAF50;
   -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
 }
 
 .button-product-add:hover {
-    background-color: #4CAF50;
-    color: white;
+    background-color: #ffffff;
+    color: #000000;
 }
