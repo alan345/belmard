@@ -16,7 +16,8 @@ import {MainPageHomeComponent} from './mainPageHome/mainPageHome.component';
 
 
 //import {USER_COMPANIES} from './companie/companie.routes';
-import {CompanieComponent} from './companie/companie.component';
+//import {CompanieComponent} from './companie/companie.component';
+
 
 
 //
