@@ -7,9 +7,8 @@
     <input type="text" name="Search" placeholder="Search" [(ngModel)]="search.search" (ngModelChange)="searchInput()">
   </div>
 
-  
   <div class="beigeback">
-    
+
     <div class="has-text-centered">
         <div [ngClass]="{ 'hidden': !loading }">Loading...</div>
         <pagination-controls (pageChange)="getPage($event)" id="server" class="change-page"></pagination-controls>
