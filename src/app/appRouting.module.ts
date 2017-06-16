@@ -46,7 +46,7 @@ export const routes: Routes = [
   //{path: 'press', component: PressComponent, canActivate: [AuthGuardService], children: USER_PRESSES},
   //{path: 'product', component: ProductComponent, canActivate: [AuthGuardService], children: USER_PRODUCTS},
 
-  {path: 'companie', loadChildren: 'app/companie/companie.module#CompanieModule'},
+  // {path: 'companie', loadChildren: 'app/companie/companie.module#CompanieModule'},
   {path: 'product', loadChildren: 'app/product/product.module#ProductModule'},
   {path: 'project', loadChildren: 'app/project/project.module#ProjectModule'},
   {path: 'user', loadChildren: 'app/user/user.module#UserModule'},
