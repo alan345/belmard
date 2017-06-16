@@ -115,6 +115,10 @@ export class ProductsComponent implements OnInit {
     this.updateCategerories()
   }
 
+
+  searchInput(){
+    
+  }
   addSearchInput(){
 //    console.log(this.search.categories)
     this.updateCategerories()
