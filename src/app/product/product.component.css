@@ -225,9 +225,9 @@ label.vid-lableft {
     width: 970px;
 }
 .button-product-add {
-    background-color: #000000;
+    background-color: #424040;
     color: #ffffff;
-    border: 2px solid #4CAF50;
+    border: 2px solid #424242;
   -webkit-transition-duration: 0.4s;
     transition-duration: 0.4s;
 }
