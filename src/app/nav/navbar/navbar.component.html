@@ -15,8 +15,9 @@
             </div>
         </nav>
              <h1 class="text-center" style="margin-bottom:0px;color:#ffffff;">Logiciel de Comptabilité</h1>
-             <a align="right" (click)="logout()" *ngIf="isLoggedIn()">Déconnexion </a>
-             <a align="right" [routerLink]="['/user/profile']" routerLinkActive="active"  class="admn-btn"> Mon Profil</a>
+             <p align="right"><a (click)="logout()" *ngIf="isLoggedIn()">Déconnexion </a>
+             <a [routerLink]="['/user/profile']" routerLinkActive="active"  class="admn-btn"> Mon Profil</a>
+             </p>
             </div>
         
                       
