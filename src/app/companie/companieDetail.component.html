@@ -14,7 +14,7 @@
   </div>
   <div class="beigeback phyto-ctnr">
     <div class="sln-adrs">
-      <h3>Welcome to {{fetchedCompanie.name}}</h3>
+      <h3>bienvenue sur {{fetchedCompanie.name}}</h3>
       <h6>{{fetchedCompanie.address.address}}, {{fetchedCompanie.address.city}}, {{fetchedCompanie.address.state}} {{fetchedCompanie.address.zip}} - {{fetchedCompanie.phoneNumber}}</h6>
     </div>
     <div class="sln-sty phyto-ctnr">
@@ -63,12 +63,12 @@
       <div class="phyto-ctnr">
         <div *ngIf = "isHQcompanie()">
           <div class="col-sm-3">
-            <button type="button" md-button (click)="openDialog('img')" class="addpic-squr">Add Picture<br><i class="fa fa-plus"></i></button>
+            <button type="button" md-button (click)="openDialog('img')" class="addpic-squr">Ajouter image<br><i class="fa fa-plus"></i></button>
           </div>
         </div>
         <div *ngIf = "!isHQcompanie() && (isAdmin() || isManager() || isSalesRep())">
           <div *ngIf="!isStylist()" class="col-sm-3">
-            <button type="button" md-button (click)="openDialog('img')" class="addpic-squr">Add Picture<br><i class="fa fa-plus"></i></button>
+            <button type="button" md-button (click)="openDialog('img')" class="addpic-squr">Ajouter iamge<br><i class="fa fa-plus"></i></button>
           </div>
         </div>
         <div class="col-sm-9">
@@ -92,7 +92,7 @@
   </div>
   <div *ngIf="!isStylist()" class="beigeback phyto-ctnr">
     <div *ngIf="!isHQcompanie()" class="sln-inf">
-      <h6> Your Phyto Sales Representative</h6>
+      <h6> LOGO du fournisseur</h6>
       <div *ngFor="let user of users; let i=index">
         <div *ngIf="i==0" [routerLink]="['/user/profile/' + user._id]" routerLinkActive="active">
             <p>{{ user.profile.name}}</p>
