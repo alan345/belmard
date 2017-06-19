@@ -565,6 +565,7 @@ a.seemre {
 }  
   
 .titre-pages {
+    margin-bottom: 30px;
     padding: 0 15px;
     border: 1px solid #969494;
     background: #c9bda5;
