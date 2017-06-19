@@ -98,33 +98,27 @@
           </div>
         </div>
 
-
-
-
-              <!-- Autocomplete -->
-              <label>Fournisseur</label>
-
-              <a [routerLink]="['/companie/new']" class="admn-btn">
-                Ajouter fournisseur
-              </a>
-
-              <input
-                [ngModelOptions]="{standalone: true}"
-                [(ngModel)]="autocompleteCompanie"
-                placeholder="Select"
-                (ngModelChange)="searchCompanies()"
-                mdInput
-              >
-              <div *ngFor="let fetchedCompanie of fetchedCompanies; let i=index">
-                {{fetchedCompanie.name}} - {{fetchedCompanie.name}}
-                <button type="button" (click)="selectCompanie(fetchedCompanie)">select</button>
-              </div>
-              <div *ngFor="let vendor of fetchedProduct.vendors; let i=index">
-                {{vendor.name}}
-                <button type="button" (click)="removeCompanie(i)"><i class="fa fa-times"></i></button>
-
-              </div>
-
+            <!-- Autocomplete -->
+            <label>Fournisseur</label>
+            <a [routerLink]="['/companie/new']" class="admn-btn">
+              Ajouter fournisseur
+            </a>
+            <input
+              [ngModelOptions]="{standalone: true}"
+              [(ngModel)]="autocompleteCompanie"
+              placeholder="Select"
+              (ngModelChange)="searchCompanies()"
+              mdInput
+            >
+            <div *ngFor="let fetchedCompanie of fetchedCompanies; let i=index">
+              {{fetchedCompanie.name}} - {{fetchedCompanie.name}}
+              <button type="button" (click)="selectCompanie(fetchedCompanie)">select</button>
+            </div>
+            <div *ngFor="let vendor of fetchedProduct.vendors; let i=index">
+              {{vendor.name}}
+              <button type="button" (click)="removeCompanie(i)"><i class="fa fa-times"></i></button>
+            </div>
+            <!-- Autocomplete -->
 
 
 

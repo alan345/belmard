@@ -27,34 +27,35 @@ export class NewUserComponent implements OnInit {
   //fetchedUser = new User()
   //fetchedUser : User;
   fetchedCompanies: Companie[] = []
-  fetchedCompanieInit : Companie = {
-    _id: '',
-    forms:[],
-    name: '',
-    typeCompanie: '',
-    phoneNumber: '',
-    address: {
-      address : '',
-      city :  '',
-      state :  '',
-      zip :  ''
-    },
-    _users:[]
-  }
-  fetchedCompanieAfter : Companie = {
-    _id: '',
-    forms:[],
-    name: '',
-    typeCompanie: '',
-    phoneNumber: '',
-    address: {
-      address : '',
-      city :  '',
-      state :  '',
-      zip :  ''
-    },
-    _users:[]
-  }
+  autocompleteCompanie: string = '';
+  // fetchedCompanieInit : Companie = {
+  //   _id: '',
+  //   forms:[],
+  //   name: '',
+  //   typeCompanie: '',
+  //   phoneNumber: '',
+  //   address: {
+  //     address : '',
+  //     city :  '',
+  //     state :  '',
+  //     zip :  ''
+  //   },
+  //   _users:[]
+  // }
+  // fetchedCompanieAfter : Companie = {
+  //   _id: '',
+  //   forms:[],
+  //   name: '',
+  //   typeCompanie: '',
+  //   phoneNumber: '',
+  //   address: {
+  //     address : '',
+  //     city :  '',
+  //     state :  '',
+  //     zip :  ''
+  //   },
+  //   _users:[]
+  // }
   companieIndexToSelect = ''
 
 
@@ -76,23 +77,45 @@ export class NewUserComponent implements OnInit {
   }
 
 
+  searchCompanies() {
+    let search = {
+        search: this.autocompleteCompanie,
+      };
+    this.getCompanies(1, search)
+  }
 
+  getCompanies(page: number, search: any) {
+    this.companieService.getCompanies(page, search)
+      .subscribe(
+        res => {
+          this.fetchedCompanies = res.data
+        },
+        error => {
+          console.log(error);
+        }
+      );
+  }
+
+  selectCompanie(companie: Companie) {
+    this.fetchedCompanies = []
+    this.fetchedUser.companies.push(companie)
+  }
+
+  removeCompanie(i: number) {
+    this.fetchedUser.companies.splice(i, 1);
+  }
   ngOnInit() {
     this.myForm = this._fb.group({
-        companieIndexToSelect: ['',[Validators.required, Validators.minLength(3)]],
-        lastVisit: [''],
-        _id: [''],
+
+
         email: [this.emailValidator],
 
         profile: this._fb.group({
             name: ['', [Validators.required, Validators.minLength(3)]],
+            lastName: ['', [Validators.required, Validators.minLength(3)]],
             phoneNumber: [''],
             // parentUser: this._fb.array([]),
-            hair: this._fb.group({
-                hairTexture: ['', <any>Validators.required],
-                hairCondition: ['', <any>Validators.required],
-                scalpCondition: ['', <any>Validators.required],
-            })
+
         })
     })
 
@@ -111,22 +134,22 @@ export class NewUserComponent implements OnInit {
       })
     )
 
-    this.activatedRoute.params.subscribe((params: Params) => {
-      if(params['id']) {
-        this.companieService.getCompanieByUserId(params['id']).subscribe(
-            res => {
-              console.log(res)
-              if(res.length) {
-                this.fetchedCompanieInit = res[0]
-                this.companieIndexToSelect = this.fetchedCompanieInit._id
-              }
-            },
-            error => {console.log(error)}
-          )
-        this.getUser(params['id'])
-      }
-
-    })
+    // this.activatedRoute.params.subscribe((params: Params) => {
+    //   if(params['id']) {
+    //     this.companieService.getCompanieByUserId(params['id']).subscribe(
+    //         res => {
+    //           console.log(res)
+    //           if(res.length) {
+    //             this.fetchedCompanieInit = res[0]
+    //             this.companieIndexToSelect = this.fetchedCompanieInit._id
+    //           }
+    //         },
+    //         error => {console.log(error)}
+    //       )
+    //     this.getUser(params['id'])
+    //   }
+    //
+    // })
   }
 
 
@@ -162,8 +185,8 @@ export class NewUserComponent implements OnInit {
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
-            //this.router.navigate(['user/' + res.obj._id])
-            this.addUserIdToCompanie(res.obj)
+            this.router.navigate(['user/' + res.obj._id])
+            //this.addUserIdToCompanie(res.obj)
           },
           error => {
             this.toastr.error('Error!')
@@ -176,8 +199,8 @@ export class NewUserComponent implements OnInit {
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
-            //this.router.navigate(['user/' + res.obj._id])
-            this.addUserIdToCompanie(res.obj)
+            this.router.navigate(['user/' + res.obj._id])
+            // this.addUserIdToCompanie(res.obj)
             //this.router.navigate(['user'])
           },
           error => {
@@ -189,67 +212,67 @@ export class NewUserComponent implements OnInit {
   }
 
 
-  addUserIdToCompanie(user : User) {
-  //  console.log(this.fetchedCompanieInit)
-  //  console.log(this.fetchedCompanieAfter)
-    //let companieToUpdate = {}
-
-
-      if(this.fetchedCompanieInit._id !== this.fetchedCompanieAfter._id ) {
-        this.fetchedCompanieInit._users.forEach((userInit, index) =>{
-          if(userInit._id === this.fetchedUser._id) {
-            delete this.fetchedCompanieInit._users[index]
-            this.companieService.updateCompanie(this.fetchedCompanieInit)
-              .subscribe(
-                res => {
-                  //console.log('User removed from previous companie' + this.fetchedCompanieInit.name)
-                  //this.onPassForm.emit();
-                  this.toastr.success('Great!', 'User removed from previous companie' + this.fetchedCompanieInit.name)
-                  //this.router.navigate(['companie/' + this.fetchedCompanie._id]);
-
-                },
-                error => {console.log(error)}
-              )
-
-          }
-        })
-      }
-
-      this.fetchedCompanies.forEach((companie, index) => {
-        if(companie._id == this.companieIndexToSelect) {
-          this.fetchedCompanieAfter = this.fetchedCompanies[index]
-        }
-      })
-
-      let okAddUserToCompanie = true
-      this.fetchedCompanieAfter._users.forEach((userFetch) => {
-        if(userFetch._id === user._id) {
-          okAddUserToCompanie = false
-        }
-      })
-      if(!okAddUserToCompanie){
-        console.log('error! user already exists in salon')
-        //this.toastr.error('error! user already exists in salon')
-        this.goBack()
-        //this.router.navigate(['companie/' + this.fetchedCompanieAfter._id]);
-        //this.navigate(this.fetchedCompanie._id)
-      } else {
-        this.fetchedCompanieAfter._users.push(user)
-        this.companieService.updateCompanie(this.fetchedCompanieAfter)
-          .subscribe(
-            res => {
-              //this.onPassForm.emit();
-              this.toastr.success('Great!', res.message)
-              //this.router.navigate(['companie/' + this.fetchedCompanie._id]);
-              this.goBack()
-              //this.navigate(user._id)
-            },
-            error => {console.log(error)}
-          )
-      }
-
-
-  }
+  // addUserIdToCompanie(user : User) {
+  // //  console.log(this.fetchedCompanieInit)
+  // //  console.log(this.fetchedCompanieAfter)
+  //   //let companieToUpdate = {}
+  //
+  //
+  //     if(this.fetchedCompanieInit._id !== this.fetchedCompanieAfter._id ) {
+  //       this.fetchedCompanieInit._users.forEach((userInit, index) =>{
+  //         if(userInit._id === this.fetchedUser._id) {
+  //           delete this.fetchedCompanieInit._users[index]
+  //           this.companieService.updateCompanie(this.fetchedCompanieInit)
+  //             .subscribe(
+  //               res => {
+  //                 //console.log('User removed from previous companie' + this.fetchedCompanieInit.name)
+  //                 //this.onPassForm.emit();
+  //                 this.toastr.success('Great!', 'User removed from previous companie' + this.fetchedCompanieInit.name)
+  //                 //this.router.navigate(['companie/' + this.fetchedCompanie._id]);
+  //
+  //               },
+  //               error => {console.log(error)}
+  //             )
+  //
+  //         }
+  //       })
+  //     }
+  //
+  //     this.fetchedCompanies.forEach((companie, index) => {
+  //       if(companie._id == this.companieIndexToSelect) {
+  //         this.fetchedCompanieAfter = this.fetchedCompanies[index]
+  //       }
+  //     })
+  //
+  //     let okAddUserToCompanie = true
+  //     this.fetchedCompanieAfter._users.forEach((userFetch) => {
+  //       if(userFetch._id === user._id) {
+  //         okAddUserToCompanie = false
+  //       }
+  //     })
+  //     if(!okAddUserToCompanie){
+  //       console.log('error! user already exists in salon')
+  //       //this.toastr.error('error! user already exists in salon')
+  //       this.goBack()
+  //       //this.router.navigate(['companie/' + this.fetchedCompanieAfter._id]);
+  //       //this.navigate(this.fetchedCompanie._id)
+  //     } else {
+  //       this.fetchedCompanieAfter._users.push(user)
+  //       this.companieService.updateCompanie(this.fetchedCompanieAfter)
+  //         .subscribe(
+  //           res => {
+  //             //this.onPassForm.emit();
+  //             this.toastr.success('Great!', res.message)
+  //             //this.router.navigate(['companie/' + this.fetchedCompanie._id]);
+  //             this.goBack()
+  //             //this.navigate(user._id)
+  //           },
+  //           error => {console.log(error)}
+  //         )
+  //     }
+  //
+  //
+  // }
 
   navigate(id: string){
     this.router.navigate(['user/' + id])

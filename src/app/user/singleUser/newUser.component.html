@@ -5,16 +5,36 @@
   </div>
   <div class="single-wrpr beigeback">
     <form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm)">
-      <div [ngClass]="{ 'hidden': fetchedUser._id }" class="form-group col-sm-4" id="lfthair">
-          <select
-            class="form-control"
-            formControlName="companieIndexToSelect"
-            [(ngModel)]="companieIndexToSelect"
-            >
-            <option value="" disabled selected>Select Salon</option>
-            <option *ngFor="let companie of fetchedCompanies; let i=index" value="{{companie._id}}">{{companie.name}}</option>
-          </select>
-      </div>
+
+
+
+          <!-- Autocomplete -->
+          <label>Fournisseur</label>
+          <a [routerLink]="['/companie/new']" class="admn-btn">
+            Ajouter Entreprise
+          </a>
+          <input
+            [ngModelOptions]="{standalone: true}"
+            [(ngModel)]="autocompleteCompanie"
+            placeholder="Select"
+            (ngModelChange)="searchCompanies()"
+            mdInput
+          >
+          <div *ngFor="let fetchedCompanie of fetchedCompanies; let i=index">
+            {{fetchedCompanie.name}} - {{fetchedCompanie.name}}
+            <button type="button" (click)="selectCompanie(fetchedCompanie)">select</button>
+          </div>
+          <div *ngFor="let vendor of fetchedUser.companies; let i=index">
+            {{vendor.name}}
+            <button type="button" (click)="removeCompanie(i)"><i class="fa fa-times"></i></button>
+          </div>
+          <!-- Autocomplete -->
+
+
+
+
+
+
       <div class="form-group col-sm-12">
         <input
           type="text"
@@ -32,6 +52,17 @@
             [(ngModel)]="fetchedUser.profile.name"
             placeholder="Client's Name">
         </div>
+
+        <div class="form-group col-sm-12">
+          <input
+            type="text"
+            class="form-control"
+            formControlName="lastName"
+            [(ngModel)]="fetchedUser.profile.lastName"
+            placeholder="Client's lastName">
+        </div>
+
+
         <div class="form-group col-sm-12">
           <input
             type="text"
@@ -40,45 +71,7 @@
             [(ngModel)]="fetchedUser.profile.phoneNumber"
             placeholder="Phone Number">
         </div>
-        <div formGroupName="hair">
-          <div class="form-group col-sm-4" id="lfthair">
-            <label>Hair Texture</label>
-              <select
-                class="form-control"
-                formControlName="hairTexture"
-                [(ngModel)]="fetchedUser.profile.hair.hairTexture">
-                <option value="Fine">Fine</option>
-                <option value="Medium">Medium</option>
-                <option value="Coarse">Coarse</option>
-              </select>
-          </div>
-          <div class="form-group col-sm-4" id="mdlhair">
-            <label>Scalp Condition</label>
-            <select
-              class="form-control"
-              formControlName="scalpCondition"
-              [(ngModel)]="fetchedUser.profile.hair.scalpCondition">
-              <option value="Healthy">Healthy</option>
-              <option value="Sensitive/Itchy">Sensitive/Itchy</option>
-              <option value="Dry">Dry</option>
-              <option value="Dandruff">Dandruff</option>
-              <option value="Oily">Oily</option>
-            </select>
-          </div>
-          <div class="form-group col-sm-4" id="rghthair">
-            <label>Hair Condition</label>
-            <select
-              class="form-control"
-              formControlName="hairCondition"
-              [(ngModel)]="fetchedUser.profile.hair.hairCondition">
-              <option value="Normal">Normal</option>
-              <option value="Dry">Dry</option>
-              <option value="Lifeless">Lifeless</option>
-              <option value="Aging">Aging</option>
-              <option value="Damaged">Damaged</option>
-            </select>
-          </div>
-        </div>
+
       </div>
       <div class="valid-edit">
         <button type="submit" [disabled]="!myForm.valid" [ngClass]="{'done':myForm.valid,'pas-done':!myForm.valid}">Done</button>

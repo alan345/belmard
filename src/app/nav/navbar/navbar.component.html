@@ -26,43 +26,40 @@
                 </div>
                 <div class="collapse navbar-collapse" id="navcol-1">
                     <ul class="nav navbar-nav navbar-right">
+                      <li>
+                        <a [routerLink]="['/product']" class="admn-btn">
+                          Produits
+                        </a>
+                      </li>
 
-                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Dropdown <span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li role="presentation"><a href="#">First Item</a></li>
-                                <li role="presentation"><a href="#">Second Item</a></li>
-                                <li role="presentation"><a href="#">Third Item</a></li>
-                            </ul>
-                        </li>
-                    <li>
-                      <a [routerLink]="['/product']" class="admn-btn">
-                        Produits
-                      </a>
-                    </li>
+                      <li>
+                        <a [routerLink]="['/project']" routerLinkActive="active"  class="admn-btn">
+                          projects
+                        </a>
+                      </li>
 
-                    <li>
-                      <a [routerLink]="['/project']" routerLinkActive="active"  class="admn-btn">
-                        projects
-                      </a>
-                    </li>
+                      <li>
+                        <a [routerLink]="['/companie']" routerLinkActive="active"  class="admn-btn">
+                          Companies
+                        </a>
+                      </li>
+                      <li>
+                        <a [routerLink]="['/user/profile']" routerLinkActive="active"  class="admn-btn">
+                          My Profile
+                        </a>
+                      </li>
 
-                    <li>
-                      <a [routerLink]="['/companie']" routerLinkActive="active"  class="admn-btn">
-                        Companies
-                      </a>
-                    </li>
-                    <li>
-                      <a [routerLink]="['/user/profile']" routerLinkActive="active"  class="admn-btn">
-                        My Profile
-                      </a>
-                    </li>
-
-                    <li>
-                      <a [routerLink]="['/user']" routerLinkActive="active" class="admn-btn">
-                        Users
-                      </a>
-                    </li>
-                    <li><a (click)="logout()" *ngIf="isLoggedIn()">Log out</a></li>
+                      <li>
+                        <a [routerLink]="['/user']" routerLinkActive="active" class="admn-btn">
+                          Users
+                        </a>
+                      </li>
+                      <li>
+                        <a [routerLink]="['/user/newuser']" routerLinkActive="active" class="admn-btn">
+                          New User
+                        </a>
+                      </li>
+                      <li><a (click)="logout()" *ngIf="isLoggedIn()">Log out</a></li>
                    </ul>
                 </div>
             </div>

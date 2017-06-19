@@ -6,10 +6,11 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { Project } from './project.model';
 import { EditOptionsComponentDialog } from '../modalLibrary/modalLibrary.component';
-import { FormBuilder, FormGroup, FormArray, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { DeleteDialog } from '../deleteDialog/deleteDialog.component'
-
+import { UserService} from '../user/user.service';
+import { User } from '../user/user.model';
 
 
 
@@ -25,19 +26,20 @@ export class ProjectSingleComponent implements OnInit {
   categ: string = 'Electricité';
 
   subCateg: string = 'file';
-
-  data:Array<Object> =
-  [
-    {
-      'categ':'Plomberie',
-      'subCategD': ['robinet', 'douche', 'joint']},
-    {
-      'categ':'Electricité',
-      'subCategD': ['lampe', 'file', 'douille']},
-    {
-      'categ':'Serrurerie',
-      'subCategD': ['cle', 'verou', 'porte']}
-  ];
+  autocompleteUser: string = '';
+  fetchedUsers: User[] = [];
+  // data:Array<Object> =
+  // [
+  //   {
+  //     'categ':'Plomberie',
+  //     'subCategD': ['robinet', 'douche', 'joint']},
+  //   {
+  //     'categ':'Electricité',
+  //     'subCategD': ['lampe', 'file', 'douille']},
+  //   {
+  //     'categ':'Serrurerie',
+  //     'subCategD': ['cle', 'verou', 'porte']}
+  // ];
 
 
 
@@ -66,8 +68,8 @@ export class ProjectSingleComponent implements OnInit {
   //     selected : false
   //   }]
 
-  inputCategorie = ''
-
+  // inputCategorie = ''
+  //
 
 
   public myForm: FormGroup;
@@ -81,6 +83,7 @@ export class ProjectSingleComponent implements OnInit {
     private location: Location,
     private activatedRoute: ActivatedRoute,
     private _fb: FormBuilder,
+    private userService: UserService,
   ) {
   }
 
@@ -105,7 +108,32 @@ export class ProjectSingleComponent implements OnInit {
     })
   }
 
+  selectUser(user: User) {
+    this.fetchedUsers = []
+    this.fetchedProject.clients.push(user)
+  }
 
+  searchUsers() {
+    let search = {
+        search: this.autocompleteUser,
+      };
+    this.getUsers(1, search)
+  }
+  getUsers(page: number, search: any) {
+    this.userService.getUsers(page, search)
+      .subscribe(
+        res => {
+          this.fetchedUsers = res.data
+        },
+        error => {
+          console.log(error);
+        }
+      );
+  }
+
+  removeUser(i: number) {
+    this.fetchedProject.clients.splice(i, 1);
+  }
 
   // removeCategorie(i: number) {
   //     this.fetchedProject.categories.splice(i, 1)
@@ -120,9 +148,9 @@ export class ProjectSingleComponent implements OnInit {
   //     //this.updatecategoriesHard2()
   // }
 
-  searchUsers(){
-    //this.getUsers(1,
-  }
+  // searchUsers(){
+  //   //this.getUsers(1,
+  // }
 
   // getUsers(page: number, search: any) {
   //   this.userService.getUsers(page, search)

@@ -1,5 +1,5 @@
 import { Form } from '../form/form.model';
-//import { Product } from '../product/product.model';
+import { Companie } from '../companie/companie.model';
 
 
 export class User {
@@ -12,6 +12,7 @@ export class User {
   profile: Profile = new Profile();
   notes: Note[] = [];
   password: string = '';
+  companies: Companie[] = [];
 }
 
 export class ProductBought {
