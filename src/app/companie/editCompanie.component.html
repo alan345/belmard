@@ -17,7 +17,7 @@
             [(ngModel)]="fetchedCompanie.name"
             required
             minlength="5"
-            placeholder="Name of Your Salon"
+            placeholder="Nom du fournisseur"
           >
           <input
             type="text"
@@ -26,7 +26,7 @@
             [(ngModel)]="fetchedCompanie.phoneNumber"
             required
             minlength="5"
-            placeholder="Phone Number"
+            placeholder="Numéro de téléphone"
           >
           <!-- <div ngModelGroup="address"> -->
           <div formGroupName="address">
@@ -37,7 +37,7 @@
               [(ngModel)]="fetchedCompanie.address.address"
               required
               minlength="5"
-              placeholder="Street Address"
+              placeholder="Adresse"
             >
             <input
               type="text"
@@ -46,7 +46,7 @@
               [(ngModel)]="fetchedCompanie.address.city"
               required
               minlength="2"
-              placeholder="City"
+              placeholder="Ville"
             >
               <input
                 type="text"
@@ -55,7 +55,7 @@
                 [(ngModel)]="fetchedCompanie.address.state"
                 required
                 minlength="5"
-                placeholder="State Code"
+                placeholder="Code postal"
               >
               <input
                 type="text"
