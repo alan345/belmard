@@ -93,12 +93,8 @@ export class ProductSingleComponent implements OnInit {
     })
   }
 
-  changeCascade(selectedIndex1, selectedIndex2, active1, active2) {
-    if(active1)
-      this.show1 = true
-    if(active2)
-      this.show2 = true
-
+  changeCascade(selectedIndex1, selectedIndex2) {
+    //console.log(selectedIndex1, selectedIndex2)
 
     this.selectedIndex1 = selectedIndex1
     this.selectedIndex2 = selectedIndex2

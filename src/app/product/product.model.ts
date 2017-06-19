@@ -65,6 +65,12 @@ export const ProductSteps =
     'categ':'Serrurerie',
     'subCateg': [
       {
+        'categ':'',
+        'subCateg': [
+          {categ: ''}
+        ]
+      },
+      {
         'categ':'Serrurerie de bâtiment',
         'subCateg': [
           {categ: 'Clés'},
@@ -113,6 +119,12 @@ export const ProductSteps =
     'categ':'Menuiserie',
     'subCateg': [
       {
+        'categ':'',
+        'subCateg': [
+          {categ: ''}
+        ]
+      },
+      {
         'categ':'Portes',
         'subCateg': [
           {categ: 'Fenêtres bois ou PVC'},
@@ -144,6 +156,12 @@ export const ProductSteps =
   {
     'categ':'Fenêtres',
     'subCateg': [
+      {
+        'categ':'',
+        'subCateg': [
+          {categ: ''}
+        ]
+      },
       {
         'categ':'Vitrage',
         'subCateg': [
@@ -192,6 +210,12 @@ export const ProductSteps =
   {
     'categ':'Plomberie',
     'subCateg': [
+      {
+        'categ':'',
+        'subCateg': [
+          {categ: ''}
+        ]
+      },
       {
         'categ':'Ballon d\'eau chaude',
         'subCateg': [
@@ -250,6 +274,12 @@ export const ProductSteps =
     'categ':'Électricité',
     'subCateg': [
       {
+        'categ':'',
+        'subCateg': [
+          {categ: ''}
+        ]
+      },
+      {
         'categ':'Convecteur',
         'subCateg': [
           {categ: 'Convecteur électrique CASSETTE RAY SUNAIR 3600TC Thermor, ref : 497091'},
@@ -295,38 +325,35 @@ export const ProductSteps =
   },
 
 
-
-
-
-
-
-
-
-
-
-    {
-      'categ':'Chauffage',
-      'subCateg': [
-        {
-          'categ':'Radiateurs',
-          'subCateg': [
-            {categ: 'Fixations de radiateurs'},
-            {categ: 'Radiateur thermoactif'},
-            {categ: 'Robinetterie de radiateurs'},
-            {categ: 'Accessoires'},
-            {categ: 'Sèche-serviettes'},
-            {categ: 'Habillage'},
-          ]
-        },
-        {
-          'categ':'Chaudière',
-          'subCateg': [
-            {categ: 'Bloc hydraulique'},
-            {categ: 'Système de sécurité surchauffe'},
-            {categ: 'Chaudière électrique'},
-            {categ: 'Thermostat'},
-          ]
-        },
-      ]
-    },
+  {
+    'categ': 'Chauffage',
+    'subCateg': [
+      {
+        'categ':'',
+        'subCateg': [
+          {categ: ''}
+        ]
+      },    
+      {
+        'categ': 'Radiateurs',
+        'subCateg': [
+          {categ: 'Fixations de radiateurs'},
+          {categ: 'Radiateur thermoactif'},
+          {categ: 'Robinetterie de radiateurs'},
+          {categ: 'Accessoires'},
+          {categ: 'Sèche-serviettes'},
+          {categ: 'Habillage'},
+        ]
+      },
+      {
+        'categ':'Chaudière',
+        'subCateg': [
+          {categ: 'Bloc hydraulique'},
+          {categ: 'Système de sécurité surchauffe'},
+          {categ: 'Chaudière électrique'},
+          {categ: 'Thermostat'},
+        ]
+      },
+    ]
+  },
 ]
