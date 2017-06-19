@@ -1,7 +1,7 @@
 <div id="global">
   <div class="goldgradient beigeborder subnav">
     <button class="subnav-btnleft" (click)="goBack()"><i class="fa fa-chevron-left"></i></button>
-    <h3 style="text-align: center;">Add/Edit Product</h3>
+    <h3 style="text-align: center;">Ajouter / Éditer produit</h3>
   </div>
   <div id="product-container">
 
@@ -211,8 +211,8 @@
       </div> -->
 
     <div class="valid-edit">
-      <button type="submit" class="done" [disabled]="!myForm.valid">Done</button>
-      <button *ngIf="fetchedProduct._id" type="button" class="delete" md-button (click)="openDialogDelete()">Delete Product</button>
+      <button type="submit" class="done" [disabled]="!myForm.valid">Enregistrer</button>
+      <button *ngIf="fetchedProduct._id" type="button" class="delete" md-button (click)="openDialogDelete()">Effacer produit</button>
     </div>
     <div class="clearfix"></div>
   </form>
