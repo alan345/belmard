@@ -48,7 +48,6 @@ export class ProjectsComponent implements OnInit {
 
   categories2 = '';
 
-
   // categoriesHard2 = [
   //   { name:'Through your eyes', selected : false },
   //   { name:'How to', selected : false },
