@@ -610,7 +610,8 @@ a.seemre {
 }
 
 .champ {
-  
+    border: 1px solid #424242;
+    border-radius: 5px;  
 }
 
 .tri {
