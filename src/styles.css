@@ -562,4 +562,61 @@ a.seemre {
 .input-group {
     width: 100% !important;
 }
+  
+  
+.titre-pages {
+    padding: 0 15px;
+    border: 1px solid #969494;
+    background: #c9bda5;
+    background: -webkit-radial-gradient(#ffffff, #969494); /* Safari */
+    background: -o-radial-gradient(#ffffff, #969494); /* Opera */
+    background: -moz-radial-gradient(#ffffff, #969494); /* Firefox */
+    background: radial-gradient(#ffffff, #969494); /* Standard syntax */
 }
+
+.bouton-add {
+    background-color: #424040;
+    color: #ffffff;
+    border: 2px solid #424242;
+    padding: 12px 28px;
+    border-radius: 4px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.bouton-add:hover {
+    background-color: #2aad48;
+    color: #000000;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.bouton-register {
+  
+}
+
+.bouton-back {
+    
+  
+}
+
+.bouton-back:hover {
+    
+}
+
+.white-box {
+    height: 350px;
+}
+
+.champ {
+  
+}
+
+.tri {
+  
+}
+
+.container {
+    width: 970px;
+}
+
+
