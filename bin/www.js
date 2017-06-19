@@ -15,7 +15,7 @@ var http = require('http')
 //console.log(app.get('env'))
 
 
-var port = normalizePort(process.env.PORT || '800')
+var port = normalizePort(process.env.PORT || '80')
 //var port = normalizePort(process.env.PORT || '3000')
 
 
