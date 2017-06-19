@@ -25,6 +25,9 @@ import { DeleteDialog } from '../deleteDialog/deleteDialog.component'
 
 export class ProductSingleComponent implements OnInit {
 
+  selectedIndex1 = 0
+  selectedIndex2 = 0
+
   categ1: string = 'Serrurerie';
   categ2: string = 'Serrurerie de bâtiment';
   categ3: string = 'Clés';
@@ -86,6 +89,11 @@ export class ProductSingleComponent implements OnInit {
       if(params['id'])
        this.getProduct(params['id'])
     })
+  }
+
+  changeCascade(selectedIndex1, selectedIndex2) {
+    this.selectedIndex1 = selectedIndex1
+    this.selectedIndex2 = selectedIndex2
   }
 
   searchCompanies() {

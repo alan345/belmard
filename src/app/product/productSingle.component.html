@@ -8,16 +8,16 @@
 
 
     <div>
-      <select [ngModel]="categ1" (ngModelChange)="categ1 = $event; second.selectedIndex = 0" #first>
-        <option *ngFor="let n of productSteps" [attr.value]="n.x">{{n.categ}}</option>
+      <select [ngModel]="categ1" (ngModelChange)="changeCascade(categ1Index.selectedIndex, categ2Index.selectedIndex)" #categ1Index>
+        <option *ngFor="let n of productSteps" [attr.value]="n.categ">{{n.categ}}</option>
       </select>
     </div>
     <div>
       <!-- <div *ngFor="let n of data[first.selectedIndex].subCateg">
         {{n|json}}<br>
       </div> -->
-      <select [(ngModel)]="categ2" (ngModelChange)="categ2 = $event; third.selectedIndex = 0" #second>
-        <option *ngFor="let n of productSteps[first.selectedIndex].subCateg" [attr.value]="n.categ">{{n.categ}}</option>
+      <select [(ngModel)]="categ2" (ngModelChange)="changeCascade(categ1Index.selectedIndex, categ2Index.selectedIndex)" #categ2Index>
+        <option *ngFor="let n of productSteps[selectedIndex1].subCateg" [attr.value]="n.categ">{{n.categ}}</option>
       </select>
     </div>
 
@@ -25,11 +25,12 @@
     <!-- {{data[first.selectedIndex].subCateg |json}} -->
     <div>
       <select [(ngModel)]="categ3" #third>
-        <option *ngFor="let n of productSteps[first.selectedIndex].subCateg[second.selectedIndex].subCateg" [attr.value]="n.categ">{{n.categ}}</option>
+        <option *ngFor="let n of productSteps[selectedIndex1].subCateg[selectedIndex2].subCateg" [attr.value]="n.categ">{{n.categ}}</option>
       </select>
     </div>
-
-
+<!-- {{first.selectedIndex|json}}
+{{second.selectedIndex|json}} -->
+<!-- {{productSteps[first.selectedIndex].subCateg[second.selectedIndex].subCateg |json}} -->
 
 
 
