@@ -37,7 +37,7 @@
 
       <div formGroupName="details">
         <div>
-          <label>referenceName</label>
+          <label>Nom du produit</label>
           <input
             type="text"
             class="form-control"
@@ -47,7 +47,7 @@
         </div>
 
         <div>
-          <label>reference</label>
+          <label>Référence</label>
           <input
             type="text"
             class="form-control"
@@ -57,7 +57,7 @@
         </div>
 
         <div>
-          <label>description</label>
+          <label>Description</label>
           <input
             type="text"
             class="form-control"
@@ -68,7 +68,7 @@
 
         <div formGroupName="dimension">
           <div>
-            <label>height</label>
+            <label>longueur</label>
             <input
               type="text"
               class="form-control"
@@ -77,7 +77,7 @@
               [(ngModel)]="fetchedProduct.details.dimension.height">
           </div>
           <div>
-            <label>width</label>
+            <label>largeur</label>
             <input
               type="text"
               class="form-control"
@@ -87,7 +87,7 @@
           </div>
 
           <div>
-            <label>depth</label>
+            <label>hauteur</label>
             <input
               type="text"
               class="form-control"
@@ -101,10 +101,10 @@
 
 
               <!-- Autocomplete -->
-              <label>Vendor</label>
+              <label>Fournisseur</label>
 
               <a [routerLink]="['/companie/new']" class="admn-btn">
-                Add companie
+                Ajouter fournisseur
               </a>
 
               <input
@@ -129,7 +129,7 @@
 
         <div formGroupName="price">
           <div>
-            <label>costPrice</label>
+            <label>Prix d'achat HT</label>
             <input
               type="text"
               class="form-control"
@@ -138,7 +138,7 @@
               [(ngModel)]="fetchedProduct.details.price.costPrice">
           </div>
           <div>
-            <label>sellingPrice</label>
+            <label>Prix de vente HT</label>
             <input
               type="text"
               class="form-control"
@@ -158,7 +158,7 @@
           <img class="promo-img" src="./uploads/forms/{{singleForm.owner}}/{{singleForm.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
         </div>
         <div>
-          <button type="button" md-button (click)="openDialog('img')" class="addpic-squr">Add Picture<br><i class="fa fa-plus"></i></button>
+          <button type="button" md-button (click)="openDialog('img')" class="addpic-squr">Ajouter une image<br><i class="fa fa-plus"></i></button>
         </div>
       </div>
 
