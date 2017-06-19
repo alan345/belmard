@@ -10,7 +10,10 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { DeleteDialog } from '../deleteDialog/deleteDialog.component'
 import { UserService} from '../user/user.service';
+import { QuoteService} from '../quote/quote.service';
+
 import { User } from '../user/user.model';
+import { Quote } from '../quote/quote.model';
 
 
 
@@ -39,7 +42,9 @@ export class ProjectSingleComponent implements OnInit {
 
   subCateg: string = 'file';
   autocompleteUser: string = '';
+  autocompleteQuote: string = '';
   fetchedUsers: User[] = [];
+  fetchedQuotes: Quote[] = [];
   // data:Array<Object> =
   // [
   //   {
@@ -96,6 +101,7 @@ export class ProjectSingleComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private _fb: FormBuilder,
     private userService: UserService,
+    private quoteService: QuoteService,
   ) {
   }
 
@@ -131,6 +137,7 @@ export class ProjectSingleComponent implements OnInit {
       };
     this.getUsers(1, search)
   }
+
   getUsers(page: number, search: any) {
     this.userService.getUsers(page, search)
       .subscribe(
@@ -147,6 +154,39 @@ export class ProjectSingleComponent implements OnInit {
     this.fetchedProject.clients.splice(i, 1);
   }
 
+
+
+
+
+
+
+    selectQuote(quote: Quote) {
+      this.fetchedQuotes = []
+      this.fetchedProject.quotes.push(quote)
+    }
+
+    searchQuotes() {
+      let search = {
+          search: this.autocompleteQuote,
+        };
+      this.getQuotes(1, search)
+    }
+
+    getQuotes(page: number, search: any) {
+      this.quoteService.getQuotes(page, search)
+        .subscribe(
+          res => {
+            this.fetchedQuotes = res.data
+          },
+          error => {
+            console.log(error);
+          }
+        );
+    }
+
+    removeQuote(i: number) {
+      this.fetchedProject.clients.splice(i, 1);
+    }
   // removeCategorie(i: number) {
   //     this.fetchedProject.categories.splice(i, 1)
   //     const control = <FormArray>this.myForm.controls['categories'];
