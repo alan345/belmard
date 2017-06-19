@@ -5,15 +5,17 @@
   </div>
   <div class="subsubnav-clients">
     <input type="text" name="Search" placeholder="Search" [(ngModel)]="search.search" (ngModelChange)="searchInput()">
+    <button
+      class="dat-btn dat-btnl"
+      type="button"
+      md-button
+      [routerLink]="['/user/newuser']"
+      routerLinkActive="active">New User</button>
   </div>
   <md-tab-group (selectChange)="onSelectChange($event)" class="beigeback admin-users">
     <md-tab label="admin">
     </md-tab>
     <md-tab label="client">
-    </md-tab>
-    <md-tab label="stylist">
-    </md-tab>
-    <md-tab label="manager">
     </md-tab>
   </md-tab-group>
   <div class="beigeback">

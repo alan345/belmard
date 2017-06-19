@@ -64,6 +64,9 @@ import { UserModule} from './user/user.module';
 // import { ProductModule} from './product/product.module';
 import { CompanieModule} from './companie/companie.module';
 
+import { QuoteModule} from './quote/quote.module';
+
+
 
 
 
@@ -210,6 +213,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ProductModule,
     // ProductModule,
     CompanieModule,
+    QuoteModule,
 
 
   ],

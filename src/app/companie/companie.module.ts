@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RouterModule} from '@angular/router';
 
 import { CompanieDetailUsersComponent} from './companieDetailUsers.component';
-import { CompaniePicturesComponent} from './companiePictures.component';
 import { AddUserByCompanieComponent} from './addUser/addUserByCompanie.component';
 import { CompaniesComponent} from './companies/companies.component';
 import { EditCompanieComponent} from './editCompanie.component';
@@ -28,7 +27,6 @@ import { Ng2PaginationModule} from 'ng2-pagination';
   ],
   declarations: [
     CompanieDetailUsersComponent,
-    CompaniePicturesComponent,
     CompaniesComponent,
     EditCompanieComponent,
     EditAddUserToCompanieComponent,

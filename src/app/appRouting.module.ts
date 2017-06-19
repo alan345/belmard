@@ -38,29 +38,17 @@ import { NgModule }             from '@angular/core';
 
 
 export const routes: Routes = [
-//  {path: '', component: MainPageHomeComponent, pathMatch: 'full'},
   {path: '', component: MainPageHomeComponent, canActivate: [AuthGuardService], pathMatch: 'full'},
 
-//  {path: 'home2', component: MainPageComponent, pathMatch: 'full'},
-
-  //{path: 'press', component: PressComponent, canActivate: [AuthGuardService], children: USER_PRESSES},
-  //{path: 'product', component: ProductComponent, canActivate: [AuthGuardService], children: USER_PRODUCTS},
 
   {path: 'companie', loadChildren: 'app/companie/companie.module#CompanieModule'},
+  {path: 'quote', loadChildren: 'app/quote/quote.module#QuoteModule'},
   {path: 'product', loadChildren: 'app/product/product.module#ProductModule'},
   {path: 'project', loadChildren: 'app/project/project.module#ProjectModule'},
   {path: 'user', loadChildren: 'app/user/user.module#UserModule'},
-//  {path: 'promotion', component: PromotionComponent, canActivate: [AuthGuardService], children: USER_PROMOTIONS},
-//  {path: 'companie/:id', component: CompanieDetailComponent},
-//  {path: 'companie/edit/:id', component: EditCompanieComponent},
-//  {path: 'map', component: MapComponent, pathMatch: 'full'},
-  // {path: 'user', component: UserComponent, children: USER_ROUTES},
+
   {path: 'form', component: FormComponent, canActivate: [AuthGuardService]},
-  //{path: 'userForms', component: UserFormsComponent, canActivate: [AuthGuardService]},
   {path: 'userForms', component: UserFormsUploadAndList, canActivate: [AuthGuardService]},
-  //{path: 'userFormsboth', component: UserFormsUploadAndList, canActivate: [AuthGuardService]},
-
-
 
   {path: 'admin', component: AdminComponent, children: ADMIN_ROUTES},
   {path: '404', component: ErrorPageComponent},

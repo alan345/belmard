@@ -23,14 +23,17 @@ import { User } from '../user/user.model';
 
 export class ProjectSingleComponent implements OnInit {
   status = [
-    {
-      index: 0,
-      label: 'status1'
-    },
-    {
-      index: 1,
-      label: 'status2'
-    },
+    {index: 0, label: 'RDV planifié'},
+    {index: 1, label: 'Rappeler'},
+    {index: 2, label: 'Stand-By'},
+    {index: 3, label: 'Devis à faire'},
+    {index: 4, label: 'Attente Validation'},
+    {index: 5, label: 'Devis validée, A envoyer'},
+    {index: 6, label: 'Attente approbation'},
+    {index: 7, label: 'Devis refusé'},
+    {index: 8, label: 'Devis accepté – Attente acompte'},
+    {index: 9, label: 'En cours de réalisation'},
+    {index: 10, label: 'Terminé'},
   ]
   categ: string = 'Electricité';
 
