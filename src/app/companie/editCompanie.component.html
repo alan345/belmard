@@ -1,7 +1,7 @@
 <div class="container">
   <div class="goldgradient beigeborder subnav">
     <button class="subnav-btnleft" (click)="goBack()"><i class="fa fa-chevron-left"></i></button>
-    <h3 style="text-align: center;">My Salon</h3>
+    <h3 style="text-align: center;">Fournisseur</h3>
   </div>
   <div class="beigeback single-wrpr">
     <h4 class="dspl-nn">id: {{fetchedCompanie._id}}</h4>
@@ -48,15 +48,7 @@
               minlength="2"
               placeholder="Ville"
             >
-              <input
-                type="text"
-                class="form-control"
-                formControlName="state"
-                [(ngModel)]="fetchedCompanie.address.state"
-                required
-                minlength="5"
-                placeholder="Code postal"
-              >
+            
               <input
                 type="text"
                 class="form-control"
@@ -64,14 +56,14 @@
                 [(ngModel)]="fetchedCompanie.address.zip"
                 required
                 minlength="5"
-                placeholder="Zip Code"
+                placeholder="Code postal"
               >
           </div>
         <!-- </div> -->
       </div>
     
       <div class="valid-edit">
-        <button type="submit" class="sln-edt done">Done</button>
+        <button type="submit" class="sln-edt done">Enregistrer</button>
       </div>
     </form>
   </div>
