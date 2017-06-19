@@ -64,6 +64,7 @@ router.put('/:id', function (req, res, next) {
     } else {
       //console.log(req.body)
         item.title = req.body.title
+        item.forms = req.body.forms
         item.embed = req.body.embed
         item.categories = req.body.categories
         item.clients = req.body.clients
