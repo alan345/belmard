@@ -25,6 +25,7 @@
 
 
 
+
       <!-- Autocomplete -->
       <label>Client</label>
       <a [routerLink]="['/user/newuser']" class="admn-btn">
@@ -89,6 +90,11 @@
 
 
 
+      <select
+        formControlName="status"
+        [(ngModel)]="fetchedProject.status">
+        <option *ngFor="let n of status" [ngValue]="n.index">{{n.label}}</option>
+      </select>
 
 
 

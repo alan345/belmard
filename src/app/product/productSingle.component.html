@@ -5,8 +5,6 @@
   </div>
   <div id="product-container">
 
-
-
     <div>
       <select [ngModel]="categ1" (ngModelChange)="changeCascade(categ1Index.selectedIndex, categ2Index.selectedIndex)" #categ1Index>
         <option *ngFor="let n of productSteps" [attr.value]="n.categ">{{n.categ}}</option>

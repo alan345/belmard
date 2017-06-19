@@ -33,34 +33,34 @@ export class ProjectsComponent implements OnInit {
     totalItems: 0
   };
 
-  categories1 = [{
-      name: 'phyto',
-      selected: false
-    },
-    {
-      name: 'phytoSpecific',
-      selected: false
-    },
-    {
-      name: 'subtil',
-      selected: false
-    }];
+  // categories1 = [{
+  //     name: 'phyto',
+  //     selected: false
+  //   },
+  //   {
+  //     name: 'phytoSpecific',
+  //     selected: false
+  //   },
+  //   {
+  //     name: 'subtil',
+  //     selected: false
+  //   }];
 
   categories2 = '';
 
 
-  categoriesHard2 = [
-    { name:'Through your eyes', selected : false },
-    { name:'How to', selected : false },
-    { name:'Fashion', selected : false },
-    { name:'Merchandising', selected : false },
-    { name:'Behind the Scene & Testimonials', selected : false }
-  ]
+  // categoriesHard2 = [
+  //   { name:'Through your eyes', selected : false },
+  //   { name:'How to', selected : false },
+  //   { name:'Fashion', selected : false },
+  //   { name:'Merchandising', selected : false },
+  //   { name:'Behind the Scene & Testimonials', selected : false }
+  // ]
 
-  trackinPage : any = {
-    lastVisitPagePressCount:[],
-    lastVisitPageProjectCount:[]
-  }
+  // trackinPage : any = {
+  //   lastVisitPagePressCount:[],
+  //   lastVisitPageProjectCount:[]
+  // }
 
   constructor(
     private sanitizer: DomSanitizer,
@@ -95,11 +95,11 @@ export class ProjectsComponent implements OnInit {
     this.search.categories.push({name:this.categories2})
     // if(this.inputSearch)
     //   this.search.categories.push({name:this.inputSearch})
-    this.categories1.forEach((categorie1)=>{
-      if(categorie1.selected == true) {
-        this.search.categories.push({name : categorie1.name})
-      }
-    })
+    // this.categories1.forEach((categorie1)=>{
+    //   if(categorie1.selected == true) {
+    //     this.search.categories.push({name : categorie1.name})
+    //   }
+    // })
 //    console.log(this.search.categories)
     this.fetchedProjects = []
     this.getProjects(1, this.search)
@@ -107,11 +107,11 @@ export class ProjectsComponent implements OnInit {
 
   changeCateg1(nameCateg: string){
     //this.categories1[nameCateg] = !this.categories1[nameCateg]
-    this.categories1.forEach((categ, index)=>{
-      if(categ.name === nameCateg) {
-        this.categories1[index].selected = !this.categories1[index].selected
-      }
-    })
+    // this.categories1.forEach((categ, index)=>{
+    //   if(categ.name === nameCateg) {
+    //     this.categories1[index].selected = !this.categories1[index].selected
+    //   }
+    // })
     this.updateCategerories()
   }
 
@@ -161,10 +161,10 @@ export class ProjectsComponent implements OnInit {
 
 
             project['isNewProject'] = false
-            this.trackinPage.lastVisitPageProjectCount.forEach((projectNotRead: Project) => {
-                if(projectNotRead._id == project._id)
-                  project['isNewProject'] = true
-            })
+            // this.trackinPage.lastVisitPageProjectCount.forEach((projectNotRead: Project) => {
+            //     if(projectNotRead._id == project._id)
+            //       project['isNewProject'] = true
+            // })
             this.fetchedProjects.push(project)
           })
           this.loading = false;
@@ -180,7 +180,7 @@ export class ProjectsComponent implements OnInit {
     this.projectService.countNewItemForUser()
     .subscribe(
       data => {
-        this.trackinPage.lastVisitPageProjectCount = data.item
+        //this.trackinPage.lastVisitPageProjectCount = data.item
         this.userService.getUser(userId)
         .subscribe(
         res => {

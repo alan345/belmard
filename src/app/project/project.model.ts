@@ -4,9 +4,9 @@ import { User } from '../user/user.model';
 export class Project {
     _id: string = '';
     name: string = '';
+    status: number = 0;
     description: string = '';
     clients: User[] = [];
     assignedTo: User[] = [];
-    status: string = '';
     forms: Form[] = [];
 }

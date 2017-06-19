@@ -22,7 +22,16 @@ import { User } from '../user/user.model';
 })
 
 export class ProjectSingleComponent implements OnInit {
-
+  status = [
+    {
+      index: 0,
+      label: 'status1'
+    },
+    {
+      index: 1,
+      label: 'status2'
+    },
+  ]
   categ: string = 'Electricité';
 
   subCateg: string = 'file';
@@ -97,7 +106,7 @@ export class ProjectSingleComponent implements OnInit {
   ngOnInit() {
 
     this.myForm = this._fb.group({
-
+      status: [''],
       name: ['', [Validators.required, Validators.minLength(5)]],
       description: ['', [Validators.required, Validators.minLength(5)]],
     });

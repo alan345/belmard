@@ -10,8 +10,9 @@ var project = new Schema({
     description: {type: String},
     clients: [{type: Schema.Types.ObjectId, ref: 'User'}],
     assignedTo: [{type: Schema.Types.ObjectId, ref: 'User'}],
-    status: {type: String},
+    status: {type: String, default: [0]},
     forms: [{type: Schema.Types.ObjectId, ref: 'Form'}],
+    status: {type: Number},
   },
   {
     timestamps: true
