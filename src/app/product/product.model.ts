@@ -51,6 +51,17 @@ export class Stock {
 export const ProductSteps =
 [
   {
+    'categ':'',
+    'subCateg': [
+      {
+        'categ':'',
+        'subCateg': [
+          {categ: ''},
+        ]
+      }
+    ]
+  },
+  {
     'categ':'Serrurerie',
     'subCateg': [
       {

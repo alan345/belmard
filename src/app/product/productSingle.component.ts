@@ -27,10 +27,12 @@ export class ProductSingleComponent implements OnInit {
 
   selectedIndex1 = 0
   selectedIndex2 = 0
+  show1 = false
+  show2 = false
 
-  categ1: string = 'Serrurerie';
-  categ2: string = 'Serrurerie de bâtiment';
-  categ3: string = 'Clés';
+  categ1: string = '';
+  categ2: string = '';
+  categ3: string = '';
   autocompleteCompanie: string = '';
   productSteps = ProductSteps;
 
@@ -91,7 +93,13 @@ export class ProductSingleComponent implements OnInit {
     })
   }
 
-  changeCascade(selectedIndex1, selectedIndex2) {
+  changeCascade(selectedIndex1, selectedIndex2, active1, active2) {
+    if(active1)
+      this.show1 = true
+    if(active2)
+      this.show2 = true
+
+
     this.selectedIndex1 = selectedIndex1
     this.selectedIndex2 = selectedIndex2
   }
