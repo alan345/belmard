@@ -606,6 +606,7 @@ a.seemre {
 }
 
 .white-box {
+    background-color: #fff;
     height: 350px;
 }
 
@@ -620,6 +621,8 @@ a.seemre {
 
 .container {
     width: 950px;
+    margin : 30px;
+  
 }
 
 .features-boxed {
