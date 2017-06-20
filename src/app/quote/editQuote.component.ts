@@ -151,6 +151,7 @@ export class EditQuoteComponent implements OnInit {
     }
     removeProduct(i: number) {
       this.fetchedQuote.devisDetails.splice(i, 1);
+      this.calculateQuote()
     }
 
     getProducts(page: number, search: any) {

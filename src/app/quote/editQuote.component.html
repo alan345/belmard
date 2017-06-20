@@ -64,23 +64,6 @@
 
 
 
-        <!-- Autocomplete -->
-        <label>Produits</label>
-        <a [routerLink]="['/product/new']" class="admn-btn">
-          Ajouter Produit
-        </a>
-        <input
-          [ngModelOptions]="{standalone: true}"
-          [(ngModel)]="autocompleteProduct"
-          placeholder="Select"
-          (ngModelChange)="searchProducts()"
-          mdInput
-        >
-        <div *ngFor="let fetchedProduct of fetchedProducts; let i=index">
-          {{fetchedProduct.details.referenceName}} - {{fetchedProduct.details.reference}}
-          <button type="button" (click)="selectProduct(fetchedProduct)">select</button>
-        </div>
-
         <div class="row">
           <div class="col-xs-1"></div>
 
@@ -149,10 +132,28 @@
             </div>
 
           </div>
-
-
-
         </div>
+
+
+                <!-- Autocomplete -->
+                <label>Produits</label>
+                <a [routerLink]="['/product/new']" class="admn-btn">
+                  Ajouter Produit
+                </a>
+                <input
+                  [ngModelOptions]="{standalone: true}"
+                  [(ngModel)]="autocompleteProduct"
+                  placeholder="Select"
+                  (ngModelChange)="searchProducts()"
+                  mdInput
+                >
+                <div *ngFor="let fetchedProduct of fetchedProducts; let i=index">
+                  {{fetchedProduct.details.referenceName}} - {{fetchedProduct.details.reference}}
+                  <button type="button" (click)="selectProduct(fetchedProduct)">select</button>
+                </div>
+                <!-- Autocomplete -->
+
+
         <div class="row">
           <div class="col-xs-1">
             Total
