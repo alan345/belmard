@@ -47,7 +47,7 @@
         <div class="prf-chalcnt">
           <div *ngFor="let companie of companies" class="act-chal">
 
-<!-- 
+<!--
             <div *ngIf="isUserBelongToHQ">
               <div *ngIf="isHQcompanie(companie)">
                 <h3>{{companie.name}}</h3>
@@ -64,7 +64,7 @@
             <h3>{{companie.name}}</h3>
             <h6>{{companie.address.address}}, {{companie.address.city}}, {{companie.address.state}} {{companie.address.zip}}</h6>
           </div>
-          <div class="chal-rslt"><p>More Features coming soon!</p></div>
+        
         </div>
       </div>
     </div>
@@ -118,12 +118,7 @@
           </div>
         </div>
       </div>
-        <div class="insta-txt">
-        <h3>Be The Next Phyto Feature!</h3>
-        <p>Submit on of your pictures to the Picture of the Month Phyto Challenge and your photo may be selected and promoted on all the Phyto Social Media channels. A great way to get yourself visibility!</p>
-        <button class="see"><a [routerLink]="['/social']">See this month's winner</a></button>
-        <button type="button" class="submit" (click)="openDialogSocial()">Submit your picture</button>
-      </div>
+
     </div>
     <div class="clearfix"></div>
   </form>
