@@ -14,11 +14,13 @@
                 </div>
             </div>
         </nav>
-             <h1 class="text-center" style="margin-bottom:0px;color:#ffffff;">Logiciel de Gestion</h1>
-             <p align="right" style="margin-right:40px;"><a (click)="logout()" *ngIf="isLoggedIn()">Déconnexion </a>
-             <a [routerLink]="['/user/profile']" routerLinkActive="active"  class="admn-btn"> Mon Profil</a>
-             </p>
-            </div>
+        <h1 class="text-center" style="margin-bottom:0px;color:#ffffff;">Logiciel de Gestion</h1>
+         <p align="right" style="margin-right:40px;"><a (click)="logout()" *ngIf="isLoggedIn()">Déconnexion </a>
+         <a [routerLink]="['/user/profile']" routerLinkActive="active"  class="admn-btn"> Mon Profil</a>
+         <button type="button" class="btn btn-secondary">Déconnexion</button>
+         <button type="button" class="btn btn-primary">Mon Profil</button>
+         </p>
+    </div>
 
 
     </div>
