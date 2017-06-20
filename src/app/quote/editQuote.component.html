@@ -48,33 +48,36 @@
               placeholder="Ville"
             >
 
-              <input
-                type="text"
-                class="form-control"
-                formControlName="zip"
-                [(ngModel)]="fetchedQuote.address.zip"
-                required
-                minlength="5"
-                placeholder="Code postal"
-              >
-          </div>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="zip"
+              [(ngModel)]="fetchedQuote.address.zip"
+              required
+              minlength="5"
+              placeholder="Code postal"
+            >
+        </div>
 
-
-
+        <br><br>
+        <a [routerLink]="['/product/new']" class="admn-btn">
+          Ajouter Produit
+        </a>
 
 
 
         <div class="row">
           <div class="col-xs-1"></div>
 
-          <div class="col-xs-1">total HT</div>
-          <div class="col-xs-1">total TTC</div>
-          <div class="col-xs-1">produit</div>
 
+          <div class="col-xs-3">produit</div>
+          <div class="col-xs-1">Ref.</div>
           <div class="col-xs-1">quanité</div>
           <div class="col-xs-1">price HT</div>
-          <div class="col-xs-1">price TTC</div>
           <div class="col-xs-1">VAT(%)</div>
+          <div class="col-xs-1">price TTC</div>
+          <div class="col-xs-1">total HT</div>
+          <div class="col-xs-1">total TTC</div>
         </div>
 
         <div *ngFor="let fetchedProduct of fetchedQuote.devisDetails; let i=index">
@@ -82,18 +85,16 @@
             <div class="col-xs-1">
               <button type="button" (click)="removeProduct(i)"><i class="fa fa-times"></i></button>
             </div>
-            <div class="col-xs-1">
-              {{fetchedQuote.devisDetails[i].totalPriceWithoutTaxes | round}}
-            </div>
 
-            <div class="col-xs-1">
-              {{fetchedQuote.devisDetails[i].totalPriceWithTaxes | round}}
-            </div>
 
-            <div class="col-xs-1">
-              {{fetchedProduct.productInit.details.referenceName}} - {{fetchedProduct.productInit.details.reference}}
+            <div class="col-xs-3">
+                {{fetchedProduct.productInit.details.referenceName}}
             </div>
-
+            <div class="col-xs-1">
+              <a [routerLink]="['/product/' + fetchedProduct.productInit._id]" class="admn-btn">
+                {{fetchedProduct.productInit.details.reference}}
+              </a>
+            </div>
             <div class="col-xs-1">
               <input
                 class="gooplusInput"
@@ -112,15 +113,7 @@
                 [(ngModel)]="fetchedQuote.devisDetails[i].priceWithoutTaxes"
                 placeholder="priceWithoutTaxes">
             </div>
-            <div class="col-xs-1">
-              <input
-                class="gooplusInput"
-                type="text"
-                (ngModelChange)="calculateQuote()"
-                [ngModelOptions]="{standalone: true}"
-                [(ngModel)]="fetchedQuote.devisDetails[i].priceWithTaxes"
-                placeholder="priceWithTaxes">
-            </div>
+
             <div class="col-xs-1">
               <input
                 class="gooplusInput"
@@ -130,31 +123,46 @@
                 [(ngModel)]="fetchedQuote.devisDetails[i].vat"
                 placeholder="vat">
             </div>
+            <div class="col-xs-1">
+              {{fetchedQuote.devisDetails[i].priceWithTaxes}}
+            </div>
+            <div class="col-xs-1">
+              {{fetchedQuote.devisDetails[i].totalPriceWithoutTaxes | round}}
+            </div>
+            <div class="col-xs-1">
+              {{fetchedQuote.devisDetails[i].totalPriceWithTaxes | round}}
+            </div>
 
           </div>
         </div>
 
+        <div class="row">
+          <div class="col-xs-1">
 
-                <!-- Autocomplete -->
-                <label>Produits</label>
-                <a [routerLink]="['/product/new']" class="admn-btn">
-                  Ajouter Produit
-                </a>
-                <input
-                  [ngModelOptions]="{standalone: true}"
-                  [(ngModel)]="autocompleteProduct"
-                  placeholder="Select"
-                  (ngModelChange)="searchProducts()"
-                  mdInput
-                >
-                <div *ngFor="let fetchedProduct of fetchedProducts; let i=index">
-                  {{fetchedProduct.details.referenceName}} - {{fetchedProduct.details.reference}}
-                  <button type="button" (click)="selectProduct(fetchedProduct)">select</button>
-                </div>
-                <!-- Autocomplete -->
+          </div>
+          <div class="col-xs-3">
+            <!-- Autocomplete -->
+            <input
+              [ngModelOptions]="{standalone: true}"
+              [(ngModel)]="autocompleteProduct"
+              placeholder="Select"
+              (ngModelChange)="searchProducts()"
+              mdInput
+            >
+            <div *ngFor="let fetchedProduct of fetchedProducts; let i=index">
+              {{fetchedProduct.details.referenceName}} - {{fetchedProduct.details.reference}}
+              <button type="button" (click)="selectProduct(fetchedProduct)">select</button>
+            </div>
+            <!-- Autocomplete -->
+          </div>
+        </div>
+
 
 
         <div class="row">
+          <div class="col-xs-8">
+
+          </div>
           <div class="col-xs-1">
             Total
           </div>
@@ -164,10 +172,10 @@
           <div class="col-xs-1">
             {{fetchedQuote.priceQuote.priceQuoteWithTaxes | round}}
           </div>
-          <div class="col-xs-1">
+          <!-- <div class="col-xs-1">
           </div>
           <div class="col-xs-4">
-          </div>
+          </div> -->
         </div>
 
 

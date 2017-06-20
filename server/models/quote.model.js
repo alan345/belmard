@@ -20,6 +20,7 @@ var quote = new Schema({
     forms: [{type: Schema.Types.ObjectId, ref: 'Form'}],
     devisDetails: [{
       productInit: {
+        _id:{type: String},
         details: {
           referenceName: {type: String},
           reference: {type: String},
