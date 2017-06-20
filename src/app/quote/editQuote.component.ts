@@ -120,13 +120,35 @@ export class EditQuoteComponent implements OnInit {
       let devisDetails: DevisDetails = {
         productInit: product,
         vat: 20,
-        finalPrice: product.details.price.sellingPrice,
-        quantity: 0,
+        priceWithoutTaxes: product.details.price.sellingPrice,
+        priceWithTaxes:0,
+        totalPriceWithTaxes:0,
+        totalPriceWithoutTaxes:0,
+        quantity: 1,
         discount: 0,
       }
       this.fetchedQuote.devisDetails.push(devisDetails)
-    }
+      this.calculateQuote()
 
+    }
+    calculateQuote() {
+      let this2 = this;
+      setTimeout(function(){
+        this2.fetchedQuote.priceQuote.priceQuoteWithTaxes = 0
+        this2.fetchedQuote.priceQuote.priceQuoteWithoutTaxes = 0
+        this2.fetchedQuote.devisDetails.forEach((product, i) => {
+
+          this2.fetchedQuote.devisDetails[i].priceWithTaxes = product.priceWithoutTaxes * 1 + (product.priceWithoutTaxes * product.vat / 100)
+          this2.fetchedQuote.devisDetails[i].totalPriceWithTaxes = this2.fetchedQuote.devisDetails[i].priceWithTaxes * product.quantity
+          this2.fetchedQuote.devisDetails[i].totalPriceWithoutTaxes = product.priceWithoutTaxes * product.quantity
+
+          this2.fetchedQuote.priceQuote.priceQuoteWithTaxes = this2.fetchedQuote.priceQuote.priceQuoteWithTaxes*1 + this2.fetchedQuote.devisDetails[i].totalPriceWithTaxes*1
+          this2.fetchedQuote.priceQuote.priceQuoteWithoutTaxes = this2.fetchedQuote.priceQuote.priceQuoteWithoutTaxes*1 + this2.fetchedQuote.devisDetails[i].totalPriceWithoutTaxes*1
+
+        })
+      }, 20)
+
+    }
     removeProduct(i: number) {
       this.fetchedQuote.devisDetails.splice(i, 1);
     }

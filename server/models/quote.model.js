@@ -34,15 +34,19 @@ var quote = new Schema({
             depth: {type: Number},
           }
         }
-
       },
-      finalPrice: {type: Number},
+      priceWithoutTaxes: {type: Number},
+      priceWithTaxes: {type: Number},
+      totalPriceWithoutTaxes: {type: Number},
+      totalPriceWithTaxes: {type: Number},
       vat: {type: Number},
       quantity: {type: Number},
       discount: {type: Number},
-
-    }]
-
+    }],
+    priceQuote: {
+      priceQuoteWithoutTaxes: {type: Number},
+      priceQuoteWithTaxes: {type: Number},
+    }
 
   },
   {

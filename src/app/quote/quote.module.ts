@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RouterModule} from '@angular/router';
 
+import { RoundPipe} from './round.pipe';
 
 import { QuotesComponent} from './quotes/quotes.component';
 import { EditQuoteComponent} from './editQuote.component';
@@ -30,7 +31,8 @@ import { Ng2PaginationModule} from 'ng2-pagination';
     EditQuoteComponent,
 
     QuoteDetailComponent,
-    
+    RoundPipe,
+
   ],
   exports:      [ ],
   providers:    [ QuoteService ],

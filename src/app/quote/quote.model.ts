@@ -13,12 +13,21 @@ export class Quote {
   forms: Form[] = [];
   products: Product[] = [];
   devisDetails: DevisDetails[] = []
+  priceQuote: PriceQuote = new PriceQuote()
+}
+
+export class PriceQuote {
+  priceQuoteWithoutTaxes: number;
+  priceQuoteWithTaxes: number;
 }
 
 
 export class DevisDetails {
   productInit: Product = new Product();
-  finalPrice: number;
+  priceWithoutTaxes: number;
+  priceWithTaxes: number;
+  totalPriceWithoutTaxes: number;
+  totalPriceWithTaxes: number;
   vat: number;
   quantity: number;
   discount: number;

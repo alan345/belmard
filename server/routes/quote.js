@@ -65,19 +65,19 @@ router.put('/:id', function (req, res, next) {
       })
     }
 
-    var foundDuplicate = false
-    var latestItem = req.body._users[req.body._users.length-1]
-    item._users.forEach(userId => {
-      if(userId == latestItem._id)
-        foundDuplicate = true
-    })
-
-    if(foundDuplicate) {
-      return res.status(404).json({
-        message: 'Duplicate',
-        err: 'Duplicate users'
-      })
-    }
+    // var foundDuplicate = false
+    // var latestItem = req.body._users[req.body._users.length-1]
+    // item._users.forEach(userId => {
+    //   if(userId == latestItem._id)
+    //     foundDuplicate = true
+    // })
+    //
+    // if(foundDuplicate) {
+    //   return res.status(404).json({
+    //     message: 'Duplicate',
+    //     err: 'Duplicate users'
+    //   })
+    // }
 
     // if( req.user.role[0] !== 'admin') {
     //   let belongToThisQuote = false
