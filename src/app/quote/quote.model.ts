@@ -12,9 +12,16 @@ export class Quote {
   _users: User[] = [];
   forms: Form[] = [];
   products: Product[] = [];
+  devisDetails: DevisDetails[] = []
 }
 
 
+export class DevisDetails {
+  productInit: Product = new Product();
+  finalPrice: number;
+  quantity: number;
+  discount: number;
+}
 
 export class Address {
   address: string = '';

@@ -18,10 +18,10 @@ var product = new Schema({
         height: {type: Number},
         width: {type: Number},
         depth: {type: Number},
-      },
-      stock: {
-        quantity:{type: Number},
       }
+    },
+    stock: {
+      quantity:{type: Number},
     },
     categorie: {
       categ1:[{name: {type: String}}],

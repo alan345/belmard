@@ -4,7 +4,7 @@ import {QuoteService} from './quote.service';
 import {ProductService} from '../product/product.service';
 
 
-import {Quote} from './quote.model';
+import {Quote, DevisDetails} from './quote.model';
 
 import {ToastsManager} from 'ng2-toastr';
 
@@ -117,7 +117,13 @@ export class EditQuoteComponent implements OnInit {
 
     selectProduct(product: Product) {
       this.fetchedProducts = []
-      this.fetchedQuote.products.push(product)
+      let devisDetails: DevisDetails = {
+        productInit: product,
+        finalPrice: 0,
+        quantity: 0,
+        discount: 0,
+      }
+      this.fetchedQuote.devisDetails.push(devisDetails)
     }
 
     removeProduct(i: number) {

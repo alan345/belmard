@@ -81,8 +81,8 @@
           {{fetchedProduct.details.referenceName}} - {{fetchedProduct.details.reference}}
           <button type="button" (click)="selectProduct(fetchedProduct)">select</button>
         </div>
-        <div *ngFor="let fetchedProduct of fetchedQuote.products; let i=index">
-          {{fetchedProduct.details.referenceName}} - {{fetchedProduct.details.reference
+        <div *ngFor="let fetchedProduct of fetchedQuote.devisDetails; let i=index">
+          {{fetchedProduct.productInit.details.referenceName}} - {{fetchedProduct.productInit.details.reference}}
           <button type="button" (click)="removeProduct(i)"><i class="fa fa-times"></i></button>
         </div>
         <!-- Autocomplete -->

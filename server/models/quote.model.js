@@ -1,5 +1,6 @@
 var mongoose                = require('mongoose'),
     Schema                  = mongoose.Schema,
+    Product                    = require('../models/product.model'),
   //  Form                    = require('../models/form.model'),
   //  User                    = require('../models/user.model'),
     mongooseUniqueValidator = require('mongoose-unique-validator');
@@ -17,7 +18,29 @@ var quote = new Schema({
     typeQuote: {type: String, default: ['salon']},
     _users : [{type: Schema.Types.ObjectId, ref: 'User'}],
     forms: [{type: Schema.Types.ObjectId, ref: 'Form'}],
-    products: [{type: Schema.Types.ObjectId, ref: 'Product'}],
+    devisDetails: [{
+      productInit: {
+        details: {
+          referenceName: {type: String},
+          reference: {type: String},
+          price: {
+            costPrice: {type: Number},
+            sellingPrice: { type: Number},
+          },
+          description: {type: String},
+          dimension: {
+            height: {type: Number},
+            width: {type: Number},
+            depth: {type: Number},
+          }
+        }
+
+      },
+      FinalPrice: {type: Number},
+      quantity: {type: Number},
+      discount: {type: Number},
+
+    }]
 
 
   },

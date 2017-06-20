@@ -357,23 +357,27 @@ router.get('/:id', function (req, res, next) {
     }
     Quote
     .findOne(findQuery)
-    //.find()
     .populate({
-      path: 'forms',
+      path: 'devisDetails.',
       model: 'Form'
     })
-    .populate(
-      {
-        path: '_users',
-        model: 'User',
-        populate: {
-          path: 'profile._profilePicture',
-          model: 'Form'
-        }
-      })
-      .populate(
-        findUsers
-      )
+    //.find()
+    // .populate({
+    //   path: 'forms',
+    //   model: 'Form'
+    // })
+    // .populate(
+    //   {
+    //     path: '_users',
+    //     model: 'User',
+    //     populate: {
+    //       path: 'profile._profilePicture',
+    //       model: 'Form'
+    //     }
+    //   })
+    //   .populate(
+    //     findUsers
+    //   )
     //.populate('users._user.profile.profilePicture._id')
     .exec(function (err, item) {
       if (err) {
