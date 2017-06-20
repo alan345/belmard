@@ -36,7 +36,8 @@ var quote = new Schema({
         }
 
       },
-      FinalPrice: {type: Number},
+      finalPrice: {type: Number},
+      vat: {type: Number},
       quantity: {type: Number},
       discount: {type: Number},
 

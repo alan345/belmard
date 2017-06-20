@@ -119,7 +119,8 @@ export class EditQuoteComponent implements OnInit {
       this.fetchedProducts = []
       let devisDetails: DevisDetails = {
         productInit: product,
-        finalPrice: 0,
+        vat: 20,
+        finalPrice: product.details.price.sellingPrice,
         quantity: 0,
         discount: 0,
       }
@@ -127,7 +128,7 @@ export class EditQuoteComponent implements OnInit {
     }
 
     removeProduct(i: number) {
-      this.fetchedQuote.products.splice(i, 1);
+      this.fetchedQuote.devisDetails.splice(i, 1);
     }
 
     getProducts(page: number, search: any) {

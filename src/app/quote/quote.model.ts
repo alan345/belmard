@@ -19,8 +19,10 @@ export class Quote {
 export class DevisDetails {
   productInit: Product = new Product();
   finalPrice: number;
+  vat: number;
   quantity: number;
   discount: number;
+
 }
 
 export class Address {

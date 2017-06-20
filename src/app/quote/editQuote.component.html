@@ -3,11 +3,11 @@
     <button class="subnav-btnleft" (click)="goBack()"><i class="fa fa-chevron-left"></i></button>
     <h3 style="text-align: center;">Quote</h3>
   </div>
-  <div class="beigeback single-wrpr">
+  <div>
     <h4 class="dspl-nn">id: {{fetchedQuote._id}}</h4>
     <!-- <form #f="ngForm" novalidate (ngSubmit)="save(f.value, f.valid)"> -->
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
-      <div class="form-group sln-inffrm">
+      <div>
         <!-- <div formGroupName="fetchedQuote"> -->
         <!-- <div ngModelGroup="fetchedQuote"> -->
           <input
@@ -81,9 +81,52 @@
           {{fetchedProduct.details.referenceName}} - {{fetchedProduct.details.reference}}
           <button type="button" (click)="selectProduct(fetchedProduct)">select</button>
         </div>
+
+        <div class="row">
+          <div class="col-xs-1">produit</div>
+          <div class="col-xs-1">Prix produit</div>
+          <div class="col-xs-1">quanité</div>
+          <div class="col-xs-1">Final Price</div>
+          <div class="col-xs-1">VAT(%)</div>
+        </div>
+
         <div *ngFor="let fetchedProduct of fetchedQuote.devisDetails; let i=index">
-          {{fetchedProduct.productInit.details.referenceName}} - {{fetchedProduct.productInit.details.reference}}
-          <button type="button" (click)="removeProduct(i)"><i class="fa fa-times"></i></button>
+          <div class="row">
+            <div class="col-xs-1">
+              <button type="button" (click)="removeProduct(i)"><i class="fa fa-times"></i></button>
+              {{fetchedProduct.productInit.details.referenceName}} - {{fetchedProduct.productInit.details.reference}}
+            </div>
+            <div class="col-xs-1">
+              {{fetchedProduct.productInit.details.price.sellingPrice}}
+            </div>
+
+
+
+            <div class="col-xs-1">
+              <input
+                type="text"
+                [ngModelOptions]="{standalone: true}"
+                [(ngModel)]="fetchedQuote.devisDetails[i].quantity"
+                placeholder="quantity">
+            </div>
+            <div class="col-xs-1">
+              <input
+                type="text"
+                [ngModelOptions]="{standalone: true}"
+                [(ngModel)]="fetchedQuote.devisDetails[i].finalPrice"
+                placeholder="finalPrice">
+            </div>
+            <div class="col-xs-1">
+              <input
+                type="text"
+                [ngModelOptions]="{standalone: true}"
+                [(ngModel)]="fetchedQuote.devisDetails[i].vat"
+                placeholder="vat">
+            </div>
+          </div>
+
+
+
         </div>
         <!-- Autocomplete -->
 
