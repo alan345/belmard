@@ -12,7 +12,7 @@ import {MdDialog } from '@angular/material';
 import {Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
-
+import { UserService} from '../user/user.service';
 import { DeleteDialog } from '../deleteDialog/deleteDialog.component';
 import { User } from '../user/user.model';
 import { Product } from '../product/product.model';
@@ -27,6 +27,7 @@ import { Product } from '../product/product.model';
 })
 export class EditQuoteComponent implements OnInit {
   fetchedQuote : Quote = new Quote()
+  autocompleteUser: string = '';
   fetchedProducts: Product[] = []
   userAdmins : User[] = []
   userManagers : User[] = []
@@ -35,6 +36,7 @@ export class EditQuoteComponent implements OnInit {
   userStylists : User[] = []
   myForm: FormGroup;
   autocompleteProduct: String = ''
+  fetchedUsers: User[] = [];
 
   constructor(
     private quoteService: QuoteService,
@@ -47,6 +49,7 @@ export class EditQuoteComponent implements OnInit {
     private _fb: FormBuilder,
     private authService: AuthService,
     private productService: ProductService,
+    private userService: UserService,
   ) {}
 
   ngOnInit() {
@@ -66,6 +69,9 @@ export class EditQuoteComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: Params) => {
       if(params['id'])
         this.getQuote(params['id'])
+
+      if(params['idClient'])
+       this.getUser(params['idClient'])
     })
   }
 
@@ -79,6 +85,58 @@ export class EditQuoteComponent implements OnInit {
       }
     })
   }
+
+
+
+
+
+
+
+    selectUser(user: User) {
+      this.fetchedUsers = []
+      this.fetchedQuote.clients.push(user)
+    }
+
+    searchUsers() {
+      let search = {
+          search: this.autocompleteUser,
+        };
+      this.getUsers(1, search)
+    }
+
+
+    getUser(id: string) {
+      this.userService.getUser(id)
+        .subscribe(
+          res => {
+            this.selectUser(res.user)
+          },
+          error => {
+            console.log(error);
+          }
+        );
+    }
+
+    getUsers(page: number, search: any) {
+      this.userService.getUsers(page, search)
+        .subscribe(
+          res => {
+            this.fetchedUsers = res.data
+          },
+          error => {
+            console.log(error);
+          }
+        );
+    }
+
+    removeUser(i: number) {
+      this.fetchedQuote.clients.splice(i, 1);
+    }
+
+
+
+
+
 
   save() {
 

@@ -9,6 +9,7 @@ export const routes: Routes = [
   // {path: 'projectSingle', component: ProjectSingleComponent},
   // {path: 'projectSingle/:id', component: ProjectSingleComponent},
   {path: 'new', component: ProjectSingleComponent},
+  {path: 'new/:idClient', component: ProjectSingleComponent},
   {path: ':id', component: ProjectSingleComponent},
 ];
 

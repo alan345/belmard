@@ -5,6 +5,16 @@
     <!--<p *ngIf="fetchedUser.profile.isFeatured" (click)="toggleFeature()"><i class="fa fa-star" style="color:#0a2f87"></i><p>
     <p *ngIf="!fetchedUser.profile.isFeatured" (click)="toggleFeature()"><i class="fa fa-star" style="color:#999999"></i><p>-->
   </div>
+
+
+  <a [routerLink]="['/project/new/' + fetchedUser._id]" class="admn-btn">
+    Add Project
+  </a>
+  <br>
+  <a [routerLink]="['/quote/new/' + fetchedUser._id]" class="admn-btn">
+    Add Quote
+  </a>
+
   <form [formGroup]="myForm" novalidate (ngSubmit)="save()" style="position: relative;">
     <div *ngIf="isEditMode" class="ovrl"></div>
     <div class="beigeback phyto-ctnr" id="stypro">
@@ -64,7 +74,7 @@
             <h3>{{companie.name}}</h3>
             <h6>{{companie.address.address}}, {{companie.address.city}}, {{companie.address.state}} {{companie.address.zip}}</h6>
           </div>
-        
+
         </div>
       </div>
     </div>

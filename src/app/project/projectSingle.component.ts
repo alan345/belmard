@@ -113,7 +113,6 @@ export class ProjectSingleComponent implements OnInit {
   //  }
 
   ngOnInit() {
-
     this.myForm = this._fb.group({
       status: [''],
       name: ['', [Validators.required, Validators.minLength(5)]],
@@ -123,6 +122,9 @@ export class ProjectSingleComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: Params) => {
       if(params['id'])
        this.getProject(params['id'])
+
+      if(params['idClient'])
+       this.getUser(params['idClient'])
     })
   }
 
@@ -136,6 +138,19 @@ export class ProjectSingleComponent implements OnInit {
         search: this.autocompleteUser,
       };
     this.getUsers(1, search)
+  }
+
+
+  getUser(id: string) {
+    this.userService.getUser(id)
+      .subscribe(
+        res => {
+          this.selectUser(res.user)
+        },
+        error => {
+          console.log(error);
+        }
+      );
   }
 
   getUsers(page: number, search: any) {
@@ -266,8 +281,6 @@ export class ProjectSingleComponent implements OnInit {
 
 
   save() {
-
-
     if(this.fetchedProject._id) {
 
       this.projectService.updateProject(this.fetchedProject)

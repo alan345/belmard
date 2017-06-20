@@ -5,6 +5,7 @@ import { Product } from '../product/product.model';
 
 export class Quote {
   _id: string = '';
+  clients: User[] = [];
   name: string = '';
   typeQuote: string = '';
   phoneNumber: string= '';
@@ -17,8 +18,8 @@ export class Quote {
 }
 
 export class PriceQuote {
-  priceQuoteWithoutTaxes: number;
-  priceQuoteWithTaxes: number;
+  priceQuoteWithoutTaxes: number = 0;
+  priceQuoteWithTaxes: number = 0;
 }
 
 

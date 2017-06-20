@@ -9,6 +9,33 @@
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
       <div>
 
+
+
+              <!-- Autocomplete -->
+              <label>Client</label>
+              <a [routerLink]="['/user/newuser']" class="admn-btn">
+                Ajouter Client
+              </a>
+              <input
+                [ngModelOptions]="{standalone: true}"
+                [(ngModel)]="autocompleteUser"
+                placeholder="Select"
+                (ngModelChange)="searchUsers()"
+                mdInput
+              >
+              <div *ngFor="let user of fetchedUsers; let i=index">
+                {{user.profile.name}} - {{user.profile.lastName}}
+                <button type="button" (click)="selectUser(user)">select</button>
+              </div>
+              <div *ngFor="let user of fetchedQuote.clients; let i=index">
+                {{user.profile.name}} - {{user.profile.lastName}}
+                <button type="button" (click)="removeUser(i)"><i class="fa fa-times"></i></button>
+              </div>
+              <!-- Autocomplete -->
+
+
+
+
           <input
             type="text"
             class="form-control"

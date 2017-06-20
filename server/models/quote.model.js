@@ -1,6 +1,6 @@
 var mongoose                = require('mongoose'),
     Schema                  = mongoose.Schema,
-    Product                    = require('../models/product.model'),
+    //Product                    = require('../models/product.model'),
   //  Form                    = require('../models/form.model'),
   //  User                    = require('../models/user.model'),
     mongooseUniqueValidator = require('mongoose-unique-validator');
@@ -13,6 +13,7 @@ var quote = new Schema({
       state : {type: String, default: ['']},
       zip : {type: String, default: ['']},
     },
+    clients: [{type: Schema.Types.ObjectId, ref: 'User'}],
     phoneNumber: {type: String, default: ['']},
     name: {type: String, default: ['']},
     typeQuote: {type: String, default: ['salon']},
@@ -45,8 +46,8 @@ var quote = new Schema({
       discount: {type: Number},
     }],
     priceQuote: {
-      priceQuoteWithoutTaxes: {type: Number},
-      priceQuoteWithTaxes: {type: Number},
+      priceQuoteWithoutTaxes: {type: Number, default: [0]},
+      priceQuoteWithTaxes: {type: Number, default: [0]},
     }
 
   },

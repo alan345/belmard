@@ -220,48 +220,48 @@ router.get('/page/:page', function (req, res, next) {
 })
 
 
-
-router.get('/byuserid/:id', function (req, res, next) {
-  Quote
-  .find({
-    '_users' : mongoose.Types.ObjectId(req.params.id)
-  })
-  .populate({
-    path: 'forms',
-    model: 'Form'
-  })
-  .populate(
-    {
-      path: '_users',
-      model: 'User',
-      populate: {
-        path: 'profile._profilePicture',
-        model: 'Form'
-      }
-    })
-    .populate(
-      {
-        path: '_users',
-        model: 'User',
-        populate: {
-          path: 'profile.parentUser',
-          model: 'User'
-        }
-      })
-  .exec(function (err, item) {
-    if (err) {
-      return res.status(404).json({
-        message: '',
-        err: err
-      })
-    } else {
-      res.status(200).json({
-        message: 'Success',
-        item: item
-      });
-    }
-  })
-})
+//
+// router.get('/byuserid/:id', function (req, res, next) {
+//   Quote
+//   .find({
+//     '_users' : mongoose.Types.ObjectId(req.params.id)
+//   })
+//   .populate({
+//     path: 'forms',
+//     model: 'Form'
+//   })
+//   .populate(
+//     {
+//       path: '_users',
+//       model: 'User',
+//       populate: {
+//         path: 'profile._profilePicture',
+//         model: 'Form'
+//       }
+//     })
+//     .populate(
+//       {
+//         path: '_users',
+//         model: 'User',
+//         populate: {
+//           path: 'profile.parentUser',
+//           model: 'User'
+//         }
+//       })
+//   .exec(function (err, item) {
+//     if (err) {
+//       return res.status(404).json({
+//         message: '',
+//         err: err
+//       })
+//     } else {
+//       res.status(200).json({
+//         message: 'Success',
+//         item: item
+//       });
+//     }
+//   })
+// })
 
 
 
@@ -319,47 +319,47 @@ router.get('/:id', function (req, res, next) {
         }
     }
 
-    if(obj.typeQuote !== 'HQ') {
-
-      if (req.user.role[0] === 'stylist' || req.user.role[0] === 'salesRep') {
-
-        //findQuery['_users'] = {$in: req.user._id}
-        //findQuery['_users'] = req.user._id
-        //let onlyMyUsers = JSON.parse(req.query.onlyMyUsers)
-    //    console.log(req.query.onlyMyUsers)
-        if(req.query.onlyMyUsers === 'true') {
-
-
-          findUsers = {
-              path: '_users',
-              model: 'User',
-              match: { 'profile.parentUser' : mongoose.Types.ObjectId(req.user._id.toString()) },
-            //  options: { sort: { 'role': -1 } },
-              populate: {
-                path: 'profile.parentUser',
-                model: 'User',
-              }
-            }
-          } else {
-            if(req.query.onlyMyUsers === 'false')
-              findUsers = {
-                  path: '_users',
-                  model: 'User',
-                //  options: { sort: { 'role': -1 } },
-                //  match: { 'profile.parentUser' : mongoose.Types.ObjectId(req.user._id.toString()) },
-                  populate: {
-                    path: 'profile.parentUser',
-                    model: 'User',
-                  }
-                }
-          }
-      }
-    }
+    // if(obj.typeQuote !== 'HQ') {
+    //
+    //   if (req.user.role[0] === 'stylist' || req.user.role[0] === 'salesRep') {
+    //
+    //     //findQuery['_users'] = {$in: req.user._id}
+    //     //findQuery['_users'] = req.user._id
+    //     //let onlyMyUsers = JSON.parse(req.query.onlyMyUsers)
+    // //    console.log(req.query.onlyMyUsers)
+    //     if(req.query.onlyMyUsers === 'true') {
+    //
+    //
+    //       findUsers = {
+    //           path: '_users',
+    //           model: 'User',
+    //           match: { 'profile.parentUser' : mongoose.Types.ObjectId(req.user._id.toString()) },
+    //         //  options: { sort: { 'role': -1 } },
+    //           populate: {
+    //             path: 'profile.parentUser',
+    //             model: 'User',
+    //           }
+    //         }
+    //       } else {
+    //         if(req.query.onlyMyUsers === 'false')
+    //           findUsers = {
+    //               path: '_users',
+    //               model: 'User',
+    //             //  options: { sort: { 'role': -1 } },
+    //             //  match: { 'profile.parentUser' : mongoose.Types.ObjectId(req.user._id.toString()) },
+    //               populate: {
+    //                 path: 'profile.parentUser',
+    //                 model: 'User',
+    //               }
+    //             }
+    //       }
+    //   }
+    // }
     Quote
     .findOne(findQuery)
     .populate({
-      path: 'devisDetails.',
-      model: 'Form'
+      path: 'clients',
+      model: 'User'
     })
     //.find()
     // .populate({
