@@ -1,5 +1,7 @@
 import { Form } from '../form/form.model';
 import { User } from '../user/user.model';
+import { Product } from '../product/product.model';
+
 
 export class Quote {
   _id: string = '';
@@ -9,6 +11,7 @@ export class Quote {
   address: Address = new Address();
   _users: User[] = [];
   forms: Form[] = [];
+  products: Product[] = [];
 }
 
 

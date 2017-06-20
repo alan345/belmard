@@ -119,47 +119,47 @@ router.get('/page/:page', function (req, res, next) {
   var pageNumber = currentPage - 1
   var skip = (itemsPerPage * pageNumber)
   //console.log(req.query.categories)
-  var categories = []
-  if(typeof req.query.categories === 'string') {
-    categories = [req.query.categories]
-  } else {
-    categories = req.query.categories
-  }
-  var dateRef = new Date();
-  dateRef.setDate(dateRef.getDate()-60)
-  var matchRules = []
+  // var categories = []
+  // if(typeof req.query.categories === 'string') {
+  //   categories = [req.query.categories]
+  // } else {
+  //   categories = req.query.categories
+  // }
+//  var dateRef = new Date();
+//  dateRef.setDate(dateRef.getDate()-60)
+  //var matchRules = []
 
-  let hasWhatsNewCateg = true
-  categories.forEach(function (categ) {
-    categorie = JSON.parse(categ)
-    if(categorie.name !== 'what\'s new') {
-      hasWhatsNewCateg = false
-      if(categorie.name) {
-        matchRules.push({
-           '$elemMatch': categorie
-         })
-      }
-    } else {
-
-    }
-  })
-
-  let categoriesArray= {
-     "$all": matchRules
-  }
+//  let hasWhatsNewCateg = true
+  // categories.forEach(function (categ) {
+  //   categorie = JSON.parse(categ)
+  //   if(categorie.name !== 'what\'s new') {
+  //     hasWhatsNewCateg = false
+  //     if(categorie.name) {
+  //       matchRules.push({
+  //          '$elemMatch': categorie
+  //        })
+  //     }
+  //   } else {
+  //
+  //   }
+  // })
+  //
+  // let categoriesArray= {
+  //    "$all": matchRules
+  // }
   let searchQuery = {
   //  createdAt:{"$lt": dateRef}
 //    categories: categoriesArray,
   //  createdAt:{"$gt": dateRef},
   }
 
-  if(hasWhatsNewCateg)
-    searchQuery['createdAt'] = {"$gt": dateRef}
-
-  if(!hasWhatsNewCateg)
-    searchQuery['categories'] = categoriesArray
+  // if(hasWhatsNewCateg)
+  //   searchQuery['createdAt'] = {"$gt": dateRef}
+  //
+  // if(!hasWhatsNewCateg)
+  //   searchQuery['categories'] = categoriesArray
   if(req.query.search)
-    searchQuery['title'] = new RegExp(req.query.search, 'i')
+    searchQuery['details.referenceName'] = new RegExp(req.query.search, 'i')
 
   // console.log(hasWhatsNewCateg)
   // console.log(searchQuery)

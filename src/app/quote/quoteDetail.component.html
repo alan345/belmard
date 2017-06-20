@@ -119,13 +119,6 @@
           </div>
         </div>
       </div>
-      <div *ngIf="isHQquote()">
-        <div *ngFor="let user of userAdmins; let i=index">
-          <div *ngIf="i==0">
-              <button type="button" class="done"><a href="mailto:{{ user.email}}">Contact Admin</a></button>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </div>

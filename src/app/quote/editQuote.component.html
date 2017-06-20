@@ -48,7 +48,7 @@
               minlength="2"
               placeholder="Ville"
             >
-            
+
               <input
                 type="text"
                 class="form-control"
@@ -59,9 +59,41 @@
                 placeholder="Code postal"
               >
           </div>
+
+
+
+
+
+
+        <!-- Autocomplete -->
+        <label>Produits</label>
+        <a [routerLink]="['/product/new']" class="admn-btn">
+          Ajouter Produit
+        </a>
+        <input
+          [ngModelOptions]="{standalone: true}"
+          [(ngModel)]="autocompleteProduct"
+          placeholder="Select"
+          (ngModelChange)="searchProducts()"
+          mdInput
+        >
+        <div *ngFor="let fetchedProduct of fetchedProducts; let i=index">
+          {{fetchedProduct.details.referenceName}} - {{fetchedProduct.details.reference}}
+          <button type="button" (click)="selectProduct(fetchedProduct)">select</button>
+        </div>
+        <div *ngFor="let fetchedProduct of fetchedQuote.products; let i=index">
+          {{fetchedProduct.details.referenceName}} - {{fetchedProduct.details.reference
+          <button type="button" (click)="removeProduct(i)"><i class="fa fa-times"></i></button>
+        </div>
+        <!-- Autocomplete -->
+
+
+
+
+
         <!-- </div> -->
       </div>
-    
+
       <div class="valid-edit">
         <button type="submit" class="sln-edt done">Enregistrer</button>
       </div>

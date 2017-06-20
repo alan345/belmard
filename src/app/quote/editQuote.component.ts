@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../auth/auth.service';
 import {QuoteService} from './quote.service';
+import {ProductService} from '../product/product.service';
+
 
 import {Quote} from './quote.model';
 
@@ -13,6 +15,8 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 import { DeleteDialog } from '../deleteDialog/deleteDialog.component';
 import { User } from '../user/user.model';
+import { Product } from '../product/product.model';
+
 
 
 
@@ -22,27 +26,15 @@ import { User } from '../user/user.model';
   styleUrls: ['./quote.component.css'],
 })
 export class EditQuoteComponent implements OnInit {
-  fetchedQuote : Quote = {
-    _id: '',
-    forms:[],
-    name: '',
-    typeQuote: '',
-    phoneNumber: '',
-    address: {
-      address : '',
-      city :  '',
-      state :  '',
-      zip :  ''
-    },
-    _users:[]
-  }
-
+  fetchedQuote : Quote = new Quote()
+  fetchedProducts: Product[] = []
   userAdmins : User[] = []
   userManagers : User[] = []
   userClients : User[] = []
   usersSalesRep : User[] = []
   userStylists : User[] = []
   myForm: FormGroup;
+  autocompleteProduct: String = ''
 
   constructor(
     private quoteService: QuoteService,
@@ -53,7 +45,8 @@ export class EditQuoteComponent implements OnInit {
     private router: Router,
     private location: Location,
     private _fb: FormBuilder,
-    private authService:AuthService,
+    private authService: AuthService,
+    private productService: ProductService,
   ) {}
 
   ngOnInit() {
@@ -113,14 +106,46 @@ export class EditQuoteComponent implements OnInit {
 
   }
 
-  move(i: number, incremet: number, typeUser: string) {
-    if(i>=0 && i<=this[typeUser].length + incremet) {
-      var tmp = this[typeUser][i];
-      this[typeUser][i] = this[typeUser][i + incremet]
-      this[typeUser][i + incremet] = tmp
-      this.save()
+
+
+    searchProducts() {
+      let search = {
+          search: this.autocompleteProduct,
+        };
+      this.getProducts(1, search)
     }
-  }
+
+    selectProduct(product: Product) {
+      this.fetchedProducts = []
+      this.fetchedQuote.products.push(product)
+    }
+
+    removeProduct(i: number) {
+      this.fetchedQuote.products.splice(i, 1);
+    }
+
+    getProducts(page: number, search: any) {
+      this.productService.getProducts(page, search)
+        .subscribe(
+          res => {
+            this.fetchedProducts = res.data
+          },
+          error => {
+            console.log(error);
+          }
+        );
+    }
+
+
+
+  // move(i: number, incremet: number, typeUser: string) {
+  //   if(i>=0 && i<=this[typeUser].length + incremet) {
+  //     var tmp = this[typeUser][i];
+  //     this[typeUser][i] = this[typeUser][i + incremet]
+  //     this[typeUser][i + incremet] = tmp
+  //     this.save()
+  //   }
+  // }
 
 
   onDelete(id: string) {
