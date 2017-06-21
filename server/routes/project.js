@@ -202,22 +202,40 @@ router.get('/page/:page', function (req, res, next) {
 
 // getting user forms to display them on front end
 router.get('/:id', function (req, res, next) {
-  Project
-  .findById({_id: req.params.id})
-  .populate({path: 'clients', model: 'User'})
-  .populate({path: 'quotes', model: 'Quote'})
-  .exec(function (err, item) {
+
+
+  Project.findById((req.params.id), function (err, obj) {
     if (err) {
-      return res.status(404).json({
-        message: '',
+      return res.status(500).json({
+        message: 'An error occured',
         err: err
       })
-    } else {
-      res.status(200).json({
-        message: 'Success',
-        item: item
+    }
+    if (!obj) {
+      return res.status(404).json({
+        title: 'No obj found',
+        error: {message: 'Obj not found!'}
       })
     }
+
+
+    Project
+    .findById({_id: req.params.id})
+    .populate({path: 'clients', model: 'User'})
+    .populate({path: 'quotes', model: 'Quote'})
+    .exec(function (err, item) {
+      if (err) {
+        return res.status(404).json({
+          message: '',
+          err: err
+        })
+      } else {
+        res.status(200).json({
+          message: 'Success',
+          item: item
+        })
+      }
+    })
   })
 })
 

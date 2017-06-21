@@ -152,11 +152,8 @@ export class ProjectSingleComponent implements OnInit {
   }
   changeCascade(selectedIndex1, selectedIndex2) {
 
-    console.log(this.categ3)
     this.selectedIndex1 = selectedIndex1
     this.selectedIndex2 = selectedIndex2
-
-
 
   }
 
@@ -188,101 +185,6 @@ export class ProjectSingleComponent implements OnInit {
   removeUser(i: number) {
     this.fetchedProject.clients.splice(i, 1);
   }
-
-
-
-
-
-    //
-    //
-    // selectQuote(quote: Quote) {
-    //   this.fetchedQuotes = []
-    //   this.fetchedProject.quotes.push(quote)
-    // }
-    //
-    // searchQuotes() {
-    //   let search = {
-    //       search: this.autocompleteQuote,
-    //     };
-    //   this.getQuotes(1, search)
-    // }
-    //
-    // getQuotes(page: number, search: any) {
-    //   this.quoteService.getQuotes(page, search)
-    //     .subscribe(
-    //       res => {
-    //         this.fetchedQuotes = res.data
-    //       },
-    //       error => {
-    //         console.log(error);
-    //       }
-    //     );
-    // }
-    //
-    // removeQuote(i: number) {
-    //   this.fetchedProject.clients.splice(i, 1);
-    // }
-  // removeCategorie(i: number) {
-  //     this.fetchedProject.categories.splice(i, 1)
-  //     const control = <FormArray>this.myForm.controls['categories'];
-  //     control.removeAt(i);
-  //     //let _2this = this
-  //   //  setTimeout(function(){
-  //       //  _2this.refreshHardCategories()
-  //   //  }, 10);
-  //
-  //
-  //     //this.updatecategoriesHard2()
-  // }
-
-  // searchUsers(){
-  //   //this.getUsers(1,
-  // }
-
-  // getUsers(page: number, search: any) {
-  //   this.userService.getUsers(page, search)
-  //     .subscribe(
-  //       res => {
-  //         this.paginationData = res.paginationData;
-  //         this.fetchedUsers =  res.data;
-  //         this.loading = false;
-  //       },
-  //       error => {
-  //         console.log(error);
-  //       }
-  //     );
-  // }
-
-  // addCategorie() {
-  //   const control = <FormArray>this.myForm.controls['categories'];
-  //   const addrCtrl = this._fb.group({
-  //       name: [''],
-  //       type:['']
-  //   });
-  //   control.push(addrCtrl);
-  // }
-  // addCategorieInput() {
-  //   this.togglCategorieButton(this.inputCategorie, 'tag')
-  //   this.inputCategorie=''
-  // }
-  // togglCategorieButton(nameCateg: string, type: string) {
-  //   var indexFound: number
-  //   this.fetchedProject.categories.forEach((categorie, index) => {
-  //     if(categorie.name == nameCateg)
-  //       indexFound = index
-  //   })
-  //
-  //   if(indexFound || indexFound== 0 ) {
-  //     let _2this = this
-  //     setTimeout(function(){
-  //         _2this.removeCategorie(+indexFound)
-  //     }, 10);
-  //
-  //   } else {
-  //     this.fetchedProject.categories.push({name:nameCateg, type:type})
-  //   //  this.addCategorie()
-  //   }
-  // }
 
 
   goBack() {
