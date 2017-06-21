@@ -1,9 +1,9 @@
-<div id="global">
+<div>
   <!-- <div class="goldgradient beigeborder subnav">
     <button class="subnav-btnleft" (click)="goBack()"><i class="fa fa-chevron-left"></i></button>
     <h3 style="text-align: center;">Add/Edit Project</h3>
   </div> -->
-  <div id="project-container">
+  <div>
 
 
 
@@ -12,8 +12,12 @@
 
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()" (keydown.enter)="$event.preventDefault()">
 
-
-
+      <div>
+        <div>
+          <label>Id</label>
+          {{fetchedProject._id}}
+        </div>
+      </div>
       <!-- cascade -->
       <div>
         <select [ngModelOptions]="{standalone: true}" [(ngModel)]="categ1" (ngModelChange)="changeCascade(categ1Index.selectedIndex, 0)" #categ1Index>
@@ -76,8 +80,8 @@
 
       <br>
       <div *ngIf="fetchedProject._id">
-        <label>Devis</label>
         <div *ngFor="let user of fetchedProject.clients">
+          <label>Devis</label>
           <a [routerLink]="['/quote/new/' + user._id + '/' + fetchedProject._id]" class="admn-btn">
             Ajouter Devis
           </a>

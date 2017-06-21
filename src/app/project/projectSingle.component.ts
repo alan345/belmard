@@ -301,11 +301,14 @@ export class ProjectSingleComponent implements OnInit {
 
 
   save() {
-    if(this.fetchedProject._id) {
 
-      this.fetchedProject.categorie.categ1 = [{name: this.categ1}]
-      this.fetchedProject.categorie.categ2 = [{name: this.categ2}]
-      this.fetchedProject.categorie.categ3 = [{name: this.categ3}]
+    this.fetchedProject.categorie.categ1 = [{name: this.categ1}]
+    this.fetchedProject.categorie.categ2 = [{name: this.categ2}]
+    this.fetchedProject.categorie.categ3 = [{name: this.categ3}]
+
+
+
+    if(this.fetchedProject._id) {
 
 
       this.projectService.updateProject(this.fetchedProject)
@@ -322,7 +325,7 @@ export class ProjectSingleComponent implements OnInit {
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
-            this.router.navigate(['project']);
+            this.router.navigate(['project/' + res.obj._id]);
           },
           error => {console.log(error)}
         );
@@ -379,9 +382,12 @@ export class ProjectSingleComponent implements OnInit {
         res => {
           this.fetchedProject = <Project>res
 
-          this.categ1 = this.fetchedProject.categorie.categ1[0].name
-          this.categ2 = this.fetchedProject.categorie.categ2[0].name
-          this.categ3 = this.fetchedProject.categorie.categ3[0].name
+          if(this.fetchedProject.categorie.categ1.length)
+            this.categ1 = this.fetchedProject.categorie.categ1[0].name
+          if(this.fetchedProject.categorie.categ2.length)
+            this.categ2 = this.fetchedProject.categorie.categ2[0].name
+          if(this.fetchedProject.categorie.categ3.length)
+            this.categ3 = this.fetchedProject.categorie.categ3[0].name
 
           let categ1Index:number = 0
           let categ2Index:number = 0

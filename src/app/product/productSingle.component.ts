@@ -159,11 +159,14 @@ export class ProductSingleComponent implements OnInit {
 
 
   save() {
+
+    this.fetchedProduct.categorie.categ1 = [{name: this.categ1}]
+    this.fetchedProduct.categorie.categ2 = [{name: this.categ2}]
+    this.fetchedProduct.categorie.categ3 = [{name: this.categ3}]
+
+    
     if(this.fetchedProduct._id) {
-      
-      this.fetchedProduct.categorie.categ1 = [{name: this.categ1}]
-      this.fetchedProduct.categorie.categ2 = [{name: this.categ2}]
-      this.fetchedProduct.categorie.categ3 = [{name: this.categ3}]
+
 
       this.productService.updateProduct(this.fetchedProduct)
         .subscribe(
