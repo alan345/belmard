@@ -1,6 +1,7 @@
 import { Form } from '../form/form.model';
 import { User } from '../user/user.model';
 import { Product } from '../product/product.model';
+import { Project } from '../project/project.model';
 
 
 export class Quote {
@@ -13,6 +14,7 @@ export class Quote {
   _users: User[] = [];
   forms: Form[] = [];
   products: Product[] = [];
+  projects: Project[] = [];
   devisDetails: DevisDetails[] = []
   priceQuote: PriceQuote = new PriceQuote()
 }

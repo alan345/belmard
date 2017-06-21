@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../auth/auth.service';
 import {QuoteService} from './quote.service';
 import {ProductService} from '../product/product.service';
-
+import { ProjectService} from '../project/project.service';
 
 import {Quote, DevisDetails} from './quote.model';
 
@@ -16,6 +16,8 @@ import { UserService} from '../user/user.service';
 import { DeleteDialog } from '../deleteDialog/deleteDialog.component';
 import { User } from '../user/user.model';
 import { Product } from '../product/product.model';
+import { Project } from '../project/project.model';
+
 
 
 
@@ -28,7 +30,9 @@ import { Product } from '../product/product.model';
 export class EditQuoteComponent implements OnInit {
   fetchedQuote : Quote = new Quote()
   autocompleteUser: string = '';
+  autocompleteProject: string = '';
   fetchedProducts: Product[] = []
+  fetchedProjects: Project[] = []
   userAdmins : User[] = []
   userManagers : User[] = []
   userClients : User[] = []
@@ -40,6 +44,10 @@ export class EditQuoteComponent implements OnInit {
 
   constructor(
     private quoteService: QuoteService,
+  //  private projectService: ProjectService,
+    private projectService: ProjectService,
+    private userService: UserService,
+    private productService: ProductService,
 //    private modalService: NgbModal,
     private toastr: ToastsManager,
     public dialog: MdDialog,
@@ -48,8 +56,10 @@ export class EditQuoteComponent implements OnInit {
     private location: Location,
     private _fb: FormBuilder,
     private authService: AuthService,
-    private productService: ProductService,
-    private userService: UserService,
+
+
+
+
   ) {}
 
   ngOnInit() {
@@ -75,16 +85,16 @@ export class EditQuoteComponent implements OnInit {
     })
   }
 
-  removeUserFromQuote(i:number, typeUser: string){
-    let this2 = this
-    let dialogRefDelete = this.dialog.open(DeleteDialog)
-    dialogRefDelete.afterClosed().subscribe(result => {
-      if(result) {
-        this[typeUser].splice(i, 1)
-        this.save()
-      }
-    })
-  }
+  // removeUserFromQuote(i:number, typeUser: string){
+  //   let this2 = this
+  //   let dialogRefDelete = this.dialog.open(DeleteDialog)
+  //   dialogRefDelete.afterClosed().subscribe(result => {
+  //     if(result) {
+  //       this[typeUser].splice(i, 1)
+  //       this.save()
+  //     }
+  //   })
+  // }
 
 
 
@@ -133,6 +143,55 @@ export class EditQuoteComponent implements OnInit {
       this.fetchedQuote.clients.splice(i, 1);
     }
 
+
+
+
+
+
+
+
+
+
+        selectProject(project: Project) {
+          this.fetchedProjects = []
+          this.fetchedQuote.projects.push(project)
+        }
+
+        searchProjects() {
+          let search = {
+              search: this.autocompleteProject,
+            };
+          this.getProjects(1, search)
+        }
+
+
+        getProject(id: string) {
+          // this.projectService.getProject(id)
+          //   .subscribe(
+          //     res => {
+          //       this.selectProject(res.project)
+          //     },
+          //     error => {
+          //       console.log(error);
+          //     }
+          //   );
+        }
+
+        getProjects(page: number, search: any) {
+          // this.projectService.getProjects(page, search)
+          //   .subscribe(
+          //     res => {
+          //       this.fetchedProjects = res.data
+          //     },
+          //     error => {
+          //       console.log(error);
+          //     }
+          //   );
+        }
+
+        removeProject(i: number) {
+          this.fetchedQuote.clients.splice(i, 1);
+        }
 
 
 

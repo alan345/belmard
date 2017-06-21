@@ -25,7 +25,7 @@ import { Ng2PaginationModule} from 'ng2-pagination';
     ProjectsComponent,
     ProjectSingleComponent,
   ],
-  exports:      [ ProjectsComponent ],
+  exports:      [  ],
   providers:    [ ProjectService ],
   entryComponents: [
 

@@ -35,6 +35,27 @@
 
 
 
+              <!-- Autocomplete -->
+              <label>Projet</label>
+              <a [routerLink]="['/project/new']" class="admn-btn">
+                Ajouter Client
+              </a>
+              <input
+                [ngModelOptions]="{standalone: true}"
+                [(ngModel)]="autocompleteProject"
+                placeholder="Select"
+                (ngModelChange)="searchProjects()"
+                mdInput
+              >
+              <div *ngFor="let project of fetchedProjects; let i=index">
+                {{project|json}}
+                <button type="button" (click)="selectProject(user)">select</button>
+              </div>
+              <div *ngFor="let project of fetchedQuote.projects; let i=index">
+                {{project|json}}
+                <button type="button" (click)="removeProject(i)"><i class="fa fa-times"></i></button>
+              </div>
+              <!-- Autocomplete -->
 
           <input
             type="text"

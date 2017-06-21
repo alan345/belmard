@@ -72,27 +72,27 @@
       <!-- Autocomplete -->
 
 
-            <!-- Autocomplete -->
-            <label>Devis</label>
-            <a [routerLink]="['/quote/new']" class="admn-btn">
-              Ajouter Devis
-            </a>
-            <input
-              [ngModelOptions]="{standalone: true}"
-              [(ngModel)]="autocompleteQuote"
-              placeholder="Select"
-              (ngModelChange)="searchQuotes()"
-              mdInput
-            >
-            <div *ngFor="let quote of fetchedQuotes; let i=index">
-              {{quote.name}}
-              <button type="button" (click)="selectQuote(quote)">select</button>
-            </div>
-            <div *ngFor="let quote of fetchedProject.quotes; let i=index">
-              {{quote.name }}
-              <button type="button" (click)="removeQuote(i)"><i class="fa fa-times"></i></button>
-            </div>
-            <!-- Autocomplete -->
+      <!-- Autocomplete -->
+      <label>Devis</label>
+      <a [routerLink]="['/quote/new']" class="admn-btn">
+        Ajouter Devis
+      </a>
+      <!-- <input
+        [ngModelOptions]="{standalone: true}"
+        [(ngModel)]="autocompleteQuote"
+        placeholder="Select"
+        (ngModelChange)="searchQuotes()"
+        mdInput
+      >
+      <div *ngFor="let quote of fetchedQuotes; let i=index">
+        {{quote.name}}
+        <button type="button" (click)="selectQuote(quote)">select</button>
+      </div>
+      <div *ngFor="let quote of fetchedProject.quotes; let i=index">
+        {{quote.name }}
+        <button type="button" (click)="removeQuote(i)"><i class="fa fa-times"></i></button>
+      </div> -->
+      <!-- Autocomplete -->
 
 
 
