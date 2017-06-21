@@ -37,7 +37,6 @@ export class UserProfileComponent implements OnInit {
 
   public myForm: FormGroup;
 
-
   constructor(
     private userService: UserService,
     private toastr: ToastsManager,
@@ -73,8 +72,6 @@ export class UserProfileComponent implements OnInit {
       }),
       forms: this._fb.array([])
     })
-
-    //let userId = this.authService.currentUser.userId
 
 
     this.activatedRoute.params.subscribe((params: Params) => {

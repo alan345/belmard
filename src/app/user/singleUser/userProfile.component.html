@@ -15,6 +15,10 @@
     Add Quote
   </a>
 
+
+  <app-quotes [userId]="fetchedUser._id"></app-quotes>
+
+
   <form [formGroup]="myForm" novalidate (ngSubmit)="save()" style="position: relative;">
     <div *ngIf="isEditMode" class="ovrl"></div>
     <div class="beigeback phyto-ctnr" id="stypro">

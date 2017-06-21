@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { AuthService} from '../../auth/auth.service';
 import { QuoteService} from '../../quote/quote.service';
 import { Quote} from '../../quote/quote.model';
@@ -10,11 +10,12 @@ import { Location} from '@angular/common';
 
 
 @Component({
-  selector: 'app-quote',
+  selector: 'app-quotes',
   templateUrl: './quotes.component.html',
   styleUrls: ['../../admin/admin.component.css'],
 })
 export class QuotesComponent implements OnInit {
+  @Input() userId = '';
   fetchedQuotes: Quote[] = [];
   loading: boolean;
   paginationData = {
@@ -27,6 +28,7 @@ export class QuotesComponent implements OnInit {
     orderBy : '',
     search: '',
     quoteType: '',
+    userId:'',
   };
 
   constructor(
@@ -39,10 +41,25 @@ export class QuotesComponent implements OnInit {
     private location: Location,
   ) {}
 
-  ngOnInit() {
+  ngOnInit() {}
+  
+  // ngOnInit() {
+  //   let this2 = this
+  //   setTimeout(function(){
+  //     console.log(this2.userId)
+  //     this2.search.userId = this2.userId
+  //     this2.search.orderBy = 'name'
+  //     this2.getQuotes(this2.paginationData.currentPage, this2.search)
+  //   }, 20);
+  //
+  // }
+
+  ngAfterViewInit(){
+    this.search.userId = this.userId
     this.search.orderBy = 'name'
     this.getQuotes(this.paginationData.currentPage, this.search)
   }
+
 
   openDialog() {
 
@@ -85,6 +102,7 @@ export class QuotesComponent implements OnInit {
     this.quoteService.getQuotes(page, search)
       .subscribe(
         res => {
+
         //  console.log("quotes");
         //  console.log(res);
           this.paginationData = res.paginationData;

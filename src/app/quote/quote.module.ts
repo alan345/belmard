@@ -35,7 +35,7 @@ import { Ng2PaginationModule} from 'ng2-pagination';
     RoundPipe,
 
   ],
-  exports:      [ ],
+  exports:      [ QuotesComponent ],
   providers:    [ QuoteService ],
   entryComponents: [ ]
 })
