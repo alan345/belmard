@@ -2,8 +2,8 @@ import {Component, OnInit, ViewChild, ElementRef, Renderer, AfterViewInit} from 
 import {FormGroup, FormControl, FormBuilder, Validators} from '@angular/forms';
 import {ToastsManager} from 'ng2-toastr';
 import {Router} from '@angular/router';
-import {newPassword} from '../userProfile.model';
-import {ProfileService} from '../profile.service';
+import {newPassword} from '../../user.model';
+
 import { AuthService} from '../../../auth/auth.service';
 import { UserService} from '../../user.service';
 import { User } from '../../user.model'
@@ -23,7 +23,6 @@ export class ChangePasswordComponent implements OnInit, AfterViewInit {
   @ViewChild('userPassword') userPassword: ElementRef;
 
   constructor(private fb: FormBuilder,
-    private profileService: ProfileService,
     private router: Router, private toastr: ToastsManager,
     private renderer: Renderer,
     private authService: AuthService,
@@ -86,7 +85,7 @@ export class ChangePasswordComponent implements OnInit, AfterViewInit {
   // submit the password change form to the backend with the new desired credentials
   onSubmit() {
     const newPass = new newPassword(this.resetPasswordForm.value.currentPassword, this.resetPasswordForm.value.newPassword);
-    this.profileService.newPassword(newPass)
+    this.userService.newPassword(newPass)
       .subscribe(
         data => {
           // after successfull registration, the user is redirected to the login page

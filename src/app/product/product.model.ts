@@ -333,7 +333,7 @@ export const ProductSteps =
         'subCateg': [
           {categ: ''}
         ]
-      },    
+      },
       {
         'categ': 'Radiateurs',
         'subCateg': [

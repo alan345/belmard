@@ -185,7 +185,7 @@ export class NewUserComponent implements OnInit {
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
-            this.router.navigate(['user/' + res.obj._id])
+            this.router.navigate(['user/profile/' + res.obj._id])
             //this.addUserIdToCompanie(res.obj)
           },
           error => {
@@ -199,7 +199,7 @@ export class NewUserComponent implements OnInit {
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
-            this.router.navigate(['user/' + res.obj._id])
+            this.router.navigate(['user/profile/' + res.obj._id])
             // this.addUserIdToCompanie(res.obj)
             //this.router.navigate(['user'])
           },

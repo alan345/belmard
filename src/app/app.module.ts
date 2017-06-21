@@ -22,7 +22,7 @@ import { CustomOption } from './toast-options';
 
 
 import { NavbarComponent} from './nav/navbar/navbar.component';
-import { SideNavbarComponent} from './nav/sideNavbar/sideNavbar.component';
+
 import { FooterComponent} from './nav/footer/footer.component';
 
 
@@ -125,7 +125,6 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     AppComponent,
     FooterComponent,
     NavbarComponent,
-    SideNavbarComponent,
 
 
     // ProductComponent,
@@ -158,7 +157,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 
 
     NavbarComponent,
-    SideNavbarComponent,
+
     ErrorComponent,
 
     MainPageHomeComponent,

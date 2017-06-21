@@ -1,7 +1,6 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {AuthService} from '../../auth/auth.service';
 import {AdminService} from '../../admin/services/admin.service';
-import {ProfileService} from '../../user/profile/profile.service';
 import {Router} from '@angular/router';
 
 @Component({
@@ -18,7 +17,7 @@ export class NavbarComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private adminService: AdminService,
-    private profileService: ProfileService,
+
     private router: Router) {
   }
 

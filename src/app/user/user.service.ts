@@ -6,7 +6,15 @@ import {User} from './user.model';
 import {ToastsManager} from 'ng2-toastr';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-import { AuthService } from '../auth/auth.service';
+
+
+
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+
+import {newPassword} from './user.model';
+import {AuthService} from '../auth/auth.service';
+
 
 
 
@@ -124,6 +132,54 @@ export class UserService {
         this.errorService.handleError(error.json());
         return Observable.throw(error.json());
       });
+  }
+
+
+  getUserDetails(userId: string) {
+    if (this.authService.isLoggedIn()) {
+      let token = this.authService.currentUser.token
+      let userId = this.authService.currentUser.userId
+      let headers = new Headers({'Content-Type': 'application/json'});
+      headers.append('Authorization', '' + token);
+      return this.http.get(this.url + userId, {headers: headers})
+        .map((response: Response) => response.json())
+        .catch((error: Response) => {
+          this.errorService.handleError(error.json());
+          return Observable.throw(error.json());
+        });
+    }
+  }
+
+
+  // updateUser(user: User) {
+  // //  console.log(user)
+  //   const body = JSON.stringify(user);
+  //   const headers = new Headers({'Content-Type': 'application/json'});
+  //   headers.append('Authorization', '' + this.token);
+  //   return this.http.put( '/profile/' + user._id, body, {headers: headers})
+  //     .map(response => response.json())
+  //     .catch((error: Response) => {
+  //       this.errorService.handleError(error.json());
+  //       return Observable.throw(error.json());
+  //     });
+  // }
+
+
+
+  // submit the new password via the form in front end
+  newPassword(newPass: newPassword) {
+    if (this.authService.isLoggedIn()) {
+      let token = localStorage.getItem('id_token');
+      const body = JSON.stringify(newPass);
+      const headers = new Headers({'Content-Type': 'application/json'});
+      headers.append('Authorization', '' + token);
+      return this.http.post('/profile/password', body, {headers: headers})
+        .map((response: Response) => response.json())
+        .catch((error: Response) => {
+          this.errorService.handleError((error.json()));
+          return Observable.throw(error.json());
+        });
+    }
   }
 
 }

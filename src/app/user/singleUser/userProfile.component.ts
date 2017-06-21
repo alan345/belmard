@@ -1,7 +1,9 @@
 import { Component, OnInit} from '@angular/core';
 import { AuthService} from '../../auth/auth.service';
 import { UserService} from '../user.service';
+
 import { ToastsManager} from 'ng2-toastr';
+
 import { MdDialog } from '@angular/material';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location }               from '@angular/common';
@@ -11,24 +13,27 @@ import { Companie } from '../../companie/companie.model';
 import { EditOptionsComponentDialog } from '../../modalLibrary/modalLibrary.component';
 import { FormBuilder, FormGroup, FormArray, Validators} from '@angular/forms';
 import { CompanieService} from '../../companie/companie.service';
+import { SeePictureDialogComponent } from '../../seePictureDialog/seePictureDialog.component';
+
 
 
 
 @Component({
   selector: 'app-users',
-  templateUrl: './userProfileSettings.component.html',
-  styleUrls: ['./userProfile.component.css'],
+  templateUrl: './userProfile.component.html',
+  styleUrls: ['../user.component.css'],
 })
 
 
-export class UserProfileSettingsComponent implements OnInit {
+export class UserProfileComponent implements OnInit {
   //fetchedUser = new User()
   //fetchedUser : User;
-  maxPictureToShow = 3;
-  instapic = 1;
-  companies: Companie[] = []
-  isEditMode: boolean = false
-  fetchedUser: User = new User();
+  isUserBelongToHQ=false
+  maxPictureToShow=3;
+  instapic=1;
+  companies: Companie[] = [];
+  isEditMode:boolean = false
+  fetchedUser : User = new User()
 
   public myForm: FormGroup;
 
@@ -54,6 +59,7 @@ export class UserProfileSettingsComponent implements OnInit {
      this.isEditMode = !this.isEditMode
    }
 
+
   ngOnInit() {
     this.myForm = this._fb.group({
       lastVisit: [''],
@@ -73,10 +79,20 @@ export class UserProfileSettingsComponent implements OnInit {
 
     this.activatedRoute.params.subscribe((params: Params) => {
       let userId = params['id']
+
+      if(!userId)
+        userId = this.authService.currentUser.userId
+
       this.getUser(userId)
       this.companieService.getCompanieByUserId(userId)
       .subscribe(
-        (data => this.companies = data)
+        (data => {
+          this.companies = data
+          this.companies.forEach(companie => {
+            if(this.isHQcompanie(companie))
+              this.isUserBelongToHQ = true
+          })
+        })
       )
     })
   }
@@ -108,9 +124,9 @@ export class UserProfileSettingsComponent implements OnInit {
   addForm(form: Form) {
     const control = <FormArray>this.myForm.controls['forms'];
     const addrCtrl = this._fb.group({
-        _id: ['', Validators.required],
-        owner: ['', Validators.required],
-        imagePath: ['', Validators.required],
+        // _id: ['', Validators.required],
+        // owner: ['', Validators.required],
+        // imagePath: ['', Validators.required],
     });
     control.push(addrCtrl);
   }
@@ -124,29 +140,48 @@ export class UserProfileSettingsComponent implements OnInit {
   }
 
 
+  openPictureDialog(form : Form){
+    let dialogRef = this.dialog.open(SeePictureDialogComponent)
+    dialogRef.componentInstance.form = form;
+    dialogRef.afterClosed().subscribe(result => {
+    })
+  }
+
+
   openDialog(positionImage: string) {
     if(positionImage == '_profilePicture') {
       let dialogRef = this.dialog.open(EditOptionsComponentDialog);
       dialogRef.afterClosed().subscribe(result => {
         if(result) {
-          this.fetchedUser.profile._profilePicture[0] = result
-          this.save()
+          if(result.type === 'pdf') {
+            this.toastr.error('No pdf!');
+          } else {
+            this.fetchedUser.profile._profilePicture[0] = result
+            this.save()
+          }
+
+
         }
       })
     } else {
       let dialogRef = this.dialog.open(EditOptionsComponentDialog);
       dialogRef.afterClosed().subscribe(result => {
         if(result) {
-          this.addForm(result)
-          this.fetchedUser.forms.unshift(result)
-          this.save()
+          if(result.type==='pdf') {
+            this.toastr.error('No pdf!');
+          } else {
+            this.addForm(result)
+            this.fetchedUser.forms.unshift(result)
+            this.save()
+          }
+
         }
       })
     }
   }
 
   save() {
-    this.editMode()
+    this.isEditMode = false
     this.userService.updateUser(this.fetchedUser)
       .subscribe(
         res => {
@@ -170,7 +205,20 @@ export class UserProfileSettingsComponent implements OnInit {
   }
 
 
+  toggleFeature(){
+    this.fetchedUser.profile.isFeatured = !this.fetchedUser.profile.isFeatured
+    this.save()
+  }
 
+  isAdmin() {
+    return this.authService.isAdmin();
+  }
+
+  isMyProfile() {
+    if(this.fetchedUser._id === this.authService.currentUser.userId)
+      return true
+    return false
+  }
 
 
   onDelete(id: string) {
@@ -184,4 +232,13 @@ export class UserProfileSettingsComponent implements OnInit {
         }
       );
   }
+
+
+
+  isHQcompanie(companie: Companie) {
+    if(companie.typeCompanie === 'HQ')
+      return true
+    return false
+  }
+
 }

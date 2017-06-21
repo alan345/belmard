@@ -196,6 +196,18 @@ export class ProductSingleComponent implements OnInit {
           this.categ2 = this.fetchedProduct.categorie.categ2[0].name
           this.categ3 = this.fetchedProduct.categorie.categ3[0].name
 
+          let categ1Index:number = 0
+          let categ2Index:number = 0
+          this.productSteps.forEach((categ1,index) => {
+            if(categ1.categ === this.categ1)
+              categ1Index = index
+          })
+          this.productSteps[categ1Index].subCateg.forEach((categ2,index) => {
+            if(categ2.categ === this.categ2)
+              categ2Index = index
+          })
+
+          this.changeCascade(categ1Index, categ2Index)
         },
         error => {
           console.log(error);
