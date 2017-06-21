@@ -4,7 +4,7 @@
     <h3 style="text-align: center;">Add Client</h3>
   </div>
   <div class="single-wrpr beigeback">
-    <form [formGroup]="myForm" novalidate (ngSubmit)="save(myForm)">
+    <form [formGroup]="myForm" novalidate (ngSubmit)="save('profile')">
 
 
 
@@ -75,6 +75,7 @@
       </div>
       <div class="valid-edit">
         <button type="submit" [disabled]="!myForm.valid" [ngClass]="{'done':myForm.valid,'pas-done':!myForm.valid}">Done</button>
+        <button type="button" (click)="saveAndCreateProject()" [disabled]="!myForm.valid" [ngClass]="{'done':myForm.valid,'pas-done':!myForm.valid}">Done and create project</button>
         <button type="button" *ngIf="fetchedUser._id" class="delete" md-button (click)="openDialogDelete()">Delete</button>
       </div>
       <div class="clearfix"></div>

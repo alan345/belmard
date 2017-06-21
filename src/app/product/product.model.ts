@@ -48,7 +48,7 @@ export class Stock {
   quantity: number = 0;
 }
 
-export const ProductSteps =
+export const ItemSteps =
 [
   {
     'categ':'',

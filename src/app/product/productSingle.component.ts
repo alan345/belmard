@@ -7,7 +7,7 @@ import { ToastsManager} from 'ng2-toastr';
 import { MdDialog } from '@angular/material';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
-import { Product, ProductSteps } from './product.model';
+import { Product, ItemSteps } from './product.model';
 import { Companie } from '../companie/companie.model';
 import { EditOptionsComponentDialog } from '../modalLibrary/modalLibrary.component';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -34,7 +34,7 @@ export class ProductSingleComponent implements OnInit {
   categ2: string = '';
   categ3: string = '';
   autocompleteCompanie: string = '';
-  productSteps = ProductSteps;
+  itemSteps = ItemSteps;
 
 
 
@@ -157,6 +157,8 @@ export class ProductSingleComponent implements OnInit {
 
 
   save() {
+    console.log(this.categ1)
+
     this.fetchedProduct.categorie.categ1 = [{name: this.categ1}]
     this.fetchedProduct.categorie.categ2 = [{name: this.categ2}]
     this.fetchedProduct.categorie.categ3 = [{name: this.categ3}]
@@ -198,11 +200,11 @@ export class ProductSingleComponent implements OnInit {
 
           let categ1Index:number = 0
           let categ2Index:number = 0
-          this.productSteps.forEach((categ1,index) => {
+          this.itemSteps.forEach((categ1,index) => {
             if(categ1.categ === this.categ1)
               categ1Index = index
           })
-          this.productSteps[categ1Index].subCateg.forEach((categ2,index) => {
+          this.itemSteps[categ1Index].subCateg.forEach((categ2,index) => {
             if(categ2.categ === this.categ2)
               categ2Index = index
           })

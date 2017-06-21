@@ -178,15 +178,20 @@ export class NewUserComponent implements OnInit {
     })
   }
 
-
-  save(form: any) {
+  saveAndCreateProject() {
+    this.save('project')
+  }
+  save(redirect: string) {
+    console.log(redirect)
     if(this.fetchedUser._id) {
       this.userService.updateUser(this.fetchedUser)
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
-            this.router.navigate(['user/profile/' + res.obj._id])
-            //this.addUserIdToCompanie(res.obj)
+            if(redirect == 'profile')
+              this.router.navigate(['user/profile/' + res.obj._id])
+            if(redirect == 'project')
+              this.router.navigate(['project/new/' + res.obj._id])
           },
           error => {
             this.toastr.error('Error!')
@@ -199,7 +204,10 @@ export class NewUserComponent implements OnInit {
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
-            this.router.navigate(['user/profile/' + res.obj._id])
+            if(redirect == 'profile')
+              this.router.navigate(['user/profile/' + res.obj._id])
+            if(redirect == 'project')
+              this.router.navigate(['project/new/' + res.obj._id])
             // this.addUserIdToCompanie(res.obj)
             //this.router.navigate(['user'])
           },

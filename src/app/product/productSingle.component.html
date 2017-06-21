@@ -5,30 +5,23 @@
   </div>
   <div id="product-container">
 
+    <!-- cascade -->
     <div>
-      <select [ngModel]="categ1" (ngModelChange)="changeCascade(categ1Index.selectedIndex, 0)" #categ1Index>
-        <option *ngFor="let n of productSteps" [attr.value]="n.categ">{{n.categ}}</option>
+      <select [(ngModel)]="categ1" (ngModelChange)="changeCascade(categ1Index.selectedIndex, 0)" #categ1Index>
+        <option *ngFor="let n of itemSteps" [attr.value]="n.categ">{{n.categ}}</option>
       </select>
     </div>
-
-    <!-- {{productSteps[selectedIndex1].subCateg|json}} -->
-    <!-- <div> -->
-    <div [hidden]="productSteps[selectedIndex1].categ==''">
+    <div [hidden]="itemSteps[selectedIndex1].categ==''">
       <select [(ngModel)]="categ2" (ngModelChange)="changeCascade(categ1Index.selectedIndex, categ2Index.selectedIndex)" #categ2Index>
-        <option *ngFor="let n of productSteps[selectedIndex1].subCateg" [attr.value]="n.categ">{{n.categ}}</option>
+        <option *ngFor="let n of itemSteps[selectedIndex1].subCateg" [attr.value]="n.categ">{{n.categ}}</option>
       </select>
     </div>
-
-    <!-- <div> -->
-    <div [hidden]="productSteps[selectedIndex1].subCateg[selectedIndex2].categ==''">
-      <select [(ngModel)]="categ3" #third>
-        <option *ngFor="let n of productSteps[selectedIndex1].subCateg[selectedIndex2].subCateg" [attr.value]="n.categ">{{n.categ}}</option>
+    <div [hidden]="itemSteps[selectedIndex1].subCateg[selectedIndex2].categ==''">
+      <select [(ngModel)]="categ3">
+        <option *ngFor="let n of itemSteps[selectedIndex1].subCateg[selectedIndex2].subCateg" [attr.value]="n.categ">{{n.categ}}</option>
       </select>
     </div>
-<!-- {{first.selectedIndex|json}}
-{{second.selectedIndex|json}} -->
-<!-- {{productSteps[first.selectedIndex].subCateg[second.selectedIndex].subCateg |json}} -->
-
+    <!-- cascade -->
 
 
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()" (keydown.enter)="$event.preventDefault()">
