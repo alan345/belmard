@@ -29,12 +29,13 @@ export class ProductSingleComponent implements OnInit {
   selectedIndex2 = 0
   show1 = false
   show2 = false
-
   categ1: string = '';
   categ2: string = '';
   categ3: string = '';
-  autocompleteCompanie: string = '';
   itemSteps = ItemSteps;
+
+
+  autocompleteCompanie: string = '';
 
 
 
@@ -94,8 +95,6 @@ export class ProductSingleComponent implements OnInit {
   }
 
   changeCascade(selectedIndex1, selectedIndex2) {
-    //console.log(selectedIndex1, selectedIndex2)
-
     this.selectedIndex1 = selectedIndex1
     this.selectedIndex2 = selectedIndex2
   }

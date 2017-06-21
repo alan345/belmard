@@ -4,7 +4,7 @@ import { ToastsManager} from 'ng2-toastr';
 import { MdDialog } from '@angular/material';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
-import { Project } from './project.model';
+import { Project, ItemSteps } from './project.model';
 import { EditOptionsComponentDialog } from '../modalLibrary/modalLibrary.component';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -25,6 +25,17 @@ import { Quote } from '../quote/quote.model';
 })
 
 export class ProjectSingleComponent implements OnInit {
+
+  selectedIndex1 = 0
+  selectedIndex2 = 0
+  show1 = false
+  show2 = false
+  categ1: string = '';
+  categ2: string = '';
+  categ3: string = '';
+  itemSteps = ItemSteps;
+
+
   status = [
     {index: 0, label: 'RDV planifié'},
     {index: 1, label: 'Rappeler'},
@@ -139,7 +150,10 @@ export class ProjectSingleComponent implements OnInit {
       };
     this.getUsers(1, search)
   }
-
+  changeCascade(selectedIndex1, selectedIndex2) {
+    this.selectedIndex1 = selectedIndex1
+    this.selectedIndex2 = selectedIndex2
+  }
 
   getUser(id: string) {
     this.userService.getUser(id)
