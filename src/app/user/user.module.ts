@@ -13,11 +13,12 @@ import { Ng2PaginationModule} from 'ng2-pagination';
 // import { UserService} from './user.service';
 
 import { QuoteModule} from '../quote/quote.module';
+import { ProjectModule} from '../project/project.module';
 
 
 
 import { RegisterComponent} from './register/register.component';
-import { UserComponent} from './user.component';
+
 import { NewUserComponent} from './singleUser/newUser.component';
 // import { SingleUserComponent} from './singleUser/singleUser.component';
 // import { AddNoteComponent} from './singleUser/addNote.component';
@@ -43,18 +44,20 @@ import{ AdminUsersComponent } from './users/adminUsers.component';
 
 @NgModule({
   imports:      [
-    QuoteModule,
+
     UserRouting,
     CommonModule,
     FormsModule,
     MaterialModule,
     Ng2PaginationModule,
     ReactiveFormsModule,
+    QuoteModule,
+    ProjectModule,
   ],
   declarations: [
 //    UserDeleteDialog,
 //    UserWhereDialogComponent,
-    UserComponent,
+
 
     NewUserComponent,
     // SingleUserComponent,

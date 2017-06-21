@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AuthService} from '../auth/auth.service';
 import { ProjectService} from './project.service';
 import { Project} from './project.model';
@@ -19,6 +19,7 @@ import { UserService} from '../user/user.service';
 
 })
 export class ProjectsComponent implements OnInit {
+  @Input() userId = '';
   token: string = localStorage.getItem('id_token');
   fetchedProjects: Project[] = [];
   search: any = {

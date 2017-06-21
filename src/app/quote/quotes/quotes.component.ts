@@ -42,7 +42,7 @@ export class QuotesComponent implements OnInit {
   ) {}
 
   ngOnInit() {}
-  
+
   // ngOnInit() {
   //   let this2 = this
   //   setTimeout(function(){

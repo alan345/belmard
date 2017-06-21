@@ -3,7 +3,7 @@
     <button class="subnav-btnleft" (click)="goBack()"><i class="fa fa-chevron-left"></i></button>
     <h3 style="text-align: center;">Quotes</h3>
 
-        <a [routerLink]="['/quote/new']" class="admn-btn">
+        <a [routerLink]="['/quote/new/' + userId]" class="admn-btn">
           Ajouter Quote
         </a>
 

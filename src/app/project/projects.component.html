@@ -6,7 +6,13 @@
   <!-- <div class="subsubnav-clients">
     <input type="text" name="Search" placeholder="Search" [(ngModel)]="search.search" (ngModelChange)="searchInput()">
   </div> -->
-  <button class="subnav-btnleft" [routerLink]="['/project/new/']" routerLinkActive="active"><i class="fa fa-chevron-left"></i>ADD Project</button>
+  <button
+    class="subnav-btnleft"
+    [routerLink]="['/project/new/' + userId]"
+    routerLinkActive="active">
+    <i class="fa fa-chevron-left"></i>
+    ADD Project
+  </button>
 
 
   <div class="beigeback">

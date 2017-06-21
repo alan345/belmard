@@ -2,24 +2,23 @@
   <div class="goldgradient beigeborder subnav">
     <button class="subnav-btnleft" (click)="goBack()"><i class="fa fa-chevron-left"></i></button>
     <h3 style="text-align: center;">Profile</h3>
+    <h4 style="text-align: center;">{{fetchedUser.profile.name}} {{fetchedUser.profile.lastName}}</h4>
+
+
     <!--<p *ngIf="fetchedUser.profile.isFeatured" (click)="toggleFeature()"><i class="fa fa-star" style="color:#0a2f87"></i><p>
     <p *ngIf="!fetchedUser.profile.isFeatured" (click)="toggleFeature()"><i class="fa fa-star" style="color:#999999"></i><p>-->
   </div>
 
 
-  <a [routerLink]="['/project/new/' + fetchedUser._id]" class="admn-btn">
+  <!-- <a [routerLink]="['/project/new/' + fetchedUser._id]" class="admn-btn">
     Add Project
-  </a>
-  <br>
-  <a [routerLink]="['/quote/new/' + fetchedUser._id]" class="admn-btn">
-    Add Quote
-  </a>
+  </a> -->
 
 
   <app-quotes [userId]="fetchedUser._id"></app-quotes>
+  <app-projects [userId]="fetchedUser._id"></app-projects>
 
-
-  <form [formGroup]="myForm" novalidate (ngSubmit)="save()" style="position: relative;">
+  <!-- <form [formGroup]="myForm" novalidate (ngSubmit)="save()" style="position: relative;">
     <div *ngIf="isEditMode" class="ovrl"></div>
     <div class="beigeback phyto-ctnr" id="stypro">
       <div class="prf-basic">
@@ -48,8 +47,7 @@
               <img src="./uploads/forms/{{profilePicture.owner}}/{{profilePicture.imagePath}}" onerror="this.src ='assets/images/profilePicture.jpg'">
             </div>
             <div class="prf-cpt">
-              <label>{{fetchedUser.profile.name}} {{fetchedUser.profile.lastName}}</label>
-              <p>{{fetchedUser.profile.title}}</p>
+
               <button *ngIf="!isEditMode && isMyProfile()" type="button" md-button (click)="editMode()" class="editicon">
                 <span class="glyphicon glyphicon-edit"></span>
               </button>
@@ -61,20 +59,7 @@
         <div class="prf-chalcnt">
           <div *ngFor="let companie of companies" class="act-chal">
 
-<!--
-            <div *ngIf="isUserBelongToHQ">
-              <div *ngIf="isHQcompanie(companie)">
-                <h3>{{companie.name}}</h3>
-                <h6>{{companie.address.address}}, {{companie.address.city}}, {{companie.address.state}} {{companie.address.zip}}</h6>
-              </div>
-            </div>
-            <div *ngIf="!isUserBelongToHQ">
-              <h3>{{companie.name}}</h3>
-              <h6>{{companie.address.address}}, {{companie.address.city}}, {{companie.address.state}} {{companie.address.zip}}</h6>
-            </div>
 
-
-                         -->
             <h3>{{companie.name}}</h3>
             <h6>{{companie.address.address}}, {{companie.address.city}}, {{companie.address.state}} {{companie.address.zip}}</h6>
           </div>
@@ -83,16 +68,6 @@
       </div>
     </div>
 
-    <!--ALAN: These should be added in a modal:
-    <div>
-      <div>
-        <button type="button" md-button (click)="openDialog('_profilePicture')" class="addpic-squr">Add Picture<br><i class="fa fa-plus"></i></button>
-      </div>
-      <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedUser.profile.name" placeholder="Name">
-      <input type="text" class="form-control" formControlName="lastName" [(ngModel)]="fetchedUser.profile.lastName" placeholder="lastName">
-      <input type="text" class="form-control" formControlName="title" [(ngModel)]="fetchedUser.profile.title" placeholder="Title">
-      <button type="submit" class="done">Done</button>
-    </div>-->
 
     <div class="img-row phyto-ctnr">
       <h3 *ngIf="isMyProfile()" style="padding: 0 15px !important;">Your Photos (Tap to Expand)</h3>
@@ -135,5 +110,5 @@
 
     </div>
     <div class="clearfix"></div>
-  </form>
+  </form> -->
 </div>
