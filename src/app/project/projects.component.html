@@ -27,7 +27,7 @@
       </tr> -->
       </thead>
       <tbody class="clienttbl">
-      <tr *ngFor="let project of fetchedProjects | paginate: { id: 'server', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }"
+      <tr *ngFor="let project of fetchedProjects | paginate: { id: 'projectPagination', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }"
         [routerLink]="['/project/' + project._id]" routerLinkActive="active">
         <td>{{project.name }}</td>
       </tr>
@@ -35,7 +35,7 @@
     </table>
     <div class="has-text-centered">
         <div [ngClass]="{ 'hidden': !loading }">Loading...</div>
-        <pagination-controls (pageChange)="getPage($event)" id="server" class="change-page"></pagination-controls>
+        <pagination-controls (pageChange)="getPage($event)" id="projectPagination" class="change-page"></pagination-controls>
     </div>
   </div>
 </div>

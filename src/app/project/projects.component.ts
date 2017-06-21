@@ -152,21 +152,8 @@ export class ProjectsComponent implements OnInit {
       .subscribe(
         res => {
           this.paginationData = res.paginationData;
-          let fetchedProjectsNotSecure =  res.data
-          fetchedProjectsNotSecure.forEach((project: Project) => {
-            //isNewProject = false
-            //project['embedSecure'] = this.sanitizer.bypassSecurityTrustResourceUrl('//fast.wistia.net/embed/iframe/' + project['embed'])
-            //project['embedSecure'] = this.sanitizer.bypassSecurityTrustResourceUrl('https://player.vimeo.com/project/' + project['embed'] )
+          this.fetchedProjects = res.data
 
-
-
-            project['isNewProject'] = false
-            // this.trackinPage.lastVisitPageProjectCount.forEach((projectNotRead: Project) => {
-            //     if(projectNotRead._id == project._id)
-            //       project['isNewProject'] = true
-            // })
-            this.fetchedProjects.push(project)
-          })
           this.loading = false;
         },
         error => {

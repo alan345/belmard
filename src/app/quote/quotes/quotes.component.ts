@@ -41,24 +41,25 @@ export class QuotesComponent implements OnInit {
     private location: Location,
   ) {}
 
-  ngOnInit() {}
 
-  // ngOnInit() {
-  //   let this2 = this
-  //   setTimeout(function(){
-  //     console.log(this2.userId)
-  //     this2.search.userId = this2.userId
-  //     this2.search.orderBy = 'name'
-  //     this2.getQuotes(this2.paginationData.currentPage, this2.search)
-  //   }, 20);
-  //
-  // }
 
-  ngAfterViewInit(){
-    this.search.userId = this.userId
-    this.search.orderBy = 'name'
-    this.getQuotes(this.paginationData.currentPage, this.search)
+  ngOnInit() {
+    let this2 = this
+    setTimeout(function(){
+      console.log(this2.userId)
+      this2.search.userId = this2.userId
+      this2.search.orderBy = 'name'
+      this2.getQuotes(this2.paginationData.currentPage, this2.search)
+    }, 200);
+
   }
+
+  // ngAfterViewInit(){
+  //   console.log(this.userId)
+  //   this.search.userId = this.userId
+  //   this.search.orderBy = 'name'
+  //   this.getQuotes(this.paginationData.currentPage, this.search)
+  // }
 
 
   openDialog() {

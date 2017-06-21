@@ -26,7 +26,7 @@
       </tr>
       </thead>
       <tbody class="clienttbl">
-        <tr *ngFor="let quote of fetchedQuotes | paginate: { id: 'server', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }">
+        <tr *ngFor="let quote of fetchedQuotes | paginate: { id: 'quotePagination', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }">
           <a [routerLink]="['/quote/' + quote._id]" routerLinkActive="active"><td>{{quote.name}}</td></a>
         </tr>
       </tbody>
@@ -34,6 +34,6 @@
   </div>
   <div class="has-text-centered">
       <div class="spinner" [ngClass]="{ 'hidden': !loading }">Loading...</div>
-      <pagination-controls (pageChange)="getPage($event)" id="server" class="change-page"></pagination-controls>
+      <pagination-controls (pageChange)="getPage($event)" id="quotePagination" class="change-page"></pagination-controls>
   </div>
 </div>

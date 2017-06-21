@@ -159,22 +159,24 @@ router.get('/page/:page', function (req, res, next) {
     search = {$or:arrObj}
     //findQuery['address.city'] = new RegExp(req.query.search, 'i')
   }
-
-
-  if(req.query.typeQuote)
-    search['typeQuote'] = req.query.typeQuote
-
-  if (req.user.role[0] === 'salesRep') {
-    search['_users'] = mongoose.Types.ObjectId(req.user._id)
-    search['typeQuote'] = { $nin: 'HQ'}
-
+  if(req.query.userId) {
+    search['clients'] = mongoose.Types.ObjectId(req.query.userId)
   }
-  if (req.user.role[0] === 'manager') {
-    search['_users'] = mongoose.Types.ObjectId(req.user._id)
-  }
-  if (req.user.role[0] === 'stylist') {
-    search['_users'] = mongoose.Types.ObjectId(req.user._id)
-  }
+
+  //
+  // if(req.query.typeQuote)
+  //   search['typeQuote'] = req.query.typeQuote
+
+  // if (req.user.role[0] === 'salesRep') {
+  //   search['_users'] = mongoose.Types.ObjectId(req.user._id)
+  //   search['typeQuote'] = { $nin: 'HQ'}
+  // }
+  // if (req.user.role[0] === 'manager') {
+  //   search['_users'] = mongoose.Types.ObjectId(req.user._id)
+  // }
+  // if (req.user.role[0] === 'stylist') {
+  //   search['_users'] = mongoose.Types.ObjectId(req.user._id)
+  // }
 
 
 
@@ -204,7 +206,7 @@ router.get('/page/:page', function (req, res, next) {
       })
     } else {
       Quote
-      .find()
+      .find(search)
       .count().exec(function (err, count) {
       res.status(200).json({
           paginationData : {
