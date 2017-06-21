@@ -13,6 +13,7 @@ var quote = new Schema({
       state : {type: String, default: ['']},
       zip : {type: String, default: ['']},
     },
+    projects: [{type: Schema.Types.ObjectId, ref: 'Project'}],
     clients: [{type: Schema.Types.ObjectId, ref: 'User'}],
     phoneNumber: {type: String, default: ['']},
     name: {type: String, default: ['']},
@@ -37,6 +38,7 @@ var quote = new Schema({
           }
         }
       },
+
       priceWithoutTaxes: {type: Number},
       priceWithTaxes: {type: Number},
       totalPriceWithoutTaxes: {type: Number},

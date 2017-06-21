@@ -97,6 +97,9 @@ export class ProductSingleComponent implements OnInit {
   changeCascade(selectedIndex1, selectedIndex2) {
     this.selectedIndex1 = selectedIndex1
     this.selectedIndex2 = selectedIndex2
+
+
+
   }
 
   searchCompanies() {
@@ -156,12 +159,11 @@ export class ProductSingleComponent implements OnInit {
 
 
   save() {
-    console.log(this.categ1)
-
-    this.fetchedProduct.categorie.categ1 = [{name: this.categ1}]
-    this.fetchedProduct.categorie.categ2 = [{name: this.categ2}]
-    this.fetchedProduct.categorie.categ3 = [{name: this.categ3}]
     if(this.fetchedProduct._id) {
+      
+      this.fetchedProduct.categorie.categ1 = [{name: this.categ1}]
+      this.fetchedProduct.categorie.categ2 = [{name: this.categ2}]
+      this.fetchedProduct.categorie.categ3 = [{name: this.categ3}]
 
       this.productService.updateProduct(this.fetchedProduct)
         .subscribe(
@@ -191,7 +193,6 @@ export class ProductSingleComponent implements OnInit {
     this.productService.getProduct(id)
       .subscribe(
         res => {
-
           this.fetchedProduct = <Product>res
           this.categ1 = this.fetchedProduct.categorie.categ1[0].name
           this.categ2 = this.fetchedProduct.categorie.categ2[0].name
@@ -207,7 +208,6 @@ export class ProductSingleComponent implements OnInit {
             if(categ2.categ === this.categ2)
               categ2Index = index
           })
-
           this.changeCascade(categ1Index, categ2Index)
         },
         error => {

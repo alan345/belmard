@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RouterModule} from '@angular/router';
 
 import { RoundPipe} from './round.pipe';
+// import { ProjectModule} from '../project/project.module';
 
 import { QuotesComponent} from './quotes/quotes.component';
 import { EditQuoteComponent} from './editQuote.component';
@@ -16,7 +17,7 @@ import { Ng2PaginationModule} from 'ng2-pagination';
 
 @NgModule({
   imports:      [
-
+    // ProjectModule,
     QuoteRouting,
     CommonModule,
     FormsModule,

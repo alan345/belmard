@@ -357,10 +357,8 @@ router.get('/:id', function (req, res, next) {
     // }
     Quote
     .findOne(findQuery)
-    .populate({
-      path: 'clients',
-      model: 'User'
-    })
+    .populate({path: 'projects', model: 'Project'})
+    .populate({path: 'clients', model: 'User'})
     //.find()
     // .populate({
     //   path: 'forms',

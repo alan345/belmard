@@ -11,9 +11,19 @@ export class Project {
     clients: User[] = [];
     assignedTo: User[] = [];
     forms: Form[] = [];
-    quotes: Quote[] = [];
+    categorie: Categorie = new Categorie();
+    // quotes: Quote[] = [];
 }
 
+export class Categorie {
+  categ1: Categ[] = [];
+  categ2: Categ[] = [];
+  categ3: Categ[] = [];
+}
+
+export class Categ {
+  name: string = '';
+}
 
 export const ItemSteps =
 [

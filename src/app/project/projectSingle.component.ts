@@ -151,14 +151,20 @@ export class ProjectSingleComponent implements OnInit {
     this.getUsers(1, search)
   }
   changeCascade(selectedIndex1, selectedIndex2) {
+
+    console.log(this.categ3)
     this.selectedIndex1 = selectedIndex1
     this.selectedIndex2 = selectedIndex2
+
+
+
   }
 
   getUser(id: string) {
     this.userService.getUser(id)
       .subscribe(
         res => {
+          //this.fetchedUsers[0] = res.user
           this.selectUser(res.user)
         },
         error => {
@@ -187,35 +193,35 @@ export class ProjectSingleComponent implements OnInit {
 
 
 
-
-
-    selectQuote(quote: Quote) {
-      this.fetchedQuotes = []
-      this.fetchedProject.quotes.push(quote)
-    }
-
-    searchQuotes() {
-      let search = {
-          search: this.autocompleteQuote,
-        };
-      this.getQuotes(1, search)
-    }
-
-    getQuotes(page: number, search: any) {
-      this.quoteService.getQuotes(page, search)
-        .subscribe(
-          res => {
-            this.fetchedQuotes = res.data
-          },
-          error => {
-            console.log(error);
-          }
-        );
-    }
-
-    removeQuote(i: number) {
-      this.fetchedProject.clients.splice(i, 1);
-    }
+    //
+    //
+    // selectQuote(quote: Quote) {
+    //   this.fetchedQuotes = []
+    //   this.fetchedProject.quotes.push(quote)
+    // }
+    //
+    // searchQuotes() {
+    //   let search = {
+    //       search: this.autocompleteQuote,
+    //     };
+    //   this.getQuotes(1, search)
+    // }
+    //
+    // getQuotes(page: number, search: any) {
+    //   this.quoteService.getQuotes(page, search)
+    //     .subscribe(
+    //       res => {
+    //         this.fetchedQuotes = res.data
+    //       },
+    //       error => {
+    //         console.log(error);
+    //       }
+    //     );
+    // }
+    //
+    // removeQuote(i: number) {
+    //   this.fetchedProject.clients.splice(i, 1);
+    // }
   // removeCategorie(i: number) {
   //     this.fetchedProject.categories.splice(i, 1)
   //     const control = <FormArray>this.myForm.controls['categories'];
@@ -297,6 +303,11 @@ export class ProjectSingleComponent implements OnInit {
   save() {
     if(this.fetchedProject._id) {
 
+      this.fetchedProject.categorie.categ1 = [{name: this.categ1}]
+      this.fetchedProject.categorie.categ2 = [{name: this.categ2}]
+      this.fetchedProject.categorie.categ3 = [{name: this.categ3}]
+
+
       this.projectService.updateProject(this.fetchedProject)
         .subscribe(
           res => {
@@ -368,6 +379,21 @@ export class ProjectSingleComponent implements OnInit {
         res => {
           this.fetchedProject = <Project>res
 
+          this.categ1 = this.fetchedProject.categorie.categ1[0].name
+          this.categ2 = this.fetchedProject.categorie.categ2[0].name
+          this.categ3 = this.fetchedProject.categorie.categ3[0].name
+
+          let categ1Index:number = 0
+          let categ2Index:number = 0
+          this.itemSteps.forEach((categ1,index) => {
+            if(categ1.categ === this.categ1)
+              categ1Index = index
+          })
+          this.itemSteps[categ1Index].subCateg.forEach((categ2,index) => {
+            if(categ2.categ === this.categ2)
+              categ2Index = index
+          })
+          this.changeCascade(categ1Index, categ2Index)
           //this.fetchedProject.embedSecure = this.sanitizer.bypassSecurityTrustResourceUrl('https://player.vimeo.com/project/' + res.embed )
           //this.fetchedProject.embedSecure = this.sanitizer.bypassSecurityTrustResourceUrl('//fast.wistia.net/embed/iframe/' + res.embed)
           // this.fetchedProject.categories.forEach((categorie) => {

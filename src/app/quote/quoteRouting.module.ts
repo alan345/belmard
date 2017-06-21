@@ -13,6 +13,7 @@ export const routes: Routes = [
   {path: '', component: QuotesComponent},
   {path: 'new', component: EditQuoteComponent},
   {path: 'new/:idClient', component: EditQuoteComponent},
+  {path: 'new/:idClient/:idProject', component: EditQuoteComponent},
   {path: 'edit/:id', component: EditQuoteComponent},
   {path: ':id', component: QuoteDetailComponent},
 

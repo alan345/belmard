@@ -38,7 +38,7 @@
               <!-- Autocomplete -->
               <label>Projet</label>
               <a [routerLink]="['/project/new']" class="admn-btn">
-                Ajouter Client
+                Ajouter Projet
               </a>
               <input
                 [ngModelOptions]="{standalone: true}"
@@ -48,11 +48,11 @@
                 mdInput
               >
               <div *ngFor="let project of fetchedProjects; let i=index">
-                {{project|json}}
-                <button type="button" (click)="selectProject(user)">select</button>
+                {{project.name}}
+                <button type="button" (click)="selectProject(project)">select</button>
               </div>
               <div *ngFor="let project of fetchedQuote.projects; let i=index">
-                {{project|json}}
+                {{project.name}}
                 <button type="button" (click)="removeProject(i)"><i class="fa fa-times"></i></button>
               </div>
               <!-- Autocomplete -->
