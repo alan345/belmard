@@ -60,12 +60,12 @@ import { SeePictureDialogComponent} from './seePictureDialog/seePictureDialog.co
 
 
 import { ProductModule} from './product/product.module';
-import { ProjectModule} from './project/project.module';
+//import { ProjectModule} from './project/project.module';
 import { UserModule} from './user/user.module';
 // import { ProductModule} from './product/product.module';
 import { CompanieModule} from './companie/companie.module';
 
-import { QuoteModule} from './quote/quote.module';
+//import { QuoteModule} from './quote/quote.module';
 
 
 
@@ -210,11 +210,11 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 
 
     UserModule,
-    ProductModule,
-    ProjectModule,
-    // ProductModule,
+  //  ProductModule,
+  //  ProjectModule,
+     ProductModule,
     CompanieModule,
-    QuoteModule,
+  //  QuoteModule,
 
 
   ],
