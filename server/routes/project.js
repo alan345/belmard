@@ -63,7 +63,7 @@ router.put('/:id', function (req, res, next) {
       })
     } else {
       //console.log(req.body)
-        item.title = req.body.title
+        item.details = req.body.details
         item.forms = req.body.forms
         item.status = req.body.status
         item.embed = req.body.embed

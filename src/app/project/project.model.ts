@@ -5,14 +5,19 @@ import { Quote } from '../quote/quote.model';
 
 export class Project {
     _id: string = '';
-    name: string = '';
+    details: Details = new Details()
     status: number = 0;
-    description: string = '';
     clients: User[] = [];
     assignedTo: User[] = [];
     forms: Form[] = [];
     categorie: Categorie = new Categorie();
     // quotes: Quote[] = [];
+}
+
+
+export class Details {
+  name: string = '';
+  description: string = '';
 }
 
 export class Categorie {
@@ -25,6 +30,20 @@ export class Categ {
   name: string = '';
 }
 
+export const StatusProject =
+[
+  {index: 0, label: 'RDV planifié'},
+  {index: 1, label: 'Rappeler'},
+  {index: 2, label: 'Stand-By'},
+  {index: 3, label: 'Devis à faire'},
+  {index: 4, label: 'Attente Validation'},
+  {index: 5, label: 'Devis validée, A envoyer'},
+  {index: 6, label: 'Attente approbation'},
+  {index: 7, label: 'Devis refusé'},
+  {index: 8, label: 'Devis accepté – Attente acompte'},
+  {index: 9, label: 'En cours de réalisation'},
+  {index: 10, label: 'Terminé'},
+]
 export const ItemSteps =
 [
   {

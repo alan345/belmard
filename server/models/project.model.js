@@ -7,8 +7,11 @@ var mongoose                = require('mongoose'),
 
 
 var project = new Schema({
-    name: {type: String},
-    description: {type: String},
+    details: {
+      name: {type: String},
+      description: {type: String},
+    },
+
     // quotes: [{type: Schema.Types.ObjectId, ref: 'Quote'}],
     clients: [{type: Schema.Types.ObjectId, ref: 'User'}],
     assignedTo: [{type: Schema.Types.ObjectId, ref: 'User'}],

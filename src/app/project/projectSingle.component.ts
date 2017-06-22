@@ -4,7 +4,7 @@ import { ToastsManager} from 'ng2-toastr';
 import { MdDialog } from '@angular/material';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
-import { Project, ItemSteps } from './project.model';
+import { Project, ItemSteps, StatusProject } from './project.model';
 import { EditOptionsComponentDialog } from '../modalLibrary/modalLibrary.component';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -36,68 +36,16 @@ export class ProjectSingleComponent implements OnInit {
   itemSteps = ItemSteps;
 
 
-  status = [
-    {index: 0, label: 'RDV planifié'},
-    {index: 1, label: 'Rappeler'},
-    {index: 2, label: 'Stand-By'},
-    {index: 3, label: 'Devis à faire'},
-    {index: 4, label: 'Attente Validation'},
-    {index: 5, label: 'Devis validée, A envoyer'},
-    {index: 6, label: 'Attente approbation'},
-    {index: 7, label: 'Devis refusé'},
-    {index: 8, label: 'Devis accepté – Attente acompte'},
-    {index: 9, label: 'En cours de réalisation'},
-    {index: 10, label: 'Terminé'},
-  ]
+  status = StatusProject
   categ: string = 'Electricité';
-
   subCateg: string = 'file';
   autocompleteUser: string = '';
   autocompleteQuote: string = '';
   fetchedUsers: User[] = [];
   fetchedQuotes: Quote[] = [];
-  // data:Array<Object> =
-  // [
-  //   {
-  //     'categ':'Plomberie',
-  //     'subCategD': ['robinet', 'douche', 'joint']},
-  //   {
-  //     'categ':'Electricité',
-  //     'subCategD': ['lampe', 'file', 'douille']},
-  //   {
-  //     'categ':'Serrurerie',
-  //     'subCategD': ['cle', 'verou', 'porte']}
-  // ];
-
 
 
   fetchedProject: Project = new Project();
-
-  // categoriesHard2 = [
-  //   { name:'Through your eyes', selected : false },
-  //   { name:'How to', selected : false },
-  //   { name:'Fashion', selected : false },
-  //   { name:'Merchandising', selected : false },
-  //   { name:'Behind the Scene & Testimonials', selected : false }
-  // ]
-
-
-  //
-  // categoriesHard1 = [{
-  //     name:'phyto',
-  //     selected : false
-  //   },
-  //   {
-  //     name:'phytoSpecific',
-  //     selected : false
-  //   },
-  //   {
-  //     name:'subtil',
-  //     selected : false
-  //   }]
-
-  // inputCategorie = ''
-  //
 
 
   public myForm: FormGroup;
@@ -119,9 +67,6 @@ export class ProjectSingleComponent implements OnInit {
 
 
 
-  // getObjects(myForm: any){
-  //    return myForm.get('categories').controls
-  //  }
 
   ngOnInit() {
     this.myForm = this._fb.group({
