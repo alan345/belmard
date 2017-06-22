@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 
-import { ProjectsComponent} from './projects.component';
+import { ProjectsComponent} from './projects/projects.component';
 import { ProjectSingleComponent} from './projectSingle.component';
 import { ProjectService} from './project.service';
 import { ProjectRouting} from './projectRouting.module';

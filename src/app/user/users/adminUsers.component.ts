@@ -43,7 +43,7 @@ export class AdminUsersComponent implements OnInit {
 
   ngOnInit() {
     this.search.orderBy = 'profile.name';
-    this.search.role = 'admin';
+    this.search.role = 'client';
     this.getUsers(this.paginationData.currentPage, this.search);
   }
   goBack() {
