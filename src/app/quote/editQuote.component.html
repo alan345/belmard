@@ -17,6 +17,7 @@
                 Ajouter Client
               </a>
               <input
+                *ngIf="!fetchedQuote.clients.length"
                 [ngModelOptions]="{standalone: true}"
                 [(ngModel)]="autocompleteUser"
                 placeholder="Select"
@@ -41,6 +42,7 @@
                 Ajouter Projet
               </a>
               <input
+                *ngIf="!fetchedQuote.projects.length"
                 [ngModelOptions]="{standalone: true}"
                 [(ngModel)]="autocompleteProject"
                 placeholder="Select"

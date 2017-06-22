@@ -142,6 +142,7 @@ export class ProjectSingleComponent implements OnInit {
   selectUser(user: User) {
     this.fetchedUsers = []
     this.fetchedProject.clients.push(user)
+    this.save()
   }
 
   searchUsers() {
@@ -184,6 +185,7 @@ export class ProjectSingleComponent implements OnInit {
 
   removeUser(i: number) {
     this.fetchedProject.clients.splice(i, 1);
+    this.save()
   }
 
 
@@ -217,7 +219,7 @@ export class ProjectSingleComponent implements OnInit {
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
-            this.router.navigate(['project']);
+            this.router.navigate(['project/' + res.obj._id]);
           },
           error => {console.log(error)}
         );

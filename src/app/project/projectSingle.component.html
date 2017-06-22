@@ -61,6 +61,7 @@
         Ajouter Client
       </a>
       <input
+        *ngIf="!fetchedProject.clients.length"
         [ngModelOptions]="{standalone: true}"
         [(ngModel)]="autocompleteUser"
         placeholder="Select"
