@@ -82,9 +82,13 @@
       <div *ngIf="fetchedProject._id">
         <div *ngFor="let user of fetchedProject.clients">
           <label>Devis</label>
-          <a [routerLink]="['/quote/new/' + user._id + '/' + fetchedProject._id]" class="admn-btn">
-            Ajouter Devis
-          </a>
+
+
+          <app-quotes [userId]="user._id" [projectId]="fetchedProject._id"></app-quotes>
+          <!-- <app-projects [userId]="fetchedUser._id"></app-projects> -->
+
+
+
         </div>
       </div>
 

@@ -16,6 +16,8 @@ import { Location} from '@angular/common';
 })
 export class QuotesComponent implements OnInit {
   @Input() userId = '';
+  @Input() projectId = '';
+
   fetchedQuotes: Quote[] = [];
   loading: boolean;
   paginationData = {
@@ -29,6 +31,7 @@ export class QuotesComponent implements OnInit {
     search: '',
     quoteType: '',
     userId:'',
+    projectId:'',
   };
 
   constructor(
@@ -46,8 +49,11 @@ export class QuotesComponent implements OnInit {
   ngOnInit() {
     let this2 = this
     setTimeout(function(){
-      console.log(this2.userId)
+      //console.log(this2.userId)
       this2.search.userId = this2.userId
+      this2.search.projectId = this2.projectId
+
+
       this2.search.orderBy = 'name'
       this2.getQuotes(this2.paginationData.currentPage, this2.search)
     }, 200);

@@ -11,6 +11,12 @@ import { ProjectRouting} from './projectRouting.module';
 import { MaterialModule } from '@angular/material';
 import { Ng2PaginationModule} from 'ng2-pagination';
 
+import { QuoteModule} from '../quote/quote.module';
+
+
+
+
+
 @NgModule({
   imports:      [
     ProjectRouting,
@@ -19,6 +25,7 @@ import { Ng2PaginationModule} from 'ng2-pagination';
     MaterialModule,
     Ng2PaginationModule,
     ReactiveFormsModule,
+    QuoteModule,
   ],
   declarations: [
 

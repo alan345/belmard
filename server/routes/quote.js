@@ -159,9 +159,18 @@ router.get('/page/:page', function (req, res, next) {
     search = {$or:arrObj}
     //findQuery['address.city'] = new RegExp(req.query.search, 'i')
   }
-  if(req.query.userId) {
+
+
+  if(req.query.userId)
     search['clients'] = mongoose.Types.ObjectId(req.query.userId)
-  }
+
+  if(req.query.projectId)
+    search['projects'] = mongoose.Types.ObjectId(req.query.projectId)
+
+
+
+
+
 
   //
   // if(req.query.typeQuote)
