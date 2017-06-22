@@ -1,20 +1,20 @@
 import { Component, OnInit} from '@angular/core';
-import { AuthService} from '../auth/auth.service';
-import { ProductService} from './product.service';
-import { Product} from './product.model';
+import { AuthService} from '../../auth/auth.service';
+import { ProductService} from '../product.service';
+import { Product} from '../product.model';
 import { ToastsManager} from 'ng2-toastr';
 import { MdDialog} from '@angular/material';
 import { Router} from '@angular/router';
 import { Location } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ViewEncapsulation} from '@angular/core';
-import { UserService} from '../user/user.service';
+import { UserService} from '../../user/user.service';
 
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
-  styleUrls: ['./product.component.css'],
+  styleUrls: ['../product.component.css'],
   encapsulation: ViewEncapsulation.None
 
 })
@@ -114,12 +114,15 @@ export class ProductsComponent implements OnInit {
     })
     this.updateCategerories()
   }
-  
 
 
-  searchInput(){
 
+  searchProducts() {
+
+    this.getProducts(1, this.search)
   }
+
+
   addSearchInput(){
 //    console.log(this.search.categories)
     this.updateCategerories()
@@ -157,21 +160,7 @@ export class ProductsComponent implements OnInit {
       .subscribe(
         res => {
           this.paginationData = res.paginationData;
-          let fetchedProductsNotSecure =  res.data
-          fetchedProductsNotSecure.forEach((product: Product) => {
-            //isNewProduct = false
-            //product['embedSecure'] = this.sanitizer.bypassSecurityTrustResourceUrl('//fast.wistia.net/embed/iframe/' + product['embed'])
-            //product['embedSecure'] = this.sanitizer.bypassSecurityTrustResourceUrl('https://player.vimeo.com/product/' + product['embed'] )
-
-
-
-            product['isNewProduct'] = false
-            this.trackinPage.lastVisitPageProductCount.forEach((productNotRead: Product) => {
-                if(productNotRead._id == product._id)
-                  product['isNewProduct'] = true
-            })
-            this.fetchedProducts.push(product)
-          })
+          this.fetchedProducts = res.data
           this.loading = false;
         },
         error => {

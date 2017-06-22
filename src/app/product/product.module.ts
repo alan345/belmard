@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 
-import { ProductsComponent} from './products.component';
+import { ProductsComponent} from './products/products.component';
 import { ProductSingleComponent} from './productSingle.component';
 import { ProductService} from './product.service';
 import { ProductRouting} from './productRouting.module';
