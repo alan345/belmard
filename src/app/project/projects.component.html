@@ -29,7 +29,7 @@
       <tbody class="clienttbl">
       <tr *ngFor="let project of fetchedProjects | paginate: { id: 'projectPagination', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }"
         [routerLink]="['/project/' + project._id]" routerLinkActive="active">
-        <td>{{project.name }}</td>
+        <td>{{project.details.name }}</td>
       </tr>
       </tbody>
     </table>
