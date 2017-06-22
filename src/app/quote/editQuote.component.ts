@@ -249,7 +249,7 @@ export class EditQuoteComponent implements OnInit {
       this.autocompleteProduct = ''
       this.fetchedQuote.devisDetails.push(devisDetails)
       this.calculateQuote()
-      this.save()
+
 
     }
     calculateQuote() {
@@ -267,6 +267,7 @@ export class EditQuoteComponent implements OnInit {
           this2.fetchedQuote.priceQuote.priceQuoteWithoutTaxes = this2.fetchedQuote.priceQuote.priceQuoteWithoutTaxes*1 + this2.fetchedQuote.devisDetails[i].totalPriceWithoutTaxes*1
 
         })
+        this2.save()
       }, 20)
 
     }
@@ -299,18 +300,7 @@ export class EditQuoteComponent implements OnInit {
   // }
 
 
-  onDelete(id: string) {
-    this.quoteService.deleteQuote(id)
-      .subscribe(
-        res => {
-          this.toastr.success('Great!', res.message);
-          console.log(res);
-        },
-        error => {
-          console.log(error);
-        }
-      );
-  }
+
 
   goBack() {
     this.location.back();
@@ -323,6 +313,41 @@ export class EditQuoteComponent implements OnInit {
   //   });
   //   control.push(addrCtrl);
   // }
+
+
+
+
+  onDelete(id: string) {
+    let this2 = this
+    return new Promise(function(resolve, reject) {
+      this2.quoteService.deleteQuote(id)
+        .subscribe(
+          res => {
+            this2.toastr.success('Great!', res.message);
+            resolve(res)
+          },
+          error => {
+            console.log(error);
+            reject(error)
+          }
+        )
+      })
+  }
+
+
+  openDialogDelete(){
+    let this2 = this
+    let dialogRefDelete = this.dialog.open(DeleteDialog)
+    dialogRefDelete.afterClosed().subscribe(result => {
+      if(result) {
+        this.onDelete(this.fetchedQuote._id).then(function(){
+          this2.router.navigate(['quote']);
+        })
+
+      }
+    })
+  }
+
 
   getQuote(id: string) {
     this.quoteService.getQuote(id, {})

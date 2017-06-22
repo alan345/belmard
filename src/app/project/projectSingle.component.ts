@@ -318,22 +318,22 @@ export class ProjectSingleComponent implements OnInit {
   }
 
 
-    onDelete(id: string) {
-      let this2 = this
-      return new Promise(function(resolve, reject) {
-        this2.projectService.deleteProject(id)
-          .subscribe(
-            res => {
-              this2.toastr.success('Great!', res.message);
-              resolve(res)
-            },
-            error => {
-              console.log(error);
-              reject(error)
-            }
-          )
-        })
-    }
+  onDelete(id: string) {
+    let this2 = this
+    return new Promise(function(resolve, reject) {
+      this2.projectService.deleteProject(id)
+        .subscribe(
+          res => {
+            this2.toastr.success('Great!', res.message);
+            resolve(res)
+          },
+          error => {
+            console.log(error);
+            reject(error)
+          }
+        )
+      })
+  }
 
 
 }
