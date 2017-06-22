@@ -80,54 +80,53 @@ export class ProductsComponent implements OnInit {
     this.location.back();
   }
 
-  onSelectChange = ($event: any): void => {
-//    console.log($event)
-    this.categories2 = $event.tab.textLabel
-    this.updateCategerories()
-    // this.search.categories = []
-    // this.search.categories.push({name:$event.tab.textLabel})
-    // this.getProducts(this.paginationData.currentPage, this.search)
+//   onSelectChange = ($event: any): void => {
+// //    console.log($event)
+//     this.categories2 = $event.tab.textLabel
+//     this.updateCategerories()
+//     // this.search.categories = []
+//     // this.search.categories.push({name:$event.tab.textLabel})
+//     // this.getProducts(this.paginationData.currentPage, this.search)
+//
+//   }
 
-  }
+//   updateCategerories(){
+//     this.search.categories = []
+//     this.search.categories.push({name:this.categories2})
+//     // if(this.inputSearch)
+//     //   this.search.categories.push({name:this.inputSearch})
+//     this.categories1.forEach((categorie1)=>{
+//       if(categorie1.selected == true) {
+//         this.search.categories.push({name : categorie1.name})
+//       }
+//     })
+// //    console.log(this.search.categories)
+//     this.fetchedProducts = []
+//     this.getProducts(1, this.search)
+//   }
 
-  updateCategerories(){
-    this.search.categories = []
-    this.search.categories.push({name:this.categories2})
-    // if(this.inputSearch)
-    //   this.search.categories.push({name:this.inputSearch})
-    this.categories1.forEach((categorie1)=>{
-      if(categorie1.selected == true) {
-        this.search.categories.push({name : categorie1.name})
-      }
-    })
-//    console.log(this.search.categories)
-    this.fetchedProducts = []
-    this.getProducts(1, this.search)
-  }
-
-  changeCateg1(nameCateg: string){
-    //this.categories1[nameCateg] = !this.categories1[nameCateg]
-    this.categories1.forEach((categ, index)=>{
-      if(categ.name === nameCateg) {
-        this.categories1[index].selected = !this.categories1[index].selected
-      }
-    })
-    this.updateCategerories()
-  }
+  // changeCateg1(nameCateg: string){
+  //   //this.categories1[nameCateg] = !this.categories1[nameCateg]
+  //   this.categories1.forEach((categ, index)=>{
+  //     if(categ.name === nameCateg) {
+  //       this.categories1[index].selected = !this.categories1[index].selected
+  //     }
+  //   })
+  //   this.updateCategerories()
+  // }
 
 
 
   searchProducts() {
-
     this.getProducts(1, this.search)
   }
 
 
-  addSearchInput(){
-//    console.log(this.search.categories)
-    this.updateCategerories()
-    // this.search.categories.pop()
-  }
+//   addSearchInput(){
+// //    console.log(this.search.categories)
+//     this.updateCategerories()
+//     // this.search.categories.pop()
+//   }
 
   onDelete(id: string) {
     this.productService.deleteProduct(id)
@@ -170,33 +169,7 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit() {
-    let userId = this.authService.currentUser.userId
-    this.productService.countNewItemForUser()
-    .subscribe(
-      data => {
-        this.trackinPage.lastVisitPageProductCount = data.item
-        this.userService.getUser(userId)
-        .subscribe(
-        res => {
-          res.user.trackinPage.lastVisitPageProduct = new Date()
-          this.userService.updateUser(res.user)
-            .subscribe(
-              res => {},
-              error => {
-                console.log(error);
-              }
-            )
-        },
-        error => {
-          console.log(error);
-        }
-        )
-
-      },
-      error => console.log(error)
-    )
-    this.categories2 = 'what\'s new'
-    this.updateCategerories()
+    this.getProducts(1, this.search)
   }
 
   isAdmin() {
