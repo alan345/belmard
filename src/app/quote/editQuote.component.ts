@@ -206,7 +206,7 @@ export class EditQuoteComponent implements OnInit {
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
-            this.router.navigate(['quote/' + this.fetchedQuote._id])
+            //this.router.navigate(['quote/edit/' + this.fetchedQuote._id])
           },
           error => {
             this.toastr.error('error!', error)
@@ -217,7 +217,7 @@ export class EditQuoteComponent implements OnInit {
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
-              this.router.navigate(['quote/' + res.obj._id])
+              this.router.navigate(['quote/edit/' + res.obj._id])
           },
           error => {console.log(error)}
         )
@@ -246,8 +246,10 @@ export class EditQuoteComponent implements OnInit {
         quantity: 1,
         discount: 0,
       }
+      this.autocompleteProduct = ''
       this.fetchedQuote.devisDetails.push(devisDetails)
       this.calculateQuote()
+      this.save()
 
     }
     calculateQuote() {
