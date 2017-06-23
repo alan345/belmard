@@ -1,4 +1,6 @@
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+/*@import "fullcalendar/dist/fullcalendar.min.css";*/
+
 .box {
 background-color: #fff;
 }

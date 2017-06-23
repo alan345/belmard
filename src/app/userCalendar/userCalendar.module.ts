@@ -1,3 +1,7 @@
+//import {CalendarComponent} from "angular2-fullcalendar/src/calendar/calendar";
+
+
+
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -12,6 +16,12 @@ import { MaterialModule } from '@angular/material';
 import { Ng2PaginationModule} from 'ng2-pagination';
 
 import { QuoteModule} from '../quote/quote.module';
+
+import {CalendarModule} from "ap-angular2-fullcalendar";
+// import {CalendarModule} from "ap-angular2-fullcalendar";
+// import {CalendarComponent} from "ap-angular2-fullcalendar";
+//import {CalendarComponent} from "ap-angular2-fullcalendar";
+
 
 //import {UserCalendarComponent} from "angular2-fulluserCalendar/src/userCalendar/userCalendar";
 //import {UserCalendarModule} from "ap-angular2-fulluserCalendar";
@@ -29,10 +39,14 @@ import { QuoteModule} from '../quote/quote.module';
     Ng2PaginationModule,
     ReactiveFormsModule,
     QuoteModule,
+  //  CalendarComponent,
+    CalendarModule.forRoot(),
+//    CalendarModule.forRoot()
   //  UserCalendarModuleFullUserCalendar.forRoot()
   ],
   declarations: [
-
+  //  CalendarComponent,
+  //CalendarComponent,
 //    UserCalendarsComponent,
     UserCalendarSingleComponent,
   //  UserCalendarComponent,

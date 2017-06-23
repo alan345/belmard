@@ -28,8 +28,8 @@ export class UserCalendarSingleComponent implements OnInit {
 
 
 
-  userCalendarOptions = {
-    height: 'parent',
+  calendarOptions = {
+    height: '500px',
     fixedWeekCount : false,
     defaultDate: '2016-09-12',
     editable: true,
@@ -134,7 +134,9 @@ export class UserCalendarSingleComponent implements OnInit {
   }
 
 
-
+  onCalendarInit(event) {
+    console.log(event)
+  }
 
 
   ngOnInit() {
