@@ -29,11 +29,20 @@ export class UserCalendarSingleComponent implements OnInit {
 
 
   calendarOptions = {
-    height: '500px',
+    height: '100',
     fixedWeekCount : false,
+    selectable: true,
+    header: {
+      left: 'prev,today,next',
+      center: 'title',
+      right: 'month,agendaWeek,agendaDay'
+    },
     defaultDate: '2016-09-12',
     editable: true,
     eventLimit: true, // allow "more" link when too many events
+    eventClick: this.eventClick.bind(this), //bind do the magic
+    eventDragStop: this.eventDragStop.bind(this),
+    select:this.select.bind(this),
     events: [
       {
         title: 'All Day Event',
@@ -133,11 +142,24 @@ export class UserCalendarSingleComponent implements OnInit {
   ) {
   }
 
+  select(start, end){
+    console.log(start)
+    console.log(end)
+  }
+  eventClick(event){
+    //console.log(event)
+  }
+  eventDragStop(event) {
+    console.log(event)
+  }
 
   onCalendarInit(event) {
     console.log(event)
   }
 
+  test() {
+    this.calendarOptions.events[0].start = '2016-09-02'
+  }
 
   ngOnInit() {
     this.myForm = this._fb.group({
