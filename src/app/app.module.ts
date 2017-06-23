@@ -109,7 +109,7 @@ import { AdminGuardService} from './admin/services/adminGuard';
 import { AdminComponent} from './admin/admin.component';
 
 
-
+//import {CalendarComponent} from "angular2-fullcalendar/src/calendar/calendar";
 
 
 
@@ -126,6 +126,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     AppComponent,
     FooterComponent,
     NavbarComponent,
+  //  CalendarComponent,
 
 
     // ProductComponent,

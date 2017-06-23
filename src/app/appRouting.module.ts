@@ -39,7 +39,7 @@ import { NgModule }             from '@angular/core';
 export const routes: Routes = [
   {path: '', component: MainPageHomeComponent, canActivate: [AuthGuardService], pathMatch: 'full'},
 
-
+  {path: 'userCalendar', loadChildren: 'app/userCalendar/userCalendar.module#UserCalendarModule'},
   {path: 'companie', loadChildren: 'app/companie/companie.module#CompanieModule'},
   {path: 'quote', loadChildren: 'app/quote/quote.module#QuoteModule'},
   {path: 'product', loadChildren: 'app/product/product.module#ProductModule'},
