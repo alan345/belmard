@@ -6,21 +6,24 @@ var mongoose                = require('mongoose'),
     mongooseUniqueValidator = require('mongoose-unique-validator')
 
 
-var calendar = new Schema({
-    user: [{type: Schema.Types.ObjectId, ref: 'User'}],
-    events:[{
+var userCalendar = new Schema({
       title:{type: String, default: ['']},
       url:{type: String, default: ['']},
       start:{type: Date},
       end:{type: Date},
       id:{type: Number},
       client: [{type: Schema.Types.ObjectId, ref: 'User'}],
-    }],
+      user: [{type: Schema.Types.ObjectId, ref: 'User'}],
+      color: {
+        primary: {type: String, default: ['#ad2121']},
+        secondary: {type: String, default: ['#FAE3E3']},
+      }
+
   },
   {
     timestamps: true
   })
 
-calendar.plugin(mongooseUniqueValidator)
+userCalendar.plugin(mongooseUniqueValidator)
 
-module.exports = mongoose.model('Calendar', calendar)
+module.exports = mongoose.model('UserCalendar', userCalendar)

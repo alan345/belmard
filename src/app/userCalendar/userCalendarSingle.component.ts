@@ -162,10 +162,38 @@ export class UserCalendarSingleComponent implements OnInit {
           afterEnd: true
         }
       });
+    //  this.save()
       this.refresh.next();
     }
 
 
+
+
+      save() {
+
+        // if(this.fetchedQuote._id) {
+        //   this.quoteService.updateQuote(this.fetchedQuote)
+        //     .subscribe(
+        //       res => {
+        //         this.toastr.success('Great!', res.message)
+        //         //this.router.navigate(['quote/edit/' + this.fetchedQuote._id])
+        //       },
+        //       error => {
+        //         this.toastr.error('error!', error)
+        //       }
+        //     )
+        // } else {
+          this.userCalendarService.saveUserCalendar(this.events[0])
+            .subscribe(
+              res => {
+                this.toastr.success('Great!', res.message)
+                  this.router.navigate(['quote/edit/' + res.obj._id])
+              },
+              error => {console.log(error)}
+            )
+        // }
+
+      }
 
 
 
@@ -211,20 +239,71 @@ export class UserCalendarSingleComponent implements OnInit {
 
 
   ngOnInit() {
-    this.myForm = this._fb.group({
-      status: [''],
-      name: ['', [Validators.required, Validators.minLength(5)]],
-      description: ['', [Validators.required, Validators.minLength(5)]],
-    });
 
-    this.activatedRoute.params.subscribe((params: Params) => {
-      if(params['id'])
-       this.getUserCalendar(params['id'])
-
-      if(params['idClient'])
-       this.getUser(params['idClient'])
-    })
+    this.getUserCalendars(1,{})
+    // this.myForm = this._fb.group({
+    //   status: [''],
+    //   name: ['', [Validators.required, Validators.minLength(5)]],
+    //   description: ['', [Validators.required, Validators.minLength(5)]],
+    // });
+    //
+    // this.activatedRoute.params.subscribe((params: Params) => {
+    //   if(params['id'])
+    //    this.getUserCalendar(params['id'])
+    //
+    //   if(params['idClient'])
+    //    this.getUser(params['idClient'])
+    // })
   }
+
+
+
+  getUserCalendars(page: number, search: any) {
+    this.userCalendarService.getUserCalendars(page, search)
+      .subscribe(
+        res => {
+          console.log(res)
+
+
+
+
+
+          this.events = []
+          res.data.forEach(event => {
+            this.events.push({
+              title: event.title,
+              start: new Date(event.start),
+              end: new Date(event.end),
+              color: event.color,
+              draggable: true,
+              resizable: {
+                beforeStart: true,
+                afterEnd: true
+              }
+            })
+          });
+
+
+
+
+          this.refresh.next();
+
+
+
+
+
+
+        //  console.log("quotes");
+        //  console.log(res);
+
+        },
+        error => {
+          console.log(error);
+        }
+      );
+  }
+
+
 
   selectUser(user: User) {
     this.fetchedUsers = []
@@ -290,38 +369,38 @@ export class UserCalendarSingleComponent implements OnInit {
     })
   }
 
-
-  save() {
-
-    this.fetchedUserCalendar.categorie.categ1 = [{name: this.categ1}]
-    this.fetchedUserCalendar.categorie.categ2 = [{name: this.categ2}]
-    this.fetchedUserCalendar.categorie.categ3 = [{name: this.categ3}]
-
-
-
-    if(this.fetchedUserCalendar._id) {
-
-
-      this.userCalendarService.updateUserCalendar(this.fetchedUserCalendar)
-        .subscribe(
-          res => {
-            this.toastr.success('Great!', res.message)
-            this.router.navigate(['userCalendar/' + res.obj._id]);
-          },
-          error => {console.log(error)}
-        );
-    } else {
-
-      this.userCalendarService.saveUserCalendar(this.fetchedUserCalendar)
-        .subscribe(
-          res => {
-            this.toastr.success('Great!', res.message)
-            this.router.navigate(['userCalendar/' + res.obj._id]);
-          },
-          error => {console.log(error)}
-        );
-    }
-  }
+  //
+  // save() {
+  //
+  //   this.fetchedUserCalendar.categorie.categ1 = [{name: this.categ1}]
+  //   this.fetchedUserCalendar.categorie.categ2 = [{name: this.categ2}]
+  //   this.fetchedUserCalendar.categorie.categ3 = [{name: this.categ3}]
+  //
+  //
+  //
+  //   if(this.fetchedUserCalendar._id) {
+  //
+  //
+  //     this.userCalendarService.updateUserCalendar(this.fetchedUserCalendar)
+  //       .subscribe(
+  //         res => {
+  //           this.toastr.success('Great!', res.message)
+  //           this.router.navigate(['userCalendar/' + res.obj._id]);
+  //         },
+  //         error => {console.log(error)}
+  //       );
+  //   } else {
+  //
+  //     this.userCalendarService.saveUserCalendar(this.fetchedUserCalendar)
+  //       .subscribe(
+  //         res => {
+  //           this.toastr.success('Great!', res.message)
+  //           this.router.navigate(['userCalendar/' + res.obj._id]);
+  //         },
+  //         error => {console.log(error)}
+  //       );
+  //   }
+  // }
 
   openDialogDelete(){
     let this2 = this
@@ -366,43 +445,43 @@ export class UserCalendarSingleComponent implements OnInit {
 
 
 
-
-  getUserCalendar(id : string) {
-    this.userCalendarService.getUserCalendar(id)
-      .subscribe(
-        res => {
-          this.fetchedUserCalendar = <UserCalendar>res
-
-          if(this.fetchedUserCalendar.categorie.categ1.length)
-            this.categ1 = this.fetchedUserCalendar.categorie.categ1[0].name
-          if(this.fetchedUserCalendar.categorie.categ2.length)
-            this.categ2 = this.fetchedUserCalendar.categorie.categ2[0].name
-          if(this.fetchedUserCalendar.categorie.categ3.length)
-            this.categ3 = this.fetchedUserCalendar.categorie.categ3[0].name
-
-          let categ1Index:number = 0
-          let categ2Index:number = 0
-          this.itemSteps.forEach((categ1,index) => {
-            if(categ1.categ === this.categ1)
-              categ1Index = index
-          })
-          this.itemSteps[categ1Index].subCateg.forEach((categ2,index) => {
-            if(categ2.categ === this.categ2)
-              categ2Index = index
-          })
-          this.changeCascade(categ1Index, categ2Index)
-          //this.fetchedUserCalendar.embedSecure = this.sanitizer.bypassSecurityTrustResourceUrl('https://player.vimeo.com/userCalendar/' + res.embed )
-          //this.fetchedUserCalendar.embedSecure = this.sanitizer.bypassSecurityTrustResourceUrl('//fast.wistia.net/embed/iframe/' + res.embed)
-          // this.fetchedUserCalendar.categories.forEach((categorie) => {
-          //   //this.addCategorie()
-          // })
-          //this.refreshHardCategories()
-        },
-        error => {
-          console.log(error);
-        }
-      )
-  }
+  //
+  // getUserCalendar(id : string) {
+  //   this.userCalendarService.getUserCalendar(id)
+  //     .subscribe(
+  //       res => {
+  //         this.fetchedUserCalendar = <UserCalendar>res
+  //
+  //         if(this.fetchedUserCalendar.categorie.categ1.length)
+  //           this.categ1 = this.fetchedUserCalendar.categorie.categ1[0].name
+  //         if(this.fetchedUserCalendar.categorie.categ2.length)
+  //           this.categ2 = this.fetchedUserCalendar.categorie.categ2[0].name
+  //         if(this.fetchedUserCalendar.categorie.categ3.length)
+  //           this.categ3 = this.fetchedUserCalendar.categorie.categ3[0].name
+  //
+  //         let categ1Index:number = 0
+  //         let categ2Index:number = 0
+  //         this.itemSteps.forEach((categ1,index) => {
+  //           if(categ1.categ === this.categ1)
+  //             categ1Index = index
+  //         })
+  //         this.itemSteps[categ1Index].subCateg.forEach((categ2,index) => {
+  //           if(categ2.categ === this.categ2)
+  //             categ2Index = index
+  //         })
+  //         this.changeCascade(categ1Index, categ2Index)
+  //         //this.fetchedUserCalendar.embedSecure = this.sanitizer.bypassSecurityTrustResourceUrl('https://player.vimeo.com/userCalendar/' + res.embed )
+  //         //this.fetchedUserCalendar.embedSecure = this.sanitizer.bypassSecurityTrustResourceUrl('//fast.wistia.net/embed/iframe/' + res.embed)
+  //         // this.fetchedUserCalendar.categories.forEach((categorie) => {
+  //         //   //this.addCategorie()
+  //         // })
+  //         //this.refreshHardCategories()
+  //       },
+  //       error => {
+  //         console.log(error);
+  //       }
+  //     )
+  // }
 
 
   onDelete(id: string) {
