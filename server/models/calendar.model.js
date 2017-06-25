@@ -6,16 +6,28 @@ var mongoose                = require('mongoose'),
     mongooseUniqueValidator = require('mongoose-unique-validator')
 
 
-var calendar = new Schema({
-    user: [{type: Schema.Types.ObjectId, ref: 'User'}],
-    events:[{
+var calendar = new Schema(
+
+    {
       title:{type: String, default: ['']},
-      url:{type: String, default: ['']},
+      color: {
+        primary: {type: String, default: ['#ad2121']},
+        secondary: {type: String, default: ['#FAE3E3']},
+      },
+      resizable: {
+        beforeStart: {type: Boolean, default: [true]},
+        afterEnd: {type: Boolean, default: [true]},
+      },
+      draggable: {type: Boolean, default: [true]},
+
+      //url:{type: String, default: ['']},
       start:{type: Date},
       end:{type: Date},
-      id:{type: Number},
-      client: [{type: Schema.Types.ObjectId, ref: 'User'}],
-    }],
+      meta: {
+        client: [{type: Schema.Types.ObjectId, ref: 'User'}],
+        user: [{type: Schema.Types.ObjectId, ref: 'User'}],
+      }
+
   },
   {
     timestamps: true

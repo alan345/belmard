@@ -1,3 +1,152 @@
+<mwl-demo-utils-calendar-header
+  [(view)]="view"
+  [(viewDate)]="viewDate"
+  (viewDateChange)="fetchEvents()"
+  (viewChange)="fetchEvents()">
+</mwl-demo-utils-calendar-header>
+
+
+<ng-template #loading>
+  <div class="text-center">
+    <i class="fa fa-spin fa-spinner fa-5x"></i>
+    <br>
+    Loading events...
+  </div>
+</ng-template>
+
+
+<!--
+<div *ngIf="events$ | async; else loading; let events">
+  {{events|json}}
+  alanALAN
+</div> -->
+
+
+
+<div *ngIf="events$ | async; else loading; let events">
+  <div [ngSwitch]="view">
+    <mwl-calendar-month-view
+      *ngSwitchCase="'month'"
+      [viewDate]="viewDate"
+      [events]="events"
+      [activeDayIsOpen]="activeDayIsOpen"
+      (dayClicked)="dayClicked($event.day)"
+      (eventClicked)="eventClicked($event.event)">
+    </mwl-calendar-month-view>
+    <mwl-calendar-week-view
+      *ngSwitchCase="'week'"
+      [viewDate]="viewDate"
+      [events]="events"
+      (eventClicked)="eventClicked($event.event)">
+    </mwl-calendar-week-view>
+    <mwl-calendar-day-view
+      *ngSwitchCase="'day'"
+      [viewDate]="viewDate"
+      [events]="events"
+      (eventClicked)="eventClicked($event.event)">
+    </mwl-calendar-day-view>
+  </div>
+</div>
+angular2-fullcalendar
+<br>
+<br><br><br>
+
+
+
+
+
+<h3>
+  Edit events
+  <button
+    class="btn btn-primary pull-right"
+    (click)="save()">
+    Add new
+  </button>
+
+  <!-- <button
+    class="btn btn-primary pull-right"
+    (click)="addEvent()">
+    Add new
+  </button> -->
+  <div class="clearfix"></div>
+</h3>
+
+
+<div *ngIf="events$ | async; else loading; let events">
+<table class="table table-bordered">
+
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Primary color</th>
+      <th>Secondary color</th>
+      <th>Starts at</th>
+      <th>Ends at</th>
+      <th>Remove</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <!-- <tr *ngIf="events$ | async; else loading; let events"> -->
+
+      <tr *ngFor="let event of events; let index = index">
+        <td>
+          <input
+            type="text"
+            class="form-control"
+            [(ngModel)]="event.title"
+            (keyup)="refresh()">
+        </td>
+        <td>
+          <input
+            type="color"
+            [(ngModel)]="event.color.primary"
+            (change)="refresh()">
+        </td>
+        <td>
+          <input
+            type="color"
+            [(ngModel)]="event.color.secondary"
+            (change)="refresh()">
+        </td>
+        <td>
+          <mwl-demo-utils-date-time-picker
+            [(date)]="event.start"
+            (dateChange)="refresh()"
+            placeholder="Not set">
+          </mwl-demo-utils-date-time-picker>
+        </td>
+        <td>
+          <mwl-demo-utils-date-time-picker
+            [(date)]="event.end"
+            (dateChange)="refresh()"
+            placeholder="Not set">
+          </mwl-demo-utils-date-time-picker>
+        </td>
+        <td>
+          <button
+            class="btn btn-danger"
+            (click)="events.splice(index, 1); refresh()">
+            Delete
+          </button>
+        </td>
+      </tr>
+
+  </tbody>
+
+</table>
+<div>
+
+
+
+
+
+
+
+<!--
+
+
+
 <ng-template #modalContent let-close="close">
   <div class="modal-header">
     <h5 class="modal-title">Event action occurred</h5>
@@ -126,49 +275,49 @@
     </tr>
   </thead>
 
-  <tbody>
-    <tr *ngFor="let event of events; let index = index">
+  <tbody> -->
+    <!-- <tr *ngFor="let event of events; let index = index">
       <td>
         <input
           type="text"
           class="form-control"
           [(ngModel)]="event.title"
-          (keyup)="refresh.next()">
+          (keyup)="refresh()">
       </td>
       <td>
         <input
           type="color"
           [(ngModel)]="event.color.primary"
-          (change)="refresh.next()">
+          (change)="refresh()">
       </td>
       <td>
         <input
           type="color"
           [(ngModel)]="event.color.secondary"
-          (change)="refresh.next()">
+          (change)="refresh()">
       </td>
       <td>
         <mwl-demo-utils-date-time-picker
           [(date)]="event.start"
-          (dateChange)="refresh.next()"
+          (dateChange)="refresh()"
           placeholder="Not set">
         </mwl-demo-utils-date-time-picker>
       </td>
       <td>
         <mwl-demo-utils-date-time-picker
           [(date)]="event.end"
-          (dateChange)="refresh.next()"
+          (dateChange)="refresh()"
           placeholder="Not set">
         </mwl-demo-utils-date-time-picker>
       </td>
       <td>
         <button
           class="btn btn-danger"
-          (click)="events.splice(index, 1); refresh.next()">
+          (click)="events.splice(index, 1); refresh()">
           Delete
         </button>
       </td>
     </tr>
   </tbody>
 
-</table>
+</table> -->
