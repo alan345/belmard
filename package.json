@@ -5,6 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "node ./bin/www",
+    "uglify": "uglifyjs dist/vendor.bundle.js --screw-ie8 --compress --mangle --output dist/vendor.bundle.js && uglifyjs dist/main.bundle.js --screw-ie8 --compress --mangle --output dist/main.bundle.js && uglifyjs dist/styles.bundle.js --screw-ie8 --compress --mangle --output dist/styles.bundle.js && uglifyjs dist/polyfills.bundle.js --screw-ie8 --compress --mangle --output dist/polyfills.bundle.js && uglifyjs dist/inline.bundle.js --screw-ie8 --compress --mangle --output dist/inline.bundle.js",
     "test": "ng test",
     "pree2e": "webdriver-manager update --standalone false --gecko false",
     "e2e": "protractor"
