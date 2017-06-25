@@ -9,7 +9,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { Product, ItemSteps } from './product.model';
 import { Companie } from '../companie/companie.model';
-import { EditOptionsComponentDialog } from '../modalLibrary/modalLibrary.component';
+import { EditOptionsComponentDialog } from '../form/modalLibrary/modalLibrary.component';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { DeleteDialog } from '../deleteDialog/deleteDialog.component'

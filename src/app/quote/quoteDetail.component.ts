@@ -11,7 +11,7 @@ import {Router, ActivatedRoute, Params } from '@angular/router';
 import {Location} from '@angular/common';
 import { Form } from '../form/form.model';
 import { FormBuilder, FormGroup, FormArray, Validators} from '@angular/forms';
-import { EditOptionsComponentDialog } from '../modalLibrary/modalLibrary.component';
+import { EditOptionsComponentDialog } from '../form/modalLibrary/modalLibrary.component';
 
 import { User } from '../user/user.model';
 

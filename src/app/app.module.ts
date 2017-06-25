@@ -100,7 +100,7 @@ import { ErrorPageComponent} from './errorPage/errorPage.component';
 import { AdminService} from './admin/services/admin.service';
 
 
-import { EditOptionsComponentDialog} from './modalLibrary/modalLibrary.component';
+import { EditOptionsComponentDialog} from './form/modalLibrary/modalLibrary.component';
 
 
 

@@ -3,7 +3,7 @@ import { MainPageHomeService} from './mainPageHome.service';
 import { FormGroup } from '@angular/forms';
 import { ToastsManager} from 'ng2-toastr';
 import { MdDialog} from '@angular/material';
-import { EditOptionsComponentDialog }  from '../modalLibrary/modalLibrary.component';
+import { EditOptionsComponentDialog }  from '../form/modalLibrary/modalLibrary.component';
 import { AdminService} from '../admin/services/admin.service';
 
 

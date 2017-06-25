@@ -10,7 +10,7 @@ import { Location }               from '@angular/common';
 import { User } from '../user.model';
 import { Form } from '../../form/form.model';
 import { Companie } from '../../companie/companie.model';
-import { EditOptionsComponentDialog } from '../../modalLibrary/modalLibrary.component';
+import { EditOptionsComponentDialog } from '../../form/modalLibrary/modalLibrary.component';
 import { FormBuilder, FormGroup, FormArray, Validators} from '@angular/forms';
 import { CompanieService} from '../../companie/companie.service';
 import { SeePictureDialogComponent } from '../../seePictureDialog/seePictureDialog.component';

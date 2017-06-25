@@ -5,7 +5,7 @@ import { MdDialog } from '@angular/material';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { UserCalendar, ItemSteps, StatusUserCalendar } from './userCalendar.model';
-import { EditOptionsComponentDialog } from '../modalLibrary/modalLibrary.component';
+import { EditOptionsComponentDialog } from '../form/modalLibrary/modalLibrary.component';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { DeleteDialog } from '../deleteDialog/deleteDialog.component'
