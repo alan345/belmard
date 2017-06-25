@@ -59,11 +59,11 @@ import { SeePictureDialogComponent} from './seePictureDialog/seePictureDialog.co
 //
 
 
-import { ProductModule} from './product/product.module';
+//import { ProductModule} from './product/product.module';
 //import { ProjectModule} from './project/project.module';
 import { UserModule} from './user/user.module';
 // import { ProductModule} from './product/product.module';
-import { CompanieModule} from './companie/companie.module';
+//import { CompanieModule} from './companie/companie.module';
 
 //import { QuoteModule} from './quote/quote.module';
 
@@ -209,11 +209,13 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 
     NgbModule.forRoot(),
     UserModule,
-  //  ProductModule,
+
   //  ProjectModule,
-     ProductModule,
-    CompanieModule,
+//    ProductModule,
+  //  CompanieModule,
   //  QuoteModule,
+
+
 
 
   ],

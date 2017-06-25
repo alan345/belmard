@@ -9,7 +9,6 @@ import { AdminService} from '../admin/services/admin.service';
 
 import { Options } from './options.model';
 import { Router} from '@angular/router';
-import { CompanieService} from '../companie/companie.service';
 import { AuthService} from '../auth/auth.service';
 // import { Companie} from '../companie/companie.model';
 
@@ -43,7 +42,7 @@ export class MainPageHomeComponent implements OnInit {
   // }
 
   constructor(
-    private companieService:CompanieService,
+
     private router:Router,
     private adminService: AdminService,
     private mainPageHomeService: MainPageHomeService,
@@ -95,7 +94,7 @@ export class MainPageHomeComponent implements OnInit {
   goTo(path: string) {
 
       this.router.navigate([path]);
-    
+
 
 
     // if( (this.isAdmin() || this.isManager()) && path === 'user') {
