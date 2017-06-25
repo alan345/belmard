@@ -3,7 +3,7 @@ import { NgModule} from '@angular/core';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpModule, RequestOptions, Http} from '@angular/http';
 import { AppComponent} from './app.component';
-
+import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { MaterialModule } from '@angular/material';
 import { Ng2PaginationModule} from 'ng2-pagination';
 import { ProgressBarModule} from 'ng2-progress-bar';
@@ -87,7 +87,6 @@ import { ErrorComponent} from './errorHandler/error.component';
 
 import { MainPageHomeComponent} from './mainPageHome/mainPageHome.component';
 import { MainPageHomeService} from './mainPageHome/mainPageHome.service';
-
 
 
 
@@ -206,10 +205,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ProgressBarModule,
     FormsModule,
     Ng2PaginationModule,
-//    NgbModule.forRoot(),
     MaterialModule,
 
-
+    NgbModule.forRoot(),
     UserModule,
   //  ProductModule,
   //  ProjectModule,
