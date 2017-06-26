@@ -66,3 +66,9 @@ background: #444;
 background: linear-gradient( #555, #2C2C2C);
 
 }
+
+#wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
