@@ -1,6 +1,6 @@
 import { Form } from '../form/form.model';
 import { User } from '../user/user.model';
-import { Quote } from '../quote/quote.model';
+import { Project } from '../project/project.model';
 
 
 export class UserCalendar {
@@ -10,6 +10,7 @@ export class UserCalendar {
     end: Date = new Date();
     clients: User[] = [];
     users: User[] = [];
+    projects: Project[] = [];
 
     isActiveEvent: boolean = false;
     color: Color = new Color();

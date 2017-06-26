@@ -128,7 +128,8 @@
     <tr>
       <th>Title</th>
       <th>Primary color</th>
-      <th>Secondary color</th>
+      <th>Client</th>
+      <th>Project</th>
       <th>Starts at</th>
       <th>Ends at</th>
       <th>Remove</th>
@@ -152,11 +153,66 @@
             (change)="refresh.next()">
         </td>
         <td>
-          <input
+          <!-- <input
             type="color"
             [(ngModel)]="event.color.secondary"
-            (change)="refresh.next()">
+            (change)="refresh.next()"> -->
+
+            <!-- Autocomplete -->
+            <div *ngIf="!event.clients.length">
+              <a [routerLink]="['/user/newuser']" class="admn-btn">
+                Créer un nouveau client
+              </a>
+              <input
+                [ngModelOptions]="{standalone: true}"
+                [(ngModel)]="autocompleteUser"
+                placeholder="Select"
+                (ngModelChange)="searchUsers()"
+                mdInput
+              >
+            </div>
+            <div *ngFor="let user of fetchedUsers; let i=index">
+              {{user.profile.name}} - {{user.profile.lastName}}
+              <button type="button" (click)="selectUser(user)">select</button>
+            </div>
+
+            <div *ngFor="let user of event.clients; let i=index">
+              {{user.profile.name}} - {{user.profile.lastName}}
+              <button type="button" (click)="removeUser(i)"><i class="fa fa-times"></i></button>
+            </div>
+            <!-- Autocomplete -->
+
+
         </td>
+        <td>
+            <!-- Autocomplete -->
+            <div *ngIf="!event.projects.length">
+              <a [routerLink]="['/user/newuser']" class="admn-btn">
+                Créer un nouveau Project
+              </a>
+              <input
+                [ngModelOptions]="{standalone: true}"
+                [(ngModel)]="autocompleteProject"
+                placeholder="Select"
+                (ngModelChange)="searchProjects()"
+                mdInput
+              >
+            </div>
+            <div *ngFor="let project of fetchedProjects; let i=index">
+              {{project.details.name}}
+              <button type="button" (click)="selectProject(project)">select</button>
+            </div>
+
+            <div *ngFor="let project of event.projects; let i=index">
+              {{project.details.name}}
+              <button type="button" (click)="removeProject(i)"><i class="fa fa-times"></i></button>
+            </div>
+            <!-- Autocomplete -->
+
+
+        </td>
+
+
         <td>
           <mwl-demo-utils-date-time-picker
             [(date)]="event.start"

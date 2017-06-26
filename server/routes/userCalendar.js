@@ -77,6 +77,8 @@ router.put('/:id', function (req, res, next) {
         item.client = req.body.client,
         item.user = req.body.user,
         item.color = req.body.color,
+        item.clients = req.body.clients,
+        item.users = req.body.users,
 
 
 
@@ -178,7 +180,7 @@ router.get('/page/:page', function (req, res, next) {
   .find(searchQuery)
   .sort('-createdAt')
   .populate({path: 'clients', model: 'User'})
-  .populate({path: 'quotes', model: 'Quote'})
+  .populate({path: 'users', model: 'User'})
   .limit(itemsPerPage)
   .skip(skip)
   .exec(function (err, item) {
