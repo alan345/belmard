@@ -134,22 +134,12 @@ export class NewUserComponent implements OnInit {
       })
     )
 
-    // this.activatedRoute.params.subscribe((params: Params) => {
-    //   if(params['id']) {
-    //     this.companieService.getCompanieByUserId(params['id']).subscribe(
-    //         res => {
-    //           console.log(res)
-    //           if(res.length) {
-    //             this.fetchedCompanieInit = res[0]
-    //             this.companieIndexToSelect = this.fetchedCompanieInit._id
-    //           }
-    //         },
-    //         error => {console.log(error)}
-    //       )
-    //     this.getUser(params['id'])
-    //   }
-    //
-    // })
+    this.activatedRoute.params.subscribe((params: Params) => {
+      if(params['id']) {
+        this.getUser(params['id'])
+      }
+
+    })
   }
 
 
