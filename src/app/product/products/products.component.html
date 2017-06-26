@@ -19,7 +19,7 @@
           <h2 class="name">Liste des produits</h2>
           <div class="subsubnav-clients">
             <input
-              class="champ"
+              celass="champ"
               type="text"
               name="Search"
               placeholder="Rechercher"
@@ -45,7 +45,7 @@
             </tbody>
           </table>
           <div class="has-text-centered">
-            <div [hidden]="!loading">Loading...</div>
+            <div [ngClass]="{ 'hidden': !loading }">Loading...</div>
             <pagination-controls (pageChange)="getPage($event)" id="server" class="change-page"></pagination-controls>
           </div>
         </div>
