@@ -23,3 +23,9 @@ margin: 20px;
 .bg-inverse {
 border-radius: 5px;
 }
+
+.btn btn-secondary{
+margin: 10px;
+padding: 5px;
+}
+
