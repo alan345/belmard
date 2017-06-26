@@ -96,10 +96,10 @@ export class UserCalendarService {
       });
   }
 
-  saveUserCalendar(userCalendar : UserCalendar) {
+  saveUserCalendar(userCalendar) {
   //  console.log("this.authService.currentUser.token",this.authService.currentUser.token);
   //  delete userCalendar._id;
-  delete userCalendar._id
+    delete userCalendar._id
   //console.log(userCalendar)
     const body = JSON.stringify(userCalendar);
     const headers = new Headers({'Content-Type': 'application/json'});
