@@ -9,15 +9,16 @@
   <div>
     <div class="row">
       <div class="col-md-6 col-sm-6 item">
-        <div id="wrapper" class="box">
+        <div class="box">
           <h2 class="name">Ajouter un produit</h2>
-          <button class="btn2" [routerLink]="['/product/productSingle/']" routerLinkActive="active"><i class=""></i>Créer un nouveau Produit</button>
+          <div id="wrapper"><button class="btn2" [routerLink]="['/product/productSingle/']" routerLinkActive="active"><i class=""></i>Créer un nouveau Produit</button>
+          </div>
         </div>
       </div>
       <div class="col-md-6 col-sm-6 item">
-        <div id="wrapper" class="box">
+        <div class="box">
           <h2 class="name">Liste des produits</h2>
-          <div class="subsubnav-clients">
+          <div id="wrapper" class="subsubnav-clients">
             <input
               celass="champ"
               type="text"
