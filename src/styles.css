@@ -27,9 +27,9 @@ border-radius: 5px;
 .btn1 {
 background-color: #fff;
 text-Align: Center;  
-margin: 10px;
-padding: 5px;
-border-radius: 5px;  
+margin: 5px;
+padding: 10px;
+border-radius: 8px;  
 }
 
 .btn1:hover {
