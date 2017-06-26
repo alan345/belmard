@@ -319,6 +319,7 @@ export class UserCalendarSingleComponent implements OnInit {
       newEvent.start = this.viewDate
       newEvent.end = endDate
       newEvent.color = colors.red
+      newEvent.isActiveEvent = true
       this.events.push(newEvent)
 
       // this.events.push({

@@ -161,7 +161,7 @@ router.get('/page/:page', function (req, res, next) {
   // if(!hasWhatsNewCateg)
   //   searchQuery['categories'] = categoriesArray
   if(req.query.search)
-    searchQuery['name'] = new RegExp(req.query.search, 'i')
+    searchQuery['details.name'] = new RegExp(req.query.search, 'i')
 
   // console.log(hasWhatsNewCateg)
   // console.log(searchQuery)

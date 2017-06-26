@@ -129,7 +129,7 @@
   <thead>
     <tr>
       <th>Title</th>
-      <th>Primary color</th>
+
       <th>Client</th>
       <th>User</th>
       <th>Project</th>
@@ -149,12 +149,12 @@
             [(ngModel)]="event.title"
             (keyup)="refresh.next()">
         </td>
-        <td>
+        <!-- <td>
           <input
             type="color"
             [(ngModel)]="event.color.primary"
             (change)="refresh.next()">
-        </td>
+        </td> -->
         <td>
             <!-- Autocomplete -->
             <div *ngIf="!event.clients.length">
