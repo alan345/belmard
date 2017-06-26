@@ -11,21 +11,22 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { DeleteDialog } from '../deleteDialog/deleteDialog.component'
 import { UserService} from '../user/user.service';
 import { QuoteService} from '../quote/quote.service';
+import { isSameMonth, isSameDay, startOfMonth, endOfMonth, startOfWeek, endOfWeek, startOfDay, endOfDay, format } from 'date-fns';
 
 import { User } from '../user/user.model';
 import { Quote } from '../quote/quote.model';
 import { ChangeDetectionStrategy, ViewChild, TemplateRef } from '@angular/core';
 
-import {
-  startOfDay,
-  endOfDay,
-  subDays,
-  addDays,
-  endOfMonth,
-  isSameDay,
-  isSameMonth,
-  addHours
-} from 'date-fns';
+// import {
+//   startOfDay,
+//   endOfDay,
+//   subDays,
+//   addDays,
+//   endOfMonth,
+//   isSameDay,
+//   isSameMonth,
+//   addHours
+// } from 'date-fns';
 
 import { Subject } from 'rxjs/Subject';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -140,23 +141,30 @@ export class UserCalendarSingleComponent implements OnInit {
 
 
       ngOnInit() {
-
-        this.getUserCalendars(1,{})
-        // this.myForm = this._fb.group({
-        //   status: [''],
-        //   name: ['', [Validators.required, Validators.minLength(5)]],
-        //   description: ['', [Validators.required, Validators.minLength(5)]],
-        // });
-        //
-        // this.activatedRoute.params.subscribe((params: Params) => {
-        //   if(params['id'])
-        //    this.getUserCalendar(params['id'])
-        //
-        //   if(params['idClient'])
-        //    this.getUser(params['idClient'])
-        // })
+        this.fetchEvents()
       }
 
+      fetchEvents() {
+        console.log('fetchEvents')
+        const getStart: any = {
+        month: startOfMonth,
+        week: startOfWeek,
+        day: startOfDay
+      }[this.view];
+
+      const getEnd: any = {
+        month: endOfMonth,
+        week: endOfWeek,
+        day: endOfDay
+      }[this.view];
+
+      const search = {
+        'startDate': format(getStart(this.viewDate), 'YYYY-MM-DD'),
+        'endDate': format(getEnd(this.viewDate), 'YYYY-MM-DD')
+      }
+
+        this.getUserCalendars(1, search)
+      }
 
 
       getUserCalendars(page: number, search: any) {
@@ -199,7 +207,8 @@ export class UserCalendarSingleComponent implements OnInit {
       }
 
     dayClicked({date, events}: {date: Date, events: UserCalendar[]}): void {
-      console.log(events)
+    //  console.log(date)
+      this.viewDate = date
       // if (isSameMonth(date, this.viewDate)) {
       //   if (
       //     (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
@@ -234,23 +243,16 @@ export class UserCalendarSingleComponent implements OnInit {
       this.refresh.next();
     }
 
+
     handleEvent(action: string, selectedEvent): void {
-
       console.log(selectedEvent)
-
       this.events.forEach((event, index) => { this.events[index].isActiveEvent = false })
-
       this.events.forEach((event, index) => {
-
           if(selectedEvent._id === event._id) {
             this.events[index].isActiveEvent = true
           }
-
       })
 
-      //this.saveEvent(event)
-      // this.modalData = {event, action};
-      // this.modal.open(this.modalContent, {size: 'lg'});
     }
 
 
@@ -298,11 +300,11 @@ export class UserCalendarSingleComponent implements OnInit {
     }
 
     addEvent(): void {
-      var endDate = new Date();
+      var endDate = this.viewDate;
       endDate.setHours(endDate.getHours() + 4);
       this.events.push({
         title: 'New event',
-        start: new Date(),
+        start: this.viewDate,
         end: endDate,
         color: colors.red,
         draggable: true,

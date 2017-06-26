@@ -27,6 +27,7 @@ export class UserCalendarService {
 
 
   getUserCalendars(page: number, search: any) {
+    console.log(search)
     let headers = new Headers({'Content-Type': 'application/json'});
     headers.append('Authorization', '' + this.authService.currentUser.token);
     let options = new RequestOptions({ headers: headers, search: search});
