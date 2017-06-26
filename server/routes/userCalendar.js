@@ -74,11 +74,12 @@ router.put('/:id', function (req, res, next) {
         item.url = req.body.url,
         item.start = req.body.start,
         item.end = req.body.end,
-        item.client = req.body.client,
+
         item.user = req.body.user,
         item.color = req.body.color,
         item.clients = req.body.clients,
         item.users = req.body.users,
+        item.projects = req.body.projects,
 
 
 
@@ -181,6 +182,7 @@ router.get('/page/:page', function (req, res, next) {
   .sort('-createdAt')
   .populate({path: 'clients', model: 'User'})
   .populate({path: 'users', model: 'User'})
+  .populate({path: 'projects', model: 'Project'})
   .limit(itemsPerPage)
   .skip(skip)
   .exec(function (err, item) {

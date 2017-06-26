@@ -11,12 +11,17 @@ var userCalendar = new Schema({
       url:{type: String, default: ['']},
       start:{type: Date},
       end:{type: Date},
+      draggable: {type: Boolean, default: [true] },
       clients: [{type: Schema.Types.ObjectId, ref: 'User'}],
       projects: [{type: Schema.Types.ObjectId, ref: 'Project'}],
       users: [{type: Schema.Types.ObjectId, ref: 'User'}],
       color: {
         primary: {type: String, default: ['#ad2121']},
         secondary: {type: String, default: ['#FAE3E3']},
+      },
+      resizable:{
+        beforeStart:  {type: Boolean, default: [true] },
+        afterEnd:  {type: Boolean, default: [true] },
       }
 
   },

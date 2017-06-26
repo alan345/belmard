@@ -11,10 +11,8 @@ export class UserCalendar {
     clients: User[] = [];
     users: User[] = [];
     projects: Project[] = [];
-
     isActiveEvent: boolean = false;
     color: Color = new Color();
-
     draggable: boolean = true;
     resizable: Resizable = new Resizable();
     // assignedTo: User[] = [];
