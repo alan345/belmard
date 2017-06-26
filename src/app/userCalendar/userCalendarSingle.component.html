@@ -131,6 +131,7 @@
       <th>Title</th>
       <th>Primary color</th>
       <th>Client</th>
+      <th>User</th>
       <th>Project</th>
       <th>Starts at</th>
       <th>Ends at</th>
@@ -155,15 +156,35 @@
             (change)="refresh.next()">
         </td>
         <td>
-          <!-- <input
-            type="color"
-            [(ngModel)]="event.color.secondary"
-            (change)="refresh.next()"> -->
-
             <!-- Autocomplete -->
             <div *ngIf="!event.clients.length">
               <a [routerLink]="['/user/newuser']" class="admn-btn">
                 Créer un nouveau client
+              </a>
+              <input
+                [ngModelOptions]="{standalone: true}"
+                [(ngModel)]="autocompleteClient"
+                placeholder="Select"
+                (ngModelChange)="searchClients()"
+                mdInput
+              >
+            </div>
+            <div *ngFor="let user of fetchedClients; let i=index">
+              {{user.profile.name}} - {{user.profile.lastName}}
+              <button type="button" (click)="selectClient(user)">select</button>
+            </div>
+
+            <div *ngFor="let user of event.clients; let i=index">
+              {{user.profile.name}} - {{user.profile.lastName}}
+              <button type="button" (click)="removeClient(i)"><i class="fa fa-times"></i></button>
+            </div>
+            <!-- Autocomplete -->
+        </td>
+        <td>
+            <!-- Autocomplete -->
+            <div *ngIf="!event.users.length">
+              <a [routerLink]="['/user/newuser']" class="admn-btn">
+                Créer un nouveau User
               </a>
               <input
                 [ngModelOptions]="{standalone: true}"
@@ -178,7 +199,7 @@
               <button type="button" (click)="selectUser(user)">select</button>
             </div>
 
-            <div *ngFor="let user of event.clients; let i=index">
+            <div *ngFor="let user of event.users; let i=index">
               {{user.profile.name}} - {{user.profile.lastName}}
               <button type="button" (click)="removeUser(i)"><i class="fa fa-times"></i></button>
             </div>

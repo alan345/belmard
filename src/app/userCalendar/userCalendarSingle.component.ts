@@ -66,8 +66,11 @@ export class UserCalendarSingleComponent implements OnInit {
     activeDayIsOpen: boolean = false;
     autocompleteUser: string = '';
     autocompleteProject: string = '';
+    autocompleteClient: string = '';
     fetchedUsers: User[] = [];
     fetchedProjects: Project[] = [];
+    fetchedClients: User[] = [];
+
 
     // modalData: {
     //   action: string,
@@ -395,11 +398,58 @@ export class UserCalendarSingleComponent implements OnInit {
 
 
 //autocomplete
+  selectClient(client: User) {
+    this.fetchedClients = []
+    this.events.forEach(event => {
+      if(event.isActiveEvent) {
+        event.clients.push(client)
+        this.saveEvent(event)
+      }
+    })
+  }
+  searchClients() {
+    let search = {
+        search: this.autocompleteClient,
+      };
+    this.getClients(1, search)
+  }
+  // getClient(id: string) {
+  //   this.userService.getUser(id)
+  //     .subscribe(
+  //       res => {this.selectClient(res.client)},
+  //       error => {console.log(error);}
+  //     );
+  // }
+
+  getClients(page: number, search: any) {
+    this.userService.getUsers(page, search)
+      .subscribe(
+        res => {
+           this.fetchedClients = res.data
+           this.refresh.next();
+        },
+        error => {console.log(error);}
+      );
+  }
+  removeClient(i: number) {
+    this.events.forEach(event => {
+      if(event.isActiveEvent) {
+        event.clients.splice(i, 1);
+        this.saveEvent(event)
+      }
+    })
+  }
+//autocomplete
+
+
+
+
+//autocomplete
   selectUser(user: User) {
     this.fetchedUsers = []
     this.events.forEach(event => {
       if(event.isActiveEvent) {
-        event.clients.push(user)
+        event.users.push(user)
         this.saveEvent(event)
       }
     })
@@ -410,13 +460,13 @@ export class UserCalendarSingleComponent implements OnInit {
       };
     this.getUsers(1, search)
   }
-  getUser(id: string) {
-    this.userService.getUser(id)
-      .subscribe(
-        res => {this.selectUser(res.user)},
-        error => {console.log(error);}
-      );
-  }
+  // getUser(id: string) {
+  //   this.userService.getUser(id)
+  //     .subscribe(
+  //       res => {this.selectUser(res.user)},
+  //       error => {console.log(error);}
+  //     );
+  // }
 
   getUsers(page: number, search: any) {
     this.userService.getUsers(page, search)
@@ -431,7 +481,7 @@ export class UserCalendarSingleComponent implements OnInit {
   removeUser(i: number) {
     this.events.forEach(event => {
       if(event.isActiveEvent) {
-        event.clients.splice(i, 1);
+        event.users.splice(i, 1);
         this.saveEvent(event)
       }
     })
@@ -456,13 +506,13 @@ export class UserCalendarSingleComponent implements OnInit {
       };
     this.getProjects(1, search)
   }
-  getProject(id: string) {
-    this.projectService.getProject(id)
-      .subscribe(
-        res => {this.selectProject(res.project)},
-        error => {console.log(error);}
-      );
-  }
+  // getProject(id: string) {
+  //   this.projectService.getProject(id)
+  //     .subscribe(
+  //       res => {this.selectProject(res.project)},
+  //       error => {console.log(error);}
+  //     );
+  // }
 
   getProjects(page: number, search: any) {
     this.projectService.getProjects(page, search)
@@ -477,7 +527,7 @@ export class UserCalendarSingleComponent implements OnInit {
   removeProject(i: number) {
     this.events.forEach(event => {
       if(event.isActiveEvent) {
-        event.clients.splice(i, 1);
+        event.projects.splice(i, 1);
         this.saveEvent(event)
       }
     })
