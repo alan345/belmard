@@ -245,8 +245,7 @@ export class UserCalendarSingleComponent implements OnInit {
 
 
     handleEvent(action: string, selectedEvent): void {
-      console.log(selectedEvent)
-      this.events.forEach((event, index) => { this.events[index].isActiveEvent = false })
+      this.clearSelectedEvents()
       this.events.forEach((event, index) => {
           if(selectedEvent._id === event._id) {
             this.events[index].isActiveEvent = true
@@ -255,7 +254,9 @@ export class UserCalendarSingleComponent implements OnInit {
 
     }
 
-
+    clearSelectedEvents() {
+      this.events.forEach((event, index) => { this.events[index].isActiveEvent = false })
+    }
 
 
     saveEvent(event ){
@@ -286,20 +287,23 @@ export class UserCalendarSingleComponent implements OnInit {
     deleteEvent(event, index) {
       this.events.splice(index, 1);
       this.refresh.next()
+      if(event._id) {
+        this.userCalendarService.deleteUserCalendar(event._id)
+          .subscribe(
+            res => {
+              this.toastr.success('Great!', res.message)
+            },
+            error => {
+              this.toastr.error('error!', error)
+            }
+          )
+      }
 
-      this.userCalendarService.deleteUserCalendar(event._id)
-        .subscribe(
-          res => {
-            this.toastr.success('Great!', res.message)
-          },
-          error => {
-            this.toastr.error('error!', error)
-          }
-        )
 
     }
 
     addEvent(): void {
+      this.clearSelectedEvents()
       var endDate = this.viewDate;
       endDate.setHours(endDate.getHours() + 4);
       this.events.push({
