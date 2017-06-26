@@ -181,10 +181,10 @@ export class UserCalendarSingleComponent implements OnInit {
                 })
               });
               this.refresh.next();
-              let this2 = this
-              setTimeout(function(){
-                  this2.refresh.next();
-              }, 20);
+              // let this2 = this
+              // setTimeout(function(){
+              //     this2.refresh.next();
+              // }, 20);
 
 
 
@@ -200,42 +200,31 @@ export class UserCalendarSingleComponent implements OnInit {
 
     dayClicked({date, events}: {date: Date, events: UserCalendar[]}): void {
       console.log(events)
-      if (isSameMonth(date, this.viewDate)) {
-        if (
-          (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
-          events.length === 0
-        ) {
-
-          this.events.forEach((event, index) => {
-            this.events[index].isActiveEvent = false
-          })
-          console.log(this.events)
-
-        //  this.activeDayIsOpen = false;
-        } else {
-
-
-
-
-
-
-          this.events.forEach((event, index) => {
-            console.log('rr')
-            events.forEach((activeEvent, ActiveIndex) => {
-              console.log('qq')
-              if(activeEvent._id === event._id) {
-                this.events[index].isActiveEvent = true
-
-              }
-
-            })
-          })
-          console.log(this.events)
-
-          //this.activeDayIsOpen = true;
-          this.viewDate = date;
-        }
-      }
+      // if (isSameMonth(date, this.viewDate)) {
+      //   if (
+      //     (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
+      //     events.length === 0
+      //   ) {
+      //
+      //     this.events.forEach((event, index) => { this.events[index].isActiveEvent = false })
+      //
+      //   //  this.activeDayIsOpen = false;
+      //   } else {
+      //     this.events.forEach((event, index) => { this.events[index].isActiveEvent = false })
+      //
+      //     this.events.forEach((event, index) => {
+      //       events.forEach((activeEvent, ActiveIndex) => {
+      //         if(activeEvent._id === event._id) {
+      //           this.events[index].isActiveEvent = true
+      //         }
+      //       })
+      //     })
+      //     console.log(this.events)
+      //
+      //     //this.activeDayIsOpen = true;
+      //     this.viewDate = date;
+      //   }
+      // }
     }
 
     eventTimesChanged({event, newStart, newEnd}: CalendarEventTimesChangedEvent): void {
@@ -245,10 +234,21 @@ export class UserCalendarSingleComponent implements OnInit {
       this.refresh.next();
     }
 
-    handleEvent(action: string, event: CalendarEvent): void {
+    handleEvent(action: string, selectedEvent): void {
 
-      console.log(event)
-      this.saveEvent(event)
+      console.log(selectedEvent)
+
+      this.events.forEach((event, index) => { this.events[index].isActiveEvent = false })
+
+      this.events.forEach((event, index) => {
+
+          if(selectedEvent._id === event._id) {
+            this.events[index].isActiveEvent = true
+          }
+
+      })
+
+      //this.saveEvent(event)
       // this.modalData = {event, action};
       // this.modal.open(this.modalContent, {size: 'lg'});
     }
@@ -298,19 +298,28 @@ export class UserCalendarSingleComponent implements OnInit {
     }
 
     addEvent(): void {
+      var endDate = new Date();
+      endDate.setHours(endDate.getHours() + 4);
       this.events.push({
         title: 'New event',
         start: new Date(),
-        end: new Date(),
+        end: endDate,
         color: colors.red,
         draggable: true,
+        isActiveEvent: true,
         resizable: {
           beforeStart: true,
           afterEnd: true
         }
       });
     //  this.save()
-      this.refresh.next();
+
+
+    let this2 = this
+    setTimeout(function(){
+        this2.refresh.next();
+    }, 20);
+
     }
 
 
