@@ -421,7 +421,10 @@ export class UserCalendarSingleComponent implements OnInit {
   getUsers(page: number, search: any) {
     this.userService.getUsers(page, search)
       .subscribe(
-        res => { this.fetchedUsers = res.data },
+        res => {
+           this.fetchedUsers = res.data
+           this.refresh.next();
+        },
         error => {console.log(error);}
       );
   }
@@ -464,7 +467,10 @@ export class UserCalendarSingleComponent implements OnInit {
   getProjects(page: number, search: any) {
     this.projectService.getProjects(page, search)
       .subscribe(
-        res => { this.fetchedProjects = res.data },
+        res => {
+          this.fetchedProjects = res.data;
+          this.refresh.next();
+        },
         error => {console.log(error);}
       );
   }
