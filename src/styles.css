@@ -17,5 +17,9 @@ H1, H2, H3, H4, H5 {
 }
 
 .row {
-margin: 20px; border-radius: 10px;
+margin: 20px;
+}
+
+.bg-primary {
+border-radius: 10px;
 }
