@@ -13,6 +13,7 @@ import { Ng2PaginationModule} from 'ng2-pagination';
 // import { UserService} from './user.service';
 
 import { QuoteModule} from '../quote/quote.module';
+import { CompanieModule} from '../companie/companie.module';
 import { ProjectModule} from '../project/project.module';
 
 
@@ -53,6 +54,7 @@ import{ AdminUsersComponent } from './users/adminUsers.component';
     ReactiveFormsModule,
     QuoteModule,
     ProjectModule,
+    CompanieModule,
   ],
   declarations: [
 //    UserDeleteDialog,
