@@ -25,37 +25,37 @@ export class ProductsComponent implements OnInit {
     categories : [],
     search: ''
   };
-  loading: boolean;
+  loading: boolean= false;
 
   paginationData = {
     currentPage: 1,
     itemsPerPage: 0,
     totalItems: 0
   };
-
-  categories1 = [{
-      name: 'phyto',
-      selected: false
-    },
-    {
-      name: 'phytoSpecific',
-      selected: false
-    },
-    {
-      name: 'subtil',
-      selected: false
-    }];
-
-  categories2 = '';
-
-
-  categoriesHard2 = [
-    { name:'Through your eyes', selected : false },
-    { name:'How to', selected : false },
-    { name:'Fashion', selected : false },
-    { name:'Merchandising', selected : false },
-    { name:'Behind the Scene & Testimonials', selected : false }
-  ]
+  //
+  // categories1 = [{
+  //     name: 'phyto',
+  //     selected: false
+  //   },
+  //   {
+  //     name: 'phytoSpecific',
+  //     selected: false
+  //   },
+  //   {
+  //     name: 'subtil',
+  //     selected: false
+  //   }];
+  //
+  // categories2 = '';
+  //
+  //
+  // categoriesHard2 = [
+  //   { name:'Through your eyes', selected : false },
+  //   { name:'How to', selected : false },
+  //   { name:'Fashion', selected : false },
+  //   { name:'Merchandising', selected : false },
+  //   { name:'Behind the Scene & Testimonials', selected : false }
+  // ]
 
   trackinPage : any = {
     lastVisitPagePressCount:[],
