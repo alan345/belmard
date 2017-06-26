@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { ProductsComponent} from './products/products.component';
 import { ProductSingleComponent} from './productSingle.component';
 import { ProductService} from './product.service';
+import { CompanieModule } from '../companie/companie.module';
 import { ProductRouting} from './productRouting.module';
 import { MaterialModule } from '@angular/material';
 import { Ng2PaginationModule} from 'ng2-pagination';
@@ -19,6 +20,7 @@ import { Ng2PaginationModule} from 'ng2-pagination';
     MaterialModule,
     Ng2PaginationModule,
     ReactiveFormsModule,
+    CompanieModule,
   ],
   declarations: [
 
@@ -27,8 +29,6 @@ import { Ng2PaginationModule} from 'ng2-pagination';
   ],
   exports:      [ ProductsComponent ],
   providers:    [ ProductService ],
-  entryComponents: [
-
-  ]
+  entryComponents: [ ]
 })
 export class ProductModule { }

@@ -62,14 +62,23 @@ router.put('/:id', function (req, res, next) {
       })
     } else {
       //console.log(req.body)
-        item.details = req.body.details
-        item.forms = req.body.forms
-        item.status = req.body.status
-        item.embed = req.body.embed
-        item.categories = req.body.categories
-        item.clients = req.body.clients
-        item.quotes = req.body.quotes
-        item.categorie = req.body.categorie
+        // item.details = req.body.details
+        // item.forms = req.body.forms
+        // item.status = req.body.status
+        // item.embed = req.body.embed
+        // item.categories = req.body.categories
+        // item.clients = req.body.clients
+        // item.quotes = req.body.quotes
+        // item.categorie = req.body.categorie
+        item.title = req.body.title,
+        item.url = req.body.url,
+        item.start = req.body.start,
+        item.end = req.body.end,
+        item.client = req.body.client,
+        item.user = req.body.user,
+        item.color = req.body.color,
+
+
 
 
         item.save(function (err, result) {

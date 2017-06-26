@@ -5,7 +5,8 @@ import { Quote } from '../quote/quote.model';
 
 export class UserCalendar {
     _id: string = '';
-    details: Details = new Details()
+    isActiveEvent: boolean = false;
+    details: Details = new Details();
     status: number = 0;
     clients: User[] = [];
     assignedTo: User[] = [];

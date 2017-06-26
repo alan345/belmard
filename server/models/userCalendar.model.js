@@ -11,7 +11,6 @@ var userCalendar = new Schema({
       url:{type: String, default: ['']},
       start:{type: Date},
       end:{type: Date},
-      id:{type: Number},
       client: [{type: Schema.Types.ObjectId, ref: 'User'}],
       user: [{type: Schema.Types.ObjectId, ref: 'User'}],
       color: {

@@ -89,50 +89,150 @@ export class UserCalendarSingleComponent implements OnInit {
     }];
 
     refresh: Subject<any> = new Subject();
+    events = []
+    // events: CalendarEvent[] = [{
+    //   start: subDays(startOfDay(new Date()), 1),
+    //   end: addDays(new Date(), 1),
+    //   title: 'A 3 day event',
+    //   color: colors.red,
+    //   actions: this.actions
+    // }, {
+    //   start: startOfDay(new Date()),
+    //   title: 'An event with no end date',
+    //   color: colors.yellow,
+    //   actions: this.actions
+    // }, {
+    //   start: subDays(endOfMonth(new Date()), 3),
+    //   end: addDays(endOfMonth(new Date()), 3),
+    //   title: 'A long event that spans 2 months',
+    //   color: colors.blue
+    // }, {
+    //   start: addHours(startOfDay(new Date()), 2),
+    //   end: new Date(),
+    //   title: 'A draggable and resizable event',
+    //   color: colors.yellow,
+    //   actions: this.actions,
+    //   resizable: {
+    //     beforeStart: true,
+    //     afterEnd: true
+    //   },
+    //   draggable: true
+    // }];
 
-    events: CalendarEvent[] = [{
-      start: subDays(startOfDay(new Date()), 1),
-      end: addDays(new Date(), 1),
-      title: 'A 3 day event',
-      color: colors.red,
-      actions: this.actions
-    }, {
-      start: startOfDay(new Date()),
-      title: 'An event with no end date',
-      color: colors.yellow,
-      actions: this.actions
-    }, {
-      start: subDays(endOfMonth(new Date()), 3),
-      end: addDays(endOfMonth(new Date()), 3),
-      title: 'A long event that spans 2 months',
-      color: colors.blue
-    }, {
-      start: addHours(startOfDay(new Date()), 2),
-      end: new Date(),
-      title: 'A draggable and resizable event',
-      color: colors.yellow,
-      actions: this.actions,
-      resizable: {
-        beforeStart: true,
-        afterEnd: true
-      },
-      draggable: true
-    }];
+    activeDayIsOpen: boolean = false;
 
-    activeDayIsOpen: boolean = true;
+
+      constructor(
+        private modal: NgbModal,
+        private sanitizer: DomSanitizer,
+        private userCalendarService: UserCalendarService,
+        private toastr: ToastsManager,
+        public dialog: MdDialog,
+        private router: Router,
+        private location: Location,
+        private activatedRoute: ActivatedRoute,
+        private _fb: FormBuilder,
+        private userService: UserService,
+        private quoteService: QuoteService,
+      ) {
+      }
 
 
 
-    dayClicked({date, events}: {date: Date, events: CalendarEvent[]}): void {
+      ngOnInit() {
 
+        this.getUserCalendars(1,{})
+        // this.myForm = this._fb.group({
+        //   status: [''],
+        //   name: ['', [Validators.required, Validators.minLength(5)]],
+        //   description: ['', [Validators.required, Validators.minLength(5)]],
+        // });
+        //
+        // this.activatedRoute.params.subscribe((params: Params) => {
+        //   if(params['id'])
+        //    this.getUserCalendar(params['id'])
+        //
+        //   if(params['idClient'])
+        //    this.getUser(params['idClient'])
+        // })
+      }
+
+
+
+      getUserCalendars(page: number, search: any) {
+        this.userCalendarService.getUserCalendars(page, search)
+          .subscribe(
+            res => {
+              console.log(res)
+
+              this.events = []
+              res.data.forEach(event => {
+                this.events.push({
+                  _id: event._id,
+                  title: event.title,
+                  start: new Date(event.start),
+                  end: new Date(event.end),
+                  color: event.color,
+                  draggable: true,
+                  resizable: {
+                    beforeStart: true,
+                    afterEnd: true
+                  }
+                })
+              });
+              this.refresh.next();
+              let this2 = this
+              setTimeout(function(){
+                  this2.refresh.next();
+              }, 20);
+
+
+
+            //  console.log("quotes");
+            //  console.log(res);
+
+            },
+            error => {
+              console.log(error);
+            }
+          );
+      }
+
+    dayClicked({date, events}: {date: Date, events: UserCalendar[]}): void {
+      console.log(events)
       if (isSameMonth(date, this.viewDate)) {
         if (
           (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
           events.length === 0
         ) {
-          this.activeDayIsOpen = false;
+
+          this.events.forEach((event, index) => {
+            this.events[index].isActiveEvent = false
+          })
+          console.log(this.events)
+
+        //  this.activeDayIsOpen = false;
         } else {
-          this.activeDayIsOpen = true;
+
+
+
+
+
+
+          this.events.forEach((event, index) => {
+            console.log('rr')
+            events.forEach((activeEvent, ActiveIndex) => {
+              console.log('qq')
+              if(activeEvent._id === event._id) {
+                this.events[index].isActiveEvent = true
+
+              }
+
+            })
+          })
+          console.log(this.events)
+
+          //this.activeDayIsOpen = true;
           this.viewDate = date;
         }
       }
@@ -146,15 +246,62 @@ export class UserCalendarSingleComponent implements OnInit {
     }
 
     handleEvent(action: string, event: CalendarEvent): void {
+
+      console.log(event)
+      this.saveEvent(event)
       // this.modalData = {event, action};
       // this.modal.open(this.modalContent, {size: 'lg'});
+    }
+
+
+
+
+    saveEvent(event ){
+      if(event._id) {
+        this.userCalendarService.updateUserCalendar(event)
+          .subscribe(
+            res => {
+              this.toastr.success('Great!', res.message)
+              //this.router.navigate(['quote/edit/' + this.fetchedQuote._id])
+            },
+            error => {
+              this.toastr.error('error!', error)
+            }
+          )
+      } else {
+        this.userCalendarService.saveUserCalendar(event)
+          .subscribe(
+            res => {
+              this.toastr.success('Great!', res.message)
+                //this.router.navigate(['quote/edit/' + res.obj._id])
+            },
+            error => {console.log(error)}
+          )
+      }
+    }
+
+
+    deleteEvent(event, index) {
+      this.events.splice(index, 1);
+      this.refresh.next()
+
+      this.userCalendarService.deleteUserCalendar(event._id)
+        .subscribe(
+          res => {
+            this.toastr.success('Great!', res.message)
+          },
+          error => {
+            this.toastr.error('error!', error)
+          }
+        )
+
     }
 
     addEvent(): void {
       this.events.push({
         title: 'New event',
-        start: startOfDay(new Date()),
-        end: endOfDay(new Date()),
+        start: new Date(),
+        end: new Date(),
         color: colors.red,
         draggable: true,
         resizable: {
@@ -183,14 +330,14 @@ export class UserCalendarSingleComponent implements OnInit {
         //       }
         //     )
         // } else {
-          this.userCalendarService.saveUserCalendar(this.events[0])
-            .subscribe(
-              res => {
-                this.toastr.success('Great!', res.message)
-                  this.router.navigate(['quote/edit/' + res.obj._id])
-              },
-              error => {console.log(error)}
-            )
+          // this.userCalendarService.saveUserCalendar(this.events[0])
+          //   .subscribe(
+          //     res => {
+          //       this.toastr.success('Great!', res.message)
+          //         this.router.navigate(['quote/edit/' + res.obj._id])
+          //     },
+          //     error => {console.log(error)}
+          //   )
         // }
 
       }
@@ -219,89 +366,7 @@ export class UserCalendarSingleComponent implements OnInit {
   fetchedUserCalendar: UserCalendar = new UserCalendar();
 
 
-  public myForm: FormGroup;
 
-  constructor(
-    private modal: NgbModal,
-    private sanitizer: DomSanitizer,
-    private userCalendarService: UserCalendarService,
-    private toastr: ToastsManager,
-    public dialog: MdDialog,
-    private router: Router,
-    private location: Location,
-    private activatedRoute: ActivatedRoute,
-    private _fb: FormBuilder,
-    private userService: UserService,
-    private quoteService: QuoteService,
-  ) {
-  }
-
-
-
-  ngOnInit() {
-
-    this.getUserCalendars(1,{})
-    // this.myForm = this._fb.group({
-    //   status: [''],
-    //   name: ['', [Validators.required, Validators.minLength(5)]],
-    //   description: ['', [Validators.required, Validators.minLength(5)]],
-    // });
-    //
-    // this.activatedRoute.params.subscribe((params: Params) => {
-    //   if(params['id'])
-    //    this.getUserCalendar(params['id'])
-    //
-    //   if(params['idClient'])
-    //    this.getUser(params['idClient'])
-    // })
-  }
-
-
-
-  getUserCalendars(page: number, search: any) {
-    this.userCalendarService.getUserCalendars(page, search)
-      .subscribe(
-        res => {
-          console.log(res)
-
-
-
-
-
-          this.events = []
-          res.data.forEach(event => {
-            this.events.push({
-              title: event.title,
-              start: new Date(event.start),
-              end: new Date(event.end),
-              color: event.color,
-              draggable: true,
-              resizable: {
-                beforeStart: true,
-                afterEnd: true
-              }
-            })
-          });
-
-
-
-
-          this.refresh.next();
-
-
-
-
-
-
-        //  console.log("quotes");
-        //  console.log(res);
-
-        },
-        error => {
-          console.log(error);
-        }
-      );
-  }
 
 
 
@@ -317,12 +382,12 @@ export class UserCalendarSingleComponent implements OnInit {
       };
     this.getUsers(1, search)
   }
-  changeCascade(selectedIndex1, selectedIndex2) {
-
-    this.selectedIndex1 = selectedIndex1
-    this.selectedIndex2 = selectedIndex2
-
-  }
+  // changeCascade(selectedIndex1, selectedIndex2) {
+  //
+  //   this.selectedIndex1 = selectedIndex1
+  //   this.selectedIndex2 = selectedIndex2
+  //
+  // }
 
   getUser(id: string) {
     this.userService.getUser(id)
