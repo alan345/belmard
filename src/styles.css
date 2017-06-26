@@ -20,6 +20,6 @@ H1, H2, H3, H4, H5 {
 margin: 20px;
 }
 
-.bg-primary {
-border-radius: 10px;
+.bg-muted {
+border-radius: 5px;
 }
