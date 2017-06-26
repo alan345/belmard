@@ -2,7 +2,7 @@ var express = require('express'),
     router  = express.Router(),
     config  = require('../config/config'),
     User    = require('../models/user.model'),
-    Calendar    = require('../models/calendar.model'),
+    UserCalendar    = require('../models/userCalendar.model'),
     fs      = require('fs'),
     jwt     = require('jsonwebtoken')
 
@@ -54,7 +54,7 @@ router.use('/', function (req, res, next) {
 
 //update
 router.put('/:id', function (req, res, next) {
-  Calendar.findById(({_id: req.params.id}), function (err, item) {
+  UserCalendar.findById(({_id: req.params.id}), function (err, item) {
     if (err) {
       return res.status(404).json({
         message: '',
@@ -90,12 +90,12 @@ router.put('/:id', function (req, res, next) {
 })
 
 router.post('/', function (req, res, next) {
-  console.log(req.body)
-  //var Calendar = new Calendar(req.body)
-  var calendar = new Calendar(req.body)
+  //console.log(req.body)
+  //var UserCalendar = new UserCalendar(req.body)
+  var userCalendar = new UserCalendar(req.body)
+  console.log(userCalendar)
 
-
-  calendar.save(function (err, result) {
+  userCalendar.save(function (err, result) {
     if (err) {
       console.log(err)
       return res.status(403).json({
@@ -165,7 +165,7 @@ router.get('/page/:page', function (req, res, next) {
   // console.log(hasWhatsNewCateg)
   // console.log(searchQuery)
 
-  Calendar
+  UserCalendar
   .find(searchQuery)
   .sort('-createdAt')
   .populate({path: 'clients', model: 'User'})
@@ -179,7 +179,7 @@ router.get('/page/:page', function (req, res, next) {
         err: err
       })
     } else {
-      Calendar
+      UserCalendar
       .find(searchQuery)
       .count()
       .exec(function (err, count) {
@@ -201,7 +201,7 @@ router.get('/page/:page', function (req, res, next) {
 
 // getting user forms to display them on front end
 router.get('/:id', function (req, res, next) {
-  Calendar.findById((req.params.id), function (err, obj) {
+  UserCalendar.findById((req.params.id), function (err, obj) {
     if (err) {
       return res.status(500).json({
         message: 'An error occured',
@@ -216,7 +216,7 @@ router.get('/:id', function (req, res, next) {
     }
 
 
-    Calendar
+    UserCalendar
     .findById({_id: req.params.id})
     .populate({path: 'clients', model: 'User'})
     .populate({path: 'quotes', model: 'Quote'})
@@ -249,8 +249,8 @@ router.get('/countNewItemForUser/:id', function (req, res, next) {
         error: err
       });
     } else {
-      Calendar
-      .find({createdAt:{"$gt": user.trackinPage.lastVisitPageCalendar}})
+      UserCalendar
+      .find({createdAt:{"$gt": user.trackinPage.lastVisitPageUserCalendar}})
       .exec(function (err, item) {
         if (err) {
           return res.status(404).json({
@@ -270,7 +270,7 @@ router.get('/countNewItemForUser/:id', function (req, res, next) {
 
 
 router.delete('/:id', function (req, res, next) {
-  Calendar.findById((req.params.id), function (err, item) {
+  UserCalendar.findById((req.params.id), function (err, item) {
     if (err) {
       return res.status(500).json({
         message: 'An error occured',

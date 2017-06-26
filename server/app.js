@@ -20,6 +20,7 @@ var options    = require('./routes/options')
 var presses    = require('./routes/press')
 var products    = require('./routes/product')
 var projects    = require('./routes/project')
+var userCalendars    = require('./routes/userCalendar')
 
 
 var app = express()
@@ -61,6 +62,7 @@ app.use('/product', products)
 app.use('/project', projects)
 app.use('/admin', adminPage)
 app.use('/options', options)
+app.use('/userCalendar', userCalendars)
 
 
 

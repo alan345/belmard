@@ -26,7 +26,14 @@
 
 
     <div>
-        <nav class="navbar navbar-default navigation-clean">
+
+
+        <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <!-- Guillaume ici regarde la nouvelle navabar pour bootstrap4 https://v4-alpha.getbootstrap.com/components/navbar/           -->
             <div class="container">
                 <div class="navbar-header"><a class="navbar-brand navbar-link" href="#">Accueil</a>
                     <button class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
@@ -62,7 +69,11 @@
                           Devis
                         </a>
                       </li>
-
+                      <li>
+                        <a [routerLink]="['/userCalendar/123']" routerLinkActive="active" class="admn-btn">
+                          Calendar
+                        </a>
+                      </li>
                    </ul>
                 </div>
             </div>
