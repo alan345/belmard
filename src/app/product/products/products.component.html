@@ -1,52 +1,54 @@
 <div class="container">
-  <div class="bg-primary">
-    <div class="row">
-      <div class="col-xs-6 col-sm-4"><button class="subnav-btnleft" (click)="goBack()"><i class="fa fa-chevron-left"></i></button></div>
-      <div class="col-xs-6 col-sm-4"><h3 i18n style="text-align: center; vertical-align: middle;">Produits</h3></div>
-      <div class="col-xs-6 col-sm-4"></div>
-    </div>
-  </div>
-  <div>
-    <div class="features-boxed">
-      <div class="col-md-6 col-sm-6 item">
-        <div class="white-box">
-          <h2 class="name">Ajouter un produit</h2>
-          <button class="bouton-add" [routerLink]="['/product/productSingle/']" routerLinkActive="active"><i class=""></i>Créer un nouveau Produit</button>
-        </div>
+  <div class="single-wrpr beigeback">
+    <div class="bg-primary">
+      <div class="row">
+        <div class="col-xs-6 col-sm-4"><button class="subnav-btnleft" (click)="goBack()"><i class="fa fa-chevron-left"></i></button></div>
+        <div class="col-xs-6 col-sm-4"><h3 i18n style="text-align: center; vertical-align: middle;">Produits</h3></div>
+        <div class="col-xs-6 col-sm-4"></div>
       </div>
-      <div class="col-md-6 col-sm-6 item">
-        <div class="white-box">
-          <h2 class="name">Liste des produits</h2>
-          <div class="subsubnav-clients">
-            <input
-              class="champ"
-              type="text"
-              name="Search"
-              placeholder="Search"
-              [(ngModel)]="search.search"
-              (ngModelChange)="searchProducts()">
+    </div>
+    <div>
+      <div class="features-boxed">
+        <div class="col-md-6 col-sm-6 item">
+          <div class="white-box">
+            <h2 class="name">Ajouter un produit</h2>
+            <button class="bouton-add" [routerLink]="['/product/productSingle/']" routerLinkActive="active"><i class=""></i>Créer un nouveau Produit</button>
           </div>
-          <table class="table table-hover table-responsive table-condensed">
-            <thead>
-              <tr>
-                <th class="tbl-left">
-                  <p class="name">Référence</p>
-                  <!-- <button class="updownbtn" (click)="orderBy('profile.name')"><i class="fa fa-chevron-down"></i></button>
-                  <button class="updownbtn" (click)="orderBy('-profile.name')"><i class="fa fa-chevron-up"></i></button> -->
-                </th>
-              </tr>
-            </thead>
-            <tbody class="clienttbl">
-              <tr *ngFor="let product of fetchedProducts | paginate: { id: 'server', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }"
-                [routerLink]="['/product/' + product._id]"
-                routerLinkActive="active">
-                <td>{{product.details.referenceName}}</td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="has-text-centered">
-            <div [ngClass]="{ 'hidden': !loading }">Loading...</div>
-            <pagination-controls (pageChange)="getPage($event)" id="server" class="change-page"></pagination-controls>
+        </div>
+        <div class="col-md-6 col-sm-6 item">
+          <div class="white-box">
+            <h2 class="name">Liste des produits</h2>
+            <div class="subsubnav-clients">
+              <input
+                class="champ"
+                type="text"
+                name="Search"
+                placeholder="Search"
+                [(ngModel)]="search.search"
+                (ngModelChange)="searchProducts()">
+            </div>
+            <table class="table table-hover table-responsive table-condensed">
+              <thead>
+                <tr>
+                  <th class="tbl-left">
+                    <p class="name">Référence</p>
+                    <!-- <button class="updownbtn" (click)="orderBy('profile.name')"><i class="fa fa-chevron-down"></i></button>
+                    <button class="updownbtn" (click)="orderBy('-profile.name')"><i class="fa fa-chevron-up"></i></button> -->
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="clienttbl">
+                <tr *ngFor="let product of fetchedProducts | paginate: { id: 'server', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }"
+                  [routerLink]="['/product/' + product._id]"
+                  routerLinkActive="active">
+                  <td>{{product.details.referenceName}}</td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="has-text-centered">
+              <div [ngClass]="{ 'hidden': !loading }">Loading...</div>
+              <pagination-controls (pageChange)="getPage($event)" id="server" class="change-page"></pagination-controls>
+            </div>
           </div>
         </div>
       </div>
