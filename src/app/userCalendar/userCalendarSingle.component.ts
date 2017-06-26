@@ -4,7 +4,7 @@ import { ToastsManager} from 'ng2-toastr';
 import { MdDialog } from '@angular/material';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
-import { UserCalendar, ItemSteps, StatusUserCalendar } from './userCalendar.model';
+import { UserCalendar } from './userCalendar.model';
 import { EditOptionsComponentDialog } from '../form/modalLibrary/modalLibrary.component';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -71,26 +71,26 @@ export class UserCalendarSingleComponent implements OnInit {
 
     viewDate: Date = new Date();
 
-    modalData: {
-      action: string,
-      event: CalendarEvent
-    };
+    // modalData: {
+    //   action: string,
+    //   event: CalendarEvent
+    // };
 
-    actions: CalendarEventAction[] = [{
-      label: '<i class="fa fa-fw fa-pencil"></i>',
-      onClick: ({event}: {event: CalendarEvent}): void => {
-        this.handleEvent('Edited', event);
-      }
-    }, {
-      label: '<i class="fa fa-fw fa-times"></i>',
-      onClick: ({event}: {event: CalendarEvent}): void => {
-        this.events = this.events.filter(iEvent => iEvent !== event);
-        this.handleEvent('Deleted', event);
-      }
-    }];
+    // actions: CalendarEventAction[] = [{
+    //   label: '<i class="fa fa-fw fa-pencil"></i>',
+    //   onClick: ({event}: {event: CalendarEvent}): void => {
+    //     this.handleEvent('Edited', event);
+    //   }
+    // }, {
+    //   label: '<i class="fa fa-fw fa-times"></i>',
+    //   onClick: ({event}: {event: CalendarEvent}): void => {
+    //     this.events = this.events.filter(iEvent => iEvent !== event);
+    //     this.handleEvent('Deleted', event);
+    //   }
+    // }];
 
     refresh: Subject<any> = new Subject();
-    events = []
+    events: UserCalendar[] = []
     // events: CalendarEvent[] = [{
     //   start: subDays(startOfDay(new Date()), 1),
     //   end: addDays(new Date(), 1),
@@ -181,6 +181,9 @@ export class UserCalendarSingleComponent implements OnInit {
                   start: new Date(event.start),
                   end: new Date(event.end),
                   color: event.color,
+                  isActiveEvent:false,
+                  users:[],  
+                  clients:[],
                   draggable: true,
                   resizable: {
                     beforeStart: true,
@@ -307,12 +310,15 @@ export class UserCalendarSingleComponent implements OnInit {
       var endDate = this.viewDate;
       endDate.setHours(endDate.getHours() + 4);
       this.events.push({
+        _id:'',
         title: 'New event',
         start: this.viewDate,
         end: endDate,
         color: colors.red,
         draggable: true,
         isActiveEvent: true,
+        users: [],
+        clients: [],
         resizable: {
           beforeStart: true,
           afterEnd: true
@@ -366,10 +372,7 @@ export class UserCalendarSingleComponent implements OnInit {
   categ1: string = '';
   categ2: string = '';
   categ3: string = '';
-  itemSteps = ItemSteps;
 
-
-  status = StatusUserCalendar
   categ: string = 'Electricité';
   subCateg: string = 'file';
   autocompleteUser: string = '';
@@ -439,15 +442,15 @@ export class UserCalendarSingleComponent implements OnInit {
     this.location.back();
   }
 
-  openDialog(positionImage: string) {
-    let dialogRef = this.dialog.open(EditOptionsComponentDialog);
-    dialogRef.afterClosed().subscribe(result => {
-      if(result) {
-        console.log(result)
-        this.fetchedUserCalendar.forms.push( result)
-      }
-    })
-  }
+  // openDialog(positionImage: string) {
+  //   let dialogRef = this.dialog.open(EditOptionsComponentDialog);
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     if(result) {
+  //       console.log(result)
+  //       this.fetchedUserCalendar.forms.push( result)
+  //     }
+  //   })
+  // }
 
   //
   // save() {
