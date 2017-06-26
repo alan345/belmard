@@ -34,8 +34,7 @@ border-radius: 5px;
 
 .btn2 {
 font-family: Arial,sans-serif;
-font-size: 1.6em;
-width: 200px;
+width: auto;
 height: 43px;
 padding-top: 7px; /*permet le centrage vertical*/
 text-align: center;
