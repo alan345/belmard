@@ -96,3 +96,8 @@ padding-top:0px;
 margin-top:0px;
 width:auto;
 }
+
+.card-header {
+text-align: center;
+background-color: #000;  
+}
