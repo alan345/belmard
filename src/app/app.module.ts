@@ -13,8 +13,6 @@ import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { AuthHttp, AuthConfig} from 'angular2-jwt';
 
-
-
 import { ToastModule} from 'ng2-toastr/ng2-toastr';
 import { ToastOptions} from 'ng2-toastr';
 import { CustomOption } from './toast-options';
