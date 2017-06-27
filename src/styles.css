@@ -17,8 +17,8 @@ H1, H2, H3, H4, H5 {
 }
 
 .row {
-  align-items: center;
-  
+ 
+  justify-content: center;
 margin: 20px; 
 }
 
