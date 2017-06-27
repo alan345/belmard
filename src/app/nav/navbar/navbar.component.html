@@ -33,7 +33,46 @@
           </button>
 
           <!-- Guillaume ici regarde la nouvelle navabar pour bootstrap4 https://v4-alpha.getbootstrap.com/components/navbar/           -->
-            <div class="container">
+            <div id="custom-bootstrap-menu" class="navbar navbar-default " role="navigation">
+    <div class="container-fluid">
+        <div class="navbar-header"><a class="navbar-brand" href="#">Brand</a>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menubuilder"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+            </button>
+        </div>
+        <div class="collapse navbar-collapse navbar-menubuilder">
+            <ul class="nav navbar-nav navbar-left">
+                <li><a [routerLink]="['/product']" class="admn-btn">
+                          Produits
+                        </a>
+                </li>
+                <li><a [routerLink]="['/project']" routerLinkActive="active"  class="admn-btn">
+                          Projets
+                        </a>
+                </li>
+                <li><a [routerLink]="['/project']" routerLinkActive="active"  class="admn-btn">
+                          Projets
+                        </a>
+                </li>
+                <li><a [routerLink]="['/companie']" routerLinkActive="active"  class="admn-btn">
+                          Fournisseurs
+                        </a>
+                </li>
+                <li>
+                        <a [routerLink]="['/quote']" routerLinkActive="active" class="admn-btn">
+                          Devis
+                        </a>
+                      </li>
+                      <li>
+                        <a [routerLink]="['/userCalendar/123']" routerLinkActive="active" class="admn-btn">
+                          Calendar
+                        </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+          
+          /*<div class="container">
                 <div class="navbar-header"><a class="navbar-brand navbar-link" href="#">Accueil</a>
                     
                 </div>
@@ -77,4 +116,4 @@
                 </div>
             </div>
         </nav>
-    </div>
+    </div> */
