@@ -131,46 +131,12 @@ router.get('/page/:page', function (req, res, next) {
   var currentPage = Number(req.params.page)
   var pageNumber = currentPage - 1
   var skip = (itemsPerPage * pageNumber)
-  //console.log(req.query.categories)
-  // var categories = []
-  // if(typeof req.query.categories === 'string') {
-  //   categories = [req.query.categories]
-  // } else {
-  //   categories = req.query.categories
-  // }
-  // var dateRef = new Date();
-  // dateRef.setDate(dateRef.getDate()-60)
-  // var matchRules = []
 
-  // let hasWhatsNewCateg = true
-  // categories.forEach(function (categ) {
-  //   categorie = JSON.parse(categ)
-  //   if(categorie.name !== 'what\'s new') {
-  //     hasWhatsNewCateg = false
-  //     if(categorie.name) {
-  //       matchRules.push({
-  //          '$elemMatch': categorie
-  //        })
-  //     }
-  //   } else {
-  //
-  //   }
-  // })
 
-  // let categoriesArray= {
-  //    "$all": matchRules
-  // }
   let searchQuery = {
-  //  createdAt:{"$lt": dateRef}
-//    categories: categoriesArray,
-  //  createdAt:{"$gt": dateRef},
+   start:{"$gt": req.query.startDate},
+   end:{"$lt": req.query.endDate},
   }
-
-  // if(hasWhatsNewCateg)
-  //   searchQuery['createdAt'] = {"$gt": dateRef}
-  //
-  // if(!hasWhatsNewCateg)
-  //   searchQuery['categories'] = categoriesArray
 
   if(req.query.userSearch)
     searchQuery['users'] = mongoose.Types.ObjectId(JSON.parse(req.query.userSearch)._id)
@@ -181,17 +147,9 @@ router.get('/page/:page', function (req, res, next) {
   if(req.query.clientSearch)
     searchQuery['clients'] = mongoose.Types.ObjectId(JSON.parse(req.query.clientSearch)._id)
 
-  // if(req.query.typeUser)
-  //   searchQuery['users.type'] = req.query.typeUser
-  //
-
-
 
   if(req.query.search)
     searchQuery['name'] = new RegExp(req.query.search, 'i')
-
-  // console.log(hasWhatsNewCateg)
-  // console.log(searchQuery)
 
   UserCalendar
   .find(searchQuery)
