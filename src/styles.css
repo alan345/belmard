@@ -79,7 +79,7 @@ background: linear-gradient( #555, #2C2C2C);
   border-radius: 8px;
 }
 
-.nav-link:active {
+.active {
     color: rgba(255, 255, 255, 1);
     background-color: rgba(91, 199, 92, 1);
   border-radius: 8px;
