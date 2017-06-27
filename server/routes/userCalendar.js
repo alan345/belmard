@@ -217,18 +217,15 @@ router.get('/page/:page', function (req, res, next) {
           var itemFiltered = []
           item.forEach(event => {
             event.clients.forEach(client=> {
-
               if(client.type.length) {
-                // console.log(client.type[0])
-                // console.log(req.query.typeUser)
                 if(client.type[0] === req.query.typeUser) {
                   itemFiltered.push(event)
                 }
               }
             })
           })
-          //console.log(itemFiltered)
           item = itemFiltered
+          count = item.length
         }
 
 
