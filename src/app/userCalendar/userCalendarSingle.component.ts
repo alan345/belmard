@@ -5,13 +5,13 @@ import { MdDialog } from '@angular/material';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { UserCalendar } from './userCalendar.model';
-import { EditOptionsComponentDialog } from '../form/modalLibrary/modalLibrary.component';
-import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+
+import { FormBuilder} from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
-import { DeleteDialog } from '../deleteDialog/deleteDialog.component'
+
 import { UserService} from '../user/user.service';
 import { ProjectService} from '../project/project.service';
-import { isSameMonth, isSameDay, startOfMonth, endOfMonth, startOfWeek, endOfWeek, startOfDay, endOfDay, format } from 'date-fns';
+import { startOfMonth, endOfMonth, startOfWeek, endOfWeek, startOfDay, endOfDay, format } from 'date-fns';
 
 import { User } from '../user/user.model';
 import { Project } from '../project/project.model';
@@ -21,11 +21,7 @@ import { TypeUser } from '../user/user.model';
 
 import { Subject } from 'rxjs/Subject';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import {
-  CalendarEvent,
-  CalendarEventAction,
-  CalendarEventTimesChangedEvent
-} from 'angular-calendar';
+import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent } from 'angular-calendar';
 
 
 const colors: any = {
@@ -78,7 +74,10 @@ export class UserCalendarSingleComponent implements OnInit {
       typeUser:[],
       clientSearch:[],
       userSearch:[],
-      projectSearch:[]
+      projectSearch:[],
+      endDate: '',
+      startDate: '',
+
     }
 
 
@@ -119,12 +118,11 @@ export class UserCalendarSingleComponent implements OnInit {
         day: endOfDay
       }[this.view];
 
-        const search = {
-          'startDate': format(getStart(this.viewDate), 'YYYY-MM-DD'),
-          'endDate': format(getEnd(this.viewDate), 'YYYY-MM-DD')
-        }
+        this.search.startDate = format(getStart(this.viewDate), 'YYYY-MM-DD');
+        this.search.endDate = format(getEnd(this.viewDate), 'YYYY-MM-DD');
 
-        this.getUserCalendars(1, search)
+
+        this.getUserCalendars(1, this.search)
       }
 
 
@@ -135,11 +133,8 @@ export class UserCalendarSingleComponent implements OnInit {
         this.userCalendarService.getUserCalendars(page, search)
           .subscribe(
             res => {
-              console.log(res)
-
               this.events = []
               //this.events = res.data
-
 
               res.data.forEach(event => {
                 let newEvent: UserCalendar = new UserCalendar();
@@ -148,29 +143,9 @@ export class UserCalendarSingleComponent implements OnInit {
                 newEvent.end = new Date(event.end)
                 newEvent.isActiveEvent = false
                 this.events.push(newEvent)
-                // this.events.push({
-                //   _id: event._id,
-                //   title: event.title,
-                //   start: new Date(event.start),
-                //   end: new Date(event.end),
-                //   color: event.color,
-                //   isActiveEvent:false,
-                //   users: event.users,
-                //   clients:event.clients,
-                //   draggable: true,
-                //   resizable: {
-                //     beforeStart: true,
-                //     afterEnd: true
-                //   }
-                // })
+
               });
               this.refresh.next();
-              // let this2 = this
-              // setTimeout(function(){
-              //     this2.refresh.next();
-              // }, 20);
-
-
             },
             error => {
               console.log(error);
@@ -195,7 +170,6 @@ export class UserCalendarSingleComponent implements OnInit {
       this.events.forEach((event, index) => {
           if(selectedEvent._id === event._id) {
             this.events[index].isActiveEvent = true
-        //    this.activeEvent = event
           }
       })
 
@@ -245,8 +219,6 @@ export class UserCalendarSingleComponent implements OnInit {
             }
           )
       }
-
-
     }
 
     addEvent(): void {
@@ -260,18 +232,12 @@ export class UserCalendarSingleComponent implements OnInit {
       newEvent.color = colors.red
       newEvent.isActiveEvent = true
       this.events.push(newEvent)
-
-
-
-    let this2 = this
-    setTimeout(function(){
-        this2.refresh.next();
-    }, 20);
+      let this2 = this
+      setTimeout(function(){
+          this2.refresh.next();
+      }, 20);
 
     }
-
-
-  save() {}
 
 
 
@@ -473,13 +439,6 @@ export class UserCalendarSingleComponent implements OnInit {
       };
     this.getUsers(1, search)
   }
-  // getUser(id: string) {
-  //   this.userService.getUser(id)
-  //     .subscribe(
-  //       res => {this.selectUser(res.user)},
-  //       error => {console.log(error);}
-  //     );
-  // }
 
   getUsers(page: number, search: any) {
     this.userService.getUsers(page, search)
@@ -519,14 +478,6 @@ export class UserCalendarSingleComponent implements OnInit {
       };
     this.getProjects(1, search)
   }
-  // getProject(id: string) {
-  //   this.projectService.getProject(id)
-  //     .subscribe(
-  //       res => {this.selectProject(res.project)},
-  //       error => {console.log(error);}
-  //     );
-  // }
-
   getProjects(page: number, search: any) {
     this.projectService.getProjects(page, search)
       .subscribe(
@@ -639,23 +590,23 @@ export class UserCalendarSingleComponent implements OnInit {
 
 
 
-
-  onDelete(id: string) {
-    let this2 = this
-    return new Promise(function(resolve, reject) {
-      this2.userCalendarService.deleteUserCalendar(id)
-        .subscribe(
-          res => {
-            this2.toastr.success('Great!', res.message);
-            resolve(res)
-          },
-          error => {
-            console.log(error);
-            reject(error)
-          }
-        )
-      })
-  }
+  //
+  // onDelete(id: string) {
+  //   let this2 = this
+  //   return new Promise(function(resolve, reject) {
+  //     this2.userCalendarService.deleteUserCalendar(id)
+  //       .subscribe(
+  //         res => {
+  //           this2.toastr.success('Great!', res.message);
+  //           resolve(res)
+  //         },
+  //         error => {
+  //           console.log(error);
+  //           reject(error)
+  //         }
+  //       )
+  //     })
+  // }
 
 
 }

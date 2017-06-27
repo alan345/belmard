@@ -1,95 +1,98 @@
 <!-- Autocomplete typeUser-->
-<div *ngIf="!search.typeUser.length">
-  <input
-    [ngModelOptions]="{standalone: true}"
-    [(ngModel)]="autocompleteTypeUser"
-    placeholder="Select type User"
-    (ngModelChange)="searchTypeUser()"
-    mdInput
-  >
+<div>
+  <label>Search</label>
+  <div *ngIf="!search.typeUser.length">
+    <input
+      [ngModelOptions]="{standalone: true}"
+      [(ngModel)]="autocompleteTypeUser"
+      placeholder="Select type User"
+      (ngModelChange)="searchTypeUser()"
+      mdInput
+    >
+  </div>
+  <div *ngFor="let fetchedTypeUser of fetchedTypeUsers; let i=index">
+    {{fetchedTypeUser}}
+    <button type="button" (click)="selectTypeUser(fetchedTypeUser)">select</button>
+  </div>
+  <div *ngFor="let typeUser of search.typeUser; let i=index">
+    {{typeUser}}
+    <button type="button" (click)="removeTypeUser(i)"><i class="fa fa-times"></i></button>
+  </div>
+  <!-- Autocomplete typeUser-->
+
+
+
+  <!-- Autocomplete clientSearch-->
+  <div *ngIf="!search.clientSearch.length">
+    <input
+      [ngModelOptions]="{standalone: true}"
+      [(ngModel)]="autocompleteClientSearch"
+      placeholder="Select Client to search"
+      (ngModelChange)="searchClientSearchs()"
+      mdInput
+    >
+  </div>
+  <div *ngFor="let user of fetchedClientSearchs; let i=index">
+    {{user.profile.name}} - {{user.profile.lastName}}
+    <button type="button" (click)="selectClientSearch(user)">select</button>
+  </div>
+
+  <div *ngFor="let client of search.clientSearch; let i=index">
+    {{client.profile.name}} - {{client.profile.lastName}}
+    <button type="button" (click)="removeClientSearch(i)"><i class="fa fa-times"></i></button>
+  </div>
+  <!-- Autocomplete clientSearch-->
+
+
+
+  <!-- Autocomplete userSearch-->
+  <div *ngIf="!search.userSearch.length">
+    <input
+      [ngModelOptions]="{standalone: true}"
+      [(ngModel)]="autocompleteUserSearch"
+      placeholder="Select User to search"
+      (ngModelChange)="searchUserSearchs()"
+      mdInput
+    >
+  </div>
+  <div *ngFor="let user of fetchedUserSearchs; let i=index">
+    {{user.profile.name}} - {{user.profile.lastName}}
+    <button type="button" (click)="selectUserSearch(user)">select</button>
+  </div>
+
+  <div *ngFor="let user of search.userSearch; let i=index">
+    {{user.profile.name}} - {{user.profile.lastName}}
+    <button type="button" (click)="removeUserSearch(i)"><i class="fa fa-times"></i></button>
+  </div>
+  <!-- Autocomplete userSearch-->
+
+
+
+
+
+
+
+  <!-- Autocomplete projectSearch-->
+  <div *ngIf="!search.projectSearch.length">
+    <input
+      [ngModelOptions]="{standalone: true}"
+      [(ngModel)]="autocompleteProjectSearch"
+      placeholder="Select Project to search"
+      (ngModelChange)="searchProjectSearchs()"
+      mdInput
+    >
+  </div>
+  <div *ngFor="let project of fetchedProjectSearchs; let i=index">
+    {{project.details.name}} - {{project.details.lastName}}
+    <button type="button" (click)="selectProjectSearch(project)">select</button>
+  </div>
+
+  <div *ngFor="let project of search.projectSearch; let i=index">
+    {{project.details.name}} - {{project.details.lastName}}
+    <button type="button" (click)="removeProjectSearch(i)"><i class="fa fa-times"></i></button>
+  </div>
+  <!-- Autocomplete projectSearch-->
 </div>
-<div *ngFor="let fetchedTypeUser of fetchedTypeUsers; let i=index">
-  {{fetchedTypeUser}}
-  <button type="button" (click)="selectTypeUser(fetchedTypeUser)">select</button>
-</div>
-<div *ngFor="let typeUser of search.typeUser; let i=index">
-  {{typeUser}}
-  <button type="button" (click)="removeTypeUser(i)"><i class="fa fa-times"></i></button>
-</div>
-<!-- Autocomplete typeUser-->
-
-
-
-<!-- Autocomplete clientSearch-->
-<div *ngIf="!search.clientSearch.length">
-  <input
-    [ngModelOptions]="{standalone: true}"
-    [(ngModel)]="autocompleteClientSearch"
-    placeholder="Select Client to search"
-    (ngModelChange)="searchClientSearchs()"
-    mdInput
-  >
-</div>
-<div *ngFor="let user of fetchedClientSearchs; let i=index">
-  {{user.profile.name}} - {{user.profile.lastName}}
-  <button type="button" (click)="selectClientSearch(user)">select</button>
-</div>
-
-<div *ngFor="let client of search.clientSearch; let i=index">
-  {{client.profile.name}} - {{client.profile.lastName}}
-  <button type="button" (click)="removeClientSearch(i)"><i class="fa fa-times"></i></button>
-</div>
-<!-- Autocomplete clientSearch-->
-
-
-
-<!-- Autocomplete userSearch-->
-<div *ngIf="!search.userSearch.length">
-  <input
-    [ngModelOptions]="{standalone: true}"
-    [(ngModel)]="autocompleteUserSearch"
-    placeholder="Select User to search"
-    (ngModelChange)="searchUserSearchs()"
-    mdInput
-  >
-</div>
-<div *ngFor="let user of fetchedUserSearchs; let i=index">
-  {{user.profile.name}} - {{user.profile.lastName}}
-  <button type="button" (click)="selectUserSearch(user)">select</button>
-</div>
-
-<div *ngFor="let user of search.userSearch; let i=index">
-  {{user.profile.name}} - {{user.profile.lastName}}
-  <button type="button" (click)="removeUserSearch(i)"><i class="fa fa-times"></i></button>
-</div>
-<!-- Autocomplete userSearch-->
-
-
-
-
-
-
-
-<!-- Autocomplete projectSearch-->
-<div *ngIf="!search.projectSearch.length">
-  <input
-    [ngModelOptions]="{standalone: true}"
-    [(ngModel)]="autocompleteProjectSearch"
-    placeholder="Select Project to search"
-    (ngModelChange)="searchProjectSearchs()"
-    mdInput
-  >
-</div>
-<div *ngFor="let project of fetchedProjectSearchs; let i=index">
-  {{project.details.name}} - {{project.details.lastName}}
-  <button type="button" (click)="selectProjectSearch(project)">select</button>
-</div>
-
-<div *ngFor="let project of search.projectSearch; let i=index">
-  {{project.details.name}} - {{project.details.lastName}}
-  <button type="button" (click)="removeProjectSearch(i)"><i class="fa fa-times"></i></button>
-</div>
-<!-- Autocomplete projectSearch-->
 
 
 
