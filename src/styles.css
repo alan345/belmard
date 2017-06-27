@@ -18,7 +18,9 @@ H1, H2, H3, H4, H5 {
 
 .row {
 margin: 20px;
+text-align: center;  
 }
+
 
 .bg-inverse {
 border-radius: 5px;
