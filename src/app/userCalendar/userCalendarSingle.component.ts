@@ -66,17 +66,17 @@ export class UserCalendarSingleComponent implements OnInit {
     activeDayIsOpen: boolean = false;
     autocompleteUser: string = '';
     autocompleteProject: string = '';
-    autocompleteClient: string = '';
+
     fetchedUsers: User[] = [];
     fetchedProjects: Project[] = [];
-    fetchedClients: User[] = [];
 
 
-    fetchedTypeUsers = []
-    autocompleteTypeUser: string = '';
+
+
 
     search= {
       typeUser:[],
+      clientSearch:[]
     }
 
 
@@ -124,23 +124,6 @@ export class UserCalendarSingleComponent implements OnInit {
 
         this.getUserCalendars(1, search)
       }
-
-
-      // autocolplete typeUser
-        searchTypeUser() {
-          this.fetchedTypeUsers = this.typeUser.filter((el) =>
-            el.toLowerCase().indexOf(this.autocompleteTypeUser.toLowerCase()) > -1
-          );
-        }
-        selectTypeUser(typeUser) {
-          this.autocompleteTypeUser = '';
-          this.fetchedTypeUsers = [];
-          this.search.typeUser.push(typeUser);
-        }
-        removeTypeUser(i: number) {
-          this.search.typeUser.splice(i, 1);
-        }
-      // autocolplete typeUser
 
 
 
@@ -194,33 +177,7 @@ export class UserCalendarSingleComponent implements OnInit {
       }
 
     dayClicked({date, events}: {date: Date, events: UserCalendar[]}): void {
-    //  console.log(date)
       this.viewDate = date
-      // if (isSameMonth(date, this.viewDate)) {
-      //   if (
-      //     (isSameDay(this.viewDate, date) && this.activeDayIsOpen === true) ||
-      //     events.length === 0
-      //   ) {
-      //
-      //     this.events.forEach((event, index) => { this.events[index].isActiveEvent = false })
-      //
-      //   //  this.activeDayIsOpen = false;
-      //   } else {
-      //     this.events.forEach((event, index) => { this.events[index].isActiveEvent = false })
-      //
-      //     this.events.forEach((event, index) => {
-      //       events.forEach((activeEvent, ActiveIndex) => {
-      //         if(activeEvent._id === event._id) {
-      //           this.events[index].isActiveEvent = true
-      //         }
-      //       })
-      //     })
-      //     console.log(this.events)
-      //
-      //     //this.activeDayIsOpen = true;
-      //     this.viewDate = date;
-      //   }
-      // }
     }
 
     eventTimesChanged({event, newStart, newEnd}: CalendarEventTimesChangedEvent): void {
@@ -302,22 +259,6 @@ export class UserCalendarSingleComponent implements OnInit {
       newEvent.isActiveEvent = true
       this.events.push(newEvent)
 
-      // this.events.push({
-      //   _id:'',
-      //   title: 'New event',
-      //   start: this.viewDate,
-      //   end: endDate,
-      //   color: colors.red,
-      //   draggable: true,
-      //   isActiveEvent: true,
-      //   users: [],
-      //   clients: [],
-      //   resizable: {
-      //     beforeStart: true,
-      //     afterEnd: true
-      //   }
-      // });
-    //  this.save()
 
 
     let this2 = this
@@ -328,57 +269,72 @@ export class UserCalendarSingleComponent implements OnInit {
     }
 
 
+  save() {}
 
 
-      save() {
 
-        // if(this.fetchedQuote._id) {
-        //   this.quoteService.updateQuote(this.fetchedQuote)
-        //     .subscribe(
-        //       res => {
-        //         this.toastr.success('Great!', res.message)
-        //         //this.router.navigate(['quote/edit/' + this.fetchedQuote._id])
-        //       },
-        //       error => {
-        //         this.toastr.error('error!', error)
-        //       }
-        //     )
-        // } else {
-          // this.userCalendarService.saveUserCalendar(this.events[0])
-          //   .subscribe(
-          //     res => {
-          //       this.toastr.success('Great!', res.message)
-          //         this.router.navigate(['quote/edit/' + res.obj._id])
-          //     },
-          //     error => {console.log(error)}
-          //   )
-        // }
 
+  // autocolplete typeUser
+    fetchedTypeUsers = []
+    autocompleteTypeUser: string = '';
+    searchTypeUser() {
+      if(!this.autocompleteTypeUser) {
+        this.fetchedTypeUsers = []
+      } else {
+        this.fetchedTypeUsers = this.typeUser.filter((el) =>
+          el.toLowerCase().indexOf(this.autocompleteTypeUser.toLowerCase()) > -1
+        );
       }
-
-
-
-  // selectedIndex1 = 0
-  // selectedIndex2 = 0
-  // show1 = false
-  // show2 = false
-  // categ1: string = '';
-  // categ2: string = '';
-  // categ3: string = '';
-
-  // categ: string = 'Electricité';
-  // subCateg: string = 'file';
-
-  // fetchedQuotes: Quote[] = [];
-
-
-//  fetchedUserCalendar: UserCalendar = new UserCalendar();
+    }
+    selectTypeUser(typeUser) {
+      this.autocompleteTypeUser = '';
+      this.fetchedTypeUsers = [];
+      this.search.typeUser.push(typeUser);
+    }
+    removeTypeUser(i: number) {
+      this.search.typeUser.splice(i, 1);
+    }
+  // autocolplete typeUser
 
 
 
 
+  //autocomplete clientSearch
+    autocompleteClientSearch: string = '';
+    fetchedClientSearchs: User[] = [];
+    selectClientSearch(clientSearch: User) {
+      this.autocompleteClientSearch = '';
+      this.fetchedClientSearchs = []
+      this.search.clientSearch.push(clientSearch)
+    }
+    searchClientSearchs() {
+      let search = {
+          search: this.autocompleteClientSearch,
+        };
+      this.getClientSearchs(1, search)
+    }
 
-//autocomplete
+    getClientSearchs(page: number, search: any) {
+      this.userService.getUsers(page, search)
+        .subscribe(
+          res => {
+             this.fetchedClientSearchs = res.data
+             this.refresh.next();
+          },
+          error => {console.log(error);}
+        );
+    }
+    removeClientSearch(i: number) {
+      this.search.clientSearch.splice(i, 1);
+    }
+  //autocomplete client
+
+
+
+
+//autocomplete client
+  autocompleteClient: string = '';
+  fetchedClients: User[] = [];
   selectClient(client: User) {
     this.fetchedClients = []
     this.events.forEach(event => {
@@ -420,7 +376,7 @@ export class UserCalendarSingleComponent implements OnInit {
       }
     })
   }
-//autocomplete
+//autocomplete client
 
 
 

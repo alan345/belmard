@@ -1,11 +1,13 @@
-<!-- Autocomplete -->
-<input
-  [ngModelOptions]="{standalone: true}"
-  [(ngModel)]="autocompleteTypeUser"
-  placeholder="Select type User"
-  (ngModelChange)="searchTypeUser()"
-  mdInput
->
+<!-- Autocomplete typeUser-->
+<div *ngIf="!search.typeUser.length">
+  <input
+    [ngModelOptions]="{standalone: true}"
+    [(ngModel)]="autocompleteTypeUser"
+    placeholder="Select type User"
+    (ngModelChange)="searchTypeUser()"
+    mdInput
+  >
+</div>
 <div *ngFor="let fetchedTypeUser of fetchedTypeUsers; let i=index">
   {{fetchedTypeUser}}
   <button type="button" (click)="selectTypeUser(fetchedTypeUser)">select</button>
@@ -14,9 +16,30 @@
   {{typeUser}}
   <button type="button" (click)="removeTypeUser(i)"><i class="fa fa-times"></i></button>
 </div>
-<!-- Autocomplete -->
+<!-- Autocomplete typeUser-->
 
 
+
+<!-- Autocomplete clientSearch-->
+<div *ngIf="!search.clientSearch.length">
+  <input
+    [ngModelOptions]="{standalone: true}"
+    [(ngModel)]="autocompleteClientSearch"
+    placeholder="Select Client to search"
+    (ngModelChange)="searchClientSearchs()"
+    mdInput
+  >
+</div>
+<div *ngFor="let user of fetchedClientSearchs; let i=index">
+  {{user.profile.name}} - {{user.profile.lastName}}
+  <button type="button" (click)="selectClientSearch(user)">select</button>
+</div>
+
+<div *ngFor="let user of search.clientSearch; let i=index">
+  {{user.profile.name}} - {{user.profile.lastName}}
+  <button type="button" (click)="removeClientSearch(i)"><i class="fa fa-times"></i></button>
+</div>
+<!-- Autocomplete clientSearch-->
 
 
 <ng-template #modalContent let-close="close">
@@ -177,7 +200,7 @@
             (change)="refresh.next()">
         </td> -->
         <td>
-            <!-- Autocomplete -->
+            <!-- Autocomplete client-->
             <div *ngIf="!event.clients.length">
               <a [routerLink]="['/user/newuser']" class="admn-btn">
                 Créer un nouveau client
@@ -199,7 +222,7 @@
               {{user.profile.name}} - {{user.profile.lastName}}
               <button type="button" (click)="removeClient(i)"><i class="fa fa-times"></i></button>
             </div>
-            <!-- Autocomplete -->
+            <!-- Autocomplete client-->
         </td>
         <td>
             <!-- Autocomplete -->

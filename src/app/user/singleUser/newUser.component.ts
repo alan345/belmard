@@ -93,9 +93,13 @@ export class NewUserComponent implements OnInit {
 
   // autocolplete typeUser
   searchTypeUser() {
-    this.fetchedTypeUsers = this.typeUser.filter((el) =>
-      el.toLowerCase().indexOf(this.autocompleteTypeUser.toLowerCase()) > -1
-    );
+    if(!this.autocompleteTypeUser) {
+      this.fetchedTypeUsers = []
+    } else {
+      this.fetchedTypeUsers = this.typeUser.filter((el) =>
+        el.toLowerCase().indexOf(this.autocompleteTypeUser.toLowerCase()) > -1
+      );
+    }
   }
   selectTypeUser(typeUser) {
     this.autocompleteTypeUser = '';
