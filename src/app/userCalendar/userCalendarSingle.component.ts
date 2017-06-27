@@ -76,7 +76,9 @@ export class UserCalendarSingleComponent implements OnInit {
 
     search= {
       typeUser:[],
-      clientSearch:[]
+      clientSearch:[],
+      userSearch:[],
+      projectSearch:[]
     }
 
 
@@ -299,35 +301,116 @@ export class UserCalendarSingleComponent implements OnInit {
 
 
 
-  //autocomplete clientSearch
-    autocompleteClientSearch: string = '';
-    fetchedClientSearchs: User[] = [];
-    selectClientSearch(clientSearch: User) {
-      this.autocompleteClientSearch = '';
-      this.fetchedClientSearchs = []
-      this.search.clientSearch.push(clientSearch)
+  //autocomplete userSearch
+    autocompleteUserSearch: string = '';
+    fetchedUserSearchs: User[] = [];
+    selectUserSearch(userSearch: User) {
+      this.autocompleteUserSearch = '';
+      this.fetchedUserSearchs = []
+      this.search.userSearch.push(userSearch)
     }
-    searchClientSearchs() {
+    searchUserSearchs() {
+      if(!this.autocompleteUserSearch) {
+        this.fetchedUserSearchs  = []
+      } else {
+        let search = {
+            search: this.autocompleteUserSearch,
+          };
+        this.getUserSearchs(1, search);
+      }
+    }
+
+    getUserSearchs(page: number, search: any) {
+      this.userService.getUsers(page, search)
+        .subscribe(
+          res => {
+             this.fetchedUserSearchs = res.data
+             this.refresh.next();
+          },
+          error => {console.log(error); }
+        );
+    }
+    removeUserSearch(i: number) {
+      this.search.userSearch.splice(i, 1);
+    }
+  //autocomplete userSearch
+
+
+
+
+//autocomplete clientSearch
+  autocompleteClientSearch: string = '';
+  fetchedClientSearchs: User[] = [];
+  selectClientSearch(userSearch: User) {
+    this.autocompleteClientSearch = '';
+    this.fetchedClientSearchs = []
+    this.search.clientSearch.push(userSearch)
+  }
+  searchClientSearchs() {
+    if(!this.autocompleteClientSearch) {
+      this.fetchedClientSearchs = []
+    } else {
       let search = {
           search: this.autocompleteClientSearch,
         };
       this.getClientSearchs(1, search)
     }
+  }
+  getClientSearchs(page: number, search: any) {
+    this.userService.getUsers(page, search)
+      .subscribe(
+        res => {
+           this.fetchedClientSearchs = res.data
+           this.refresh.next();
+        },
+        error => {console.log(error);}
+      );
+  }
+  removeClientSearch(i: number) {
+    this.search.clientSearch.splice(i, 1);
+  }
+//autocomplete clientSearch
 
-    getClientSearchs(page: number, search: any) {
-      this.userService.getUsers(page, search)
-        .subscribe(
-          res => {
-             this.fetchedClientSearchs = res.data
-             this.refresh.next();
-          },
-          error => {console.log(error);}
-        );
+
+
+
+
+//autocomplete projectSearch
+  autocompleteProjectSearch: string = '';
+  fetchedProjectSearchs: Project[] = [];
+  selectProjectSearch(projectSearch: Project) {
+    this.autocompleteProjectSearch = '';
+    this.fetchedProjectSearchs = []
+    this.search.projectSearch.push(projectSearch)
+  }
+  searchProjectSearchs() {
+    if(!this.autocompleteProjectSearch) {
+      this.fetchedProjectSearchs = []
+    } else {
+      let search = {
+          search: this.autocompleteProjectSearch,
+        };
+      this.getProjectSearchs(1, search)
     }
-    removeClientSearch(i: number) {
-      this.search.clientSearch.splice(i, 1);
-    }
-  //autocomplete client
+
+  }
+  getProjectSearchs(page: number, search: any) {
+    this.projectService.getProjects(page, search)
+      .subscribe(
+        res => {
+           this.fetchedProjectSearchs = res.data
+           this.refresh.next();
+        },
+        error => {console.log(error);}
+      );
+  }
+  removeProjectSearch(i: number) {
+    this.search.projectSearch.splice(i, 1);
+  }
+//autocomplete projectSearch
+
+
+
 
 
 
@@ -350,13 +433,6 @@ export class UserCalendarSingleComponent implements OnInit {
       };
     this.getClients(1, search)
   }
-  // getClient(id: string) {
-  //   this.userService.getUser(id)
-  //     .subscribe(
-  //       res => {this.selectClient(res.client)},
-  //       error => {console.log(error);}
-  //     );
-  // }
 
   getClients(page: number, search: any) {
     this.userService.getUsers(page, search)

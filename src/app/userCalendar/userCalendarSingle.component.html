@@ -35,11 +35,65 @@
   <button type="button" (click)="selectClientSearch(user)">select</button>
 </div>
 
-<div *ngFor="let user of search.clientSearch; let i=index">
-  {{user.profile.name}} - {{user.profile.lastName}}
+<div *ngFor="let client of search.clientSearch; let i=index">
+  {{client.profile.name}} - {{client.profile.lastName}}
   <button type="button" (click)="removeClientSearch(i)"><i class="fa fa-times"></i></button>
 </div>
 <!-- Autocomplete clientSearch-->
+
+
+
+<!-- Autocomplete userSearch-->
+<div *ngIf="!search.userSearch.length">
+  <input
+    [ngModelOptions]="{standalone: true}"
+    [(ngModel)]="autocompleteUserSearch"
+    placeholder="Select User to search"
+    (ngModelChange)="searchUserSearchs()"
+    mdInput
+  >
+</div>
+<div *ngFor="let user of fetchedUserSearchs; let i=index">
+  {{user.profile.name}} - {{user.profile.lastName}}
+  <button type="button" (click)="selectUserSearch(user)">select</button>
+</div>
+
+<div *ngFor="let user of search.userSearch; let i=index">
+  {{user.profile.name}} - {{user.profile.lastName}}
+  <button type="button" (click)="removeUserSearch(i)"><i class="fa fa-times"></i></button>
+</div>
+<!-- Autocomplete userSearch-->
+
+
+
+
+
+
+
+<!-- Autocomplete projectSearch-->
+<div *ngIf="!search.projectSearch.length">
+  <input
+    [ngModelOptions]="{standalone: true}"
+    [(ngModel)]="autocompleteProjectSearch"
+    placeholder="Select Project to search"
+    (ngModelChange)="searchProjectSearchs()"
+    mdInput
+  >
+</div>
+<div *ngFor="let project of fetchedProjectSearchs; let i=index">
+  {{project.details.name}} - {{project.details.lastName}}
+  <button type="button" (click)="selectProjectSearch(project)">select</button>
+</div>
+
+<div *ngFor="let project of search.projectSearch; let i=index">
+  {{project.details.name}} - {{project.details.lastName}}
+  <button type="button" (click)="removeProjectSearch(i)"><i class="fa fa-times"></i></button>
+</div>
+<!-- Autocomplete projectSearch-->
+
+
+
+
 
 
 <ng-template #modalContent let-close="close">
