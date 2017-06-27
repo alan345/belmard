@@ -99,7 +99,7 @@ export class UserCalendarSingleComponent implements OnInit {
 
 
       ngOnInit() {
-        this.fetchEvents()
+        this.fetchEvents();
       }
 
 
@@ -258,9 +258,11 @@ export class UserCalendarSingleComponent implements OnInit {
       this.autocompleteTypeUser = '';
       this.fetchedTypeUsers = [];
       this.search.typeUser.push(typeUser);
+      this.fetchEvents();
     }
     removeTypeUser(i: number) {
       this.search.typeUser.splice(i, 1);
+      this.fetchEvents();
     }
   // autocolplete typeUser
 
@@ -274,6 +276,7 @@ export class UserCalendarSingleComponent implements OnInit {
       this.autocompleteUserSearch = '';
       this.fetchedUserSearchs = []
       this.search.userSearch.push(userSearch)
+      this.fetchEvents();
     }
     searchUserSearchs() {
       if(!this.autocompleteUserSearch) {
@@ -298,6 +301,7 @@ export class UserCalendarSingleComponent implements OnInit {
     }
     removeUserSearch(i: number) {
       this.search.userSearch.splice(i, 1);
+      this.fetchEvents();
     }
   //autocomplete userSearch
 
@@ -311,6 +315,7 @@ export class UserCalendarSingleComponent implements OnInit {
     this.autocompleteClientSearch = '';
     this.fetchedClientSearchs = []
     this.search.clientSearch.push(userSearch)
+    this.fetchEvents();
   }
   searchClientSearchs() {
     if(!this.autocompleteClientSearch) {
@@ -334,6 +339,7 @@ export class UserCalendarSingleComponent implements OnInit {
   }
   removeClientSearch(i: number) {
     this.search.clientSearch.splice(i, 1);
+    this.fetchEvents();
   }
 //autocomplete clientSearch
 
@@ -348,6 +354,7 @@ export class UserCalendarSingleComponent implements OnInit {
     this.autocompleteProjectSearch = '';
     this.fetchedProjectSearchs = []
     this.search.projectSearch.push(projectSearch)
+    this.fetchEvents();
   }
   searchProjectSearchs() {
     if(!this.autocompleteProjectSearch) {
@@ -372,6 +379,7 @@ export class UserCalendarSingleComponent implements OnInit {
   }
   removeProjectSearch(i: number) {
     this.search.projectSearch.splice(i, 1);
+    this.fetchEvents();
   }
 //autocomplete projectSearch
 

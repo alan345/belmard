@@ -171,6 +171,22 @@ router.get('/page/:page', function (req, res, next) {
   //
   // if(!hasWhatsNewCateg)
   //   searchQuery['categories'] = categoriesArray
+
+  if(req.query.userSearch)
+    searchQuery['users'] = mongoose.Types.ObjectId(JSON.parse(req.query.userSearch)._id)
+
+  if(req.query.projectSearch)
+    searchQuery['projects'] = mongoose.Types.ObjectId(JSON.parse(req.query.projectSearch)._id)
+
+  if(req.query.clientSearch)
+    searchQuery['clients'] = mongoose.Types.ObjectId(JSON.parse(req.query.clientSearch)._id)
+
+  // if(req.query.typeUser)
+  //   searchQuery['users.type'] = req.query.typeUser
+  //
+
+
+
   if(req.query.search)
     searchQuery['name'] = new RegExp(req.query.search, 'i')
 
@@ -196,14 +212,34 @@ router.get('/page/:page', function (req, res, next) {
       .find(searchQuery)
       .count()
       .exec(function (err, count) {
-      res.status(200).json({
-          paginationData : {
-            totalItems: count,
-            currentPage : currentPage,
-            itemsPerPage : itemsPerPage
-          },
-          data: item
-        })
+
+        if(req.query.typeUser) {
+          var itemFiltered = []
+          item.forEach(event => {
+            event.clients.forEach(client=> {
+
+              if(client.type.length) {
+                // console.log(client.type[0])
+                // console.log(req.query.typeUser)
+                if(client.type[0] === req.query.typeUser) {
+                  itemFiltered.push(event)
+                }
+              }
+            })
+          })
+          //console.log(itemFiltered)
+          item = itemFiltered
+        }
+
+
+        res.status(200).json({
+            paginationData : {
+              totalItems: count,
+              currentPage : currentPage,
+              itemsPerPage : itemsPerPage
+            },
+            data: item
+          })
       })
     }
   })
