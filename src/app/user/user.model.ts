@@ -22,6 +22,7 @@ export class ProductBought {
 }
 
 
+export const TypeUser = ['plombier', 'serrurier']
 
 export class Profile {
   name: string = '';

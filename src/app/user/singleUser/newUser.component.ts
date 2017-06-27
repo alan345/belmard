@@ -9,8 +9,8 @@ import { ToastsManager} from 'ng2-toastr';
 import { MdDialog} from '@angular/material';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location }               from '@angular/common';
-import { User } from '../user.model';
-import { Form } from '../../form/form.model';
+import { User, TypeUser } from '../user.model';
+//import { Form } from '../../form/form.model';
 
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { DeleteDialog } from '../../deleteDialog/deleteDialog.component'
@@ -37,7 +37,7 @@ export class NewUserComponent implements OnInit {
 
   companieIndexToSelect = ''
   typeUserDropDown = ''
-  typeUser = ['plombier', 'serrurier']
+  typeUser = TypeUser
 
   fetchedUser: User = new User();
 
@@ -93,7 +93,9 @@ export class NewUserComponent implements OnInit {
 
   // autocolplete typeUser
   searchTypeUser() {
-    this.fetchedTypeUsers = this.typeUser;
+    this.fetchedTypeUsers = this.typeUser.filter((el) =>
+      el.toLowerCase().indexOf(this.autocompleteTypeUser.toLowerCase()) > -1
+    );
   }
   selectTypeUser(typeUser) {
     this.autocompleteTypeUser = '';

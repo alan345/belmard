@@ -6,7 +6,7 @@ import { ToastsManager} from 'ng2-toastr';
 
 import { MdDialog } from '@angular/material';
 import { Router, ActivatedRoute, Params } from '@angular/router';
-import { Location }               from '@angular/common';
+import { Location } from '@angular/common';
 import { User } from '../user.model';
 import { Form } from '../../form/form.model';
 import { Companie } from '../../companie/companie.model';

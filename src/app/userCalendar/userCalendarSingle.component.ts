@@ -17,7 +17,7 @@ import { User } from '../user/user.model';
 import { Project } from '../project/project.model';
 import { ChangeDetectionStrategy, ViewChild, TemplateRef } from '@angular/core';
 
-
+import { TypeUser } from '../user/user.model';
 
 import { Subject } from 'rxjs/Subject';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
@@ -57,7 +57,7 @@ export class UserCalendarSingleComponent implements OnInit {
 
   @ViewChild('modalContent') modalContent: TemplateRef<any>;
 
-    typeUser = ['plombier', 'serrurier']
+    typeUser = TypeUser
     view: string = 'month';
     viewDate: Date = new Date();
     refresh: Subject<any> = new Subject();
@@ -127,17 +127,19 @@ export class UserCalendarSingleComponent implements OnInit {
 
 
       // autocolplete typeUser
-      searchTypeUser() {
-        this.fetchedTypeUsers = this.typeUser;
-      }
-      selectTypeUser(typeUser) {
-        this.autocompleteTypeUser = '';
-        this.fetchedTypeUsers = [];
-        this.search.typeUser.push(typeUser);
-      }
-      removeTypeUser(i: number) {
-      //  this.fetchedUser.type.splice(i, 1);
-      }
+        searchTypeUser() {
+          this.fetchedTypeUsers = this.typeUser.filter((el) =>
+            el.toLowerCase().indexOf(this.autocompleteTypeUser.toLowerCase()) > -1
+          );
+        }
+        selectTypeUser(typeUser) {
+          this.autocompleteTypeUser = '';
+          this.fetchedTypeUsers = [];
+          this.search.typeUser.push(typeUser);
+        }
+        removeTypeUser(i: number) {
+          this.search.typeUser.splice(i, 1);
+        }
       // autocolplete typeUser
 
 
