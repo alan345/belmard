@@ -27,48 +27,6 @@ margin: 20px;
 border-radius: 5px;
 }
 
-.btn1 {
-background-color: #fff;
-text-Align: Center;  
-margin: 5px;
-padding: 10px;
-border-radius: 8px;  
-}
-
-.btn1:hover {
-color: #000;
-background: #bababa;
-}
-  
- .btn1:active {
-color: #fff;
-background: #444;
-}
-
-.btn2 {
-font-family: Arial,sans-serif;
-width: auto;
-height: 43px;
-padding: 10px;
-text-align: center;
-color: #fff;
-background: #444;
-background: linear-gradient( #555, #2C2C2C);
-border-radius: 8px;
-}
-  
-.btn2:hover {
-color: #fff;
-background: #555;
-background: linear-gradient( #777, #333);
-}
-  
- .btn2:active {
-color: #fff;
-background: #444;
-background: linear-gradient( #555, #2C2C2C);
-
-}
 
 #wrapper {
   display: flex;
@@ -107,7 +65,8 @@ background-color: #337ab7;
 }
 
 .btn {
-text-align: center;  
+text-align: center;
+  justify-content: center;
 }
 
 .card-block {
@@ -125,6 +84,3 @@ text-align: center;
 border-radius: 5px;  
 }
 
-.btn2 {
-text-align: center;  
-}
