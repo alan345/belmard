@@ -74,13 +74,13 @@ background: linear-gradient( #555, #2C2C2C);
 }
 
 .nav-link:hover {
-    color: rgba(255, 255, 255, 1);
+    color: #fff;
     background-color: rgba(143, 143, 143, 1);
   border-radius: 8px;
 }
 
 .active {
-    color: rgba(255, 255, 255, 1);
+    color: #fff;
     background-color: rgba(91, 199, 92, 1);
   border-radius: 8px;
 }
