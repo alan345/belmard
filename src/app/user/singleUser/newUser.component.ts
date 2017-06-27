@@ -28,36 +28,16 @@ export class NewUserComponent implements OnInit {
   //fetchedUser : User;
   fetchedCompanies: Companie[] = []
   autocompleteCompanie: string = '';
-  // fetchedCompanieInit : Companie = {
-  //   _id: '',
-  //   forms:[],
-  //   name: '',
-  //   typeCompanie: '',
-  //   phoneNumber: '',
-  //   address: {
-  //     address : '',
-  //     city :  '',
-  //     state :  '',
-  //     zip :  ''
-  //   },
-  //   _users:[]
-  // }
-  // fetchedCompanieAfter : Companie = {
-  //   _id: '',
-  //   forms:[],
-  //   name: '',
-  //   typeCompanie: '',
-  //   phoneNumber: '',
-  //   address: {
-  //     address : '',
-  //     city :  '',
-  //     state :  '',
-  //     zip :  ''
-  //   },
-  //   _users:[]
-  // }
-  companieIndexToSelect = ''
 
+  fetchedTypeUsers = []
+  autocompleteTypeUser: string = '';
+
+
+
+
+  companieIndexToSelect = ''
+  typeUserDropDown = ''
+  typeUser = ['plombier', 'serrurier']
 
   fetchedUser: User = new User();
 
@@ -104,10 +84,33 @@ export class NewUserComponent implements OnInit {
   removeCompanie(i: number) {
     this.fetchedUser.companies.splice(i, 1);
   }
+
+
+
+
+
+
+
+  // autocolplete typeUser
+  searchTypeUser() {
+    this.fetchedTypeUsers = this.typeUser;
+  }
+  selectTypeUser(typeUser) {
+    this.autocompleteTypeUser = '';
+    this.fetchedTypeUsers = [];
+    this.fetchedUser.type.push(typeUser);
+  }
+  removeTypeUser(i: number) {
+    this.fetchedUser.type.splice(i, 1);
+  }
+  // autocolplete typeUser
+
+
+
+
+
   ngOnInit() {
     this.myForm = this._fb.group({
-
-
         email: [this.emailValidator],
 
         profile: this._fb.group({
@@ -169,19 +172,21 @@ export class NewUserComponent implements OnInit {
   }
 
   saveAndCreateProject() {
-    this.save('project')
+    this.save()
   }
-  save(redirect: string) {
-    console.log(redirect)
+  save() {
+
+    //console.log(this.typeUserDropDown)
+    //this.fetchedUser.type = [this.typeUserDropDown]
     if(this.fetchedUser._id) {
       this.userService.updateUser(this.fetchedUser)
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
-            if(redirect == 'profile')
-              this.router.navigate(['user/profile/' + res.obj._id])
-            if(redirect == 'project')
-              this.router.navigate(['project/new/' + res.obj._id])
+            // if(redirect == 'profile')
+            //   this.router.navigate(['user/profile/' + res.obj._id])
+            // if(redirect == 'project')
+            //   this.router.navigate(['project/new/' + res.obj._id])
           },
           error => {
             this.toastr.error('Error!')
@@ -194,10 +199,10 @@ export class NewUserComponent implements OnInit {
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
-            if(redirect == 'profile')
-              this.router.navigate(['user/profile/' + res.obj._id])
-            if(redirect == 'project')
-              this.router.navigate(['project/new/' + res.obj._id])
+            // if(redirect == 'profile')
+            //   this.router.navigate(['user/profile/' + res.obj._id])
+            // if(redirect == 'project')
+            //   this.router.navigate(['project/new/' + res.obj._id])
             // this.addUserIdToCompanie(res.obj)
             //this.router.navigate(['user'])
           },
@@ -210,68 +215,6 @@ export class NewUserComponent implements OnInit {
   }
 
 
-  // addUserIdToCompanie(user : User) {
-  // //  console.log(this.fetchedCompanieInit)
-  // //  console.log(this.fetchedCompanieAfter)
-  //   //let companieToUpdate = {}
-  //
-  //
-  //     if(this.fetchedCompanieInit._id !== this.fetchedCompanieAfter._id ) {
-  //       this.fetchedCompanieInit._users.forEach((userInit, index) =>{
-  //         if(userInit._id === this.fetchedUser._id) {
-  //           delete this.fetchedCompanieInit._users[index]
-  //           this.companieService.updateCompanie(this.fetchedCompanieInit)
-  //             .subscribe(
-  //               res => {
-  //                 //console.log('User removed from previous companie' + this.fetchedCompanieInit.name)
-  //                 //this.onPassForm.emit();
-  //                 this.toastr.success('Great!', 'User removed from previous companie' + this.fetchedCompanieInit.name)
-  //                 //this.router.navigate(['companie/' + this.fetchedCompanie._id]);
-  //
-  //               },
-  //               error => {console.log(error)}
-  //             )
-  //
-  //         }
-  //       })
-  //     }
-  //
-  //     this.fetchedCompanies.forEach((companie, index) => {
-  //       if(companie._id == this.companieIndexToSelect) {
-  //         this.fetchedCompanieAfter = this.fetchedCompanies[index]
-  //       }
-  //     })
-  //
-  //     let okAddUserToCompanie = true
-  //     this.fetchedCompanieAfter._users.forEach((userFetch) => {
-  //       if(userFetch._id === user._id) {
-  //         okAddUserToCompanie = false
-  //       }
-  //     })
-  //     if(!okAddUserToCompanie){
-  //       console.log('error! user already exists in salon')
-  //       //this.toastr.error('error! user already exists in salon')
-  //       this.goBack()
-  //       //this.router.navigate(['companie/' + this.fetchedCompanieAfter._id]);
-  //       //this.navigate(this.fetchedCompanie._id)
-  //     } else {
-  //       this.fetchedCompanieAfter._users.push(user)
-  //       this.companieService.updateCompanie(this.fetchedCompanieAfter)
-  //         .subscribe(
-  //           res => {
-  //             //this.onPassForm.emit();
-  //             this.toastr.success('Great!', res.message)
-  //             //this.router.navigate(['companie/' + this.fetchedCompanie._id]);
-  //             this.goBack()
-  //             //this.navigate(user._id)
-  //           },
-  //           error => {console.log(error)}
-  //         )
-  //     }
-  //
-  //
-  // }
-
   navigate(id: string){
     this.router.navigate(['user/' + id])
   }
@@ -282,6 +225,9 @@ export class NewUserComponent implements OnInit {
       .subscribe(
         res => {
           this.fetchedUser = res.user
+          this.fetchedUser.type.forEach(type => {
+            this.typeUserDropDown = type
+          });
         },
         error => {
           console.log(error);

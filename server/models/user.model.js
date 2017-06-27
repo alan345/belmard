@@ -25,6 +25,7 @@ var user = new Schema({
     lastVisit: Date,
     // you might want more user roles, so an array would be fine
     role: {type: Array, default: ['client']},
+    type: {type: Array, default: ['']},
     companies: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
     profile : {
       _profilePicture : [{type: Schema.Types.ObjectId, ref: 'Form'}],

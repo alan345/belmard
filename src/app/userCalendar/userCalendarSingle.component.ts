@@ -57,7 +57,7 @@ export class UserCalendarSingleComponent implements OnInit {
 
   @ViewChild('modalContent') modalContent: TemplateRef<any>;
 
-
+    typeUser = ['plombier', 'serrurier']
     view: string = 'month';
     viewDate: Date = new Date();
     refresh: Subject<any> = new Subject();
@@ -70,6 +70,10 @@ export class UserCalendarSingleComponent implements OnInit {
     fetchedUsers: User[] = [];
     fetchedProjects: Project[] = [];
     fetchedClients: User[] = [];
+
+
+    fetchedTypeUsers = []
+    autocompleteTypeUser: string = '';
 
 
     // modalData: {
@@ -143,6 +147,8 @@ export class UserCalendarSingleComponent implements OnInit {
         this.fetchEvents()
       }
 
+
+
       fetchEvents() {
         console.log('fetchEvents')
         const getStart: any = {
@@ -164,6 +170,24 @@ export class UserCalendarSingleComponent implements OnInit {
 
         this.getUserCalendars(1, search)
       }
+
+
+      // autocolplete typeUser
+      searchTypeUser() {
+        this.fetchedTypeUsers = this.typeUser;
+      }
+      selectTypeUser(typeUser) {
+        this.autocompleteTypeUser = '';
+        this.fetchedTypeUsers = [];
+      //  this.fetchedUser.type.push(typeUser);
+      }
+      removeTypeUser(i: number) {
+      //  this.fetchedUser.type.splice(i, 1);
+      }
+      // autocolplete typeUser
+
+
+
 
 
       getUserCalendars(page: number, search: any) {

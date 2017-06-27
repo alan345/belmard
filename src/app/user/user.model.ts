@@ -7,6 +7,7 @@ export class User {
   email: string = '';
   lastVisit: Date = new Date;
   role: string[] = [];
+  type: string[] = [];
   forms: Form[] = [];
   products: ProductBought[] = [];
   profile: Profile = new Profile();

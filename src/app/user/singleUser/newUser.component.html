@@ -4,7 +4,7 @@
     <h3 style="text-align: center;">Add Client</h3>
   </div>
   <div class="single-wrpr beigeback">
-    <form [formGroup]="myForm" novalidate (ngSubmit)="save('profile')">
+    <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
 
 
 
@@ -20,6 +20,8 @@
             (ngModelChange)="searchCompanies()"
             mdInput
           >
+
+
           <div *ngFor="let fetchedCompanie of fetchedCompanies; let i=index">
             {{fetchedCompanie.name}} - {{fetchedCompanie.name}}
             <button type="button" (click)="selectCompanie(fetchedCompanie)">select</button>
@@ -31,6 +33,34 @@
           <!-- Autocomplete -->
 
 
+
+
+
+          <!-- Autocomplete -->
+          <input
+            [ngModelOptions]="{standalone: true}"
+            [(ngModel)]="autocompleteTypeUser"
+            placeholder="Select type User"
+            (ngModelChange)="searchTypeUser()"
+            mdInput
+          >
+          <div *ngFor="let fetchedTypeUser of fetchedTypeUsers; let i=index">
+            {{fetchedTypeUser}}
+            <button type="button" (click)="selectTypeUser(fetchedTypeUser)">select</button>
+          </div>
+          <div *ngFor="let typeUser of fetchedUser.type; let i=index">
+            {{typeUser}}
+            <button type="button" (click)="removeTypeUser(i)"><i class="fa fa-times"></i></button>
+          </div>
+          <!-- Autocomplete -->
+
+
+          <!-- <select
+            [ngModelOptions]="{standalone: true}"
+            [(ngModel)]="typeUserDropDown"
+          >
+            <option *ngFor="let n of typeUser" [attr.value]="n.value">{{n.value}}</option>
+          </select> -->
 
 
 

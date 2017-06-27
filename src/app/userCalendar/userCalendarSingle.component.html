@@ -1,3 +1,24 @@
+<!-- Autocomplete -->
+<!-- <input
+  [ngModelOptions]="{standalone: true}"
+  [(ngModel)]="autocompleteTypeUser"
+  placeholder="Select type User"
+  (ngModelChange)="searchTypeUser()"
+  mdInput
+>
+<div *ngFor="let fetchedTypeUser of fetchedTypeUsers; let i=index">
+  {{fetchedTypeUser}}
+  <button type="button" (click)="selectTypeUser(fetchedTypeUser)">select</button>
+</div>
+<div *ngFor="let typeUser of fetchedUser.type; let i=index">
+  {{typeUser}}
+  <button type="button" (click)="removeTypeUser(i)"><i class="fa fa-times"></i></button>
+</div> -->
+<!-- Autocomplete -->
+
+
+
+
 <ng-template #modalContent let-close="close">
   <div class="modal-header">
     <h5 class="modal-title">Event action occurred</h5>
