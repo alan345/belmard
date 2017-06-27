@@ -66,7 +66,7 @@ background-color: #337ab7;
 
 .btn {
 text-align: center;
-  justify-content: center;
+  
 }
 
 .card-block {
@@ -81,6 +81,7 @@ margin:10px;
 margin: 20px;
 background-color: #b5b5b5;
 text-align: center;
-border-radius: 5px;  
+border-radius: 5px; 
+justify-content: center;  
 }
 
