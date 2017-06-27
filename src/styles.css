@@ -74,15 +74,15 @@ background: linear-gradient( #555, #2C2C2C);
 }
 
 .nav-link:hover {
-    color: #fff;
+    color: #ffffff;
     background-color: rgba(143, 143, 143, 1);
-  border-radius: 8px;
+  border-radius: 5px;
 }
 
 .active {
-    color: #fff;
+    color: #ffffff;
     background-color: rgba(91, 199, 92, 1);
-  border-radius: 8px;
+  border-radius: 5px;
 }
 
 .header {
