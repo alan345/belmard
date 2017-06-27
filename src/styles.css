@@ -114,3 +114,7 @@ text-align: center;
 .card-block {
 text-align: center;  
 }
+
+.card {
+margin:20px;
+}
