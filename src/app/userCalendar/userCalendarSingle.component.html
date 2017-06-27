@@ -1,5 +1,5 @@
 <!-- Autocomplete -->
-<!-- <input
+<input
   [ngModelOptions]="{standalone: true}"
   [(ngModel)]="autocompleteTypeUser"
   placeholder="Select type User"
@@ -10,10 +10,10 @@
   {{fetchedTypeUser}}
   <button type="button" (click)="selectTypeUser(fetchedTypeUser)">select</button>
 </div>
-<div *ngFor="let typeUser of fetchedUser.type; let i=index">
+<div *ngFor="let typeUser of search.typeUser; let i=index">
   {{typeUser}}
   <button type="button" (click)="removeTypeUser(i)"><i class="fa fa-times"></i></button>
-</div> -->
+</div>
 <!-- Autocomplete -->
 
 

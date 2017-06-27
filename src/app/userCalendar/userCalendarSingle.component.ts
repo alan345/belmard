@@ -75,55 +75,9 @@ export class UserCalendarSingleComponent implements OnInit {
     fetchedTypeUsers = []
     autocompleteTypeUser: string = '';
 
-
-    // modalData: {
-    //   action: string,
-    //   event: CalendarEvent
-    // };
-
-    // actions: CalendarEventAction[] = [{
-    //   label: '<i class="fa fa-fw fa-pencil"></i>',
-    //   onClick: ({event}: {event: CalendarEvent}): void => {
-    //     this.handleEvent('Edited', event);
-    //   }
-    // }, {
-    //   label: '<i class="fa fa-fw fa-times"></i>',
-    //   onClick: ({event}: {event: CalendarEvent}): void => {
-    //     this.events = this.events.filter(iEvent => iEvent !== event);
-    //     this.handleEvent('Deleted', event);
-    //   }
-    // }];
-
-
-    // events: CalendarEvent[] = [{
-    //   start: subDays(startOfDay(new Date()), 1),
-    //   end: addDays(new Date(), 1),
-    //   title: 'A 3 day event',
-    //   color: colors.red,
-    //   actions: this.actions
-    // }, {
-    //   start: startOfDay(new Date()),
-    //   title: 'An event with no end date',
-    //   color: colors.yellow,
-    //   actions: this.actions
-    // }, {
-    //   start: subDays(endOfMonth(new Date()), 3),
-    //   end: addDays(endOfMonth(new Date()), 3),
-    //   title: 'A long event that spans 2 months',
-    //   color: colors.blue
-    // }, {
-    //   start: addHours(startOfDay(new Date()), 2),
-    //   end: new Date(),
-    //   title: 'A draggable and resizable event',
-    //   color: colors.yellow,
-    //   actions: this.actions,
-    //   resizable: {
-    //     beforeStart: true,
-    //     afterEnd: true
-    //   },
-    //   draggable: true
-    // }];
-
+    search= {
+      typeUser:[],
+    }
 
 
       constructor(
@@ -179,7 +133,7 @@ export class UserCalendarSingleComponent implements OnInit {
       selectTypeUser(typeUser) {
         this.autocompleteTypeUser = '';
         this.fetchedTypeUsers = [];
-      //  this.fetchedUser.type.push(typeUser);
+        this.search.typeUser.push(typeUser);
       }
       removeTypeUser(i: number) {
       //  this.fetchedUser.type.splice(i, 1);
