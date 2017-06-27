@@ -77,11 +77,12 @@ text-align: center;
 margin:10px;
 }
 
-.title {
-margin: 20px;
-background-color: #b5b5b5;
-text-align: center;
-border-radius: 5px; 
-justify-content: center;  
-}
 
+.title {
+color: #fff;
+text-align: center;
+background-color: #337ab7;
+order-radius: 5px; 
+justify-content: center;
+margin: 20px;  
+}
