@@ -73,12 +73,12 @@ background: linear-gradient( #555, #2C2C2C);
   justify-content: center;
 }
 
-.navb:hover {
+.nav-link:hover {
     color: rgba(255, 255, 255, 1);
     background-color: rgba(143, 143, 143, 1);
 }
 
-.navb:active {
+.nav-link:active {
     color: rgba(255, 255, 255, 1);
     background-color: rgba(91, 199, 92, 1);
 }
