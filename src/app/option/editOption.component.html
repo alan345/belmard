@@ -7,7 +7,7 @@
     <h4 class="dspl-nn">id: {{fetchedOption._id}}</h4>
     <!-- <form #f="ngForm" novalidate (ngSubmit)="save(f.value, f.valid)"> -->
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
-      <!-- <div formGroupName="calendar"> -->
+      <div formGroupName="calendar">
         <input
           type="text"
           class="form-control"
@@ -17,7 +17,7 @@
 
           placeholder="timeBegin"
         >
-      <!-- </div> -->
+      </div>
 
 
       <div class="valid-edit">

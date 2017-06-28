@@ -126,6 +126,7 @@ export class EditOptionComponent implements OnInit {
     this.optionService.getOption()
       .subscribe(
         res => {
+          //console.log(res)
           this.fetchedOption = res
         },
         error => {
