@@ -15,7 +15,7 @@
       <div>
         <label>Search</label>
         <div *ngIf="!search.typeUser.length">
-          <input
+          <input class="form-control"
             [ngModelOptions]="{standalone: true}"
             [(ngModel)]="autocompleteTypeUser"
             placeholder="Select type User"
@@ -37,7 +37,7 @@
 
         <!-- Autocomplete clientSearch-->
         <div *ngIf="!search.clientSearch.length">
-          <input
+          <input class="form-control"
             [ngModelOptions]="{standalone: true}"
             [(ngModel)]="autocompleteClientSearch"
             placeholder="Select Client to search"
@@ -60,7 +60,7 @@
 
         <!-- Autocomplete userSearch-->
         <div *ngIf="!search.userSearch.length">
-          <input
+          <input class="form-control"
             [ngModelOptions]="{standalone: true}"
             [(ngModel)]="autocompleteUserSearch"
             placeholder="Select User to search"
@@ -87,7 +87,7 @@
 
         <!-- Autocomplete projectSearch-->
         <div *ngIf="!search.projectSearch.length">
-          <input
+          <input class="form-control"
             [ngModelOptions]="{standalone: true}"
             [(ngModel)]="autocompleteProjectSearch"
             placeholder="Select Project to search"
