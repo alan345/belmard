@@ -4,8 +4,62 @@
   <div class="col-md-6"><h3 class="title">Fournisseurs</h3></div>
   <div class="col-md-3"></div>
 </div>
+<div class="row">
+   <div class="col-md-4">
+    <div class="card">
+    <div class="card-header">
+      <h4 class="card-title">Ajouter un produit</h4>
+    </div>
+    <div class="card-block">
+      <button class="btn btn-primary" [routerLink]="['/companie/new']" routerLinkActive="active"><i class=""></i>Ajouter Fournisseur</button>
+    </div>
+    </div>
+  </div>
 
-<div class="container beigeback">
+  <div class="col-md-4">
+    <div class="card">
+    <div class="card-header">
+      <h4 class="card-title">Consultation / Édition</h4>
+    </div>
+    <div class="card-block">
+      <div id="wrapper" class="subsubnav-clients">
+          <input
+            celass="champ"
+            type="text"
+            name="Search"
+            placeholder="Rechercher"
+            [(ngModel)]="search.search"
+            (ngModelChange)="searchProducts()">
+        </div>
+            <table class="table table-hover table-responsive table-condensed">
+              <thead>
+                <tr>
+                  <th class="tbl-left">
+                    <h3 class="name">Références</h3>
+                    <!-- <button class="updownbtn" (click)="orderBy('profile.name')"><i class="fa fa-chevron-down"></i></button>
+                    <button class="updownbtn" (click)="orderBy('-profile.name')"><i class="fa fa-chevron-up"></i></button> -->
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="clienttbl">
+                <tr *ngFor="let companie of fetchedCompanies | paginate: { id: 'server', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }">
+          <a [routerLink]="['/companie/' + companie._id]" routerLinkActive="active"><td>{{companie.name}}</td></a>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="has-text-centered">
+      <div class="spinner" [ngClass]="{ 'hidden': !loading }">Loading...</div>
+      <pagination-controls (pageChange)="getPage($event)" id="server" class="change-page"></pagination-controls>
+            </div>
+          </div>
+    
+    </div>
+    
+  </div>
+  
+</div>
+<!-- <div class="container beigeback">
   <div>
     
 
@@ -41,4 +95,4 @@
       <div class="spinner" [ngClass]="{ 'hidden': !loading }">Loading...</div>
       <pagination-controls (pageChange)="getPage($event)" id="server" class="change-page"></pagination-controls>
   </div>
-</div>
+</div>  -->
