@@ -74,6 +74,12 @@ export class CompaniesComponent implements OnInit {
       );
   }
 
+
+  searchCompanies() {
+    this.getCompanies(1, this.search)
+  }
+
+
   getPage(page: number) {
 
     this.loading = true;

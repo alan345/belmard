@@ -29,7 +29,7 @@
             name="Search"
             placeholder="Rechercher"
             [(ngModel)]="search.search"
-            (ngModelChange)="searchProducts()">
+            (ngModelChange)="searchCompanies()">
         </div>
             <table class="table table-hover table-responsive table-condensed">
               <thead>
@@ -49,12 +49,9 @@
     </table>
   </div>
   <div class="has-text-centered">
-      <div class="spinner" [ngClass]="{ 'hidden': !loading }">Loading...</div>
-      <pagination-controls (pageChange)="getPage($event)" id="server" class="change-page"></pagination-controls>
-            </div>
-          </div>
-    
-    </div>
-    
-  
+    <div [hidden]="!loading">Loading...</div>
+    <pagination-controls (pageChange)="getPage($event)" id="server" class="change-page"></pagination-controls>
+  </div>
+</div>
+</div>
 </div>

@@ -56,6 +56,9 @@ export class AdminUsersComponent implements OnInit {
 
   }
 
+  searchUsers() {
+    this.getUsers(1, this.search)
+  }
 
   searchInput() {
     this.getUsers(this.paginationData.currentPage, this.search);
