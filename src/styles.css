@@ -15,7 +15,10 @@ body {
 H1, H2, H3, H4, H5 {
   text-Align: Center; padding: 5px;
 }
-
+a {
+font-family: sans-serif;
+}  
+  
 .row {
  
   justify-content: center;
