@@ -140,8 +140,6 @@
 
 
       <div class="form-group prmimg-cnt">
-
-        <!-- <input type="hidden" class="form-control" formControlName="_id" [(ngModel)]="fetchedProduct.form._id"> -->
         <div *ngFor="let singleForm of fetchedProduct.forms">
           <img class="promo-img" src="./uploads/forms/{{singleForm.owner}}/{{singleForm.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
         </div>
@@ -151,52 +149,6 @@
       </div>
 
 
-
-
-      <!-- <div class="lft-form">
-        <label>Select Categories For This Product:</label>
-        <div *ngFor="let categorieHard of categoriesHard2; let i=index">
-          <md-checkbox
-            (click)="togglCategorieButton(categorieHard.name, 'categ2')"
-            [ngModelOptions]="{standalone: true}"
-            [(ngModel)]="categoriesHard2[i].selected"
-          ></md-checkbox>
-          {{categorieHard.name}}
-        </div>
-        <label>Select Product Line For This Product:</label>
-        <div *ngFor="let categorieHard of categoriesHard1; let i=index">
-          <md-checkbox
-            (click)="togglCategorieButton(categorieHard.name, 'categ1')"
-            [ngModelOptions]="{standalone: true}"
-            [(ngModel)]="categoriesHard1[i].selected"
-          ></md-checkbox>
-          {{categorieHard.name}}
-        </div>
-      </div> -->
-
-      <!-- <div class="rght-form">
-        <input
-          [ngModelOptions]="{standalone: true}"
-          [(ngModel)]="inputCategorie"
-          placeholder="Add Tags to Product"
-          (keyup.enter)="addCategorieInput()"
-          mdInput
-        >
-        <div formArrayName="categories">
-          <div *ngFor="let categorie of getObjects(myForm); let i=index" class="tagz">
-            <div [formGroupName]="i">
-              <input type="hidden" class="form-control" formControlName="name" [(ngModel)]="fetchedProduct.categories[i].name">
-              <input type="hidden" class="form-control" formControlName="type" [(ngModel)]="fetchedProduct.categories[i].type">
-              <div class="tagz-cnt" *ngIf="fetchedProduct.categories[i].type=='tag'">
-                <div class="tagz">
-                  <span class="tagz-name">{{fetchedProduct.categories[i].name}}</span>
-                  <i class="tagz-icn fa fa-times pull-right" (click)="removeCategorie(i)"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div> -->
 
     <div class="valid-edit">
       <button type="submit" class="done" [disabled]="!myForm.valid">Enregistrer</button>

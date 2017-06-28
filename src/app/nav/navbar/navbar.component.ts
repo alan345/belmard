@@ -2,6 +2,9 @@ import {Component, OnInit, Input} from '@angular/core';
 import {AuthService} from '../../auth/auth.service';
 import {AdminService} from '../../admin/services/admin.service';
 import {Router} from '@angular/router';
+import { UserService} from '../../user/user.service';
+import { User} from '../../user/user.model';
+
 
 @Component({
   selector: 'app-navbar',
@@ -12,16 +15,18 @@ export class NavbarComponent implements OnInit {
   @Input() sidenav: any;
  // private userId: string = localStorage.getItem('userId');
   // private userId: string;
-  fetchedUser: any[] = [];
+  fetchedUser: User = new User();
 
   constructor(
     private authService: AuthService,
     private adminService: AdminService,
-
+    private userService: UserService,
     private router: Router) {
   }
 
   ngOnInit() {
+    this.getUser('')
+
     // if (this.authService.isLoggedIn()) {
     //   let userId = localStorage.getItem('userId');
     //   this.profileService.getUserDetails(userId)
@@ -35,6 +40,14 @@ export class NavbarComponent implements OnInit {
     //       })
     //     );
     // }
+  }
+
+  getUser(id: string) {
+    this.userService.getUser(id)
+      .subscribe(
+        res => { this.fetchedUser = res.user },
+        error => { console.log(error) }
+      )
   }
 
 

@@ -157,42 +157,52 @@ router.get('/page/:page', function (req, res, next) {
 // })
 
 
+function getUser(req, res, next, id) {
+    User
+    .findById(id)
+    // .populate('products.product')
+    .populate({path: 'forms', model: 'Form'})
+    // .populate('profile._profilePicture')
+    // .populate('profile.parentUser')
 
-// get user info
-router.get('/:id', function (req, res, next) {
-  let id = ''
-  if(req.params) {
-    id = req.params.id
-  } else {
-    id = req.user._id
-  }
 
-  User
-  .findOne({_id: id})
-  // .populate('products.product')
-  .populate('forms')
-  // .populate('profile._profilePicture')
-  // .populate('profile.parentUser')
-  .populate({path: 'companies', model: 'Companie'})
-  .exec(function (err, user) {
-    if (err) {
-      return res.status(403).json({
-        title: 'There was a problem',
-        error: err
-      });
-    }
+    .populate({
+        path: 'companies',
+        model: 'Companie',
+        populate: {
+          path: 'forms',
+          model: 'Form'
+        }
+      })
+    .exec(function (err, user) {
+      if (err) {
+        return res.status(403).json({
+          title: 'There was a problem',
+          error: err
+        });
+      }
 
-    if (!user) {
-      return res.status(404).json({
-        title: 'No form found',
-        error: {message: 'Item not found!'}
-      });
-    }
+      if (!user) {
+        return res.status(404).json({
+          title: 'No form found',
+          error: {message: 'Item not found!'}
+        });
+      }
 
-    return res.status(200).json({
-      user: user
+      return res.status(200).json({
+        user: user
+      })
     })
-  })
+}
+
+router.get('/:id', function (req, res, next) {
+  let id = req.params.id
+  getUser(req, res, next, id)
+});
+
+router.get('', function (req, res, next) {
+  let id = req.user._id
+  getUser(req, res, next, id)
 });
 
 

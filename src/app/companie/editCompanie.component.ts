@@ -14,7 +14,7 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { DeleteDialog } from '../deleteDialog/deleteDialog.component';
 import { User } from '../user/user.model';
 
-
+import { EditOptionsComponentDialog } from '../form/modalLibrary/modalLibrary.component';
 
 @Component({
   selector: 'app-companie',
@@ -22,20 +22,7 @@ import { User } from '../user/user.model';
   styleUrls: ['./companie.component.css'],
 })
 export class EditCompanieComponent implements OnInit {
-  fetchedCompanie : Companie = {
-    _id: '',
-    forms:[],
-    name: '',
-    typeCompanie: '',
-    phoneNumber: '',
-    address: {
-      address : '',
-      city :  '',
-      state :  '',
-      zip :  ''
-    },
-    _users:[]
-  }
+  fetchedCompanie: Companie = new Companie()
 
   userAdmins : User[] = []
   userManagers : User[] = []
@@ -71,21 +58,36 @@ export class EditCompanieComponent implements OnInit {
 
 
     this.activatedRoute.params.subscribe((params: Params) => {
+      let userId = ''
+
       if(params['id'])
-        this.getCompanie(params['id'])
+        userId = params['id']
+
+      this.getCompanie(userId)
     })
   }
 
-  removeUserFromCompanie(i:number, typeUser: string){
-    let this2 = this
-    let dialogRefDelete = this.dialog.open(DeleteDialog)
-    dialogRefDelete.afterClosed().subscribe(result => {
+
+  openDialog(positionImage: string) {
+    let dialogRef = this.dialog.open(EditOptionsComponentDialog);
+    dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        this[typeUser].splice(i, 1)
-        this.save()
+        this.fetchedCompanie.forms.push(result)
       }
     })
   }
+
+
+  // removeUserFromCompanie(i:number, typeUser: string){
+  //   let this2 = this
+  //   let dialogRefDelete = this.dialog.open(DeleteDialog)
+  //   dialogRefDelete.afterClosed().subscribe(result => {
+  //     if(result) {
+  //       this[typeUser].splice(i, 1)
+  //       this.save()
+  //     }
+  //   })
+  // }
 
   save() {
 
@@ -94,7 +96,7 @@ export class EditCompanieComponent implements OnInit {
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
-            this.router.navigate(['companie/' + this.fetchedCompanie._id])
+          //  this.router.navigate(['companie/' + this.fetchedCompanie._id])
           },
           error => {
             this.toastr.error('error!', error)
@@ -105,7 +107,7 @@ export class EditCompanieComponent implements OnInit {
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
-              this.router.navigate(['companie/' + res.obj._id])
+            //  this.router.navigate(['companie/' + res.obj._id])
           },
           error => {console.log(error)}
         )
@@ -153,19 +155,19 @@ export class EditCompanieComponent implements OnInit {
       .subscribe(
         res => {
           this.fetchedCompanie = res
-          this.fetchedCompanie._users.forEach((user) => {
-            if(user.role[0] === 'admin')
-              this.userAdmins.push(user)
-            if(user.role[0] === 'salesRep')
-              this.usersSalesRep.push(user)
-            if(user.role[0] === 'client')
-              this.userClients.push(user)
-            if(user.role[0] === 'stylist')
-              this.userStylists.push(user)
-            if(user.role[0] === 'manager')
-              this.userManagers.push(user)
-          //  this.addUser(user)
-          })
+          // this.fetchedCompanie._users.forEach((user) => {
+          //   if(user.role[0] === 'admin')
+          //     this.userAdmins.push(user)
+          //   if(user.role[0] === 'salesRep')
+          //     this.usersSalesRep.push(user)
+          //   if(user.role[0] === 'client')
+          //     this.userClients.push(user)
+          //   if(user.role[0] === 'stylist')
+          //     this.userStylists.push(user)
+          //   if(user.role[0] === 'manager')
+          //     this.userManagers.push(user)
+          // //  this.addUser(user)
+          // })
         },
         error => {
           console.log(error);

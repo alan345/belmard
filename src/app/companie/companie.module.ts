@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RouterModule} from '@angular/router';
 
-import { CompanieDetailUsersComponent} from './companieDetailUsers.component';
-import { AddUserByCompanieComponent} from './addUser/addUserByCompanie.component';
+// import { CompanieDetailUsersComponent} from './companieDetailUsers.component';
+// import { AddUserByCompanieComponent} from './addUser/addUserByCompanie.component';
 import { CompaniesComponent} from './companies/companies.component';
 import { EditCompanieComponent} from './editCompanie.component';
-import { EditAddUserToCompanieComponent} from './addUser/editAddUserToCompanie.component';
+// import { EditAddUserToCompanieComponent} from './addUser/editAddUserToCompanie.component';
 import { CompanieDetailComponent} from './companieDetail.component';
 import { CompanieService} from './companie.service';
 import { CompanieRouting} from './companieRouting.module';
@@ -26,12 +26,12 @@ import { Ng2PaginationModule} from 'ng2-pagination';
     RouterModule,
   ],
   declarations: [
-    CompanieDetailUsersComponent,
+    // CompanieDetailUsersComponent,
     CompaniesComponent,
     EditCompanieComponent,
-    EditAddUserToCompanieComponent,
+    // EditAddUserToCompanieComponent,
     CompanieDetailComponent,
-    AddUserByCompanieComponent,
+    // AddUserByCompanieComponent,
   ],
   exports:      [ ],
   providers:    [ CompanieService ],

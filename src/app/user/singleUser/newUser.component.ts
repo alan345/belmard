@@ -64,7 +64,7 @@ export class NewUserComponent implements OnInit {
       let search = {
           search: this.autocompleteCompanie,
         };
-      this.getCompanies(1, search)      
+      this.getCompanies(1, search)
     }
 
   }
@@ -136,18 +136,18 @@ export class NewUserComponent implements OnInit {
 
     // let userId = this.authService.currentUser.userId
     // this.companieService.getCompanieByUserId(userId)
-    this.companieService.getCompanieForCurrentUser()
-    .subscribe(
-      (data => {
-        this.fetchedCompanies = data
-
-        if(this.fetchedCompanies.length)
-          this.companieIndexToSelect = this.fetchedCompanies[0]._id
-        // Ok mes tes clients sont dans quel salon? ==> je prends le premier salon qui nest pas HQ
-        // if(data.length)
-        //   this.fetchedCompanie = data[0]
-      })
-    )
+    // this.companieService.getCompanieForCurrentUser()
+    // .subscribe(
+    //   (data => {
+    //     this.fetchedCompanies = data
+    //
+    //     if(this.fetchedCompanies.length)
+    //       this.companieIndexToSelect = this.fetchedCompanies[0]._id
+    //     // Ok mes tes clients sont dans quel salon? ==> je prends le premier salon qui nest pas HQ
+    //     // if(data.length)
+    //     //   this.fetchedCompanie = data[0]
+    //   })
+    // )
 
     this.activatedRoute.params.subscribe((params: Params) => {
       if(params['id']) {

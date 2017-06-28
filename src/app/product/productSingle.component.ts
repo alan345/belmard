@@ -164,7 +164,7 @@ export class ProductSingleComponent implements OnInit {
     this.fetchedProduct.categorie.categ2 = [{name: this.categ2}]
     this.fetchedProduct.categorie.categ3 = [{name: this.categ3}]
 
-    
+
     if(this.fetchedProduct._id) {
 
 

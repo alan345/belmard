@@ -78,35 +78,20 @@ export class UserProfileComponent implements OnInit {
       let userId = params['id']
 
       if(!userId)
-        userId = this.authService.currentUser.userId
+        userId = ''
+        // userId = this.authService.currentUser.userId
 
       this.getUser(userId)
-      // this.companieService.getCompanieByUserId(userId)
-      // .subscribe(
-      //   (data => {
-      //     this.companies = data
-      //     this.companies.forEach(companie => {
-      //       if(this.isHQcompanie(companie))
-      //         this.isUserBelongToHQ = true
-      //     })
-      //   })
-      // )
+
     })
   }
 
 
-  getUser(id : string) {
+  getUser(id: string) {
     this.userService.getUser(id)
       .subscribe(
-        res => {
-          this.fetchedUser = res.user
-          this.fetchedUser.forms.forEach((form : Form) => {
-            this.addForm(form)
-          })
-        },
-        error => {
-          console.log(error);
-        }
+        res => { this.fetchedUser = res.user },
+        error => { console.log(error) }
       )
   }
 
