@@ -87,7 +87,7 @@ export class ProjectSingleComponent implements OnInit {
   selectUser(user: User) {
     this.fetchedUsers = []
     this.fetchedProject.clients.push(user)
-    this.save()
+    //this.save()
   }
 
   searchUsers() {
@@ -187,7 +187,8 @@ export class ProjectSingleComponent implements OnInit {
     dialogRefDelete.afterClosed().subscribe(result => {
       if(result) {
         this.onDelete(this.fetchedProject._id).then(function(){
-          this2.router.navigate(['user']);
+          // this2.router.navigate(['user']);
+          this2.goBack();
         })
 
       }

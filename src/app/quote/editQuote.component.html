@@ -13,9 +13,6 @@
 
               <!-- Autocomplete -->
               <label>Client</label>
-              <a [routerLink]="['/user/newuser']" class="admn-btn">
-                Créer un nouveau client
-              </a>
               <input
                 *ngIf="!fetchedQuote.clients.length"
                 [ngModelOptions]="{standalone: true}"
@@ -28,6 +25,12 @@
                 {{user.profile.name}} - {{user.profile.lastName}}
                 <button type="button" (click)="selectUser(user)">select</button>
               </div>
+              <div *ngIf="fetchedQuote.length == 0 && autocompleteUser !=''">
+                Pas de resultats,
+                <a [routerLink]="['/user/newuser']" class="admn-btn">
+                  Créer un nouveau client
+                </a>
+              </div>
               <div *ngFor="let user of fetchedQuote.clients; let i=index">
                 {{user.profile.name}} - {{user.profile.lastName}}
                 <button type="button" (click)="removeUser(i)"><i class="fa fa-times"></i></button>
@@ -36,11 +39,8 @@
 
 
 
-              <!-- Autocomplete -->
+              <!-- Autocomplete Project-->
               <label>Projet</label>
-              <a [routerLink]="['/project/new']" class="admn-btn">
-                Créer un nouveau Projet
-              </a>
               <input
                 *ngIf="!fetchedQuote.projects.length"
                 [ngModelOptions]="{standalone: true}"
@@ -50,13 +50,20 @@
                 mdInput
               >
               <div *ngFor="let project of fetchedProjects; let i=index">
-                {{project.name}}
+                {{project.details.name}}
                 <button type="button" (click)="selectProject(project)">select</button>
               </div>
+              <div *ngIf="fetchedProjects.length == 0 && autocompleteProject !=''">
+                Pas de resultats,
+                <a [routerLink]="['/project/new']" class="admn-btn">
+                   créer un nouveau Projet
+                </a>
+              </div>
               <div *ngFor="let project of fetchedQuote.projects; let i=index">
-                {{project.name}}
+                {{project.details.name}}
                 <button type="button" (click)="removeProject(i)"><i class="fa fa-times"></i></button>
               </div>
+
               <!-- Autocomplete -->
 
           <input

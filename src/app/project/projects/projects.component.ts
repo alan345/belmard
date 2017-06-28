@@ -143,26 +143,27 @@ export class ProjectsComponent implements OnInit {
   }
 
   ngOnInit() {
-    let userId = this.authService.currentUser.userId
+    this.getProjects(1, this.search)
+    // let userId = this.authService.currentUser.userId
     // this.projectService.countNewItemForUser()
     // .subscribe(
     //   data => {
         //this.trackinPage.lastVisitPageProjectCount = data.item
-        this.userService.getUser(userId)
-        .subscribe(
-        res => {
-          res.user.trackinPage.lastVisitPageProject = new Date()
-          this.userService.updateUser(res.user)
-            .subscribe(
-              res => {},
-              error => {
-                console.log(error);
-              }
-            )
-        },
-        error => {
-          console.log(error);
-        })
+        // this.userService.getUser(userId)
+        // .subscribe(
+        // res => {
+        //   res.user.trackinPage.lastVisitPageProject = new Date()
+        //   this.userService.updateUser(res.user)
+        //     .subscribe(
+        //       res => {},
+        //       error => {
+        //         console.log(error);
+        //       }
+        //     )
+        // },
+        // error => {
+        //   console.log(error);
+        // })
     //
     //   },
     //   error => console.log(error)
