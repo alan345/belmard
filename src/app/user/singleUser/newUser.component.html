@@ -8,41 +8,41 @@
 
   <div class="single-wrpr beigeback">
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
+      <div class="form-group col-sm-12">
+        <!-- Autocomplete -->
+        <label>Fournisseur</label>
+        <input
+          *ngIf="!fetchedUser.companies.length"
+          [ngModelOptions]="{standalone: true}"
+          [(ngModel)]="autocompleteCompanie"
+          placeholder="Select"
+          (ngModelChange)="searchCompanies()"
+          mdInput
+        >
+        <div *ngFor="let fetchedCompanie of fetchedCompanies; let i=index">
+          {{fetchedCompanie.name}}
+          <button type="button" (click)="selectCompanie(fetchedCompanie)">select</button>
+        </div>
+        <div *ngIf="fetchedCompanies.length == 0 && autocompleteCompanie !=''">
+          Pas de resultats,
+          <a [routerLink]="['/companie/new']" class="admn-btn">
+            Ajouter Entreprise
+          </a>
+        </div>
+        <div *ngFor="let vendor of fetchedUser.companies; let i=index">
+          {{vendor.name}}
+          <button type="button" (click)="removeCompanie(i)"><i class="fa fa-times"></i></button>
+        </div>
+        <!-- Autocomplete -->
+      </div>
 
 
 
+      <div class="form-group col-sm-12">
           <!-- Autocomplete -->
-          <label>Fournisseur</label>
-
+          <label>Type User</label>
           <input
-            [ngModelOptions]="{standalone: true}"
-            [(ngModel)]="autocompleteCompanie"
-            placeholder="Select"
-            (ngModelChange)="searchCompanies()"
-            mdInput
-          >
-          <div *ngFor="let fetchedCompanie of fetchedCompanies; let i=index">
-            {{fetchedCompanie.name}} - {{fetchedCompanie.name}}
-            <button type="button" (click)="selectCompanie(fetchedCompanie)">select</button>
-          </div>
-          <div *ngIf="fetchedCompanies.length == 0 && autocompleteCompanie !=''">
-            Pas de resultats,
-            <a [routerLink]="['/companie/new']" class="admn-btn">
-              Ajouter Entreprise
-            </a>
-          </div>
-          <div *ngFor="let vendor of fetchedUser.companies; let i=index">
-            {{vendor.name}}
-            <button type="button" (click)="removeCompanie(i)"><i class="fa fa-times"></i></button>
-          </div>
-          <!-- Autocomplete -->
-
-
-
-
-
-          <!-- Autocomplete -->
-          <input
+            *ngIf="!fetchedUser.type.length"
             [ngModelOptions]="{standalone: true}"
             [(ngModel)]="autocompleteTypeUser"
             placeholder="Select type User"
@@ -58,7 +58,7 @@
             <button type="button" (click)="removeTypeUser(i)"><i class="fa fa-times"></i></button>
           </div>
           <!-- Autocomplete -->
-
+        </div>
 
           <!-- <select
             [ngModelOptions]="{standalone: true}"
@@ -71,8 +71,6 @@
 
 
       <div class="form-group col-sm-12">
-
-
 
         <input
           type="text"

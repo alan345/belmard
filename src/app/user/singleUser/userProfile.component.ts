@@ -81,16 +81,16 @@ export class UserProfileComponent implements OnInit {
         userId = this.authService.currentUser.userId
 
       this.getUser(userId)
-      this.companieService.getCompanieByUserId(userId)
-      .subscribe(
-        (data => {
-          this.companies = data
-          this.companies.forEach(companie => {
-            if(this.isHQcompanie(companie))
-              this.isUserBelongToHQ = true
-          })
-        })
-      )
+      // this.companieService.getCompanieByUserId(userId)
+      // .subscribe(
+      //   (data => {
+      //     this.companies = data
+      //     this.companies.forEach(companie => {
+      //       if(this.isHQcompanie(companie))
+      //         this.isUserBelongToHQ = true
+      //     })
+      //   })
+      // )
     })
   }
 

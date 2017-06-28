@@ -114,47 +114,47 @@ router.get('/page/:page', function (req, res, next) {
 })
 
 
-// get all forms from database
-router.get('/getUsersByEmail', function (req, res, next) {
-  var itemsPerPage = 5
-  var currentPage = 1
-  var pageNumber = currentPage - 1
-  var skip = (itemsPerPage * pageNumber)
-  var limit = (itemsPerPage * pageNumber) + itemsPerPage
-  //lastVisit
-  //console.log(req.query.email)
-
-  User
-  .find({
-    'email' : new RegExp(req.query.email, 'i')
-  })
-  .limit(itemsPerPage)
-  .skip(skip)
-  .sort(req.query.orderBy)
-  .exec(function (err, item) {
-    if (err) {
-      return res.status(404).json({
-        message: 'No results',
-        err: err
-      })
-    } else {
-      User
-      .find({
-        'profile.name' : new RegExp(req.query.search, 'i')
-      })
-      .count().exec(function (err, count) {
-      res.status(200).json({
-          paginationData : {
-            totalItems: count,
-            currentPage : currentPage,
-            itemsPerPage : itemsPerPage
-          },
-          data: item
-        })
-      })
-    }
-  })
-})
+//
+// router.get('/getUsersByEmail', function (req, res, next) {
+//   var itemsPerPage = 5
+//   var currentPage = 1
+//   var pageNumber = currentPage - 1
+//   var skip = (itemsPerPage * pageNumber)
+//   var limit = (itemsPerPage * pageNumber) + itemsPerPage
+//   //lastVisit
+//   //console.log(req.query.email)
+//
+//   User
+//   .find({
+//     'email' : new RegExp(req.query.email, 'i')
+//   })
+//   .limit(itemsPerPage)
+//   .skip(skip)
+//   .sort(req.query.orderBy)
+//   .exec(function (err, item) {
+//     if (err) {
+//       return res.status(404).json({
+//         message: 'No results',
+//         err: err
+//       })
+//     } else {
+//       User
+//       .find({
+//         'profile.name' : new RegExp(req.query.search, 'i')
+//       })
+//       .count().exec(function (err, count) {
+//       res.status(200).json({
+//           paginationData : {
+//             totalItems: count,
+//             currentPage : currentPage,
+//             itemsPerPage : itemsPerPage
+//           },
+//           data: item
+//         })
+//       })
+//     }
+//   })
+// })
 
 
 
@@ -169,10 +169,11 @@ router.get('/:id', function (req, res, next) {
 
   User
   .findOne({_id: id})
-  .populate('products.product')
+  // .populate('products.product')
   .populate('forms')
-  .populate('profile._profilePicture')
-  .populate('profile.parentUser')
+  // .populate('profile._profilePicture')
+  // .populate('profile.parentUser')
+  .populate({path: 'companies', model: 'Companie'})
   .exec(function (err, user) {
     if (err) {
       return res.status(403).json({
