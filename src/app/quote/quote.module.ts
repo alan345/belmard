@@ -29,13 +29,10 @@ import { ProductModule } from '../product/product.module';
     ProductModule,
   ],
   declarations: [
-
     QuotesComponent,
     EditQuoteComponent,
-
     QuoteDetailComponent,
     RoundPipe,
-
   ],
   exports:      [ QuotesComponent ],
   providers:    [ QuoteService ],

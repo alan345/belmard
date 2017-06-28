@@ -267,7 +267,7 @@ export class EditQuoteComponent implements OnInit {
           this2.fetchedQuote.priceQuote.priceQuoteWithoutTaxes = this2.fetchedQuote.priceQuote.priceQuoteWithoutTaxes*1 + this2.fetchedQuote.devisDetails[i].totalPriceWithoutTaxes*1
 
         })
-        this2.save()
+        //this2.save()
       }, 20)
 
     }

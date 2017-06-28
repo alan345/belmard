@@ -117,35 +117,35 @@
 
 
         <div class="row">
-          <div class="col-xs-1"></div>
+          <div class="col-md-1"></div>
 
 
-          <div class="col-xs-3">produit</div>
-          <div class="col-xs-1">Ref.</div>
-          <div class="col-xs-1">quanité</div>
-          <div class="col-xs-1">price HT</div>
-          <div class="col-xs-1">VAT(%)</div>
-          <div class="col-xs-1">price TTC</div>
-          <div class="col-xs-1">total HT</div>
-          <div class="col-xs-1">total TTC</div>
+          <div class="col-md-3">produit</div>
+          <div class="col-md-1">Ref.</div>
+          <div class="col-md-1">quanité</div>
+          <div class="col-md-1">price HT</div>
+          <div class="col-md-1">VAT(%)</div>
+          <div class="col-md-1">price TTC</div>
+          <div class="col-md-1">total HT</div>
+          <div class="col-md-1">total TTC</div>
         </div>
 
         <div *ngFor="let fetchedProduct of fetchedQuote.devisDetails; let i=index">
           <div class="row">
-            <div class="col-xs-1">
+            <div class="col-md-1">
               <button type="button" (click)="removeProduct(i)"><i class="fa fa-times"></i></button>
             </div>
 
 
-            <div class="col-xs-3">
+            <div class="col-md-3">
                 {{fetchedProduct.productInit.details.referenceName}}
             </div>
-            <div class="col-xs-1">
+            <div class="col-md-1">
               <a [routerLink]="['/product/' + fetchedProduct.productInit._id]" class="admn-btn">
                 {{fetchedProduct.productInit.details.reference}}
               </a>
             </div>
-            <div class="col-xs-1">
+            <div class="col-md-1">
               <input
                 class="gooplusInput"
                 type="text"
@@ -154,7 +154,7 @@
                 [(ngModel)]="fetchedQuote.devisDetails[i].quantity"
                 placeholder="quantity">
             </div>
-            <div class="col-xs-1">
+            <div class="col-md-1">
               <input
                 class="gooplusInput"
                 type="text"
@@ -164,7 +164,7 @@
                 placeholder="priceWithoutTaxes">
             </div>
 
-            <div class="col-xs-1">
+            <div class="col-md-1">
               <input
                 class="gooplusInput"
                 type="text"
@@ -173,13 +173,13 @@
                 [(ngModel)]="fetchedQuote.devisDetails[i].vat"
                 placeholder="vat">
             </div>
-            <div class="col-xs-1">
+            <div class="col-md-1">
               {{fetchedQuote.devisDetails[i].priceWithTaxes}}
             </div>
-            <div class="col-xs-1">
+            <div class="col-md-1">
               {{fetchedQuote.devisDetails[i].totalPriceWithoutTaxes | round}}
             </div>
-            <div class="col-xs-1">
+            <div class="col-md-1">
               {{fetchedQuote.devisDetails[i].totalPriceWithTaxes | round}}
             </div>
 
@@ -187,10 +187,10 @@
         </div>
 
         <div class="row">
-          <div class="col-xs-1">
+          <div class="col-md-1">
 
           </div>
-          <div class="col-xs-3">
+          <div class="col-md-3">
             <!-- Autocomplete -->
             <input
               [ngModelOptions]="{standalone: true}"
@@ -210,21 +210,21 @@
 
 
         <div class="row">
-          <div class="col-xs-8">
+          <div class="col-md-8">
 
           </div>
-          <div class="col-xs-1">
+          <div class="col-md-1">
             Total
           </div>
-          <div class="col-xs-1">
+          <div class="col-md-1">
             {{fetchedQuote.priceQuote.priceQuoteWithoutTaxes | round}}
           </div>
-          <div class="col-xs-1">
+          <div class="col-md-1">
             {{fetchedQuote.priceQuote.priceQuoteWithTaxes | round}}
           </div>
-          <!-- <div class="col-xs-1">
+          <!-- <div class="col-md-1">
           </div>
-          <div class="col-xs-4">
+          <div class="col-md-4">
           </div> -->
         </div>
 
