@@ -190,22 +190,22 @@ export class UserProfileComponent implements OnInit {
 
 
 
-  setDateToday(){
-    this.fetchedUser.lastVisit = new Date()
-    this.userService.updateUser(this.fetchedUser)
-      .subscribe(
-        res => {
-          this.toastr.success('Great!', res.message)
-        },
-        error => {console.log(error)}
-      )
-  }
+  // setDateToday(){
+  //   this.fetchedUser.lastVisit = new Date()
+  //   this.userService.updateUser(this.fetchedUser)
+  //     .subscribe(
+  //       res => {
+  //         this.toastr.success('Great!', res.message)
+  //       },
+  //       error => {console.log(error)}
+  //     )
+  // }
 
 
-  toggleFeature(){
-    this.fetchedUser.profile.isFeatured = !this.fetchedUser.profile.isFeatured
-    this.save()
-  }
+  // toggleFeature(){
+  //   this.fetchedUser.profile.isFeatured = !this.fetchedUser.profile.isFeatured
+  //   this.save()
+  // }
 
   isAdmin() {
     return this.authService.isAdmin();

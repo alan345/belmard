@@ -86,34 +86,8 @@ export class EditQuoteComponent implements OnInit {
     })
   }
 
-  // removeUserFromQuote(i:number, typeUser: string){
-  //   let this2 = this
-  //   let dialogRefDelete = this.dialog.open(DeleteDialog)
-  //   dialogRefDelete.afterClosed().subscribe(result => {
-  //     if(result) {
-  //       this[typeUser].splice(i, 1)
-  //       this.save()
-  //     }
-  //   })
-  // }
 
 
-
-
-
-
-
-    selectUser(user: User) {
-      this.fetchedUsers = []
-      this.fetchedQuote.clients.push(user)
-    }
-
-    searchUsers() {
-      let search = {
-          search: this.autocompleteUser,
-        };
-      this.getUsers(1, search)
-    }
 
 
     getUser(id: string) {
@@ -122,27 +96,38 @@ export class EditQuoteComponent implements OnInit {
           res => {
             this.selectUser(res.user)
           },
-          error => {
-            console.log(error);
-          }
+          error => { console.log(error) }
         );
     }
 
+
+    // Autocomplete User
+    selectUser(user: User) {
+      this.fetchedUsers = []
+      this.fetchedQuote.clients.push(user)
+    }
+
+    searchUsers() {
+      if(!this.autocompleteUser) {
+        this.fetchedUsers = []
+      } else {
+        let search = {
+            search: this.autocompleteUser,
+          };
+        this.getUsers(1, search)
+      }
+    }
     getUsers(page: number, search: any) {
       this.userService.getUsers(page, search)
         .subscribe(
-          res => {
-            this.fetchedUsers = res.data
-          },
-          error => {
-            console.log(error);
-          }
+          res => { this.fetchedUsers = res.data },
+          error => { console.log(error) }
         );
     }
-
     removeUser(i: number) {
       this.fetchedQuote.clients.splice(i, 1);
     }
+    // Autocomplete User
 
 
 

@@ -3,7 +3,6 @@ var express = require('express'),
     config  = require('../config/config'),
     User    = require('../models/user.model'),
     Form    = require('../models/form.model'),
-    Options    = require('../models/options.model'),
     fs      = require('fs'),
     jwt     = require('jsonwebtoken');
 

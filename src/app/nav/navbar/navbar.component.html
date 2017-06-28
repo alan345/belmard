@@ -1,100 +1,47 @@
 <div>
-    <div class="header">
-                          
-          <a href="#"> <img class="logo-header" src="assets/images/marker.png"></a>  
-          <h1 class="text-center" style="margin-bottom:0px;color:#ffffff;">Logiciel de Gestion</h1>
-         <p align="right" style="margin-right:40px;">
-           <button type="button" class="btn btn-secondary" (click)="logout()" *ngIf="isLoggedIn()">Déconnexion</button>
-           <button type="button" class="btn btn-primary" [routerLink]="['/user/profile']" routerLinkActive="active">Mon Profil</button>
-         </p>
-    </div>
-
-
-    </div>
-
-
-    <div>
-<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <a class="navbar-brand" href="#">Accueil</a>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" [routerLink]="['/product']">Produits <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" [routerLink]="['/project']">Projets <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" [routerLink]="['/user']">Utilisateurs <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" [routerLink]="['/companie']">Fournisseurs <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" [routerLink]="['/quote']">Devis <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" [routerLink]="['/userCalendar/123']">Planning <span class="sr-only">(current)</span></a>
-      </li>
-    </ul>
-    <!-- <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="text" placeholder="Rechercher">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Rechercher</button>
-    </form>   -->
+  <div class="header">
+    <a href="#"> <img class="logo-header" src="assets/images/marker.png"></a>
+    <h1 class="text-center" style="margin-bottom:0px;color:#ffffff;">Logiciel de Gestion</h1>
+    <p align="right" style="margin-right:40px;">
+       <button type="button" class="btn btn-secondary" (click)="logout()" *ngIf="isLoggedIn()">Déconnexion</button>
+       <button type="button" class="btn btn-primary" [routerLink]="['/user/profile']" routerLinkActive="active">Mon Profil</button>
+    </p>
   </div>
-</nav>
+</div>
 
 
+<div>
+  <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="#">Accueil</a>
 
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/product']">Produits</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/project']">Projets </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/user']">Utilisateurs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/companie']">Fournisseurs</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/quote']">Devis</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/userCalendar/123']">Planning</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/option']">Options</a>
+        </li>
 
-          <!-- Guillaume ici regarde la nouvelle navabar pour bootstrap4 https://v4-alpha.getbootstrap.com/components/navbar/           -->
-
-          <!--<div class="container">
-                <div class="navbar-header"><a class="navbar-brand navbar-link" href="#">Accueil</a>
-
-                </div>
-                <div class="collapse navbar-collapse" id="navcol-1">
-                    <ul class="nav navbar-nav navbar-right">
-                      <li>
-                        <a [routerLink]="['/product']" class="admn-btn">
-                          Produits
-                        </a>
-                      </li>
-                      <li>
-                        <a [routerLink]="['/project']" routerLinkActive="active"  class="admn-btn">
-                          Projets
-                        </a>
-                      </li>
-
-                      <li>
-                        <a [routerLink]="['/companie']" routerLinkActive="active"  class="admn-btn">
-                          Fournisseurs
-                        </a>
-                      </li>
-
-
-                      <li>
-                        <a [routerLink]="['/user']" routerLinkActive="active" class="admn-btn">
-                          Utilisateurs
-                        </a>
-                      </li>
-
-                      <li>
-                        <a [routerLink]="['/quote']" routerLinkActive="active" class="admn-btn">
-                          Devis
-                        </a>
-                      </li>
-                      <li>
-                        <a [routerLink]="['/userCalendar/123']" routerLinkActive="active" class="admn-btn">
-                          Calendar
-                        </a>
-                      </li>
-                   </ul>
-                </div>
-            </div> -->
-
+      </ul>
     </div>
+  </nav>
+</div>

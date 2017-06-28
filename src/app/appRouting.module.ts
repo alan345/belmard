@@ -45,6 +45,7 @@ export const routes: Routes = [
   {path: 'product', loadChildren: 'app/product/product.module#ProductModule'},
   {path: 'project', loadChildren: 'app/project/project.module#ProjectModule'},
   {path: 'user', loadChildren: 'app/user/user.module#UserModule'},
+  {path: 'option', loadChildren: 'app/option/option.module#OptionModule'},
 
   {path: 'form', component: FormComponent, canActivate: [AuthGuardService]},
   {path: 'userForms', component: UserFormsUploadAndList, canActivate: [AuthGuardService]},

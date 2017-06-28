@@ -25,7 +25,7 @@
                 {{user.profile.name}} - {{user.profile.lastName}}
                 <button type="button" (click)="selectUser(user)">select</button>
               </div>
-              <div *ngIf="fetchedQuote.length == 0 && autocompleteUser !=''">
+              <div *ngIf="fetchedUsers.length == 0 && autocompleteUser !=''">
                 Pas de resultats,
                 <a [routerLink]="['/user/newuser']" class="admn-btn">
                   Créer un nouveau client

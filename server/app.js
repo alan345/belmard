@@ -61,7 +61,7 @@ app.use('/press', presses)
 app.use('/product', products)
 app.use('/project', projects)
 app.use('/admin', adminPage)
-app.use('/options', options)
+app.use('/option', options)
 app.use('/userCalendar', userCalendars)
 
 

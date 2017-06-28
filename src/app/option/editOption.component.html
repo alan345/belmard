@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="goldgradient beigeborder subnav">
+    <button class="subnav-btnleft" (click)="goBack()"><i class="fa fa-chevron-left"></i></button>
+    <h3 style="text-align: center;">Option</h3>
+  </div>
+  <div>
+    <h4 class="dspl-nn">id: {{fetchedOption._id}}</h4>
+    <!-- <form #f="ngForm" novalidate (ngSubmit)="save(f.value, f.valid)"> -->
+    <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
+      <!-- <div formGroupName="calendar"> -->
+        <input
+          type="text"
+          class="form-control"
+          formControlName="timeBegin"
+          [(ngModel)]="fetchedOption.calendar.timeBegin"
+          required
+
+          placeholder="timeBegin"
+        >
+      <!-- </div> -->
+
+
+      <div class="valid-edit">
+        <button type="submit" class="sln-edt done">Enregistrer</button>
+      </div>
+    </form>
+  </div>
+</div>
