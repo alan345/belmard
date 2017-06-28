@@ -120,6 +120,7 @@ export class NewUserComponent implements OnInit {
         email: [this.emailValidator],
 
         profile: this._fb.group({
+            colorCalendar: ['', [Validators.required, Validators.minLength(3)]],
             name: ['', [Validators.required, Validators.minLength(3)]],
             lastName: ['', [Validators.required, Validators.minLength(3)]],
             phoneNumber: [''],

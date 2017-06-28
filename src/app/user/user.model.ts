@@ -5,34 +5,31 @@ import { Companie } from '../companie/companie.model';
 export class User {
   _id: string = '';
   email: string = '';
-  lastVisit: Date = new Date;
+  // lastVisit: Date = new Date;
   role: string[] = [];
   type: string[] = [];
   forms: Form[] = [];
-  products: ProductBought[] = [];
+  // products: ProductBought[] = [];
   profile: Profile = new Profile();
-  notes: Note[] = [];
+  // notes: Note[] = [];
   password: string = '';
   companies: Companie[] = [];
 }
 
-export class ProductBought {
-  dateProductAdded: Date = new Date;
-//  product: Product;
-}
 
 
 export const TypeUser = ['plombier', 'serrurier']
 
 export class Profile {
   name: string = '';
-  isFeatured: boolean = false;
+  // isFeatured: boolean = false;
   lastName: string = '';
-  title: string = '';
+  // title: string = '';
   phoneNumber: string = '';
   parentUser: User[] = [];
   _profilePicture: Form[] = [];
-  hair: Hair = new Hair();
+  colorCalendar: string = '';
+  // hair: Hair = new Hair();
 }
 
 export class Hair {
@@ -42,10 +39,10 @@ export class Hair {
 }
 
 
-export interface Note {
-    text: string;
-    dateNote: Date;
-}
+// export interface Note {
+//     text: string;
+//     dateNote: Date;
+// }
 
 export interface Address {
     street: string;
