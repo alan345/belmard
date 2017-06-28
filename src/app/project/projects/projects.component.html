@@ -32,13 +32,24 @@
             [(ngModel)]="search.search"
             (ngModelChange)="searchProjects()">
         </div>
-        <table class="table table-hover table-responsive table-condensed">
+
+        <div class="row">
+          <div
+            class="col-md-6"
+            *ngFor="let project of fetchedProjects | paginate: { id: 'projectPagination', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }"
+            [routerLink]="['/project/' + project._id]"
+            routerLinkActive="active"
+          >
+          {{project.details.name }}
+          </div>
+        </div>
+
+
+        <!-- <table class="table table-hover table-responsive table-condensed">
           <thead>
             <tr>
               <th class="tbl-left">
-                <h3 class="name">Références</h3>
-                <!-- <button class="updownbtn" (click)="orderBy('profile.name')"><i class="fa fa-chevron-down"></i></button>
-                <button class="updownbtn" (click)="orderBy('-profile.name')"><i class="fa fa-chevron-up"></i></button> -->
+
               </th>
             </tr>
           </thead>
@@ -48,10 +59,12 @@
               <td>{{project.details.name }}</td>
             </tr>
           </tbody>
-        </table>
-        <div class="has-text-centered">
-          <div [hidden]="!loading">Loading...</div>
-          <pagination-controls (pageChange)="getPage($event)" id="projectPagination" class="change-page"></pagination-controls>
+        </table> -->
+        <div class="row">
+          <div class="col-md-12">
+            <div [hidden]="!loading">Loading...</div>
+            <pagination-controls (pageChange)="getPage($event)" id="projectPagination" class="change-page"></pagination-controls>
+          </div>
         </div>
       </div>
     </div>
