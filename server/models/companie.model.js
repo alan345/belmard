@@ -6,7 +6,7 @@ var mongoose                = require('mongoose'),
 
 var companie = new Schema({
   //  _id: String,
-    address:{
+    address: {
       address : {type: String, default: ['']},
       city : {type: String, default: ['']},
       state : {type: String, default: ['']},
@@ -15,7 +15,7 @@ var companie = new Schema({
     phoneNumber: {type: String, default: ['']},
     name: {type: String, default: ['']},
     typeCompanie: {type: String, default: ['salon']},
-    _users : [{type: Schema.Types.ObjectId, ref: 'User'}],
+    //users : [{type: Schema.Types.ObjectId, ref: 'User'}],
     forms: [{type: Schema.Types.ObjectId, ref: 'Form'}],
 
 

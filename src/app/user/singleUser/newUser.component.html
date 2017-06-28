@@ -13,9 +13,7 @@
 
           <!-- Autocomplete -->
           <label>Fournisseur</label>
-          <a [routerLink]="['/companie/new']" class="admn-btn">
-            Ajouter Entreprise
-          </a>
+
           <input
             [ngModelOptions]="{standalone: true}"
             [(ngModel)]="autocompleteCompanie"
@@ -23,11 +21,15 @@
             (ngModelChange)="searchCompanies()"
             mdInput
           >
-
-
           <div *ngFor="let fetchedCompanie of fetchedCompanies; let i=index">
             {{fetchedCompanie.name}} - {{fetchedCompanie.name}}
             <button type="button" (click)="selectCompanie(fetchedCompanie)">select</button>
+          </div>
+          <div *ngIf="fetchedCompanies.length == 0 && autocompleteCompanie !=''">
+            Pas de resultats,
+            <a [routerLink]="['/companie/new']" class="admn-btn">
+              Ajouter Entreprise
+            </a>
           </div>
           <div *ngFor="let vendor of fetchedUser.companies; let i=index">
             {{vendor.name}}

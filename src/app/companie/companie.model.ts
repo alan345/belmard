@@ -7,7 +7,7 @@ export class Companie {
   typeCompanie: string = '';
   phoneNumber: string= '';
   address: Address = new Address();
-  _users: User[] = [];
+  users: User[] = [];
   forms: Form[] = [];
 }
 

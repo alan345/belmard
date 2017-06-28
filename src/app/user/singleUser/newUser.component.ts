@@ -58,10 +58,15 @@ export class NewUserComponent implements OnInit {
 
 
   searchCompanies() {
-    let search = {
-        search: this.autocompleteCompanie,
-      };
-    this.getCompanies(1, search)
+    if(!this.autocompleteCompanie) {
+      this.fetchedCompanies = []
+    } else {
+      let search = {
+          search: this.autocompleteCompanie,
+        };
+      this.getCompanies(1, search)      
+    }
+
   }
 
   getCompanies(page: number, search: any) {
@@ -75,8 +80,8 @@ export class NewUserComponent implements OnInit {
         }
       );
   }
-
   selectCompanie(companie: Companie) {
+    this.autocompleteCompanie = ''
     this.fetchedCompanies = []
     this.fetchedUser.companies.push(companie)
   }
