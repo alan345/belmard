@@ -14,6 +14,7 @@ import { QuoteService} from './quote.service';
 import { QuoteRouting} from './quoteRouting.module';
 import { MaterialModule } from '@angular/material';
 import { Ng2PaginationModule} from 'ng2-pagination';
+import { ProductModule } from '../product/product.module';
 
 @NgModule({
   imports:      [
@@ -25,6 +26,7 @@ import { Ng2PaginationModule} from 'ng2-pagination';
     Ng2PaginationModule,
     ReactiveFormsModule,
     RouterModule,
+    ProductModule,
   ],
   declarations: [
 
