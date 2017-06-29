@@ -25,21 +25,12 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getUser('')
 
-    // if (this.authService.isLoggedIn()) {
-    //   let userId = localStorage.getItem('userId');
-    //   this.profileService.getUserDetails(userId)
-    //     .subscribe(
-    //       (data => {
-    //         const userArray = [];
-    //         for (let key in data) {
-    //           userArray.push(data[key]);
-    //         }
-    //         this.fetchedUser = userArray;
-    //       })
-    //     );
-    // }
+
+    if (this.authService.isLoggedIn()) {
+      //let userId = localStorage.getItem('userId');
+      this.getUser('')
+    }
   }
 
   getUser(id: string) {

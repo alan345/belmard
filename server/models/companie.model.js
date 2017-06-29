@@ -12,6 +12,12 @@ var companie = new Schema({
       state : {type: String, default: ['']},
       zip : {type: String, default: ['']},
     },
+    option:{
+      calendar: {
+        timeBegin: {type: Number, default: [8]},
+        timeEnd: {type: Number, default: [19]},
+      }
+    },
     phoneNumber: {type: String, default: ['']},
     name: {type: String, default: ['']},
     typeCompanie: {type: String, default: ['salon']},

@@ -63,12 +63,42 @@
               placeholder="Code postal"
             >
             <div class="form-group prmimg-cnt">
-              <div *ngFor="let singleForm of fetchedCompanie.forms">
-                <img class="promo-img" src="./uploads/forms/{{singleForm.owner}}/{{singleForm.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
+              <div *ngFor="let singleForm of fetchedCompanie.forms; let i=index">
+                <img
+                  class="promo-img"
+                  height="50px"
+                  src="./uploads/forms/{{singleForm.owner}}/{{singleForm.imagePath}}"
+                  onerror="this.src ='assets/images/no-image-found.jpg'">
+                  <button type="button" class="dlt-btn" (click)="removeForm(i)">
+                    <i class="fa fa-trash"></i>
+                  </button>
               </div>
               <div>
                 <button type="button" md-button (click)="openDialog('img')" class="addpic-squr">Ajouter une image<br><i class="fa fa-plus"></i></button>
               </div>
+            </div>
+          </div>
+          <div formGroupName="option">
+            <div formGroupName="calendar">
+              <h4>Options</h4>
+              <input
+                type="text"
+                class="form-control"
+                formControlName="timeBegin"
+                [(ngModel)]="fetchedCompanie.option.calendar.timeBegin"
+                required
+                minlength="1"
+                placeholder="timeBegin"
+              >
+              <input
+                type="text"
+                class="form-control"
+                formControlName="timeEnd"
+                [(ngModel)]="fetchedCompanie.option.calendar.timeEnd"
+                required
+                minlength="1"
+                placeholder="timeEnd"
+              >
             </div>
           </div>
       </div>

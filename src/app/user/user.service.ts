@@ -25,7 +25,7 @@ export class UserService {
   //private token: string = localStorage.getItem('id_token');
   //private userId: string = localStorage.getItem('userId');
   private users: User[] = [];
-  private singleUser = Object;
+  private currentUser = Object;
 
   constructor(
     private http: Http,
@@ -77,6 +77,7 @@ export class UserService {
 
 
   getUser(id: string) {
+
     let headers = new Headers({'Content-Type': 'application/json'});
     headers.append('Authorization', '' + this.authService.currentUser.token);
     return this.http.get(this.url + 'profile/' + id, {headers: headers})

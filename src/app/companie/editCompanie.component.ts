@@ -47,6 +47,12 @@ export class EditCompanieComponent implements OnInit {
     this.myForm = this._fb.group({
       name: [''],
       phoneNumber: ['', [Validators.required, Validators.minLength(2)]],
+      option: this._fb.group({
+        calendar: this._fb.group({
+          timeBegin: ['', [Validators.required, Validators.minLength(1)]],
+          timeEnd: ['', [Validators.required, Validators.minLength(1)]],
+        }),
+      }),
       address: this._fb.group({
         address: ['', [Validators.required, Validators.minLength(2)]],
         city: ['', [Validators.required, Validators.minLength(2)]],
@@ -80,6 +86,10 @@ export class EditCompanieComponent implements OnInit {
     })
   }
 
+  removeForm(i: number) {
+      this.fetchedCompanie.forms.splice(i, 1)
+      this.save();
+  }
 
   // removeUserFromCompanie(i:number, typeUser: string){
   //   let this2 = this
