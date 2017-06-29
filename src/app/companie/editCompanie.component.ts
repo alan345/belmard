@@ -62,13 +62,14 @@ export class EditCompanieComponent implements OnInit {
       _users: this._fb.array([])
     })
 
+
     this.activatedRoute.params.subscribe((params: Params) => {
 
       if(params['id']) {
         if(params['id'] === 'mine') {
-        //  this.getCompanie('')
+          this.getCompanie('')
         } else {
-        //  this.getCompanie(params['id'])
+          this.getCompanie(params['id'])
         }
       }
 
