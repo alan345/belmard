@@ -92,3 +92,7 @@ background-color: #337ab7;
 border-radius: 5px; 
 justify-content: center; 
 }
+
+.tdbtn {
+text-align: right;  
+}
