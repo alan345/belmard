@@ -27,7 +27,7 @@
         <!-- test tableau Guillaume -->
         <div *ngFor="let fetchedTypeUser of fetchedTypeUsers; let i=index">
           <table>
-           <tr>
+           <tr class="tdbtn">
                <td>{{fetchedTypeUser}}</td>
                <td class="tdbtn"><button type="button" (click)="selectTypeUser(fetchedTypeUser)">select</button></td>
            </tr>
