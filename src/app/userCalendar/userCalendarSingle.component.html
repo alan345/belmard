@@ -23,9 +23,16 @@
             mdInput
           >
         </div>
+        
+        <!-- test tableau Guillaume -->
         <div *ngFor="let fetchedTypeUser of fetchedTypeUsers; let i=index">
-          {{fetchedTypeUser}}
-          <button type="button" (click)="selectTypeUser(fetchedTypeUser)">select</button>
+          <table>
+           <tr>
+               <td>{{fetchedTypeUser}}</td>
+               <td class="tdbtn"><button type="button" (click)="selectTypeUser(fetchedTypeUser)">select</button></td>
+           </tr>
+          </table>
+          <!-- test tableau Guillaume -->
         </div>
         <div *ngFor="let typeUser of search.typeUser; let i=index">
           {{typeUser}}
