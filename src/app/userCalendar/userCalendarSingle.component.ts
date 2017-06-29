@@ -103,7 +103,11 @@ export class UserCalendarSingleComponent implements OnInit {
         )
     }
 
+    fetchCalendarEvents(){
 
+      this.fetchEvents()
+
+    }
     fetchEvents() {
       const getStart: any = {
         month: startOfMonth,

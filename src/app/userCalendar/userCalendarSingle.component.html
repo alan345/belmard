@@ -183,9 +183,9 @@
               class="btn btn-primary"
               mwlCalendarPreviousView
               [view]="view"
-              (viewDateChange)="fetchEvents()"
-              (viewChange)="fetchEvents()"
               [(viewDate)]="viewDate"
+              (viewDateChange)="fetchCalendarEvents()"
+              (viewChange)="fetchCalendarEvents()"
               >
               Previous
             </div>
@@ -193,8 +193,8 @@
               class="btn btn-secondary"
               mwlCalendarToday
               [(viewDate)]="viewDate"
-              (viewDateChange)="fetchEvents()"
-              (viewChange)="fetchEvents()"
+              (viewDateChange)="fetchCalendarEvents()"
+              (viewChange)="fetchCalendarEvents()"
               >
               Today
             </div>
@@ -203,8 +203,8 @@
               mwlCalendarNextView
               [view]="view"
               [(viewDate)]="viewDate"
-              (viewDateChange)="fetchEvents()"
-              (viewChange)="fetchEvents()"
+              (viewDateChange)="fetchCalendarEvents()"
+              (viewChange)="fetchCalendarEvents()"
               >
               Next
             </div>
