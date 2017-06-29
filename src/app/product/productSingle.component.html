@@ -9,18 +9,18 @@
   <div id="product-container">
 
     <!-- cascade -->
-    <div class="col-md-3">
-      <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="categ1" (ngModelChange)="changeCascade(categ1Index.selectedIndex, 0)" #categ1Index>
+    <div>
+      <select class="form-control col-md-3" [ngModelOptions]="{standalone: true}" [(ngModel)]="categ1" (ngModelChange)="changeCascade(categ1Index.selectedIndex, 0)" #categ1Index>
         <option *ngFor="let n of itemSteps" [attr.value]="n.categ">{{n.categ}}</option>
       </select>
     </div>
-    <div class="col-md-3" [hidden]="itemSteps[selectedIndex1].categ==''">
-      <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="categ2" (ngModelChange)="changeCascade(categ1Index.selectedIndex, categ2Index.selectedIndex)" #categ2Index>
+    <div [hidden]="itemSteps[selectedIndex1].categ==''">
+      <select class="form-control col-md-3" [ngModelOptions]="{standalone: true}" [(ngModel)]="categ2" (ngModelChange)="changeCascade(categ1Index.selectedIndex, categ2Index.selectedIndex)" #categ2Index>
         <option *ngFor="let n of itemSteps[selectedIndex1].subCateg" [attr.value]="n.categ">{{n.categ}}</option>
       </select>
     </div>
-    <div class="col-md-3" [hidden]="itemSteps[selectedIndex1].subCateg[selectedIndex2].categ==''">
-      <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="categ3">
+    <div [hidden]="itemSteps[selectedIndex1].subCateg[selectedIndex2].categ==''">
+      <select class="form-control col-md-3" [ngModelOptions]="{standalone: true}" [(ngModel)]="categ3">
         <option *ngFor="let n of itemSteps[selectedIndex1].subCateg[selectedIndex2].subCateg" [attr.value]="n.categ">{{n.categ}}</option>
       </select>
     </div>
@@ -30,11 +30,11 @@
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()" (keydown.enter)="$event.preventDefault()">
 
       <div formGroupName="details">
-        <div class="col-md-6">
+        <div>
           <label>Nom du produit</label>
           <input
             type="text"
-            class="form-control"
+            class="form-control col-md-6"
             formControlName="referenceName"
             placeholder="referenceName"
             [(ngModel)]="fetchedProduct.details.referenceName">
@@ -44,7 +44,7 @@
           <label>Référence</label>
           <input
             type="text"
-            class="form-control"
+            class="form-control col-md-6"
             formControlName="reference"
             placeholder="reference"
             [(ngModel)]="fetchedProduct.details.reference">
@@ -54,7 +54,7 @@
           <label>Description</label>
           <input
             type="text"
-            class="form-control"
+            class="form-control col-md-6"
             formControlName="description"
             placeholder="description"
             [(ngModel)]="fetchedProduct.details.description">
@@ -65,7 +65,7 @@
             <label>longueur</label>
             <input
               type="text"
-              class="form-control"
+              class="form-control col-md-6"
               formControlName="height"
               placeholder="height"
               [(ngModel)]="fetchedProduct.details.dimension.height">
@@ -74,7 +74,7 @@
             <label>largeur</label>
             <input
               type="text"
-              class="form-control"
+              class="form-control col-md-6"
               formControlName="width"
               placeholder="width"
               [(ngModel)]="fetchedProduct.details.dimension.width">
@@ -84,7 +84,7 @@
             <label>hauteur</label>
             <input
               type="text"
-              class="form-control"
+              class="form-control col-md-6"
               formControlName="depth"
               placeholder="depth"
               [(ngModel)]="fetchedProduct.details.dimension.depth">
@@ -120,7 +120,7 @@
             <label>Prix d'achat HT</label>
             <input
               type="text"
-              class="form-control"
+              class="form-control col-md-6"
               formControlName="costPrice"
               placeholder="costPrice"
               [(ngModel)]="fetchedProduct.details.price.costPrice">
@@ -129,7 +129,7 @@
             <label>Prix de vente HT</label>
             <input
               type="text"
-              class="form-control"
+              class="form-control col-md-6"
               formControlName="sellingPrice"
               placeholder="sellingPrice"
               [(ngModel)]="fetchedProduct.details.price.sellingPrice">
