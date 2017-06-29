@@ -9,17 +9,17 @@
   <div id="product-container">
 
     <!-- cascade -->
-    <div class="col-xs-2">
+    <div class="xm-6">
       <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="categ1" (ngModelChange)="changeCascade(categ1Index.selectedIndex, 0)" #categ1Index>
         <option *ngFor="let n of itemSteps" [attr.value]="n.categ">{{n.categ}}</option>
       </select>
     </div>
-    <div class="col-xs-2" [hidden]="itemSteps[selectedIndex1].categ==''">
+    <div class="xm-6" [hidden]="itemSteps[selectedIndex1].categ==''">
       <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="categ2" (ngModelChange)="changeCascade(categ1Index.selectedIndex, categ2Index.selectedIndex)" #categ2Index>
         <option *ngFor="let n of itemSteps[selectedIndex1].subCateg" [attr.value]="n.categ">{{n.categ}}</option>
       </select>
     </div>
-    <div class="col-xs-2" [hidden]="itemSteps[selectedIndex1].subCateg[selectedIndex2].categ==''">
+    <div class="xm-6" [hidden]="itemSteps[selectedIndex1].subCateg[selectedIndex2].categ==''">
       <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="categ3">
         <option *ngFor="let n of itemSteps[selectedIndex1].subCateg[selectedIndex2].subCateg" [attr.value]="n.categ">{{n.categ}}</option>
       </select>
