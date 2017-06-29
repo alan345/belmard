@@ -58,12 +58,15 @@ export class EditCompanieComponent implements OnInit {
 
 
     this.activatedRoute.params.subscribe((params: Params) => {
-      let userId = ''
 
-      if(params['id'])
-        userId = params['id']
+      if(params['id']) {
+        if(params['id'] === 'mine') {
+          this.getCompanie('')
+        } else {
+          this.getCompanie(params['id'])
+        }
+      }
 
-      this.getCompanie(userId)
     })
   }
 

@@ -15,7 +15,7 @@ export const routes: Routes = [
   // {path: 'edit/addUser/:id', component: EditAddUserToCompanieComponent},
   // {path: 'edit/addUser/:id/:email', component: EditAddUserToCompanieComponent},
   // {path: 'addUserByCompanie', component: AddUserByCompanieComponent},
-  {path: 'mine', component: EditCompanieComponent},
+  //{path: 'mine', component: EditCompanieComponent},
   {path: 'new', component: EditCompanieComponent},
   {path: 'edit/:id', component: EditCompanieComponent},
   {path: ':id', component: CompanieDetailComponent},
