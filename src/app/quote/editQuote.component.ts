@@ -18,7 +18,7 @@ import { User } from '../user/user.model';
 import { Product } from '../product/product.model';
 import { Project } from '../project/project.model';
 
-
+declare let jsPDF;
 
 
 
@@ -86,9 +86,99 @@ export class EditQuoteComponent implements OnInit {
     })
   }
 
+  // getBase64Image(img) {
+  //     // Create an empty canvas element
+  //     var canvas = document.createElement("canvas");
+  //     canvas.width = img.width;
+  //     canvas.height = img.height;
+  //
+  //     // Copy the image contents to the canvas
+  //     var ctx = canvas.getContext("2d");
+  //     ctx.drawImage(img, 0, 0);
+  //
+  //     // Get the data-URL formatted image
+  //     // Firefox supports PNG and JPEG. You could check img.src to
+  //     // guess the original format, but be aware the using "image/jpg"
+  //     // will re-encode the image.
+  //     var dataURL = canvas.toDataURL("image/png");
+  //
+  //     return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+  // }
+
+  //
+  // getBase64FromImageUrl(url) {
+  //     var img = new Image();
+  //
+  //     img.setAttribute('crossOrigin', 'anonymous');
+  //
+  //     img.onload = function () {
+  //         var canvas = document.createElement("canvas");
+  //         canvas.width =img.width;
+  //         canvas.height =img.height;
+  //
+  //         var ctx = canvas.getContext("2d");
+  //         ctx.drawImage(img, 0, 0);
+  //
+  //         var dataURL = canvas.toDataURL("image/png");
+  //
+  //         return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+  //     };
+  //
+  //     img.src = url;
+  // }
 
 
 
+
+  getBase64Image(imgUrl) {
+    return new Promise(
+      function(resolve, reject) {
+
+        var img = new Image();
+        img.src = imgUrl;
+        img.setAttribute('crossOrigin', 'anonymous');
+
+        img.onload = function() {
+          var canvas = document.createElement("canvas");
+          canvas.width = img.width;
+          canvas.height = img.height;
+          var ctx = canvas.getContext("2d");
+          ctx.drawImage(img, 0, 0);
+          var dataURL = canvas.toDataURL("image/png");
+          resolve(dataURL.replace(/^data:image\/(png|jpg);base64,/, ""));
+        }
+        img.onerror = function() {
+          reject("The image could not be loaded.");
+        }
+
+      });
+
+  }
+
+
+  public downloadPDF() {
+
+      // var imgUrl = './uploads/forms/5942c4a999bc0023cc518c0a/1b90.screen%20shot%202017-06-15%20at%2012.50.08%20pm.png';
+      // let base64image = this.getBase64Image(imgUrl).then(function(base64image) {
+
+
+              var doc = new jsPDF();
+              doc.text(20, 20, 'Hello world!');
+              doc.text(20, 30, 'This is client-side Javascript, pumping out a PDF.');
+              doc.addPage();
+              //doc.addImage('data:image/png;base64,'+base64image, 'png', 15, 40, 180, 180);
+              doc.text(20, 20, 'Do you like that?');
+
+              // Save the PDF
+              doc.save('Test.pdf');
+
+      // }, function(reason) {
+      //   console.log(reason); // Error!
+      // });
+
+
+
+  }
 
     getUser(id: string) {
       this.userService.getUser(id)

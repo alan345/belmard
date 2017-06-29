@@ -6,6 +6,12 @@
   <div>
     <h4 class="dspl-nn">id: {{fetchedQuote._id}}</h4>
     <!-- <form #f="ngForm" novalidate (ngSubmit)="save(f.value, f.valid)"> -->
+
+    <button
+      (click)="downloadPDF()">download PDF
+    </button>
+
+
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
       <div>
 
