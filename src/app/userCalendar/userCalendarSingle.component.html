@@ -35,8 +35,12 @@
           <!-- test tableau Guillaume -->
         </div>
         <div *ngFor="let typeUser of search.typeUser; let i=index">
-          {{typeUser}}
-          <button class="btn btn-danger btn-sm ferme" type="button" (click)="removeTypeUser(i)"><i class="fa fa-times"></i></button>
+          <table>
+           <tr>
+               <td class="tdbtn1">{{typeUser}}</td>
+          <td class="tdbtn2"><button class="btn btn-danger btn-sm ferme" type="button" (click)="removeTypeUser(i)"><i class="fa fa-times"></i></button></td>
+           </tr>
+          </table>
         </div>
         <!-- Autocomplete typeUser-->
 
