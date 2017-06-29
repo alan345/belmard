@@ -34,7 +34,7 @@
           </table>
           <!-- test tableau Guillaume -->
         </div>
-        <div *ngFor="let typeUser of search.typeUser; let i=index">
+        <div class="form-control" *ngFor="let typeUser of search.typeUser; let i=index">
           <table>
            <tr>
                <td class="tdbtn1">{{typeUser}}</td>
@@ -66,7 +66,7 @@
           </table>
           
         </div>
-        <div *ngFor="let client of search.clientSearch; let i=index">
+        <div class="form-control" *ngFor="let client of search.clientSearch; let i=index">
           <table>
            <tr>
                <td class="tdbtn1">{{client.profile.name}} - {{client.profile.lastName}}</td>
@@ -100,7 +100,7 @@
           </table>
           
         </div>
-        <div *ngFor="let user of search.userSearch; let i=index">
+        <div class="form-control" *ngFor="let user of search.userSearch; let i=index">
           <table>
            <tr>
                <td class="tdbtn1">{{user.profile.name}} - {{user.profile.lastName}}</td>
@@ -138,7 +138,7 @@
           </table>
           
         </div>
-        <div *ngFor="let project of search.projectSearch; let i=index">
+        <div class="form-control" *ngFor="let project of search.projectSearch; let i=index">
           <table>
            <tr>
                <td class="tdbtn1">{{project.details.name}} - {{project.details.lastName}}</td>
