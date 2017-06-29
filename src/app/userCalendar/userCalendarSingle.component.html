@@ -59,7 +59,7 @@
 
         <div *ngFor="let client of search.clientSearch; let i=index">
           {{client.profile.name}} - {{client.profile.lastName}}
-          <button type="button" (click)="removeClientSearch(i)"><i class="fa fa-times"></i></button>
+          <button class="btn btn-danger ferme" type="button" (click)="removeClientSearch(i)"><i class="fa fa-times"></i></button>
         </div>
         <!-- Autocomplete clientSearch-->
 
