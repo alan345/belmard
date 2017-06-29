@@ -93,10 +93,8 @@
 
             <!-- Autocomplete companie-->
             <label>Fournisseur</label>
-            <a [routerLink]="['/companie/new']" class="admn-btn">
-              Ajouter fournisseur
-            </a>
-            <input
+            <button type="button" class="btn btn-warning" [routerLink]="['/companie/new']"><a>Ajouter fournisseur</a>
+            <input  class="form-control col-md-4"
               [ngModelOptions]="{standalone: true}"
               [(ngModel)]="autocompleteCompanie"
               placeholder="Select"
