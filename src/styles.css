@@ -93,6 +93,12 @@ border-radius: 5px;
 justify-content: center; 
 }
 
-.tdbtn {
-text-align: center;  
+.tdbtn1 {
+text-align: left;
+width: 50%;
+}
+
+.tdbtn2 {
+text-align: right;
+width: 50%;
 }
