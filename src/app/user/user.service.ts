@@ -77,28 +77,27 @@ export class UserService {
 
 
   getUser(id: string) {
-    // if(!id) {
-    //   console.log(this.currentUser)
-    //   if(this.currentUser.user._id) {
-    //     console.log(this.currentUser)
-    //     return Observable.of(this.currentUser)
-    //   }
-    //
-    // }
+    if(!id) {
+    //  console.log(this.currentUser)
+      if(this.currentUser._id) {
+    //    console.log(this.currentUser)
+        return Observable.of(this.currentUser)
+      }
+
+    }
 
     let headers = new Headers({'Content-Type': 'application/json'});
     headers.append('Authorization', '' + this.authService.currentUser.token);
     return this.http.get(this.url + 'profile/' + id, {headers: headers})
       .map((response: Response) => {
-        //console.log(response.json().user)
+
        if(!id) {
-         this.currentUser = response.json()
-         console.log(this.currentUser)
+         this.currentUser = response.json().user
+      //   console.log(this.currentUser)
        }
 
-        return response.json();
-      //  this.singleForm = response.json();
-        //return this.singleForm;
+        return response.json().user;
+
       })
       .catch((error: Response) => {
         this.errorService.handleError(error.json());

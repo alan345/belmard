@@ -235,7 +235,7 @@ export class NewUserComponent implements OnInit {
     this.userService.getUser(id)
       .subscribe(
         res => {
-          this.fetchedUser = res.user
+          this.fetchedUser = res
           this.fetchedUser.type.forEach(type => {
             this.typeUserDropDown = type
           });

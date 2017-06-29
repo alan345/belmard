@@ -56,7 +56,7 @@ export class UserCalendarSingleComponent implements OnInit {
     autocompleteProject: string = '';
     fetchedUsers: User[] = [];
     fetchedProjects: Project[] = [];
-
+    currentUser: User = new User();
     search= {
       typeUser:[],
       clientSearch:[],
@@ -83,7 +83,20 @@ export class UserCalendarSingleComponent implements OnInit {
 
     ngOnInit() {
       this.fetchEvents();
+      this.getUser();
     }
+
+
+    getUser() {
+      this.userService.getUser('')
+        .subscribe(
+          res => {
+            console.log(res)
+            this.currentUser = res },
+          error => { console.log(error) }
+        )
+    }
+
 
     fetchEvents() {
       const getStart: any = {

@@ -76,7 +76,6 @@ export class UserProfileComponent implements OnInit {
 
     this.activatedRoute.params.subscribe((params: Params) => {
       let userId = params['id']
-
       if(!userId)
         userId = ''
         // userId = this.authService.currentUser.userId
@@ -90,7 +89,7 @@ export class UserProfileComponent implements OnInit {
   getUser(id: string) {
     this.userService.getUser(id)
       .subscribe(
-        res => { this.fetchedUser = res.user },
+        res => { this.fetchedUser = res },
         error => { console.log(error) }
       )
   }

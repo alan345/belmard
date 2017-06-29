@@ -55,7 +55,7 @@ export class ChangePasswordComponent implements OnInit, AfterViewInit {
     this.userService.getUser(id)
       .subscribe(
         res => {
-          this.fetchedUser = <User>res.user
+          this.fetchedUser = <User>res
         },
         error => {
           console.log(error);

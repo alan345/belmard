@@ -94,7 +94,7 @@ export class EditQuoteComponent implements OnInit {
       this.userService.getUser(id)
         .subscribe(
           res => {
-            this.selectUser(res.user)
+            this.selectUser(res)
           },
           error => { console.log(error) }
         );
