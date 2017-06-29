@@ -26,20 +26,6 @@ export class QuoteDetailComponent implements OnInit {
   users: User[] = [];
   userAdmins: User[] = [];
   fetchedQuote: Quote = new Quote();
-  // {
-  //   _id: '',
-  //   forms: [],
-  //   name: '',
-  //   typeQuote: '',
-  //   phoneNumber: '',
-  //   address: {
-  //     address : '',
-  //     city :  '',
-  //     state :  '',
-  //     zip :  ''
-  //   },
-  //   _users: []
-  // };
 
   search = {
     orderBy : '-client',
@@ -139,7 +125,6 @@ export class QuoteDetailComponent implements OnInit {
     let dialogRef = this.dialog.open(EditOptionsComponentDialog);
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        console.log(result)
         if(result.type ==='pdf') {
           this.toastr.error('No pdf!');
         } else {

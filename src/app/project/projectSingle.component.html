@@ -62,11 +62,9 @@
 
 
 
-      <!-- Autocomplete -->
+
+      <!-- Autocomplete User-->
       <label>Client</label>
-      <a [routerLink]="['/user/newuser']" class="admn-btn">
-        Créer un nouveau client
-      </a>
       <input
         *ngIf="!fetchedProject.clients.length"
         [ngModelOptions]="{standalone: true}"
@@ -79,11 +77,17 @@
         {{user.profile.name}} - {{user.profile.lastName}}
         <button type="button" (click)="selectUser(user)">select</button>
       </div>
+      <div *ngIf="fetchedUsers.length == 0 && autocompleteUser !=''">
+          Pas de resultats,
+          <a [routerLink]="['/user/newuser']" class="admn-btn">
+            Créer un nouveau client
+          </a>
+      </div>
       <div *ngFor="let user of fetchedProject.clients; let i=index">
         {{user.profile.name}} - {{user.profile.lastName}}
         <button type="button" (click)="removeUser(i)"><i class="fa fa-times"></i></button>
       </div>
-      <!-- Autocomplete -->
+      <!-- Autocomplete User -->
 
 
       <br>

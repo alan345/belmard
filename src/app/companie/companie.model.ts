@@ -16,8 +16,8 @@ export class Option {
   calendar: Calendar = new Calendar();
 }
 export class Calendar {
-  dateBegin: number = 8;
-  dateEnd: number = 19;
+  timeBegin: number = 8;
+  timeEnd: number = 19;
 }
 
 export class Address {

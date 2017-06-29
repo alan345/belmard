@@ -261,8 +261,8 @@
           [viewDate]="viewDate"
           [events]="events"
           [refresh]="refresh"
-          [dayStartHour]="9"
-          [dayEndHour]="19"
+          [dayStartHour]=timeBegin
+          [dayEndHour]=timeEnd
           (eventClicked)="handleEvent('Clicked', $event.event)"
           (eventTimesChanged)="eventTimesChanged($event)">
         </mwl-calendar-day-view>

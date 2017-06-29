@@ -84,31 +84,12 @@ export class ProjectSingleComponent implements OnInit {
     })
   }
 
-  selectUser(user: User) {
-    this.fetchedUsers = []
-    this.fetchedProject.clients.push(user)
-    //this.save()
-  }
-
-  searchUsers() {
-    let search = {
-        search: this.autocompleteUser,
-      };
-    this.getUsers(1, search)
-  }
-  changeCascade(selectedIndex1, selectedIndex2) {
-
-    this.selectedIndex1 = selectedIndex1
-    this.selectedIndex2 = selectedIndex2
-
-  }
-
   getUser(id: string) {
     this.userService.getUser(id)
       .subscribe(
         res => {
           //this.fetchedUsers[0] = res.user
-          this.selectUser(res.user)
+          this.selectUser(res)
         },
         error => {
           console.log(error);
@@ -116,6 +97,31 @@ export class ProjectSingleComponent implements OnInit {
       );
   }
 
+  changeCascade(selectedIndex1, selectedIndex2) {
+
+    this.selectedIndex1 = selectedIndex1
+    this.selectedIndex2 = selectedIndex2
+
+  }
+
+
+
+  // autocomplete user
+  selectUser(user: User) {
+    this.autocompleteUser=''
+    this.fetchedUsers = []
+    this.fetchedProject.clients.push(user)
+  }
+  searchUsers() {
+    if(!this.autocompleteUser) {
+       this.fetchedUsers = []
+    } else {
+      let search = {
+          search: this.autocompleteUser,
+        };
+      this.getUsers(1, search)
+    }
+  }
   getUsers(page: number, search: any) {
     this.userService.getUsers(page, search)
       .subscribe(
@@ -127,12 +133,10 @@ export class ProjectSingleComponent implements OnInit {
         }
       );
   }
-
   removeUser(i: number) {
     this.fetchedProject.clients.splice(i, 1);
-    this.save()
   }
-
+  // autocomplete user
 
   goBack() {
     this.location.back();

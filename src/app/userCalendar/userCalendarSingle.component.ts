@@ -57,6 +57,8 @@ export class UserCalendarSingleComponent implements OnInit {
     fetchedUsers: User[] = [];
     fetchedProjects: Project[] = [];
     currentUser: User = new User();
+    timeBegin: number= 9
+    timeEnd: number= 19
     search= {
       typeUser:[],
       clientSearch:[],
@@ -91,8 +93,12 @@ export class UserCalendarSingleComponent implements OnInit {
       this.userService.getUser('')
         .subscribe(
           res => {
-            console.log(res)
-            this.currentUser = res },
+            this.currentUser = res
+            this.currentUser.companies.forEach(companie => {
+              this.timeEnd = companie.option.calendar.timeEnd
+              this.timeBegin = companie.option.calendar.timeBegin
+            })
+          },
           error => { console.log(error) }
         )
     }
@@ -380,12 +386,15 @@ export class UserCalendarSingleComponent implements OnInit {
     })
   }
   searchClients() {
-    let search = {
-        search: this.autocompleteClient,
-      };
-    this.getClients(1, search)
+    if(!this.autocompleteClient) {
+       this.fetchedClients = []
+    } else {
+      let search = {
+          search: this.autocompleteClient,
+        };
+      this.getClients(1, search)
+    }
   }
-
   getClients(page: number, search: any) {
     this.userService.getUsers(page, search)
       .subscribe(

@@ -103,6 +103,7 @@ export class EditQuoteComponent implements OnInit {
 
     // Autocomplete User
     selectUser(user: User) {
+      this.autocompleteUser = ''
       this.fetchedUsers = []
       this.fetchedQuote.clients.push(user)
     }
@@ -149,6 +150,7 @@ export class EditQuoteComponent implements OnInit {
 
     // autocomplete project
     selectProject(project: Project) {
+      this.autocompleteProject = ''
       this.fetchedProjects = []
       this.fetchedQuote.projects.push(project)
     }
@@ -208,10 +210,15 @@ export class EditQuoteComponent implements OnInit {
 
 
     searchProducts() {
-      let search = {
-          search: this.autocompleteProduct,
-        };
-      this.getProducts(1, search)
+
+      if(!this.autocompleteProduct) {
+        this.fetchedProducts = []
+      } else {
+        let search = {
+            search: this.autocompleteProduct,
+          };
+        this.getProducts(1, search)
+      }
     }
 
     selectProduct(product: Product) {
