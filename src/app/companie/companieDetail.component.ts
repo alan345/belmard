@@ -160,16 +160,16 @@ export class CompanieDetailComponent implements OnInit {
         res => {
           this.fetchedCompanie = res
 
-          this.fetchedCompanie._users.forEach((user) => {
-            if(user.role[0] === 'salesRep')
-              this.users.push(user)
-            if(user.role[0] === 'admin')
-              this.userAdmins.push(user)
-          })
-
-          this.fetchedCompanie.forms.forEach((form: Form) => {
-            this.addForm(form)
-          })
+          // this.fetchedCompanie._users.forEach((user) => {
+          //   if(user.role[0] === 'salesRep')
+          //     this.users.push(user)
+          //   if(user.role[0] === 'admin')
+          //     this.userAdmins.push(user)
+          // })
+          //
+          // this.fetchedCompanie.forms.forEach((form: Form) => {
+          //   this.addForm(form)
+          // })
         },
         error => {
           console.log(error);
