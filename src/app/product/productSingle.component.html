@@ -10,7 +10,7 @@
 
     <!-- cascade -->
     <div>
-      <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="categ1" (ngModelChange)="changeCascade(categ1Index.selectedIndex, 0)" #categ1Index>
+      <select class="form-control col-xs-2" [ngModelOptions]="{standalone: true}" [(ngModel)]="categ1" (ngModelChange)="changeCascade(categ1Index.selectedIndex, 0)" #categ1Index>
         <option *ngFor="let n of itemSteps" [attr.value]="n.categ">{{n.categ}}</option>
       </select>
     </div>
