@@ -25,7 +25,7 @@ export class UserService {
   //private token: string = localStorage.getItem('id_token');
   //private userId: string = localStorage.getItem('userId');
   private users: User[] = [];
-  private currentUser = Object;
+  private currentUser: User = new User();
 
   constructor(
     private http: Http,
@@ -77,11 +77,25 @@ export class UserService {
 
 
   getUser(id: string) {
-    console.log(id)
+    // if(!id) {
+    //   console.log(this.currentUser)
+    //   if(this.currentUser.user._id) {
+    //     console.log(this.currentUser)
+    //     return Observable.of(this.currentUser)
+    //   }
+    //
+    // }
+
     let headers = new Headers({'Content-Type': 'application/json'});
     headers.append('Authorization', '' + this.authService.currentUser.token);
     return this.http.get(this.url + 'profile/' + id, {headers: headers})
       .map((response: Response) => {
+        //console.log(response.json().user)
+       if(!id) {
+         console.log('save')
+         this.currentUser = response.json()
+       }
+
         return response.json();
       //  this.singleForm = response.json();
         //return this.singleForm;
