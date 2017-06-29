@@ -92,8 +92,8 @@ export class UserService {
       .map((response: Response) => {
         //console.log(response.json().user)
        if(!id) {
-         console.log('save')
          this.currentUser = response.json()
+         console.log(this.currentUser)
        }
 
         return response.json();

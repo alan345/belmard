@@ -67,9 +67,9 @@ export class EditCompanieComponent implements OnInit {
 
       if(params['id']) {
         if(params['id'] === 'mine') {
-          this.getCompanie('')
+        //  this.getCompanie('')
         } else {
-          this.getCompanie(params['id'])
+        //  this.getCompanie(params['id'])
         }
       }
 
