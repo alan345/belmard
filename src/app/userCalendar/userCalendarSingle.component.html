@@ -89,16 +89,27 @@
             (ngModelChange)="searchUserSearchs()"
             mdInput
           >
-        </div>
+          </div>
+        <!-- test tableau Guillaume -->
         <div *ngFor="let user of fetchedUserSearchs; let i=index">
-          {{user.profile.name}} - {{user.profile.lastName}}
-          <button type="button" (click)="selectUserSearch(user)">select</button>
+          <table>
+           <tr>
+               <td class="tdbtn1">{{user.profile.name}} - {{user.profile.lastName}}</td>
+               <td class="tdbtn2"><button class="btn btn-success" type="button" (click)="selectUserSearch(user)">select</button></td>
+           </tr>
+          </table>
+          
         </div>
-
         <div *ngFor="let user of search.userSearch; let i=index">
-          {{user.profile.name}} - {{user.profile.lastName}}
-          <button type="button" (click)="removeUserSearch(i)"><i class="fa fa-times"></i></button>
+          <table>
+           <tr>
+               <td class="tdbtn1">{{user.profile.name}} - {{user.profile.lastName}}</td>
+          <td class="tdbtn2"><button class="btn btn-danger btn-sm ferme" type="button" (click)="removeUserSearch(i)"><i class="fa fa-times"></i></button></td>
+           </tr>
+          </table>
         </div>
+        <!-- test tableau Guillaume -->
+        
         <!-- Autocomplete userSearch-->
 
 
@@ -117,17 +128,28 @@
             mdInput
           >
         </div>
+        <!-- test tableau Guillaume -->
         <div *ngFor="let project of fetchedProjectSearchs; let i=index">
-          {{project.details.name}} - {{project.details.lastName}}
-          <button type="button" (click)="selectProjectSearch(project)">select</button>
+          <table>
+           <tr>
+               <td class="tdbtn1">{{project.details.name}} - {{project.details.lastName}}</td>
+               <td class="tdbtn2"><button class="btn btn-success" type="button" (click)="selectProjectSearch(project)">select</button></td>
+           </tr>
+          </table>
+          
         </div>
-
         <div *ngFor="let project of search.projectSearch; let i=index">
-          {{project.details.name}} - {{project.details.lastName}}
-          <button type="button" (click)="removeProjectSearch(i)"><i class="fa fa-times"></i></button>
+          <table>
+           <tr>
+               <td class="tdbtn1">{{project.details.name}} - {{project.details.lastName}}</td>
+          <td class="tdbtn2"><button class="btn btn-danger btn-sm ferme" type="button" (click)="removeProjectSearch(i)"><i class="fa fa-times"></i></button></td>
+           </tr>
+          </table>
         </div>
+        <!-- test tableau Guillaume --></div>
+        
         <!-- Autocomplete projectSearch-->
-      </div>
+  
 
 
     </div>
