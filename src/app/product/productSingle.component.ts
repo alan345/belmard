@@ -97,17 +97,26 @@ export class ProductSingleComponent implements OnInit {
   changeCascade(selectedIndex1, selectedIndex2) {
     this.selectedIndex1 = selectedIndex1
     this.selectedIndex2 = selectedIndex2
-
-
-
   }
+
 
   searchCompanies() {
-    let search = {
-        search: this.autocompleteCompanie,
-      };
-    this.getCompanies(1, search)
+    if(!this.autocompleteCompanie) {
+      this.fetchedCompanies = []
+    } else {
+      let search = {
+          search: this.autocompleteCompanie,
+        };
+      this.getCompanies(1, search)
+    }
   }
+
+  // searchCompanies() {
+  //   let search = {
+  //       search: this.autocompleteCompanie,
+  //     };
+  //   this.getCompanies(1, search)
+  // }
 
   selectCompanie(companie: Companie) {
     this.fetchedCompanies = []

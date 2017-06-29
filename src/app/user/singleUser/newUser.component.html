@@ -9,7 +9,7 @@
   <div class="single-wrpr beigeback">
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
       <div class="form-group col-sm-12">
-        <!-- Autocomplete -->
+        <!-- Autocomplete companie -->
         <label>Fournisseur</label>
         <input
           *ngIf="!fetchedUser.companies.length"
@@ -33,7 +33,7 @@
           {{vendor.name}}
           <button type="button" (click)="removeCompanie(i)"><i class="fa fa-times"></i></button>
         </div>
-        <!-- Autocomplete -->
+        <!-- Autocomplete companie -->
       </div>
 
 

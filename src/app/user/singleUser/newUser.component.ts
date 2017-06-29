@@ -66,7 +66,6 @@ export class NewUserComponent implements OnInit {
         };
       this.getCompanies(1, search)
     }
-
   }
 
   getCompanies(page: number, search: any) {

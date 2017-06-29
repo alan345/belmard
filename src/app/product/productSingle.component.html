@@ -90,22 +90,24 @@
         <!-- Autocomplete companie-->
         <div>
           <label>Fournisseur</label>
-          <button
-            type="button"
-            class="btn btn-warning"
-            [routerLink]="['/companie/new']">
-            <a>Ajouter fournisseur</a>
-          </button>
-          <input  class="form-control col-md-4"
-          [ngModelOptions]="{standalone: true}"
-          [(ngModel)]="autocompleteCompanie"
-          placeholder="Select"
-          (ngModelChange)="searchCompanies()"
-          mdInput
+          <input
+            *ngIf="!fetchedProduct.vendors.length"
+            class="form-control col-md-4"
+            [ngModelOptions]="{standalone: true}"
+            [(ngModel)]="autocompleteCompanie"
+            placeholder="Select"
+            (ngModelChange)="searchCompanies()"
+            mdInput
           >
           <div *ngFor="let fetchedCompanie of fetchedCompanies; let i=index">
             {{fetchedCompanie.name}} - {{fetchedCompanie.name}}
             <button type="button" (click)="selectCompanie(fetchedCompanie)">select</button>
+          </div>
+          <div *ngIf="fetchedCompanies.length == 0 && autocompleteCompanie !=''">
+            Pas de resultats,
+            <a [routerLink]="['/companie/new']" class="admn-btn">
+              Ajouter Entreprise
+            </a>
           </div>
           <div *ngFor="let vendor of fetchedProduct.vendors; let i=index">
             {{vendor.name}}
