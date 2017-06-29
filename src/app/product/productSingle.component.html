@@ -30,7 +30,7 @@
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()" (keydown.enter)="$event.preventDefault()">
 
       <div formGroupName="details">
-        <div>
+        <div class="col-md-6">
           <label>Nom du produit</label>
           <input
             type="text"
