@@ -111,14 +111,9 @@ export class ProductSingleComponent implements OnInit {
     }
   }
 
-  // searchCompanies() {
-  //   let search = {
-  //       search: this.autocompleteCompanie,
-  //     };
-  //   this.getCompanies(1, search)
-  // }
 
   selectCompanie(companie: Companie) {
+    this.autocompleteCompanie = ''
     this.fetchedCompanies = []
     this.fetchedProduct.vendors.push(companie)
   }
