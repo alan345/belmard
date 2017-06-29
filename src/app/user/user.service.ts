@@ -77,7 +77,7 @@ export class UserService {
 
 
   getUser(id: string) {
-
+    console.log(id)
     let headers = new Headers({'Content-Type': 'application/json'});
     headers.append('Authorization', '' + this.authService.currentUser.token);
     return this.http.get(this.url + 'profile/' + id, {headers: headers})

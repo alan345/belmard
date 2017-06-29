@@ -57,10 +57,10 @@ export class NavbarComponent implements OnInit {
     }, 150);
 
   }
-  sideNavOpen(){
-    //this.sidenav.open()
-    this.sidenav.toggle()
-  }
+  // sideNavOpen(){
+  //   //this.sidenav.open()
+  //   this.sidenav.toggle()
+  // }
   isAdmin() {
     return this.adminService.isAdmin();
   }

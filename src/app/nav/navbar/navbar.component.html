@@ -1,75 +1,77 @@
-<div>
-  <div class="header">
-    <div *ngFor="let companie of fetchedUser.companies">
-      <a href="#">
-        <div *ngFor="let form of companie.forms">
+<!-- <div *ngIf="isLoggedIn()"> -->
+  <div>
+    <div class="header">
+      <div *ngFor="let companie of fetchedUser.companies">
+        <a href="#">
+          <div *ngFor="let form of companie.forms">
 
-          <img
-            class="logo-header"
-            src="./uploads/forms/{{form.owner}}/{{form.imagePath}}"
-            onerror="this.src ='assets/images/marker.png'">
-          </div>
-      </a>
+            <img
+              class="logo-header"
+              src="./uploads/forms/{{form.owner}}/{{form.imagePath}}"
+              onerror="this.src ='assets/images/marker.png'">
+            </div>
+        </a>
+      </div>
+      <h1 class="text-center" style="margin-bottom:0px;color:#ffffff;">Logiciel de Gestion</h1>
+      <p align="right" style="margin-right:40px;">
+         <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="logout()"
+          *ngIf="isLoggedIn()">
+          Déconnexion
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          [routerLink]="['/user/profile']"
+          routerLinkActive="active">
+          Mon Profil
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          [routerLink]="['/companie/edit/mine']"
+          routerLinkActive="active">
+          Mon Entreprise
+        </button>
+      </p>
     </div>
-    <h1 class="text-center" style="margin-bottom:0px;color:#ffffff;">Logiciel de Gestion</h1>
-    <p align="right" style="margin-right:40px;">
-       <button
-        type="button"
-        class="btn btn-secondary"
-        (click)="logout()"
-        *ngIf="isLoggedIn()">
-        Déconnexion
-      </button>
-      <button
-        type="button"
-        class="btn btn-primary"
-        [routerLink]="['/user/profile']"
-        routerLinkActive="active">
-        Mon Profil
-      </button>
-      <button
-        type="button"
-        class="btn btn-primary"
-        [routerLink]="['/companie/edit/mine']"
-        routerLinkActive="active">
-        Mon Entreprise
-      </button>
-    </p>
   </div>
-</div>
 
 
-<div>
-  <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <a class="navbar-brand" href="#">Accueil</a>
+  <div>
+    <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="#">Accueil</a>
 
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" [routerLink]="['/product']">Produits</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" [routerLink]="['/project']">Projets </a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" [routerLink]="['/user']">Utilisateurs</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" [routerLink]="['/companie']">Fournisseurs</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" [routerLink]="['/quote']">Devis</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" [routerLink]="['/userCalendar/123']">Planning</a>
-        </li>
-        <!-- <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" [routerLink]="['/option']">Options</a>
-        </li> -->
-      </ul>
-    </div>
-  </nav>
-</div>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" [routerLink]="['/product']">Produits</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" [routerLink]="['/project']">Projets </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" [routerLink]="['/user']">Utilisateurs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" [routerLink]="['/companie']">Fournisseurs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" [routerLink]="['/quote']">Devis</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" [routerLink]="['/userCalendar/123']">Planning</a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" [routerLink]="['/option']">Options</a>
+          </li> -->
+        </ul>
+      </div>
+    </nav>
+  </div>
+<!-- </div> -->
