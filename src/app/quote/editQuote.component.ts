@@ -184,7 +184,9 @@ export class EditQuoteComponent implements OnInit {
           verticalPointer += 6
           doc.text(marginLeft, verticalPointer, this2.fetchedQuote.address.city + ' ' + this2.fetchedQuote.address.zip + ' ' + this2.fetchedQuote.address.state + ' ');
 
-          verticalPointer += 6
+
+          doc.setFontSize(12);
+          verticalPointer += 15
           doc.text(20, verticalPointer, 'reference' );
           doc.text(50, verticalPointer, 'ref' );
           doc.text(80, verticalPointer, 'quantite');
@@ -192,6 +194,7 @@ export class EditQuoteComponent implements OnInit {
           doc.text(140, verticalPointer, 'Prix TTC');
 
 
+          doc.setFontSize(10);
           this2.fetchedQuote.devisDetails.forEach(detail => {
             verticalPointer += 6
             doc.text(20, verticalPointer, detail.productInit.details.referenceName );
@@ -199,8 +202,13 @@ export class EditQuoteComponent implements OnInit {
             doc.text(80, verticalPointer, detail.quantity.toString());
             doc.text(110, verticalPointer, detail.totalPriceWithoutTaxes.toString() );
             doc.text(140, verticalPointer, detail.totalPriceWithTaxes.toString() );
-
           });
+
+          doc.setFontSize(12);
+          verticalPointer += 12
+          doc.text(80, verticalPointer, 'Total');
+          doc.text(110, verticalPointer, this2.fetchedQuote.priceQuote.priceQuoteWithoutTaxes.toString() );
+          doc.text(140, verticalPointer, this2.fetchedQuote.priceQuote.priceQuoteWithTaxes.toString() );
 
 
           doc.save('Test.pdf');
