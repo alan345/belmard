@@ -143,17 +143,49 @@ export class EditQuoteComponent implements OnInit {
 
 
   downloadPDF() {
-      //var imgUrl = './uploads/forms/5942c4a999bc0023cc518c0a/1b90.screen%20shot%202017-06-15%20at%2012.50.08%20pm.png';
+      let this2 = this
       let base64image = this.getBase64Image(this.imgLogoUrl).then(function(dataImg: any) {
+
+              let marginLeft = 20
+              let verticalStep = 10
               let heightLogo = 50
               var doc = new jsPDF();
-
+              let verticalPointer = 0;
               //doc.addPage();
               doc.addImage( dataImg.dataURL, 'png', 15, 20, heightLogo * dataImg.ratioImg, heightLogo);
+
               doc.setFontSize(22);
-              doc.text(20, 90, 'Devis');
+              verticalPointer += 90
+              doc.text(marginLeft, verticalPointer, 'Devis');
               doc.setFontSize(16);
-              doc.text(20, 100, 'Pour un cleint de Ouf');
+              if(this2.fetchedQuote.clients.length) {
+                verticalPointer += verticalStep
+                doc.text(marginLeft, verticalPointer, 'Client : ' + this2.fetchedQuote.clients[0].profile.lastName + ' ' + this2.fetchedQuote.clients[0].profile.name);
+              }
+              if(this2.fetchedQuote.projects.length) {
+                verticalPointer += verticalStep
+                doc.text(marginLeft, verticalPointer, 'Projet : ' + this2.fetchedQuote.projects[0].details.name);
+              }
+
+              verticalPointer += verticalStep
+              doc.text(marginLeft, verticalPointer, 'Details');
+
+              doc.setFontSize(10);
+
+              verticalPointer += verticalStep
+              doc.text(marginLeft, verticalPointer, this2.fetchedQuote.name);
+
+              verticalPointer += verticalStep
+              doc.text(marginLeft, verticalPointer, this2.fetchedQuote.phoneNumber);
+
+              verticalPointer += verticalStep
+              doc.text(marginLeft, verticalPointer, this2.fetchedQuote.address.address);
+
+
+              verticalPointer += verticalStep
+              doc.text(marginLeft, verticalPointer, this2.fetchedQuote.address.city + ' ' + this2.fetchedQuote.address.zip + ' ' + this2.fetchedQuote.address.state + ' ');
+
+
 
               //doc.text(20, 20, 'Do you like that?');
 
