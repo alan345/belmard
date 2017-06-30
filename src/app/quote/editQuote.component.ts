@@ -34,7 +34,7 @@ export class EditQuoteComponent implements OnInit {
   fetchedProducts: Product[] = []
   fetchedProjects: Project[] = []
   currentUser: User = new User()
-  imgLogoUrl: string = ''
+  imgLogoUrl: string = './assets/images/profile-placeholder.jpg'
   // userAdmins : User[] = []
   // userManagers : User[] = []
   // userClients : User[] = []
@@ -90,59 +90,12 @@ export class EditQuoteComponent implements OnInit {
     })
   }
 
-  // getBase64Image(img) {
-  //     // Create an empty canvas element
-  //     var canvas = document.createElement("canvas");
-  //     canvas.width = img.width;
-  //     canvas.height = img.height;
-  //
-  //     // Copy the image contents to the canvas
-  //     var ctx = canvas.getContext("2d");
-  //     ctx.drawImage(img, 0, 0);
-  //
-  //     // Get the data-URL formatted image
-  //     // Firefox supports PNG and JPEG. You could check img.src to
-  //     // guess the original format, but be aware the using "image/jpg"
-  //     // will re-encode the image.
-  //     var dataURL = canvas.toDataURL("image/png");
-  //
-  //     return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
-  // }
-
-  //
-  // getBase64FromImageUrl(url) {
-  //     var img = new Image();
-  //
-  //     img.setAttribute('crossOrigin', 'anonymous');
-  //
-  //     img.onload = function () {
-  //         var canvas = document.createElement("canvas");
-  //         canvas.width =img.width;
-  //         canvas.height =img.height;
-  //
-  //         var ctx = canvas.getContext("2d");
-  //         ctx.drawImage(img, 0, 0);
-  //
-  //         var dataURL = canvas.toDataURL("image/png");
-  //
-  //         return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
-  //     };
-  //
-  //     img.src = url;
-  // }
-
-
-
-
-
-
 
   getCurrentUser() {
     this.userService.getUser('')
       .subscribe(
         res => {
           this.currentUser = res
-
           this.currentUser.companies.forEach(companie => {
             companie.forms.forEach(form => {
               this.imgLogoUrl = "./uploads/forms/" + form.owner + "/" + form.imagePath
@@ -200,7 +153,7 @@ export class EditQuoteComponent implements OnInit {
               doc.setFontSize(22);
               doc.text(20, 90, 'Devis');
               doc.setFontSize(16);
-              doc.text(20, 100, 'Pour un cleint de Oud');
+              doc.text(20, 100, 'Pour un cleint de Ouf');
 
               //doc.text(20, 20, 'Do you like that?');
 

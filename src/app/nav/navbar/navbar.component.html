@@ -29,6 +29,7 @@
           Mon Profil
         </button>
         <button
+          *ngIf="fetchedUser.companies.length"
           type="button"
           class="btn btn-primary"
           [routerLink]="['/companie/edit/mine']"
