@@ -33,11 +33,14 @@ export class EditQuoteComponent implements OnInit {
   autocompleteProject: string = '';
   fetchedProducts: Product[] = []
   fetchedProjects: Project[] = []
-  userAdmins : User[] = []
-  userManagers : User[] = []
-  userClients : User[] = []
-  usersSalesRep : User[] = []
-  userStylists : User[] = []
+  currentUser: User = new User()
+  imgLogoUrl: string = ''
+  // userAdmins : User[] = []
+  // userManagers : User[] = []
+  // userClients : User[] = []
+  // usersSalesRep : User[] = []
+  // userStylists : User[] = []
+
   myForm: FormGroup;
   autocompleteProduct: String = ''
   fetchedUsers: User[] = [];
@@ -75,6 +78,7 @@ export class EditQuoteComponent implements OnInit {
       _users: this._fb.array([])
     })
 
+    this.getCurrentUser();
 
     this.activatedRoute.params.subscribe((params: Params) => {
       if(params['id'])
@@ -130,6 +134,28 @@ export class EditQuoteComponent implements OnInit {
 
 
 
+
+
+
+  getCurrentUser() {
+    this.userService.getUser('')
+      .subscribe(
+        res => {
+          this.currentUser = res
+
+          this.currentUser.companies.forEach(companie => {
+            companie.forms.forEach(form => {
+              this.imgLogoUrl = "./uploads/forms/" + form.owner + "/" + form.imagePath
+            });
+
+          });
+        },
+        error => {
+          console.log(error);
+        }
+      )
+  }
+
   getBase64Image(imgUrl) {
     return new Promise(
       function(resolve, reject) {
@@ -140,12 +166,19 @@ export class EditQuoteComponent implements OnInit {
 
         img.onload = function() {
           var canvas = document.createElement("canvas");
+          // console.log(img.width, img.height)
           canvas.width = img.width;
           canvas.height = img.height;
           var ctx = canvas.getContext("2d");
           ctx.drawImage(img, 0, 0);
           var dataURL = canvas.toDataURL("image/png");
-          resolve(dataURL.replace(/^data:image\/(png|jpg);base64,/, ""));
+          let dataImg = {
+            dataURL : dataURL,
+            width: img.width,
+            height: img.height,
+            ratioImg: img.width / img.height
+          }
+          resolve(dataImg);
         }
         img.onerror = function() {
           reject("The image could not be loaded.");
@@ -156,25 +189,27 @@ export class EditQuoteComponent implements OnInit {
   }
 
 
-  public downloadPDF() {
-
-      // var imgUrl = './uploads/forms/5942c4a999bc0023cc518c0a/1b90.screen%20shot%202017-06-15%20at%2012.50.08%20pm.png';
-      // let base64image = this.getBase64Image(imgUrl).then(function(base64image) {
-
-
+  downloadPDF() {
+      //var imgUrl = './uploads/forms/5942c4a999bc0023cc518c0a/1b90.screen%20shot%202017-06-15%20at%2012.50.08%20pm.png';
+      let base64image = this.getBase64Image(this.imgLogoUrl).then(function(dataImg: any) {
+              let heightLogo = 50
               var doc = new jsPDF();
-              doc.text(20, 20, 'Hello world!');
-              doc.text(20, 30, 'This is client-side Javascript, pumping out a PDF.');
-              doc.addPage();
-              //doc.addImage('data:image/png;base64,'+base64image, 'png', 15, 40, 180, 180);
-              doc.text(20, 20, 'Do you like that?');
+
+              //doc.addPage();
+              doc.addImage( dataImg.dataURL, 'png', 15, 20, heightLogo * dataImg.ratioImg, heightLogo);
+              doc.setFontSize(22);
+              doc.text(20, 90, 'Devis');
+              doc.setFontSize(16);
+              doc.text(20, 100, 'Pour un cleint de Oud');
+
+              //doc.text(20, 20, 'Do you like that?');
 
               // Save the PDF
               doc.save('Test.pdf');
 
-      // }, function(reason) {
-      //   console.log(reason); // Error!
-      // });
+      }, function(reason) {
+        console.log(reason); // Error!
+      });
 
 
 
@@ -431,19 +466,7 @@ export class EditQuoteComponent implements OnInit {
       .subscribe(
         res => {
           this.fetchedQuote = res
-          this.fetchedQuote._users.forEach((user) => {
-            if(user.role[0] === 'admin')
-              this.userAdmins.push(user)
-            if(user.role[0] === 'salesRep')
-              this.usersSalesRep.push(user)
-            if(user.role[0] === 'client')
-              this.userClients.push(user)
-            if(user.role[0] === 'stylist')
-              this.userStylists.push(user)
-            if(user.role[0] === 'manager')
-              this.userManagers.push(user)
-          //  this.addUser(user)
-          })
+
         },
         error => {
           console.log(error);
@@ -456,13 +479,6 @@ export class EditQuoteComponent implements OnInit {
   isManager() {
     return this.authService.isManager();
   }
-  isSalesRep() {
-    return this.authService.isSalesRep();
-  }
-  isHQquote(){
-    if(this.fetchedQuote.typeQuote === 'HQ')
-      return true
-    return false
-  }
+
 
 }
