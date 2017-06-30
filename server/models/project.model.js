@@ -14,7 +14,7 @@ var project = new Schema({
 
     // quotes: [{type: Schema.Types.ObjectId, ref: 'Quote'}],
     clients: [{type: Schema.Types.ObjectId, ref: 'User'}],
-    assignedTo: [{type: Schema.Types.ObjectId, ref: 'User'}],
+    assignedTos: [{type: Schema.Types.ObjectId, ref: 'User'}],
     status: {type: String, default: [0]},
     forms: [{type: Schema.Types.ObjectId, ref: 'Form'}],
     status: {type: Number},

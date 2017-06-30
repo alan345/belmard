@@ -8,7 +8,7 @@ export class Project {
     details: Details = new Details()
     status: number = 0;
     clients: User[] = [];
-    assignedTo: User[] = [];
+    assignedTos: User[] = [];
     forms: Form[] = [];
     categorie: Categorie = new Categorie();
     // quotes: Quote[] = [];

@@ -120,36 +120,42 @@
 
 
 
-<!--
-      <label class="phyto-ctnr">Users</label>
-      <input
-        [ngModelOptions]="{standalone: true}"
-        [(ngModel)]="inputUser"
-        placeholder="Choose related product"
-        (ngModelChange)="searchUsers()"
-        mdInput
-      >
-      <div *ngFor="let fetchedUser of fetchedUsers; let i=index">
-        {{fetchedUser.name}} - {{fetchedUser.name}}
-        <button type="button" (click)="selectProduct(fetchedUser)">select</button>
-      </div>
-      <div *ngFor="let productFetch of fetchedUser.products; let i=index">
-        <div *ngFor="let custom_attribute of productFetch.product.magento.custom_attributes" class="rltpdt-ctnr">
-          <div *ngIf="custom_attribute.attribute_code == 'image'" class="rltpdt-cnt">
-            {{productFetch.product.magento.sku}} - {{productFetch.product.magento.name}}
-            <img src="{{urlMagento}}{{custom_attribute.value}}" onerror="this.src ='assets/images/no-image-found.jpg'">
-            <button type="button" (click)="removeProduct(i)"><i class="fa fa-times"></i></button>
-          </div>
-        </div>
-      </div> -->
-
-
 
       <select
         formControlName="status"
         [(ngModel)]="fetchedProject.status">
         <option *ngFor="let n of status" [ngValue]="n.index">{{n.label}}</option>
       </select>
+
+
+
+
+
+    <!-- Autocomplete AssignedTo-->
+    <label>Assigned To</label>
+    <input
+      *ngIf="!fetchedProject.assignedTos.length"
+      [ngModelOptions]="{standalone: true}"
+      [(ngModel)]="autocompleteAssignedTo"
+      placeholder="Select"
+      (ngModelChange)="searchAssignedTos()"
+      mdInput
+    >
+    <div *ngFor="let user of fetchedAssignedTos; let i=index">
+      {{user.profile.name}} - {{user.profile.lastName}}
+      <button type="button" (click)="selectAssignedTo(user)">select</button>
+    </div>
+    <div *ngIf="fetchedAssignedTos.length == 0 && autocompleteAssignedTo !=''">
+        Pas de resultats,
+        <a [routerLink]="['/user/newuser']" class="admn-btn">
+          Créer un nouveau employe
+        </a>
+    </div>
+    <div *ngFor="let user of fetchedProject.AssignedTos; let i=index">
+      {{user.profile.name}} - {{user.profile.lastName}}
+      <button type="button" (click)="removeUser(i)"><i class="fa fa-times"></i></button>
+    </div>
+    <!-- Autocomplete User -->
 
 
 

@@ -138,6 +138,49 @@ export class ProjectSingleComponent implements OnInit {
   }
   // autocomplete user
 
+
+
+
+
+
+    // autocomplete AssignedTo
+    autocompleteAssignedTo: string = '';
+    fetchedAssignedTos: User[] = [];
+    selectAssignedTo(user: User) {
+      this.autocompleteAssignedTo=''
+      this.fetchedAssignedTos = []
+      this.fetchedProject.assignedTos.push(user)
+    }
+    searchAssignedTos() {
+      if(!this.autocompleteAssignedTo) {
+         this.fetchedAssignedTos = []
+      } else {
+        let search = {
+            search: this.autocompleteAssignedTo,
+          };
+        this.getUsers(1, search)
+      }
+    }
+    getAssignedTos(page: number, search: any) {
+      this.userService.getUsers(page, search)
+        .subscribe(
+          res => {
+            this.fetchedUsers = res.data
+          },
+          error => {
+            console.log(error);
+          }
+        );
+    }
+    removeAssignedTo(i: number) {
+      this.fetchedProject.assignedTos.splice(i, 1);
+    }
+    // autocomplete user
+
+
+
+
+
   goBack() {
     this.location.back();
   }
