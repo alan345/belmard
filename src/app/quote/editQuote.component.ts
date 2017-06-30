@@ -146,51 +146,64 @@ export class EditQuoteComponent implements OnInit {
       let this2 = this
       let base64image = this.getBase64Image(this.imgLogoUrl).then(function(dataImg: any) {
 
-              let marginLeft = 20
-              let verticalStep = 10
-              let heightLogo = 50
-              var doc = new jsPDF();
-              let verticalPointer = 0;
-              //doc.addPage();
-              doc.addImage( dataImg.dataURL, 'png', 15, 20, heightLogo * dataImg.ratioImg, heightLogo);
+          let marginLeft = 20
+          let verticalStep = 10
+          let heightLogo = 50
+          var doc = new jsPDF();
+          let verticalPointer = 0;
+          //doc.addPage();
+          doc.addImage( dataImg.dataURL, 'png', 15, 20, heightLogo * dataImg.ratioImg, heightLogo);
 
-              doc.setFontSize(22);
-              verticalPointer += 90
-              doc.text(marginLeft, verticalPointer, 'Devis');
-              doc.setFontSize(16);
-              if(this2.fetchedQuote.clients.length) {
-                verticalPointer += verticalStep
-                doc.text(marginLeft, verticalPointer, 'Client : ' + this2.fetchedQuote.clients[0].profile.lastName + ' ' + this2.fetchedQuote.clients[0].profile.name);
-              }
-              if(this2.fetchedQuote.projects.length) {
-                verticalPointer += verticalStep
-                doc.text(marginLeft, verticalPointer, 'Projet : ' + this2.fetchedQuote.projects[0].details.name);
-              }
+          doc.setFontSize(22);
+          verticalPointer += 90
+          doc.text(120, 20, 'Devis');
+          doc.setFontSize(16);
+          if(this2.fetchedQuote.clients.length) {
+            verticalPointer += verticalStep
+            doc.text(marginLeft, verticalPointer, 'Client : ' + this2.fetchedQuote.clients[0].profile.lastName + ' ' + this2.fetchedQuote.clients[0].profile.name);
+          }
+          if(this2.fetchedQuote.projects.length) {
+            verticalPointer += verticalStep
+            doc.text(marginLeft, verticalPointer, 'Projet : ' + this2.fetchedQuote.projects[0].details.name);
+          }
 
-              verticalPointer += verticalStep
-              doc.text(marginLeft, verticalPointer, 'Details');
+          verticalPointer += verticalStep
+          doc.text(marginLeft, verticalPointer, 'Details');
 
-              doc.setFontSize(10);
+          doc.setFontSize(10);
 
-              verticalPointer += verticalStep
-              doc.text(marginLeft, verticalPointer, this2.fetchedQuote.name);
+          verticalPointer += 6
+          doc.text(marginLeft, verticalPointer, this2.fetchedQuote.name);
 
-              verticalPointer += verticalStep
-              doc.text(marginLeft, verticalPointer, this2.fetchedQuote.phoneNumber);
+          verticalPointer += 6
+          doc.text(marginLeft, verticalPointer, this2.fetchedQuote.phoneNumber);
 
-              verticalPointer += verticalStep
-              doc.text(marginLeft, verticalPointer, this2.fetchedQuote.address.address);
+          verticalPointer += 6
+          doc.text(marginLeft, verticalPointer, this2.fetchedQuote.address.address);
+
+          verticalPointer += 6
+          doc.text(marginLeft, verticalPointer, this2.fetchedQuote.address.city + ' ' + this2.fetchedQuote.address.zip + ' ' + this2.fetchedQuote.address.state + ' ');
+
+          verticalPointer += 6
+          doc.text(20, verticalPointer, 'reference' );
+          doc.text(50, verticalPointer, 'ref' );
+          doc.text(80, verticalPointer, 'quantite');
+          doc.text(110, verticalPointer, 'Prix HT' );
+          doc.text(140, verticalPointer, 'Prix TTC');
 
 
-              verticalPointer += verticalStep
-              doc.text(marginLeft, verticalPointer, this2.fetchedQuote.address.city + ' ' + this2.fetchedQuote.address.zip + ' ' + this2.fetchedQuote.address.state + ' ');
+          this2.fetchedQuote.devisDetails.forEach(detail => {
+            verticalPointer += 6
+            doc.text(20, verticalPointer, detail.productInit.details.referenceName );
+            doc.text(50, verticalPointer, detail.productInit.details.reference );
+            doc.text(80, verticalPointer, detail.quantity.toString());
+            doc.text(110, verticalPointer, detail.totalPriceWithoutTaxes.toString() );
+            doc.text(140, verticalPointer, detail.totalPriceWithTaxes.toString() );
+
+          });
 
 
-
-              //doc.text(20, 20, 'Do you like that?');
-
-              // Save the PDF
-              doc.save('Test.pdf');
+          doc.save('Test.pdf');
 
       }, function(reason) {
         console.log(reason); // Error!
