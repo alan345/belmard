@@ -138,7 +138,7 @@
           <div class="col-md-1">quanité</div>
           <div class="col-md-1">price HT</div>
           <div class="col-md-1">VAT(%)</div>
-          <div class="col-md-1">price TTC</div>
+          <!-- <div class="col-md-1">price TTC</div> -->
           <div class="col-md-1">total HT</div>
           <div class="col-md-1">total TTC</div>
         </div>
@@ -186,9 +186,9 @@
                 [(ngModel)]="fetchedQuote.devisDetails[i].vat"
                 placeholder="vat">
             </div>
-            <div class="col-md-1">
+            <!-- <div class="col-md-1">
               {{fetchedQuote.devisDetails[i].priceWithTaxes}}
-            </div>
+            </div> -->
             <div class="col-md-1">
               {{fetchedQuote.devisDetails[i].totalPriceWithoutTaxes | round}}
             </div>
