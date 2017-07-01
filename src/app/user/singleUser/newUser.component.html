@@ -119,7 +119,13 @@
       </div>
       <div class="valid-edit">
         <button type="submit" [disabled]="!myForm.valid" [ngClass]="{'done':myForm.valid,'pas-done':!myForm.valid}">Done</button>
-        <button type="button" (click)="saveAndCreateProject()" [disabled]="!myForm.valid" [ngClass]="{'done':myForm.valid,'pas-done':!myForm.valid}">Done and create project</button>
+        <button
+          *ngIf="fetchedUser._id"
+          type="button"
+          (click)="saveAndCreateProject()"
+          [disabled]="!myForm.valid">
+          Save & Create project
+        </button>
         <button type="button" *ngIf="fetchedUser._id" class="delete" md-button (click)="openDialogDelete()">Delete</button>
       </div>
       <div class="clearfix"></div>

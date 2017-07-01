@@ -84,6 +84,27 @@ export class ProjectSingleComponent implements OnInit {
     })
   }
 
+
+  addCalendar(){
+    let idUser = "na"
+    let idProject = "na"
+    let idClient = "na"
+    let typeUser = "na"
+
+      //idUser/:idProject/:idClient/typeUser
+    if(this.fetchedProject.assignedTos.length)
+      idUser = this.fetchedProject.assignedTos[0]._id
+
+    if(this.fetchedProject._id)
+      idProject = this.fetchedProject._id
+
+    if(this.fetchedProject.clients.length)
+      idClient = this.fetchedProject.clients[0]._id
+
+
+    this.router.navigate(['userCalendar/' + idUser + "/" + idProject+ "/" + idClient+ "/" + typeUser])
+  }
+
   getUser(id: string) {
     this.userService.getUser(id)
       .subscribe(
@@ -158,14 +179,14 @@ export class ProjectSingleComponent implements OnInit {
         let search = {
             search: this.autocompleteAssignedTo,
           };
-        this.getUsers(1, search)
+        this.getAssignedTos(1, search)
       }
     }
     getAssignedTos(page: number, search: any) {
       this.userService.getUsers(page, search)
         .subscribe(
           res => {
-            this.fetchedUsers = res.data
+            this.fetchedAssignedTos = res.data
           },
           error => {
             console.log(error);

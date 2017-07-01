@@ -47,6 +47,9 @@ export class EditCompanieComponent implements OnInit {
     this.myForm = this._fb.group({
       name: [''],
       phoneNumber: ['', [Validators.required, Validators.minLength(2)]],
+      categJson: this._fb.group({
+        categProduct: ['']
+      }),
       option: this._fb.group({
         calendar: this._fb.group({
           timeBegin: ['', [Validators.required, Validators.minLength(1)]],
@@ -104,6 +107,7 @@ export class EditCompanieComponent implements OnInit {
 
   save() {
 
+    //this.fetchedCompanie.categJson.categProduct = JSON.stringify(JSON.parse(this.fetchedCompanie.categJson.categProduct))
     if(this.fetchedCompanie._id) {
       this.companieService.updateCompanie(this.fetchedCompanie)
         .subscribe(
@@ -168,6 +172,16 @@ export class EditCompanieComponent implements OnInit {
       .subscribe(
         res => {
           this.fetchedCompanie = res
+
+
+          //console.log(JSON.stringify(res.profile.name))
+            // console.log(JSON.parse(this.fetchedCompanie.categJson.categProduct))
+          // console.log(JSON.parse("alan:'toto'"))
+          // console.log(JSON.parse(JSON.stringify(res.profile.name)))
+
+
+
+
           // this.fetchedCompanie._users.forEach((user) => {
           //   if(user.role[0] === 'admin')
           //     this.userAdmins.push(user)

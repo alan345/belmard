@@ -78,6 +78,22 @@
               </div>
             </div>
           </div>
+
+        <div formGroupName="categJson">
+
+            <h4>categProduct</h4>
+            <textarea
+              class="form-control"
+              formControlName="categProduct"
+              [(ngModel)]="fetchedCompanie.categJson.categProduct"
+              required
+              minlength="1"
+              placeholder="categJson"
+            >
+          </textarea>
+
+        </div>
+
           <div formGroupName="option">
             <div formGroupName="calendar">
               <h4>Options</h4>

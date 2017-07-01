@@ -60,9 +60,9 @@
       </div>
 
 
-
-
-
+      <div class="FormGroup">
+        <button type="button" (click)="addCalendar()">Add Calendar</button>
+      </div>
       <!-- Autocomplete User-->
       <label>Client</label>
       <input
@@ -151,9 +151,11 @@
           Créer un nouveau employe
         </a>
     </div>
-    <div *ngFor="let user of fetchedProject.AssignedTos; let i=index">
+
+
+    <div *ngFor="let user of fetchedProject.assignedTos; let i=index">
       {{user.profile.name}} - {{user.profile.lastName}}
-      <button type="button" (click)="removeUser(i)"><i class="fa fa-times"></i></button>
+      <button type="button" (click)="removeAssignedTo(i)"><i class="fa fa-times"></i></button>
     </div>
     <!-- Autocomplete User -->
 

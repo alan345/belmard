@@ -13,6 +13,8 @@ import { EditOptionsComponentDialog } from '../form/modalLibrary/modalLibrary.co
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { DeleteDialog } from '../deleteDialog/deleteDialog.component'
+import { UserService } from '../user/user.service'
+import { User } from '../user/user.model'
 
 
 
@@ -52,6 +54,7 @@ export class ProductSingleComponent implements OnInit {
   public myForm: FormGroup;
 
   constructor(
+    private userService: UserService,
     private sanitizer: DomSanitizer,
     private productService: ProductService,
     private toastr: ToastsManager,
@@ -86,13 +89,31 @@ export class ProductSingleComponent implements OnInit {
       })
     })
 
+    this.getCurrentUser();
 
 
-    this.activatedRoute.params.subscribe((params: Params) => {
-      if(params['id'])
-       this.getProduct(params['id'])
-    })
   }
+
+  fetchedCurrentUser: User = new User()
+  getCurrentUser() {
+    this.userService.getUser('')
+      .subscribe(
+        res => {
+          this.fetchedCurrentUser = res
+          this.itemSteps = JSON.parse(this.fetchedCurrentUser.companies[0].categJson.categProduct)
+
+          this.activatedRoute.params.subscribe((params: Params) => {
+            if(params['id'])
+             this.getProduct(params['id'])
+          })
+          
+        },
+        error => {
+          console.log(error);
+        }
+      )
+  }
+
 
   changeCascade(selectedIndex1, selectedIndex2) {
     this.selectedIndex1 = selectedIndex1

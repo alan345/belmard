@@ -34,7 +34,6 @@ const colors: any = {
   }
 };
 
-
 @Component({
   selector: 'app-userCalendars',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -45,6 +44,7 @@ const colors: any = {
 
 export class UserCalendarSingleComponent implements OnInit {
 //  @ViewChild('modalContent') modalContent: TemplateRef<any>;
+    // testcolor = "background-color:#ffff00"
     typeUser = TypeUser
     view: string = 'month';
     viewDate: Date = new Date();
@@ -84,12 +84,40 @@ export class UserCalendarSingleComponent implements OnInit {
     ) {}
 
     ngOnInit() {
+      this.activatedRoute.params.subscribe((params: Params) => {
+        //idUser/:idProject/:idClient/typeUser
+        if(params['idUser'])
+          this.getUserSearch(params['idUser'])
+
+        if(params['idProject'])
+          this.getProjectSearch(params['idProject'])
+
+        if(params['idClient'])
+          this.getClientSearch(params['idClient'])
+
+        if(params['typeUser'])
+          this.selectTypeUser(params['typeUser'])
+
+        if(true) {
+          let this2 = this
+          setTimeout(function(){
+            this2.clearSelectedEvents()
+            this2.addEvent()
+            this2.getClient(params['idClient'])
+            this2.refresh.next();
+          }, 800);
+
+
+        }
+
+      })
+
       this.fetchEvents();
-      this.getUser();
+      this.getCurrentUser();
     }
 
 
-    getUser() {
+    getCurrentUser() {
       this.userService.getUser('')
         .subscribe(
           res => {
@@ -104,9 +132,7 @@ export class UserCalendarSingleComponent implements OnInit {
     }
 
     fetchCalendarEvents(){
-
       this.fetchEvents()
-
     }
     fetchEvents() {
       const getStart: any = {
@@ -220,12 +246,18 @@ export class UserCalendarSingleComponent implements OnInit {
     }
   }
 
+
+
   addEvent(): void {
     this.clearSelectedEvents()
-    var endDate = this.viewDate;
+    let endDate = this.viewDate;
     endDate.setHours(endDate.getHours() + 4);
+    // pointeur not value
+
+    console.log(this.viewDate)
+    console.log(endDate)
     let newEvent = new UserCalendar();
-    newEvent.title = 'New event'
+    newEvent.title = ''
     newEvent.start = this.viewDate
     newEvent.end = endDate
     newEvent.color = colors.red
@@ -234,7 +266,7 @@ export class UserCalendarSingleComponent implements OnInit {
     let this2 = this
     setTimeout(function(){
         this2.refresh.next();
-    }, 20);
+    }, 5);
 
   }
 
@@ -284,7 +316,15 @@ export class UserCalendarSingleComponent implements OnInit {
       this.getUserSearchs(1, search);
     }
   }
-
+  getUserSearch(id: string) {
+    this.userService.getUser(id)
+      .subscribe(
+        res => {
+          this.selectUserSearch(res)
+        },
+        error => { console.log(error) }
+      )
+  }
   getUserSearchs(page: number, search: any) {
     this.userService.getUsers(page, search)
       .subscribe(
@@ -320,6 +360,15 @@ export class UserCalendarSingleComponent implements OnInit {
         };
       this.getClientSearchs(1, search)
     }
+  }
+  getClientSearch(id: string) {
+    this.userService.getUser(id)
+      .subscribe(
+        res => {
+          this.selectClientSearch(res)
+        },
+        error => { console.log(error) }
+      )
   }
   getClientSearchs(page: number, search: any) {
     this.userService.getUsers(page, search)
@@ -357,7 +406,15 @@ export class UserCalendarSingleComponent implements OnInit {
         };
       this.getProjectSearchs(1, search)
     }
-
+  }
+  getProjectSearch(id: string) {
+    this.projectService.getProject(id)
+      .subscribe(
+        res => {
+          this.selectProjectSearch(res)
+        },
+        error => { console.log(error) }
+      )
   }
   getProjectSearchs(page: number, search: any) {
     this.projectService.getProjects(page, search)
@@ -381,11 +438,11 @@ export class UserCalendarSingleComponent implements OnInit {
   autocompleteClient: string = '';
   fetchedClients: User[] = [];
   selectClient(client: User) {
+    this.autocompleteClient = ''
     this.fetchedClients = []
     this.events.forEach(event => {
       if(event.isActiveEvent) {
         event.clients.push(client)
-        this.saveEvent(event)
       }
     })
   }
@@ -399,6 +456,16 @@ export class UserCalendarSingleComponent implements OnInit {
       this.getClients(1, search)
     }
   }
+  getClient(id: string) {
+    this.userService.getUser(id)
+      .subscribe(
+        res => {
+          this.selectClient(res)
+        },
+        error => { console.log(error) }
+      )
+  }
+
   getClients(page: number, search: any) {
     this.userService.getUsers(page, search)
       .subscribe(
@@ -413,7 +480,6 @@ export class UserCalendarSingleComponent implements OnInit {
     this.events.forEach(event => {
       if(event.isActiveEvent) {
         event.clients.splice(i, 1);
-        this.saveEvent(event)
       }
     })
   }
@@ -424,19 +490,23 @@ export class UserCalendarSingleComponent implements OnInit {
 
 //autocomplete
   selectUser(user: User) {
+    this.autocompleteUser = ''
     this.fetchedUsers = []
     this.events.forEach(event => {
       if(event.isActiveEvent) {
         event.users.push(user)
-        this.saveEvent(event)
       }
     })
   }
   searchUsers() {
-    let search = {
-        search: this.autocompleteUser,
-      };
-    this.getUsers(1, search)
+    if(!this.autocompleteUser) {
+      this.fetchedUsers = []
+    } else {
+      let search = {
+          search: this.autocompleteUser,
+        };
+      this.getUsers(1, search);
+    }
   }
 
   getUsers(page: number, search: any) {
@@ -453,7 +523,6 @@ export class UserCalendarSingleComponent implements OnInit {
     this.events.forEach(event => {
       if(event.isActiveEvent) {
         event.users.splice(i, 1);
-        this.saveEvent(event)
       }
     })
   }
@@ -463,19 +532,23 @@ export class UserCalendarSingleComponent implements OnInit {
 
 //autocomplete
   selectProject(project: Project) {
+    this.autocompleteProject = ''
     this.fetchedProjects = []
     this.events.forEach(event => {
       if(event.isActiveEvent) {
         event.projects.push(project)
-        this.saveEvent(event)
       }
     })
   }
   searchProjects() {
-    let search = {
-        search: this.autocompleteProject,
-      };
-    this.getProjects(1, search)
+    if(!this.autocompleteProject) {
+      this.fetchedProjects = []
+    } else {
+      let search = {
+          search: this.autocompleteProject,
+        };
+      this.getProjects(1, search);
+    }
   }
   getProjects(page: number, search: any) {
     this.projectService.getProjects(page, search)
@@ -491,7 +564,6 @@ export class UserCalendarSingleComponent implements OnInit {
     this.events.forEach(event => {
       if(event.isActiveEvent) {
         event.projects.splice(i, 1);
-        this.saveEvent(event)
       }
     })
   }

@@ -24,7 +24,7 @@ var user = new Schema({
     // },
     // lastVisit: Date,
     role: {type: Array, default: ['client']},
-    type: {type: Array, default: ['']},
+    type: {type: Array},
     companies: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
     profile : {
       _profilePicture : [{type: Schema.Types.ObjectId, ref: 'Form'}],

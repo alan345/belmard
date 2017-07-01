@@ -71,6 +71,8 @@ router.put('/:id', function (req, res, next) {
         item.clients = req.body.clients
         item.quotes = req.body.quotes
         item.categorie = req.body.categorie
+        item.assignedTos = req.body.assignedTos
+
 
 
         item.save(function (err, result) {
@@ -223,6 +225,7 @@ router.get('/:id', function (req, res, next) {
     .findById({_id: req.params.id})
     .populate({path: 'clients', model: 'User'})
     .populate({path: 'quotes', model: 'Quote'})
+    .populate({path: 'assignedTos', model: 'User'})
     .exec(function (err, item) {
       if (err) {
         return res.status(404).json({

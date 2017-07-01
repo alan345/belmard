@@ -124,7 +124,7 @@ export class NewUserComponent implements OnInit {
         email: [this.emailValidator],
 
         profile: this._fb.group({
-            colorCalendar: ['', [Validators.required, Validators.minLength(3)]],
+            colorCalendar: [''],
             name: ['', [Validators.required, Validators.minLength(3)]],
             lastName: ['', [Validators.required, Validators.minLength(3)]],
             phoneNumber: [''],
@@ -184,6 +184,8 @@ export class NewUserComponent implements OnInit {
 
   saveAndCreateProject() {
     this.save()
+    this.router.navigate(['project/new/' + this.fetchedUser._id])
+
   }
   save() {
 
@@ -211,7 +213,7 @@ export class NewUserComponent implements OnInit {
           res => {
             this.toastr.success('Great!', res.message)
             // if(redirect == 'profile')
-            //   this.router.navigate(['user/profile/' + res.obj._id])
+            this.router.navigate(['user/newuser/' + res.obj._id])
             // if(redirect == 'project')
             //   this.router.navigate(['project/new/' + res.obj._id])
             // this.addUserIdToCompanie(res.obj)
@@ -229,6 +231,7 @@ export class NewUserComponent implements OnInit {
   navigate(id: string){
     this.router.navigate(['user/' + id])
   }
+
 
 
   getUser(id: string) {

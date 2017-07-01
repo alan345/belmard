@@ -8,9 +8,13 @@ export const routes: Routes = [
 //  {path: '', component: UserCalendarsComponent},
   // {path: 'userCalendarSingle', component: UserCalendarSingleComponent},
   // {path: 'userCalendarSingle/:id', component: UserCalendarSingleComponent},
-  {path: 'new', component: UserCalendarSingleComponent},
-  {path: 'new/:idClient', component: UserCalendarSingleComponent},
-  {path: ':id', component: UserCalendarSingleComponent},
+  // {path: 'new', component: UserCalendarSingleComponent},
+  // {path: 'new/:idClient', component: UserCalendarSingleComponent},
+  {path: '', component: UserCalendarSingleComponent},
+  {path: ':idUser', component: UserCalendarSingleComponent},
+  {path: ':idUser/:idProject', component: UserCalendarSingleComponent},
+  {path: ':idUser/:idProject/:idClient', component: UserCalendarSingleComponent},
+  {path: ':idUser/:idProject/:idClient/:typeUser', component: UserCalendarSingleComponent},
 ];
 
 @NgModule({

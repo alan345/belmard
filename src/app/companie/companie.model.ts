@@ -10,8 +10,13 @@ export class Companie {
   option: Option = new Option();
   users: User[] = [];
   forms: Form[] = [];
+  categJson: CategJson = new CategJson();
 }
 
+export class CategJson {
+  categProduct: string= '';
+  categProject: string= '';
+}
 export class Option {
   calendar: Calendar = new Calendar();
 }
