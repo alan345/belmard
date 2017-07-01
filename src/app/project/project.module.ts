@@ -12,13 +12,14 @@ import { MaterialModule } from '@angular/material';
 import { Ng2PaginationModule} from 'ng2-pagination';
 
 import { QuoteModule} from '../quote/quote.module';
-
+import { Ng2DragDropModule } from 'ng2-drag-drop';
 
 
 
 
 @NgModule({
   imports:      [
+    Ng2DragDropModule,
     ProjectRouting,
     CommonModule,
     FormsModule,

@@ -64,8 +64,17 @@ export class ProjectSingleComponent implements OnInit {
   ) {
   }
 
+  droppedItems = []
+  items = [
+          {name: "Apple", type: "fruit"},
+          {name: "Carrot", type: "vegetable"},
+          {name: "Orange", type: "fruit"}];
 
-
+  onItemDrop(e: any) {
+    console.log(e.dragData)
+      // Get the dropped data here
+      this.droppedItems.push(e.dragData);
+  }
 
 
   ngOnInit() {
@@ -100,7 +109,7 @@ export class ProjectSingleComponent implements OnInit {
     if(this.fetchedProject.clients.length)      {queryParams['idClientSearch'] = this.fetchedProject.clients[0]._id}
     this.router.navigate(['userCalendar/', queryParams])
   }
-  
+
   getUser(id: string) {
     this.userService.getUser(id)
       .subscribe(
