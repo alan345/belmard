@@ -80,34 +80,31 @@ export class UserCalendarSingleComponent implements OnInit {
       private activatedRoute: ActivatedRoute,
       private _fb: FormBuilder,
       private userService: UserService,
-      private projectService: ProjectService,
+      private projectService: ProjectService
     ) {}
 
     ngOnInit() {
       this.activatedRoute.params.subscribe((params: Params) => {
-        //idUser/:idProject/:idClient/typeUser
-        if(params['idUser'])
-          this.getUserSearch(params['idUser'])
 
-        if(params['idProject'])
-          this.getProjectSearch(params['idProject'])
 
-        if(params['idClient'])
-          this.getClientSearch(params['idClient'])
+        //http://localhost/#/userCalendar;idUserSearch=5954ac1c801cb7430e963d96;idProjectSearch=5953b829801cb7430e963d8a;idClientSearch=5950ba5defcface933c2b72a;typeUserSearch=boulanger
+        console.log(params)
 
-        if(params['typeUser'])
-          this.selectTypeUser(params['typeUser'])
+        if(params['idUserSearch']) {this.getUserSearch(params['idUserSearch'])}
+        if(params['idProjectSearch']) {this.getProjectSearch(params['idProjectSearch'])}
+        if(params['idClientSearch']) {this.getClientSearch(params['idClientSearch'])}
+        if(params['typeUserSearch']) {this.selectTypeUser(params['typeUserSearch'])}
 
-        if(true) {
+        if(params['new']) {
           let this2 = this
           setTimeout(function(){
             this2.clearSelectedEvents()
             this2.addEvent()
-            this2.getClient(params['idClient'])
+            if(params['idUserNew']) { this2.getUser(params['idUserNew']) }
+            if(params['idProjectNew']) { this2.getProject(params['idProjectNew']) }
+            if(params['idClientNew']) { this2.getClient(params['idClientNew']) }
             this2.refresh.next();
           }, 800);
-
-
         }
 
       })
@@ -508,7 +505,15 @@ export class UserCalendarSingleComponent implements OnInit {
       this.getUsers(1, search);
     }
   }
-
+  getUser(id: string) {
+    this.userService.getUser(id)
+      .subscribe(
+        res => {
+          this.selectUser(res)
+        },
+        error => { console.log(error) }
+      )
+  }
   getUsers(page: number, search: any) {
     this.userService.getUsers(page, search)
       .subscribe(
@@ -549,6 +554,15 @@ export class UserCalendarSingleComponent implements OnInit {
         };
       this.getProjects(1, search);
     }
+  }
+  getProject(id: string) {
+    this.projectService.getProject(id)
+      .subscribe(
+        res => {
+          this.selectProject(res)
+        },
+        error => { console.log(error) }
+      )
   }
   getProjects(page: number, search: any) {
     this.projectService.getProjects(page, search)

@@ -11,10 +11,10 @@ export const routes: Routes = [
   // {path: 'new', component: UserCalendarSingleComponent},
   // {path: 'new/:idClient', component: UserCalendarSingleComponent},
   {path: '', component: UserCalendarSingleComponent},
-  {path: ':idUser', component: UserCalendarSingleComponent},
-  {path: ':idUser/:idProject', component: UserCalendarSingleComponent},
-  {path: ':idUser/:idProject/:idClient', component: UserCalendarSingleComponent},
-  {path: ':idUser/:idProject/:idClient/:typeUser', component: UserCalendarSingleComponent},
+  // {path: ':idUser', component: UserCalendarSingleComponent},
+  // {path: ':idUser/:idProject', component: UserCalendarSingleComponent},
+  // {path: ':idUser/:idProject/:idClient', component: UserCalendarSingleComponent},
+  // {path: ':idUser/:idProject/:idClient/:typeUser', component: UserCalendarSingleComponent},
 ];
 
 @NgModule({

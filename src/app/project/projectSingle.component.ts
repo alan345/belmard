@@ -86,25 +86,21 @@ export class ProjectSingleComponent implements OnInit {
 
 
   addCalendar(){
-    let idUser = "na"
-    let idProject = "na"
-    let idClient = "na"
-    let typeUser = "na"
-
-      //idUser/:idProject/:idClient/typeUser
-    if(this.fetchedProject.assignedTos.length)
-      idUser = this.fetchedProject.assignedTos[0]._id
-
-    if(this.fetchedProject._id)
-      idProject = this.fetchedProject._id
-
-    if(this.fetchedProject.clients.length)
-      idClient = this.fetchedProject.clients[0]._id
-
-
-    this.router.navigate(['userCalendar/' + idUser + "/" + idProject+ "/" + idClient+ "/" + typeUser])
+    let queryParams = {}
+    queryParams['new'] = true
+    if(this.fetchedProject.assignedTos.length) {queryParams['idUserNew'] = this.fetchedProject.assignedTos[0]._id}
+    if(this.fetchedProject._id) {queryParams['idProjectNew'] = this.fetchedProject._id}
+    if(this.fetchedProject.clients.length) {queryParams['idClientNew'] = this.fetchedProject.clients[0]._id }
+    this.router.navigate(['userCalendar/', queryParams])
   }
-
+  seeCalendar(){
+    let queryParams = {}
+    if(this.fetchedProject.assignedTos.length)  {queryParams['idUserSearch'] = this.fetchedProject.assignedTos[0]._id }
+    if(this.fetchedProject._id)                 {queryParams['idProjectSearch'] = this.fetchedProject._id}
+    if(this.fetchedProject.clients.length)      {queryParams['idClientSearch'] = this.fetchedProject.clients[0]._id}
+    this.router.navigate(['userCalendar/', queryParams])
+  }
+  
   getUser(id: string) {
     this.userService.getUser(id)
       .subscribe(
