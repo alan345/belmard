@@ -26,6 +26,15 @@ import { Quote } from '../quote/quote.model';
 
 export class ProjectSingleComponent implements OnInit {
 
+
+
+  listBoxers: Array<string> = ['Sugar Ray Robinson', 'Muhammad Ali', 'George Foreman', 'Joe Frazier', 'Jake LaMotta', 'Joe Louis', 'Jack Dempsey', 'Rocky Marciano', 'Mike Tyson', 'Oscar De La Hoya'];
+  listTeamOne: Array<string> = ['aaa'];
+  listTeamTwo: Array<string> = [];
+
+
+
+
   selectedIndex1 = 0
   selectedIndex2 = 0
   show1 = false
@@ -64,17 +73,8 @@ export class ProjectSingleComponent implements OnInit {
   ) {
   }
 
-  droppedItems = []
-  items = [
-          {name: "Apple", type: "fruit"},
-          {name: "Carrot", type: "vegetable"},
-          {name: "Orange", type: "fruit"}];
 
-  onItemDrop(e: any) {
-    console.log(e.dragData)
-      // Get the dropped data here
-      this.droppedItems.push(e.dragData);
-  }
+
 
 
   ngOnInit() {

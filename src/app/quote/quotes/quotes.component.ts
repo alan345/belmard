@@ -67,7 +67,11 @@ export class QuotesComponent implements OnInit {
   //   this.getQuotes(this.paginationData.currentPage, this.search)
   // }
 
+  searchQuotes(){
 
+  }
+
+  
   openDialog() {
 
   }

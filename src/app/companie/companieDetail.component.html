@@ -17,46 +17,6 @@
       <h3>bienvenue sur {{fetchedCompanie.name}}</h3>
       <h6>{{fetchedCompanie.address.address}}, {{fetchedCompanie.address.city}}, {{fetchedCompanie.address.state}} {{fetchedCompanie.address.zip}} - {{fetchedCompanie.phoneNumber}}</h6>
     </div>
-    <div class="sln-sty phyto-ctnr">
-      <div *ngFor="let user of fetchedCompanie._users">
-          <div *ngIf="!isHQcompanie()">
-            <div *ngIf="user.role == 'stylist' || user.role == 'manager'">
-              <div *ngIf="user.role != 'client'">
-                <div [routerLink]="['/user/profile/' + user._id]" routerLinkActive="active" class="one-sty">
-                  <div class="one-stypic" *ngIf="user.profile._profilePicture.length == 0">
-                    <img src="assets/images/prof-pic-placeholder.png">
-                  </div>
-                  <div *ngFor="let profilePicture of user.profile._profilePicture" class="one-stypic">
-                    <img src="./uploads/forms/{{profilePicture.owner}}/{{profilePicture.imagePath}}"
-                      onerror="this.src ='assets/images/no-image-found.jpg'">
-                  </div>
-                  <div class="sty-ttl">
-                    <label>{{ user.profile.name}}</label>
-                    <p>{{ user.profile.title}}</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div *ngIf="isHQcompanie()">
-            <div *ngIf="user.role != 'client'">
-              <div [routerLink]="['/user/profile/' + user._id]" routerLinkActive="active" class="one-sty">
-                <div class="one-stypic" *ngIf="user.profile._profilePicture.length == 0">
-                  <img src="assets/images/prof-pic-placeholder.png">
-                </div>
-                <div *ngFor="let profilePicture of user.profile._profilePicture" class="one-stypic">
-                  <img src="./uploads/forms/{{profilePicture.owner}}/{{profilePicture.imagePath}}"
-                    onerror="this.src ='assets/images/no-image-found.jpg'">
-                </div>
-                <div class="sty-ttl">
-                  <label>{{ user.profile.name}}</label>
-                  <p>{{ user.profile.title}}</p>
-                </div>
-              </div>
-            </div>
-          </div>
-      </div>
-    </div>
   </div>
   <div class="img-row phyto-ctnr">
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()" class="img-frm phyto-ctnr">

@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 
+import { ProjectTasksComponent} from './projectTasks.component';
 import { ProjectsComponent} from './projects/projects.component';
 import { ProjectSingleComponent} from './projectSingle.component';
 import { ProjectService} from './project.service';
@@ -12,14 +13,13 @@ import { MaterialModule } from '@angular/material';
 import { Ng2PaginationModule} from 'ng2-pagination';
 
 import { QuoteModule} from '../quote/quote.module';
-import { Ng2DragDropModule } from 'ng2-drag-drop';
-
+import {DndModule} from 'ng2-dnd';
 
 
 
 @NgModule({
   imports:      [
-    Ng2DragDropModule,
+    DndModule.forRoot(),
     ProjectRouting,
     CommonModule,
     FormsModule,
@@ -29,7 +29,7 @@ import { Ng2DragDropModule } from 'ng2-drag-drop';
     QuoteModule,
   ],
   declarations: [
-
+    ProjectTasksComponent,
     ProjectsComponent,
     ProjectSingleComponent,
   ],
