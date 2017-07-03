@@ -41,7 +41,21 @@ export class ProjectTasksComponent implements OnInit {
    ];
   fetchedProject: Project = new Project();
 
+  public many = [
 
+    {
+      bucketName: 'Group A',
+      tasks: ['The', 'possibilities', 'are', 'endless!']
+    },
+
+    {
+      bucketName: 'Group B',
+      tasks: ['The', 'toto', 'tata', 'titi!']
+    },
+
+  ]
+
+  public many2: Array<string> = ['Explore', 'them'];
 
   constructor(
   //  private sanitizer: DomSanitizer,
@@ -72,8 +86,14 @@ export class ProjectTasksComponent implements OnInit {
     }
     this.fetchedProject.bucketTasks.push(bucketTaskObj)
     this.save()
-
   }
+
+
+  deleteBucketTask(bucketTaskIndex){
+    this.fetchedProject.bucketTasks.splice(bucketTaskIndex, 1)
+    this.save()
+  }
+
   deleteTask(bucketTaskIndex, taskIndex){
     this.fetchedProject.bucketTasks[bucketTaskIndex].tasks.splice(taskIndex, 1)
     this.save()
@@ -92,6 +112,7 @@ export class ProjectTasksComponent implements OnInit {
    }
 
  private onRemoveModel(args) {
+   console.log('ababa')
    let [el, source] = args;
    // do something else
  }
@@ -106,16 +127,17 @@ export class ProjectTasksComponent implements OnInit {
         .subscribe(
           res => {
             this.fetchedProject = <Project>res
+
             // this.fetchedProject.bucketTasks.forEach((bucketTask,i) => {
             //   this.fetchedProject.bucketTasks[i].openNewTask= false
             // })
 
 
-            //
-            // this.fetchedProject.bucketTasks = this.bucketTasks
-            // // console.log(content, index)
-            // // this.fetchedProject.bucketTasks[index].tasks.push({name:content})
-            //  this.save()
+
+            this.fetchedProject.bucketTasks = this.bucketTasks
+            // console.log(content, index)
+            // this.fetchedProject.bucketTasks[index].tasks.push({name:content})
+             this.save()
 
 
           },
