@@ -36,11 +36,13 @@
           <option *ngFor="let n of itemSteps[selectedIndex1].subCateg[selectedIndex2].subCateg" [attr.value]="n.categ">{{n.categ}}</option>
         </select>
       </div>
-
-
       <!-- cascade -->
 
 
+
+      <a [routerLink]="['/project/tasks/' + fetchedProject._id]" class="admn-btn">
+        Taches
+      </a>
 
       <div class="form-group">
 

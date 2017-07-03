@@ -13,8 +13,8 @@
       <div style="height: 120px;">
       </div>
       <div>
-        <!-- <h3>{{viewDate | date:longDate}}</h3> -->
-        <h3>{{viewDate}}</h3>
+        <h3>{{viewDate | date:longDate}}</h3>
+        <!-- <h3>{{viewDate}}</h3> -->
         <h4>Search</h4>
         <div *ngIf="!search.typeUser.length">
           <input class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="autocompleteTypeUser" placeholder="Select type User" (ngModelChange)="searchTypeUser()" mdInput>

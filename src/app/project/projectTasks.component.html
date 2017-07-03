@@ -1,5 +1,5 @@
-<div class='wrapper'>
-  <div class='container' *ngFor='let bucketTask of fetchedProject.bucketTasks; let bucketTaskIndex = index;' [dragula]='"nested-bag"'>
+<div class='wrapper wrapperTasks'>
+  <div class='container containerTasks' *ngFor='let bucketTask of fetchedProject.bucketTasks; let bucketTaskIndex = index;' [dragula]='"nested-bag"'>
     <span>{{bucketTask.bucketName}}</span>
     <div *ngFor='let task of bucketTask.tasks; let taskIndex = index;'>
       {{task.name}}
