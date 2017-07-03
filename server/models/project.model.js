@@ -23,13 +23,12 @@ var project = new Schema({
       categ2:[{name: {type: String}}],
       categ3:[{name: {type: String}}],
     },
-    task:{
-      columnName:[{name: {type: String}}],
+    bucketTasks:[{
+      bucketName:{type: String, default: ['']},
       tasks:[{
-        name:{name: {type: String}},
-        inColumn: {type: Number, default: [0]},
+        name: {type: String},
       }]
-    }
+    }]
   },
   {
     timestamps: true

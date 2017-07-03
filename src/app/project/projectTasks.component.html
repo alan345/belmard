@@ -1,69 +1,23 @@
-
-
-<!-- 
-    <h4>Simple Drag-and-Drop</h4>
-    <div class="row">
-        <div class="col-sm-3">
-            <div class="card card-success">
-                <div class="card-heading">Available to drag</div>
-                <div class="card-body">
-                    <div class="card card-default" dnd-draggable [dragEnabled]="true">
-                        <div class="card-body">
-                            <div>Drag Me</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-3">
-            <div dnd-droppable class="card card-info" (onDropSuccess)="simpleDrop=$event">
-                <div class="card-heading">Place to drop</div>
-                <div class="card-body">
-                    <div *ngIf="simpleDrop">Item was dropped here</div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-
-
-
-
-    <h4>Multi list sortable</h4>
-    <div class="row">
-        <div class="col-sm-3">
-        <div class="card card-warning">
-            <div class="card-heading">
-            Available boxers
-            </div>
-            <div class="card-body" dnd-sortable-container [dropZones]="['boxers-zone']" [sortableData]="listBoxers">
-                <ul class="list-group" >
-                    <li *ngFor="let item of listBoxers; let i = index" class="list-group-item" dnd-sortable [sortableIndex]="i">{{item}}</li>
-                </ul>
-            </div>
-        </div>
-        </div>
-        <div class="col-sm-3">
-        <div class="card card-success">
-            <div class="card-heading">
-            First Team
-            </div>
-            <div class="card-body" dnd-sortable-container [dropZones]="['boxers-zone']" [sortableData]="listTeamOne">
-                <ul class="list-group" >
-                    <li *ngFor="let item of listTeamOne; let i = index" class="list-group-item" dnd-sortable [sortableIndex]="i">{{item}}</li>
-                </ul>
-            </div>
-        </div>
-        </div>
-        <div class="col-sm-3">
-        <div class="card card-info">
-            <div class="card-heading">
-            Second Team
-            </div>
-            <div class="card-body" dnd-sortable-container [dropZones]="['boxers-zone']" [sortableData]="listTeamTwo">
-                <ul class="list-group">
-                    <li *ngFor="let item of listTeamTwo; let i = index" class="list-group-item" dnd-sortable [sortableIndex]="i">{{item}}</li>
-                </ul>
-            </div>
-        </div>
-        </div>
+<div class='wrapper'>
+  <div class='container' *ngFor='let bucketTask of fetchedProject.bucketTasks; let bucketTaskIndex = index;' [dragula]='"nested-bag"'>
+    <span>{{bucketTask.bucketName}}</span>
+    <div *ngFor='let task of bucketTask.tasks; let taskIndex = index;'>
+      {{task.name}}
+      <button (click)="deleteTask(bucketTaskIndex, taskIndex)">X</button>
     </div>
+
+    <button (click)="newTask(bucketTaskIndex)">Create Task</button>
+    <div *ngIf="bucketTask.openNewTask">
+      <textarea #content rows="4" cols="10"></textarea>
+      <button (click)="addTask(content.value, bucketTaskIndex)">Add</button>
+    </div>
+  </div>
+  <div>
+    <input
+      type="text"
+      #newBucketTaskInput
+      (keyup.enter)="newBucketTask(newBucketTaskInput.value)"
+      placeholder="bucketTask"
+    >
+  </div>
+</div>

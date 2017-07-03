@@ -11,9 +11,18 @@ export class Project {
     assignedTos: User[] = [];
     forms: Form[] = [];
     categorie: Categorie = new Categorie();
+    bucketTasks: BucketTasks[] = []
     // quotes: Quote[] = [];
 }
+export class BucketTasks {
+  bucketName: string = '';
+  openNewTask: boolean = false;
+  tasks: Tasks[] = []
+}
 
+export class Tasks {
+  name: string = '';
+}
 
 export class Details {
   name: string = '';
