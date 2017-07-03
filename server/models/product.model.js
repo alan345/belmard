@@ -6,6 +6,7 @@ var mongoose                = require('mongoose'),
     mongooseUniqueValidator = require('mongoose-unique-validator')
 
 var product = new Schema({
+    ownerCompanies: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
     details: {
       referenceName: {type: String},
       reference: {type: String},

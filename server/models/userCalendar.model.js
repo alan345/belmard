@@ -7,6 +7,7 @@ var mongoose                = require('mongoose'),
 
 
 var userCalendar = new Schema({
+      ownerCompanies: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
       title:{type: String, default: ['']},
       url:{type: String, default: ['']},
       start:{type: Date},

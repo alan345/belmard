@@ -6,6 +6,7 @@ var mongoose                = require('mongoose'),
     mongooseUniqueValidator = require('mongoose-unique-validator');
 
 var quote = new Schema({
+    ownerCompanies: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
   //  _id: String,
     address:{
       address : {type: String, default: ['']},

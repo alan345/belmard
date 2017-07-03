@@ -7,6 +7,7 @@ var mongoose                = require('mongoose'),
 
 
 var project = new Schema({
+    ownerCompanies: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
     details: {
       name: {type: String},
       description: {type: String},
