@@ -11,6 +11,13 @@
       <div
         (click)='onClick(bucketTaskIndex, taskIndex)'
         *ngFor='let task of bucketTask.tasks; let taskIndex = index;'>
+
+        <div
+          *ngFor='let user of task.assignedTos'
+          class="round"
+          [style.background-color]="user.profile.colorCalendar">
+        </div>
+
         {{task.name}}
         <button (click)="deleteTask(bucketTaskIndex, taskIndex)">X</button>
       </div>
@@ -51,7 +58,7 @@
         [(ngModel)]="fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].description"
         placeholder="Description"
       >
-    </textarea>
+      </textarea>
       <app-autocomplete
 
         [typeAutocomplete]="'assignedTo'"
