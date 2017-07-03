@@ -22,7 +22,9 @@ export class BucketTasks {
 
 export class Tasks {
   name: string = '';
+  editMode: boolean = false;
 }
+
 
 export class Details {
   name: string = '';

@@ -100,7 +100,7 @@ export class ProjectTasksComponent implements OnInit {
   }
   addTask(content, bucketTaskIndex){
     this.fetchedProject.bucketTasks[bucketTaskIndex].openNewTask = false
-    this.fetchedProject.bucketTasks[bucketTaskIndex].tasks.push({name:content})
+    this.fetchedProject.bucketTasks[bucketTaskIndex].tasks.push({name:content, editMode:false})
     this.save()
   }
   newTask(index){
@@ -117,7 +117,16 @@ export class ProjectTasksComponent implements OnInit {
    // do something else
  }
 
+onClick(bucketTaskIndex, taskIndex){
+  this.fetchedProject.bucketTasks.forEach((bucketTask, i) =>{
+    bucketTask.tasks.forEach((task, j) => {
+      this.fetchedProject.bucketTasks[i].tasks[j].editMode = false
+    })
+  }
+  )
+  this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].editMode = true
 
+}
 
 
 
@@ -134,10 +143,10 @@ export class ProjectTasksComponent implements OnInit {
 
 
 
-            this.fetchedProject.bucketTasks = this.bucketTasks
+            //this.fetchedProject.bucketTasks = this.bucketTasks
             // console.log(content, index)
             // this.fetchedProject.bucketTasks[index].tasks.push({name:content})
-             this.save()
+             //this.save()
 
 
           },

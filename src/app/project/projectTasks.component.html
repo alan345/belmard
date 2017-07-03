@@ -6,7 +6,9 @@
     <div class='container containerTasks'
       [dragulaModel]='fetchedProject.bucketTasks[bucketTaskIndex].tasks'
       [dragula]='"nested-bag"'>
-      <div *ngFor='let task of bucketTask.tasks; let taskIndex = index;'>
+      <div
+        (click)='onClick(bucketTaskIndex, taskIndex)'
+        *ngFor='let task of bucketTask.tasks; let taskIndex = index;'>
         {{task.name}}
         <button (click)="deleteTask(bucketTaskIndex, taskIndex)">X</button>
       </div>
@@ -19,19 +21,30 @@
     </div>
   </div>
 
-
-
-
-
   <div>
     <input
       type="text"
       #newBucketTaskInput
-      (keyup.enter)="newBucketTask(newBucketTaskInput.value)"
-      placeholder="bucketTask"
+      (keyup.enter)="newBucketTask(newBucketTaskInput.value);newBucketTaskInput.value='';"
+      placeholder="Name bucket"
     >
   </div>
 </div>
+
+
+<div *ngFor='let bucketTask of fetchedProject.bucketTasks; let bucketTaskIndex = index;'>
+  <div *ngFor='let task of bucketTask.tasks; let taskIndex = index;'>
+    <div *ngIf="task.editMode">
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].name"
+        placeholder="Nom du fournisseur"
+        (keyup.enter)="save()"
+      >
+  </div>
+</div>
+
 
 
 
