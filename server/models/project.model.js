@@ -25,6 +25,7 @@ var project = new Schema({
       bucketName:{type: String, default: ['']},
       tasks:[{
         name: {type: String},
+        description: {type: String},
         assignedTos: [{type: Schema.Types.ObjectId, ref: 'User'}],
       }]
     }]

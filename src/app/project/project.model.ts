@@ -17,12 +17,13 @@ export class Project {
 export class BucketTasks {
   bucketName: string = '';
   openNewTask: boolean = false;
-  tasks: Tasks[] = []
+  tasks: Task[] = []
 }
 
-export class Tasks {
+export class Task {
   name: string = '';
   editMode: boolean = false;
+  description: string = '';
   assignedTos: User[] = [];
 }
 

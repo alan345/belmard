@@ -4,7 +4,7 @@ import { ToastsManager} from 'ng2-toastr';
 //import { MdDialog } from '@angular/material';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
-import { Project, BucketTasks } from './project.model';
+import { Project, BucketTasks, Task } from './project.model';
 // import { EditOptionsComponentDialog } from '../form/modalLibrary/modalLibrary.component';
 //import { FormGroup} from '@angular/forms';
 // import { DomSanitizer } from '@angular/platform-browser';
@@ -101,7 +101,9 @@ export class ProjectTasksComponent implements OnInit {
   }
   addTask(content, bucketTaskIndex) {
     this.fetchedProject.bucketTasks[bucketTaskIndex].openNewTask = false
-    this.fetchedProject.bucketTasks[bucketTaskIndex].tasks.push({ name: content, editMode: false, assignedTos: [] })
+    let newTask = new Task()
+    newTask.name = content
+    this.fetchedProject.bucketTasks[bucketTaskIndex].tasks.push(newTask)
     this.save()
   }
   newTask(index) {

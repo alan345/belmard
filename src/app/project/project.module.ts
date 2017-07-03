@@ -13,14 +13,13 @@ import { MaterialModule } from '@angular/material';
 import { Ng2PaginationModule} from 'ng2-pagination';
 
 import { QuoteModule} from '../quote/quote.module';
-import {DndModule} from 'ng2-dnd';
+
 import { DragulaModule } from 'ng2-dragula';
 import { AutocompleteComponent } from '../autocomplete/autocomplete.component'
 
 @NgModule({
   imports:     [
     DragulaModule,
-    DndModule.forRoot(),
     ProjectRouting,
     CommonModule,
     FormsModule,

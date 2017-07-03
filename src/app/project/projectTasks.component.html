@@ -40,12 +40,20 @@
       <input
         type="text"
         class="form-control"
+        (focusout)="save()"
         [(ngModel)]="fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].name"
         placeholder="Nom du fournisseur"
         (keyup.enter)="save()"
       >
-
+      <textarea
+        class="form-control"
+        (focusout)="save()"
+        [(ngModel)]="fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].description"
+        placeholder="Description"
+      >
+    </textarea>
       <app-autocomplete
+
         [typeAutocomplete]="'assignedTo'"
         [singleChoice]="'true'"
         [arrayContent]="fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].assignedTos"
