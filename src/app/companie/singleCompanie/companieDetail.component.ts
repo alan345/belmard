@@ -1,25 +1,25 @@
 import {Component, OnInit} from '@angular/core';
 
-import {AuthService} from '../auth/auth.service';
-import {CompanieService} from './companie.service';
-import {Companie} from './companie.model';
+import {AuthService} from '../../auth/auth.service';
+import {CompanieService} from '../companie.service';
+import {Companie} from '../companie.model';
 
 import {ToastsManager} from 'ng2-toastr';
 
 import {MdDialog} from '@angular/material';
 import {Router, ActivatedRoute, Params } from '@angular/router';
 import {Location} from '@angular/common';
-import { Form } from '../form/form.model';
+import { Form } from '../../form/form.model';
 import { FormBuilder, FormGroup, FormArray, Validators} from '@angular/forms';
-import { EditOptionsComponentDialog } from '../form/modalLibrary/modalLibrary.component';
+import { EditOptionsComponentDialog } from '../../form/modalLibrary/modalLibrary.component';
 
-import { User } from '../user/user.model';
+import { User } from '../../user/user.model';
 
 
 @Component({
   selector: 'app-companie',
   templateUrl: './companieDetail.component.html',
-  styleUrls: ['./companie.component.css'],
+  styleUrls: ['../companie.component.css'],
 })
 export class CompanieDetailComponent implements OnInit {
   maxPictureToShow = 3;

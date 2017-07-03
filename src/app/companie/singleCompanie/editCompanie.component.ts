@@ -1,8 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../auth/auth.service';
-import {CompanieService} from './companie.service';
+import {AuthService} from '../../auth/auth.service';
+import {CompanieService} from '../companie.service';
 
-import {Companie} from './companie.model';
+import {Companie} from '../companie.model';
 
 import {ToastsManager} from 'ng2-toastr';
 
@@ -11,15 +11,15 @@ import {Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 
-import { DeleteDialog } from '../deleteDialog/deleteDialog.component';
-import { User } from '../user/user.model';
+import { DeleteDialog } from '../../deleteDialog/deleteDialog.component';
+import { User } from '../../user/user.model';
 
-import { EditOptionsComponentDialog } from '../form/modalLibrary/modalLibrary.component';
+import { EditOptionsComponentDialog } from '../../form/modalLibrary/modalLibrary.component';
 
 @Component({
   selector: 'app-companie',
   templateUrl: './editCompanie.component.html',
-  styleUrls: ['./companie.component.css'],
+  styleUrls: ['../companie.component.css'],
 })
 export class EditCompanieComponent implements OnInit {
   fetchedCompanie: Companie = new Companie()
@@ -172,29 +172,6 @@ export class EditCompanieComponent implements OnInit {
       .subscribe(
         res => {
           this.fetchedCompanie = res
-
-
-          //console.log(JSON.stringify(res.profile.name))
-            // console.log(JSON.parse(this.fetchedCompanie.categJson.categProduct))
-          // console.log(JSON.parse("alan:'toto'"))
-          // console.log(JSON.parse(JSON.stringify(res.profile.name)))
-
-
-
-
-          // this.fetchedCompanie._users.forEach((user) => {
-          //   if(user.role[0] === 'admin')
-          //     this.userAdmins.push(user)
-          //   if(user.role[0] === 'salesRep')
-          //     this.usersSalesRep.push(user)
-          //   if(user.role[0] === 'client')
-          //     this.userClients.push(user)
-          //   if(user.role[0] === 'stylist')
-          //     this.userStylists.push(user)
-          //   if(user.role[0] === 'manager')
-          //     this.userManagers.push(user)
-          // //  this.addUser(user)
-          // })
         },
         error => {
           console.log(error);
