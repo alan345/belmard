@@ -173,7 +173,12 @@ router.get('/page/:page', function (req, res, next) {
   .find(searchQuery)
   .sort('-createdAt')
   .populate({path: 'clients', model: 'User'})
-  .populate({path: 'quotes', model: 'Quote'})
+  // .populate({path: 'quotes', model: 'Quote'})
+  // .populate(
+  //   {
+  //     path: 'bucketTasks.tasks.assignedTos',
+  //     model: 'User',
+  //   })
   .limit(itemsPerPage)
   .skip(skip)
   .exec(function (err, item) {
@@ -225,8 +230,13 @@ router.get('/:id', function (req, res, next) {
     Project
     .findById({_id: req.params.id})
     .populate({path: 'clients', model: 'User'})
-    .populate({path: 'quotes', model: 'Quote'})
+    // .populate({path: 'quotes', model: 'Quote'})
     .populate({path: 'assignedTos', model: 'User'})
+    .populate(
+      {
+        path: 'bucketTasks.tasks.assignedTos',
+        model: 'User',
+      })    
     .exec(function (err, item) {
       if (err) {
         return res.status(404).json({

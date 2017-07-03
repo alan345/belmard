@@ -23,6 +23,7 @@ export class BucketTasks {
 export class Tasks {
   name: string = '';
   editMode: boolean = false;
+  assignedTos: User[] = [];
 }
 
 

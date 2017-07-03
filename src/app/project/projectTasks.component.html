@@ -1,3 +1,5 @@
+
+
 <div class='row'>
 
   <div *ngFor='let bucketTask of fetchedProject.bucketTasks; let bucketTaskIndex = index;'>
@@ -42,11 +44,24 @@
         placeholder="Nom du fournisseur"
         (keyup.enter)="save()"
       >
+
+      <app-autocomplete
+        [typeAutocomplete]="'assignedTo'"
+        [singleChoice]="'true'"
+        [arrayContent]="fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].assignedTos"
+        (getResultAutocomplete)="selectAssignedTo($event, bucketTaskIndex, taskIndex)"
+        >
+      </app-autocomplete>
+
+    </div>
   </div>
 </div>
 
-
-
+<!-- <pre>
+  <code>
+    {{fetchedProject|json}}
+</code>
+</pre> -->
 
 <!-- <div class='parent'>
     <label for='hy'>

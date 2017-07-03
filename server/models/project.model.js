@@ -11,8 +11,6 @@ var project = new Schema({
       name: {type: String},
       description: {type: String},
     },
-
-    // quotes: [{type: Schema.Types.ObjectId, ref: 'Quote'}],
     clients: [{type: Schema.Types.ObjectId, ref: 'User'}],
     assignedTos: [{type: Schema.Types.ObjectId, ref: 'User'}],
     status: {type: String, default: [0]},
@@ -27,6 +25,7 @@ var project = new Schema({
       bucketName:{type: String, default: ['']},
       tasks:[{
         name: {type: String},
+        assignedTos: [{type: Schema.Types.ObjectId, ref: 'User'}],
       }]
     }]
   },

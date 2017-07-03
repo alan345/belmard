@@ -15,7 +15,7 @@ import { Ng2PaginationModule} from 'ng2-pagination';
 import { QuoteModule} from '../quote/quote.module';
 import {DndModule} from 'ng2-dnd';
 import { DragulaModule } from 'ng2-dragula';
-
+import { AutocompleteComponent } from '../autocomplete/autocomplete.component'
 
 @NgModule({
   imports:     [
@@ -33,8 +33,12 @@ import { DragulaModule } from 'ng2-dragula';
     ProjectTasksComponent,
     ProjectsComponent,
     ProjectSingleComponent,
+    AutocompleteComponent,
   ],
-  exports:      [ ProjectsComponent ],
+  exports:      [
+    ProjectsComponent,
+    AutocompleteComponent,
+  ],
   providers:    [ ProjectService ],
   entryComponents: [
 

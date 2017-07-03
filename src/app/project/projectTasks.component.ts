@@ -15,6 +15,7 @@ import { Project, BucketTasks } from './project.model';
 // import { User } from '../user/user.model';
 // import { Quote } from '../quote/quote.model';
 import { DragulaService } from 'ng2-dragula';
+import { User } from '../user/user.model';
 
 
 @Component({
@@ -28,17 +29,17 @@ export class ProjectTasksComponent implements OnInit {
 
 
   public bucketTasks: Array<any> = [
-     {
-       bucketName: 'Group A',
-       openNewTask: false,
-       tasks: [{name: 'Item A'},{name: 'Item B'},{name: 'Item C'},{name: 'Item D'}]
-     },
-     {
-       bucketName: 'Group B',
-       openNewTask: false,
-       tasks: [{name: 'Item 1'},{name: 'Item 2'},{name: 'Item 3'},{name: 'Item 4'}]
-     }
-   ];
+    {
+      bucketName: 'Group A',
+      openNewTask: false,
+      tasks: [{ name: 'Item A' }, { name: 'Item B' }, { name: 'Item C' }, { name: 'Item D' }]
+    },
+    {
+      bucketName: 'Group B',
+      openNewTask: false,
+      tasks: [{ name: 'Item 1' }, { name: 'Item 2' }, { name: 'Item 3' }, { name: 'Item 4' }]
+    }
+  ];
   fetchedProject: Project = new Project();
 
   public many = [
@@ -58,17 +59,17 @@ export class ProjectTasksComponent implements OnInit {
   public many2: Array<string> = ['Explore', 'them'];
 
   constructor(
-  //  private sanitizer: DomSanitizer,
+    //  private sanitizer: DomSanitizer,
     private projectService: ProjectService,
     private toastr: ToastsManager,
-//    public dialog: MdDialog,
+    //    public dialog: MdDialog,
     private router: Router,
     private location: Location,
     private activatedRoute: ActivatedRoute,
     private dragulaService: DragulaService,
-//    private _fb: FormBuilder,
-//    private userService: UserService,
-//    private quoteService: QuoteService,
+    //    private _fb: FormBuilder,
+    //    private userService: UserService,
+    //    private quoteService: QuoteService,
   ) {
     dragulaService.dropModel.subscribe((value) => {
       this.onDropModel(value.slice(1));
@@ -78,10 +79,10 @@ export class ProjectTasksComponent implements OnInit {
     });
   }
 
-  newBucketTask(newBucketTask){
+  newBucketTask(newBucketTask) {
     let bucketTaskObj: BucketTasks = {
       bucketName: newBucketTask,
-      openNewTask:false,
+      openNewTask: false,
       tasks: []
     }
     this.fetchedProject.bucketTasks.push(bucketTaskObj)
@@ -89,77 +90,82 @@ export class ProjectTasksComponent implements OnInit {
   }
 
 
-  deleteBucketTask(bucketTaskIndex){
+  deleteBucketTask(bucketTaskIndex) {
     this.fetchedProject.bucketTasks.splice(bucketTaskIndex, 1)
     this.save()
   }
 
-  deleteTask(bucketTaskIndex, taskIndex){
+  deleteTask(bucketTaskIndex, taskIndex) {
     this.fetchedProject.bucketTasks[bucketTaskIndex].tasks.splice(taskIndex, 1)
     this.save()
   }
-  addTask(content, bucketTaskIndex){
+  addTask(content, bucketTaskIndex) {
     this.fetchedProject.bucketTasks[bucketTaskIndex].openNewTask = false
-    this.fetchedProject.bucketTasks[bucketTaskIndex].tasks.push({name:content, editMode:false})
+    this.fetchedProject.bucketTasks[bucketTaskIndex].tasks.push({ name: content, editMode: false, assignedTos: [] })
     this.save()
   }
-  newTask(index){
+  newTask(index) {
     this.fetchedProject.bucketTasks[index].openNewTask = true
   }
   private onDropModel(args) {
-     let [el, target, source] = args;
-     // do something else
-   }
-
- private onRemoveModel(args) {
-   console.log('ababa')
-   let [el, source] = args;
-   // do something else
- }
-
-onClick(bucketTaskIndex, taskIndex){
-  this.fetchedProject.bucketTasks.forEach((bucketTask, i) =>{
-    bucketTask.tasks.forEach((task, j) => {
-      this.fetchedProject.bucketTasks[i].tasks[j].editMode = false
-    })
+    let [el, target, source] = args;
+    // do something else
   }
-  )
-  this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].editMode = true
 
-}
-
-
+  private onRemoveModel(args) {
+    let [el, source] = args;
+  }
 
 
-    getProject(id : string) {
-      this.projectService.getProject(id)
-        .subscribe(
-          res => {
-            this.fetchedProject = <Project>res
-
-            // this.fetchedProject.bucketTasks.forEach((bucketTask,i) => {
-            //   this.fetchedProject.bucketTasks[i].openNewTask= false
-            // })
+  selectAssignedTo(event, bucketTaskIndex, taskIndex) {
+    this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].assignedTos = event
+    this.save()
+  }
 
 
-
-            //this.fetchedProject.bucketTasks = this.bucketTasks
-            // console.log(content, index)
-            // this.fetchedProject.bucketTasks[index].tasks.push({name:content})
-             //this.save()
-
-
-          },
-          error => {
-            console.log(error);
-          }
-        )
+  onClick(bucketTaskIndex, taskIndex) {
+    this.fetchedProject.bucketTasks.forEach((bucketTask, i) => {
+      bucketTask.tasks.forEach((task, j) => {
+        this.fetchedProject.bucketTasks[i].tasks[j].editMode = false
+      })
     }
+    )
+    this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].editMode = true
+
+  }
+
+
+
+
+  getProject(id: string) {
+    this.projectService.getProject(id)
+      .subscribe(
+      res => {
+        this.fetchedProject = <Project>res
+
+        // this.fetchedProject.bucketTasks.forEach((bucketTask,i) => {
+        //   this.fetchedProject.bucketTasks[i].openNewTask= false
+        // })
+
+
+
+        //this.fetchedProject.bucketTasks = this.bucketTasks
+        // console.log(content, index)
+        // this.fetchedProject.bucketTasks[index].tasks.push({name:content})
+        //this.save()
+
+
+      },
+      error => {
+        console.log(error);
+      }
+      )
+  }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
-      if(params['id'])
-       this.getProject(params['id'])
+      if (params['id'])
+        this.getProject(params['id'])
 
     })
   }
@@ -171,30 +177,30 @@ onClick(bucketTaskIndex, taskIndex){
     this.location.back();
   }
 
-
+  getResultAutocomplete(event) {
+    console.log(event)
+  }
 
 
   save() {
-
-
-    if(this.fetchedProject._id) {
+    if (this.fetchedProject._id) {
       this.projectService.updateProject(this.fetchedProject)
         .subscribe(
-          res => {
-            this.toastr.success('Great!', res.message)
-            //this.router.navigate(['project/' + res.obj._id]);
-          },
-          error => {console.log(error)}
+        res => {
+          this.toastr.success('Great!', res.message)
+          //this.router.navigate(['project/' + res.obj._id]);
+        },
+        error => { console.log(error) }
         );
     } else {
 
       this.projectService.saveProject(this.fetchedProject)
         .subscribe(
-          res => {
-            this.toastr.success('Great!', res.message)
+        res => {
+          this.toastr.success('Great!', res.message)
           //  this.router.navigate(['project/' + res.obj._id]);
-          },
-          error => {console.log(error)}
+        },
+        error => { console.log(error) }
         );
     }
   }
