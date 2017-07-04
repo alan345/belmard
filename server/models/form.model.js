@@ -7,6 +7,7 @@ var mongoose                = require('mongoose'),
 var form = new Schema({
   // textInputOne: {type: String},
   // textInputTwo: {type: String},
+  ownerCompanies: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
   imagePath: {type: String},
   title: {type: String, default: ['']},
   type: {type: String, default: ['']},

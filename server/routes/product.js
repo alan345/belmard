@@ -89,7 +89,13 @@ router.put('/:id', function (req, res, next) {
 })
 
 router.post('/', function (req, res, next) {
-  // console.log(req.body)
+  if(!req.user.companies.length) {
+    return res.status(404).json({
+      message: 'You must belong to a companie',
+      err: ''
+    })
+  }
+   console.log(req.user.companies)
   //var Product = new Product(req.body)
   var product = new Product(req.body)
   product.ownerCompanies = req.user.companies

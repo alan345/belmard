@@ -90,6 +90,7 @@ router.put('/:id', function (req, res, next) {
 
 router.post('/', function (req, res, next) {
   var companie = new Companie(req.body);
+  companie.ownerCompanies = req.user.companies
   companie.save(function (err, result) {
     if (err) {
       return res.status(403).json({

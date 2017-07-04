@@ -102,10 +102,17 @@ router.put('/:id', function (req, res, next) {
 })
 
 router.post('/', function (req, res, next) {
+  if(!req.user.companies.length) {
+    return res.status(404).json({
+      message: 'You must belong to a companie',
+      err: ''
+    })
+  }
   //console.log(req.body)
   //var UserCalendar = new UserCalendar(req.body)
   var userCalendar = new UserCalendar(req.body)
-  console.log(userCalendar)
+  userCalendar.ownerCompanies = req.user.companies
+  // console.log(userCalendar)
 
   userCalendar.save(function (err, result) {
     if (err) {

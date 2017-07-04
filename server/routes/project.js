@@ -94,10 +94,17 @@ router.put('/:id', function (req, res, next) {
 })
 
 router.post('/', function (req, res, next) {
-  console.log(req.body)
-  //var Project = new Project(req.body)
+  if(!req.user.companies.length) {
+    return res.status(404).json({
+      message: 'You must belong to a companie',
+      err: ''
+    })
+  }
+
+
   var project = new Project(req.body)
 
+  project.ownerCompanies = req.user.companies
 
   project.save(function (err, result) {
     if (err) {
@@ -236,7 +243,7 @@ router.get('/:id', function (req, res, next) {
       {
         path: 'bucketTasks.tasks.assignedTos',
         model: 'User',
-      })    
+      })
     .exec(function (err, item) {
       if (err) {
         return res.status(404).json({

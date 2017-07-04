@@ -121,7 +121,14 @@ router.put('/:id', function (req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
+  if(!req.user.companies.length) {
+    return res.status(404).json({
+      message: 'You must belong to a companie',
+      err: ''
+    })
+  }
   var quote = new Quote(req.body);
+  quote.ownerCompanies = req.user.companies
   quote.save(function (err, result) {
     if (err) {
       return res.status(403).json({

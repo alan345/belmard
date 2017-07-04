@@ -100,7 +100,10 @@ export class ProductSingleComponent implements OnInit {
       .subscribe(
         res => {
           this.fetchedCurrentUser = res
-          this.itemSteps = JSON.parse(this.fetchedCurrentUser.companies[0].categJson.categProduct)
+          this.fetchedCurrentUser.companies.forEach((companie,index) => {
+            this.itemSteps = JSON.parse(this.fetchedCurrentUser.companies[index].categJson.categProduct)
+          })
+
           this.activatedRoute.params.subscribe((params: Params) => {
             if(params['id'])
              this.getProduct(params['id'])
@@ -207,7 +210,9 @@ export class ProductSingleComponent implements OnInit {
             this.toastr.success('Great!', res.message)
             this.router.navigate(['product']);
           },
-          error => {console.log(error)}
+          error => {
+            this.toastr.error('Error!')
+            console.log(error)}
         );
     }
   }

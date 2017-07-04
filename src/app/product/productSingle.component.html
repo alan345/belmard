@@ -5,22 +5,24 @@
   <div class="col-md-3"></div>
 </div>
 <div class="container" id="global">
-  <div id="product-container">
+  <div>
     <!-- cascade -->
     <div>
-      <select class="form-control col-md-3" [ngModelOptions]="{standalone: true}" [(ngModel)]="categ1" (ngModelChange)="changeCascade(categ1Index.selectedIndex, 0)" #categ1Index>
-        <option *ngFor="let n of itemSteps" [attr.value]="n.categ">{{n.categ}}</option>
-      </select>
-    </div>
-    <div [hidden]="itemSteps[selectedIndex1].categ==''">
-      <select class="form-control col-md-3" [ngModelOptions]="{standalone: true}" [(ngModel)]="categ2" (ngModelChange)="changeCascade(categ1Index.selectedIndex, categ2Index.selectedIndex)" #categ2Index>
-        <option *ngFor="let n of itemSteps[selectedIndex1].subCateg" [attr.value]="n.categ">{{n.categ}}</option>
-      </select>
-    </div>
-    <div [hidden]="itemSteps[selectedIndex1].subCateg[selectedIndex2].categ==''">
-      <select class="form-control col-md-3" [ngModelOptions]="{standalone: true}" [(ngModel)]="categ3">
-        <option *ngFor="let n of itemSteps[selectedIndex1].subCateg[selectedIndex2].subCateg" [attr.value]="n.categ">{{n.categ}}</option>
-      </select>
+      <div>
+        <select class="form-control col-md-3" [ngModelOptions]="{standalone: true}" [(ngModel)]="categ1" (ngModelChange)="changeCascade(categ1Index.selectedIndex, 0)" #categ1Index>
+          <option *ngFor="let n of itemSteps" [attr.value]="n.categ">{{n.categ}}</option>
+        </select>
+      </div>
+      <div [hidden]="itemSteps[selectedIndex1].categ==''">
+        <select class="form-control col-md-3" [ngModelOptions]="{standalone: true}" [(ngModel)]="categ2" (ngModelChange)="changeCascade(categ1Index.selectedIndex, categ2Index.selectedIndex)" #categ2Index>
+          <option *ngFor="let n of itemSteps[selectedIndex1].subCateg" [attr.value]="n.categ">{{n.categ}}</option>
+        </select>
+      </div>
+      <div [hidden]="itemSteps[selectedIndex1].subCateg[selectedIndex2].categ==''">
+        <select class="form-control col-md-3" [ngModelOptions]="{standalone: true}" [(ngModel)]="categ3">
+          <option *ngFor="let n of itemSteps[selectedIndex1].subCateg[selectedIndex2].subCateg" [attr.value]="n.categ">{{n.categ}}</option>
+        </select>
+      </div>
     </div>
     <!-- cascade -->
 
@@ -107,14 +109,14 @@
                <td class="tdbtn2"><button class="btn btn-success" type="button" (click)="selectCompanie(fetchedCompanie)">select</button></td>
            </tr>
           </table>
-          
+
         </div>
         <div *ngIf="fetchedCompanies.length == 0 && autocompleteCompanie !=''">
             Pas de resultats,
             <a [routerLink]="['/companie/new']" class="admn-btn">
               Ajouter Entreprise
             </a>
-        </div>  
+        </div>
         <div class="form-control col-md-4" *ngFor="let vendor of fetchedProduct.vendors; let i=index">
           <table>
            <tr>
@@ -123,10 +125,10 @@
            </tr>
           </table>
         </div>
-        
+
           </div>
         <!-- test tableau Guillaume -->
-          
+
         <!-- Autocomplete -->
 
 

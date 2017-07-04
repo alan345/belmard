@@ -137,7 +137,7 @@ router.post('/', upload.single('fileUp'), function (req, res, err) {
     //     }
     //   });
 
-    
+
 //Gooplus
     let nbChar = req.file.filename.split('.').shift().length + 1
     //console.log(req.file.filename.substring(nbChar))
@@ -149,9 +149,17 @@ router.post('/', upload.single('fileUp'), function (req, res, err) {
       imagePath: req.file.filename,
       //type: req.file.filename.slice(-3),
       type: req.file.filename.split('.').pop(),
-      owner: user._id
+      owner: user._id,
+      ownerCompanies: req.user.companies
     });
 
+    if(!req.user.companies.length) {
+      return res.status(404).json({
+        message: 'You must belong to a companie',
+        err: ''
+      })
+    }
+    
     form.save(function (err, result) {
       if (err) {
         return res.status(404).json({
