@@ -82,9 +82,9 @@ export class ProductSingleComponent implements OnInit {
           sellingPrice: ['', [Validators.required, Validators.minLength(1)]],
         }),
         dimension: this._fb.group({
-          height: ['', [Validators.required, Validators.minLength(1)]],
-          width: ['', [Validators.required, Validators.minLength(1)]],
-          depth: ['', [Validators.required, Validators.minLength(1)]],
+          height: [''],
+          width: [''],
+          depth: [''],
         }),
       })
     })
