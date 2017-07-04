@@ -121,6 +121,21 @@
 
       <div class="valid-edit">
         <button type="submit" class="sln-edt done">Enregistrer</button>
+        <button
+          *ngIf="!fetchedCurrentUser.companies.length"
+          type="button"
+          class="sln-edt done"
+          (click)="saveToMyCompanie()">
+          Enregistrer en tant que Ma companie
+        </button>
+
+        <button
+          *ngIf="fetchedCompanie._id"
+          type="button"
+          class="sln-edt done"
+          (click)="onDelete(fetchedCompanie._id)">
+          Delete
+        </button>
       </div>
     </form>
   </div>

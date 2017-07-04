@@ -333,6 +333,25 @@ router.post('/password', function (req, res, next) {
 
 
 
+
+router.put('/addCompanieToMyself', function (req, res, next) {
+   console.log(req.user._id)
+  User.update({ _id: req.user._id }, { $set: { companies: [req.body._id] }}, function (err, item) {
+    if (err) {
+      return res.status(404).json({
+        message: '',
+        err: err
+      })
+    } else {
+      res.status(201).json({
+        message: '',
+        obj: item
+      });
+    }
+  });
+});
+
+
 //update profile @alan
 router.put('/:id', function (req, res, next) {
   User.findById(({_id: req.params.id}), function (err, item) {

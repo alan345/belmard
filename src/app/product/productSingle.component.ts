@@ -101,12 +101,10 @@ export class ProductSingleComponent implements OnInit {
         res => {
           this.fetchedCurrentUser = res
           this.itemSteps = JSON.parse(this.fetchedCurrentUser.companies[0].categJson.categProduct)
-
           this.activatedRoute.params.subscribe((params: Params) => {
             if(params['id'])
              this.getProduct(params['id'])
           })
-          
         },
         error => {
           console.log(error);

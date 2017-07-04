@@ -28,8 +28,15 @@
           routerLinkActive="active">
           Mon Profil
         </button>
-        <button
+        <!-- <button
           *ngIf="fetchedUser.companies.length"
+          type="button"
+          class="btn btn-primary"
+          [routerLink]="['/companie/edit/mine']"
+          routerLinkActive="active">
+          Mon Entreprise
+        </button> -->
+        <button
           type="button"
           class="btn btn-primary"
           [routerLink]="['/companie/edit/mine']"

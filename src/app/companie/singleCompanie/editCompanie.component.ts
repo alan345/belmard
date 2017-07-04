@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../auth/auth.service';
 import {CompanieService} from '../companie.service';
+import {UserService} from '../../user/user.service';
+
 
 import {Companie} from '../companie.model';
 
@@ -41,6 +43,7 @@ export class EditCompanieComponent implements OnInit {
     private location: Location,
     private _fb: FormBuilder,
     private authService:AuthService,
+    private userService:UserService
   ) {}
 
   ngOnInit() {
@@ -65,7 +68,7 @@ export class EditCompanieComponent implements OnInit {
       _users: this._fb.array([])
     })
 
-
+    this.getCurrentUser()
     this.activatedRoute.params.subscribe((params: Params) => {
 
       if(params['id']) {
@@ -79,6 +82,14 @@ export class EditCompanieComponent implements OnInit {
     })
   }
 
+  fetchedCurrentUser: User = new User()
+  getCurrentUser() {
+    this.userService.getUser('')
+      .subscribe(
+        res => { this.fetchedCurrentUser = res },
+        error => { console.log(error) }
+      )
+  }
 
   openDialog(positionImage: string) {
     let dialogRef = this.dialog.open(EditOptionsComponentDialog);
@@ -106,7 +117,6 @@ export class EditCompanieComponent implements OnInit {
   // }
 
   save() {
-
     //this.fetchedCompanie.categJson.categProduct = JSON.stringify(JSON.parse(this.fetchedCompanie.categJson.categProduct))
     if(this.fetchedCompanie._id) {
       this.companieService.updateCompanie(this.fetchedCompanie)
@@ -129,17 +139,31 @@ export class EditCompanieComponent implements OnInit {
           error => {console.log(error)}
         )
     }
-
   }
 
-  move(i: number, incremet: number, typeUser: string) {
-    if(i>=0 && i<=this[typeUser].length + incremet) {
-      var tmp = this[typeUser][i];
-      this[typeUser][i] = this[typeUser][i + incremet]
-      this[typeUser][i + incremet] = tmp
-      this.save()
-    }
-  }
+
+saveToMyCompanie(){
+  this.companieService.saveCompanie(this.fetchedCompanie)
+    .subscribe(
+      res => {
+        this.userService.addCompanieToMyself(res.obj)
+          .subscribe(
+            res => { this.toastr.success('Great!', res.message) },
+            error => {console.log(error)}
+          )
+        this.toastr.success('Great!', res.message)
+      },
+      error => {console.log(error)}
+    )
+}
+  // move(i: number, incremet: number, typeUser: string) {
+  //   if(i>=0 && i<=this[typeUser].length + incremet) {
+  //     var tmp = this[typeUser][i];
+  //     this[typeUser][i] = this[typeUser][i + incremet]
+  //     this[typeUser][i + incremet] = tmp
+  //     this.save()
+  //   }
+  // }
 
 
   onDelete(id: string) {
@@ -147,6 +171,7 @@ export class EditCompanieComponent implements OnInit {
       .subscribe(
         res => {
           this.toastr.success('Great!', res.message);
+          this.router.navigate(['companie/'])
           console.log(res);
         },
         error => {
@@ -159,13 +184,7 @@ export class EditCompanieComponent implements OnInit {
     this.location.back();
   }
 
-  // addUser(user) {
-  //   const control = <FormArray>this.myForm.controls['_users'];
-  //   const addrCtrl = this._fb.group({
-  //       _id: ['', Validators.required],
-  //   });
-  //   control.push(addrCtrl);
-  // }
+
 
   getCompanie(id: string) {
     this.companieService.getCompanie(id, {})
@@ -181,16 +200,6 @@ export class EditCompanieComponent implements OnInit {
   isAdmin() {
     return this.authService.isAdmin();
   }
-  isManager() {
-    return this.authService.isManager();
-  }
-  isSalesRep() {
-    return this.authService.isSalesRep();
-  }
-  isHQcompanie(){
-    if(this.fetchedCompanie.typeCompanie === 'HQ')
-      return true
-    return false
-  }
+
 
 }
