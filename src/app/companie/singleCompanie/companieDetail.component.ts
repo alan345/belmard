@@ -68,9 +68,9 @@ export class CompanieDetailComponent implements OnInit {
 
   }
 
+
+
   ngOnInit() {
-
-
     this.activatedRoute.params.subscribe((params: Params) => {
       //this.fetchedCompanie=
       //this.router.navigate(['companie/' + params['id'] ]);

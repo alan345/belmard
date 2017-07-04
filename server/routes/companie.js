@@ -60,11 +60,10 @@ router.put('/:id', function (req, res, next) {
   Companie.findById(({_id: req.params.id}), function (err, item) {
     if (err) {
       return res.status(404).json({
-        message: '',
+        message: err,
         err: err
       })
     }
-
 
     for (var prop in req.body) {
       if(prop !== '__v' && prop !== 'updatedAt' && prop !== 'createdAt')
@@ -87,6 +86,10 @@ router.put('/:id', function (req, res, next) {
 
   })
 });
+
+
+
+
 
 router.post('/', function (req, res, next) {
   var companie = new Companie(req.body);

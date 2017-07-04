@@ -118,6 +118,8 @@ export class CompanieService {
       });
   }
 
+
+
   saveCompanie(companie: Companie) {
   //  console.log("this.authService.currentUser.token",this.authService.currentUser.token);
     delete companie._id;

@@ -14,6 +14,26 @@
   </div>
 
 
+  <h3>Stripe</h3>
+  <h4>Customer</h4>
+  <button type="button" class="done" (click)="saveCustInStripe()">saveCustInStripe</button>
+  <pre>
+  {{stripeCust|json}}
+  </pre>
+
+
+  <h4>Card</h4>
+  <button type="button" class="done" (click)="saveCardInStripe()">saveCardInStripe</button>
+  <pre>
+  {{stripeCard|json}}
+  </pre>
+
+
+
+
+  <button type="button" class="done" (click)="paiement()">Paiement</button>
+
+
   <a [routerLink]="['/user/newuser/' + fetchedUser._id]" class="admn-btn">
     Edit User
   </a>

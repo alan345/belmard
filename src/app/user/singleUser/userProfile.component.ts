@@ -58,6 +58,19 @@ export class UserProfileComponent implements OnInit {
      this.isEditMode = !this.isEditMode
    }
 
+   paiement() {
+     this.userService.paiement()
+       .subscribe(
+         res => {
+           console.log(res);
+         },
+         error => {
+           console.log(error);
+         }
+       );
+   }
+
+
 
   ngOnInit() {
     this.myForm = this._fb.group({
@@ -81,8 +94,42 @@ export class UserProfileComponent implements OnInit {
         // userId = this.authService.currentUser.userId
 
       this.getUser(userId)
-
+      this.getStripeCust()
+      this.getStripeCard()
     })
+  }
+
+
+  stripeCust = {}
+  getStripeCust() {
+    this.userService.getStripeCust()
+      .subscribe(
+        res => { this.stripeCust = res },
+        error => { console.log(error) }
+      )
+  }
+
+  stripeCard = {}
+  getStripeCard() {
+    this.userService.getStripeCard()
+      .subscribe(
+        res => { this.stripeCard = res },
+        error => { console.log(error) }
+      )
+  }
+  saveCustInStripe(){
+    this.userService.saveCustInStripe()
+      .subscribe(
+        res => { console.log(res); },
+        error => { console.log(error); }
+      );
+  }
+  saveCardInStripe(){
+    this.userService.saveCardInStripe()
+      .subscribe(
+        res => { console.log(res); },
+        error => { console.log(error); }
+      );
   }
 
 

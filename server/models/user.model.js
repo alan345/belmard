@@ -8,14 +8,13 @@ var user = new Schema({
     email: {type: String, unique: true, required: true, lowercase: true},
     password: {type: String, required: true},
     forms: [{type: Schema.Types.ObjectId, ref: 'Form'}],
-    // products: [{
-    //   dateProductAdded: {type: Date, default: ['']},
-    //   product: {type: Schema.Types.ObjectId, ref: 'Product'},
-    // }],
-    // notes: [{
-    //   text: String,
-    //   dateNote: Date
-    // }],
+    paiement: {
+      stripe:{
+        cusId:{type: String},
+        cardId:{type: String},
+        subId:{type: String},
+      }
+    },
     resetPasswordToken: String,
     resetPasswordExpires: String,
     // trackinPage : {
