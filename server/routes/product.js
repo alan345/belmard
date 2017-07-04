@@ -89,10 +89,10 @@ router.put('/:id', function (req, res, next) {
 })
 
 router.post('/', function (req, res, next) {
-  console.log(req.body)
+  // console.log(req.body)
   //var Product = new Product(req.body)
   var product = new Product(req.body)
-
+  product.ownerCompanies = req.user.companies
   product.owner = req.user._id
   product.save(function (err, result) {
     if (err) {
