@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { AuthService} from '../../auth/auth.service';
 import { UserService} from '../user.service';
+import { PaiementService} from '../paiement.service';
 
 import { ToastsManager} from 'ng2-toastr';
 
@@ -19,13 +20,13 @@ import { SeePictureDialogComponent } from '../../seePictureDialog/seePictureDial
 
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './userProfile.component.html',
+  selector: 'app-paiement',
+  templateUrl: './paiement.component.html',
   styleUrls: ['../user.component.css'],
 })
 
 
-export class UserProfileComponent implements OnInit {
+export class PaiementComponent implements OnInit {
   //fetchedUser = new User()
   //fetchedUser : User;
   isUserBelongToHQ=false
@@ -39,6 +40,7 @@ export class UserProfileComponent implements OnInit {
 
   constructor(
     private userService: UserService,
+    private paiementService: PaiementService,
     private toastr: ToastsManager,
     public dialog: MdDialog,
     private router: Router,
@@ -94,9 +96,66 @@ export class UserProfileComponent implements OnInit {
         // userId = this.authService.currentUser.userId
 
       this.getUser(userId)
-
+      this.getStripeCust()
+      this.getStripeCard()
+      this.getStripeSubscription()
     })
   }
+
+
+  stripeCust = {}
+  getStripeCust() {
+    this.paiementService.getStripeCust()
+      .subscribe(
+        res => { this.stripeCust = res },
+        error => { console.log(error) }
+      )
+  }
+
+  stripeCard = {}
+  getStripeCard() {
+    this.paiementService.getStripeCard()
+      .subscribe(
+        res => { this.stripeCard = res },
+        error => { console.log(error) }
+      )
+  }
+  stripeSubscription = {}
+  getStripeSubscription(){
+    this.paiementService.getStripeSubscription()
+      .subscribe(
+        res => { this.stripeSubscription = res },
+        error => { console.log(error) }
+      )
+  }
+  saveCustInStripe(){
+    this.paiementService.saveCustInStripe()
+      .subscribe(
+        res => { console.log(res); },
+        error => { console.log(error); }
+      );
+  }
+  saveCardInStripe(){
+    this.paiementService.saveCardInStripe()
+      .subscribe(
+        res => { console.log(res); },
+        error => { console.log(error); }
+      );
+  }
+  saveSubscriptionInStripe(){
+    this.paiementService.saveSubscriptionInStripe()
+      .subscribe(
+        res => { console.log(res); },
+        error => { console.log(error); }
+      );
+  }
+
+
+
+
+
+
+
 
 
 

@@ -14,7 +14,7 @@ import {UserProfileComponent} from './singleUser/userProfile.component';
 //import {UserProfileSettingsComponent} from './singleUser/userProfileSettings.component';
 
 import {ChangePasswordComponent} from './singleUser/changePassword/changePassword.component';
-
+import { PaiementComponent } from './paiement/paiement.component';
 //import {SingleUserComponent} from './singleUser/singleUser.component';
 //import {AddNoteComponent} from './singleUser/addNote.component';
 //import {ChooseDateComponent} from './singleUser/chooseDate.component';
@@ -26,16 +26,17 @@ import{ AdminUsersComponent } from './users/adminUsers.component';
 
 
 export const routes: Routes = [
-  {path: '', component: AdminUsersComponent},
-  {path: 'newuser', component: NewUserComponent},
-  {path: 'newuser/:id', component: NewUserComponent},
-  {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
-  {path: 'reset', component: ForgetPasswordComponent},
-  {path: 'reset/:token', component: ResetPasswordComponent},
+  {path: '', component: AdminUsersComponent, canActivate: [AuthGuardService]},
+  {path: 'newuser', component: NewUserComponent, canActivate: [AuthGuardService]},
+  {path: 'newuser/:id', component: NewUserComponent, canActivate: [AuthGuardService]},
+  {path: 'login', component: LoginComponent, canActivate: [AuthGuardService]},
+  {path: 'register', component: RegisterComponent, canActivate: [AuthGuardService]},
+  {path: 'reset', component: ForgetPasswordComponent, canActivate: [AuthGuardService]},
+  {path: 'reset/:token', component: ResetPasswordComponent, canActivate: [AuthGuardService]},
   //{path: 'forms', component: UserFormsComponent, canActivate: [AuthGuardService]},
   {path: 'profile/password', component: ChangePasswordComponent, canActivate: [AuthGuardService]},
-  {path: 'profile', component: UserProfileComponent},
+  {path: 'profile', component: UserProfileComponent, canActivate: [AuthGuardService]},
+  {path: 'paiement', component: PaiementComponent, canActivate: [AuthGuardService]},
   {path: 'profile/:id', component: UserProfileComponent, canActivate: [AuthGuardService]},
 
 //  {path: 'profile/:id/userProfileSettings', component: UserProfileSettingsComponent, canActivate: [AuthGuardService]},

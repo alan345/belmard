@@ -31,6 +31,10 @@ import { NewUserComponent} from './singleUser/newUser.component';
 // import { UserProfileSettingsComponent } from './profile/userProfileSettings.component';
 // import { UserProfilePicturesComponent } from './profile/userProfilePictures.component';
 import { UserProfileComponent } from './singleUser/userProfile.component';
+
+import { PaiementComponent } from './paiement/paiement.component';
+
+
 //import { ProfileService} from './singleUser/profile.service';
 import { ChangePasswordComponent } from './singleUser/changePassword/changePassword.component';
 import { ResetPasswordComponent} from './accountRecover/resetPassword.component';
@@ -75,6 +79,7 @@ import{ AdminUsersComponent } from './users/adminUsers.component';
     ForgetPasswordComponent,
 
     UserProfileComponent,
+    PaiementComponent,
     // UserProfilePicturesComponent,
     // UserProfileSettingsComponent,
     ChangePasswordComponent,

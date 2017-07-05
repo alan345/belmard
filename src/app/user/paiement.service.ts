@@ -60,7 +60,18 @@ export class PaiementService {
         return Observable.throw(error.json());
       });
   }
-
+  getStripeSubscription(){
+    let headers = new Headers({'Content-Type': 'application/json'});
+    headers.append('Authorization', '' + this.authService.currentUser.token);
+    return this.http.get(this.url + 'paiement/getStripeSubscription', {headers: headers})
+      .map((response: Response) => {
+        return response.json();
+      })
+      .catch((error: Response) => {
+        this.errorService.handleError(error.json());
+        return Observable.throw(error.json());
+      });
+  }
 
 
   paiement() {
@@ -96,6 +107,19 @@ export class PaiementService {
   //  let headers = new Headers({'Content-Type': 'application/json'});
     headers.append('Authorization', '' + this.authService.currentUser.token);
     return this.http.post(this.url + 'paiement/saveCardInStripe', body, {headers: headers})
+      .map(response => response.json())
+      .catch((error: Response) => {
+        this.errorService.handleError(error.json());
+        return Observable.throw(error.json());
+      });
+  }
+  saveSubscriptionInStripe(){
+    let companie
+    const body = JSON.stringify(companie);
+    const headers = new Headers({'Content-Type': 'application/json'});
+  //  let headers = new Headers({'Content-Type': 'application/json'});
+    headers.append('Authorization', '' + this.authService.currentUser.token);
+    return this.http.post(this.url + 'paiement/saveSubscriptionInStripe', body, {headers: headers})
       .map(response => response.json())
       .catch((error: Response) => {
         this.errorService.handleError(error.json());

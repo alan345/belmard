@@ -14,29 +14,32 @@
   <a [routerLink]="['/user/newuser/' + fetchedUser._id]" class="admn-btn">
     Edit User
   </a>
-<br><br>
-  <a [routerLink]="['/user/paiement/']" class="admn-btn">
-    Paiement
-  </a>
+
+  <h3>Stripe</h3>
+
+  <h4>Customer</h4>
+  <button type="button" class="done" (click)="saveCustInStripe()">saveCustInStripe</button>
+  <pre>
+  {{stripeCust|json}}
+  </pre>
+
+
+  <h4>Card</h4>
+  <button type="button" class="done" (click)="saveCardInStripe()">saveCardInStripe</button>
+  <pre>
+  {{stripeCard|json}}
+  </pre>
+
+  <h4>Abonnement</h4>
+  <button type="button" class="done" (click)="saveSubscriptionInStripe()">saveSubInStripe</button>
+  <pre>
+  {{stripeSubscription|json}}
+  </pre>
+
+
+  <button type="button" class="done" (click)="paiement()">Paiement</button>
 
 
 
-  <h4>phoneNumber</h4>
-  {{fetchedUser.profile.phoneNumber}}
-
-
-  <h4>Companies</h4>
-  <div *ngFor="let companie of fetchedUser.companies">
-    {{companie.name}}
-  </div>
-
-
-  <h4>Type User</h4>
-  <div *ngFor="let typeSingle of fetchedUser.type">
-    {{typeSingle}}
-  </div>
-
-  <app-quotes [showHeader]="false" [userId]="fetchedUser._id"></app-quotes>
-  <app-projects [showHeader]="false" [userId]="fetchedUser._id"></app-projects>
 
 </div>
