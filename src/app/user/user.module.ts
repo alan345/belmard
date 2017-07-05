@@ -37,6 +37,7 @@ import { ResetPasswordComponent} from './accountRecover/resetPassword.component'
 import { ForgetPasswordComponent} from './accountRecover/forgetPassword.component';
 
 import { UserService} from './user.service';
+import { PaiementService} from './paiement.service';
 import { LoginComponent} from './login/login.component';
 //import { UserFormsComponent} from '../form/userForms.component';
 
@@ -87,7 +88,8 @@ import{ AdminUsersComponent } from './users/adminUsers.component';
    ],
   providers:    [
     // ProfileService,
-    UserService
+    UserService,
+    PaiementService,
   ],
   entryComponents: [
   //  UserDeleteDialog,

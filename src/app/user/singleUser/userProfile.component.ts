@@ -1,6 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { AuthService} from '../../auth/auth.service';
 import { UserService} from '../user.service';
+import { PaiementService} from '../paiement.service';
 
 import { ToastsManager} from 'ng2-toastr';
 
@@ -39,6 +40,7 @@ export class UserProfileComponent implements OnInit {
 
   constructor(
     private userService: UserService,
+    private paiementService: PaiementService,
     private toastr: ToastsManager,
     public dialog: MdDialog,
     private router: Router,
@@ -102,7 +104,7 @@ export class UserProfileComponent implements OnInit {
 
   stripeCust = {}
   getStripeCust() {
-    this.userService.getStripeCust()
+    this.paiementService.getStripeCust()
       .subscribe(
         res => { this.stripeCust = res },
         error => { console.log(error) }
@@ -111,21 +113,21 @@ export class UserProfileComponent implements OnInit {
 
   stripeCard = {}
   getStripeCard() {
-    this.userService.getStripeCard()
+    this.paiementService.getStripeCard()
       .subscribe(
         res => { this.stripeCard = res },
         error => { console.log(error) }
       )
   }
   saveCustInStripe(){
-    this.userService.saveCustInStripe()
+    this.paiementService.saveCustInStripe()
       .subscribe(
         res => { console.log(res); },
         error => { console.log(error); }
       );
   }
   saveCardInStripe(){
-    this.userService.saveCardInStripe()
+    this.paiementService.saveCardInStripe()
       .subscribe(
         res => { console.log(res); },
         error => { console.log(error); }

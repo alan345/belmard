@@ -21,7 +21,7 @@ var options    = require('./routes/options')
 var products    = require('./routes/product')
 var projects    = require('./routes/project')
 var userCalendars    = require('./routes/userCalendar')
-// var paiements    = require('./routes/paiement')
+var paiements    = require('./routes/paiement')
 
 var app = express()
 
@@ -63,7 +63,7 @@ app.use('/project', projects)
 app.use('/admin', adminPage)
 app.use('/option', options)
 app.use('/userCalendar', userCalendars)
-// app.use('/paiement', paiements)
+app.use('/paiement', paiements)
 
 
 

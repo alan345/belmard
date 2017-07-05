@@ -70,30 +70,30 @@ export class UserService {
   //     })
   // }
 
-  getStripeCust() {
-    let headers = new Headers({'Content-Type': 'application/json'});
-    headers.append('Authorization', '' + this.authService.currentUser.token);
-    return this.http.get(this.url + 'profile/getStripeCust', {headers: headers})
-      .map((response: Response) => {
-        return response.json();
-      })
-      .catch((error: Response) => {
-        this.errorService.handleError(error.json());
-        return Observable.throw(error.json());
-      });
-  }
-  getStripeCard() {
-    let headers = new Headers({'Content-Type': 'application/json'});
-    headers.append('Authorization', '' + this.authService.currentUser.token);
-    return this.http.get(this.url + 'profile/getStripeCard', {headers: headers})
-      .map((response: Response) => {
-        return response.json();
-      })
-      .catch((error: Response) => {
-        this.errorService.handleError(error.json());
-        return Observable.throw(error.json());
-      });
-  }
+  // getStripeCust() {
+  //   let headers = new Headers({'Content-Type': 'application/json'});
+  //   headers.append('Authorization', '' + this.authService.currentUser.token);
+  //   return this.http.get(this.url + 'profile/getStripeCust', {headers: headers})
+  //     .map((response: Response) => {
+  //       return response.json();
+  //     })
+  //     .catch((error: Response) => {
+  //       this.errorService.handleError(error.json());
+  //       return Observable.throw(error.json());
+  //     });
+  // }
+  // getStripeCard() {
+  //   let headers = new Headers({'Content-Type': 'application/json'});
+  //   headers.append('Authorization', '' + this.authService.currentUser.token);
+  //   return this.http.get(this.url + 'profile/getStripeCard', {headers: headers})
+  //     .map((response: Response) => {
+  //       return response.json();
+  //     })
+  //     .catch((error: Response) => {
+  //       this.errorService.handleError(error.json());
+  //       return Observable.throw(error.json());
+  //     });
+  // }
 
   getUser(id: string) {
     // if(!id) {
@@ -167,32 +167,32 @@ export class UserService {
           return Observable.throw(error.json());
         });
   }
-  saveCustInStripe(){
-    let companie
-    const body = JSON.stringify(companie);
-    const headers = new Headers({'Content-Type': 'application/json'});
-  //  let headers = new Headers({'Content-Type': 'application/json'});
-    headers.append('Authorization', '' + this.authService.currentUser.token);
-    return this.http.post(this.url + 'profile/saveCustInStripe', body, {headers: headers})
-      .map(response => response.json())
-      .catch((error: Response) => {
-        this.errorService.handleError(error.json());
-        return Observable.throw(error.json());
-      });
-  }
-  saveCardInStripe(){
-    let companie
-    const body = JSON.stringify(companie);
-    const headers = new Headers({'Content-Type': 'application/json'});
-  //  let headers = new Headers({'Content-Type': 'application/json'});
-    headers.append('Authorization', '' + this.authService.currentUser.token);
-    return this.http.post(this.url + 'profile/saveCardInStripe', body, {headers: headers})
-      .map(response => response.json())
-      .catch((error: Response) => {
-        this.errorService.handleError(error.json());
-        return Observable.throw(error.json());
-      });
-  }
+  // saveCustInStripe(){
+  //   let companie
+  //   const body = JSON.stringify(companie);
+  //   const headers = new Headers({'Content-Type': 'application/json'});
+  // //  let headers = new Headers({'Content-Type': 'application/json'});
+  //   headers.append('Authorization', '' + this.authService.currentUser.token);
+  //   return this.http.post(this.url + 'profile/saveCustInStripe', body, {headers: headers})
+  //     .map(response => response.json())
+  //     .catch((error: Response) => {
+  //       this.errorService.handleError(error.json());
+  //       return Observable.throw(error.json());
+  //     });
+  // }
+  // saveCardInStripe(){
+  //   let companie
+  //   const body = JSON.stringify(companie);
+  //   const headers = new Headers({'Content-Type': 'application/json'});
+  // //  let headers = new Headers({'Content-Type': 'application/json'});
+  //   headers.append('Authorization', '' + this.authService.currentUser.token);
+  //   return this.http.post(this.url + 'profile/saveCardInStripe', body, {headers: headers})
+  //     .map(response => response.json())
+  //     .catch((error: Response) => {
+  //       this.errorService.handleError(error.json());
+  //       return Observable.throw(error.json());
+  //     });
+  // }
 
   updateUser(user: User) {
     const body = JSON.stringify(user);
