@@ -9,8 +9,8 @@ export class Quote {
   clients: User[] = [];
   name: string = '';
   typeQuote: string = '';
-  phoneNumber: string= '';
-  address: Address = new Address();
+  // phoneNumber: string= '';
+  // address: Address = new Address();
   _users: User[] = [];
   forms: Form[] = [];
   products: Product[] = [];
@@ -37,9 +37,9 @@ export class DevisDetails {
 
 }
 
-export class Address {
-  address: string = '';
-  city: string = '';
-  state: string = '';
-  zip: string = '';
-}
+// export class Address {
+//   address: string = '';
+//   city: string = '';
+//   state: string = '';
+//   zip: string = '';
+// }

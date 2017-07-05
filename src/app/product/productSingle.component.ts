@@ -185,15 +185,12 @@ export class ProductSingleComponent implements OnInit {
 
 
   save() {
-
     this.fetchedProduct.categorie.categ1 = [{name: this.categ1}]
     this.fetchedProduct.categorie.categ2 = [{name: this.categ2}]
     this.fetchedProduct.categorie.categ3 = [{name: this.categ3}]
 
 
     if(this.fetchedProduct._id) {
-
-
       this.productService.updateProduct(this.fetchedProduct)
         .subscribe(
           res => {
@@ -203,7 +200,6 @@ export class ProductSingleComponent implements OnInit {
           error => {console.log(error)}
         );
     } else {
-
       this.productService.saveProduct(this.fetchedProduct)
         .subscribe(
           res => {
@@ -211,8 +207,9 @@ export class ProductSingleComponent implements OnInit {
             this.router.navigate(['product']);
           },
           error => {
-            this.toastr.error('Error!')
-            console.log(error)}
+            this.toastr.error('Error!', error.message)
+            console.log(error)
+          }
         );
     }
   }

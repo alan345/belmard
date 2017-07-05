@@ -7,14 +7,16 @@ import { RoundPipe} from './round.pipe';
 // import { ProjectModule} from '../project/project.module';
 
 import { QuotesComponent} from './quotes/quotes.component';
-import { EditQuoteComponent} from './editQuote.component';
+import { EditQuoteComponent} from './single/editQuote.component';
 
-import { QuoteDetailComponent} from './quoteDetail.component';
+import { QuoteDetailComponent} from './single/quoteDetail.component';
 import { QuoteService} from './quote.service';
 import { QuoteRouting} from './quoteRouting.module';
 import { MaterialModule } from '@angular/material';
 import { Ng2PaginationModule} from 'ng2-pagination';
 import { ProductModule } from '../product/product.module';
+// import { AutocompleteComponent } from '../autocomplete/autocomplete.component'
+
 
 @NgModule({
   imports:      [
@@ -27,14 +29,19 @@ import { ProductModule } from '../product/product.module';
     ReactiveFormsModule,
     RouterModule,
     ProductModule,
+    // AutocompleteComponent,
   ],
   declarations: [
     QuotesComponent,
     EditQuoteComponent,
     QuoteDetailComponent,
     RoundPipe,
+    // AutocompleteComponent
   ],
-  exports:      [ QuotesComponent ],
+  exports:      [
+    QuotesComponent,
+    // AutocompleteComponent,
+  ],
   providers:    [ QuoteService ],
   entryComponents: [ ]
 })

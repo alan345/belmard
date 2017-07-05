@@ -1,7 +1,7 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { QuoteDetailComponent} from './quoteDetail.component';
-import { EditQuoteComponent} from './editQuote.component';
+import { QuoteDetailComponent} from './single/quoteDetail.component';
+import { EditQuoteComponent} from './single/editQuote.component';
 
 import { AdminGuardService} from '../admin/services/adminGuard';
 

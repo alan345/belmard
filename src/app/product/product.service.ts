@@ -97,17 +97,18 @@ export class ProductService {
   }
 
   saveProduct(product : Product) {
-  //  console.log("this.authService.currentUser.token",this.authService.currentUser.token);
-  //  delete product._id;
-  delete product._id
-  //console.log(product)
+    //  console.log("this.authService.currentUser.token",this.authService.currentUser.token);
+    //  delete product._id;
+    delete product._id
+    //console.log(product)
     const body = JSON.stringify(product);
     const headers = new Headers({'Content-Type': 'application/json'});
     headers.append('Authorization', '' + this.authService.currentUser.token);
     return this.http.post(this.url + 'product/',body, {headers: headers})
       .map(response => response.json())
       .catch((error: Response) => {
-        this.errorService.handleError(error.json());
+        // console.log(error.json())
+        // this.errorService.handleError(error.json());
         return Observable.throw(error.json());
       });
   }

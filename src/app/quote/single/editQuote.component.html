@@ -7,16 +7,13 @@
     <h4 class="dspl-nn">id: {{fetchedQuote._id}}</h4>
     <!-- <form #f="ngForm" novalidate (ngSubmit)="save(f.value, f.valid)"> -->
 
-    <button
-      (click)="downloadPDF()">download PDF
+    <button (click)="downloadPDF()">
+      download PDF
     </button>
 
 
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
       <div>
-
-
-
               <!-- Autocomplete user-->
               <label>Client</label>
               <input
@@ -81,51 +78,21 @@
             minlength="5"
             placeholder="Nom du quote"
           >
-          <input
-            type="text"
-            class="form-control"
-            formControlName="phoneNumber"
-            [(ngModel)]="fetchedQuote.phoneNumber"
-            required
-            minlength="5"
-            placeholder="Numéro de téléphone"
-          >
-          <!-- <div ngModelGroup="address"> -->
-          <div formGroupName="address">
-            <input
-              type="text"
-              class="form-control"
-              formControlName="address"
-              [(ngModel)]="fetchedQuote.address.address"
-              required
-              minlength="5"
-              placeholder="Adresse"
-            >
-            <input
-              type="text"
-              class="form-control"
-              formControlName="city"
-              [(ngModel)]="fetchedQuote.address.city"
-              required
-              minlength="2"
-              placeholder="Ville"
-            >
+          <br>
 
-            <input
-              type="text"
-              class="form-control"
-              formControlName="zip"
-              [(ngModel)]="fetchedQuote.address.zip"
-              required
-              minlength="5"
-              placeholder="Code postal"
-            >
-        </div>
+          <div *ngFor="let client of fetchedQuote.clients">
+            <div>name:{{client.profile.name}}</div>
+            <div>lastName:{{client.profile.lastName}}</div>
+            <div>phoneNumber:{{client.profile.phoneNumber}}</div>
+            <div>address:{{client.profile.address.address}}</div>
+            <div>city:{{client.profile.address.city}}</div>
+            <div>state:{{client.profile.address.state}}</div>
+            <div>zip:{{client.profile.address.zip}}</div>
+          </div>
+
 
         <br><br>
-        <a [routerLink]="['/product/new']" class="admn-btn">
-          Créer un nouveau Produit
-        </a>
+
 
 
 
@@ -203,6 +170,16 @@
           <div class="col-md-1"></div>
           <div class="col-md-3">
             <!-- Autocomplete -->
+            <!-- <app-autocomplete
+              [typeAutocomplete]="'user'"
+              [title]="'Apporteur Affaire'"
+              [singleChoice]="'true'"
+              [arrayContent]="fetchedUser.salesMan"
+              (getResultAutocomplete)="selectSalesMan($event)"
+              >
+            </app-autocomplete> -->
+
+
             <input
               [ngModelOptions]="{standalone: true}"
               [(ngModel)]="autocompleteProduct"

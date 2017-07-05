@@ -23,6 +23,7 @@ import { NavbarComponent} from './nav/navbar/navbar.component';
 
 import { FooterComponent} from './nav/footer/footer.component';
 
+// import { AutocompleteComponent } from './autocomplete/autocomplete.component'
 
 
 
@@ -188,7 +189,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     AdminComponent,
 
 
-
+    // AutocompleteComponent,
 
   ],
   imports: [
@@ -207,6 +208,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 
   //  NgbModule.forRoot(),
     UserModule,
+    // AutocompleteComponent,
 
   //  ProjectModule,
 //    ProductModule,

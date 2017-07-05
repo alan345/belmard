@@ -97,17 +97,17 @@ export class ProjectService {
   }
 
   saveProject(project : Project) {
-  //  console.log("this.authService.currentUser.token",this.authService.currentUser.token);
-  //  delete project._id;
-  delete project._id
-  //console.log(project)
+    //  console.log("this.authService.currentUser.token",this.authService.currentUser.token);
+    //  delete project._id;
+    delete project._id
+    //console.log(project)
     const body = JSON.stringify(project);
     const headers = new Headers({'Content-Type': 'application/json'});
     headers.append('Authorization', '' + this.authService.currentUser.token);
     return this.http.post(this.url + 'project/',body, {headers: headers})
       .map(response => response.json())
       .catch((error: Response) => {
-        this.errorService.handleError(error.json());
+        // this.errorService.handleError(error.json());
         return Observable.throw(error.json());
       });
   }

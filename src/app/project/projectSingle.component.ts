@@ -249,7 +249,10 @@ export class ProjectSingleComponent implements OnInit {
             this.toastr.success('Great!', res.message)
             this.router.navigate(['project/' + res.obj._id]);
           },
-          error => {console.log(error)}
+          error => {
+            this.toastr.error('Error!', error.message)
+            console.log(error)
+          }
         );
     }
   }

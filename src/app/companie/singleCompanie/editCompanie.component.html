@@ -120,7 +120,12 @@
       </div>
 
       <div class="valid-edit">
-        <button type="submit" class="sln-edt done">Enregistrer</button>
+        <button
+          *ngIf="fetchedCurrentUser.companies.length"
+          type="submit"
+          class="sln-edt done">
+          Enregistrer
+        </button>
         <button
           *ngIf="!fetchedCurrentUser.companies.length"
           type="button"

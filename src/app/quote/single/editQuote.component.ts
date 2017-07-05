@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {AuthService} from '../auth/auth.service';
-import {QuoteService} from './quote.service';
-import {ProductService} from '../product/product.service';
-import { ProjectService} from '../project/project.service';
+import {AuthService} from '../../auth/auth.service';
+import {QuoteService} from '../quote.service';
+import {ProductService} from '../../product/product.service';
+import { ProjectService} from '../../project/project.service';
 
-import {Quote, DevisDetails} from './quote.model';
+import {Quote, DevisDetails} from '../quote.model';
 
 import {ToastsManager} from 'ng2-toastr';
 
@@ -12,11 +12,11 @@ import {MdDialog } from '@angular/material';
 import {Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { UserService} from '../user/user.service';
-import { DeleteDialog } from '../deleteDialog/deleteDialog.component';
-import { User } from '../user/user.model';
-import { Product } from '../product/product.model';
-import { Project } from '../project/project.model';
+import { UserService} from '../../user/user.service';
+import { DeleteDialog } from '../../deleteDialog/deleteDialog.component';
+import { User } from '../../user/user.model';
+import { Product } from '../../product/product.model';
+import { Project } from '../../project/project.model';
 
 declare let jsPDF;
 
@@ -25,7 +25,7 @@ declare let jsPDF;
 @Component({
   selector: 'app-quote',
   templateUrl: './editQuote.component.html',
-  styleUrls: ['./quote.component.css'],
+  styleUrls: ['../quote.component.css'],
 })
 export class EditQuoteComponent implements OnInit {
   fetchedQuote : Quote = new Quote()
@@ -68,13 +68,13 @@ export class EditQuoteComponent implements OnInit {
   ngOnInit() {
     this.myForm = this._fb.group({
       name: [''],
-      phoneNumber: ['', [Validators.required, Validators.minLength(2)]],
-      address: this._fb.group({
-        address: ['', [Validators.required, Validators.minLength(2)]],
-        city: ['', [Validators.required, Validators.minLength(2)]],
-        state: ['', [Validators.required, Validators.minLength(2)]],
-        zip: ['', [Validators.required, Validators.minLength(2)]],
-      }),
+      // phoneNumber: ['', [Validators.required, Validators.minLength(2)]],
+      // address: this._fb.group({
+      //   address: ['', [Validators.required, Validators.minLength(2)]],
+      //   city: ['', [Validators.required, Validators.minLength(2)]],
+      //   state: ['', [Validators.required, Validators.minLength(2)]],
+      //   zip: ['', [Validators.required, Validators.minLength(2)]],
+      // }),
       _users: this._fb.array([])
     })
 
@@ -175,14 +175,14 @@ export class EditQuoteComponent implements OnInit {
           verticalPointer += 6
           doc.text(marginLeft, verticalPointer, this2.fetchedQuote.name);
 
-          verticalPointer += 6
-          doc.text(marginLeft, verticalPointer, this2.fetchedQuote.phoneNumber);
+          // verticalPointer += 6
+          // doc.text(marginLeft, verticalPointer, this2.fetchedQuote.phoneNumber);
 
-          verticalPointer += 6
-          doc.text(marginLeft, verticalPointer, this2.fetchedQuote.address.address);
+          // verticalPointer += 6
+          // doc.text(marginLeft, verticalPointer, this2.fetchedQuote.address.address);
 
-          verticalPointer += 6
-          doc.text(marginLeft, verticalPointer, this2.fetchedQuote.address.city + ' ' + this2.fetchedQuote.address.zip + ' ' + this2.fetchedQuote.address.state + ' ');
+          // verticalPointer += 6
+          // doc.text(marginLeft, verticalPointer, this2.fetchedQuote.address.city + ' ' + this2.fetchedQuote.address.zip + ' ' + this2.fetchedQuote.address.state + ' ');
 
 
           doc.setFontSize(12);
