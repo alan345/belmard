@@ -2,7 +2,6 @@ export class StripeCustomer {
   id: string = '';
   account_balance: number=0;
   created: string = '';
-  currency: string = '';
   default_source: string = '';
   description: string = '';
   email: string = '';
@@ -16,12 +15,13 @@ export class Sources {
 
 export class DataSource {
   id: string = '';
+  object: string = 'card';
   address_city: string = '';
   address_country: string = '';
   address_line1: string = '';
   address_state: string = '';
   address_zip: string = '';
-  address_zip_check: string = '';
+  address_line2: string = '';
   brand: string = '';
   country: string = '';
   exp_month: string = '';

@@ -73,19 +73,29 @@ export class PaiementService {
       });
   }
 
-
-  paiement() {
-      let companie
-      const body = JSON.stringify(companie);
-      const headers = new Headers({'Content-Type': 'application/json'});
-    //  let headers = new Headers({'Content-Type': 'application/json'});
-      headers.append('Authorization', '' + this.authService.currentUser.token);
-      return this.http.post(this.url + 'paiement/paiement ', body, {headers: headers})
-        .map(response => response.json())
-        .catch((error: Response) => {
-          this.errorService.handleError(error.json());
-          return Observable.throw(error.json());
-        });
+  deleteCard(cardId){
+    let headers = new Headers({'Content-Type': 'application/json'});
+    headers.append('Authorization', '' + this.authService.currentUser.token);
+    return this.http.delete(this.url + 'paiement/deleteCard/' + cardId, {headers: headers})
+      .map((response: Response) => {
+        return response.json();
+      })
+      .catch((error: Response) => {
+        this.errorService.handleError(error.json());
+        return Observable.throw(error.json());
+      });
+  }
+  deleteCustInStripe(){
+    let headers = new Headers({'Content-Type': 'application/json'});
+    headers.append('Authorization', '' + this.authService.currentUser.token);
+    return this.http.delete(this.url + 'paiement/deleteCustInStripe', {headers: headers})
+      .map((response: Response) => {
+        return response.json();
+      })
+      .catch((error: Response) => {
+        this.errorService.handleError(error.json());
+        return Observable.throw(error.json());
+      });
   }
   saveCustInStripe(){
     let companie
@@ -100,9 +110,8 @@ export class PaiementService {
         return Observable.throw(error.json());
       });
   }
-  saveCardInStripe(){
-    let companie
-    const body = JSON.stringify(companie);
+  saveCardInStripe(card){
+    const body = JSON.stringify(card);
     const headers = new Headers({'Content-Type': 'application/json'});
   //  let headers = new Headers({'Content-Type': 'application/json'});
     headers.append('Authorization', '' + this.authService.currentUser.token);

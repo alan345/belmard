@@ -4,20 +4,16 @@ import { UserService} from '../user.service';
 import { PaiementService} from './paiement.service';
 
 import { ToastsManager} from 'ng2-toastr';
-
-import { MdDialog } from '@angular/material';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { User } from '../user.model';
-import { StripeCustomer } from './paiement.model';
+import { StripeCustomer, DataSource } from './paiement.model';
 
 
-import { Form } from '../../form/form.model';
+
 import { Companie } from '../../companie/companie.model';
-import { EditOptionsComponentDialog } from '../../form/modalLibrary/modalLibrary.component';
+
 import { FormBuilder, FormGroup, FormArray, Validators} from '@angular/forms';
-import { CompanieService} from '../../companie/companie.service';
-import { SeePictureDialogComponent } from '../../seePictureDialog/seePictureDialog.component';
 
 
 
@@ -38,76 +34,55 @@ export class PaiementComponent implements OnInit {
   companies: Companie[] = [];
   isEditMode:boolean = false
   fetchedUser : User = new User()
-
-  public myForm: FormGroup;
+  stripeCust: StripeCustomer = new StripeCustomer()
+  newCard: DataSource = new DataSource()
+  // public myForm: FormGroup;
 
   constructor(
     private userService: UserService,
     private paiementService: PaiementService,
     private toastr: ToastsManager,
-    public dialog: MdDialog,
     private router: Router,
     private location: Location,
     private activatedRoute: ActivatedRoute,
     private _fb: FormBuilder,
-    private authService: AuthService,
-    private companieService: CompanieService,
-  ) {
-  }
-
-  getObjects(myForm: any){
-     return myForm.get('forms').controls
-   }
-
-   editMode(){
-     this.isEditMode = !this.isEditMode
-   }
-
-
+    private authService: AuthService
+  ) {}
 
 
 
   ngOnInit() {
-    this.myForm = this._fb.group({
-      lastVisit: [''],
-      profile: this._fb.group({
-        _profilePicture: this._fb.group({
-          _id: ['', [Validators.required, Validators.minLength(5)]]
-        }),
-        name: ['', [Validators.required, Validators.minLength(2)]],
-        lastName: ['', [Validators.required, Validators.minLength(2)]],
-        title: ['', [Validators.required, Validators.minLength(2)]]
-      }),
-      forms: this._fb.array([])
-    })
-
-
-    this.activatedRoute.params.subscribe((params: Params) => {
-      let userId = params['id']
-      if(!userId)
-        userId = ''
-        // userId = this.authService.currentUser.userId
-
-      // this.getUser(userId)
-      this.getStripeCust()
-      // this.getStripeCard()
-      // this.getStripeSubscription()
-    })
+    this.getStripeCust()
   }
 
 
-  stripeCust: StripeCustomer = new StripeCustomer()
+
   getStripeCust() {
     this.paiementService.getStripeCust()
       .subscribe(
         res => {
           console.log(res)
-          this.stripeCust = res.customer
+          if(res.customer.deleted) {
+            this.stripeCust = new StripeCustomer()
+          } else {
+            this.stripeCust = res.customer
+          }
+
         },
         error => { console.log(error) }
       )
   }
-
+  deleteCustInStripe(){
+    this.paiementService.deleteCustInStripe()
+      .subscribe(
+        res => {
+          this.toastr.success('Great!')
+          this.getStripeCust()
+          console.log(res);
+        },
+        error => { console.log(error); }
+      );
+  }
   saveCustInStripe(){
     this.paiementService.saveCustInStripe()
       .subscribe(
@@ -119,8 +94,9 @@ export class PaiementComponent implements OnInit {
         error => { console.log(error); }
       );
   }
-  saveCardInStripe(){
-    this.paiementService.saveCardInStripe()
+  saveCardInStripe() {
+    // console.log(this.newCard)
+    this.paiementService.saveCardInStripe(this.newCard)
       .subscribe(
         res => {
           this.toastr.success('Great!')
@@ -145,8 +121,18 @@ export class PaiementComponent implements OnInit {
 
 
 
-  deleteCardInStripe(){
-
+  deleteCardInStripe(cardId){
+    this.paiementService.deleteCard(cardId)
+      .subscribe(
+        res => {
+          console.log(res.message)
+          this.toastr.success('Great!');
+          this.getStripeCust()
+        },
+        error => {
+          console.log(error);
+        }
+      );
   }
 
 
@@ -165,70 +151,17 @@ export class PaiementComponent implements OnInit {
 
 
 
-  removeForm(i: number) {
-      this.fetchedUser.forms.splice(i, 1)
-      const control = <FormArray>this.myForm.controls['forms'];
-      control.removeAt(i)
-      this.save()
-  }
-  addForm(form: Form) {
-    const control = <FormArray>this.myForm.controls['forms'];
-    const addrCtrl = this._fb.group({
-        // _id: ['', Validators.required],
-        // owner: ['', Validators.required],
-        // imagePath: ['', Validators.required],
-    });
-    control.push(addrCtrl);
-  }
 
 
   goBack() {
     this.location.back();
   }
-  seeAllPicture(){
-    this.router.navigate(['user/profile/' + this.fetchedUser._id + "/userProfilePictures"]);
-  }
 
 
-  openPictureDialog(form : Form){
-    let dialogRef = this.dialog.open(SeePictureDialogComponent)
-    dialogRef.componentInstance.form = form;
-    dialogRef.afterClosed().subscribe(result => {
-    })
-  }
 
 
-  openDialog(positionImage: string) {
-    if(positionImage == '_profilePicture') {
-      let dialogRef = this.dialog.open(EditOptionsComponentDialog);
-      dialogRef.afterClosed().subscribe(result => {
-        if(result) {
-          if(result.type === 'pdf') {
-            this.toastr.error('No pdf!');
-          } else {
-            this.fetchedUser.profile._profilePicture[0] = result
-            this.save()
-          }
 
 
-        }
-      })
-    } else {
-      let dialogRef = this.dialog.open(EditOptionsComponentDialog);
-      dialogRef.afterClosed().subscribe(result => {
-        if(result) {
-          if(result.type==='pdf') {
-            this.toastr.error('No pdf!');
-          } else {
-            this.addForm(result)
-            this.fetchedUser.forms.unshift(result)
-            this.save()
-          }
-
-        }
-      })
-    }
-  }
 
   save() {
     this.isEditMode = false
@@ -243,22 +176,6 @@ export class PaiementComponent implements OnInit {
 
 
 
-  // setDateToday(){
-  //   this.fetchedUser.lastVisit = new Date()
-  //   this.userService.updateUser(this.fetchedUser)
-  //     .subscribe(
-  //       res => {
-  //         this.toastr.success('Great!', res.message)
-  //       },
-  //       error => {console.log(error)}
-  //     )
-  // }
-
-
-  // toggleFeature(){
-  //   this.fetchedUser.profile.isFeatured = !this.fetchedUser.profile.isFeatured
-  //   this.save()
-  // }
 
   isAdmin() {
     return this.authService.isAdmin();
@@ -284,11 +201,5 @@ export class PaiementComponent implements OnInit {
   }
 
 
-
-  isHQcompanie(companie: Companie) {
-    if(companie.typeCompanie === 'HQ')
-      return true
-    return false
-  }
 
 }

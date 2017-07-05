@@ -1,7 +1,8 @@
 <div class="row">
   <div class="col-md-1"></div>
   <div class="col-md-2"><button type="button" class="btn btn-warning" (click)="goBack()"><i class="fa fa-chevron-left"><a> Retour</a></i></button></div>
-  <div class="col-md-6"><h3 class="title">Profile</h3></div>
+  <div class="col-md-6">
+    <h3 class="title">Profile</h3></div>
   <div class="col-md-3"></div>
 </div>
 
@@ -17,14 +18,12 @@
 
   <h4>Customer</h4>
   <button type="button" class="done" (click)="saveCustInStripe()">saveCustInStripe</button>
+  <button type="button" class="done" (click)="deleteCustInStripe()">deleteCustInStripe</button>
   <div class="form-control">
     {{stripeCust.id}}
   </div>
   <div class="form-control">
     {{stripeCust.created}}
-  </div>
-  <div class="form-control">
-    {{stripeCust.currency}}
   </div>
   <div class="form-control">
     {{stripeCust.email}}
@@ -56,23 +55,37 @@
 
 
   <h4>Card</h4>
-  <button type="button" class="done" (click)="saveCardInStripe()">saveCardInStripe</button>
-  <div *ngFor="let sub of stripeCust.sources.data; let i=index;">
+  <div *ngIf="!stripeCust.sources.data.length">
+
+    <input type="text" [(ngModel)]="newCard.address_city" placeholder="address_city" class="form-control">
+    <input type="text" [(ngModel)]="newCard.address_country" placeholder="address_country" class="form-control">
+    <input type="text" [(ngModel)]="newCard.address_line1" placeholder="address_line1" class="form-control">
+    <input type="text" [(ngModel)]="newCard.address_line2" placeholder="address_line2" class="form-control">
+    <input type="text" [(ngModel)]="newCard.address_state" placeholder="address_state" class="form-control">
+    <input type="text" [(ngModel)]="newCard.address_zip" placeholder="address_zip" class="form-control"> eg: 8
+    <input type="text" [(ngModel)]="newCard.exp_month" placeholder="exp_month" class="form-control"> eg: 2018
+    <input type="text" [(ngModel)]="newCard.exp_year" placeholder="exp_year" class="form-control"> eg: 4242424242424242
+    <input type="text" [(ngModel)]="newCard.number" placeholder="number" class="form-control">
+    <button type="button" class="done" (click)="saveCardInStripe()">saveCardInStripe</button>
+  </div>
+
+
+  <div *ngFor="let card of stripeCust.sources.data; let i=index;">
     <h5>Card {{i}}</h5>
-    <button type="button" class="done" (click)="deleteCardInStripe(sub.id)">deleteCardInStripe</button>
-    <div class="form-control">{{sub.id}}</div>
-    <div class="form-control">{{sub.address_city}}</div>
-    <div class="form-control">{{sub.address_country}}</div>
-    <div class="form-control">{{sub.address_line1}}</div>
-    <div class="form-control">{{sub.address_line2}}</div>
-    <div class="form-control">{{sub.address_state}}</div>
-    <div class="form-control">{{sub.address_zip}}</div>
-    <div class="form-control">{{sub.brand}}</div>
-    <div class="form-control">{{sub.country}}</div>
-    <div class="form-control">{{sub.exp_month}}</div>
-    <div class="form-control">{{sub.exp_year}}</div>
-    <div class="form-control">{{sub.funding}}</div>
-    <div class="form-control">{{sub.last4}}</div>
+    <button type="button" class="done" (click)="deleteCardInStripe(card.id)">deleteCardInStripe</button>
+    <div class="form-control">{{card.id}}</div>
+    <div class="form-control">{{card.address_city}}</div>
+    <div class="form-control">{{card.address_country}}</div>
+    <div class="form-control">{{card.address_line1}}</div>
+    <div class="form-control">{{card.address_line2}}</div>
+    <div class="form-control">{{card.address_state}}</div>
+    <div class="form-control">{{card.address_zip}}</div>
+    <div class="form-control">{{card.brand}}</div>
+    <div class="form-control">{{card.country}}</div>
+    <div class="form-control">{{card.exp_month}}</div>
+    <div class="form-control">{{card.exp_year}}</div>
+    <div class="form-control">{{card.funding}}</div>
+    <div class="form-control">{{card.last4}}</div>
   </div>
 
 

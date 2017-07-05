@@ -11,9 +11,7 @@ var user = new Schema({
     forms: [{type: Schema.Types.ObjectId, ref: 'Form'}],
     paiement: {
       stripe:{
-        cusId:{type: String},
-        cardId:{type: String},
-        subId:{type: String},
+        cusId:{type: String}
       }
     },
     salesMan: [{type: Schema.Types.ObjectId, ref: 'User'}],

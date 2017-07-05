@@ -2,8 +2,6 @@ var express = require('express'),
     router  = express.Router(),
     config  = require('../config/config'),
     User    = require('../models/user.model'),
-    Product    = require('../models/product.model'),
-    Form    = require('../models/form.model'),
     fs      = require('fs'),
     jwt     = require('jsonwebtoken'),
     stripe  = require("stripe")("sk_test_cg4vcpE5gV1ApywsErwoWL7u");
@@ -49,37 +47,8 @@ router.use('/', function (req, res, next) {
 });
 
 
-
-
-
-//
-// router.get('/getStripeCard', function (req, res, next) {
-//   // console.log(req.user.paiement.stripe.cardId)
-//     if(!req.user.paiement.stripe.cardId) {
-//       return res.status(404).json({
-//         title: 'No data',
-//         error: 'noData'
-//       });
-//     }
-//     console.log(req.user.paiement.stripe.cusId, req.user.paiement.stripe.cardId)
-//     stripe.customers.retrieveCard(req.user.paiement.stripe.cusId, req.user.paiement.stripe.cardId,
-//       function(err, card) {
-//         if(err) {
-//           return res.status(404).json({
-//             title: 'No data in stripe',
-//             error: 'noData'
-//           });
-//         } else {
-//           return res.status(200).json({
-//             customer: card
-//           })
-//         }
-//       }
-//     );
-// })
-
 router.get('/getStripeCust', function (req, res, next) {
-  console.log(req.user.paiement.stripe)
+  // console.log(req.user.paiement.stripe)
     if(!req.user.paiement.stripe.cusId) {
       return res.status(404).json({
         title: 'No data',
@@ -103,34 +72,10 @@ router.get('/getStripeCust', function (req, res, next) {
 })
 
 
-//
-// router.get('/getStripeSubscription', function (req, res, next) {
-//     if(!req.user.paiement.stripe.subId) {
-//       return res.status(404).json({
-//         title: 'No data',
-//         error: 'noData'
-//       });
-//     }
-//     stripe.subscriptions.retrieve(req.user.paiement.stripe.subId,
-//       function(err, subscription) {
-//         if(err) {
-//           return res.status(404).json({
-//             title: 'No data in stripe',
-//             error: 'noData'
-//           });
-//         } else {
-//           return res.status(200).json({
-//             customer: subscription
-//           })
-//         }
-//       }
-//     );
-// })
-
 
 
 router.post('/saveCustInStripe/', function (req, res, next) {
-    createCustomerInStripe().then(function(customer){
+    createCustomerInStripe(req).then(function(customer){
       updateStripeCustomerIdToDb(req, customer).then(function(item){
         if(item) {
           return res.status(200).json({
@@ -157,22 +102,13 @@ router.post('/saveCustInStripe/', function (req, res, next) {
 });
 router.post('/saveCardInStripe/', function (req, res, next) {
   if(req.user.paiement.stripe.cusId) {
-    createCardInStripe(req.user.paiement.stripe.cusId)
+    createCardInStripe(req)
     .then((card) => {
-      // console.log('aa')
-      // if(card) {
-        return res.status(200).json({
-          card: card
-        })
-      // } else {
-      //   return res.status(404).json({
-      //     title: 'Error',
-      //     error: 'error'
-      //   });
-      // }
+      return res.status(200).json({
+        card: card
+      })
     })
     .catch((error) => {
-      // console.log('bb')
       return res.status(404).json({
         title: 'Error Not saved in stripe',
         error: error
@@ -181,19 +117,11 @@ router.post('/saveCardInStripe/', function (req, res, next) {
   }
 });
 router.post('/saveSubscriptionInStripe/', function (req, res, next) {
-  // if(req.user.paiement.stripe.subId) {
     createSubInStripe(req.user.paiement.stripe.cusId)
     .then(function(subscription){
-        // if(item) {
-          return res.status(200).json({
-            subscription: subscription
-          })
-        // } else {
-        //   return res.status(404).json({
-        //     title: 'No data in stripe',
-        //     error: 'noData'
-        //   });
-        // }
+      return res.status(200).json({
+        subscription: subscription
+      })
     })
     .catch((error) => {
       return res.status(404).json({
@@ -201,22 +129,51 @@ router.post('/saveSubscriptionInStripe/', function (req, res, next) {
         error: error
       });
     });
-  // }
 });
 
 
 
 
 
-// function updateStripeSubIdToDb(req, subscription){
-//   let paiement = req.user.paiement
-//   paiement.stripe.subId = subscription.id
-//   return new Promise(function(resolve, reject) {
-//     User.update({ _id: req.user._id }, { $set: { paiement: paiement}}, function (err, item) {
-//       if (err) { resolve(item) } else { reject(err) }
-//     });
-//   })
-// }
+
+  router.delete('/deleteCard/:idCard', function (req, res, next) {
+    stripe.customers.deleteCard(
+      req.user.paiement.stripe.cusId,
+      req.params.idCard,
+      function(err, confirmation) {
+        if(confirmation) {
+          return res.status(200).json({
+            message: confirmation
+          })
+        } else {
+          return res.status(404).json({
+            title: 'Error',
+            error: err
+          });
+        }
+      }
+    );
+  })
+
+router.delete('/deleteCustInStripe', function (req, res, next) {
+  stripe.customers.del(req.user.paiement.stripe.cusId,
+    function(err, confirmation) {
+      if(confirmation) {
+        return res.status(200).json({
+          message: confirmation
+        })
+      } else {
+        return res.status(404).json({
+          title: 'Error',
+          error: err
+        });
+      }
+    }
+  );
+})
+
+
+
 function updateStripeCustomerIdToDb(req, customer){
   let paiement = req.user.paiement
   paiement.stripe.cusId = customer.id
@@ -227,23 +184,13 @@ function updateStripeCustomerIdToDb(req, customer){
   })
 }
 
-// function updateStripeCardIdToDb(req, card){
-//   let paiement = req.user.paiement
-//   paiement.stripe.cardId = card.id
-//
-//   return new Promise(function(resolve, reject) {
-//     User.update({ _id: req.user._id }, { $set: { paiement: paiement}}, function (err, item) {
-//       if (err) { resolve(item) } else { reject(err) }
-//     });
-//   })
-// }
 
+function createCustomerInStripe(req) {
 
-function createCustomerInStripe() {
   return new Promise(function(resolve, reject) {
     stripe.customers.create({
-      description: 'Customer for alan345alan@gmail.com',
-      email: 'alan345alan@gmail.com'
+      description: 'Customer for' + req.user.email,
+      email: req.user.email
     }, function(err, customer) {
       if(customer){
         console.log("customer Created in Stripe")
@@ -276,26 +223,35 @@ function createSubInStripe(cusId){
     })
 }
 
-function createCardInStripe(cusId){
+function createCardInStripe(req){
+  let cusId = req.user.paiement.stripe.cusId
+  let card = req.body
+  console.log(req.body)
+  delete card.id
+  delete card.brand
+  delete card.country
+  delete card.funding
+
   return new Promise(function(resolve, reject) {
       stripe.customers.createSource(
         cusId,
         {
-          source: {
-            "object": "card",
-            "address_city": "EPinal",
-            "address_country": "France",
-            "address_line1": "70 chemin du petit chaperon rouge",
-            "address_line2": "",
-            "address_state": "assignedTos",
-            "address_zip": "10100",
-            "exp_month": 8,
-            "exp_year": 2018,
-            "number": "4242424242424242",
-            "last4": "4242",
-            "metadata": {},
-            "name": null,
-          }
+          source: card
+          // {
+          //   "object": "card",
+          //   "address_city": "EPinal",
+          //   "address_country": "France",
+          //   "address_line1": "70 chemin du petit chaperon rouge",
+          //   "address_line2": "",
+          //   "address_state": "assignedTos",
+          //   "address_zip": "10100",
+          //   "exp_month": 8,
+          //   "exp_year": 2018,
+          //   "number": "4242424242424242",
+          //   // "last4": "4242",
+          //   // "metadata": {},
+          //   // "name": null,
+          // }
          },
         function(err, card) {
           if(card) {

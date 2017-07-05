@@ -32,11 +32,7 @@ export class Profile {
 }
 
 
-export class Hair {
-  hairTexture: string = '';
-  hairCondition: string = '';
-  scalpCondition: string = '';
-}
+
 
 export class DetailHouse {
   typeHouse: string = '';
