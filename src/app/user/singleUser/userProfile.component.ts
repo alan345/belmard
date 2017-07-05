@@ -58,17 +58,7 @@ export class UserProfileComponent implements OnInit {
      this.isEditMode = !this.isEditMode
    }
 
-   paiement() {
-     this.userService.paiement()
-       .subscribe(
-         res => {
-           console.log(res);
-         },
-         error => {
-           console.log(error);
-         }
-       );
-   }
+
 
 
 

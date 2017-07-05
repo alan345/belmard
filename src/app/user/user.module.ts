@@ -16,7 +16,7 @@ import { QuoteModule} from '../quote/quote.module';
 import { CompanieModule} from '../companie/companie.module';
 import { ProjectModule} from '../project/project.module';
 
-
+import { PaiementPipe } from './paiement/paiement.pipe';
 
 import { RegisterComponent} from './register/register.component';
 
@@ -85,6 +85,7 @@ import{ AdminUsersComponent } from './users/adminUsers.component';
     ChangePasswordComponent,
 
     RegisterComponent,
+    PaiementPipe,
 
 
   ],

@@ -23,7 +23,7 @@
       {{stripeCust.id}}
     </div>
     <div class="form-control">
-      {{stripeCust.created}}
+      {{stripeCust.created | timestampToDate}}
     </div>
     <div class="form-control">
       {{stripeCust.email}}
@@ -69,14 +69,15 @@
     </div>
     <div *ngFor="let sub of stripeCust.subscriptions.data">
       <div class="form-control">{{sub.id}}</div>
-      <div class="form-control">{{sub.created}}</div>
-      <div class="form-control">{{sub.current_period_end}}</div>
-      <div class="form-control">{{sub.current_period_start}}</div>
+      <div class="form-control">{{sub.created | timestampToDate}}</div>
+      <div class="form-control">{{sub.current_period_start | timestampToDate}}</div>
+      <div class="form-control">{{sub.current_period_end | timestampToDate}}</div>
+
 
       <h4>Plan</h4>
       <div class="form-control">{{sub.plan.id}}</div>
       <div class="form-control">{{sub.plan.amount}}</div>
-      <div class="form-control">{{sub.plan.created}}</div>
+      <div class="form-control">{{sub.plan.created | timestampToDate}}</div>
       <div class="form-control">{{sub.plan.currency}}</div>
       <div class="form-control">{{sub.plan.interval}}</div>
       <div class="form-control">{{sub.plan.interval_count}}</div>

@@ -9,8 +9,6 @@ import { Location } from '@angular/common';
 import { User } from '../user.model';
 import { StripeCustomer, DataSource } from './paiement.model';
 
-
-
 import { Companie } from '../../companie/companie.model';
 
 import { FormBuilder, FormGroup, FormArray, Validators} from '@angular/forms';
@@ -61,7 +59,7 @@ export class PaiementComponent implements OnInit {
     this.paiementService.getStripeCust()
       .subscribe(
         res => {
-          console.log(res)
+          // console.log(res)
           if(res.customer.deleted) {
             this.stripeCust = new StripeCustomer()
           } else {
@@ -115,7 +113,7 @@ export class PaiementComponent implements OnInit {
         res => {
           this.toastr.success('Great!')
           this.getStripeCust()
-          console.log(res);
+          // console.log(res);
         },
         error => { console.log(error); }
       );
