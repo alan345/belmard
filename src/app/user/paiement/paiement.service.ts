@@ -73,6 +73,18 @@ export class PaiementService {
       });
   }
 
+  deleteSub(subId){
+    let headers = new Headers({'Content-Type': 'application/json'});
+    headers.append('Authorization', '' + this.authService.currentUser.token);
+    return this.http.delete(this.url + 'paiement/deleteSub/' + subId, {headers: headers})
+      .map((response: Response) => {
+        return response.json();
+      })
+      .catch((error: Response) => {
+        this.errorService.handleError(error.json());
+        return Observable.throw(error.json());
+      });
+  }
   deleteCard(cardId){
     let headers = new Headers({'Content-Type': 'application/json'});
     headers.append('Authorization', '' + this.authService.currentUser.token);
@@ -122,9 +134,8 @@ export class PaiementService {
         return Observable.throw(error.json());
       });
   }
-  saveSubscriptionInStripe(){
-    let companie
-    const body = JSON.stringify(companie);
+  saveSubscriptionInStripe(plan){
+    const body = JSON.stringify(plan);
     const headers = new Headers({'Content-Type': 'application/json'});
   //  let headers = new Headers({'Content-Type': 'application/json'});
     headers.append('Authorization', '' + this.authService.currentUser.token);

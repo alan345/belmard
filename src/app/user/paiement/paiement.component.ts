@@ -106,8 +106,11 @@ export class PaiementComponent implements OnInit {
         error => { console.log(error); }
       );
   }
-  saveSubscriptionInStripe(){
-    this.paiementService.saveSubscriptionInStripe()
+  saveSubscriptionInStripe(planValue){
+    let plan = {
+      plan: planValue
+    }
+    this.paiementService.saveSubscriptionInStripe(plan)
       .subscribe(
         res => {
           this.toastr.success('Great!')
@@ -119,7 +122,19 @@ export class PaiementComponent implements OnInit {
   }
 
 
-
+  deleteSubInStripe(subId){
+    this.paiementService.deleteSub(subId)
+      .subscribe(
+        res => {
+          console.log(res.message)
+          this.toastr.success('Great!');
+          this.getStripeCust()
+        },
+        error => {
+          console.log(error);
+        }
+      );
+  }
 
   deleteCardInStripe(cardId){
     this.paiementService.deleteCard(cardId)

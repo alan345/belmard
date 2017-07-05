@@ -117,7 +117,7 @@ router.post('/saveCardInStripe/', function (req, res, next) {
   }
 });
 router.post('/saveSubscriptionInStripe/', function (req, res, next) {
-    createSubInStripe(req.user.paiement.stripe.cusId)
+    createSubInStripe(req)
     .then(function(subscription){
       return res.status(200).json({
         subscription: subscription
@@ -135,6 +135,24 @@ router.post('/saveSubscriptionInStripe/', function (req, res, next) {
 
 
 
+
+  router.delete('/deleteSub/:idSub', function (req, res, next) {
+    stripe.subscriptions.del(
+      req.params.idSub,
+      function(err, confirmation) {
+        if(confirmation) {
+          return res.status(200).json({
+            message: confirmation
+          })
+        } else {
+          return res.status(404).json({
+            title: 'Error',
+            error: err
+          });
+        }
+      }
+    );
+  })
 
   router.delete('/deleteCard/:idCard', function (req, res, next) {
     stripe.customers.deleteCard(
@@ -206,11 +224,13 @@ function createCustomerInStripe(req) {
 
 
 
-function createSubInStripe(cusId){
+function createSubInStripe(req){
+    let cusId = req.user.paiement.stripe.cusId
+    // console.log(req.body)
     return new Promise(function(resolve, reject) {
       stripe.subscriptions.create({
         customer: cusId,
-        plan: "gold"
+        plan: req.body.plan
       }, function(err, subscription) {
         if(subscription) {
           console.log(subscription)
