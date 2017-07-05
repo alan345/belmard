@@ -9,6 +9,9 @@ import { MdDialog } from '@angular/material';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { User } from '../user.model';
+import { StripeCustomer } from './paiement.model';
+
+
 import { Form } from '../../form/form.model';
 import { Companie } from '../../companie/companie.model';
 import { EditOptionsComponentDialog } from '../../form/modalLibrary/modalLibrary.component';
@@ -95,39 +98,43 @@ export class PaiementComponent implements OnInit {
         userId = ''
         // userId = this.authService.currentUser.userId
 
-      this.getUser(userId)
+      // this.getUser(userId)
       this.getStripeCust()
-      this.getStripeCard()
-      this.getStripeSubscription()
+      // this.getStripeCard()
+      // this.getStripeSubscription()
     })
   }
 
 
-  stripeCust = {}
+  stripeCust: StripeCustomer = new StripeCustomer()
+
   getStripeCust() {
     this.paiementService.getStripeCust()
       .subscribe(
-        res => { this.stripeCust = res },
+        res => {
+          console.log(res)
+          this.stripeCust = res.customer
+        },
         error => { console.log(error) }
       )
   }
 
-  stripeCard = {}
-  getStripeCard() {
-    this.paiementService.getStripeCard()
-      .subscribe(
-        res => { this.stripeCard = res },
-        error => { console.log(error) }
-      )
-  }
-  stripeSubscription = {}
-  getStripeSubscription(){
-    this.paiementService.getStripeSubscription()
-      .subscribe(
-        res => { this.stripeSubscription = res },
-        error => { console.log(error) }
-      )
-  }
+  // stripeCard = {}
+  // getStripeCard() {
+  //   this.paiementService.getStripeCard()
+  //     .subscribe(
+  //       res => { this.stripeCard = res },
+  //       error => { console.log(error) }
+  //     )
+  // }
+  // stripeSubscription = {}
+  // getStripeSubscription(){
+  //   this.paiementService.getStripeSubscription()
+  //     .subscribe(
+  //       res => { this.stripeSubscription = res },
+  //       error => { console.log(error) }
+  //     )
+  // }
   saveCustInStripe(){
     this.paiementService.saveCustInStripe()
       .subscribe(

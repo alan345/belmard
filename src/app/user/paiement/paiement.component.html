@@ -19,22 +19,82 @@
 
   <h4>Customer</h4>
   <button type="button" class="done" (click)="saveCustInStripe()">saveCustInStripe</button>
-  <pre>
+  <div class="form-control">
+    {{stripeCust.id}}
+  </div>
+  <div class="form-control">
+    {{stripeCust.created}}
+  </div>
+  <div class="form-control">
+    {{stripeCust.currency}}
+  </div>
+  <div class="form-control">
+    {{stripeCust.email}}
+  </div>
+
+
+  <!-- <input
+    type="text"
+    [(ngModel)]="stripeCust.id"
+    placeholder="id"
+    class="form-control"
+    autofocus autocapitalize="none"
+    autocomplete="off"
+    spellcheck="false"
+    autocorrect="none">
+  <input
+    type="text"
+    [(ngModel)]="stripeCust.id"
+    placeholder="id"
+    class="form-control"
+    autofocus autocapitalize="none"
+    autocomplete="off"
+    spellcheck="false"
+    autocorrect="none">
+    -->
+  <!-- <pre>
   {{stripeCust|json}}
-  </pre>
+  </pre> -->
 
 
   <h4>Card</h4>
   <button type="button" class="done" (click)="saveCardInStripe()">saveCardInStripe</button>
-  <pre>
-  {{stripeCard|json}}
-  </pre>
+  <div *ngFor="let sub of stripeCust.sources.data">
+    <div class="form-control">{{sub.id}}</div>
+    <div class="form-control">{{sub.address_city}}</div>
+    <div class="form-control">{{sub.address_country}}</div>
+    <div class="form-control">{{sub.address_line1}}</div>
+    <div class="form-control">{{sub.address_line2}}</div>
+    <div class="form-control">{{sub.address_state}}</div>
+    <div class="form-control">{{sub.address_zip}}</div>
+    <div class="form-control">{{sub.brand}}</div>
+    <div class="form-control">{{sub.country}}</div>
+    <div class="form-control">{{sub.exp_month}}</div>
+    <div class="form-control">{{sub.exp_year}}</div>
+    <div class="form-control">{{sub.funding}}</div>
+    <div class="form-control">{{sub.last4}}</div>
+  </div>
+
 
   <h4>Abonnement</h4>
   <button type="button" class="done" (click)="saveSubscriptionInStripe()">saveSubInStripe</button>
-  <pre>
-  {{stripeSubscription|json}}
-  </pre>
+  <div *ngFor="let sub of stripeCust.subscriptions.data">
+    <div class="form-control">{{sub.id}}</div>
+    <div class="form-control">{{sub.created}}</div>
+    <div class="form-control">{{sub.current_period_end}}</div>
+    <div class="form-control">{{sub.current_period_start}}</div>
+
+    <h4>Plan</h4>
+    <div class="form-control">{{sub.plan.id}}</div>
+    <div class="form-control">{{sub.plan.amount}}</div>
+    <div class="form-control">{{sub.plan.created}}</div>
+    <div class="form-control">{{sub.plan.currency}}</div>
+    <div class="form-control">{{sub.plan.interval}}</div>
+    <div class="form-control">{{sub.plan.interval_count}}</div>
+    <div class="form-control">{{sub.plan.name}}</div>
+
+
+  </div>
 
 
   <button type="button" class="done" (click)="paiement()">Paiement</button>

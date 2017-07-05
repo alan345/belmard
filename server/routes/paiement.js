@@ -52,31 +52,31 @@ router.use('/', function (req, res, next) {
 
 
 
-
-router.get('/getStripeCard', function (req, res, next) {
-  // console.log(req.user.paiement.stripe.cardId)
-    if(!req.user.paiement.stripe.cardId) {
-      return res.status(404).json({
-        title: 'No data',
-        error: 'noData'
-      });
-    }
-    console.log(req.user.paiement.stripe.cusId, req.user.paiement.stripe.cardId)
-    stripe.customers.retrieveCard(req.user.paiement.stripe.cusId, req.user.paiement.stripe.cardId,
-      function(err, card) {
-        if(err) {
-          return res.status(404).json({
-            title: 'No data in stripe',
-            error: 'noData'
-          });
-        } else {
-          return res.status(200).json({
-            customer: card
-          })
-        }
-      }
-    );
-})
+//
+// router.get('/getStripeCard', function (req, res, next) {
+//   // console.log(req.user.paiement.stripe.cardId)
+//     if(!req.user.paiement.stripe.cardId) {
+//       return res.status(404).json({
+//         title: 'No data',
+//         error: 'noData'
+//       });
+//     }
+//     console.log(req.user.paiement.stripe.cusId, req.user.paiement.stripe.cardId)
+//     stripe.customers.retrieveCard(req.user.paiement.stripe.cusId, req.user.paiement.stripe.cardId,
+//       function(err, card) {
+//         if(err) {
+//           return res.status(404).json({
+//             title: 'No data in stripe',
+//             error: 'noData'
+//           });
+//         } else {
+//           return res.status(200).json({
+//             customer: card
+//           })
+//         }
+//       }
+//     );
+// })
 
 router.get('/getStripeCust', function (req, res, next) {
   console.log(req.user.paiement.stripe)
@@ -103,29 +103,29 @@ router.get('/getStripeCust', function (req, res, next) {
 })
 
 
-
-router.get('/getStripeSubscription', function (req, res, next) {
-    if(!req.user.paiement.stripe.subId) {
-      return res.status(404).json({
-        title: 'No data',
-        error: 'noData'
-      });
-    }
-    stripe.subscriptions.retrieve(req.user.paiement.stripe.subId,
-      function(err, subscription) {
-        if(err) {
-          return res.status(404).json({
-            title: 'No data in stripe',
-            error: 'noData'
-          });
-        } else {
-          return res.status(200).json({
-            customer: subscription
-          })
-        }
-      }
-    );
-})
+//
+// router.get('/getStripeSubscription', function (req, res, next) {
+//     if(!req.user.paiement.stripe.subId) {
+//       return res.status(404).json({
+//         title: 'No data',
+//         error: 'noData'
+//       });
+//     }
+//     stripe.subscriptions.retrieve(req.user.paiement.stripe.subId,
+//       function(err, subscription) {
+//         if(err) {
+//           return res.status(404).json({
+//             title: 'No data in stripe',
+//             error: 'noData'
+//           });
+//         } else {
+//           return res.status(200).json({
+//             customer: subscription
+//           })
+//         }
+//       }
+//     );
+// })
 
 
 
@@ -142,8 +142,18 @@ router.post('/saveCustInStripe/', function (req, res, next) {
             error: 'noData'
           });
         }
-      })
-    })
+      }).catch((error) => {
+        return res.status(404).json({
+          title: 'Error',
+          error: error
+        });
+      });
+    }).catch((error) => {
+      return res.status(404).json({
+        title: 'Error',
+        error: error
+      });
+    });
 });
 router.post('/saveCardInStripe/', function (req, res, next) {
   if(req.user.paiement.stripe.cusId) {
@@ -200,15 +210,15 @@ router.post('/saveSubscriptionInStripe/', function (req, res, next) {
 
 
 
-function updateStripeSubIdToDb(req, subscription){
-  let paiement = req.user.paiement
-  paiement.stripe.subId = subscription.id
-  return new Promise(function(resolve, reject) {
-    User.update({ _id: req.user._id }, { $set: { paiement: paiement}}, function (err, item) {
-      if (err) { resolve(item) } else { reject(err) }
-    });
-  })
-}
+// function updateStripeSubIdToDb(req, subscription){
+//   let paiement = req.user.paiement
+//   paiement.stripe.subId = subscription.id
+//   return new Promise(function(resolve, reject) {
+//     User.update({ _id: req.user._id }, { $set: { paiement: paiement}}, function (err, item) {
+//       if (err) { resolve(item) } else { reject(err) }
+//     });
+//   })
+// }
 function updateStripeCustomerIdToDb(req, customer){
   let paiement = req.user.paiement
   paiement.stripe.cusId = customer.id
@@ -219,16 +229,16 @@ function updateStripeCustomerIdToDb(req, customer){
   })
 }
 
-function updateStripeCardIdToDb(req, card){
-  let paiement = req.user.paiement
-  paiement.stripe.cardId = card.id
-
-  return new Promise(function(resolve, reject) {
-    User.update({ _id: req.user._id }, { $set: { paiement: paiement}}, function (err, item) {
-      if (err) { resolve(item) } else { reject(err) }
-    });
-  })
-}
+// function updateStripeCardIdToDb(req, card){
+//   let paiement = req.user.paiement
+//   paiement.stripe.cardId = card.id
+//
+//   return new Promise(function(resolve, reject) {
+//     User.update({ _id: req.user._id }, { $set: { paiement: paiement}}, function (err, item) {
+//       if (err) { resolve(item) } else { reject(err) }
+//     });
+//   })
+// }
 
 
 function createCustomerInStripe() {
