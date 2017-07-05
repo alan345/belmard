@@ -1,7 +1,7 @@
 import { Component, OnInit} from '@angular/core';
 import { AuthService} from '../../auth/auth.service';
 import { UserService} from '../user.service';
-import { PaiementService} from '../paiement.service';
+import { PaiementService} from './paiement.service';
 
 import { ToastsManager} from 'ng2-toastr';
 
@@ -63,17 +63,7 @@ export class PaiementComponent implements OnInit {
      this.isEditMode = !this.isEditMode
    }
 
-   paiement() {
-     this.userService.paiement()
-       .subscribe(
-         res => {
-           console.log(res);
-         },
-         error => {
-           console.log(error);
-         }
-       );
-   }
+
 
 
 
@@ -107,7 +97,6 @@ export class PaiementComponent implements OnInit {
 
 
   stripeCust: StripeCustomer = new StripeCustomer()
-
   getStripeCust() {
     this.paiementService.getStripeCust()
       .subscribe(
@@ -119,40 +108,36 @@ export class PaiementComponent implements OnInit {
       )
   }
 
-  // stripeCard = {}
-  // getStripeCard() {
-  //   this.paiementService.getStripeCard()
-  //     .subscribe(
-  //       res => { this.stripeCard = res },
-  //       error => { console.log(error) }
-  //     )
-  // }
-  // stripeSubscription = {}
-  // getStripeSubscription(){
-  //   this.paiementService.getStripeSubscription()
-  //     .subscribe(
-  //       res => { this.stripeSubscription = res },
-  //       error => { console.log(error) }
-  //     )
-  // }
   saveCustInStripe(){
     this.paiementService.saveCustInStripe()
       .subscribe(
-        res => { console.log(res); },
+        res => {
+          this.toastr.success('Great!')
+          this.stripeCust = res.customer
+          console.log(res);
+        },
         error => { console.log(error); }
       );
   }
   saveCardInStripe(){
     this.paiementService.saveCardInStripe()
       .subscribe(
-        res => { console.log(res); },
+        res => {
+          this.toastr.success('Great!')
+          this.getStripeCust()
+          console.log(res);
+        },
         error => { console.log(error); }
       );
   }
   saveSubscriptionInStripe(){
     this.paiementService.saveSubscriptionInStripe()
       .subscribe(
-        res => { console.log(res); },
+        res => {
+          this.toastr.success('Great!')
+          this.getStripeCust()
+          console.log(res);
+        },
         error => { console.log(error); }
       );
   }
@@ -160,7 +145,9 @@ export class PaiementComponent implements OnInit {
 
 
 
+  deleteCardInStripe(){
 
+  }
 
 
 

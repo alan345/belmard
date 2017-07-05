@@ -54,55 +54,8 @@ export class UserService {
 
 
 
-  // getUsersByEmail(search: any) {
-  //   let headers = new Headers({'Content-Type': 'application/json'})
-  //   headers.append('Authorization', '' + this.authService.currentUser.token)
-  //   let options = new RequestOptions({ headers: headers, search: search});
-  //   return this.http.get(this.url + 'profile/getUsersByEmail/'  , options)
-  //     .timeout(9000)
-  //     .map((response: Response) => {
-  //       const users = response.json();
-  //       return users;
-  //     })
-  //     .catch((error: Response) => {
-  //       this.errorService.handleError(error.json());
-  //       return Observable.throw(error.json());
-  //     })
-  // }
-
-  // getStripeCust() {
-  //   let headers = new Headers({'Content-Type': 'application/json'});
-  //   headers.append('Authorization', '' + this.authService.currentUser.token);
-  //   return this.http.get(this.url + 'profile/getStripeCust', {headers: headers})
-  //     .map((response: Response) => {
-  //       return response.json();
-  //     })
-  //     .catch((error: Response) => {
-  //       this.errorService.handleError(error.json());
-  //       return Observable.throw(error.json());
-  //     });
-  // }
-  // getStripeCard() {
-  //   let headers = new Headers({'Content-Type': 'application/json'});
-  //   headers.append('Authorization', '' + this.authService.currentUser.token);
-  //   return this.http.get(this.url + 'profile/getStripeCard', {headers: headers})
-  //     .map((response: Response) => {
-  //       return response.json();
-  //     })
-  //     .catch((error: Response) => {
-  //       this.errorService.handleError(error.json());
-  //       return Observable.throw(error.json());
-  //     });
-  // }
 
   getUser(id: string) {
-    // if(!id) {
-    // //  console.log(this.currentUser)
-    //   if(this.currentUser._id) {
-    // //    console.log(this.currentUser)
-    //     return Observable.of(this.currentUser)
-    //   }
-    // }
 
     let headers = new Headers({'Content-Type': 'application/json'});
     headers.append('Authorization', '' + this.authService.currentUser.token);
@@ -154,45 +107,7 @@ export class UserService {
       });
   }
 
-  paiement() {
-      let companie
-      const body = JSON.stringify(companie);
-      const headers = new Headers({'Content-Type': 'application/json'});
-    //  let headers = new Headers({'Content-Type': 'application/json'});
-      headers.append('Authorization', '' + this.authService.currentUser.token);
-      return this.http.post(this.url + 'profile/paiement ', body, {headers: headers})
-        .map(response => response.json())
-        .catch((error: Response) => {
-          this.errorService.handleError(error.json());
-          return Observable.throw(error.json());
-        });
-  }
-  // saveCustInStripe(){
-  //   let companie
-  //   const body = JSON.stringify(companie);
-  //   const headers = new Headers({'Content-Type': 'application/json'});
-  // //  let headers = new Headers({'Content-Type': 'application/json'});
-  //   headers.append('Authorization', '' + this.authService.currentUser.token);
-  //   return this.http.post(this.url + 'profile/saveCustInStripe', body, {headers: headers})
-  //     .map(response => response.json())
-  //     .catch((error: Response) => {
-  //       this.errorService.handleError(error.json());
-  //       return Observable.throw(error.json());
-  //     });
-  // }
-  // saveCardInStripe(){
-  //   let companie
-  //   const body = JSON.stringify(companie);
-  //   const headers = new Headers({'Content-Type': 'application/json'});
-  // //  let headers = new Headers({'Content-Type': 'application/json'});
-  //   headers.append('Authorization', '' + this.authService.currentUser.token);
-  //   return this.http.post(this.url + 'profile/saveCardInStripe', body, {headers: headers})
-  //     .map(response => response.json())
-  //     .catch((error: Response) => {
-  //       this.errorService.handleError(error.json());
-  //       return Observable.throw(error.json());
-  //     });
-  // }
+
 
   updateUser(user: User) {
     const body = JSON.stringify(user);

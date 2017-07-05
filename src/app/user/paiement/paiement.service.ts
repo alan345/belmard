@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {Response, Headers, Http, RequestOptions} from '@angular/http';
-import {ErrorService} from '../errorHandler/error.service';
-import {User} from './user.model';
-import {Companie} from '../companie/companie.model';
+import {ErrorService} from '../../errorHandler/error.service';
+import {User} from '../user.model';
+import {Companie} from '../../companie/companie.model';
 import {ToastsManager} from 'ng2-toastr';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -13,8 +13,8 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-import {newPassword} from './user.model';
-import {AuthService} from '../auth/auth.service';
+
+import {AuthService} from '../../auth/auth.service';
 
 
 
@@ -106,7 +106,7 @@ export class PaiementService {
     const headers = new Headers({'Content-Type': 'application/json'});
   //  let headers = new Headers({'Content-Type': 'application/json'});
     headers.append('Authorization', '' + this.authService.currentUser.token);
-    return this.http.post(this.url + 'paiement/saveCardInStripe', body, {headers: headers})
+    return this.http.post(this.url + 'paiement/saveCardInStripe/', body, {headers: headers})
       .map(response => response.json())
       .catch((error: Response) => {
         this.errorService.handleError(error.json());

@@ -59,7 +59,9 @@
 
   <h4>Card</h4>
   <button type="button" class="done" (click)="saveCardInStripe()">saveCardInStripe</button>
-  <div *ngFor="let sub of stripeCust.sources.data">
+  <div *ngFor="let sub of stripeCust.sources.data; let i=index;">
+    <h5>Card {{i}}</h5>
+    <button type="button" class="done" (click)="deleteCardInStripe(sub.id)">deleteCardInStripe</button>
     <div class="form-control">{{sub.id}}</div>
     <div class="form-control">{{sub.address_city}}</div>
     <div class="form-control">{{sub.address_country}}</div>
@@ -97,7 +99,6 @@
   </div>
 
 
-  <button type="button" class="done" (click)="paiement()">Paiement</button>
 
 
 

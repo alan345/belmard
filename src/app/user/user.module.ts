@@ -41,7 +41,7 @@ import { ResetPasswordComponent} from './accountRecover/resetPassword.component'
 import { ForgetPasswordComponent} from './accountRecover/forgetPassword.component';
 
 import { UserService} from './user.service';
-import { PaiementService} from './paiement.service';
+import { PaiementService} from './paiement/paiement.service';
 import { LoginComponent} from './login/login.component';
 //import { UserFormsComponent} from '../form/userForms.component';
 

@@ -144,69 +144,67 @@ router.post('/saveCustInStripe/', function (req, res, next) {
         }
       }).catch((error) => {
         return res.status(404).json({
-          title: 'Error',
+          title: 'Error not saved in db',
           error: error
         });
       });
     }).catch((error) => {
       return res.status(404).json({
-        title: 'Error',
+        title: 'Error Not saved in stripe',
         error: error
       });
     });
 });
 router.post('/saveCardInStripe/', function (req, res, next) {
   if(req.user.paiement.stripe.cusId) {
-    createCardInStripe(req.user.paiement.stripe.cusId).then(function(card){
-      updateStripeCardIdToDb(req, card).then(function(item){
-        if(item) {
-          return res.status(200).json({
-            customer: customer
-          })
-        } else {
-          return res.status(404).json({
-            title: 'No data in stripe',
-            error: 'noData'
-          });
-        }
-      })
+    createCardInStripe(req.user.paiement.stripe.cusId)
+    .then((card) => {
+      // console.log('aa')
+      // if(card) {
+        return res.status(200).json({
+          card: card
+        })
+      // } else {
+      //   return res.status(404).json({
+      //     title: 'Error',
+      //     error: 'error'
+      //   });
+      // }
     })
+    .catch((error) => {
+      // console.log('bb')
+      return res.status(404).json({
+        title: 'Error Not saved in stripe',
+        error: error
+      });
+    });
   }
 });
 router.post('/saveSubscriptionInStripe/', function (req, res, next) {
   // if(req.user.paiement.stripe.subId) {
-    createSubInStripe(req.user.paiement.stripe.cusId).then(function(subscription){
-      updateStripeSubIdToDb(req, subscription).then(function(item){
-        if(item) {
+    createSubInStripe(req.user.paiement.stripe.cusId)
+    .then(function(subscription){
+        // if(item) {
           return res.status(200).json({
-            customer: customer
+            subscription: subscription
           })
-        } else {
-          return res.status(404).json({
-            title: 'No data in stripe',
-            error: 'noData'
-          });
-        }
-      })
+        // } else {
+        //   return res.status(404).json({
+        //     title: 'No data in stripe',
+        //     error: 'noData'
+        //   });
+        // }
     })
+    .catch((error) => {
+      return res.status(404).json({
+        title: 'Error Not saved in stripe',
+        error: error
+      });
+    });
   // }
 });
 
 
-
-
-// router.post('/paiement/', function (req, res, next) {
-//   if(!req.user.paiement.stripe.cusId) {
-//
-//   }
-//   // createCustomerInStripe().then(function(customer){
-//   //   updateStripeCustomerIdToDb()
-//   //   createSource(customer).then(function(card){
-//   //     createSubscription(customer).then(function(subscription){
-//   //     })
-//   //   })
-//   // })
-// });
 
 
 
@@ -224,7 +222,7 @@ function updateStripeCustomerIdToDb(req, customer){
   paiement.stripe.cusId = customer.id
   return new Promise(function(resolve, reject) {
     User.update({ _id: req.user._id }, { $set: { paiement: paiement}}, function (err, item) {
-      if (err) { resolve(item) } else { reject(err) }
+      if (item) { resolve(item) } else { reject(err) }
     });
   })
 }
@@ -272,7 +270,7 @@ function createSubInStripe(cusId){
           resolve(subscription)
         } else {
           console.log(err)
-          reject(error)
+          reject(err)
         }
       });
     })
@@ -301,7 +299,6 @@ function createCardInStripe(cusId){
          },
         function(err, card) {
           if(card) {
-            console.log(card)
             resolve(card)
           } else {
             console.log(err)
