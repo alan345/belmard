@@ -17,6 +17,7 @@ import { Location} from '@angular/common';
 export class QuotesComponent implements OnInit {
   @Input() userId = '';
   @Input() projectId = '';
+  @Input() showHeader = true;
 
   fetchedQuotes: Quote[] = [];
   loading: boolean;
@@ -71,7 +72,7 @@ export class QuotesComponent implements OnInit {
 
   }
 
-  
+
   openDialog() {
 
   }

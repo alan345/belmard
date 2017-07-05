@@ -7,13 +7,8 @@ var mongoose                = require('mongoose'),
 
 var quote = new Schema({
     ownerCompanies: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
-  //  _id: String,
-    address:{
-      address : {type: String, default: ['']},
-      city : {type: String, default: ['']},
-      state : {type: String, default: ['']},
-      zip : {type: String, default: ['']},
-    },
+
+
     projects: [{type: Schema.Types.ObjectId, ref: 'Project'}],
     clients: [{type: Schema.Types.ObjectId, ref: 'User'}],
     phoneNumber: {type: String, default: ['']},

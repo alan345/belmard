@@ -74,7 +74,7 @@ router.put('/:id', function (req, res, next) {
         item.url = req.body.url,
         item.start = req.body.start,
         item.end = req.body.end,
-
+        item.details = req.body.details,
         item.user = req.body.user,
         item.color = req.body.color,
         item.clients = req.body.clients,
@@ -151,9 +151,9 @@ router.get('/page/:page', function (req, res, next) {
   if(req.query.projectSearch)
     searchQuery['projects'] = mongoose.Types.ObjectId(JSON.parse(req.query.projectSearch)._id)
 
-  if(req.query.clientSearch)
-    searchQuery['clients'] = mongoose.Types.ObjectId(JSON.parse(req.query.clientSearch)._id)
-
+  // if(req.query.clientSearch)
+  //   searchQuery['clients'] = mongoose.Types.ObjectId(JSON.parse(req.query.clientSearch)._id)
+  //
 
   if(req.query.search)
     searchQuery['name'] = new RegExp(req.query.search, 'i')

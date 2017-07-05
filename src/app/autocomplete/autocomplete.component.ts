@@ -1,5 +1,8 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { UserService} from '../user/user.service';
+import { CompanieService} from '../companie/companie.service';
+
+
 import { User } from '../user/user.model';
 import { Quote } from '../quote/quote.model';
 
@@ -13,55 +16,71 @@ export class AutocompleteComponent {
   @Input() typeAutocomplete: string;
   @Input() arrayContent = [];
   @Input() singleChoice: boolean = true;
+  @Input() title: string = '';
+
 
   autocompleteSearch = ''
-  fetchedUsers: User[] = [];
-  // @Input() view: string;
-  //
-  // @Input() viewDate: Date;
-  //
-  // @Input() locale: string = 'en';
-  //
+  fetchedData: User[] = [];
+
   @Output() getResultAutocomplete: EventEmitter<any> = new EventEmitter();
-  //
-  // @Output() viewDateChange: EventEmitter<Date> = new EventEmitter();
+
   constructor(
     private userService: UserService,
-  ) { }
+    private companieService: CompanieService,
+  ) {}
 
 
-  getUsers(page: number, search: any) {
-    this.userService.getUsers(page, search)
-      .subscribe(
-      res => {
-        this.fetchedUsers = res.data
-      },
-      error => {
-        console.log(error);
-      }
-      );
+  getData(page: number, search: any) {
+
+    if(this.typeAutocomplete ==='user')
+      this.userService.getUsers(page, search)
+      .subscribe( res => { this.fetchedData = res.data }, error => { console.log(error); });
+
+    if(this.typeAutocomplete ==='companie')
+      this.companieService.getCompanies(page, search)
+      .subscribe( res => { this.fetchedData = res.data }, error => { console.log(error); });
   }
 
 
-  selectData(user: User) {
+  selectData(data) {
     this.autocompleteSearch = ''
-    this.fetchedUsers = []
-    this.arrayContent.push(user)
+    this.fetchedData = []
+    this.arrayContent.push(data)
     this.getResultAutocomplete.emit(this.arrayContent)
   }
   searchData() {
     if (!this.autocompleteSearch) {
-      this.fetchedUsers = []
+      this.fetchedData = []
     } else {
       let search = {
         search: this.autocompleteSearch,
       };
-      this.getUsers(1, search)
+      this.getData(1, search)
     }
   }
   removeData(i: number) {
     this.arrayContent.splice(i, 1);
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

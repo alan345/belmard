@@ -7,12 +7,13 @@
 
 <div class="container">
   <div class="goldgradient beigeborder subnav">
-    <button class="subnav-btnleft" (click)="goBack()"><i class="fa fa-chevron-left"></i></button>
     <h3 style="text-align: center;">Profile</h3>
     <h4 style="text-align: center;">{{fetchedUser.profile.name}} {{fetchedUser.profile.lastName}}</h4>
 
   </div>
-
+  <a [routerLink]="['/user/newuser/' + fetchedUser._id]" class="admn-btn">
+    Edit User
+  </a>
 
   <h3>Stripe</h3>
   <h4>Customer</h4>
@@ -34,9 +35,7 @@
   <button type="button" class="done" (click)="paiement()">Paiement</button>
 
 
-  <a [routerLink]="['/user/newuser/' + fetchedUser._id]" class="admn-btn">
-    Edit User
-  </a>
+
 
   <h4>phoneNumber</h4>
   {{fetchedUser.profile.phoneNumber}}
@@ -53,7 +52,7 @@
     {{typeSingle}}
   </div>
 
-  <app-quotes [userId]="fetchedUser._id"></app-quotes>
-  <app-projects [userId]="fetchedUser._id"></app-projects>
+  <app-quotes [showHeader]="false" [userId]="fetchedUser._id"></app-quotes>
+  <app-projects [showHeader]="false" [userId]="fetchedUser._id"></app-projects>
 
 </div>

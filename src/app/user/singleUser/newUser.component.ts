@@ -34,7 +34,10 @@ export class NewUserComponent implements OnInit {
 
 
 
-
+  titleArray=['Mr.', 'Mrs.']
+  typeClientArray=['Particulier','Societe','Administration']
+  statusHouseArray=['Propriétaire','Locataire']
+  typeHouseArray=['Pavillon','Immeuble']
   companieIndexToSelect = ''
   typeUserDropDown = ''
   typeUser = TypeUser
@@ -79,17 +82,17 @@ export class NewUserComponent implements OnInit {
         }
       );
   }
-  selectCompanie(companie: Companie) {
-    this.autocompleteCompanie = ''
-    this.fetchedCompanies = []
-    this.fetchedUser.companies.push(companie)
+  selectCompanie(companies) {
+    this.fetchedUser.companies = companies
   }
+  //
+  // removeCompanie(i: number) {
+  //   this.fetchedUser.companies.splice(i, 1);
+  // }
 
-  removeCompanie(i: number) {
-    this.fetchedUser.companies.splice(i, 1);
+  selectSalesMan(users) {
+    this.fetchedUser.salesMan = users
   }
-
-
 
 
 
@@ -124,29 +127,35 @@ export class NewUserComponent implements OnInit {
         email: [this.emailValidator],
 
         profile: this._fb.group({
-            colorCalendar: [''],
-            name: ['', [Validators.required, Validators.minLength(3)]],
-            lastName: ['', [Validators.required, Validators.minLength(3)]],
-            phoneNumber: [''],
-            // parentUser: this._fb.array([]),
-
+          colorCalendar: [''],
+          otherData: [''],
+          name: ['', [Validators.required, Validators.minLength(3)]],
+          lastName: ['', [Validators.required, Validators.minLength(3)]],
+          phoneNumber: [''],
+          fax: [''],
+          title: [''],
+          typeClient: [''],
+          statusHouse: [''],
+          detailHouse: this._fb.group({
+            typeHouse: [''],
+            surface: [''],
+            accesCode: [''],
+            floor: [''],
+            accessType: [''],
+          }),
+          address: this._fb.group({
+            address: [''],
+            city: [''],
+            state: [''],
+            zip: [''],
+          })
         })
     })
 
-    // let userId = this.authService.currentUser.userId
-    // this.companieService.getCompanieByUserId(userId)
-    // this.companieService.getCompanieForCurrentUser()
-    // .subscribe(
-    //   (data => {
-    //     this.fetchedCompanies = data
-    //
-    //     if(this.fetchedCompanies.length)
-    //       this.companieIndexToSelect = this.fetchedCompanies[0]._id
-    //     // Ok mes tes clients sont dans quel salon? ==> je prends le premier salon qui nest pas HQ
-    //     // if(data.length)
-    //     //   this.fetchedCompanie = data[0]
-    //   })
-    // )
+
+
+
+
 
     this.activatedRoute.params.subscribe((params: Params) => {
       if(params['id']) {

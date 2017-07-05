@@ -19,6 +19,7 @@ import { UserService} from '../../user/user.service';
 })
 export class ProjectsComponent implements OnInit {
   @Input() userId = '';
+  @Input() showHeader = true;
   token: string = localStorage.getItem('id_token');
   fetchedProjects: Project[] = [];
   search: any = {

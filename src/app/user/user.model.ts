@@ -1,36 +1,36 @@
 import { Form } from '../form/form.model';
 import { Companie } from '../companie/companie.model';
 
+export const TypeUser = ['plombier', 'serrurier']
 
 export class User {
   _id: string = '';
   email: string = '';
-  // lastVisit: Date = new Date;
   role: string[] = [];
   type: string[] = [];
   forms: Form[] = [];
-  // products: ProductBought[] = [];
   profile: Profile = new Profile();
-  // notes: Note[] = [];
   password: string = '';
   companies: Companie[] = [];
+  salesMan: User[] = [];
 }
-
-
-
-export const TypeUser = ['plombier', 'serrurier']
 
 export class Profile {
   name: string = '';
-  // isFeatured: boolean = false;
   lastName: string = '';
-  // title: string = '';
   phoneNumber: string = '';
+  otherData: string = '';
   parentUser: User[] = [];
   _profilePicture: Form[] = [];
   colorCalendar: string = '';
-  // hair: Hair = new Hair();
+  fax: string = '';
+  title: string = '';
+  typeClient: string = '';
+  statusHouse: string = '';
+  detailHouse: DetailHouse = new DetailHouse();
+  address: Address = new Address();
 }
+
 
 export class Hair {
   hairTexture: string = '';
@@ -38,16 +38,22 @@ export class Hair {
   scalpCondition: string = '';
 }
 
+export class DetailHouse {
+  typeHouse: string = '';
+  surface: number = 0;
+  accesCode: string = '';
+  floor: string = '';
+  accessType: string = '';
+}
 
-// export interface Note {
-//     text: string;
-//     dateNote: Date;
-// }
 
-export interface Address {
-    street: string;
-    postcode: string;
 
+
+export class Address {
+    address : string = '';
+    city : string = '';
+    state : string = '';
+    zip : string = '';
 }
 
 

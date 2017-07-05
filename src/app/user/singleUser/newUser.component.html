@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-1"></div>
   <div class="col-md-2"><button type="button" class="btn btn-warning" (click)="goBack()"><i class="fa fa-chevron-left"><a> Retour</a></i></button></div>
-  <div class="col-md-6"><h3 class="title">Nouveau Client</h3></div>
+  <div class="col-md-6"><h3 class="title">Client</h3></div>
   <div class="col-md-3"></div>
 </div>
 
@@ -9,69 +9,14 @@
   <div class="single-wrpr beigeback">
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
       <div class="form-group col-sm-12">
-        <!-- Autocomplete companie -->
-        <label>Entreprise</label>
-        <input
-          *ngIf="!fetchedUser.companies.length"
-          [ngModelOptions]="{standalone: true}"
-          [(ngModel)]="autocompleteCompanie"
-          placeholder="Select"
-          (ngModelChange)="searchCompanies()"
-          mdInput
-        >
-        <div *ngFor="let fetchedCompanie of fetchedCompanies; let i=index">
-          {{fetchedCompanie.name}}
-          <button type="button" (click)="selectCompanie(fetchedCompanie)">select</button>
-        </div>
-        <div *ngIf="fetchedCompanies.length == 0 && autocompleteCompanie !=''">
-          Pas de resultats,
-          <a [routerLink]="['/companie/new']" class="admn-btn">
-            Ajouter Entreprise
-          </a>
-        </div>
-        <div *ngFor="let vendor of fetchedUser.companies; let i=index">
-          {{vendor.name}}
-          <button type="button" (click)="removeCompanie(i)"><i class="fa fa-times"></i></button>
-        </div>
-        <!-- Autocomplete companie -->
+        <label>Code Client :</label>
+        {{fetchedUser._id}}
       </div>
 
 
 
-      <div class="form-group col-sm-12">
-          <!-- Autocomplete -->
-          <label>Type User</label>
-          <input
-            *ngIf="!fetchedUser.type.length"
-            [ngModelOptions]="{standalone: true}"
-            [(ngModel)]="autocompleteTypeUser"
-            placeholder="Select type User"
-            (ngModelChange)="searchTypeUser()"
-            mdInput
-          >
-          <div *ngFor="let fetchedTypeUser of fetchedTypeUsers; let i=index">
-            {{fetchedTypeUser}}
-            <button type="button" (click)="selectTypeUser(fetchedTypeUser)">select</button>
-          </div>
-          <div *ngFor="let typeUser of fetchedUser.type; let i=index">
-            {{typeUser}}
-            <button type="button" (click)="removeTypeUser(i)"><i class="fa fa-times"></i></button>
-          </div>
-          <!-- Autocomplete -->
-        </div>
-
-          <!-- <select
-            [ngModelOptions]="{standalone: true}"
-            [(ngModel)]="typeUserDropDown"
-          >
-            <option *ngFor="let n of typeUser" [attr.value]="n.value">{{n.value}}</option>
-          </select> -->
-
-
-
 
       <div class="form-group col-sm-12">
-
         <input
           type="text"
           class="form-control"
@@ -81,13 +26,15 @@
       </div>
       <div formGroupName="profile">
         <div class="form-group col-sm-12">
-          <label>Couleur Calendrier</label>
-          <input
-            type="color"
-            formControlName="colorCalendar"
-            [(ngModel)]="fetchedUser.profile.colorCalendar"
-          >
+          <select
+            [(ngModel)]="fetchedUser.title"
+            class="form-control"
+            formControlName="title"
+            >
+            <option *ngFor="let n of titleArray" [attr.value]="n">{{n}}</option>
+          </select>
         </div>
+
         <div class="form-group col-sm-12">
           <input
             type="text"
@@ -105,7 +52,22 @@
             [(ngModel)]="fetchedUser.profile.lastName"
             placeholder="Client's lastName">
         </div>
-
+        <div class="form-group col-sm-12">
+          <select
+            [(ngModel)]="fetchedUser.typeClient"
+            class="form-control"
+            formControlName="typeClient">
+            <option *ngFor="let n of typeClientArray" [attr.value]="n">{{n}}</option>
+          </select>
+        </div>
+        <div class="form-group col-sm-12">
+          <select
+            [(ngModel)]="fetchedUser.statusHouse"
+            class="form-control"
+            formControlName="statusHouse">
+            <option *ngFor="let n of statusHouseArray" [attr.value]="n">{{n}}</option>
+          </select>
+        </div>
 
         <div class="form-group col-sm-12">
           <input
@@ -116,6 +78,178 @@
             placeholder="Phone Number">
         </div>
 
+        <div formGroupName="address">
+          <h5>Address</h5>
+          <div class="form-group col-sm-12">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="address"
+              [(ngModel)]="fetchedUser.profile.address.address"
+              placeholder="address">
+          </div>
+          <div class="form-group col-sm-12">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="city"
+              [(ngModel)]="fetchedUser.profile.address.city"
+              placeholder="city">
+          </div>
+          <div class="form-group col-sm-12">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="state"
+              [(ngModel)]="fetchedUser.profile.address.state"
+              placeholder="state">
+          </div>
+          <div class="form-group col-sm-12">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="zip"
+              [(ngModel)]="fetchedUser.profile.address.zip"
+              placeholder="zip">
+          </div>
+        </div>
+        <div formGroupName="detailHouse">
+          <h5>detailHouse</h5>
+          <div class="form-group col-sm-12">
+            <select
+              [(ngModel)]="fetchedUser.profile.detailHouse.typeHouse"
+              class="form-control"
+              formControlName="typeHouse">
+              <option *ngFor="let n of typeHouseArray" [attr.value]="n">{{n}}</option>
+            </select>
+          </div>
+          <div class="form-group col-sm-12">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="surface"
+              [(ngModel)]="fetchedUser.profile.detailHouse.surface"
+              placeholder="surface">
+          </div>
+          <div class="form-group col-sm-12">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="accesCode"
+              [(ngModel)]="fetchedUser.profile.detailHouse.accesCode"
+              placeholder="accesCode">
+          </div>
+          <div class="form-group col-sm-12">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="floor"
+              [(ngModel)]="fetchedUser.profile.detailHouse.floor"
+              placeholder="floor">
+          </div>
+          <div class="form-group col-sm-12">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="accessType"
+              [(ngModel)]="fetchedUser.profile.detailHouse.accessType"
+              placeholder="accessType">
+          </div>
+        </div>
+        <div class="form-group col-sm-12">
+          <textarea
+            class="form-control"
+            formControlName="otherData"
+            [(ngModel)]="fetchedUser.profile.otherData"
+            placeholder="Autres"
+          >
+          </textarea>
+        </div>
+        <div class="form-group col-sm-12">
+          <label>Couleur Calendrier</label>
+          <input
+            type="color"
+            formControlName="colorCalendar"
+            [(ngModel)]="fetchedUser.profile.colorCalendar"
+          >
+        </div>
+        <div class="form-group col-sm-12">
+          <app-autocomplete
+            [typeAutocomplete]="'user'"
+            [title]="'Apporteur Affaire'"
+            [singleChoice]="'true'"
+            [arrayContent]="fetchedUser.salesMan"
+            (getResultAutocomplete)="selectSalesMan($event)"
+            >
+          </app-autocomplete>
+        </div>
+
+
+
+
+
+        <div class="form-group col-sm-12">
+            <!-- Autocomplete -->
+            <label>Type User</label>
+            <input
+              *ngIf="!fetchedUser.type.length"
+              [ngModelOptions]="{standalone: true}"
+              [(ngModel)]="autocompleteTypeUser"
+              placeholder="Select type User"
+              (ngModelChange)="searchTypeUser()"
+              mdInput
+            >
+            <div *ngFor="let fetchedTypeUser of fetchedTypeUsers; let i=index">
+              {{fetchedTypeUser}}
+              <button type="button" (click)="selectTypeUser(fetchedTypeUser)">select</button>
+            </div>
+            <div *ngFor="let typeUser of fetchedUser.type; let i=index">
+              {{typeUser}}
+              <button type="button" (click)="removeTypeUser(i)"><i class="fa fa-times"></i></button>
+            </div>
+            <!-- Autocomplete -->
+          </div>
+
+
+          <div class="form-group col-sm-12">
+            <app-autocomplete
+              [typeAutocomplete]="'companie'"
+              [title]="'Entreprise'"
+              [singleChoice]="'true'"
+              [arrayContent]="fetchedUser.companies"
+              (getResultAutocomplete)="selectCompanie($event)"
+              >
+            </app-autocomplete>
+          </div>
+
+
+        <div class="form-group col-sm-12">
+          <!-- Autocomplete companie -->
+          <!-- <label>Entreprise</label>
+          <input
+            *ngIf="!fetchedUser.companies.length"
+            [ngModelOptions]="{standalone: true}"
+            [(ngModel)]="autocompleteCompanie"
+            placeholder="Select"
+            (ngModelChange)="searchCompanies()"
+            mdInput
+          >
+          <div *ngFor="let fetchedCompanie of fetchedCompanies; let i=index">
+            {{fetchedCompanie.name}}
+            <button type="button" (click)="selectCompanie(fetchedCompanie)">select</button>
+          </div>
+          <div *ngIf="fetchedCompanies.length == 0 && autocompleteCompanie !=''">
+            Pas de resultats,
+            <a [routerLink]="['/companie/new']" class="admn-btn">
+              Ajouter Entreprise
+            </a>
+          </div>
+          <div *ngFor="let vendor of fetchedUser.companies; let i=index">
+            {{vendor.name}}
+            <button type="button" (click)="removeCompanie(i)"><i class="fa fa-times"></i></button>
+          </div> -->
+          <!-- Autocomplete companie -->
+        </div>
       </div>
       <div class="valid-edit">
         <button type="submit" [disabled]="!myForm.valid" [ngClass]="{'done':myForm.valid,'pas-done':!myForm.valid}">Done</button>

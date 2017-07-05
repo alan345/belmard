@@ -60,8 +60,7 @@
       >
       </textarea>
       <app-autocomplete
-
-        [typeAutocomplete]="'assignedTo'"
+        [typeAutocomplete]="'user'"
         [singleChoice]="'true'"
         [arrayContent]="fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].assignedTos"
         (getResultAutocomplete)="selectAssignedTo($event, bucketTaskIndex, taskIndex)"

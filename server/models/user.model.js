@@ -5,6 +5,7 @@ var mongoose                = require('mongoose'),
     mongooseUniqueValidator = require('mongoose-unique-validator')
 
 var user = new Schema({
+    companies: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
     email: {type: String, unique: true, required: true, lowercase: true},
     password: {type: String, required: true},
     forms: [{type: Schema.Types.ObjectId, ref: 'Form'}],
@@ -15,30 +16,35 @@ var user = new Schema({
         subId:{type: String},
       }
     },
+    salesMan: [{type: Schema.Types.ObjectId, ref: 'User'}],
     resetPasswordToken: String,
     resetPasswordExpires: String,
-    // trackinPage : {
-    //   lastVisitPageVideo: {type: Date, default: ['']},
-    //   lastVisitPagePress: {type: Date, default: ['']}
-    // },
-    // lastVisit: Date,
     role: {type: Array, default: ['client']},
     type: {type: Array},
-    companies: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
     profile : {
       _profilePicture : [{type: Schema.Types.ObjectId, ref: 'Form'}],
-      // parentUser: [{type: Schema.Types.ObjectId, ref: 'User'}],
       name: {type: String, default: ['']},
-      // isFeatured: {type: Boolean, default: ['false']},
-      // title: {type: String, default: ['']},
+      fax:{type: String, default: ['']},
+      title: {type: String, default: ['']},
       lastName: {type: String, default: ['']},
       phoneNumber:{type: String, default: ['']},
+      typeClient:{type: String, default: ['']},
       colorCalendar:{type: String, default: ['#ad2121']},
-      // hair : {
-      //   hairCondition : {type: String, default: ['Normal']},
-      //   scalpCondition : {type: String, default: ['Healthy']},
-      //   hairTexture : {type: String, default: ['Fine']}
-      // }
+      statusHouse:{type: String, default: ['']},
+      otherData:{type: String, default: ['']},
+      detailHouse:{
+        typeHouse:{type: String, default: ['']},
+        surface:{type: Number, default: [0]},
+        accesCode:{type: String, default: ['']},
+        floor:{type: String, default: ['']},
+        accessType:{type: String, default: ['']},
+      },
+      address:{
+        address : {type: String, default: ['']},
+        city : {type: String, default: ['']},
+        state : {type: String, default: ['']},
+        zip : {type: String, default: ['']},
+      },
     }
   },
   {

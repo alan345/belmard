@@ -15,6 +15,7 @@ export class UserCalendar {
     color: Color = new Color();
     draggable: boolean = true;
     resizable: Resizable = new Resizable();
+    details: Details = new Details();
     // assignedTo: User[] = [];
     // forms: Form[] = [];
     //
@@ -22,6 +23,9 @@ export class UserCalendar {
     // quotes: Quote[] = [];
 }
 
+export class Details {
+  description: string = '';
+}
 export class Resizable {
   beforeStart: boolean = true;
   afterEnd: boolean = true;

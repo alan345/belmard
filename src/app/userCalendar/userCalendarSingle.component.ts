@@ -36,7 +36,7 @@ const colors: any = {
 
 @Component({
   selector: 'app-userCalendars',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './userCalendarSingle.component.html',
   styleUrls: ['./userCalendar.component.css'],
 

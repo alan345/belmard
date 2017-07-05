@@ -10,7 +10,7 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-3">
-      <div style="height: 120px;">
+      <div style="height: 60px;">
       </div>
       <div>
         <h3>{{viewDate | date:'longDate'}}</h3>
@@ -36,7 +36,7 @@
           </table>
         </div>
 
-        <div *ngIf="!search.clientSearch.length">
+        <!-- <div *ngIf="!search.clientSearch.length">
           <input class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="autocompleteClientSearch" placeholder="Select Client to search" (ngModelChange)="searchClientSearchs()" mdInput>
         </div>
         <div class="form-control" *ngFor="let user of fetchedClientSearchs; let i=index">
@@ -54,7 +54,7 @@
               <td class="tdbtn2"><button class="btn btn-danger btn-sm ferme" type="button" (click)="removeClientSearch(i)"><i class="fa fa-times"></i></button></td>
             </tr>
           </table>
-        </div>
+        </div> -->
         <div *ngIf="!search.userSearch.length">
           <input class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="autocompleteUserSearch" placeholder="Select User to search" (ngModelChange)="searchUserSearchs()" mdInput>
         </div>
@@ -97,8 +97,11 @@
 
 
 
+
+
+
       <div class="row">
-        <h4>Details</h4>
+        <h4>Event</h4>
         <div class="col-md-12">
           <button class="btn btn-primary pull-right" (click)="addEvent()">
             <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
@@ -116,7 +119,7 @@
           <div class="col-md-12">
             <input type="text" class="form-control" [(ngModel)]="event.title" placeholder="Name" (keyup)="refresh.next()">
           </div>
-          <div class="col-md-12">
+          <!-- <div class="col-md-12">
             <div *ngIf="!event.clients.length">
               <input *ngIf="!event.clients.length" [ngModelOptions]="{standalone: true}" [(ngModel)]="autocompleteClient" placeholder="Select Client" (ngModelChange)="searchClients()" mdInput>
             </div>
@@ -134,7 +137,7 @@
               {{user.profile.name}} - {{user.profile.lastName}}
               <button type="button" (click)="removeClient(i)"><i class="fa fa-times"></i></button>
             </div>
-          </div>
+          </div> -->
           <div class="col-md-12">
             <div *ngIf="!event.users.length">
               <input *ngIf="!event.users.length" [ngModelOptions]="{standalone: true}" [(ngModel)]="autocompleteUser" placeholder="Select User" (ngModelChange)="searchUsers()" mdInput>
@@ -180,6 +183,15 @@
           <div class="col-md-12">
             <mwl-demo-utils-date-time-picker [(date)]="event.end" (dateChange)="refresh.next()" placeholder="Not set">
             </mwl-demo-utils-date-time-picker>
+          </div>
+          <div class="col-md-12">
+            <textarea
+              class="form-control"
+              [(ngModel)]="events[index].details.description"
+              required
+              placeholder="Description"
+            >
+          </textarea>
           </div>
           <div class="col-md-12">
             <button class="btn btn-danger" (click)="deleteEvent(event, index)">Delete</button>
