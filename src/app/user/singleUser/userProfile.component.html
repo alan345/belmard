@@ -5,19 +5,20 @@
   <div class="col-md-3"></div>
 </div>
 
+
 <div class="container">
   <div class="goldgradient beigeborder subnav">
     <h3 style="text-align: center;">Profile</h3>
     <h4 style="text-align: center;">{{fetchedUser.profile.name}} {{fetchedUser.profile.lastName}}</h4>
 
   </div>
-  <a [routerLink]="['/user/newuser/' + fetchedUser._id]" class="admn-btn">
-    Edit User
-  </a>
+  <a [routerLink]="['/user/newuser/' + fetchedUser._id]" class="admn-btn">Edit User</a>
 <br><br>
+<div *ngIf="isMyProfile()">
   <a [routerLink]="['/user/paiement/']" class="admn-btn">
     Paiement
   </a>
+</div>
 
 
 

@@ -222,10 +222,6 @@ export class UserProfileComponent implements OnInit {
 
 
 
-  isHQcompanie(companie: Companie) {
-    if(companie.typeCompanie === 'HQ')
-      return true
-    return false
-  }
+
 
 }
