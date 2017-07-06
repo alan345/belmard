@@ -144,33 +144,12 @@ export class ProjectsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getProjects(1, this.search)
-    // let userId = this.authService.currentUser.userId
-    // this.projectService.countNewItemForUser()
-    // .subscribe(
-    //   data => {
-        //this.trackinPage.lastVisitPageProjectCount = data.item
-        // this.userService.getUser(userId)
-        // .subscribe(
-        // res => {
-        //   res.user.trackinPage.lastVisitPageProject = new Date()
-        //   this.userService.updateUser(res.user)
-        //     .subscribe(
-        //       res => {},
-        //       error => {
-        //         console.log(error);
-        //       }
-        //     )
-        // },
-        // error => {
-        //   console.log(error);
-        // })
-    //
-    //   },
-    //   error => console.log(error)
-    // )
-    //this.categories2 = 'what\'s new'
-  //  this.updateCategerories()
+    let this2 = this
+    setTimeout(function(){
+      this2.search.userId = this2.userId
+      this2.search.orderBy = 'name'
+      this2.getProjects(1, this2.search)
+    }, 200);
   }
 
   isAdmin() {

@@ -50,32 +50,17 @@ export class QuotesComponent implements OnInit {
   ngOnInit() {
     let this2 = this
     setTimeout(function(){
-      //console.log(this2.userId)
       this2.search.userId = this2.userId
       this2.search.projectId = this2.projectId
-
-
       this2.search.orderBy = 'name'
-      this2.getQuotes(this2.paginationData.currentPage, this2.search)
+      this2.getQuotes(1, this2.search)
     }, 200);
 
   }
 
-  // ngAfterViewInit(){
-  //   console.log(this.userId)
-  //   this.search.userId = this.userId
-  //   this.search.orderBy = 'name'
-  //   this.getQuotes(this.paginationData.currentPage, this.search)
-  // }
 
-  searchQuotes(){
+  searchQuotes(){}
 
-  }
-
-
-  openDialog() {
-
-  }
 
   goBack() {
     this.location.back();
