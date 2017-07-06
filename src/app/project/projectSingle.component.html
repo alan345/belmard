@@ -22,17 +22,17 @@
       </div>
       <!-- cascade -->
       <div>
-        <select [ngModelOptions]="{standalone: true}" [(ngModel)]="categ1" (ngModelChange)="changeCascade(categ1Index.selectedIndex, 0)" #categ1Index>
+        <select class="form-control col-md-3" [ngModelOptions]="{standalone: true}" [(ngModel)]="categ1" (ngModelChange)="changeCascade(categ1Index.selectedIndex, 0)" #categ1Index>
           <option *ngFor="let n of itemSteps" [attr.value]="n.categ">{{n.categ}}</option>
         </select>
       </div>
       <div [hidden]="itemSteps[selectedIndex1].categ==''">
-        <select [ngModelOptions]="{standalone: true}" [(ngModel)]="categ2" (ngModelChange)="changeCascade(categ1Index.selectedIndex, categ2Index.selectedIndex)" #categ2Index>
+        <select class="form-control col-md-3" [ngModelOptions]="{standalone: true}" [(ngModel)]="categ2" (ngModelChange)="changeCascade(categ1Index.selectedIndex, categ2Index.selectedIndex)" #categ2Index>
           <option *ngFor="let n of itemSteps[selectedIndex1].subCateg" [attr.value]="n.categ">{{n.categ}}</option>
         </select>
       </div>
       <div [hidden]="itemSteps[selectedIndex1].subCateg[selectedIndex2].categ==''">
-        <select [ngModelOptions]="{standalone: true}" [(ngModel)]="categ3">
+        <select class="form-control col-md-3" [ngModelOptions]="{standalone: true}" [(ngModel)]="categ3">
           <option *ngFor="let n of itemSteps[selectedIndex1].subCateg[selectedIndex2].subCateg" [attr.value]="n.categ">{{n.categ}}</option>
         </select>
       </div>
@@ -48,23 +48,53 @@
 
         <div class="phyto-ctnr ttl-cde">
           <label>Nom</label>
-          <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedProject.details.name" placeholder="Ref">
+          <input class="form-control col-md-4" type="text" formControlName="name" [(ngModel)]="fetchedProject.details.name" placeholder="Ref">
         </div>
       </div>
       <div class="form-group phyto-ctnr ttl-cde">
         <label>Description</label>
-        <input type="text" class="form-control" formControlName="description" placeholder="description" [(ngModel)]="fetchedProject.details.description">
+        <input class="form-control col-md-4" type="text" formControlName="description" placeholder="description" [(ngModel)]="fetchedProject.details.description">
       </div>
 
 
-      <div class="FormGroup">
-        <button type="button" (click)="addCalendar()">Add Calendar</button>
+      <div class="FormGroup whtxt">
+        <a class="btn btn-primary" (click)="addCalendar()">
+         <i class="fa fa-calendar" aria-hidden="true"></i>
+         <span>Choisir Date</span>
+        </a>
       </div>
-      <div class="FormGroup">
-        <button type="button" (click)="seeCalendar()">See Calendar of this project</button>
+      <div class="FormGroup whtxt">
+        <a class="btn btn-warning" (click)="seeCalendar()">
+         <i class="fa fa-calendar" aria-hidden="true"></i>
+         <span>Voir calendrier du Projet</span>
+        </a>
       </div>
       <!-- Autocomplete User-->
       <label>Client</label>
+      <div>
+          <input class="form-control" *ngIf="!search.typeUser.length" [ngModelOptions]="{standalone: true}"
+          [(ngModel)]="autocompleteUser"
+          placeholder="Select"
+          (ngModelChange)="searchUsers()"
+          mdInput>
+        </div>
+        <div class="form-control" *ngFor="let user of fetchedUsers; let i=index">
+         <table>
+            <tr>
+              <td class="tdbtn1">{{user.profile.name}} - {{user.profile.lastName}}</td>
+              <td class="tdbtn2"><button class="btn btn-success" type="button" (click)="selectUser(user)">select</button></td>
+            </tr>
+          </table>
+        </div>
+        <div class="form-control" *ngFor="let user of fetchedProject.clients; let i=index">
+          <table>
+            <tr>
+              <td class="tdbtn1">{{user.profile.name}} - {{user.profile.lastName}}</td>
+              <td class="tdbtn2"><button class="btn btn-danger btn-sm ferme" type="button" (click)="removeUser(i)"><i class="fa fa-times"></i></button></td>
+            </tr>
+          </table>
+        </div>
+      <!--
       <input
         *ngIf="!fetchedProject.clients.length"
         [ngModelOptions]="{standalone: true}"
@@ -86,7 +116,7 @@
       <div *ngFor="let user of fetchedProject.clients; let i=index">
         {{user.profile.name}} - {{user.profile.lastName}}
         <button type="button" (click)="removeUser(i)"><i class="fa fa-times"></i></button>
-      </div>
+      </div> -->
       <!-- Autocomplete User -->
 
 
