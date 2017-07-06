@@ -71,6 +71,32 @@
       </div>
       <!-- Autocomplete User-->
       <label>Client</label>
+      <div *ngIf="!search.typeUser.length">
+          <input class="form-control" [ngModelOptions]="{standalone: true}"
+          [(ngModel)]="autocompleteUser"
+          placeholder="Select"
+          (ngModelChange)="searchUsers()"
+          mdInput
+          >
+        </div>
+        <div class="form-control" *ngFor="let user of fetchedUsers; let i=index">
+       
+          <table>
+            <tr>
+              <td class="tdbtn1">{{user.profile.name}} - {{user.profile.lastName}}</td>
+              <td class="tdbtn2"><button class="btn btn-success" type="button" (click)="selectUser(user)">select</button></td>
+            </tr>
+          </table>
+        </div>
+        <div class="form-control" *ngFor="let user of fetchedProject.clients; let i=index">
+          <table>
+            <tr>
+              <td class="tdbtn1">{{user.profile.name}} - {{user.profile.lastName}}</td>
+              <td class="tdbtn2"><button class="btn btn-danger btn-sm ferme" type="button" (click)="removeUser(i)"><i class="fa fa-times"></i></button></td>
+            </tr>
+          </table>
+        </div>
+      <!--
       <input
         *ngIf="!fetchedProject.clients.length"
         [ngModelOptions]="{standalone: true}"
@@ -92,7 +118,7 @@
       <div *ngFor="let user of fetchedProject.clients; let i=index">
         {{user.profile.name}} - {{user.profile.lastName}}
         <button type="button" (click)="removeUser(i)"><i class="fa fa-times"></i></button>
-      </div>
+      </div> -->
       <!-- Autocomplete User -->
 
 
