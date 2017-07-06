@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { UserService} from '../user/user.service';
 import { CompanieService} from '../companie/companie.service';
-
+import { ProductService} from '../product/product.service';
 
 import { User } from '../user/user.model';
 import { Quote } from '../quote/quote.model';
@@ -27,6 +27,7 @@ export class AutocompleteComponent {
   constructor(
     private userService: UserService,
     private companieService: CompanieService,
+    private productService: ProductService,
   ) {}
 
 
@@ -39,7 +40,16 @@ export class AutocompleteComponent {
     if(this.typeAutocomplete ==='companie')
       this.companieService.getCompanies(page, search)
       .subscribe( res => { this.fetchedData = res.data }, error => { console.log(error); });
+
+    if(this.typeAutocomplete ==='product')
+      this.productService.getProducts(page, search)
+      .subscribe( res => { this.fetchedData = res.data }, error => { console.log(error); });
+
+
   }
+
+
+
 
 
   selectData(data) {
@@ -61,29 +71,5 @@ export class AutocompleteComponent {
   removeData(i: number) {
     this.arrayContent.splice(i, 1);
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

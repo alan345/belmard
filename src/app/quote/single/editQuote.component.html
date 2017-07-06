@@ -170,28 +170,16 @@
           <div class="col-md-1"></div>
           <div class="col-md-3">
             <!-- Autocomplete -->
-            <!-- <app-autocomplete
-              [typeAutocomplete]="'user'"
-              [title]="'Apporteur Affaire'"
-              [singleChoice]="'true'"
-              [arrayContent]="fetchedUser.salesMan"
-              (getResultAutocomplete)="selectSalesMan($event)"
+            <app-autocomplete
+              [typeAutocomplete]="'product'"
+              [title]=""
+              [singleChoice]="'false'"
+              [arrayContent]="arrayContentToSearch"
+              (getResultAutocomplete)="selectProduct($event[0])"
               >
-            </app-autocomplete> -->
+            </app-autocomplete>
 
 
-            <input
-              [ngModelOptions]="{standalone: true}"
-              [(ngModel)]="autocompleteProduct"
-              placeholder="Select"
-              (ngModelChange)="searchProducts()"
-              mdInput
-            >
-            <div *ngFor="let fetchedProduct of fetchedProducts; let i=index">
-              {{fetchedProduct.details.referenceName}} - {{fetchedProduct.details.reference}}
-              <button type="button" (click)="selectProduct(fetchedProduct)">select</button>
-            </div>
-            <!-- Autocomplete -->
           </div>
           <div class="col-md-8"></div>
         </div>

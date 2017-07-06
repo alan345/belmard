@@ -44,7 +44,7 @@ export class EditQuoteComponent implements OnInit {
   myForm: FormGroup;
   autocompleteProduct: String = ''
   fetchedUsers: User[] = [];
-
+  arrayContentToSearch =[]
   constructor(
     private quoteService: QuoteService,
   //  private projectService: ProjectService,
@@ -353,7 +353,8 @@ export class EditQuoteComponent implements OnInit {
     }
 
     selectProduct(product: Product) {
-      this.fetchedProducts = []
+
+      this.arrayContentToSearch = []
       let devisDetails: DevisDetails = {
         productInit: product,
         vat: 20,

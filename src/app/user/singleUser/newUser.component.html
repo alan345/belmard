@@ -213,9 +213,9 @@
 
           <div class="form-group col-sm-12">
             <app-autocomplete
-              [typeAutocomplete]="'companie'"
               [title]="'Entreprise'"
               [singleChoice]="'true'"
+              [typeAutocomplete]="'companie'"
               [arrayContent]="fetchedUser.companies"
               (getResultAutocomplete)="selectCompanie($event)"
               >

@@ -70,6 +70,7 @@ import { UserModule} from './user/user.module';
 
 
 
+import { AutocompleteComponent } from './autocomplete/autocomplete.component'
 
 
 
@@ -126,7 +127,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     NavbarComponent,
   //  CalendarComponent,
 
-
+    // AutocompleteComponent,
     // ProductComponent,
     // ProductsComponent,
     // NewProductComponent,
@@ -188,8 +189,6 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     EditOptionsComponentDialog,
     AdminComponent,
 
-
-    // AutocompleteComponent,
 
   ],
   imports: [

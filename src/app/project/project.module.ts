@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
-
+import { MaterialModule } from '@angular/material';
+import { Ng2PaginationModule} from 'ng2-pagination';
 
 
 import { ProjectTasksComponent} from './projectTasks.component';
@@ -9,13 +10,15 @@ import { ProjectsComponent} from './projects/projects.component';
 import { ProjectSingleComponent} from './projectSingle.component';
 import { ProjectService} from './project.service';
 import { ProjectRouting} from './projectRouting.module';
-import { MaterialModule } from '@angular/material';
-import { Ng2PaginationModule} from 'ng2-pagination';
+
 
 import { QuoteModule} from '../quote/quote.module';
 
 import { DragulaModule } from 'ng2-dragula';
-import { AutocompleteComponent } from '../autocomplete/autocomplete.component'
+// import { AutocompleteComponent } from '../autocomplete/autocomplete.component'
+// import { AutocompleteModule } from '../autocomplete/autocomplete.module'
+import {SharedModule } from '../shared/shared.module';
+
 
 @NgModule({
   imports:     [
@@ -27,16 +30,18 @@ import { AutocompleteComponent } from '../autocomplete/autocomplete.component'
     Ng2PaginationModule,
     ReactiveFormsModule,
     QuoteModule,
+    SharedModule,
+    // AutocompleteModule,
   ],
   declarations: [
     ProjectTasksComponent,
     ProjectsComponent,
     ProjectSingleComponent,
-    AutocompleteComponent,
+    // AutocompleteComponent,
   ],
   exports:      [
     ProjectsComponent,
-    AutocompleteComponent,
+    // AutocompleteComponent,
   ],
   providers:    [ ProjectService ],
   entryComponents: [

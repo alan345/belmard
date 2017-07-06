@@ -17,6 +17,9 @@ import { Ng2PaginationModule} from 'ng2-pagination';
 import { ProductModule } from '../product/product.module';
 // import { AutocompleteComponent } from '../autocomplete/autocomplete.component'
 
+import {SharedModule } from '../shared/shared.module';
+
+
 
 @NgModule({
   imports:      [
@@ -29,6 +32,7 @@ import { ProductModule } from '../product/product.module';
     ReactiveFormsModule,
     RouterModule,
     ProductModule,
+    SharedModule,
     // AutocompleteComponent,
   ],
   declarations: [

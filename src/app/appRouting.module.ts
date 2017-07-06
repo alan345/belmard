@@ -4,7 +4,7 @@ import {ModuleWithProviders} from '@angular/core';
 
 import {ADMIN_ROUTES} from './admin/admin.routes';
 import {FormComponent} from './form/form.component';
-import {UserFormsComponent} from './form/userForms.component';
+// import {UserFormsComponent} from './form/userForms.component';
 import {UserFormsUploadAndList} from './form/userFormsUploadAndList.component';
 
 

@@ -47,6 +47,10 @@ import { LoginComponent} from './login/login.component';
 
 import{ AdminUsersComponent } from './users/adminUsers.component';
 
+// import { AutocompleteComponent } from '../autocomplete/autocomplete.component'
+
+import {SharedModule } from '../shared/shared.module';
+
 
 @NgModule({
   imports:      [
@@ -60,12 +64,13 @@ import{ AdminUsersComponent } from './users/adminUsers.component';
     QuoteModule,
     ProjectModule,
     CompanieModule,
+    SharedModule,
   ],
   declarations: [
 //    UserDeleteDialog,
 //    UserWhereDialogComponent,
 
-
+    // AutocompleteComponent,
     NewUserComponent,
     // SingleUserComponent,
     // AddNoteComponent,
@@ -90,6 +95,7 @@ import{ AdminUsersComponent } from './users/adminUsers.component';
 
   ],
   exports:      [
+    // AutocompleteComponent
     // UsersComponent
    ],
   providers:    [
