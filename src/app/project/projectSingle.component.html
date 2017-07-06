@@ -71,8 +71,8 @@
       </div>
       <!-- Autocomplete User-->
       <label>Client</label>
-      <div *ngIf="!search.typeUser.length">
-          <input class="form-control" [ngModelOptions]="{standalone: true}"
+      <div>
+          <input class="form-control" *ngIf="!search.typeUser.length" [ngModelOptions]="{standalone: true}"
           [(ngModel)]="autocompleteUser"
           placeholder="Select"
           (ngModelChange)="searchUsers()"
