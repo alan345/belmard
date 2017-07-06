@@ -203,10 +203,21 @@
           </div> -->
         </div>
 
+        <div class="row">
+          <div class="col-md-6">
+          </div>
+          <div class="col-md-4">
+            <div class="card" style="width:350px;">
+              <signature-pad
+                *ngIf="!fetchedQuote.signature.base64"
+                [options]="signaturePadOptions"
+                (onBeginEvent)="drawStart()"
+                (onEndEvent)="drawComplete()"></signature-pad>
+              <img *ngIf="fetchedQuote.signature.base64" [src]="fetchedQuote.signature.base64"/>
+            </div>
+          </div>
 
-
-
-
+        </div>
         <!-- </div> -->
       </div>
 

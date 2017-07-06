@@ -46,6 +46,9 @@ var quote = new Schema({
     priceQuote: {
       priceQuoteWithoutTaxes: {type: Number, default: [0]},
       priceQuoteWithTaxes: {type: Number, default: [0]},
+    },
+    signature:{
+      base64:{type: String, default: ['']},
     }
 
   },

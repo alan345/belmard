@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from '../../auth/auth.service';
 import {QuoteService} from '../quote.service';
 import {ProductService} from '../../product/product.service';
@@ -21,6 +21,9 @@ import { Project } from '../../project/project.model';
 declare let jsPDF;
 
 
+import { SignaturePad } from 'angular2-signaturepad/signature-pad';
+
+
 
 @Component({
   selector: 'app-quote',
@@ -28,6 +31,8 @@ declare let jsPDF;
   styleUrls: ['../quote.component.css'],
 })
 export class EditQuoteComponent implements OnInit {
+  @ViewChild(SignaturePad) signaturePad: SignaturePad;
+
   fetchedQuote : Quote = new Quote()
   autocompleteUser: string = '';
   autocompleteProject: string = '';
@@ -59,10 +64,6 @@ export class EditQuoteComponent implements OnInit {
     private location: Location,
     private _fb: FormBuilder,
     private authService: AuthService,
-
-
-
-
   ) {}
 
   ngOnInit() {
@@ -89,6 +90,35 @@ export class EditQuoteComponent implements OnInit {
       this.getProject(params['idProject'])
     })
   }
+
+
+
+    private signaturePadOptions: Object = { // passed through to szimek/signature_pad constructor
+      minWidth: 1,
+      maxWidth: 7,
+      canvasWidth: 350,
+      canvasHeight: 200,
+      penColor: "rgb(36, 41, 46)"
+    };
+
+
+
+    ngAfterViewInit() {
+      // this.signaturePad is now available
+      this.signaturePad.set('minWidth', 1); // set szimek/signature_pad options at runtime
+      this.signaturePad.clear(); // invoke functions from szimek/signature_pad API
+    }
+
+    drawComplete() {
+      // will be notified of szimek/signature_pad's onEnd event
+      // console.log(this.signaturePad.toDataURL());
+      this.fetchedQuote.signature.base64 = this.signaturePad.toDataURL()
+    }
+
+    drawStart() {
+      // will be notified of szimek/signature_pad's onBegin event
+      console.log('begin drawing');
+    }
 
 
   getCurrentUser() {

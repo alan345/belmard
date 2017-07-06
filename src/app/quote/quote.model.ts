@@ -17,8 +17,12 @@ export class Quote {
   projects: Project[] = [];
   devisDetails: DevisDetails[] = []
   priceQuote: PriceQuote = new PriceQuote()
+  signature: Signature=new Signature()
 }
 
+export class Signature {
+  base64: string = '';
+}
 export class PriceQuote {
   priceQuoteWithoutTaxes: number = 0;
   priceQuoteWithTaxes: number = 0;

@@ -18,6 +18,7 @@ import { ProductModule } from '../product/product.module';
 // import { AutocompleteComponent } from '../autocomplete/autocomplete.component'
 
 import {SharedModule } from '../shared/shared.module';
+import { SignaturePadModule } from 'angular2-signaturepad';
 
 
 
@@ -33,6 +34,7 @@ import {SharedModule } from '../shared/shared.module';
     RouterModule,
     ProductModule,
     SharedModule,
+    SignaturePadModule,
     // AutocompleteComponent,
   ],
   declarations: [
