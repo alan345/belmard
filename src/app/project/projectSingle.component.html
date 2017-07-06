@@ -72,7 +72,7 @@
       <!-- Autocomplete User-->
       <label>Client</label>
       <div>
-  
+
           <!-- <input class="form-control" *ngIf="!search.typeUser.length" [ngModelOptions]="{standalone: true}" -->
 
           <input class="form-control col-md-3" [ngModelOptions]="{standalone: true}"
@@ -130,7 +130,10 @@
           <label>Devis</label>
 
 
-          <app-quotes [userId]="user._id" [projectId]="fetchedProject._id"></app-quotes>
+          <app-quotes
+            [showHeader]=false
+            [userId]="user._id"
+            [projectId]="fetchedProject._id"></app-quotes>
           <!-- <app-projects [userId]="fetchedUser._id"></app-projects> -->
 
 
@@ -154,17 +157,18 @@
 
 
 
-
+      <div class="form-group">
       <select
         formControlName="status"
         [(ngModel)]="fetchedProject.status">
         <option *ngFor="let n of status" [ngValue]="n.index">{{n.label}}</option>
       </select>
+    </div>
 
 
 
 
-
+    <div class="form-group">
     <!-- Autocomplete AssignedTo-->
     <label>Assigned To</label>
     <input
@@ -192,7 +196,7 @@
       <button type="button" (click)="removeAssignedTo(i)"><i class="fa fa-times"></i></button>
     </div>
     <!-- Autocomplete User -->
-
+  </div>
 
 
     <div class="valid-edit">

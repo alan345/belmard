@@ -40,6 +40,7 @@ export class EditQuoteComponent implements OnInit {
   fetchedProjects: Project[] = []
   currentUser: User = new User()
   imgLogoUrl: string = './assets/images/profile-placeholder.jpg'
+  imgSignatureBase64Temp = ''
   // userAdmins : User[] = []
   // userManagers : User[] = []
   // userClients : User[] = []
@@ -96,7 +97,7 @@ export class EditQuoteComponent implements OnInit {
     private signaturePadOptions: Object = { // passed through to szimek/signature_pad constructor
       minWidth: 1,
       maxWidth: 7,
-      canvasWidth: 350,
+      canvasWidth: 250,
       canvasHeight: 200,
       penColor: "rgb(36, 41, 46)"
     };
@@ -108,16 +109,24 @@ export class EditQuoteComponent implements OnInit {
       this.signaturePad.set('minWidth', 1); // set szimek/signature_pad options at runtime
       this.signaturePad.clear(); // invoke functions from szimek/signature_pad API
     }
-
+    resetSignature() {
+      this.signaturePad.clear();
+    }
+    validateSignature(){
+      this.fetchedQuote.signature.base64 = this.imgSignatureBase64Temp
+      this.fetchedQuote.signature.dateSignature = new Date()
+      this.save()
+    }
     drawComplete() {
       // will be notified of szimek/signature_pad's onEnd event
       // console.log(this.signaturePad.toDataURL());
-      this.fetchedQuote.signature.base64 = this.signaturePad.toDataURL()
+      this.imgSignatureBase64Temp = this.signaturePad.toDataURL()
+
     }
 
     drawStart() {
       // will be notified of szimek/signature_pad's onBegin event
-      console.log('begin drawing');
+      // console.log('begin drawing');
     }
 
 

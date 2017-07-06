@@ -49,6 +49,7 @@ var quote = new Schema({
     },
     signature:{
       base64:{type: String, default: ['']},
+      dateSignature:{type: Date},
     }
 
   },

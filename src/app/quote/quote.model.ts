@@ -22,6 +22,7 @@ export class Quote {
 
 export class Signature {
   base64: string = '';
+  dateSignature: Date;
 }
 export class PriceQuote {
   priceQuoteWithoutTaxes: number = 0;
