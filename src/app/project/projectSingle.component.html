@@ -72,9 +72,13 @@
       <!-- Autocomplete User-->
       <label>Client</label>
       <div>
+<<<<<<< HEAD
         
           <!-- <input class="form-control" *ngIf="!search.typeUser.length" [ngModelOptions]="{standalone: true}" -->
           <input class="form-control" [ngModelOptions]="{standalone: true}"
+=======
+          <input class="form-control col-md-3" [ngModelOptions]="{standalone: true}"
+>>>>>>> d92ba4c7c984eb330eff670a83cb14a9f93f44cc
           [(ngModel)]="autocompleteUser"
           placeholder="Select"
           (ngModelChange)="searchUsers()"
