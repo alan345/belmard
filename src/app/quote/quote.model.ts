@@ -22,7 +22,7 @@ export class Quote {
 
 export class Paiement {
   type: string = '';
-  amount: Number= 0;
+  amount: number= 0;
   datePaiement: Date = new Date();
 }
 
@@ -33,6 +33,7 @@ export class Signature {
 export class PriceQuote {
   priceQuoteWithoutTaxes: number = 0;
   priceQuoteWithTaxes: number = 0;
+  paiementQuote: number = 0;
 }
 
 

@@ -193,15 +193,20 @@
           {{paiement.datePaiement}}
         </div>
         <div class="col-md-3">
-          <input type="text" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedQuote.paiements[i].amount" placeholder="Amount">
+          <input type="text"
+            (ngModelChange)="calculateQuote()"
+            [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedQuote.paiements[i].amount" placeholder="Amount">
         </div>
         <div class="col-md-3">
-          <input type="text" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedQuote.paiements[i].type" placeholder="Type">
+          <input
+          type="text"
+          (ngModelChange)="calculateQuote()"
+          [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedQuote.paiements[i].type" placeholder="Type">
         </div>
       </div>
 
 
-
+      total: {{fetchedQuote.priceQuote.paiementQuote}}
 
 
 

@@ -423,8 +423,14 @@ export class EditQuoteComponent implements OnInit {
 
           this2.fetchedQuote.priceQuote.priceQuoteWithTaxes = this2.fetchedQuote.priceQuote.priceQuoteWithTaxes*1 + this2.fetchedQuote.devisDetails[i].totalPriceWithTaxes*1
           this2.fetchedQuote.priceQuote.priceQuoteWithoutTaxes = this2.fetchedQuote.priceQuote.priceQuoteWithoutTaxes*1 + this2.fetchedQuote.devisDetails[i].totalPriceWithoutTaxes*1
+        })
+        this2.fetchedQuote.priceQuote.paiementQuote = 0
+        this2.fetchedQuote.paiements.forEach((paiement, i) => {
+          this2.fetchedQuote.priceQuote.paiementQuote = this2.fetchedQuote.priceQuote.paiementQuote*1 + paiement.amount*1
 
         })
+
+
         //this2.save()
       }, 20)
 
