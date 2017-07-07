@@ -63,6 +63,9 @@ router.get('/getStripeCust', function (req, res, next) {
             error: 'noData'
           });
         } else {
+          customer.data.forEach(sub => {
+            console.log(sub.plan.current_period_end)
+          })
           return res.status(200).json({
             customer: customer
           })
@@ -191,6 +194,17 @@ router.delete('/deleteCustInStripe', function (req, res, next) {
 })
 
 
+///to do here !!
+
+function updateCurrent_period_end(req, customer){
+  let paiement = req.user.paiement
+  paiement.stripe.current_period_end = customer.id
+  return new Promise(function(resolve, reject) {
+    User.update({ _id: req.user._id }, { $set: { paiement: paiement}}, function (err, item) {
+      if (item) { resolve(item) } else { reject(err) }
+    });
+  })
+}
 
 function updateStripeCustomerIdToDb(req, customer){
   let paiement = req.user.paiement

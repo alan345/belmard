@@ -50,30 +50,5 @@
       </div>
     </form>
   </div>
-  <div *ngIf="!isStylist()" class="beigeback phyto-ctnr">
-    <div *ngIf="!isHQcompanie()" class="sln-inf">
-      <h6> LOGO du fournisseur</h6>
-      <div *ngFor="let user of users; let i=index">
-        <div *ngIf="i==0" [routerLink]="['/user/profile/' + user._id]" routerLinkActive="active">
-            <p>{{ user.profile.name}}</p>
-            <p>{{ user.profile.phoneNumber}}</p>
-            <p>{{ user.email}}</p>
-        </div>
-      </div>
-    </div>
-    <div *ngIf="isHQcompanie()" class="sln-inf">
-      <h6>Your My Chair App Administrator</h6>
-      <div *ngFor="let user of userAdmins; let i=index">
-        <div *ngIf="i==0" [routerLink]="['/user/profile/' + user._id]" routerLinkActive="active">
-            <p>{{ user.profile.name}}</p>
-            <p>{{ user.profile.phoneNumber}}</p>
-            <p>{{ user.email}}</p>
-        </div>
-      </div>
-    </div>
-    <div class="sln-mng">
 
-
-    </div>
-  </div>
 </div>

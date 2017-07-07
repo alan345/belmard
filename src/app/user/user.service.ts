@@ -56,6 +56,13 @@ export class UserService {
 
 
   getUser(id: string) {
+    if(!id) {
+      // console.log(this.currentUser)
+      if(this.currentUser._id) {
+        // console.log(this.currentUser)
+        return Observable.of(this.currentUser)
+      }
+    }
 
     let headers = new Headers({'Content-Type': 'application/json'});
     headers.append('Authorization', '' + this.authService.currentUser.token);

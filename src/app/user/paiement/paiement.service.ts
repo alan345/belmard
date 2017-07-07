@@ -44,7 +44,7 @@ export class PaiementService {
         return response.json();
       })
       .catch((error: Response) => {
-        this.errorService.handleError(error.json());
+        // this.errorService.handleError(error.json());
         return Observable.throw(error.json());
       });
   }
