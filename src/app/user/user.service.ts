@@ -53,8 +53,13 @@ export class UserService {
   }
 
 
+  // cleanCurrentUserInSession(){
+  //   this.currentUser = new User();
+  // }
 
-
+  // getCurrentUserInSession(){
+  //   return this.currentUser
+  // }
   getUser(id: string) {
     if(!id) {
       // console.log(this.currentUser)

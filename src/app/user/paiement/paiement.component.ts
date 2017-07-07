@@ -74,9 +74,9 @@ export class PaiementComponent implements OnInit {
     this.paiementService.deleteCustInStripe()
       .subscribe(
         res => {
+          this.userService.cleanCurrentUserInSession()
           this.toastr.success('Great!')
           this.getStripeCust()
-          console.log(res);
         },
         error => { console.log(error); }
       );
@@ -85,6 +85,7 @@ export class PaiementComponent implements OnInit {
     this.paiementService.saveCustInStripe()
       .subscribe(
         res => {
+          this.userService.cleanCurrentUserInSession()
           this.toastr.success('Great!')
           this.stripeCust = res.customer
           console.log(res);
@@ -97,6 +98,7 @@ export class PaiementComponent implements OnInit {
     this.paiementService.saveCardInStripe(this.newCard)
       .subscribe(
         res => {
+          this.userService.cleanCurrentUserInSession()
           this.toastr.success('Great!')
           this.getStripeCust()
           console.log(res);
@@ -111,6 +113,7 @@ export class PaiementComponent implements OnInit {
     this.paiementService.saveSubscriptionInStripe(plan)
       .subscribe(
         res => {
+          this.userService.cleanCurrentUserInSession()
           this.toastr.success('Great!')
           this.getStripeCust()
           // console.log(res);
@@ -124,6 +127,7 @@ export class PaiementComponent implements OnInit {
     this.paiementService.deleteSub(subId)
       .subscribe(
         res => {
+          this.userService.cleanCurrentUserInSession()
           console.log(res.message)
           this.toastr.success('Great!');
           this.getStripeCust()
@@ -138,7 +142,7 @@ export class PaiementComponent implements OnInit {
     this.paiementService.deleteCard(cardId)
       .subscribe(
         res => {
-          console.log(res.message)
+          this.userService.cleanCurrentUserInSession()
           this.toastr.success('Great!');
           this.getStripeCust()
         },
@@ -149,18 +153,18 @@ export class PaiementComponent implements OnInit {
   }
 
 
-
-
-
-
-
-  getUser(id: string) {
-    this.userService.getUser(id)
-      .subscribe(
-        res => { this.fetchedUser = res },
-        error => { console.log(error) }
-      )
-  }
+  // 
+  //
+  //
+  //
+  //
+  // getUser(id: string) {
+  //   this.userService.getUser(id)
+  //     .subscribe(
+  //       res => { this.fetchedUser = res },
+  //       error => { console.log(error) }
+  //     )
+  // }
 
 
 

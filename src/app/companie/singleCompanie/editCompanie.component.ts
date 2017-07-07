@@ -148,7 +148,11 @@ saveToMyCompanie(){
       res => {
         this.userService.addCompanieToMyself(res.obj)
           .subscribe(
-            res => { this.toastr.success('Great!', res.message) },
+            res => {
+              // this.userService.cleanCurrentUserInSession()
+              location.reload();
+              this.toastr.success('Great!', res.message)
+            },
             error => {console.log(error)}
           )
         this.toastr.success('Great!', res.message)

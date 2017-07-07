@@ -105,6 +105,8 @@ import { EditOptionsComponentDialog} from './form/modalLibrary/modalLibrary.comp
 
 
 import { AdminGuardService} from './admin/services/adminGuard';
+import {CompanieGuardService} from './companie/companieGuard.service';
+
 import { AdminComponent} from './admin/admin.component';
 
 
@@ -233,6 +235,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   //  ProductService,
   //  PromotionService,
     AdminGuardService,
+    CompanieGuardService,
   //  ProfileService,
     {
       provide: AuthHttp,

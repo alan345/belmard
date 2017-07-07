@@ -8,6 +8,7 @@ import {FormComponent} from './form/form.component';
 import {UserFormsUploadAndList} from './form/userFormsUploadAndList.component';
 
 
+import {CompanieGuardService} from './companie/companieGuard.service';
 
 import {AuthGuardService} from './auth/authguard.service';
 
@@ -39,11 +40,11 @@ import { NgModule }             from '@angular/core';
 export const routes: Routes = [
   {path: '', component: MainPageHomeComponent, canActivate: [AuthGuardService], pathMatch: 'full'},
 
-  {path: 'userCalendar', loadChildren: 'app/userCalendar/userCalendar.module#UserCalendarModule', canActivate: [AuthGuardService]},
+  {path: 'userCalendar', loadChildren: 'app/userCalendar/userCalendar.module#UserCalendarModule', canActivate: [AuthGuardService, CompanieGuardService]},
   {path: 'companie', loadChildren: 'app/companie/companie.module#CompanieModule', canActivate: [AuthGuardService]},
-  {path: 'quote', loadChildren: 'app/quote/quote.module#QuoteModule', canActivate: [AuthGuardService]},
-  {path: 'product', loadChildren: 'app/product/product.module#ProductModule', canActivate: [AuthGuardService]},
-  {path: 'project', loadChildren: 'app/project/project.module#ProjectModule', canActivate: [AuthGuardService]},
+  {path: 'quote', loadChildren: 'app/quote/quote.module#QuoteModule', canActivate: [AuthGuardService, CompanieGuardService]},
+  {path: 'product', loadChildren: 'app/product/product.module#ProductModule', canActivate: [AuthGuardService, CompanieGuardService]},
+  {path: 'project', loadChildren: 'app/project/project.module#ProjectModule', canActivate: [AuthGuardService, CompanieGuardService]},
   {path: 'user', loadChildren: 'app/user/user.module#UserModule'},
   // {path: 'option', loadChildren: 'app/option/option.module#OptionModule'},
 

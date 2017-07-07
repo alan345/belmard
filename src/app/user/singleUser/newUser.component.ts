@@ -206,7 +206,7 @@ export class NewUserComponent implements OnInit {
 
   }
   save() {
-
+    // this.userService.cleanCurrentUserInSession()
     //console.log(this.typeUserDropDown)
     //this.fetchedUser.type = [this.typeUserDropDown]
     if(this.fetchedUser._id) {
@@ -214,6 +214,7 @@ export class NewUserComponent implements OnInit {
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
+            location.reload();
             // if(redirect == 'profile')
             //   this.router.navigate(['user/profile/' + res.obj._id])
             // if(redirect == 'project')
@@ -231,7 +232,8 @@ export class NewUserComponent implements OnInit {
           res => {
             this.toastr.success('Great!', res.message)
             // if(redirect == 'profile')
-            this.router.navigate(['user/newuser/' + res.obj._id])
+            // this.router.navigate(['user/newuser/' + res.obj._id])
+            location.reload();
             // if(redirect == 'project')
             //   this.router.navigate(['project/new/' + res.obj._id])
             // this.addUserIdToCompanie(res.obj)

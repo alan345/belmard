@@ -48,7 +48,6 @@ router.use('/', function (req, res, next) {
 
 
 router.get('/getStripeCust', function (req, res, next) {
-  // console.log(req.user.paiement.stripe)
     if(!req.user.paiement.stripe.cusId) {
       return res.status(404).json({
         title: 'No data',
@@ -63,8 +62,26 @@ router.get('/getStripeCust', function (req, res, next) {
             error: 'noData'
           });
         } else {
-          customer.data.forEach(sub => {
-            console.log(sub.plan.current_period_end)
+          if(customer.deleted) {
+            return res.status(404).json({
+              title: 'Deleted',
+              error: customer
+            });
+          }
+          customer.subscriptions.data.forEach(sub => {
+            console.log('ssss')
+            console.log(sub)
+            updateCurrent_period_endInDb(req, sub.current_period_end)
+            .then(item => {
+              console.log(item)
+            })
+            .catch(err => {
+              console.log(err)
+              return res.status(404).json({
+                title: 'Error not saved in db',
+                error: err
+              });
+            })
           })
           return res.status(200).json({
             customer: customer
@@ -196,9 +213,9 @@ router.delete('/deleteCustInStripe', function (req, res, next) {
 
 ///to do here !!
 
-function updateCurrent_period_end(req, customer){
+function updateCurrent_period_endInDb(req, current_period_end){
   let paiement = req.user.paiement
-  paiement.stripe.current_period_end = customer.id
+  paiement.stripe.current_period_end = current_period_end*1000
   return new Promise(function(resolve, reject) {
     User.update({ _id: req.user._id }, { $set: { paiement: paiement}}, function (err, item) {
       if (item) { resolve(item) } else { reject(err) }

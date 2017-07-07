@@ -13,6 +13,14 @@ export class User {
   password: string = '';
   companies: Companie[] = [];
   salesMan: User[] = [];
+  paiement: Paiement= new Paiement()
+}
+
+export class Paiement{
+  stripe: Stripe = new Stripe()
+}
+export class Stripe {
+  current_period_end: Date
 }
 
 export class Profile {
