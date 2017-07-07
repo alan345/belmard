@@ -195,12 +195,14 @@
         <div class="col-md-3">
           <input type="text"
             (ngModelChange)="calculateQuote()"
-            [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedQuote.paiements[i].amount" placeholder="Amount">
+            [ngModelOptions]="{standalone: true}"
+            class="form-control"
+            [(ngModel)]="fetchedQuote.paiements[i].amount"
+            placeholder="Amount">
         </div>
         <div class="col-md-3">
           <input
           type="text"
-          (ngModelChange)="calculateQuote()"
           [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedQuote.paiements[i].type" placeholder="Type">
         </div>
       </div>

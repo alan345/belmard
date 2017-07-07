@@ -443,6 +443,7 @@ export class EditQuoteComponent implements OnInit {
 
     removePaiement(i: number) {
       this.fetchedQuote.paiements.splice(i, 1);
+      this.calculateQuote()
     }
 
     getProducts(page: number, search: any) {
