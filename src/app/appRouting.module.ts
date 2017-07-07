@@ -8,7 +8,9 @@ import {FormComponent} from './form/form.component';
 import {UserFormsUploadAndList} from './form/userFormsUploadAndList.component';
 
 
-import {CompanieGuardService} from './companie/companieGuard.service';
+import { CompanieGuardService} from './companie/companieGuard.service';
+import { PaiementGuardService} from './user/paiement/paiementGuard.service';
+
 
 import {AuthGuardService} from './auth/authguard.service';
 
@@ -40,11 +42,11 @@ import { NgModule }             from '@angular/core';
 export const routes: Routes = [
   {path: '', component: MainPageHomeComponent, canActivate: [AuthGuardService], pathMatch: 'full'},
 
-  {path: 'userCalendar', loadChildren: 'app/userCalendar/userCalendar.module#UserCalendarModule', canActivate: [AuthGuardService, CompanieGuardService]},
+  {path: 'userCalendar', loadChildren: 'app/userCalendar/userCalendar.module#UserCalendarModule', canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
   {path: 'companie', loadChildren: 'app/companie/companie.module#CompanieModule', canActivate: [AuthGuardService]},
-  {path: 'quote', loadChildren: 'app/quote/quote.module#QuoteModule', canActivate: [AuthGuardService, CompanieGuardService]},
-  {path: 'product', loadChildren: 'app/product/product.module#ProductModule', canActivate: [AuthGuardService, CompanieGuardService]},
-  {path: 'project', loadChildren: 'app/project/project.module#ProjectModule', canActivate: [AuthGuardService, CompanieGuardService]},
+  {path: 'quote', loadChildren: 'app/quote/quote.module#QuoteModule', canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
+  {path: 'product', loadChildren: 'app/product/product.module#ProductModule', canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
+  {path: 'project', loadChildren: 'app/project/project.module#ProjectModule', canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
   {path: 'user', loadChildren: 'app/user/user.module#UserModule'},
   // {path: 'option', loadChildren: 'app/option/option.module#OptionModule'},
 

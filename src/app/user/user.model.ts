@@ -20,7 +20,7 @@ export class Paiement{
   stripe: Stripe = new Stripe()
 }
 export class Stripe {
-  current_period_end: Date
+  current_period_end: Date= new Date()
 }
 
 export class Profile {

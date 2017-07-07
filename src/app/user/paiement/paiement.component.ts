@@ -8,9 +8,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { User } from '../user.model';
 import { StripeCustomer, DataSource } from './paiement.model';
-
 import { Companie } from '../../companie/companie.model';
-
 import { FormBuilder, FormGroup, FormArray, Validators} from '@angular/forms';
 
 
@@ -115,7 +113,8 @@ export class PaiementComponent implements OnInit {
         res => {
           // this.userService.cleanCurrentUserInSession()
           this.toastr.success('Great!')
-          this.getStripeCust()
+          // this.getStripeCust()
+          location.reload();
           // console.log(res);
         },
         error => { console.log(error); }
@@ -130,7 +129,8 @@ export class PaiementComponent implements OnInit {
           // this.userService.cleanCurrentUserInSession()
           // console.log(res.message)
           this.toastr.success('Great!');
-          this.getStripeCust()
+          // this.getStripeCust()
+          location.reload();
         },
         error => {
           console.log(error);

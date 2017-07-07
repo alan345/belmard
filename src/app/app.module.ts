@@ -19,7 +19,8 @@ import { CustomOption } from './toast-options';
 
 
 
-import { NavbarComponent} from './nav/navbar/navbar.component';
+// import { NavbarComponent} from './nav/navbar/navbar.component';
+import { NavbarModule} from './nav/navbar/navbar.module';
 
 import { FooterComponent} from './nav/footer/footer.component';
 
@@ -105,7 +106,9 @@ import { EditOptionsComponentDialog} from './form/modalLibrary/modalLibrary.comp
 
 
 import { AdminGuardService} from './admin/services/adminGuard';
-import {CompanieGuardService} from './companie/companieGuard.service';
+import { CompanieGuardService} from './companie/companieGuard.service';
+import { PaiementGuardService} from './user/paiement/paiementGuard.service';
+
 
 import { AdminComponent} from './admin/admin.component';
 
@@ -126,7 +129,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   declarations: [
     AppComponent,
     FooterComponent,
-    NavbarComponent,
+    // NavbarComponent,
   //  CalendarComponent,
 
     // AutocompleteComponent,
@@ -137,7 +140,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 
     DeleteDialog,
     SeePictureDialogComponent,
-
+    // NavbarModule,
     // PressComponent,
     // PressesComponent,
     // PressSingleComponent,
@@ -159,7 +162,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 
 
 
-    NavbarComponent,
+
 
     ErrorComponent,
 
@@ -206,6 +209,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     FormsModule,
     Ng2PaginationModule,
     MaterialModule,
+    NavbarModule,
 
   //  NgbModule.forRoot(),
     UserModule,
@@ -236,6 +240,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   //  PromotionService,
     AdminGuardService,
     CompanieGuardService,
+    PaiementGuardService,
   //  ProfileService,
     {
       provide: AuthHttp,

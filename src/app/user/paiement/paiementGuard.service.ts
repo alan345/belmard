@@ -2,17 +2,14 @@ import { Injectable} from '@angular/core';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, CanActivate, Router} from '@angular/router';
 import { Observable} from 'rxjs';
 import { ToastsManager} from 'ng2-toastr';
-import { UserService} from '../user/user.service'
-import { User } from '../user/user.model'
-
-
-
+import { UserService} from '../user.service'
+import { User } from '../user.model'
 
 
 
 
 @Injectable()
-export class CompanieGuardService implements CanActivate {
+export class PaiementGuardService implements CanActivate {
 
   constructor(
     private router: Router,
@@ -25,9 +22,14 @@ export class CompanieGuardService implements CanActivate {
     this.userService.getUser('')
       .subscribe(
         res => {
-          if (res.companies.length) {
+          let currentUser: User = res
+          console.log(new Date( currentUser.paiement.stripe.current_period_end) )
+          console.log(typeof new Date())
+          if (new Date(currentUser.paiement.stripe.current_period_end) > new Date()) {
+            console.log('s')
             answer= true;
           } else {
+            console.log('s')
             answer = false
           }
         },
@@ -36,8 +38,8 @@ export class CompanieGuardService implements CanActivate {
       if(answer) {
         return true
       } else {
-        this.toastr.error('Create your own Companie!');
-        this.router.navigate(['/companie/new']);
+        this.toastr.error('Check your paiement!');
+        this.router.navigate(['/user/paiement']);
       }
   }
 }

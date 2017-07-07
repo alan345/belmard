@@ -68,21 +68,6 @@ router.get('/getStripeCust', function (req, res, next) {
               error: customer
             });
           }
-          customer.subscriptions.data.forEach(sub => {
-            console.log('ssss')
-            console.log(sub)
-            updateCurrent_period_endInDb(req, sub.current_period_end)
-            .then(item => {
-              console.log(item)
-            })
-            .catch(err => {
-              console.log(err)
-              return res.status(404).json({
-                title: 'Error not saved in db',
-                error: err
-              });
-            })
-          })
           return res.status(200).json({
             customer: customer
           })
@@ -139,6 +124,20 @@ router.post('/saveCardInStripe/', function (req, res, next) {
 router.post('/saveSubscriptionInStripe/', function (req, res, next) {
     createSubInStripe(req)
     .then(function(subscription){
+
+      console.log(subscription.current_period_end)
+      // customer.subscriptions.data.forEach(sub => {
+        updateCurrent_period_endInDb(req, subscription.current_period_end)
+        .then(item => { console.log(item) })
+        .catch(err => {
+          return res.status(404).json({
+            title: 'Error not saved in db',
+            error: err
+          });
+        })
+      // })
+
+
       return res.status(200).json({
         subscription: subscription
       })
@@ -161,6 +160,20 @@ router.post('/saveSubscriptionInStripe/', function (req, res, next) {
       req.params.idSub,
       function(err, confirmation) {
         if(confirmation) {
+
+
+
+            updateCurrent_period_endInDb(req, '')
+            .then(item => { console.log(item) })
+            .catch(err => {
+              return res.status(404).json({
+                title: 'Error not saved in db',
+                error: err
+              });
+            })
+
+
+
           return res.status(200).json({
             message: confirmation
           })

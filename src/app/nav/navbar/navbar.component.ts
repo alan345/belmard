@@ -4,6 +4,8 @@ import {AdminService} from '../../admin/services/admin.service';
 import {Router} from '@angular/router';
 import { UserService} from '../../user/user.service';
 import { User} from '../../user/user.model';
+import { CompanieGuardService} from '../../companie/companieGuard.service'
+import { PaiementGuardService} from '../../user/paiement/paiementGuard.service'
 
 
 @Component({
@@ -21,7 +23,10 @@ export class NavbarComponent implements OnInit {
     private authService: AuthService,
     private adminService: AdminService,
     private userService: UserService,
-    private router: Router) {
+    private router: Router,
+    // private companieGuardService: CompanieGuardService,
+    // private paiementGuardService: PaiementGuardService,
+  ) {
   }
 
   ngOnInit() {
