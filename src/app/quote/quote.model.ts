@@ -9,8 +9,6 @@ export class Quote {
   clients: User[] = [];
   name: string = '';
   typeQuote: string = '';
-  // phoneNumber: string= '';
-  // address: Address = new Address();
   _users: User[] = [];
   forms: Form[] = [];
   products: Product[] = [];
@@ -18,6 +16,14 @@ export class Quote {
   devisDetails: DevisDetails[] = []
   priceQuote: PriceQuote = new PriceQuote()
   signature: Signature=new Signature()
+  paiements: Paiement[] = []
+}
+
+
+export class Paiement {
+  type: string = '';
+  amount: Number= 0;
+  datePaiement: Date = new Date();
 }
 
 export class Signature {

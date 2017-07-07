@@ -50,7 +50,14 @@ var quote = new Schema({
     signature:{
       base64:{type: String, default: ['']},
       dateSignature:{type: Date},
-    }
+    },
+    paiements:[
+      {
+        datePaiement:{type: Date},
+        amount: {type: Number},
+        type: {type: String},
+      }
+    ]
 
   },
   {

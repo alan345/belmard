@@ -21,23 +21,24 @@ export class CompanieGuardService implements CanActivate {
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
-    let answer: boolean
-    this.userService.getUser('')
-      .subscribe(
-        res => {
-          if (res.companies.length) {
-            answer= true;
-          } else {
-            answer = false
-          }
-        },
-        error => { console.log(error) }
-      )
-      if(answer) {
-        return true
-      } else {
-        this.toastr.error('Create your own Companie!');
-        this.router.navigate(['/companie/new']);
-      }
+    return true;
+    // let answer: boolean
+    // this.userService.getUser('')
+    //   .subscribe(
+    //     res => {
+    //       if (res.companies.length) {
+    //         answer= true;
+    //       } else {
+    //         answer = false
+    //       }
+    //     },
+    //     error => { console.log(error) }
+    //   )
+    //   if(answer) {
+    //     return true
+    //   } else {
+    //     this.toastr.error('Create your own Companie!');
+    //     this.router.navigate(['/companie/new']);
+    //   }
   }
 }

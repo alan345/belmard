@@ -4,7 +4,7 @@ import {QuoteService} from '../quote.service';
 import {ProductService} from '../../product/product.service';
 import { ProjectService} from '../../project/project.service';
 
-import {Quote, DevisDetails} from '../quote.model';
+import {Quote, DevisDetails, Paiement} from '../quote.model';
 
 import {ToastsManager} from 'ng2-toastr';
 
@@ -255,9 +255,6 @@ export class EditQuoteComponent implements OnInit {
       }, function(reason) {
         console.log(reason); // Error!
       });
-
-
-
   }
 
     getUser(id: string) {
@@ -277,7 +274,10 @@ export class EditQuoteComponent implements OnInit {
       this.fetchedUsers = []
       this.fetchedQuote.clients.push(user)
     }
-
+    addPaiement(){
+      let newPaiement:Paiement = new Paiement()
+      this.fetchedQuote.paiements.push(newPaiement)
+    }
     searchUsers() {
       if(!this.autocompleteUser) {
         this.fetchedUsers = []
@@ -432,6 +432,11 @@ export class EditQuoteComponent implements OnInit {
     removeProduct(i: number) {
       this.fetchedQuote.devisDetails.splice(i, 1);
       this.calculateQuote()
+    }
+
+
+    removePaiement(i: number) {
+      this.fetchedQuote.paiements.splice(i, 1);
     }
 
     getProducts(page: number, search: any) {

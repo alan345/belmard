@@ -19,12 +19,20 @@ export class PaiementGuardService implements CanActivate {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
 
-    if(this.userService.isCurrentUserIsInSubPeriod()) {
-      return true
-    } else {
-      this.toastr.error('Check your paiement!');
-      this.router.navigate(['/user/paiement']);
-    }
+
+    return true;
+
+    // if(this.userService.isCurrentUserIsInSubPeriod()) {
+    //   return true
+    // } else {
+    //   this.toastr.error('Check your paiement!');
+    //   this.router.navigate(['/user/paiement']);
+    // }
+
+
+
+
+
     // let answer: boolean
     // this.userService.getUser('')
     //   .subscribe(
