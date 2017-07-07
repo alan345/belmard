@@ -3,7 +3,7 @@ import { AuthService} from '../../auth/auth.service';
 import { UserService} from '../user.service';
 import { Companie } from '../../companie/companie.model';
 import { CompanieService } from '../../companie/companie.service';
-
+import { EditOptionsComponentDialog } from '../../form/modalLibrary/modalLibrary.component';
 import { ToastsManager} from 'ng2-toastr';
 
 import { MdDialog} from '@angular/material';
@@ -95,8 +95,17 @@ export class NewUserComponent implements OnInit {
   }
 
 
-
-
+  openDialog(positionImage: string) {
+    let dialogRef = this.dialog.open(EditOptionsComponentDialog);
+    dialogRef.afterClosed().subscribe(result => {
+      if(result) {
+        this.fetchedUser.forms.push(result)
+      }
+    })
+  }
+  removePic(i) {
+    this.fetchedUser.forms.splice(i, 1);
+  }
 
   // autocolplete typeUser
   searchTypeUser() {

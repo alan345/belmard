@@ -115,7 +115,9 @@ export class ProductSingleComponent implements OnInit {
       )
   }
 
-
+  removePic(i) {
+    this.fetchedProduct.forms.splice(i, 1);
+  }
   changeCascade(selectedIndex1, selectedIndex2) {
     this.selectedIndex1 = selectedIndex1
     this.selectedIndex2 = selectedIndex2

@@ -165,7 +165,9 @@ export class ProjectSingleComponent implements OnInit {
   // autocomplete user
 
 
-
+  removePic(i) {
+    this.fetchedProject.forms.splice(i, 1);
+  }
 
 
 

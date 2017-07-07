@@ -98,7 +98,7 @@ export class CompanieService {
         //return this.singleForm;
       })
       .catch((error: Response) => {
-        this.errorService.handleError(error.json());
+        // this.errorService.handleError(error.json());
         return Observable.throw(error.json());
       });
   }

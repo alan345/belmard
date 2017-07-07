@@ -157,6 +157,9 @@
         <div class="form-group prmimg-cnt">
           <div *ngFor="let singleForm of fetchedProduct.forms">
             <img class="promo-img" src="./uploads/forms/{{singleForm.owner}}/{{singleForm.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
+            <button type="button" md-button (click)="removePic(i)">
+              <i class="fa fa-times"></i>
+            </button>
           </div>
           <div>
             <button type="button" md-button (click)="openDialog('img')" class="addpic-squr">Ajouter une image<br><i class="fa fa-plus"></i></button>

@@ -17,15 +17,30 @@
     Paiement
   </a>
   </div>
-  <h4>phoneNumber</h4> {{fetchedUser.profile.phoneNumber}}
-  <h4>Companies</h4>
-  <div *ngFor="let companie of fetchedUser.companies">
-    {{companie.name}}
+
+  <div class="form-group prmimg-cnt">
+    <div *ngFor="let singleForm of fetchedUser.forms">
+      <img style="height:120px" class="promo-img" src="./uploads/forms/{{singleForm.owner}}/{{singleForm.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
+    </div>
   </div>
-  <h4>Type User</h4>
-  <div *ngFor="let typeSingle of fetchedUser.type">
-    {{typeSingle}}
+
+  <div class="form-group">
+    <b>phoneNumber</b> {{fetchedUser.profile.phoneNumber}}
   </div>
+  <div class="form-group">
+    <b>Companies</b>
+    <div *ngFor="let companie of fetchedUser.companies">
+      {{companie.name}}
+    </div>
+  </div>
+  <div class="form-group">
+    <b>Type User</b>
+    <div *ngFor="let typeSingle of fetchedUser.type">
+      {{typeSingle}}
+    </div>
+  </div>
+  <b>Projets</b>
   <app-projects [showHeader]="false" [userId]="fetchedUser._id"></app-projects>
+  <b>Devis</b>
   <app-quotes [showHeader]="false" [userId]="fetchedUser._id"></app-quotes>
 </div>

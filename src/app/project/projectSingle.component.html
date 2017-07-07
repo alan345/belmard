@@ -146,11 +146,18 @@
       <div class="form-group prmimg-cnt">
 
         <!-- <input type="hidden" class="form-control" formControlName="_id" [(ngModel)]="fetchedProject.form._id"> -->
-        <div *ngFor="let singleForm of fetchedProject.forms">
+        <div *ngFor="let singleForm of fetchedProject.forms; let i=index;">
           <img class="promo-img" src="./uploads/forms/{{singleForm.owner}}/{{singleForm.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
+          <button type="button" md-button (click)="removePic(i)">
+            <i class="fa fa-times"></i>
+          </button>
         </div>
         <div>
-          <button type="button" md-button (click)="openDialog('img')" class="addpic-squr">Add Picture<br><i class="fa fa-plus"></i></button>
+          <button type="button" md-button (click)="openDialog('img')" class="addpic-squr">
+            Add Picture
+            <br>
+            <i class="fa fa-plus"></i>
+          </button>
         </div>
       </div>
 
