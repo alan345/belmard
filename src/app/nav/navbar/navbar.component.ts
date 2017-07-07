@@ -36,6 +36,10 @@ export class NavbarComponent implements OnInit {
     }
   }
 
+  // isCurrentUserIsInSubPeriod(){
+  //   return this.userService.isCurrentUserIsInSubPeriod()
+  // }
+
   getUser(id: string) {
     this.userService.getUser(id)
       .subscribe(

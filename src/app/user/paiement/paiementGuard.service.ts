@@ -18,28 +18,35 @@ export class PaiementGuardService implements CanActivate {
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
-    let answer: boolean
-    this.userService.getUser('')
-      .subscribe(
-        res => {
-          let currentUser: User = res
-          console.log(new Date( currentUser.paiement.stripe.current_period_end) )
-          console.log(typeof new Date())
-          if (new Date(currentUser.paiement.stripe.current_period_end) > new Date()) {
-            console.log('s')
-            answer= true;
-          } else {
-            console.log('s')
-            answer = false
-          }
-        },
-        error => { console.log(error) }
-      )
-      if(answer) {
-        return true
-      } else {
-        this.toastr.error('Check your paiement!');
-        this.router.navigate(['/user/paiement']);
-      }
+
+    if(this.userService.isCurrentUserIsInSubPeriod()) {
+      return true
+    } else {
+      this.toastr.error('Check your paiement!');
+      this.router.navigate(['/user/paiement']);
+    }
+    // let answer: boolean
+    // this.userService.getUser('')
+    //   .subscribe(
+    //     res => {
+    //       let currentUser: User = res
+    //       console.log(new Date( currentUser.paiement.stripe.current_period_end) )
+    //       console.log(typeof new Date())
+    //       if (new Date(currentUser.paiement.stripe.current_period_end) > new Date()) {
+    //         console.log('s')
+    //         answer= true;
+    //       } else {
+    //         console.log('s')
+    //         answer = false
+    //       }
+    //     },
+    //     error => { console.log(error) }
+    //   )
+    //   if(answer) {
+    //     return true
+    //   } else {
+    //     this.toastr.error('Check your paiement!');
+    //     this.router.navigate(['/user/paiement']);
+    //   }
   }
 }

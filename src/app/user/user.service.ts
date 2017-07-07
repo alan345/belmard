@@ -57,9 +57,24 @@ export class UserService {
   //   this.currentUser = new User();
   // }
 
-  // getCurrentUserInSession(){
-  //   return this.currentUser
-  // }
+  getCurrentUserInSession(){
+    return this.currentUser
+  }
+  isCurrentUserIsInSubPeriod(){
+    if (new Date(this.currentUser.paiement.stripe.current_period_end) > new Date())
+      return true;
+    return false
+
+  }
+  isCurrentUserHasCompanie(){
+    if(this.currentUser.companies.length)
+      return true
+    return false
+  }
+
+
+
+
   getUser(id: string) {
     if(!id) {
       // console.log(this.currentUser)
