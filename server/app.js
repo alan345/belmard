@@ -22,6 +22,8 @@ var products    = require('./routes/product')
 var projects    = require('./routes/project')
 var userCalendars    = require('./routes/userCalendar')
 var paiements    = require('./routes/paiement')
+var paiementQuotes    = require('./routes/paiementQuote')
+
 
 var app = express()
 
