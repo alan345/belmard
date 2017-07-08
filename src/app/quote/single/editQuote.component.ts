@@ -38,7 +38,7 @@ export class EditQuoteComponent implements OnInit {
   autocompleteProject: string = '';
   fetchedProducts: Product[] = []
   fetchedProjects: Project[] = []
-  currentUser: User = new User()
+  // currentUser: User = new User()
   imgLogoUrl: string = './assets/images/profile-placeholder.jpg'
   imgSignatureBase64Temp = ''
   // userAdmins : User[] = []
@@ -70,19 +70,12 @@ export class EditQuoteComponent implements OnInit {
   ngOnInit() {
     this.myForm = this._fb.group({
       name: [''],
-      // phoneNumber: ['', [Validators.required, Validators.minLength(2)]],
-      // address: this._fb.group({
-      //   address: ['', [Validators.required, Validators.minLength(2)]],
-      //   city: ['', [Validators.required, Validators.minLength(2)]],
-      //   state: ['', [Validators.required, Validators.minLength(2)]],
-      //   zip: ['', [Validators.required, Validators.minLength(2)]],
-      // }),
-      _users: this._fb.array([])
     })
 
-    this.getCurrentUser();
+    // this.getCurrentUser();
 
     this.activatedRoute.params.subscribe((params: Params) => {
+
       if(params['id'])
         this.getQuote(params['id'])
       if(params['idClient'])
@@ -132,23 +125,23 @@ export class EditQuoteComponent implements OnInit {
     }
 
 
-  getCurrentUser() {
-    this.userService.getUser('')
-      .subscribe(
-        res => {
-          this.currentUser = res
-          this.currentUser.companies.forEach(companie => {
-            companie.forms.forEach(form => {
-              this.imgLogoUrl = "./uploads/forms/" + form.owner + "/" + form.imagePath
-            });
-
-          });
-        },
-        error => {
-          console.log(error);
-        }
-      )
-  }
+  // getCurrentUser() {
+  //   this.userService.getUser('')
+  //     .subscribe(
+  //       res => {
+  //         this.currentUser = res
+  //         // this.currentUser.companies.forEach(companie => {
+  //         //   companie.forms.forEach(form => {
+  //         //     this.imgLogoUrl = "./uploads/forms/" + form.owner + "/" + form.imagePath
+  //         //   });
+  //         //
+  //         // });
+  //       },
+  //       error => {
+  //         console.log(error);
+  //       }
+  //     )
+  // }
 
   getBase64Image(imgUrl) {
     return new Promise(

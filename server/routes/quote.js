@@ -15,6 +15,53 @@ process.on('uncaughtException', function (err) {
 });
 
 
+
+
+router.get('/:id', function (req, res, next) {
+  Quote.findById((req.params.id), function (err, obj) {
+    if (err) {
+      return res.status(500).json({
+        message: 'An error occured',
+        err: err
+      })
+    }
+    if (!obj) {
+      return res.status(404).json({
+        title: 'No form found',
+        error: {message: 'Form not found!'}
+      })
+    }
+    let findQuery = {}
+    findQuery['_id'] = req.params.id
+
+    Quote
+    .findOne(findQuery)
+    .populate({path: 'projects', model: 'Project'})
+    .populate({path: 'clients', model: 'User'})
+
+    .exec(function (err, item) {
+      if (err) {
+        return res.status(404).json({
+          message: '',
+          err: err
+        })
+      } if (!item) {
+        return res.status(404).json({
+          title: 'No obj found',
+          error: {message: 'Obj not found!'}
+        })
+      } else {
+        res.status(200).json({
+          message: 'Success',
+          item: item
+        });
+      }
+    })
+  })
+})
+
+
+
 // Checking if user is authenticated or not, security middleware
 router.use('/', function (req, res, next) {
   var token = req.headers['authorization'];
@@ -65,38 +112,7 @@ router.put('/:id', function (req, res, next) {
       })
     }
 
-    // var foundDuplicate = false
-    // var latestItem = req.body._users[req.body._users.length-1]
-    // item._users.forEach(userId => {
-    //   if(userId == latestItem._id)
-    //     foundDuplicate = true
-    // })
-    //
-    // if(foundDuplicate) {
-    //   return res.status(404).json({
-    //     message: 'Duplicate',
-    //     err: 'Duplicate users'
-    //   })
-    // }
 
-    // if( req.user.role[0] !== 'admin') {
-    //   let belongToThisQuote = false
-    //   item._users.forEach(user => {
-    //       //console.log(user,req.user._id.toString())
-    //     if(user.toString() === req.user._id.toString()){
-    //   //    console.log('aa')
-    //       belongToThisQuote = true
-    //     }
-    //
-    //   })
-    //   //console.log(belongToThisQuote)
-    //   if(!belongToThisQuote) {
-    //     return res.status(404).json({
-    //       message: 'Not your quote',
-    //       err: 'Not your quote'
-    //     })
-    //   }
-    // }
 
     for (var prop in req.body) {
       if(prop !== '__v' && prop !== 'updatedAt' && prop !== 'createdAt')
@@ -177,33 +193,6 @@ router.get('/page/:page', function (req, res, next) {
 
 
 
-
-
-  //
-  // if(req.query.typeQuote)
-  //   search['typeQuote'] = req.query.typeQuote
-
-  // if (req.user.role[0] === 'salesRep') {
-  //   search['_users'] = mongoose.Types.ObjectId(req.user._id)
-  //   search['typeQuote'] = { $nin: 'HQ'}
-  // }
-  // if (req.user.role[0] === 'manager') {
-  //   search['_users'] = mongoose.Types.ObjectId(req.user._id)
-  // }
-  // if (req.user.role[0] === 'stylist') {
-  //   search['_users'] = mongoose.Types.ObjectId(req.user._id)
-  // }
-
-
-
-
-  // if(req.query.parentUser)
-  //   findQuery['profile.parentUser'] = mongoose.Types.ObjectId(req.query.parentUser)
-  //
-
-  //let arrObj = [{findQuery}]
-//  console.log(arrObj)
-
   Quote
   .find(search)
   .populate(
@@ -238,183 +227,7 @@ router.get('/page/:page', function (req, res, next) {
 })
 
 
-//
-// router.get('/byuserid/:id', function (req, res, next) {
-//   Quote
-//   .find({
-//     '_users' : mongoose.Types.ObjectId(req.params.id)
-//   })
-//   .populate({
-//     path: 'forms',
-//     model: 'Form'
-//   })
-//   .populate(
-//     {
-//       path: '_users',
-//       model: 'User',
-//       populate: {
-//         path: 'profile._profilePicture',
-//         model: 'Form'
-//       }
-//     })
-//     .populate(
-//       {
-//         path: '_users',
-//         model: 'User',
-//         populate: {
-//           path: 'profile.parentUser',
-//           model: 'User'
-//         }
-//       })
-//   .exec(function (err, item) {
-//     if (err) {
-//       return res.status(404).json({
-//         message: '',
-//         err: err
-//       })
-//     } else {
-//       res.status(200).json({
-//         message: 'Success',
-//         item: item
-//       });
-//     }
-//   })
-// })
 
-
-
-
-router.get('/:id', function (req, res, next) {
-
-  // if(req.user.role[0] === 'client') {
-  //   return res.status(404).json({
-  //     title: 'No obj found',
-  //     error: {message: 'Not found!'}
-  //   })
-  // }
-  Quote.findById((req.params.id), function (err, obj) {
-    if (err) {
-      return res.status(500).json({
-        message: 'An error occured',
-        err: err
-      })
-    }
-    if (!obj) {
-      return res.status(404).json({
-        title: 'No form found',
-        error: {message: 'Form not found!'}
-      })
-    }
-
-
-    let findQuery = {}
-
-    findQuery['_id'] = req.params.id
-    let findUsers ={
-        path: '_users',
-        model: 'User',
-      }
-    if (req.user.role[0] === 'admin' || req.user.role[0] === 'manager') {
-      findUsers = {
-          path: '_users',
-          model: 'User',
-          //options: { sort: { 'role': +1 } },
-          populate: {
-            path: 'profile.parentUser',
-            model: 'User',
-          }
-        }
-    }
-    if(obj.typeQuote === 'HQ') {
-      findUsers = {
-          path: '_users',
-          model: 'User',
-        //  options: { sort: { 'role': -1 } },
-          populate: {
-            path: 'profile.parentUser',
-            model: 'User',
-          }
-        }
-    }
-
-    // if(obj.typeQuote !== 'HQ') {
-    //
-    //   if (req.user.role[0] === 'stylist' || req.user.role[0] === 'salesRep') {
-    //
-    //     //findQuery['_users'] = {$in: req.user._id}
-    //     //findQuery['_users'] = req.user._id
-    //     //let onlyMyUsers = JSON.parse(req.query.onlyMyUsers)
-    // //    console.log(req.query.onlyMyUsers)
-    //     if(req.query.onlyMyUsers === 'true') {
-    //
-    //
-    //       findUsers = {
-    //           path: '_users',
-    //           model: 'User',
-    //           match: { 'profile.parentUser' : mongoose.Types.ObjectId(req.user._id.toString()) },
-    //         //  options: { sort: { 'role': -1 } },
-    //           populate: {
-    //             path: 'profile.parentUser',
-    //             model: 'User',
-    //           }
-    //         }
-    //       } else {
-    //         if(req.query.onlyMyUsers === 'false')
-    //           findUsers = {
-    //               path: '_users',
-    //               model: 'User',
-    //             //  options: { sort: { 'role': -1 } },
-    //             //  match: { 'profile.parentUser' : mongoose.Types.ObjectId(req.user._id.toString()) },
-    //               populate: {
-    //                 path: 'profile.parentUser',
-    //                 model: 'User',
-    //               }
-    //             }
-    //       }
-    //   }
-    // }
-    Quote
-    .findOne(findQuery)
-    .populate({path: 'projects', model: 'Project'})
-    .populate({path: 'clients', model: 'User'})
-    //.find()
-    // .populate({
-    //   path: 'forms',
-    //   model: 'Form'
-    // })
-    // .populate(
-    //   {
-    //     path: '_users',
-    //     model: 'User',
-    //     populate: {
-    //       path: 'profile._profilePicture',
-    //       model: 'Form'
-    //     }
-    //   })
-    //   .populate(
-    //     findUsers
-    //   )
-    //.populate('users._user.profile.profilePicture._id')
-    .exec(function (err, item) {
-      if (err) {
-        return res.status(404).json({
-          message: '',
-          err: err
-        })
-      } if (!item) {
-        return res.status(404).json({
-          title: 'No obj found',
-          error: {message: 'Obj not found!'}
-        })
-      } else {
-        res.status(200).json({
-          message: 'Success',
-          item: item
-        });
-      }
-    })
-  })
-})
 
 
 router.delete('/:id', function (req, res, next) {

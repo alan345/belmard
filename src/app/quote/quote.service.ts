@@ -73,23 +73,23 @@ export class QuoteService {
       });
   }
 
-  getQuoteByUserId(id: string) {
-    let headers = new Headers({'Content-Type': 'application/json'});
-    headers.append('Authorization', '' + this.authService.currentUser.token);
-    return this.http.get(this.url + 'quote/byuserid/' + id, {headers: headers})
-      .map((response: Response) => {
-        return response.json().item
-      })
-      .catch((error: Response) => {
-        this.errorService.handleError(error.json());
-        return Observable.throw(error.json());
-      });
-  }
+  // getQuoteByUserId(id: string) {
+  //   let headers = new Headers({'Content-Type': 'application/json'});
+  //   headers.append('Authorization', '' + this.authService.currentUser.token);
+  //   return this.http.get(this.url + 'quote/byuserid/' + id, {headers: headers})
+  //     .map((response: Response) => {
+  //       return response.json().item
+  //     })
+  //     .catch((error: Response) => {
+  //       this.errorService.handleError(error.json());
+  //       return Observable.throw(error.json());
+  //     });
+  // }
 
 
   getQuote(id: string, search: any) : Observable<Quote> {
     let headers = new Headers({'Content-Type': 'application/json'});
-    headers.append('Authorization', '' + this.authService.currentUser.token);
+    headers.append('Authorization', '' );
     let options = new RequestOptions({ headers: headers, search: search});
     return this.http.get(this.url + 'quote/' + id, options)
       .map((response: Response) => {

@@ -11,6 +11,11 @@
       download PDF
     </button>
 
+    <button [routerLink]="['/quote/public/' + fetchedQuote._id]">
+      Devis acces public
+    </button>
+
+
 
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
       <div>
@@ -227,6 +232,8 @@
         </div>
       </div>
 
+
+      <br><br>
 
 
       <div class="valid-edit">
