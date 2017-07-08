@@ -166,15 +166,7 @@ export class QuoteDetailComponent implements OnInit {
   isAdmin() {
     return this.authService.isAdmin();
   }
-  isStylist() {
-    return this.authService.isStylist();
-  }
-  isSalesRep(){
-    return this.authService.isSalesRep();
-  }
-  isManager(){
-    return this.authService.isManager();
-  }
+
   isHQquote(){
     if(this.fetchedQuote.typeQuote === 'HQ')
       return true

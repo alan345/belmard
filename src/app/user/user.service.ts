@@ -60,6 +60,7 @@ export class UserService {
   getCurrentUserInSession(){
     return this.currentUser
   }
+
   isCurrentUserIsInSubPeriod(){
     if (new Date(this.currentUser.paiement.stripe.current_period_end) > new Date())
       return true;

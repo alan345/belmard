@@ -2,7 +2,7 @@ import { Injectable} from '@angular/core';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, CanActivate, Router} from '@angular/router';
 import { Observable} from 'rxjs';
 import { ToastsManager} from 'ng2-toastr';
-import { UserService} from '../user.service'
+import { AuthService} from '../../auth/auth.service'
 import { User } from '../user.model'
 
 
@@ -14,13 +14,13 @@ export class PaiementGuardService implements CanActivate {
   constructor(
     private router: Router,
     private toastr: ToastsManager,
-    private userService: UserService
+    private authService: AuthService
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
 
-
-    return true;
+    return this.authService.isCurrentUserIsInSubPeriod()
+    // return true;
 
     // if(this.userService.isCurrentUserIsInSubPeriod()) {
     //   return true

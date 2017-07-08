@@ -107,14 +107,6 @@ export class CompaniesComponent implements OnInit {
   isAdmin() {
     return this.authService.isAdmin();
   }
-  isStylist() {
-    return this.authService.isStylist();
-  }
-  isSalesRep(){
-    return this.authService.isSalesRep();
-  }
-  isManager(){
-    return this.authService.isManager();
-  }
+
 
 }

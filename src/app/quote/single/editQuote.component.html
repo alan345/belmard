@@ -190,7 +190,19 @@
           <button type="button" (click)="removePaiement(i)"><i class="fa fa-times"></i></button>
         </div>
         <div class="col-md-3">
-          {{paiement.datePaiement}}
+          {{paiement.datePaiement | date:'yyyy-MM-dd' }}
+          <!-- <input [ngModelOptions]="{standalone: true}" [ngModel]="paiement.datePaiement | date:'yyyy-MM-dd'" (ngModelChange)="paiement.datePaiement = $event" type="date" name="startDate"/> -->
+          <!-- <input type="date" [ngModelOptions]="{standalone: true}" class="form-control" id="myDate" [ngModel]="fetchedQuote.paiements[i].datePaiement | date:'y-MM-dd'" (ngModelChange)="fetchedQuote.paiements[i].datePaiement = $event" name="birthday"> -->
+          <!-- <input type="date" #myDate [value]="fetchedQuote.paiements[i].datePaiement | date:'yyyy-MM-dd'" (input)="fetchedQuote.paiements[i].datePaiement=parseDate($event.target.value)" /> -->
+          <!-- <input [ngModelOptions]="{standalone: true}" [ngModel]="fetchedQuote.paiements[i].datePaiement | date:'yyyy-MM-dd'" (ngModelChange)="fetchedQuote.paiements[i].datePaiement = $event" type="date" name="startDate"/> -->
+          <!-- <input
+
+            type="date"
+            [ngModelOptions]="{standalone: true}"
+            class="form-control"
+            [(ngModel)]="fetchedQuote.paiements[i].datePaiement"
+            placeholder="Amount"
+            useValueAsDate> -->
         </div>
         <div class="col-md-3">
           <input type="text"
@@ -206,7 +218,6 @@
           [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedQuote.paiements[i].type" placeholder="Type">
         </div>
       </div>
-
 
       total paiement: {{fetchedQuote.priceQuote.paiementQuote}}
       <br>

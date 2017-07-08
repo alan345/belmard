@@ -21,10 +21,10 @@ import {SharedModule } from '../shared/shared.module';
 import { SignaturePadModule } from 'angular2-signaturepad';
 
 
-
 @NgModule({
   imports:      [
     // ProjectModule,
+    
     QuoteRouting,
     CommonModule,
     FormsModule,

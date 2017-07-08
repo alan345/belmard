@@ -440,6 +440,13 @@ export class EditQuoteComponent implements OnInit {
       this.calculateQuote()
     }
 
+  //   parseDate(dateString: string): Date {
+  //     if (dateString) {
+  //         return new Date(dateString);
+  //     } else {
+  //         return null;
+  //     }
+  // }
 
     removePaiement(i: number) {
       this.fetchedQuote.paiements.splice(i, 1);

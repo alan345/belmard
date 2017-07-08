@@ -4,7 +4,7 @@ import { Observable} from 'rxjs';
 import { ToastsManager} from 'ng2-toastr';
 import { UserService} from '../user/user.service'
 import { User } from '../user/user.model'
-
+import { AuthService} from '../auth/auth.service'
 
 
 
@@ -17,11 +17,11 @@ export class CompanieGuardService implements CanActivate {
   constructor(
     private router: Router,
     private toastr: ToastsManager,
-    private userService: UserService
+    private authService: AuthService,
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
-    return true;
+    return this.authService.isCurrentUserHasCompanie()
     // let answer: boolean
     // this.userService.getUser('')
     //   .subscribe(

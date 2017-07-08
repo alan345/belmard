@@ -18,6 +18,7 @@ export class AuthService {
   public currentUser={
     userId: '',
     token: '',
+    // user: {}
   //  companieId:[]
 
   }
@@ -57,12 +58,18 @@ export class AuthService {
       .map((response: Response) => {
         let token = response.json() && response.json().token;
         let userId = response.json() && response.json().userId;
+        let user = response.json() && response.json().user;
         if (token) {
 
-          let currentUser = { userId: userId, token: token }
+          let currentUser = {
+            userId: userId,
+            token: token,
+            // user: user
+          }
 
           this.token = token
           this.currentUser = currentUser
+
         //  console.log(this.currentUser)
           localStorage.setItem('currentUser', JSON.stringify(currentUser))
         }
@@ -93,34 +100,76 @@ export class AuthService {
     }
     return false;
   }
-  isStylist() {
+
+
+
+  getCurrentUser(){
+
     let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
-    if (userInfo) {
-      if (userInfo.user.role[0] === 'stylist') {
-        return true;
-      }
-    }
-    return false;
+    console.log(userInfo)
+    return userInfo.user
+    // return userInfo
+    // if (userInfo) {
+    //   if (userInfo.user.role[0] === 'admin') {
+    //     return true;
+    //   }
+    // }
+    // return false;
   }
-  isSalesRep() {
+  isCurrentUserIsInSubPeriod(){
     let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
-    if (userInfo) {
-      if (userInfo.user.role[0] === 'salesRep') {
-        return true;
-      }
-    }
-    return false;
+    if (new Date(userInfo.user.paiement.stripe.current_period_end) > new Date())
+      return true;
+    return false
+  }
+  isCurrentUserHasCompanie(){
+    let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
+
+    if(userInfo.user.companies.length)
+      return true
+    return false
   }
 
-  isManager(){
-    let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
-    if (userInfo) {
-      if (userInfo.user.role[0] === 'manager') {
-        return true;
-      }
-    }
-    return false;
-  }
+  // isCurrentUserIsInSubPeriod(){
+  //   if (new Date(this.currentUser.paiement.stripe.current_period_end) > new Date())
+  //     return true;
+  //   return false
+  //
+  // }
+  // isCurrentUserHasCompanie(){
+  //   if(this.currentUser.companies.length)
+  //     return true
+  //   return false
+  // }
+
+  // isStylist() {
+  //   let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
+  //   if (userInfo) {
+  //     if (userInfo.user.role[0] === 'stylist') {
+  //       return true;
+  //     }
+  //   }
+  //   return false;
+  // }
+  // isSalesRep() {
+  //   let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
+  //   if (userInfo) {
+  //     if (userInfo.user.role[0] === 'salesRep') {
+  //       return true;
+  //     }
+  //   }
+  //   return false;
+  // }
+  //
+  // isManager(){
+  //   let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
+  //   if (userInfo) {
+  //     if (userInfo.user.role[0] === 'manager') {
+  //       return true;
+  //     }
+  //   }
+  //   return false;
+  // }
 
   // sending request for password reset
   forget(reset: Reset) {
