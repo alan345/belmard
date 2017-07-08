@@ -7,15 +7,20 @@ import { AdminGuardService} from '../admin/services/adminGuard';
 
 import { QuotesComponent} from './quotes/quotes.component';
 
+import { CompanieGuardService} from '../companie/companieGuard.service';
+import { PaiementGuardService} from '../user/paiement/paiementGuard.service';
+import { AuthGuardService} from '../auth/authguard.service';
+
 
 
 export const routes: Routes = [
-  {path: '', component: QuotesComponent},
-  {path: 'new', component: EditQuoteComponent},
-  {path: 'new/:idClient', component: EditQuoteComponent},
-  {path: 'new/:idClient/:idProject', component: EditQuoteComponent},
-  {path: 'edit/:id', component: EditQuoteComponent},
-  {path: ':id', component: QuoteDetailComponent},
+  {path: '', component: QuotesComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
+  {path: 'new', component: EditQuoteComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
+  {path: 'new/:idClient', component: EditQuoteComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
+  {path: 'new/:idClient/:idProject', component: EditQuoteComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
+  {path: 'edit/:id', component: EditQuoteComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
+  {path: ':id', component: QuoteDetailComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
+  {path: 'public/:id', component: EditQuoteComponent},
 
 ];
 

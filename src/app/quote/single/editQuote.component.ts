@@ -32,7 +32,7 @@ import { SignaturePad } from 'angular2-signaturepad/signature-pad';
 })
 export class EditQuoteComponent implements OnInit {
   @ViewChild(SignaturePad) signaturePad: SignaturePad;
-
+  showPaiements: boolean = false
   fetchedQuote : Quote = new Quote()
   autocompleteUser: string = '';
   autocompleteProject: string = '';
@@ -102,7 +102,9 @@ export class EditQuoteComponent implements OnInit {
       penColor: "rgb(36, 41, 46)"
     };
 
-
+    togglePaiements(){
+      this.showPaiements = !this.showPaiements
+    }
 
     ngAfterViewInit() {
       // this.signaturePad is now available
