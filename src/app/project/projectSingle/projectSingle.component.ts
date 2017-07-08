@@ -1,26 +1,26 @@
 import { Component, OnInit} from '@angular/core';
-import { ProjectService} from './project.service';
+import { ProjectService} from '../project.service';
 import { ToastsManager} from 'ng2-toastr';
 import { MdDialog } from '@angular/material';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
-import { Project, ItemSteps, StatusProject } from './project.model';
-import { EditOptionsComponentDialog } from '../form/modalLibrary/modalLibrary.component';
+import { Project, ItemSteps, StatusProject } from '../project.model';
+import { EditOptionsComponentDialog } from '../../form/modalLibrary/modalLibrary.component';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
-import { DeleteDialog } from '../deleteDialog/deleteDialog.component'
-import { UserService} from '../user/user.service';
-import { QuoteService} from '../quote/quote.service';
+import { DeleteDialog } from '../../deleteDialog/deleteDialog.component'
+import { UserService} from '../../user/user.service';
+import { QuoteService} from '../../quote/quote.service';
 
-import { User } from '../user/user.model';
-import { Quote } from '../quote/quote.model';
+import { User } from '../../user/user.model';
+import { Quote } from '../../quote/quote.model';
 
 
 
 @Component({
   selector: 'app-projects',
   templateUrl: './projectSingle.component.html',
-  styleUrls: ['./project.component.css'],
+  styleUrls: ['../project.component.css'],
 
 })
 

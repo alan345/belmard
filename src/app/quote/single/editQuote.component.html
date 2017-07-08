@@ -190,19 +190,28 @@
           <button type="button" (click)="removePaiement(i)"><i class="fa fa-times"></i></button>
         </div>
         <div class="col-md-3">
-          {{paiement.datePaiement | date:'yyyy-MM-dd' }}
+          <div (click)="editDateMode(i)">{{paiement.datePaiement | date:'yyyy-MM-dd' }}</div>
           <!-- <input [ngModelOptions]="{standalone: true}" [ngModel]="paiement.datePaiement | date:'yyyy-MM-dd'" (ngModelChange)="paiement.datePaiement = $event" type="date" name="startDate"/> -->
           <!-- <input type="date" [ngModelOptions]="{standalone: true}" class="form-control" id="myDate" [ngModel]="fetchedQuote.paiements[i].datePaiement | date:'y-MM-dd'" (ngModelChange)="fetchedQuote.paiements[i].datePaiement = $event" name="birthday"> -->
           <!-- <input type="date" #myDate [value]="fetchedQuote.paiements[i].datePaiement | date:'yyyy-MM-dd'" (input)="fetchedQuote.paiements[i].datePaiement=parseDate($event.target.value)" /> -->
           <!-- <input [ngModelOptions]="{standalone: true}" [ngModel]="fetchedQuote.paiements[i].datePaiement | date:'yyyy-MM-dd'" (ngModelChange)="fetchedQuote.paiements[i].datePaiement = $event" type="date" name="startDate"/> -->
-          <!-- <input
-
+          <input
+            *ngIf="fetchedQuote.paiements[i].editDateMode"
             type="date"
+            (focusout)="editDateMode(i)"
             [ngModelOptions]="{standalone: true}"
             class="form-control"
             [(ngModel)]="fetchedQuote.paiements[i].datePaiement"
             placeholder="Amount"
-            useValueAsDate> -->
+            useValueAsDate>
+        </div>
+        <div class="col-md-3">
+          <input
+          type="text"
+          [ngModelOptions]="{standalone: true}"
+          class="form-control"
+          [(ngModel)]="fetchedQuote.paiements[i].type"
+          placeholder="Type">
         </div>
         <div class="col-md-3">
           <input type="text"
@@ -212,16 +221,29 @@
             [(ngModel)]="fetchedQuote.paiements[i].amount"
             placeholder="Amount">
         </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+        </div>
         <div class="col-md-3">
-          <input
-          type="text"
-          [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedQuote.paiements[i].type" placeholder="Type">
+          total paiement:
+        </div>
+        <div class="col-md-3">
+          {{fetchedQuote.priceQuote.paiementQuote}}
         </div>
       </div>
-
-      total paiement: {{fetchedQuote.priceQuote.paiementQuote}}
+      <div class="row">
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-3">
+          Reste a payer :
+        </div>
+        <div class="col-md-3">
+          {{fetchedQuote.priceQuote.priceQuoteWithoutTaxes*1 - fetchedQuote.priceQuote.paiementQuote*1}}
+        </div>
+      </div>
       <br>
-      Rester a payer : {{fetchedQuote.priceQuote.priceQuoteWithoutTaxes*1 - fetchedQuote.priceQuote.paiementQuote*1}}
+
 
 
       <div class="valid-edit">

@@ -1,10 +1,10 @@
 import { Component, OnInit} from '@angular/core';
-import { ProjectService} from './project.service';
+import { ProjectService} from '../project.service';
 import { ToastsManager} from 'ng2-toastr';
 //import { MdDialog } from '@angular/material';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
-import { Project, BucketTasks, Task } from './project.model';
+import { Project, BucketTasks, Task } from '../project.model';
 // import { EditOptionsComponentDialog } from '../form/modalLibrary/modalLibrary.component';
 //import { FormGroup} from '@angular/forms';
 // import { DomSanitizer } from '@angular/platform-browser';
@@ -15,13 +15,13 @@ import { Project, BucketTasks, Task } from './project.model';
 // import { User } from '../user/user.model';
 // import { Quote } from '../quote/quote.model';
 import { DragulaService } from 'ng2-dragula';
-import { User } from '../user/user.model';
+import { User } from '../../user/user.model';
 
 
 @Component({
   selector: 'app-projects',
   templateUrl: './projectTasks.component.html',
-  styleUrls: ['./project.component.css'],
+  styleUrls: ['../project.component.css'],
 
 })
 

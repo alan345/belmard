@@ -5,9 +5,9 @@ import { MaterialModule } from '@angular/material';
 import { Ng2PaginationModule} from 'ng2-pagination';
 
 
-import { ProjectTasksComponent} from './projectTasks.component';
+import { ProjectTasksComponent} from './projectSingle/projectTasks.component';
 import { ProjectsComponent} from './projects/projects.component';
-import { ProjectSingleComponent} from './projectSingle.component';
+import { ProjectSingleComponent} from './projectSingle/projectSingle.component';
 import { ProjectService} from './project.service';
 import { ProjectRouting} from './projectRouting.module';
 

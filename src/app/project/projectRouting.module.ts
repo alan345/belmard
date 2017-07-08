@@ -1,8 +1,8 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule }            from '@angular/core';
 import { ProjectsComponent} from './projects/projects.component';
-import { ProjectSingleComponent} from './projectSingle.component';
-import { ProjectTasksComponent} from './projectTasks.component';
+import { ProjectSingleComponent} from './projectSingle/projectSingle.component';
+import { ProjectTasksComponent} from './projectSingle/projectTasks.component';
 
 
 export const routes: Routes = [

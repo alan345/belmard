@@ -349,10 +349,17 @@ export class EditQuoteComponent implements OnInit {
 
 
 
-
+  editDateMode(index) {
+    this.fetchedQuote.paiements[index].editDateMode = !this.fetchedQuote.paiements[index].editDateMode
+  }
 
   save() {
-
+    this.fetchedQuote.paiements.forEach((paiement, index) =>{
+      let year = Number(this.fetchedQuote.paiements[index].datePaiement.toString().substring(0, 4))
+      let month = Number(this.fetchedQuote.paiements[index].datePaiement.toString().substring(5, 7))
+      let day = Number(this.fetchedQuote.paiements[index].datePaiement.toString().substring(8, 10))
+      this.fetchedQuote.paiements[index].datePaiement = new Date(year, month-1, day)
+    })
     if(this.fetchedQuote._id) {
       this.quoteService.updateQuote(this.fetchedQuote)
         .subscribe(

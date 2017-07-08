@@ -24,6 +24,7 @@ export class Paiement {
   type: string = '';
   amount: number= 0;
   datePaiement: Date = new Date();
+  editDateMode : boolean = false
 }
 
 export class Signature {
