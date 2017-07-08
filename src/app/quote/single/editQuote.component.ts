@@ -541,9 +541,7 @@ export class EditQuoteComponent implements OnInit {
   isAdmin() {
     return this.authService.isAdmin();
   }
-  isManager() {
-    return this.authService.isManager();
-  }
+
 
 
 }
