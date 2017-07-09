@@ -46,6 +46,7 @@ import { SignaturePadModule } from 'angular2-signaturepad';
   ],
   exports:      [
     PaiementQuotesComponent,
+    EditPaiementQuoteComponent,
     // AutocompleteComponent,
   ],
   providers:    [ PaiementQuoteService ],

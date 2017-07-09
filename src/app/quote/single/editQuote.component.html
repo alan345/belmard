@@ -189,7 +189,19 @@
       <div (click)="togglePaiements()">Paiements</div>
       <div *ngIf="showPaiements">
 
-        <app-paiementQuotes [showHeader]="false" [quoteId]="fetchedQuote._id"></app-paiementQuotes>
+        <app-paiementQuotes
+          (getPaiementQuotesCross)="getPaiementQuotes($event)"
+          [showHeader]="false"
+          [idQuote]="fetchedQuote._id">
+        </app-paiementQuotes>
+        Total Paiement = {{totalPaiementAmount}}
+        <br>
+        Reste a payer = {{fetchedQuote.priceQuote.priceQuoteWithoutTaxes*1 -  totalPaiementAmount*1| round}}
+        <app-paiementQuote
+          (newPaiementQuoteSaved)="newPaiementQuoteSaved()"
+        >
+        </app-paiementQuote>
+
         <!-- <div>
           <button type="button" (click)="addPaiement()"><i class="fa fa-plus"></i>Add Paiement</button>
         </div>

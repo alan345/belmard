@@ -1,10 +1,10 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, Output, EventEmitter} from '@angular/core';
 import {AuthService} from '../../auth/auth.service';
 import {QuoteService} from '../quote.service';
 import {ProductService} from '../../product/product.service';
 import { ProjectService} from '../../project/project.service';
 
-import {Quote, DevisDetails, Paiement} from '../quote.model';
+import {Quote, DevisDetails} from '../quote.model';
 
 import {ToastsManager} from 'ng2-toastr';
 
@@ -17,11 +17,15 @@ import { DeleteDialog } from '../../deleteDialog/deleteDialog.component';
 import { User } from '../../user/user.model';
 import { Product } from '../../product/product.model';
 import { Project } from '../../project/project.model';
+import { PaiementQuote } from '../../paiementQuote/paiementQuote.model';
+
 
 declare let jsPDF;
 
 
 import { SignaturePad } from 'angular2-signaturepad/signature-pad';
+import { PaiementQuotesComponent } from '../../paiementQuote/paiementQuotes/paiementQuotes.component';
+
 
 
 
@@ -32,6 +36,10 @@ import { SignaturePad } from 'angular2-signaturepad/signature-pad';
 })
 export class EditQuoteComponent implements OnInit {
   @ViewChild(SignaturePad) signaturePad: SignaturePad;
+  @ViewChild(PaiementQuotesComponent) paiementQuotesComponent: PaiementQuotesComponent;
+  // @Output() refreshPaiementQuotes: EventEmitter<any> = new EventEmitter();
+  // @Output() newPaiementQuoteSaved: EventEmitter<any> = new EventEmitter();
+
   showPaiements: boolean = false
   fetchedQuote : Quote = new Quote()
   autocompleteUser: string = '';
@@ -41,12 +49,13 @@ export class EditQuoteComponent implements OnInit {
   // currentUser: User = new User()
   imgLogoUrl: string = './assets/images/profile-placeholder.jpg'
   imgSignatureBase64Temp = ''
+  fetchedPaiementQuotes: PaiementQuote[] = []
   // userAdmins : User[] = []
   // userManagers : User[] = []
   // userClients : User[] = []
   // usersSalesRep : User[] = []
   // userStylists : User[] = []
-
+  totalPaiementAmount: number = 0
   myForm: FormGroup;
   autocompleteProduct: String = ''
   fetchedUsers: User[] = [];
@@ -76,8 +85,8 @@ export class EditQuoteComponent implements OnInit {
 
     this.activatedRoute.params.subscribe((params: Params) => {
 
-      if(params['id'])
-        this.getQuote(params['id'])
+      if(params['idQuote'])
+        this.getQuote(params['idQuote'])
       if(params['idClient'])
        this.getUser(params['idClient'])
      if(params['idProject'])
@@ -269,10 +278,10 @@ export class EditQuoteComponent implements OnInit {
       this.fetchedUsers = []
       this.fetchedQuote.clients.push(user)
     }
-    addPaiement(){
-      let newPaiement:Paiement = new Paiement()
-      this.fetchedQuote.paiements.push(newPaiement)
-    }
+    // addPaiement(){
+    //   let newPaiement:Paiement = new Paiement()
+    //   this.fetchedQuote.paiements.push(newPaiement)
+    // }
     searchUsers() {
       if(!this.autocompleteUser) {
         this.fetchedUsers = []
@@ -344,17 +353,18 @@ export class EditQuoteComponent implements OnInit {
 
 
 
-  editDateMode(index) {
-    this.fetchedQuote.paiements[index].editDateMode = !this.fetchedQuote.paiements[index].editDateMode
-  }
+  // editDateMode(index) {
+  //   this.fetchedQuote.paiements[index].editDateMode = !this.fetchedQuote.paiements[index].editDateMode
+  // }
 
   save() {
-    this.fetchedQuote.paiements.forEach((paiement, index) =>{
-      let year = Number(this.fetchedQuote.paiements[index].datePaiement.toString().substring(0, 4))
-      let month = Number(this.fetchedQuote.paiements[index].datePaiement.toString().substring(5, 7))
-      let day = Number(this.fetchedQuote.paiements[index].datePaiement.toString().substring(8, 10))
-      this.fetchedQuote.paiements[index].datePaiement = new Date(year, month-1, day)
-    })
+    // this.fetchedQuote.paiements.forEach((paiement, index) =>{
+    //   let year = Number(this.fetchedQuote.paiements[index].datePaiement.toString().substring(0, 4))
+    //   let month = Number(this.fetchedQuote.paiements[index].datePaiement.toString().substring(5, 7))
+    //   let day = Number(this.fetchedQuote.paiements[index].datePaiement.toString().substring(8, 10))
+    //   this.fetchedQuote.paiements[index].datePaiement = new Date(year, month-1, day)
+    // })
+    //
     if(this.fetchedQuote._id) {
       this.quoteService.updateQuote(this.fetchedQuote)
         .subscribe(
@@ -426,11 +436,7 @@ export class EditQuoteComponent implements OnInit {
           this2.fetchedQuote.priceQuote.priceQuoteWithTaxes = this2.fetchedQuote.priceQuote.priceQuoteWithTaxes*1 + this2.fetchedQuote.devisDetails[i].totalPriceWithTaxes*1
           this2.fetchedQuote.priceQuote.priceQuoteWithoutTaxes = this2.fetchedQuote.priceQuote.priceQuoteWithoutTaxes*1 + this2.fetchedQuote.devisDetails[i].totalPriceWithoutTaxes*1
         })
-        this2.fetchedQuote.priceQuote.paiementQuote = 0
-        this2.fetchedQuote.paiements.forEach((paiement, i) => {
-          this2.fetchedQuote.priceQuote.paiementQuote = this2.fetchedQuote.priceQuote.paiementQuote*1 + paiement.amount*1
 
-        })
 
 
         //this2.save()
@@ -450,10 +456,10 @@ export class EditQuoteComponent implements OnInit {
   //     }
   // }
 
-    removePaiement(i: number) {
-      this.fetchedQuote.paiements.splice(i, 1);
-      this.calculateQuote()
-    }
+    // removePaiement(i: number) {
+    //   this.fetchedQuote.paiements.splice(i, 1);
+    //   this.calculateQuote()
+    // }
 
     getProducts(page: number, search: any) {
       this.productService.getProducts(page, search)
@@ -526,8 +532,19 @@ export class EditQuoteComponent implements OnInit {
       }
     })
   }
+  newPaiementQuoteSaved(){
+    this.paiementQuotesComponent.getPaiementQuotesInit()
+    // this.refreshPaiementQuotes.emit()
+    // this.getPaiementQuotesCross.emit(this.fetchedPaiementQuotes)
+  }
+  getPaiementQuotes(event){
+    // console.log(event)
 
-
+    this.fetchedPaiementQuotes = event
+    this.fetchedPaiementQuotes.forEach(paiement => {
+      this.totalPaiementAmount += paiement.amount
+    })
+  }
   getQuote(id: string) {
     this.quoteService.getQuote(id, {})
       .subscribe(

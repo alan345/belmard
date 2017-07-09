@@ -1,4 +1,4 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { AuthService} from '../../auth/auth.service';
 import { PaiementQuoteService} from '../../paiementQuote/paiementQuote.service';
 import { PaiementQuote} from '../../paiementQuote/paiementQuote.model';
@@ -16,8 +16,9 @@ import { Location} from '@angular/common';
 })
 export class PaiementQuotesComponent implements OnInit {
   // @Input() userId = '';
-  @Input() quoteId = '';
+  @Input() idQuote = '';
   @Input() showHeader = true;
+  @Output() getPaiementQuotesCross: EventEmitter<any> = new EventEmitter();
 
   fetchedPaiementQuotes: PaiementQuote[] = [];
   loading: boolean;
@@ -30,7 +31,7 @@ export class PaiementQuotesComponent implements OnInit {
   search = {
     orderBy : '',
     search: '',
-    quoteId:'',
+    idQuote:'',
   };
 
   constructor(
@@ -46,16 +47,18 @@ export class PaiementQuotesComponent implements OnInit {
 
 
   ngOnInit() {
-    let this2 = this
-    setTimeout(function(){
-      this2.search.quoteId = this2.quoteId
-      this2.search.orderBy = 'name'
-      this2.getPaiementQuotes(1, this2.search)
-    }, 200);
-
+    this.getPaiementQuotesInit()
   }
 
 
+  getPaiementQuotesInit(){
+    let this2 = this
+    setTimeout(function(){
+      this2.search.idQuote = this2.idQuote
+      this2.search.orderBy = 'name'
+      this2.getPaiementQuotes(1, this2.search)
+    }, 200);
+  }
   searchPaiementQuotes(){}
 
 
@@ -102,6 +105,7 @@ export class PaiementQuotesComponent implements OnInit {
           this.paginationData = res.paginationData;
           this.fetchedPaiementQuotes =  res.data
           this.loading = false;
+          this.getPaiementQuotesCross.emit(this.fetchedPaiementQuotes)
         },
         error => {
           console.log(error);

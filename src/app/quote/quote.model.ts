@@ -16,16 +16,16 @@ export class Quote {
   devisDetails: DevisDetails[] = []
   priceQuote: PriceQuote = new PriceQuote()
   signature: Signature=new Signature()
-  paiements: Paiement[] = []
+  // paiements: Paiement[] = []
 }
 
 
-export class Paiement {
-  type: string = '';
-  amount: number= 0;
-  datePaiement: Date = new Date();
-  editDateMode : boolean = false
-}
+// export class Paiement {
+//   type: string = '';
+//   amount: number= 0;
+//   datePaiement: Date = new Date();
+//   editDateMode : boolean = false
+// }
 
 export class Signature {
   base64: string = '';

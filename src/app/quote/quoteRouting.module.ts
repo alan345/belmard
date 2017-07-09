@@ -18,9 +18,9 @@ export const routes: Routes = [
   {path: 'new', component: EditQuoteComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
   {path: 'new/:idClient', component: EditQuoteComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
   {path: 'new/:idClient/:idProject', component: EditQuoteComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
-  {path: 'edit/:id', component: EditQuoteComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
+  {path: 'edit/:idQuote', component: EditQuoteComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
   {path: ':id', component: QuoteDetailComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
-  {path: 'public/:id', component: EditQuoteComponent},
+  {path: 'public/:idQuote', component: EditQuoteComponent},
 
 ];
 

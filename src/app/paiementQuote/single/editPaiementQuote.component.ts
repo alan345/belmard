@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {AuthService} from '../../auth/auth.service';
 import {PaiementQuoteService} from '../paiementQuote.service';
 import {ProductService} from '../../product/product.service';
@@ -30,6 +30,7 @@ import { Project } from '../../project/project.model';
   styleUrls: ['../paiementQuote.component.css'],
 })
 export class EditPaiementQuoteComponent implements OnInit {
+  @Output() newPaiementQuoteSaved: EventEmitter<any> = new EventEmitter();
 
   showPaiements: boolean = false
   fetchedPaiementQuote : PaiementQuote = new PaiementQuote()
@@ -72,9 +73,9 @@ export class EditPaiementQuoteComponent implements OnInit {
       type: [''],
     })
     this.activatedRoute.params.subscribe((params: Params) => {
-
-      if(params['id'])
-        this.getPaiementQuote(params['id'])
+      // console.log(params)
+      if(params['idPaiementQuote'])
+        this.getPaiementQuote(params['idPaiementQuote'])
       if(params['idQuote'])
        this.getQuote(params['idQuote'])
     //  if(params['idProject'])
@@ -95,7 +96,7 @@ export class EditPaiementQuoteComponent implements OnInit {
       this.quoteService.getQuote(idQuote, {})
         .subscribe(
           res => {
-            this.fetchedPaiementQuote.quotes = [res] 
+            this.fetchedPaiementQuote.quotes = [res]
           },
           error => { console.log(error) }
         )
@@ -124,7 +125,8 @@ export class EditPaiementQuoteComponent implements OnInit {
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
-              this.router.navigate(['paiementQuote/edit/' + res.obj._id])
+            this.newPaiementQuoteSaved.emit()
+              // this.router.navigate(['paiementQuote/edit/' + res.obj._id])
           },
           error => {console.log(error)}
         )
