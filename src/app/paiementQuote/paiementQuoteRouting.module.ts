@@ -16,8 +16,8 @@ import { AuthGuardService} from '../auth/authguard.service';
 export const routes: Routes = [
   {path: '', component: PaiementQuotesComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
   {path: 'new', component: EditPaiementQuoteComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
-  {path: 'new/:idClient', component: EditPaiementQuoteComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
-  {path: 'new/:idClient/:idProject', component: EditPaiementQuoteComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
+  {path: 'new/:idQuote', component: EditPaiementQuoteComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
+  // {path: 'new/:idClient/:idProject', component: EditPaiementQuoteComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
   {path: 'edit/:id', component: EditPaiementQuoteComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
   // {path: ':id', component: PaiementQuoteDetailComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
   {path: 'public/:id', component: EditPaiementQuoteComponent},

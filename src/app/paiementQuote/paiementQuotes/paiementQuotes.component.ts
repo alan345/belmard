@@ -15,8 +15,8 @@ import { Location} from '@angular/common';
   styleUrls: ['../../admin/admin.component.css'],
 })
 export class PaiementQuotesComponent implements OnInit {
-  @Input() userId = '';
-  @Input() projectId = '';
+  // @Input() userId = '';
+  @Input() quoteId = '';
   @Input() showHeader = true;
 
   fetchedPaiementQuotes: PaiementQuote[] = [];
@@ -30,9 +30,7 @@ export class PaiementQuotesComponent implements OnInit {
   search = {
     orderBy : '',
     search: '',
-    paiementQuoteType: '',
-    userId:'',
-    projectId:'',
+    quoteId:'',
   };
 
   constructor(
@@ -50,8 +48,7 @@ export class PaiementQuotesComponent implements OnInit {
   ngOnInit() {
     let this2 = this
     setTimeout(function(){
-      this2.search.userId = this2.userId
-      this2.search.projectId = this2.projectId
+      this2.search.quoteId = this2.quoteId
       this2.search.orderBy = 'name'
       this2.getPaiementQuotes(1, this2.search)
     }, 200);

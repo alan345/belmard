@@ -531,15 +531,11 @@ export class EditQuoteComponent implements OnInit {
   getQuote(id: string) {
     this.quoteService.getQuote(id, {})
       .subscribe(
-        res => {
-          this.fetchedQuote = res
-
-        },
-        error => {
-          console.log(error);
-        }
+        res => { this.fetchedQuote = res },
+        error => { console.log(error) }
       )
   }
+
   isAdmin() {
     return this.authService.isAdmin();
   }

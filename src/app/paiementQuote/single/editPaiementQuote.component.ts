@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../auth/auth.service';
 import {PaiementQuoteService} from '../paiementQuote.service';
 import {ProductService} from '../../product/product.service';
@@ -11,18 +11,16 @@ import {ToastsManager} from 'ng2-toastr';
 import {MdDialog } from '@angular/material';
 import {Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
-import { FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup} from '@angular/forms';
 import { UserService} from '../../user/user.service';
+import { QuoteService } from '../../quote/quote.service';
 import { DeleteDialog } from '../../deleteDialog/deleteDialog.component';
 import { User } from '../../user/user.model';
 import { Quote } from '../../quote/quote.model';
 import { Product } from '../../product/product.model';
 import { Project } from '../../project/project.model';
 
-declare let jsPDF;
 
-
-import { SignaturePad } from 'angular2-signaturepad/signature-pad';
 
 
 
@@ -54,10 +52,10 @@ export class EditPaiementQuoteComponent implements OnInit {
   arrayContentToSearch =[]
   constructor(
     private paiementQuoteService: PaiementQuoteService,
-  //  private projectService: ProjectService,
-    private projectService: ProjectService,
-    private userService: UserService,
-    private productService: ProductService,
+    private quoteService: QuoteService,
+    // private projectService: ProjectService,
+    // private userService: UserService,
+    // private productService: ProductService,
 //    private modalService: NgbModal,
     private toastr: ToastsManager,
     public dialog: MdDialog,
@@ -77,8 +75,8 @@ export class EditPaiementQuoteComponent implements OnInit {
 
       if(params['id'])
         this.getPaiementQuote(params['id'])
-    //   if(params['idClient'])
-    //    this.getUser(params['idClient'])
+      if(params['idQuote'])
+       this.getQuote(params['idQuote'])
     //  if(params['idProject'])
     //   this.getProject(params['idProject'])
     })
@@ -93,8 +91,15 @@ export class EditPaiementQuoteComponent implements OnInit {
       this.fetchedPaiementQuote.editDateMode = !this.fetchedPaiementQuote.editDateMode
     }
 
-
-
+    getQuote(idQuote: string) {
+      this.quoteService.getQuote(idQuote, {})
+        .subscribe(
+          res => {
+            this.fetchedPaiementQuote.quotes = [res] 
+          },
+          error => { console.log(error) }
+        )
+    }
 
   save() {
     // this.fetchedPaiementQuote.paiements.forEach((paiement, index) =>{
@@ -129,16 +134,6 @@ export class EditPaiementQuoteComponent implements OnInit {
 
 
 
-
-
-  // move(i: number, incremet: number, typeUser: string) {
-  //   if(i>=0 && i<=this[typeUser].length + incremet) {
-  //     var tmp = this[typeUser][i];
-  //     this[typeUser][i] = this[typeUser][i + incremet]
-  //     this[typeUser][i + incremet] = tmp
-  //     this.save()
-  //   }
-  // }
 
 
 

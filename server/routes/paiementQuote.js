@@ -167,8 +167,8 @@ router.get('/page/:page', function (req, res, next) {
     searchQuery['details.name'] = new RegExp(req.query.search, 'i')
 
 
-  if(req.query.userId)
-    searchQuery['clients'] = mongoose.Types.ObjectId(req.query.userId)
+  if(req.query.quoteId)
+    searchQuery['quotes'] = mongoose.Types.ObjectId(req.query.quoteId)
 
   // console.log(hasWhatsNewCateg)
   // console.log(searchQuery)

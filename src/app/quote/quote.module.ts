@@ -17,14 +17,14 @@ import { Ng2PaginationModule} from 'ng2-pagination';
 import { ProductModule } from '../product/product.module';
 // import { AutocompleteComponent } from '../autocomplete/autocomplete.component'
 
-import {SharedModule } from '../shared/shared.module';
+import { SharedModule } from '../shared/shared.module';
 import { SignaturePadModule } from 'angular2-signaturepad';
-
+import { PaiementQuoteModule} from '../paiementQuote/paiementQuote.module'
 
 @NgModule({
   imports:      [
     // ProjectModule,
-    
+
     QuoteRouting,
     CommonModule,
     FormsModule,
@@ -35,6 +35,7 @@ import { SignaturePadModule } from 'angular2-signaturepad';
     ProductModule,
     SharedModule,
     SignaturePadModule,
+    PaiementQuoteModule,
     // AutocompleteComponent,
   ],
   declarations: [

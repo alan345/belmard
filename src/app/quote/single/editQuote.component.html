@@ -188,7 +188,9 @@
 
       <div (click)="togglePaiements()">Paiements</div>
       <div *ngIf="showPaiements">
-        <div>
+
+        <app-paiementQuotes [showHeader]="false" [quoteId]="fetchedQuote._id"></app-paiementQuotes>
+        <!-- <div>
           <button type="button" (click)="addPaiement()"><i class="fa fa-plus"></i>Add Paiement</button>
         </div>
         <div class="row" *ngFor="let paiement of fetchedQuote.paiements; let i=index;">
@@ -197,10 +199,6 @@
           </div>
           <div class="col-md-3">
             <div (click)="editDateMode(i)">{{paiement.datePaiement | date:'yyyy-MM-dd' }}</div>
-            <!-- <input [ngModelOptions]="{standalone: true}" [ngModel]="paiement.datePaiement | date:'yyyy-MM-dd'" (ngModelChange)="paiement.datePaiement = $event" type="date" name="startDate"/> -->
-            <!-- <input type="date" [ngModelOptions]="{standalone: true}" class="form-control" id="myDate" [ngModel]="fetchedQuote.paiements[i].datePaiement | date:'y-MM-dd'" (ngModelChange)="fetchedQuote.paiements[i].datePaiement = $event" name="birthday"> -->
-            <!-- <input type="date" #myDate [value]="fetchedQuote.paiements[i].datePaiement | date:'yyyy-MM-dd'" (input)="fetchedQuote.paiements[i].datePaiement=parseDate($event.target.value)" /> -->
-            <!-- <input [ngModelOptions]="{standalone: true}" [ngModel]="fetchedQuote.paiements[i].datePaiement | date:'yyyy-MM-dd'" (ngModelChange)="fetchedQuote.paiements[i].datePaiement = $event" type="date" name="startDate"/> -->
             <input *ngIf="fetchedQuote.paiements[i].editDateMode" type="date" (focusout)="editDateMode(i)" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedQuote.paiements[i].datePaiement" placeholder="Amount" useValueAsDate>
           </div>
           <div class="col-md-3">
@@ -229,7 +227,7 @@
           <div class="col-md-3">
             {{fetchedQuote.priceQuote.priceQuoteWithoutTaxes*1 - fetchedQuote.priceQuote.paiementQuote*1}}
           </div>
-        </div>
+        </div> -->
       </div>
 
 
