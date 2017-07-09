@@ -5,226 +5,42 @@
   </div>
   <div>
     <h4 class="dspl-nn">id: {{fetchedPaiementQuote._id}}</h4>
-    <!-- <form #f="ngForm" novalidate (ngSubmit)="save(f.value, f.valid)"> -->
-
-    <button (click)="downloadPDF()">
-      download PDF
-    </button>
-
-    <button [routerLink]="['/paiementQuote/public/' + fetchedPaiementQuote._id]">
-      Devis acces public
-    </button>
-
 
 
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
       <div>
-        <!-- Autocomplete user-->
-        <label>Client</label>
-        <input *ngIf="!fetchedPaiementQuote.clients.length" [ngModelOptions]="{standalone: true}" [(ngModel)]="autocompleteUser" placeholder="Select" (ngModelChange)="searchUsers()" mdInput>
-        <div *ngFor="let user of fetchedUsers; let i=index">
-          {{user.profile.name}} - {{user.profile.lastName}}
-          <button type="button" (click)="selectUser(user)">select</button>
-        </div>
-        <div *ngIf="fetchedUsers.length == 0 && autocompleteUser !=''">
-          Pas de resultats,
-          <a [routerLink]="['/user/newuser']" class="admn-btn">
-                  Créer un nouveau client
-                </a>
-        </div>
-        <div *ngFor="let user of fetchedPaiementQuote.clients; let i=index">
-          {{user.profile.name}} - {{user.profile.lastName}}
-          <button type="button" (click)="removeUser(i)"><i class="fa fa-times"></i></button>
-        </div>
-        <!-- Autocomplete user-->
 
-
-
-        <!-- Autocomplete Project-->
-        <label>Projet</label>
-        <input *ngIf="!fetchedPaiementQuote.projects.length" [ngModelOptions]="{standalone: true}" [(ngModel)]="autocompleteProject" placeholder="Select" (ngModelChange)="searchProjects()" mdInput>
-        <div *ngFor="let project of fetchedProjects; let i=index">
-          {{project.details.name}}
-          <button type="button" (click)="selectProject(project)">select</button>
-        </div>
-        <div *ngIf="fetchedProjects.length == 0 && autocompleteProject !=''">
-          Pas de resultats,
-          <a [routerLink]="['/project/new']" class="admn-btn">
-                   créer un nouveau Projet
-                </a>
-        </div>
-        <div *ngFor="let project of fetchedPaiementQuote.projects; let i=index">
-          {{project.details.name}}
-          <button type="button" (click)="removeProject(i)"><i class="fa fa-times"></i></button>
-        </div>
-
-        <!-- Autocomplete -->
-
-        <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedPaiementQuote.name" required minlength="5" placeholder="Nom du paiementQuote">
-        <br>
-
-        <div *ngFor="let client of fetchedPaiementQuote.clients">
-          <div>name:{{client.profile.name}}</div>
-          <div>lastName:{{client.profile.lastName}}</div>
-          <div>phoneNumber:{{client.profile.phoneNumber}}</div>
-          <div>address:{{client.profile.address.address}}</div>
-          <div>city:{{client.profile.address.city}}</div>
-          <div>state:{{client.profile.address.state}}</div>
-          <div>zip:{{client.profile.address.zip}}</div>
-        </div>
-
-
-        <br><br>
+        <input
+          type="text"
+          class="form-control"
+          formControlName="type"
+          [(ngModel)]="fetchedPaiementQuote.type"
+          placeholder="type">
+        <input
+          type="text"
+          class="form-control"
+          formControlName="amount"
+          [(ngModel)]="fetchedPaiementQuote.amount"
+          placeholder="Amount">
 
 
 
 
-        <div class="row">
-          <div class="col-md-1"></div>
-
-
-          <div class="col-md-3">produit</div>
-          <div class="col-md-1">Ref.</div>
-          <div class="col-md-1">quanité</div>
-          <div class="col-md-1">price HT</div>
-          <div class="col-md-1">VAT(%)</div>
-          <!-- <div class="col-md-1">price TTC</div> -->
-          <div class="col-md-1">total HT</div>
-          <div class="col-md-1">total TTC</div>
-        </div>
-
-        <div *ngFor="let fetchedProduct of fetchedPaiementQuote.devisDetails; let i=index">
-          <div class="row">
-            <div class="col-md-1">
-              <button type="button" (click)="removeProduct(i)"><i class="fa fa-times"></i></button>
-            </div>
-
-
-            <div class="col-md-3">
-              {{fetchedProduct.productInit.details.referenceName}}
-            </div>
-            <div class="col-md-1">
-              <a [routerLink]="['/product/' + fetchedProduct.productInit._id]" class="admn-btn">
-                {{fetchedProduct.productInit.details.reference}}
-              </a>
-            </div>
-            <div class="col-md-1">
-              <input class="gooplusInput" type="text" (ngModelChange)="calculatePaiementQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedPaiementQuote.devisDetails[i].quantity" placeholder="quantity">
-            </div>
-            <div class="col-md-1">
-              <input class="gooplusInput" type="text" (ngModelChange)="calculatePaiementQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedPaiementQuote.devisDetails[i].priceWithoutTaxes" placeholder="priceWithoutTaxes">
-            </div>
-
-            <div class="col-md-1">
-              <input class="gooplusInput" type="text" (ngModelChange)="calculatePaiementQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedPaiementQuote.devisDetails[i].vat" placeholder="vat">
-            </div>
-            <!-- <div class="col-md-1">
-              {{fetchedPaiementQuote.devisDetails[i].priceWithTaxes}}
-            </div> -->
+      <app-autocomplete
+        [typeAutocomplete]="'quote'"
+        [title]=""
+        [singleChoice]="'true'"
+        [arrayContent]="fetchedPaiementQuote.quotes"
+        (getResultAutocomplete)="selectQuote($event[0])">
+      </app-autocomplete>
 
 
 
-          </div>
-        </div>
 
-        <div class="row">
-          <div class="col-md-1"></div>
-          <div class="col-md-3">
-            <!-- Autocomplete -->
-            <app-autocomplete [typeAutocomplete]="'product'" [title]="" [singleChoice]="'false'" [arrayContent]="arrayContentToSearch" (getResultAutocomplete)="selectProduct($event[0])">
-            </app-autocomplete>
-
-
-          </div>
-          <div class="col-md-8"></div>
-        </div>
-
-        <div class="row">
-          <div class="col-md-8">
-
-          </div>
-          <div class="col-md-1">
-            Total
-          </div>
-      
-          <!-- <div class="col-md-1">
-          </div>
-          <div class="col-md-4">
-          </div> -->
-        </div>
-
-        <div class="row">
-          <div class="col-md-6">
-          </div>
-          <div class="col-md-4">
-            <div class="card" style="width:250px;">
-              <div *ngIf="!fetchedPaiementQuote.signature.base64">
-                <button type="button" class="delete" md-button (click)="resetSignature()">
-                  Reset
-                </button>
-                <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()">
-                </signature-pad>
-                <button type="button" class="delete" md-button (click)="validateSignature()">
-                  ok
-                </button>
-              </div>
-              <img *ngIf="fetchedPaiementQuote.signature.base64" [src]="fetchedPaiementQuote.signature.base64" /> {{fetchedPaiementQuote.signature.dateSignature | date:'yMdjm'}}
-            </div>
-          </div>
-
-        </div>
-        <!-- </div> -->
+      <div (click)="editDateMode()">{{fetchedPaiementQuote.datePaiement | date:'yyyy-MM-dd' }}</div>
+        <input *ngIf="fetchedPaiementQuote.editDateMode" type="date" (focusout)="editDateMode(i)" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedPaiementQuote.datePaiement" placeholder="Amount">
       </div>
 
-
-      <div (click)="togglePaiements()">Paiements</div>
-      <div *ngIf="showPaiements">
-        <div>
-          <button type="button" (click)="addPaiement()"><i class="fa fa-plus"></i>Add Paiement</button>
-        </div>
-        <div class="row" *ngFor="let paiement of fetchedPaiementQuote.paiements; let i=index;">
-          <div class="col-md-1">
-            <button type="button" (click)="removePaiement(i)"><i class="fa fa-times"></i></button>
-          </div>
-          <div class="col-md-3">
-            <div (click)="editDateMode(i)">{{paiement.datePaiement | date:'yyyy-MM-dd' }}</div>
-            <!-- <input [ngModelOptions]="{standalone: true}" [ngModel]="paiement.datePaiement | date:'yyyy-MM-dd'" (ngModelChange)="paiement.datePaiement = $event" type="date" name="startDate"/> -->
-            <!-- <input type="date" [ngModelOptions]="{standalone: true}" class="form-control" id="myDate" [ngModel]="fetchedPaiementQuote.paiements[i].datePaiement | date:'y-MM-dd'" (ngModelChange)="fetchedPaiementQuote.paiements[i].datePaiement = $event" name="birthday"> -->
-            <!-- <input type="date" #myDate [value]="fetchedPaiementQuote.paiements[i].datePaiement | date:'yyyy-MM-dd'" (input)="fetchedPaiementQuote.paiements[i].datePaiement=parseDate($event.target.value)" /> -->
-            <!-- <input [ngModelOptions]="{standalone: true}" [ngModel]="fetchedPaiementQuote.paiements[i].datePaiement | date:'yyyy-MM-dd'" (ngModelChange)="fetchedPaiementQuote.paiements[i].datePaiement = $event" type="date" name="startDate"/> -->
-            <input *ngIf="fetchedPaiementQuote.paiements[i].editDateMode" type="date" (focusout)="editDateMode(i)" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedPaiementQuote.paiements[i].datePaiement" placeholder="Amount" useValueAsDate>
-          </div>
-          <div class="col-md-3">
-            <input type="text" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedPaiementQuote.paiements[i].type" placeholder="Type">
-          </div>
-          <div class="col-md-3">
-            <input type="text" (ngModelChange)="calculatePaiementQuote()" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedPaiementQuote.paiements[i].amount" placeholder="Amount">
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-          </div>
-          <div class="col-md-3">
-            total paiement:
-          </div>
-          <div class="col-md-3">
-            {{fetchedPaiementQuote.pricePaiementQuote.paiementQuote}}
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-4">
-          </div>
-          <div class="col-md-3">
-            Reste a payer :
-          </div>
-          <div class="col-md-3">
-            {{fetchedPaiementQuote.pricePaiementQuote.pricePaiementQuoteWithoutTaxes*1 - fetchedPaiementQuote.pricePaiementQuote.paiementQuote*1}}
-          </div>
-        </div>
-      </div>
-
-
-      <br><br>
 
 
       <div class="valid-edit">

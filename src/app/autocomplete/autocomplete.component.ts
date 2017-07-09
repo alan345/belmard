@@ -2,6 +2,8 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { UserService} from '../user/user.service';
 import { CompanieService} from '../companie/companie.service';
 import { ProductService} from '../product/product.service';
+import { QuoteService} from '../quote/quote.service';
+
 
 import { User } from '../user/user.model';
 import { Quote } from '../quote/quote.model';
@@ -28,6 +30,7 @@ export class AutocompleteComponent {
     private userService: UserService,
     private companieService: CompanieService,
     private productService: ProductService,
+    private quoteService: QuoteService,
   ) {}
 
 
@@ -43,6 +46,10 @@ export class AutocompleteComponent {
 
     if(this.typeAutocomplete ==='product')
       this.productService.getProducts(page, search)
+      .subscribe( res => { this.fetchedData = res.data }, error => { console.log(error); });
+
+    if(this.typeAutocomplete ==='quote')
+      this.quoteService.getQuotes(page, search)
       .subscribe( res => { this.fetchedData = res.data }, error => { console.log(error); });
 
 

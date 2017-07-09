@@ -10,8 +10,9 @@ export class PaiementQuote {
   _id: string = '';
   ownerCompanies: Companie[] = []
   quotes: Quote[] = []
-  datePaiement: Date;
+  datePaiement: Date = new Date();
   amount: number = 0;
   type: string = '';
+  editDateMode: boolean = false;
 
 }

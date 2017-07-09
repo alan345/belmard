@@ -15,6 +15,7 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { UserService} from '../../user/user.service';
 import { DeleteDialog } from '../../deleteDialog/deleteDialog.component';
 import { User } from '../../user/user.model';
+import { Quote } from '../../quote/quote.model';
 import { Product } from '../../product/product.model';
 import { Project } from '../../project/project.model';
 
@@ -68,9 +69,10 @@ export class EditPaiementQuoteComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-
-
-
+    this.myForm = this._fb.group({
+      amount: [''],
+      type: [''],
+    })
     this.activatedRoute.params.subscribe((params: Params) => {
 
       if(params['id'])
@@ -83,33 +85,13 @@ export class EditPaiementQuoteComponent implements OnInit {
   }
 
 
-
-    private signaturePadOptions: Object = { // passed through to szimek/signature_pad constructor
-      minWidth: 1,
-      maxWidth: 7,
-      canvasWidth: 250,
-      canvasHeight: 200,
-      penColor: "rgb(36, 41, 46)"
-    };
-
-    togglePaiements(){
-      this.showPaiements = !this.showPaiements
+    selectQuote(quote: Quote){
+      this.fetchedPaiementQuote.quotes = [quote]
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    editDateMode() {
+      this.fetchedPaiementQuote.editDateMode = !this.fetchedPaiementQuote.editDateMode
+    }
 
 
 
@@ -147,34 +129,6 @@ export class EditPaiementQuoteComponent implements OnInit {
 
 
 
-    searchProducts() {
-
-      if(!this.autocompleteProduct) {
-        this.fetchedProducts = []
-      } else {
-        let search = {
-            search: this.autocompleteProduct,
-          };
-        this.getProducts(1, search)
-      }
-    }
-
-
-
-
-
-    getProducts(page: number, search: any) {
-      this.productService.getProducts(page, search)
-        .subscribe(
-          res => {
-            this.fetchedProducts = res.data
-          },
-          error => {
-            console.log(error);
-          }
-        );
-    }
-
 
 
   // move(i: number, incremet: number, typeUser: string) {
@@ -193,13 +147,6 @@ export class EditPaiementQuoteComponent implements OnInit {
     this.location.back();
   }
 
-  // addUser(user) {
-  //   const control = <FormArray>this.myForm.controls['_users'];
-  //   const addrCtrl = this._fb.group({
-  //       _id: ['', Validators.required],
-  //   });
-  //   control.push(addrCtrl);
-  // }
 
 
 
@@ -241,7 +188,6 @@ export class EditPaiementQuoteComponent implements OnInit {
       .subscribe(
         res => {
           this.fetchedPaiementQuote = res
-
         },
         error => {
           console.log(error);

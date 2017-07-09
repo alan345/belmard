@@ -63,16 +63,9 @@ router.put('/:id', function (req, res, next) {
       })
     } else {
       //console.log(req.body)
-        item.details = req.body.details
-        item.forms = req.body.forms
-        item.status = req.body.status
-        item.embed = req.body.embed
-        item.categories = req.body.categories
-        item.clients = req.body.clients
         item.quotes = req.body.quotes
-        item.categorie = req.body.categorie
-        item.assignedTos = req.body.assignedTos
-        item.bucketTasks = req.body.bucketTasks
+        item.amount = req.body.amount
+        item.type = req.body.type
 
 
 
@@ -183,7 +176,7 @@ router.get('/page/:page', function (req, res, next) {
   PaiementQuote
   .find(searchQuery)
   .sort('-createdAt')
-  .populate({path: 'clients', model: 'User'})
+  .populate({path: 'quotes', model: 'Quote'})
   // .populate({path: 'quotes', model: 'Quote'})
   // .populate(
   //   {
@@ -240,14 +233,7 @@ router.get('/:id', function (req, res, next) {
 
     PaiementQuote
     .findById({_id: req.params.id})
-    .populate({path: 'clients', model: 'User'})
-    .populate({path: 'forms', model: 'Form'})
-    .populate({path: 'assignedTos', model: 'User'})
-    .populate(
-      {
-        path: 'bucketTasks.tasks.assignedTos',
-        model: 'User',
-      })
+    .populate({path: 'quotes', model: 'Quote'})
     .exec(function (err, item) {
       if (err) {
         return res.status(404).json({

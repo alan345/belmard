@@ -89,7 +89,7 @@ export class PaiementQuoteService {
 
   getPaiementQuote(id: string, search: any) : Observable<PaiementQuote> {
     let headers = new Headers({'Content-Type': 'application/json'});
-    headers.append('Authorization', '' );
+    headers.append('Authorization', '' + this.authService.currentUser.token);
     let options = new RequestOptions({ headers: headers, search: search});
     return this.http.get(this.url + 'paiementQuote/' + id, options)
       .map((response: Response) => {

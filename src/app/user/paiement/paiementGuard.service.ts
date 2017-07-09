@@ -18,8 +18,13 @@ export class PaiementGuardService implements CanActivate {
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
+    return true;
+    // return this.authService.isCurrentUserIsInSubPeriod()
 
-    return this.authService.isCurrentUserIsInSubPeriod()
+
+
+
+
     // return true;
 
     // if(this.userService.isCurrentUserIsInSubPeriod()) {

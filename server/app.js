@@ -66,6 +66,8 @@ app.use('/admin', adminPage)
 app.use('/option', options)
 app.use('/userCalendar', userCalendars)
 app.use('/paiement', paiements)
+app.use('/paiementQuote', paiementQuotes)
+
 
 
 
