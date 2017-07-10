@@ -21,7 +21,12 @@ export class CompanieGuardService implements CanActivate {
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | boolean {
-    return this.authService.isCurrentUserHasCompanie()
+    //return this.authService.isCurrentUserHasCompanie()
+    return true
+
+
+
+
     // let answer: boolean
     // this.userService.getUser('')
     //   .subscribe(
