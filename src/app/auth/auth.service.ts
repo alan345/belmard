@@ -104,7 +104,7 @@ export class AuthService {
 
 
   getCurrentUser(){
-    console.log(localStorage.getItem('id_token') )
+    // console.log(localStorage.getItem('id_token') )
     let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
     console.log(userInfo)
     return userInfo.user
