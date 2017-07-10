@@ -97,13 +97,11 @@ export class PaiementQuotesComponent implements OnInit {
   }
 
 
+
   getPaiementQuotes(page: number, search: any) {
     this.paiementQuoteService.getPaiementQuotes(page, search)
       .subscribe(
         res => {
-
-        //  console.log("paiementQuotes");
-        //  console.log(res);
           this.paginationData = res.paginationData;
           this.fetchedPaiementQuotes =  res.data
           this.loading = false;
