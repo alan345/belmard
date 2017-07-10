@@ -81,7 +81,8 @@ export class PaiementQuotesComponent implements OnInit {
         res => {
           this.getPaiementQuotesInit()
           this.toastr.success('Great!', res.message);
-          console.log(res);
+          this.getPaiementQuotesCross.emit(this.fetchedPaiementQuotes)
+          // console.log(res);
         },
         error => {
           console.log(error);
@@ -91,11 +92,9 @@ export class PaiementQuotesComponent implements OnInit {
 
 
   getPage(page: number) {
-
     this.loading = true;
     this.getPaiementQuotes(page, this.search);
   }
-
 
 
   getPaiementQuotes(page: number, search: any) {

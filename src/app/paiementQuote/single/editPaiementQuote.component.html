@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="goldgradient beigeborder subnav">
+  <div *ngIf="showHeader" class="goldgradient beigeborder subnav">
     <button class="subnav-btnleft" (click)="goBack()"><i class="fa fa-chevron-left"></i></button>
     <h3 style="text-align: center;">PaiementQuote</h3>
   </div>
@@ -10,12 +10,24 @@
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
       <div>
 
+
+
+        <select
+          class="form-control"
+          formControlName="type"
+          [(ngModel)]="fetchedPaiementQuote.type">
+          <option *ngFor="let n of paiementsTypes" [attr.value]="n.value">{{n.label}}</option>
+
+        </select>
+
+
+<!--
         <input
           type="text"
           class="form-control"
           formControlName="type"
           [(ngModel)]="fetchedPaiementQuote.type"
-          placeholder="type">
+          placeholder="type"> -->
         <input
           type="text"
           class="form-control"

@@ -198,6 +198,7 @@
         <br>
         Reste a payer = {{fetchedQuote.priceQuote.priceQuoteWithoutTaxes*1 -  totalPaiementAmount*1| round}}
         <app-paiementQuote
+          [showHeader]="false"
           (newPaiementQuoteSaved)="newPaiementQuoteSaved()"
         >
         </app-paiementQuote>

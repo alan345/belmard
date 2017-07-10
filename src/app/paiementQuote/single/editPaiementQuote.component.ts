@@ -31,6 +31,7 @@ import { Project } from '../../project/project.model';
 })
 export class EditPaiementQuoteComponent implements OnInit {
   @Output() newPaiementQuoteSaved: EventEmitter<any> = new EventEmitter();
+  @Input() showHeader = true;
 
   showPaiements: boolean = false
   fetchedPaiementQuote : PaiementQuote = new PaiementQuote()
@@ -51,6 +52,11 @@ export class EditPaiementQuoteComponent implements OnInit {
   autocompleteProduct: String = ''
   fetchedUsers: User[] = [];
   arrayContentToSearch =[]
+
+  paiementsTypes = [
+    { label: 'cheque', value: 'check' },
+    { label: 'Espece', value: 'cash' }
+]
   constructor(
     private paiementQuoteService: PaiementQuoteService,
     private quoteService: QuoteService,

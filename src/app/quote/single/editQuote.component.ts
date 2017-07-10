@@ -539,7 +539,7 @@ export class EditQuoteComponent implements OnInit {
   }
   getPaiementQuotes(event){
     // console.log(event)
-
+    this.totalPaiementAmount = 0
     this.fetchedPaiementQuotes = event
     this.fetchedPaiementQuotes.forEach(paiement => {
       this.totalPaiementAmount += paiement.amount
