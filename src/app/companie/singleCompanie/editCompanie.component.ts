@@ -48,7 +48,7 @@ export class EditCompanieComponent implements OnInit {
 
   ngOnInit() {
     this.myForm = this._fb.group({
-      name: [''],
+      name: ['', [Validators.required, Validators.minLength(2)]],
       phoneNumber: ['', [Validators.required, Validators.minLength(2)]],
       categJson: this._fb.group({
         categProduct: ['']

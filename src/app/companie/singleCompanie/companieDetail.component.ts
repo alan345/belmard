@@ -26,20 +26,7 @@ export class CompanieDetailComponent implements OnInit {
   users: User[] = [];
   userAdmins: User[] = [];
   fetchedCompanie: Companie = new Companie();
-  // {
-  //   _id: '',
-  //   forms: [],
-  //   name: '',
-  //   typeCompanie: '',
-  //   phoneNumber: '',
-  //   address: {
-  //     address : '',
-  //     city :  '',
-  //     state :  '',
-  //     zip :  ''
-  //   },
-  //   _users: []
-  // };
+
 
   search = {
     orderBy : '-client',
@@ -76,7 +63,7 @@ export class CompanieDetailComponent implements OnInit {
       //this.router.navigate(['companie/' + params['id'] ]);
       //console.log('init')
       this.myForm = this._fb.group({
-        forms: this._fb.array([])
+    
       })
       if(params['id'])
         this.getCompanie(params['id'])
