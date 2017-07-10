@@ -18,37 +18,6 @@
       <h6>{{fetchedCompanie.address.address}}, {{fetchedCompanie.address.city}}, {{fetchedCompanie.address.state}} {{fetchedCompanie.address.zip}} - {{fetchedCompanie.phoneNumber}}</h6>
     </div>
   </div>
-  <div class="img-row phyto-ctnr">
-    <form [formGroup]="myForm" novalidate (ngSubmit)="save()" class="img-frm phyto-ctnr">
-      <div class="phyto-ctnr">
-        <div *ngIf = "isHQcompanie()">
-          <div class="col-sm-3">
-            <button type="button" md-button (click)="openDialog('img')" class="addpic-squr">Ajouter image<br><i class="fa fa-plus"></i></button>
-          </div>
-        </div>
-        <div *ngIf = "!isHQcompanie() && (isAdmin() || isManager() || isSalesRep())">
-          <div *ngIf="!isStylist()" class="col-sm-3">
-            <button type="button" md-button (click)="openDialog('img')" class="addpic-squr">Ajouter image<br><i class="fa fa-plus"></i></button>
-          </div>
-        </div>
-        <div class="col-sm-9">
-          <div formArrayName="forms" class="phyto-ctnr">
-            <div *ngFor="let form of getObjects(myForm); let i=index" class="pic-wrpr">
-              <div *ngIf="i < maxPictureToShow">
-                <div [formGroupName]="i" class="pic-list">
-                  <img width="150" src="./uploads/forms/{{fetchedCompanie.forms[i].owner}}/{{fetchedCompanie.forms[i].imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
-                  <i *ngIf = "isHQcompanie() && isAdmin()" class="fa fa-times pull-right dlt-img" (click)="removeForm(i)"></i>
-                  <i *ngIf = "!isHQcompanie() && (isAdmin() || isManager() || isSalesRep())" class="fa fa-times pull-right dlt-img" (click)="removeForm(i)"></i>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div *ngIf="fetchedCompanie.forms.length>maxPictureToShow" class="phyto-ctnr">
-        <a class="seemre" (click)="seeAllPicture()">See All</a>
-      </div>
-    </form>
-  </div>
+
 
 </div>
