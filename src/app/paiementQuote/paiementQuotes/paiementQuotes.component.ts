@@ -88,6 +88,7 @@ export class PaiementQuotesComponent implements OnInit {
       );
   }
 
+
   getPage(page: number) {
 
     this.loading = true;
