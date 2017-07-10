@@ -17,9 +17,10 @@ import { Location} from '@angular/common';
 export class PaiementQuotesComponent implements OnInit {
   // @Input() userId = '';
   @Input() idQuote = '';
-  @Input() showHeader = true;
+  @Input() showHeader: boolean = true;
   @Output() getPaiementQuotesCross: EventEmitter<any> = new EventEmitter();
-
+  @Input() showCreate: boolean = true;
+  
   fetchedPaiementQuotes: PaiementQuote[] = [];
   loading: boolean;
   paginationData = {

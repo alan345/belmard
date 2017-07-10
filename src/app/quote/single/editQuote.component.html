@@ -192,6 +192,7 @@
         <app-paiementQuotes
           (getPaiementQuotesCross)="getPaiementQuotes($event)"
           [showHeader]="false"
+          [showCreate]="false"
           [idQuote]="fetchedQuote._id">
         </app-paiementQuotes>
         Total Paiement = {{totalPaiementAmount}}

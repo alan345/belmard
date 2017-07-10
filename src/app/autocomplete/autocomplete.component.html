@@ -33,6 +33,5 @@
         <div *ngIf="typeAutocomplete=='companie'">{{data.name}}</div>
         <div *ngIf="typeAutocomplete=='quote'">{{data.name}}</div>
         <div *ngIf="typeAutocomplete=='product'">{{data.details.referenceName}}</div>
-
-        <button type="button" (click)="removeData(i)"><i class="fa fa-times"></i></button>
+        <button *ngIf="canDelete" type="button" (click)="removeData(i)"><i class="fa fa-times"></i></button>
       </div>

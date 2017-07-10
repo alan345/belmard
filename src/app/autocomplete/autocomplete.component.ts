@@ -19,7 +19,7 @@ export class AutocompleteComponent {
   @Input() arrayContent = [];
   @Input() singleChoice: boolean = true;
   @Input() title: string = '';
-
+  @Input() canDelete: boolean = true;
 
   autocompleteSearch = ''
   fetchedData: User[] = [];

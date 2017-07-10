@@ -11,7 +11,7 @@ export class PaiementQuote {
   ownerCompanies: Companie[] = []
   quotes: Quote[] = []
   datePaiement: Date = new Date();
-  amount: number = 0;
+  amount: number;
   type: string = '';
   editDateMode: boolean = false;
 

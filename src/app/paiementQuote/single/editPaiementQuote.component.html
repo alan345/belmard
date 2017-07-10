@@ -12,44 +12,31 @@
 
 
 
-        <select
-          class="form-control"
-          formControlName="type"
-          [(ngModel)]="fetchedPaiementQuote.type">
+        <app-autocomplete [typeAutocomplete]="'quote'" [canDelete]="false" [title]="" [singleChoice]="true" [arrayContent]="fetchedPaiementQuote.quotes" (getResultAutocomplete)="selectQuote($event[0])">
+        </app-autocomplete>
+
+
+
+
+        <select class="form-control" formControlName="type" [(ngModel)]="fetchedPaiementQuote.type">
           <option *ngFor="let n of paiementsTypes" [attr.value]="n.value">{{n.label}}</option>
 
         </select>
 
 
-<!--
+        <!--
         <input
           type="text"
           class="form-control"
           formControlName="type"
           [(ngModel)]="fetchedPaiementQuote.type"
           placeholder="type"> -->
-        <input
-          type="text"
-          class="form-control"
-          formControlName="amount"
-          [(ngModel)]="fetchedPaiementQuote.amount"
-          placeholder="Amount">
+        <input type="text" class="form-control" formControlName="amount" [(ngModel)]="fetchedPaiementQuote.amount" placeholder="Amount">
 
 
 
 
-      <app-autocomplete
-        [typeAutocomplete]="'quote'"
-        [title]=""
-        [singleChoice]="'true'"
-        [arrayContent]="fetchedPaiementQuote.quotes"
-        (getResultAutocomplete)="selectQuote($event[0])">
-      </app-autocomplete>
-
-
-
-
-      <div (click)="editDateMode()">{{fetchedPaiementQuote.datePaiement | date:'yyyy-MM-dd' }}</div>
+        <div (click)="editDateMode()">{{fetchedPaiementQuote.datePaiement | date:'yyyy-MM-dd' }}</div>
         <input *ngIf="fetchedPaiementQuote.editDateMode" type="date" (focusout)="editDateMode(i)" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedPaiementQuote.datePaiement" placeholder="Amount">
       </div>
 

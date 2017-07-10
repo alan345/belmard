@@ -9,7 +9,7 @@
 </div>
 
 <div class="row">
-  <div class="col-md-4">
+  <div *ngIf="showCreate" class="col-md-4">
     <div [ngClass]="{'card': showHeader, '': !showHeader}">
       <div *ngIf="showHeader" class="card-header">
         <h4 class="card-title">Création de Paiement</h4>
@@ -44,15 +44,15 @@
           <tbody class="clienttbl">
             <tr *ngFor="let paiementQuote of fetchedPaiementQuotes | paginate: { id: 'paiementQuotePagination', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }">
 
-                <td>
-                  <a [routerLink]="['/paiementQuote/edit/' + paiementQuote._id]" routerLinkActive="active">
+              <td>
+                <a [routerLink]="['/paiementQuote/edit/' + paiementQuote._id]" routerLinkActive="active">
                   {{paiementQuote.amount}}
                   <div *ngFor="let quote of paiementQuote.quotes">
                     {{quote.name}}
                   </div>
                   </a>
-                  <button type="button" (click)="onDelete(paiementQuote._id)"><i class="fa fa-times"><a>Delete</a></i></button>
-                </td>
+                <button type="button" (click)="onDelete(paiementQuote._id)"><i class="fa fa-times"><a>Delete</a></i></button>
+              </td>
 
             </tr>
           </tbody>
