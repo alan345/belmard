@@ -43,15 +43,17 @@
           </thead>
           <tbody class="clienttbl">
             <tr *ngFor="let paiementQuote of fetchedPaiementQuotes | paginate: { id: 'paiementQuotePagination', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }">
-              <a [routerLink]="['/paiementQuote/edit/' + paiementQuote._id]" routerLinkActive="active">
+
                 <td>
+                  <a [routerLink]="['/paiementQuote/edit/' + paiementQuote._id]" routerLinkActive="active">
                   {{paiementQuote.amount}}
                   <div *ngFor="let quote of paiementQuote.quotes">
                     {{quote.name}}
                   </div>
+                  </a>
                   <button type="button" (click)="onDelete(paiementQuote._id)"><i class="fa fa-times"><a>Delete</a></i></button>
                 </td>
-              </a>
+
             </tr>
           </tbody>
         </table>

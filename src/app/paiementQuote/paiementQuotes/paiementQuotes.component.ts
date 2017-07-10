@@ -79,6 +79,7 @@ export class PaiementQuotesComponent implements OnInit {
     this.paiementQuoteService.deletePaiementQuote(id)
       .subscribe(
         res => {
+          this.getPaiementQuotesInit()
           this.toastr.success('Great!', res.message);
           console.log(res);
         },
