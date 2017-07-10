@@ -101,7 +101,8 @@ export class ProductSingleComponent implements OnInit {
         res => {
           this.fetchedCurrentUser = res
           this.fetchedCurrentUser.companies.forEach((companie,index) => {
-            this.itemSteps = JSON.parse(this.fetchedCurrentUser.companies[index].categJson.categProduct)
+            if(this.fetchedCurrentUser.companies[index].categJson.categProduct)
+              this.itemSteps = JSON.parse(this.fetchedCurrentUser.companies[index].categJson.categProduct)
           })
 
           this.activatedRoute.params.subscribe((params: Params) => {
