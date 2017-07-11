@@ -176,7 +176,7 @@
     <div class="form-group">
     <!-- Autocomplete AssignedTo-->
     <label>Assigned To</label>
-    <input
+    <input class="form-control col-md-3"
       *ngIf="!fetchedProject.assignedTos.length"
       [ngModelOptions]="{standalone: true}"
       [(ngModel)]="autocompleteAssignedTo"
@@ -205,7 +205,7 @@
 
 
     <div class="valid-edit">
-      <button type="submit" class="done" [disabled]="!myForm.valid">Done</button>
+      <button type="submit" class="done" [disabled]="!myForm.valid">Valider</button>
       <button
         *ngIf="fetchedProject._id"
         type="button"
