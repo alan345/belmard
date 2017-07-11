@@ -120,7 +120,6 @@ import { AdminComponent} from './admin/admin.component';
 
 
 
-
 export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   return new AuthHttp( new AuthConfig({}), http, options);
 }
@@ -241,6 +240,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     AdminGuardService,
     CompanieGuardService,
     PaiementGuardService,
+    // TRANSLATION_PROVIDERS,
+    // TranslateService,
   //  ProfileService,
     {
       provide: AuthHttp,

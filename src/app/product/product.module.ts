@@ -12,6 +12,11 @@ import { ProductRouting} from './productRouting.module';
 import { MaterialModule } from '@angular/material';
 import { Ng2PaginationModule} from 'ng2-pagination';
 
+import { TRANSLATION_PROVIDERS, TranslatePipe, TranslateService }   from '../translate';
+
+
+
+
 @NgModule({
   imports:      [
     ProductRouting,
@@ -26,9 +31,13 @@ import { Ng2PaginationModule} from 'ng2-pagination';
 
     ProductsComponent,
     ProductSingleComponent,
+    TranslatePipe,
   ],
   exports:      [ ProductsComponent ],
-  providers:    [ ProductService ],
+  providers:    [
+    TRANSLATION_PROVIDERS,
+    TranslateService,
+    ProductService ],
   entryComponents: [ ]
 })
 export class ProductModule { }

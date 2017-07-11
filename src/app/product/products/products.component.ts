@@ -9,7 +9,7 @@ import { Location } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ViewEncapsulation} from '@angular/core';
 import { UserService} from '../../user/user.service';
-
+import { TranslateService } from '../../translate/translate.service';
 
 @Component({
   selector: 'app-products',
@@ -32,30 +32,6 @@ export class ProductsComponent implements OnInit {
     itemsPerPage: 0,
     totalItems: 0
   };
-  //
-  // categories1 = [{
-  //     name: 'phyto',
-  //     selected: false
-  //   },
-  //   {
-  //     name: 'phytoSpecific',
-  //     selected: false
-  //   },
-  //   {
-  //     name: 'subtil',
-  //     selected: false
-  //   }];
-  //
-  // categories2 = '';
-  //
-  //
-  // categoriesHard2 = [
-  //   { name:'Through your eyes', selected : false },
-  //   { name:'How to', selected : false },
-  //   { name:'Fashion', selected : false },
-  //   { name:'Merchandising', selected : false },
-  //   { name:'Behind the Scene & Testimonials', selected : false }
-  // ]
 
   trackinPage : any = {
     lastVisitPagePressCount:[],
@@ -71,7 +47,7 @@ export class ProductsComponent implements OnInit {
     private location: Location,
     private authService: AuthService,
     private userService: UserService,
-
+    private translateService: TranslateService,
   ) {
   }
 
@@ -80,41 +56,6 @@ export class ProductsComponent implements OnInit {
     this.location.back();
   }
 
-//   onSelectChange = ($event: any): void => {
-// //    console.log($event)
-//     this.categories2 = $event.tab.textLabel
-//     this.updateCategerories()
-//     // this.search.categories = []
-//     // this.search.categories.push({name:$event.tab.textLabel})
-//     // this.getProducts(this.paginationData.currentPage, this.search)
-//
-//   }
-
-//   updateCategerories(){
-//     this.search.categories = []
-//     this.search.categories.push({name:this.categories2})
-//     // if(this.inputSearch)
-//     //   this.search.categories.push({name:this.inputSearch})
-//     this.categories1.forEach((categorie1)=>{
-//       if(categorie1.selected == true) {
-//         this.search.categories.push({name : categorie1.name})
-//       }
-//     })
-// //    console.log(this.search.categories)
-//     this.fetchedProducts = []
-//     this.getProducts(1, this.search)
-//   }
-
-  // changeCateg1(nameCateg: string){
-  //   //this.categories1[nameCateg] = !this.categories1[nameCateg]
-  //   this.categories1.forEach((categ, index)=>{
-  //     if(categ.name === nameCateg) {
-  //       this.categories1[index].selected = !this.categories1[index].selected
-  //     }
-  //   })
-  //   this.updateCategerories()
-  // }
-
 
 
   searchProducts() {
@@ -122,11 +63,7 @@ export class ProductsComponent implements OnInit {
   }
 
 
-//   addSearchInput(){
-// //    console.log(this.search.categories)
-//     this.updateCategerories()
-//     // this.search.categories.pop()
-//   }
+
 
   onDelete(id: string) {
     this.productService.deleteProduct(id)
@@ -169,6 +106,7 @@ export class ProductsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.translateService.use('ens');
     this.getProducts(1, this.search)
   }
 
