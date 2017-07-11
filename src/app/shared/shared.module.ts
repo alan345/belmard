@@ -3,6 +3,9 @@ import { CommonModule }        from '@angular/common';
 import { FormsModule }         from '@angular/forms';
 import { AutocompleteComponent } from '../autocomplete/autocomplete.component'
 
+import { TRANSLATION_PROVIDERS, TranslatePipe, TranslateService }   from '../translate';
+
+
 
 @NgModule({
   imports:      [
@@ -10,10 +13,17 @@ import { AutocompleteComponent } from '../autocomplete/autocomplete.component'
     FormsModule
   ],
   declarations: [
-    AutocompleteComponent
+    AutocompleteComponent,
+    TranslatePipe,
+
   ],
   exports: [
-    AutocompleteComponent
+    TranslatePipe,
+    AutocompleteComponent,
+  ],
+  providers: [
+    TRANSLATION_PROVIDERS,
+    TranslateService,
   ]
 })
 export class SharedModule { }

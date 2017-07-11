@@ -119,7 +119,7 @@ export class AuthService {
 
   getLanguage() {
     let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
-    console.log(userInfo.user.profile)
+    // console.log(userInfo.user.profile)
     return userInfo.user.profile.language
   }
 
