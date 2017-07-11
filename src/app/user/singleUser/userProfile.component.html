@@ -13,9 +13,10 @@
   <a [routerLink]="['/user/newuser/' + fetchedUser._id]" class="admn-btn">Edit User</a>
   <br><br>
   <div *ngIf="isMyProfile()">
+    Plan: {{fetchedUser.paiement.stripe.plan}}
     <a [routerLink]="['/user/paiement/']" class="admn-btn">
-    Paiement
-  </a>
+    Changer
+    </a>
   </div>
 
   <div class="form-group prmimg-cnt">

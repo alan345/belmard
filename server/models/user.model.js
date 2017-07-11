@@ -12,6 +12,7 @@ var user = new Schema({
     paiement: {
       stripe:{
         cusId:{type: String},
+        plan:{type: String},
         current_period_end:{type: Date}
       }
     },

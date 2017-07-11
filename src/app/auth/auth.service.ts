@@ -106,7 +106,7 @@ export class AuthService {
   getCurrentUser(){
     // console.log(localStorage.getItem('id_token') )
     let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
-    console.log(userInfo)
+    // console.log(userInfo)
     return userInfo.user
     // return userInfo
     // if (userInfo) {
@@ -116,6 +116,11 @@ export class AuthService {
     // }
     // return false;
   }
+
+  getUserPlan() {
+    let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
+    return userInfo.user.paiement.stripe.plan
+  }
   isCurrentUserIsInSubPeriod(){
     let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
     if (new Date(userInfo.user.paiement.stripe.current_period_end) > new Date())
@@ -124,7 +129,6 @@ export class AuthService {
   }
   isCurrentUserHasCompanie(){
     let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
-
     if(userInfo.user.companies.length)
       return true
     return false

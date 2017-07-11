@@ -124,19 +124,15 @@ router.post('/saveCardInStripe/', function (req, res, next) {
 router.post('/saveSubscriptionInStripe/', function (req, res, next) {
     createSubInStripe(req)
     .then(function(subscription){
-
-      console.log(subscription.current_period_end)
-      // customer.subscriptions.data.forEach(sub => {
-        updateCurrent_period_endInDb(req, subscription.current_period_end)
-        .then(item => { console.log(item) })
-        .catch(err => {
-          return res.status(404).json({
-            title: 'Error not saved in db',
-            error: err
-          });
-        })
-      // })
-
+      console.log(subscription)
+      updateCurrent_period_endInDb(req, subscription.current_period_end, subscription.plan.id)
+      .then(item => { console.log(item) })
+      .catch(err => {
+        return res.status(404).json({
+          title: 'Error not saved in db',
+          error: err
+        });
+      })
 
       return res.status(200).json({
         subscription: subscription
@@ -161,9 +157,7 @@ router.post('/saveSubscriptionInStripe/', function (req, res, next) {
       function(err, confirmation) {
         if(confirmation) {
 
-
-
-            updateCurrent_period_endInDb(req, '')
+            updateCurrent_period_endInDb(req, '', 'free')
             .then(item => { console.log(item) })
             .catch(err => {
               return res.status(404).json({
@@ -226,9 +220,10 @@ router.delete('/deleteCustInStripe', function (req, res, next) {
 
 ///to do here !!
 
-function updateCurrent_period_endInDb(req, current_period_end){
+function updateCurrent_period_endInDb(req, current_period_end, plan){
   let paiement = req.user.paiement
   paiement.stripe.current_period_end = current_period_end*1000
+  paiement.stripe.plan = plan
   return new Promise(function(resolve, reject) {
     User.update({ _id: req.user._id }, { $set: { paiement: paiement}}, function (err, item) {
       if (item) { resolve(item) } else { reject(err) }
