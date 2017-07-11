@@ -1,8 +1,8 @@
 <div *ngIf="showHeader" class="row">
   <div class="col-md-1"></div>
-  <div class="col-md-2"><button type="button" class="btn btn-warning" (click)="goBack()"><i class="fa fa-chevron-left"><a> Retour</a></i></button></div>
+  <div class="col-md-2"><button type="button" class="btn btn-warning" (click)="goBack()"><i class="fa fa-chevron-left"><a> {{ 'Back' | translate }}</a></i></button></div>
   <div class="col-md-6">
-    <h3 class="title">Projets</h3></div>
+    <h3 class="title">{{ 'Project' | translate }}</h3></div>
   <div class="col-md-3"></div>
 </div>
 
@@ -10,7 +10,7 @@
   <div class="col-md-4">
     <div [ngClass]="{'card': showHeader, '': !showHeader}">
       <div *ngIf="showHeader" class="card-header">
-        <h4 class="card-title">Ajouter un Projet</h4>
+        <h4 class="card-title">{{ 'Add a project' | translate }}</h4>
       </div>
       <div class="card-block">
        <button class="btn btn-primary" [routerLink]="['/project/new/' + userId]" routerLinkActive="active"><i class=""></i>Créer un nouveau Projet</button>
@@ -29,7 +29,7 @@
             celass="champ"
             type="text"
             name="Search"
-            placeholder="Rechercher"
+            placeholder="&#xf002; {{ ' Search' | translate }}"
             [(ngModel)]="search.search"
             (ngModelChange)="searchProjects()">
         </div>

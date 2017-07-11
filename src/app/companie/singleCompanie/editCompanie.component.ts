@@ -60,10 +60,10 @@ export class EditCompanieComponent implements OnInit {
         }),
       }),
       address: this._fb.group({
-        address: ['', [Validators.required, Validators.minLength(2)]],
-        city: ['', [Validators.required, Validators.minLength(2)]],
-        state: ['', [Validators.required, Validators.minLength(2)]],
-        zip: ['', [Validators.required, Validators.minLength(2)]],
+        address: [''],
+        city: [''],
+        state: [''],
+        zip: [''],
       }),
       _users: this._fb.array([])
     })
