@@ -4,6 +4,10 @@
 /*@import "~@ng-bootstrap/ng-bootstrap/dist/css/bootstrap.min.css";*/
 
 
+.container {
+margin-bottom: 20px; 
+}
+
 .box {
 background-color: #fff; margin: 20px; padding: 20px;
 }
