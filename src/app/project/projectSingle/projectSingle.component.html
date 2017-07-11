@@ -195,12 +195,7 @@
             </tr>
           </table>
         </div>
-         <div *ngIf="fetchedAssignedTos.length == 0 && autocompleteAssignedTo !=''">
-            Pas de resultats,
-            <a [routerLink]="['/user/newuser']" class="admn-btn">
-              Créer un nouveau employe
-            </a>
-        </div>                                                                                                              
+                                                                                                             
         <div class="form-control col-md-3" *ngFor="let user of fetchedProject.assignedTos; let i=index">
           <table>
             <tr>
