@@ -80,17 +80,17 @@
           (ngModelChange)="searchUsers()"
           mdInput>
         </div>
-        <div class="form-control" *ngFor="let user of fetchedUsers; let i=index">
-         <table class="col-md-3">
-            <tr class="col-md-3">
+        <div class="form-control col-md-3" *ngFor="let user of fetchedUsers; let i=index">
+         <table>
+            <tr>
               <td class="tdbtn1">{{user.profile.name}} - {{user.profile.lastName}}</td>
               <td class="tdbtn2"><button class="btn btn-success" type="button" (click)="selectUser(user)">select</button></td>
             </tr>
           </table>
         </div>
         <div class="form-control col-md-3" *ngFor="let user of fetchedProject.clients; let i=index">
-          <table class="col-md-3">
-            <tr class="col-md-3">
+          <table>
+            <tr>
               <td class="tdbtn1">{{user.profile.name}} - {{user.profile.lastName}}</td>
               <td class="tdbtn2"><button class="btn btn-danger btn-sm ferme" type="button" (click)="removeUser(i)"><i class="fa fa-times"></i></button></td>
             </tr>
