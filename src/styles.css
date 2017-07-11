@@ -4,6 +4,11 @@
 /*@import "~@ng-bootstrap/ng-bootstrap/dist/css/bootstrap.min.css";*/
 
 
+.btn-outline-primary {
+margin-top: 20px; 
+}
+
+
 .container {
 margin-bottom: 20px; 
 }
