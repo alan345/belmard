@@ -159,7 +159,7 @@ router.post('/', upload.single('fileUp'), function (req, res, err) {
         err: ''
       })
     }
-    
+
     form.save(function (err, result) {
       if (err) {
         return res.status(404).json({
@@ -189,6 +189,7 @@ router.patch('/edit/:id', upload.single('fileUp'), function (req, res, err) {
   if (req.file != undefined) {
     gm(req.file.path)
       .resize(400, null)
+      .autoOrient()
       .noProfile()
       .write(req.file.path, function (err) {
         if (err) {
