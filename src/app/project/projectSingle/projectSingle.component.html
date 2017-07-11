@@ -38,8 +38,6 @@
       </div>
       <!-- cascade -->
 
-
-
       <a [routerLink]="['/project/tasks/' + fetchedProject._id]" class="admn-btn">
         Taches
       </a>
@@ -165,7 +163,7 @@
 
 
       <div class="form-group">
-      <select
+      <select class="form-control col-md-3"
         formControlName="status"
         [(ngModel)]="fetchedProject.status">
         <option *ngFor="let n of status" [ngValue]="n.index">{{n.label}}</option>
