@@ -187,7 +187,7 @@
           (ngModelChange)="searchAssignedTos()"
           mdInput>
         </div>
-        <div class="form-control col-md-3" *let user of fetchedAssignedTos; let i=index">
+        <div class="form-control col-md-3" *ngFor="let user of fetchedAssignedTos; let i=index">
          <table>
             <tr>
               <td class="tdbtn1">{{user.profile.name}} - {{user.profile.lastName}}</td>
