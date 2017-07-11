@@ -117,6 +117,12 @@ export class AuthService {
     // return false;
   }
 
+  getLanguage() {
+    let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
+    console.log(userInfo.user.profile)
+    return userInfo.user.profile.language
+  }
+
   getUserPlan() {
     let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
     return userInfo.user.paiement.stripe.plan

@@ -37,6 +37,7 @@ export class Profile {
   statusHouse: string = '';
   detailHouse: DetailHouse = new DetailHouse();
   address: Address = new Address();
+  language: string = '';
 }
 
 

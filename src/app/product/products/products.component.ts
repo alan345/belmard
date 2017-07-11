@@ -105,8 +105,9 @@ export class ProductsComponent implements OnInit {
       );
   }
 
+
   ngOnInit() {
-    this.translateService.use('ens');
+    // this.translateService.use(this.authService.getLanguage());
     this.getProducts(1, this.search)
   }
 

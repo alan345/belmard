@@ -57,11 +57,10 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-
-          <li *ngIf="authService.isCurrentUserIsInSubPeriod() && authService.isCurrentUserHasCompanie()" class="nav-item">
+          <li *ngIf="isCurrentUserIsInSubPeriod() && isCurrentUserHasCompanie()" class="nav-item">
             <a class="nav-link" routerLinkActive="active" [routerLink]="['/product']">Produits</a>
           </li>
-          <li *ngIf="authService.isCurrentUserIsInSubPeriod() && authService.isCurrentUserHasCompanie()" class="nav-item">
+          <li *ngIf="isCurrentUserIsInSubPeriod() && isCurrentUserHasCompanie()" class="nav-item">
             <a class="nav-link" routerLinkActive="active" [routerLink]="['/project']">Projets </a>
           </li>
           <li class="nav-item">
@@ -70,16 +69,16 @@
           <li class="nav-item">
             <a class="nav-link" routerLinkActive="active" [routerLink]="['/companie']">Entreprises</a>
           </li>
-          <li *ngIf="authService.isCurrentUserIsInSubPeriod() && authService.isCurrentUserHasCompanie()" class="nav-item">
+          <li *ngIf="isCurrentUserIsInSubPeriod() && isCurrentUserHasCompanie()" class="nav-item">
             <a class="nav-link" routerLinkActive="active" [routerLink]="['/quote']">Devis</a>
           </li>
-          <li *ngIf="authService.isCurrentUserIsInSubPeriod() && authService.isCurrentUserHasCompanie()" class="nav-item">
+          <li *ngIf="isCurrentUserIsInSubPeriod() && isCurrentUserHasCompanie()" class="nav-item">
             <a class="nav-link" routerLinkActive="active" [routerLink]="['/paiementQuote']">Paiements</a>
           </li>
 
 
 
-          <li *ngIf="authService.isCurrentUserIsInSubPeriod() && authService.isCurrentUserHasCompanie()" class="nav-item">
+          <li *ngIf="isCurrentUserIsInSubPeriod() && isCurrentUserHasCompanie()" class="nav-item">
             <a
               class="nav-link"
               routerLinkActive="active"
@@ -87,11 +86,11 @@
               >Mon Planning</a>
           </li>
 
-          <li *ngIf="!authService.isCurrentUserIsInSubPeriod()" class="nav-item">
+          <li *ngIf="!isCurrentUserIsInSubPeriod()" class="nav-item">
             <a class="nav-link" routerLinkActive="active" [routerLink]="['/user/paiement']">Finish subscription</a>
           </li>
 
-          <li *ngIf="!authService.isCurrentUserHasCompanie()" class="nav-item">
+          <li *ngIf="!isCurrentUserHasCompanie()" class="nav-item">
             <a class="nav-link" routerLinkActive="active" [routerLink]="['/companie/edit/mine']">Rajouter mon entreprise</a>
           </li>
           <!-- <li class="nav-item">

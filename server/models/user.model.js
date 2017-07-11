@@ -23,6 +23,7 @@ var user = new Schema({
     type: {type: Array},
     profile : {
       _profilePicture : [{type: Schema.Types.ObjectId, ref: 'Form'}],
+      language: {type: String, default: ['en']},
       name: {type: String, default: ['']},
       fax:{type: String, default: ['']},
       title: {type: String, default: ['']},

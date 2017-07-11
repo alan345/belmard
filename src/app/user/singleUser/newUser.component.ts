@@ -35,6 +35,7 @@ export class NewUserComponent implements OnInit {
 
 
   titleArray=['Mr.', 'Mrs.']
+  languageArray=['fr','en']
   typeClientArray=['Particulier','Societe','Administration']
   statusHouseArray=['Propriétaire','Locataire']
   typeHouseArray=['Pavillon','Immeuble']
@@ -136,6 +137,7 @@ export class NewUserComponent implements OnInit {
         email: [this.emailValidator],
 
         profile: this._fb.group({
+          language: [''],
           colorCalendar: [''],
           otherData: [''],
           name: ['', [Validators.required, Validators.minLength(3)]],
