@@ -132,7 +132,8 @@ export class EditPaiementQuoteComponent implements OnInit {
           res => {
             this.toastr.success('Great!', res.message)
             this.newPaiementQuoteSaved.emit()
-              // this.router.navigate(['paiementQuote/edit/' + res.obj._id])
+            if(this.showHeader)
+              this.router.navigate(['paiementQuote/edit/' + res.obj._id])
           },
           error => {console.log(error)}
         )

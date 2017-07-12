@@ -27,11 +27,11 @@ export class PaiementQuoteService {
     private authService: AuthService) {}
 
 
-  getPaiementQuotesGraph(page: number, search: any) {
+  getPaiementQuotesGraph(year: number, search: any) {
     let headers = new Headers({'Content-Type': 'application/json'});
     headers.append('Authorization', '' + this.authService.currentUser.token)
     let options = new RequestOptions({ headers: headers, search: search});
-    return this.http.get(this.url + 'paiementQuote/graph/' , options)
+    return this.http.get(this.url + 'paiementQuote/graph/' + year , options)
       .timeout(5000)
       .map((response: Response) => {
         const paiementQuotes = response.json();

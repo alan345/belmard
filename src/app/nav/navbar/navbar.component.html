@@ -78,7 +78,9 @@
             <a class="nav-link" routerLinkActive="active" [routerLink]="['/paiementQuote']">Paiements</a>
           </li>
 
-
+          <li *ngIf="isCurrentUserIsInSubPeriod() && isCurrentUserHasCompanie()" class="nav-item">
+            <a class="nav-link" routerLinkActive="active" [routerLink]="['/reporting']">Reporting</a>
+          </li>
 
           <li *ngIf="isCurrentUserIsInSubPeriod() && isCurrentUserHasCompanie()" class="nav-item">
             <a

@@ -6,7 +6,7 @@ import { ToastsManager} from 'ng2-toastr';
 import { MdDialog} from '@angular/material';
 import { Router} from '@angular/router';
 import { Location} from '@angular/common';
-
+import { PaiementQuoteGraph } from './reporting.model'
 
 
 @Component({
@@ -21,7 +21,7 @@ export class ReportingsComponent implements OnInit {
   @Output() getPaiementQuotesCross: EventEmitter<any> = new EventEmitter();
   @Input() showCreate: boolean = true;
 
-  fetchedPaiementQuotes: PaiementQuote[] = [];
+  fetchedPaiementQuoteGraphs: PaiementQuoteGraph[] = [];
   loading: boolean;
   paginationData = {
     currentPage: 1,
@@ -60,11 +60,11 @@ export class ReportingsComponent implements OnInit {
 
   // lineChart
     public lineChartData:Array<any> = [
-      {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
-      {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'},
-      {data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C'}
+      {data: [0, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 0], label: 'Series A'},
+      // {data: [28, 48, 40, 19, 86, 27, 90, 0, 0 ,0, 0, 0], label: 'Series B'},
+      // {data: [18, 48, 77, 9, 100, 27, 40, 0, 0 ,0, 0, 0], label: 'Series C'}
     ];
-    public lineChartLabels:Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+    public lineChartLabels:Array<any> = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'oct', 'nov','dec'];
     public lineChartOptions:any = {
       responsive: true
     };
@@ -97,16 +97,16 @@ export class ReportingsComponent implements OnInit {
     public lineChartLegend:boolean = true;
     public lineChartType:string = 'line';
 
-    public randomize():void {
-      let _lineChartData:Array<any> = new Array(this.lineChartData.length);
-      for (let i = 0; i < this.lineChartData.length; i++) {
-        _lineChartData[i] = {data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label};
-        for (let j = 0; j < this.lineChartData[i].data.length; j++) {
-          _lineChartData[i].data[j] = Math.floor((Math.random() * 100) + 1);
-        }
-      }
-      this.lineChartData = _lineChartData;
-    }
+    // public randomize():void {
+    //   let _lineChartData:Array<any> = new Array(this.lineChartData.length);
+    //   for (let i = 0; i < this.lineChartData.length; i++) {
+    //     _lineChartData[i] = {data: new Array(this.lineChartData[i].data.length), label: this.lineChartData[i].label};
+    //     for (let j = 0; j < this.lineChartData[i].data.length; j++) {
+    //       _lineChartData[i].data[j] = Math.floor((Math.random() * 100) + 1);
+    //     }
+    //   }
+    //   this.lineChartData = _lineChartData;
+    // }
 
     // events
     public chartClicked(e:any):void {
@@ -127,9 +127,9 @@ export class ReportingsComponent implements OnInit {
 
   getPaiementQuotesInit(){
 
-    // this.search.idQuote = this.idQuote
-    this.search.orderBy = 'name'
-    this.getPaiementQuotesGraph(1, this.search)
+
+    // this.search.orderBy = 'name'
+    this.getPaiementQuotesGraph(2017, this.search)
 
   }
 
@@ -149,36 +149,39 @@ export class ReportingsComponent implements OnInit {
     // this.getPaiementQuotes(this.paginationData.currentPage, this.search)
   }
 
-  onDelete(id: string) {
-    this.paiementQuoteService.deletePaiementQuote(id)
+  // onDelete(id: string) {
+  //   this.paiementQuoteService.deletePaiementQuote(id)
+  //     .subscribe(
+  //       res => {
+  //         this.getPaiementQuotesInit()
+  //         this.toastr.success('Great!', res.message);
+  //         this.getPaiementQuotesCross.emit(this.fetchedPaiementQuotes)
+  //         // console.log(res);
+  //       },
+  //       error => {
+  //         console.log(error);
+  //       }
+  //     );
+  // }
+
+
+  // getPage(page: number) {
+  //   this.loading = true;
+  //   this.getPaiementQuotesGraph(page, this.search);
+  // }
+
+
+  getPaiementQuotesGraph(year: number, search: any) {
+    this.paiementQuoteService.getPaiementQuotesGraph(year, search)
       .subscribe(
         res => {
-          this.getPaiementQuotesInit()
-          this.toastr.success('Great!', res.message);
-          this.getPaiementQuotesCross.emit(this.fetchedPaiementQuotes)
-          // console.log(res);
-        },
-        error => {
-          console.log(error);
-        }
-      );
-  }
-
-
-  getPage(page: number) {
-    this.loading = true;
-    this.getPaiementQuotesGraph(page, this.search);
-  }
-
-
-  getPaiementQuotesGraph(page: number, search: any) {
-    this.paiementQuoteService.getPaiementQuotesGraph(page, search)
-      .subscribe(
-        res => {
+          this.lineChartData = [{data: [0, 0, 0, 0, 0, 0, 0, 0, 0 ,0, 0, 0], label: 'Paiements'}]
           this.paginationData = res.paginationData;
-          this.fetchedPaiementQuotes =  res.data
+          this.fetchedPaiementQuoteGraphs =  res.item
+          this.fetchedPaiementQuoteGraphs.forEach((element, index)=>{
+             this.lineChartData[0].data[element._id.month - 1] = element.amountTotal
+          })
           this.loading = false;
-          // this.getPaiementQuotesCross.emit(this.fetchedPaiementQuotes)
         },
         error => {
           console.log(error);

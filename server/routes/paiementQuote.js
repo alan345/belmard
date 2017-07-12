@@ -213,60 +213,58 @@ router.get('/page/:page', function (req, res, next) {
 
 
 // get all forms from database
-router.get('/graph', function (req, res, next) {
-  console.log('aa')
+router.get('/graph/:year', function (req, res, next) {
   let searchQuery = {
   //  createdAt:{"$lt": dateRef}
 //    categories: categoriesArray,
   //  createdAt:{"$gt": dateRef},
   }
+  let dateBegin = req.params.year*1 + '-01-01'
+  let dateEnd = req.params.year*1 +1 + '-01-01'
 
+  console.log(dateBegin, dateEnd)
   if(req.query.search)
     searchQuery['details.name'] = new RegExp(req.query.search, 'i')
-
 
   if(req.query.idQuote)
     searchQuery['quotes'] = mongoose.Types.ObjectId(req.query.idQuote)
 
-
-
   PaiementQuote
   .aggregate(
-     {
-       $group : {
-           _id : {
-             year: {
-               $year : "$datePaiement" },
-               month: { $month : "$datePaiement" },
-              //  day: { $dayOfMonth : "$datePaiement" }
-             },
-           amountTotal : { $sum : "$amount" }
+    {
+      $match: {
+        datePaiement :
+         {
+           '$gte': new Date(dateBegin),
+           '$lt': new  Date(dateEnd)
          }
        }
-          //  ,
-      // { $group : {
-      //      _id : { year: "$_id.year", month: "$_id.month" },
-      //      total: { $sum: "$amount"}}
-      //      }
-      //      ,
-      // { $group : {
-      //      _id : { year: "$_id.year" },
-      //      monthlyusage: { $push: { month: "$_id.month", dailyusage: "$dailyusage" }}}
-      //      }
-         )
-         .exec(function (err, item) {
-           if (err) {
-             return res.status(404).json({
-               message: '',
-               err: err
-             })
-           } else {
-             res.status(200).json({
-               message: 'Success',
-               item: item
-             })
-           }
-         })
+    }
+    ,
+    {
+     $group : {
+         _id : {
+          year: { $year : "$datePaiement" },
+          month: { $month : "$datePaiement" },
+            //  day: { $dayOfMonth : "$datePaiement" }
+        },
+         amountTotal : { $sum : "$amount" }
+      }
+    }
+  )
+ .exec(function (err, item) {
+   if (err) {
+     return res.status(404).json({
+       message: '',
+       err: err
+     })
+   } else {
+     res.status(200).json({
+       message: 'Success',
+       item: item
+     })
+   }
+ })
 
 })
 
