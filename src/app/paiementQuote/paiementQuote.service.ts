@@ -26,6 +26,23 @@ export class PaiementQuoteService {
     private toastr: ToastsManager,
     private authService: AuthService) {}
 
+
+  getPaiementQuotesGraph(page: number, search: any) {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    headers.append('Authorization', '' + this.authService.currentUser.token)
+    let options = new RequestOptions({ headers: headers, search: search});
+    return this.http.get(this.url + 'paiementQuote/graph/' , options)
+      .timeout(5000)
+      .map((response: Response) => {
+        const paiementQuotes = response.json();
+        return paiementQuotes;
+      })
+      .catch((error: Response) => {
+        this.errorService.handleError(error.json());
+        return Observable.throw(error.json());
+      });
+  }
+
   getPaiementQuotes(page: number, search: any) {
     let headers = new Headers({'Content-Type': 'application/json'});
     headers.append('Authorization', '' + this.authService.currentUser.token)
@@ -42,36 +59,36 @@ export class PaiementQuoteService {
       });
   }
 
-
-  getPaiementQuoteForCurrentUser() {
-    // if(this.paiementQuotesForCurrentUser.length) {
-    //   return Observable.of(this.paiementQuotesForCurrentUser)
-    // } else {
-    //   let id = this.authService.currentUser.userId
-    //   let headers = new Headers({'Content-Type': 'application/json'});
-    //   headers.append('Authorization', '' + this.authService.currentUser.token);
-    //   return this.http.get(this.url + 'paiementQuote/byuserid/' + id, {headers: headers})
-    //     .map((response: Response) => {
-    //       this.paiementQuotesForCurrentUser = response.json().item
-    //       return this.paiementQuotesForCurrentUser
-    //     })
-    //     .catch((error: Response) => {
-    //       this.errorService.handleError(error.json());
-    //       return Observable.throw(error.json());
-    //     });
-    // }
-    let id = this.authService.currentUser.userId
-    let headers = new Headers({'Content-Type': 'application/json'});
-    headers.append('Authorization', '' + this.authService.currentUser.token);
-    return this.http.get(this.url + 'paiementQuote/byuserid/' + id, {headers: headers})
-      .map((response: Response) => {
-        return response.json().item
-      })
-      .catch((error: Response) => {
-        this.errorService.handleError(error.json());
-        return Observable.throw(error.json());
-      });
-  }
+  //
+  // getPaiementQuoteForCurrentUser() {
+  //   // if(this.paiementQuotesForCurrentUser.length) {
+  //   //   return Observable.of(this.paiementQuotesForCurrentUser)
+  //   // } else {
+  //   //   let id = this.authService.currentUser.userId
+  //   //   let headers = new Headers({'Content-Type': 'application/json'});
+  //   //   headers.append('Authorization', '' + this.authService.currentUser.token);
+  //   //   return this.http.get(this.url + 'paiementQuote/byuserid/' + id, {headers: headers})
+  //   //     .map((response: Response) => {
+  //   //       this.paiementQuotesForCurrentUser = response.json().item
+  //   //       return this.paiementQuotesForCurrentUser
+  //   //     })
+  //   //     .catch((error: Response) => {
+  //   //       this.errorService.handleError(error.json());
+  //   //       return Observable.throw(error.json());
+  //   //     });
+  //   // }
+  //   let id = this.authService.currentUser.userId
+  //   let headers = new Headers({'Content-Type': 'application/json'});
+  //   headers.append('Authorization', '' + this.authService.currentUser.token);
+  //   return this.http.get(this.url + 'paiementQuote/byuserid/' + id, {headers: headers})
+  //     .map((response: Response) => {
+  //       return response.json().item
+  //     })
+  //     .catch((error: Response) => {
+  //       this.errorService.handleError(error.json());
+  //       return Observable.throw(error.json());
+  //     });
+  // }
 
   // getPaiementQuoteByUserId(id: string) {
   //   let headers = new Headers({'Content-Type': 'application/json'});

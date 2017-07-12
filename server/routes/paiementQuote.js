@@ -212,6 +212,57 @@ router.get('/page/:page', function (req, res, next) {
 
 
 
+// get all forms from database
+router.get('/graph', function (req, res, next) {
+  console.log('aa')
+  let searchQuery = {
+  //  createdAt:{"$lt": dateRef}
+//    categories: categoriesArray,
+  //  createdAt:{"$gt": dateRef},
+  }
+
+  if(req.query.search)
+    searchQuery['details.name'] = new RegExp(req.query.search, 'i')
+
+
+  if(req.query.idQuote)
+    searchQuery['quotes'] = mongoose.Types.ObjectId(req.query.idQuote)
+
+
+
+  PaiementQuote
+  .aggregate(
+     { $group : {
+           _id : { year: { $year : "$datePaiement" }, month: { $month : "$datePaiement" },day: { $dayOfMonth : "$datePaiement" }},
+           count : { $sum : 1 }}
+           },
+      { $group : {
+           _id : { year: "$_id.year", month: "$_id.month" },
+           dailyusage: { $push: { day: "$_id.day", count: "$count" }}}
+           },
+      { $group : {
+           _id : { year: "$_id.year" },
+           monthlyusage: { $push: { month: "$_id.month", dailyusage: "$dailyusage" }}}
+           }
+         )
+         .exec(function (err, item) {
+           if (err) {
+             return res.status(404).json({
+               message: '',
+               err: err
+             })
+           } else {
+             res.status(200).json({
+               message: 'Success',
+               item: item
+             })
+           }
+         })
+
+})
+
+
+
 // getting user forms to display them on front end
 router.get('/:id', function (req, res, next) {
 
