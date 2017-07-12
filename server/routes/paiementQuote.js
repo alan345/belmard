@@ -232,18 +232,27 @@ router.get('/graph', function (req, res, next) {
 
   PaiementQuote
   .aggregate(
-     { $group : {
-           _id : { year: { $year : "$datePaiement" }, month: { $month : "$datePaiement" },day: { $dayOfMonth : "$datePaiement" }},
-           count : { $sum : 1 }}
-           },
-      { $group : {
-           _id : { year: "$_id.year", month: "$_id.month" },
-           dailyusage: { $push: { day: "$_id.day", count: "$count" }}}
-           },
-      { $group : {
-           _id : { year: "$_id.year" },
-           monthlyusage: { $push: { month: "$_id.month", dailyusage: "$dailyusage" }}}
-           }
+     {
+       $group : {
+           _id : {
+             year: {
+               $year : "$datePaiement" },
+               month: { $month : "$datePaiement" },
+              //  day: { $dayOfMonth : "$datePaiement" }
+             },
+           amountTotal : { $sum : "$amount" }
+         }
+       }
+          //  ,
+      // { $group : {
+      //      _id : { year: "$_id.year", month: "$_id.month" },
+      //      total: { $sum: "$amount"}}
+      //      }
+      //      ,
+      // { $group : {
+      //      _id : { year: "$_id.year" },
+      //      monthlyusage: { $push: { month: "$_id.month", dailyusage: "$dailyusage" }}}
+      //      }
          )
          .exec(function (err, item) {
            if (err) {
