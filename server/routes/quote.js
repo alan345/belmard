@@ -102,6 +102,63 @@ router.use('/', function (req, res, next) {
 });
 
 
+
+
+
+
+router.get('/graph/:year', function (req, res, next) {
+  let searchQuery = {}
+  let dateBegin = req.params.year*1 + '-01-01'
+  let dateEnd = req.params.year*1 +1 + '-01-01'
+
+
+  if(req.query.search)
+    searchQuery['details.name'] = new RegExp(req.query.search, 'i')
+
+  if(req.query.idQuote)
+    searchQuery['quotes'] = mongoose.Types.ObjectId(req.query.idQuote)
+
+  Quote
+  .aggregate(
+    {
+      $match: {
+        createdAt :
+         {
+           '$gte': new Date(dateBegin),
+           '$lt': new  Date(dateEnd)
+         }
+       }
+    },
+    {
+     $group : {
+         _id : {
+          year: { $year : "$createdAt" },
+          month: { $month : "$createdAt" },
+            //  day: { $dayOfMonth : "$datePaiement" }
+        },
+         amountTotal : { $sum : "$priceQuote.priceQuoteWithoutTaxes" }
+      }
+    }
+  )
+ .exec(function (err, item) {
+   if (err) {
+     return res.status(404).json({
+       message: '',
+       err: err
+     })
+   } else {
+     res.status(200).json({
+       message: 'Success',
+       item: item
+     })
+   }
+ })
+
+})
+
+
+
+
 //update
 router.put('/:id', function (req, res, next) {
   Quote.findById(({_id: req.params.id}), function (err, item) {

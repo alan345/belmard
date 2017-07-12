@@ -46,19 +46,20 @@ var quote = new Schema({
     priceQuote: {
       priceQuoteWithoutTaxes: {type: Number, default: [0]},
       priceQuoteWithTaxes: {type: Number, default: [0]},
-      paiementQuote: {type: Number, default: [0]},
+      // paiementQuote: {type: Number, default: [0]},
     },
     signature:{
       base64:{type: String, default: ['']},
       dateSignature:{type: Date},
-    },
-    paiements:[
-      {
-        datePaiement:{type: Date},
-        amount: {type: Number},
-        type: {type: String},
-      }
-    ]
+    }
+    // ,
+    // paiements:[
+    //   {
+    //     datePaiement:{type: Date},
+    //     amount: {type: Number},
+    //     type: {type: String},
+    //   }
+    // ]
 
   },
   {

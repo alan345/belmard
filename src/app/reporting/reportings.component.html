@@ -8,8 +8,14 @@
   <div class="col-md-3"></div>
 </div>
 
-<div class="row">
 
+
+<div class="row">
+  <div *ngFor="let d of lineChartData; let i= index;">
+    <div *ngIf="i==0">
+      {{d.year}}
+    </div>
+  </div>
 
 
   <div class="row">
@@ -29,13 +35,15 @@
     <div class="col-md-7" style="margin-bottom: 10px">
       <table class="table table-responsive table-condensed">
         <tr>
+          <th></th>
           <th *ngFor="let label of lineChartLabels">{{label}}</th>
         </tr>
         <tr *ngFor="let d of lineChartData">
+          <td>{{d.label}}</td>
           <td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
         </tr>
       </table>
-      <!-- <button (click)="randomize()">CLICK</button> -->
+
     </div>
   </div>
 

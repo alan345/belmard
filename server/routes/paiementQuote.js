@@ -212,13 +212,9 @@ router.get('/page/:page', function (req, res, next) {
 
 
 
-// get all forms from database
+
 router.get('/graph/:year', function (req, res, next) {
-  let searchQuery = {
-  //  createdAt:{"$lt": dateRef}
-//    categories: categoriesArray,
-  //  createdAt:{"$gt": dateRef},
-  }
+  let searchQuery = {}
   let dateBegin = req.params.year*1 + '-01-01'
   let dateEnd = req.params.year*1 +1 + '-01-01'
 
@@ -239,8 +235,7 @@ router.get('/graph/:year', function (req, res, next) {
            '$lt': new  Date(dateEnd)
          }
        }
-    }
-    ,
+    },
     {
      $group : {
          _id : {
