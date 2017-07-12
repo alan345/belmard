@@ -35,13 +35,15 @@ export class ProjectSingleComponent implements OnInit {
 
 
 
-  selectedIndex1 = 0
-  selectedIndex2 = 0
+  selectedIndex0: number = -1
+  selectedIndex1: number = -1
+  selectedIndex2: number = -1
   show1 = false
   show2 = false
-  categ1: string = '';
-  categ2: string = '';
-  categ3: string = '';
+  // categ0: string = '';
+  // categ1: string = '';
+  // categ2: string = '';
+
   itemSteps = ItemSteps;
 
 
@@ -93,7 +95,9 @@ export class ProjectSingleComponent implements OnInit {
     })
   }
 
-
+  buttonCascade0(itemStep){
+    console.log(itemStep)
+  }
   addCalendar(){
     let queryParams = {}
     queryParams['new'] = true
@@ -123,8 +127,8 @@ export class ProjectSingleComponent implements OnInit {
       );
   }
 
-  changeCascade(selectedIndex1, selectedIndex2) {
-
+  changeCascade(selectedIndex0, selectedIndex1, selectedIndex2) {
+    this.selectedIndex0 = selectedIndex0
     this.selectedIndex1 = selectedIndex1
     this.selectedIndex2 = selectedIndex2
 
@@ -225,10 +229,18 @@ export class ProjectSingleComponent implements OnInit {
 
 
   save() {
+    let categName0 = ''
+    let categName1 = ''
+    let categName2 = ''
 
-    this.fetchedProject.categorie.categ1 = [{name: this.categ1}]
-    this.fetchedProject.categorie.categ2 = [{name: this.categ2}]
-    this.fetchedProject.categorie.categ3 = [{name: this.categ3}]
+    if(this.selectedIndex0>=0) {categName0 = this.itemSteps[this.selectedIndex0].categ}
+    if(this.selectedIndex1>=0) {categName1 = this.itemSteps[this.selectedIndex0].subCateg[this.selectedIndex1].categ}
+    if(this.selectedIndex2>=0) {categName2 = this.itemSteps[this.selectedIndex0].subCateg[this.selectedIndex1].subCateg[this.selectedIndex2].categ}
+
+
+    this.fetchedProject.categorie.categ0 = [{name: categName0}]
+    this.fetchedProject.categorie.categ1 = [{name: categName1}]
+    this.fetchedProject.categorie.categ2 = [{name: categName2}]
 
 
 
@@ -308,26 +320,39 @@ export class ProjectSingleComponent implements OnInit {
     this.projectService.getProject(id)
       .subscribe(
         res => {
+          let categName0 = ''
+          let categName1 = ''
+          let categName2 = ''
           this.fetchedProject = <Project>res
-
+          // console.log(this.fetchedProject.categorie)
+          if(this.fetchedProject.categorie.categ0.length)
+            categName0 = this.fetchedProject.categorie.categ0[0].name
           if(this.fetchedProject.categorie.categ1.length)
-            this.categ1 = this.fetchedProject.categorie.categ1[0].name
+            categName1 = this.fetchedProject.categorie.categ1[0].name
           if(this.fetchedProject.categorie.categ2.length)
-            this.categ2 = this.fetchedProject.categorie.categ2[0].name
-          if(this.fetchedProject.categorie.categ3.length)
-            this.categ3 = this.fetchedProject.categorie.categ3[0].name
+            categName2 = this.fetchedProject.categorie.categ2[0].name
 
-          let categ1Index:number = 0
-          let categ2Index:number = 0
-          this.itemSteps.forEach((categ1,index) => {
-            if(categ1.categ === this.categ1)
-              categ1Index = index
+          this.itemSteps.forEach((categ0, index) => {
+            if(categ0.categ === categName0)
+              this.selectedIndex0 = index
           })
-          this.itemSteps[categ1Index].subCateg.forEach((categ2,index) => {
-            if(categ2.categ === this.categ2)
-              categ2Index = index
+
+          if(this.selectedIndex0>=0)
+          this.itemSteps[this.selectedIndex0].subCateg.forEach((categ1,index) => {
+            if(categ1.categ === categName1)
+              this.selectedIndex1 = index
           })
-          this.changeCascade(categ1Index, categ2Index)
+          if(this.selectedIndex1>=0)
+          this.itemSteps[this.selectedIndex0].subCateg[this.selectedIndex1].subCateg.forEach((categ2,index) => {
+            if(categ2.categ === categName2)
+              this.selectedIndex2 = index
+          })
+
+
+
+
+          // this.changeCascade(categ0Index, categ1Index, categ2Index)
+
           //this.fetchedProject.embedSecure = this.sanitizer.bypassSecurityTrustResourceUrl('https://player.vimeo.com/project/' + res.embed )
           //this.fetchedProject.embedSecure = this.sanitizer.bypassSecurityTrustResourceUrl('//fast.wistia.net/embed/iframe/' + res.embed)
           // this.fetchedProject.categories.forEach((categorie) => {

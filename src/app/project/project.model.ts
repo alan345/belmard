@@ -34,9 +34,9 @@ export class Details {
 }
 
 export class Categorie {
+  categ0: Categ[] = [];
   categ1: Categ[] = [];
   categ2: Categ[] = [];
-  categ3: Categ[] = [];
 }
 
 export class Categ {
@@ -59,26 +59,27 @@ export const StatusProject =
 ]
 export const ItemSteps =
 [
-  {
-    'categ':'',
-    'subCateg': [
-      {
-        'categ':'',
-        'subCateg': [
-          {categ: ''},
-        ]
-      }
-    ]
-  },
+  // {
+  //   'categ':'',
+  //   'subCateg': [
+  //     {
+  //       'categ':'',
+  //       'subCateg': [
+  //         {categ: ''},
+  //       ]
+  //     }
+  //   ]
+  // },
+
   {
     'categ':'Devis Rénovation',
     'subCateg': [
-      {
-        'categ':'',
-        'subCateg': [
-          {categ: ''}
-        ]
-      },
+      // {
+      //   'categ':'',
+      //   'subCateg': [
+      //     {categ: ''}
+      //   ]
+      // },
       {
         'categ':'Cuisine',
         'subCateg': [
@@ -124,12 +125,12 @@ export const ItemSteps =
   {
     'categ':'Intervention Immédiate',
     'subCateg': [
-      {
-        'categ':'',
-        'subCateg': [
-          {categ: ''}
-        ]
-      },
+      // {
+      //   'categ':'',
+      //   'subCateg': [
+      //     {categ: ''}
+      //   ]
+      // },
       {
         'categ':'Plomberie',
         'subCateg': [
@@ -181,12 +182,12 @@ export const ItemSteps =
   {
     'categ':'Devis Installation',
     'subCateg': [
-      {
-        'categ':'',
-        'subCateg': [
-          {categ: ''}
-        ]
-      },
+      // {
+      //   'categ':'',
+      //   'subCateg': [
+      //     {categ: ''}
+      //   ]
+      // },
       {
         'categ':'Menuiserie',
         'subCateg': [
@@ -245,12 +246,12 @@ export const ItemSteps =
   {
     'categ':'Électricité',
     'subCateg': [
-      {
-        'categ':'',
-        'subCateg': [
-          {categ: ''}
-        ]
-      },
+      // {
+      //   'categ':'',
+      //   'subCateg': [
+      //     {categ: ''}
+      //   ]
+      // },
       {
         'categ':'Convecteur',
         'subCateg': [
@@ -300,12 +301,12 @@ export const ItemSteps =
   {
     'categ': 'Chauffage',
     'subCateg': [
-      {
-        'categ':'',
-        'subCateg': [
-          {categ: ''}
-        ]
-      },
+      // {
+      //   'categ':'',
+      //   'subCateg': [
+      //     {categ: ''}
+      //   ]
+      // },
       {
         'categ': 'Radiateurs',
         'subCateg': [

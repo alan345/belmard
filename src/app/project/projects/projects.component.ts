@@ -57,47 +57,6 @@ export class ProjectsComponent implements OnInit {
     this.location.back();
   }
 
-//   onSelectChange = ($event: any): void => {
-// //    console.log($event)
-//     this.categories2 = $event.tab.textLabel
-//     this.updateCategerories()
-//     // this.search.categories = []
-//     // this.search.categories.push({name:$event.tab.textLabel})
-//     // this.getProjects(this.paginationData.currentPage, this.search)
-//
-//   }
-
-//   updateCategerories(){
-//     this.search.categories = []
-//     this.search.categories.push({name:this.categories2})
-//     // if(this.inputSearch)
-//     //   this.search.categories.push({name:this.inputSearch})
-//     // this.categories1.forEach((categorie1)=>{
-//     //   if(categorie1.selected == true) {
-//     //     this.search.categories.push({name : categorie1.name})
-//     //   }
-//     // })
-// //    console.log(this.search.categories)
-//     this.fetchedProjects = []
-//     this.getProjects(1, this.search)
-//   }
-
-  // changeCateg1(nameCateg: string){
-  //   //this.categories1[nameCateg] = !this.categories1[nameCateg]
-  //   // this.categories1.forEach((categ, index)=>{
-  //   //   if(categ.name === nameCateg) {
-  //   //     this.categories1[index].selected = !this.categories1[index].selected
-  //   //   }
-  //   // })
-  //   this.updateCategerories()
-  // }
-
-//   addSearchInput(){
-// //    console.log(this.search.categories)
-//     this.updateCategerories()
-//     // this.search.categories.pop()
-//   }
-
   searchProjects() {
     this.getProjects(1, this.search)
   }

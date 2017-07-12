@@ -18,9 +18,9 @@ var project = new Schema({
     forms: [{type: Schema.Types.ObjectId, ref: 'Form'}],
     status: {type: Number},
     categorie: {
+      categ0:[{name: {type: String}}],
       categ1:[{name: {type: String}}],
       categ2:[{name: {type: String}}],
-      categ3:[{name: {type: String}}],
     },
     bucketTasks:[{
       bucketName:{type: String, default: ['']},
