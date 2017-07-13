@@ -15,7 +15,7 @@ import { BaseChartDirective } from 'ng2-charts/ng2-charts';
 
 
 @Component({
-  selector: 'app-paiementQuotes',
+  selector: 'app-reporting',
   templateUrl: './reportings.component.html',
   styleUrls: ['./reporting.component.css'],
 })
