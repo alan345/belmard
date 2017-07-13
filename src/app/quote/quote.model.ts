@@ -28,7 +28,9 @@ export class Detail {
 
 export class DateQuote {
   issueDate: Date = new Date();
+  issueDateString: string = '';
   expiryDate: Date = new Date();
+  expiryDateString: string ='';
 }
 
 // export class Paiement {

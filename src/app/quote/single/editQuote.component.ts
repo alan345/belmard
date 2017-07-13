@@ -356,13 +356,9 @@ export class EditQuoteComponent implements OnInit {
   // }
 
   save() {
-    // this.fetchedQuote.paiements.forEach((paiement, index) =>{
-    //   let year = Number(this.fetchedQuote.paiements[index].datePaiement.toString().substring(0, 4))
-    //   let month = Number(this.fetchedQuote.paiements[index].datePaiement.toString().substring(5, 7))
-    //   let day = Number(this.fetchedQuote.paiements[index].datePaiement.toString().substring(8, 10))
-    //   this.fetchedQuote.paiements[index].datePaiement = new Date(year, month-1, day)
-    // })
-    //
+    this.fetchedQuote.detail.dateQuote.issueDate = this.authService.HTMLDatetoIsoDate(this.fetchedQuote.detail.dateQuote.issueDateString)
+    this.fetchedQuote.detail.dateQuote.expiryDate = this.authService.HTMLDatetoIsoDate(this.fetchedQuote.detail.dateQuote.expiryDateString)
+
     if(this.fetchedQuote._id) {
       this.quoteService.updateQuote(this.fetchedQuote)
         .subscribe(
@@ -544,7 +540,12 @@ export class EditQuoteComponent implements OnInit {
   getQuote(id: string) {
     this.quoteService.getQuote(id, {})
       .subscribe(
-        res => { this.fetchedQuote = res },
+        res => {
+           this.fetchedQuote = res
+           this.fetchedQuote.detail.dateQuote.issueDateString = this.authService.isoDateToHtmlDate(this.fetchedQuote.detail.dateQuote.issueDate)
+           this.fetchedQuote.detail.dateQuote.expiryDateString = this.authService.isoDateToHtmlDate(this.fetchedQuote.detail.dateQuote.expiryDate)
+
+        },
         error => { console.log(error) }
       )
   }

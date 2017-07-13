@@ -14,9 +14,9 @@ var quote = new Schema({
     detail: {
       currency: {type: String, default: ['']},
       quoteRef: {type: String, default: ['']},
-      DateQuote:{
-        issueDate: {type: Date},
-        expiryDate: {type: Date},
+      dateQuote: {
+        issueDate: {type: Date, default: [Date()]},
+        expiryDate: {type: Date, default: [Date()]},
       }
     },
     // typeQuote: {type: String, default: ['salon']},
