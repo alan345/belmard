@@ -132,6 +132,7 @@ export class ProductSingleComponent implements OnInit {
     this.selectedIndex2 = selectedIndex2
   }
 
+
   searchCompanies() {
     if(!this.autocompleteCompanie) {
       this.fetchedCompanies = []
