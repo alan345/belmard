@@ -5,28 +5,20 @@
   </div>
   <div>
     <h4 class="dspl-nn">id: {{fetchedQuote._id}}</h4>
-    <!-- <form #f="ngForm" novalidate (ngSubmit)="save(f.value, f.valid)"> -->
-
     <button class="btn btn-primary" (click)="downloadPDF()">
       download PDF
     </button>
-
     <button class="btn btn-outline-primary" style="margin-top: 0px;" [routerLink]="['/quote/public/' + fetchedQuote._id]">
       Devis acces public
     </button>
-
-
-
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
       <div class="col-sm-6">
         <div>
           <app-autocomplete [typeAutocomplete]="'user'" [title]="Customer" [singleChoice]="'true'" [arrayContent]="fetchedQuote.clients" (getResultAutocomplete)="selectUser($event[0])">
           </app-autocomplete>
-
           <label>Nom du Devis</label>
           <input type="text" class="form-control col-md-4" formControlName="name" [(ngModel)]="fetchedQuote.name" required minlength="5" placeholder="Nom du quote">
           <br>
-
           <div *ngFor="let client of fetchedQuote.clients">
             <div>name:{{client.profile.name}}</div>
             <div>lastName:{{client.profile.lastName}}</div>
@@ -37,10 +29,8 @@
             <div>zip:{{client.profile.address.zip}}</div>
           </div>
         </div>
-
         <app-autocomplete [typeAutocomplete]="'project'" [canDelete]="true" [title]="'Project'" [singleChoice]="true" [arrayContent]="fetchedQuote.projects" (getResultAutocomplete)="selectProject($event[0])">
         </app-autocomplete>
-
       </div>
       <div class="container row">
         <div class="col-sm-5">
@@ -59,23 +49,21 @@
               <div class="input-group">
                 <input id="IssueDateISO" name="IssueDate" data-value="2017-07-13" class="form-control pickadate" />
                 <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" onclick="$('#IssueDateISO').pickadate('open');event.stopPropagation();">
-                      <span class="fa fa-calendar" style="color: #999;"></span>
+                <button class="btn btn-default" type="button" onclick="$('#IssueDateISO').pickadate('open');event.stopPropagation();">
+                  <span class="fa fa-calendar" style="color: #999;"></span>
                 </button>
                 </span>
               </div>
             </div>
           </div>
-
-
           <div class="form-group duedate">
             <label class="col-sm-4 control-label col1" for="DueDate">Expiry Date</label>
             <div class="col-sm-7">
               <div class="input-group">
                 <input id="DueDate" name="DueDate" data-value="" data-bind="value:DueDate" class="form-control pickadate" />
                 <span class="input-group-btn">
-                      <button class="btn btn-default" type="button" onclick="$('#DueDate').pickadate('open');event.stopPropagation();">
-                        <span class="fa fa-calendar" style="color: #999;"></span>
+                <button class="btn btn-default" type="button" onclick="$('#DueDate').pickadate('open');event.stopPropagation();">
+                  <span class="fa fa-calendar" style="color: #999;"></span>
                 </button>
                 </span>
               </div>
@@ -85,9 +73,9 @@
             <label class="col-sm-4 control-label col1" for="CurrencyCode">Currency</label>
             <div class="col-sm-7">
               <select class="form-control" disabled="disabled" id="CurrencyCode" name="CurrencyCode"><option value="">Select..</option>
-                    <option selected="selected" value="EUR">EUR - Euro</option>
-                    <option value="USD">USD - United States Dollar</option>
-                </select>
+                  <option selected="selected" value="EUR">EUR - Euro</option>
+                  <option value="USD">USD - United States Dollar</option>
+              </select>
             </div>
           </div>
         </div>
@@ -96,11 +84,10 @@
             <label class="col-sm-4 control-label" for="InvoiceTemplateIDFK">Estimate Template</label>
             <div class="col-sm-6">
               <select class="form-control" data-val="true" data-val-number="The field Estimate Template must be a number." id="InvoiceTemplateIDFK" name="InvoiceTemplateIDFK"><option value="30390">Mod&#232;le Facture</option>
-                    <option selected="selected" value="30391">Mod&#232;le Devis</option>
-                  </select>
+                <option selected="selected" value="30391">Mod&#232;le Devis</option>
+              </select>
             </div>
           </div>
-
           <div class="form-group">
             <label class="col-sm-4 control-label" for="EstimateTaxConfigCode">Amounts are</label>
             <div class="col-sm-6">
@@ -122,34 +109,25 @@
               <textarea class="form-control" cols="10" id="Subject" maxlength="255" name="Subject" rows="4"></textarea>
             </div>
           </div>
-
         </div>
       </div>
       <br><br>
-
-
       <div class="form-control">
         <div class="row">
           <div class="col-md-1"></div>
-
-
           <div class="col-md-3">produit</div>
           <div class="col-md-1">Ref.</div>
           <div class="col-md-1">quanité</div>
           <div class="col-md-1">price HT</div>
           <div class="col-md-1">VAT(%)</div>
-          <!-- <div class="col-md-1">price TTC</div> -->
           <div class="col-md-1">total HT</div>
           <div class="col-md-1">total TTC</div>
         </div>
-
         <div *ngFor="let fetchedProduct of fetchedQuote.devisDetails; let i=index">
           <div class="row">
             <div class="col-md-1">
               <button type="button" (click)="removeProduct(i)"><i class="fa fa-times"></i></button>
             </div>
-
-
             <div class="col-md-3">
               {{fetchedProduct.productInit.details.referenceName}}
             </div>
@@ -168,34 +146,24 @@
             <div class="col-md-1">
               <input class="gooplusInput" type="text" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].vat" placeholder="vat">
             </div>
-            <!-- <div class="col-md-1">
-              {{fetchedQuote.devisDetails[i].priceWithTaxes}}
-            </div> -->
             <div class="col-md-1">
               {{fetchedQuote.devisDetails[i].totalPriceWithoutTaxes | round}}
             </div>
             <div class="col-md-1">
               {{fetchedQuote.devisDetails[i].totalPriceWithTaxes | round}}
             </div>
-
           </div>
         </div>
-
         <div class="row">
           <div class="col-md-1"></div>
           <div class="col-md-3">
-            <!-- Autocomplete -->
             <app-autocomplete [typeAutocomplete]="'product'" [title]="" [singleChoice]="'false'" [arrayContent]="arrayContentToSearch" (getResultAutocomplete)="selectProduct($event[0])">
             </app-autocomplete>
-
-
           </div>
           <div class="col-md-8"></div>
         </div>
-
         <div class="row">
           <div class="col-md-8">
-
           </div>
           <div class="col-md-1">
             Total
@@ -206,10 +174,6 @@
           <div class="col-md-1">
             {{fetchedQuote.priceQuote.priceQuoteWithTaxes | round}}
           </div>
-          <!-- <div class="col-md-1">
-          </div>
-          <div class="col-md-4">
-          </div> -->
         </div>
       </div>
       <div class="row">
@@ -225,33 +189,22 @@
               </signature-pad>
               <button type="button" class="delete" md-button (click)="validateSignature()">
                   ok
-                </button>
+              </button>
             </div>
             <img *ngIf="fetchedQuote.signature.base64" [src]="fetchedQuote.signature.base64" /> {{fetchedQuote.signature.dateSignature | date:'yMdjm'}}
           </div>
         </div>
-
       </div>
-      <!-- </div> -->
-      <!-- </div> -->
-
-
       <div (click)="togglePaiements()">Paiements</div>
       <div *ngIf="showPaiements">
-
         <app-paiementQuotes (getPaiementQuotesCross)="getPaiementQuotes($event)" [showHeader]="false" [showCreate]="false" [idQuote]="fetchedQuote._id">
         </app-paiementQuotes>
         Total Paiement = {{totalPaiementAmount}}
         <br> Reste a payer = {{fetchedQuote.priceQuote.priceQuoteWithoutTaxes*1 - totalPaiementAmount*1| round}}
         <app-paiementQuote [showHeader]="false" (newPaiementQuoteSaved)="newPaiementQuoteSaved()">
         </app-paiementQuote>
-
       </div>
-
-
       <br><br>
-
-
       <div class="valid-edit">
         <button type="submit" class="btn btn-success">Enregistrer</button>
         <button *ngIf="fetchedQuote._id" type="button" class="delete" md-button (click)="openDialogDelete()">
@@ -259,5 +212,4 @@
         </button>
       </div>
     </form>
-
   </div>
