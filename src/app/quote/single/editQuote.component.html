@@ -60,7 +60,7 @@
 
         <!-- Autocomplete -->
 
-        <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedQuote.name" required minlength="5" placeholder="Nom du quote">
+        <input type="text" class="form-control col-md-4" formControlName="name" [(ngModel)]="fetchedQuote.name" required minlength="5" placeholder="Nom du quote">
         <br>
 
         <div *ngFor="let client of fetchedQuote.clients">
