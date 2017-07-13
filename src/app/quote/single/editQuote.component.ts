@@ -324,31 +324,32 @@ export class EditQuoteComponent implements OnInit {
 
     // autocomplete project
     selectProject(project: Project) {
-      this.autocompleteProject = ''
-      this.fetchedProjects = []
-      this.fetchedQuote.projects.push(project)
-    }
 
-    searchProjects() {
-      if(!this.autocompleteProject) {
-        this.fetchedProjects = []
-      } else {
-        let search = {
-            search: this.autocompleteProject,
-          };
-        this.getProjects(1, search)
-      }
+      // this.autocompleteProject = ''
+      // this.fetchedProjects = []
+      this.fetchedQuote.projects = [project]
     }
-    getProjects(page: number, search: any) {
-      this.projectService.getProjects(page, search)
-        .subscribe(
-          res => { this.fetchedProjects = res.data },
-          error => { console.log(error) }
-        );
-    }
-    removeProject(i: number) {
-      this.fetchedQuote.projects.splice(i, 1);
-    }
+    //
+    // searchProjects() {
+    //   if(!this.autocompleteProject) {
+    //     this.fetchedProjects = []
+    //   } else {
+    //     let search = {
+    //         search: this.autocompleteProject,
+    //       };
+    //     this.getProjects(1, search)
+    //   }
+    // }
+    // getProjects(page: number, search: any) {
+    //   this.projectService.getProjects(page, search)
+    //     .subscribe(
+    //       res => { this.fetchedProjects = res.data },
+    //       error => { console.log(error) }
+    //     );
+    // }
+    // removeProject(i: number) {
+    //   this.fetchedQuote.projects.splice(i, 1);
+    // }
     // autocomplete project
 
 

@@ -3,6 +3,8 @@ import { UserService} from '../user/user.service';
 import { CompanieService} from '../companie/companie.service';
 import { ProductService} from '../product/product.service';
 import { QuoteService} from '../quote/quote.service';
+import { ProjectService} from '../project/project.service';
+
 
 
 import { User } from '../user/user.model';
@@ -31,6 +33,7 @@ export class AutocompleteComponent {
     private companieService: CompanieService,
     private productService: ProductService,
     private quoteService: QuoteService,
+    private projectService: ProjectService,
   ) {}
 
 
@@ -51,6 +54,12 @@ export class AutocompleteComponent {
     if(this.typeAutocomplete ==='quote')
       this.quoteService.getQuotes(page, search)
       .subscribe( res => { this.fetchedData = res.data }, error => { console.log(error); });
+
+
+    if(this.typeAutocomplete ==='project')
+      this.projectService.getProjects(page, search)
+      .subscribe( res => { this.fetchedData = res.data }, error => { console.log(error); });
+
 
 
   }

@@ -12,7 +12,13 @@
 
 
 
-        <app-autocomplete [typeAutocomplete]="'quote'" [canDelete]="false" [title]="" [singleChoice]="true" [arrayContent]="fetchedPaiementQuote.quotes" (getResultAutocomplete)="selectQuote($event[0])">
+        <app-autocomplete
+          [typeAutocomplete]="'quote'"
+          [canDelete]="false"
+          [title]=""
+          [singleChoice]="true"
+          [arrayContent]="fetchedPaiementQuote.quotes"
+          (getResultAutocomplete)="selectQuote($event[0])">
         </app-autocomplete>
 
 
