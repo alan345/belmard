@@ -122,7 +122,7 @@ router.get('/graph/:year', function (req, res, next) {
   .aggregate(
     {
       $match: {
-        createdAt :
+        'detail.dateQuote.issueDate' :
          {
            '$gte': new Date(dateBegin),
            '$lt': new  Date(dateEnd)
@@ -132,8 +132,8 @@ router.get('/graph/:year', function (req, res, next) {
     {
      $group : {
          _id : {
-          year: { $year : "$createdAt" },
-          month: { $month : "$createdAt" },
+          year: { $year : "$detail.dateQuote.issueDate" },
+          month: { $month : "$detail.dateQuote.issueDate" },
             //  day: { $dayOfMonth : "$datePaiement" }
         },
          amountTotal : { $sum : "$priceQuote.priceQuoteWithoutTaxes" }
