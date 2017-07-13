@@ -9,7 +9,7 @@ var mongoose                = require('mongoose'),
 var paiementQuote = new Schema({
     ownerCompanies: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
     quotes: [{type: Schema.Types.ObjectId, ref: 'Quote'}],
-    datePaiement:{type: Date},
+    datePaiement: {type: Date},
     amount: {type: Number},
     type: {type: String},
   },

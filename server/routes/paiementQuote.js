@@ -66,6 +66,7 @@ router.put('/:id', function (req, res, next) {
         item.quotes = req.body.quotes
         item.amount = req.body.amount
         item.type = req.body.type
+        item.datePaiement = req.body.datePaiement
 
 
 

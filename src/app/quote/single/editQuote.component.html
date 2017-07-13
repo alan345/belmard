@@ -14,7 +14,9 @@
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
       <div class="col-sm-6">
         <div>
-          <app-autocomplete [typeAutocomplete]="'user'" [title]="Customer" [singleChoice]="'true'" [arrayContent]="fetchedQuote.clients" (getResultAutocomplete)="selectUser($event[0])">
+          <app-autocomplete [typeAutocomplete]="'user'" [title]="'Customer'" [singleChoice]="'true'" [arrayContent]="fetchedQuote.clients" (getResultAutocomplete)="selectUser($event[0])">
+          </app-autocomplete>
+          <app-autocomplete [typeAutocomplete]="'project'" [canDelete]="true" [title]="'Project'" [singleChoice]="true" [arrayContent]="fetchedQuote.projects" (getResultAutocomplete)="selectProject($event[0])">
           </app-autocomplete>
           <label>Nom du Devis</label>
           <input type="text" class="form-control col-md-4" formControlName="name" [(ngModel)]="fetchedQuote.name" required minlength="5" placeholder="Nom du quote">
@@ -29,8 +31,6 @@
             <div>zip:{{client.profile.address.zip}}</div>
           </div>
         </div>
-        <app-autocomplete [typeAutocomplete]="'project'" [canDelete]="true" [title]="'Project'" [singleChoice]="true" [arrayContent]="fetchedQuote.projects" (getResultAutocomplete)="selectProject($event[0])">
-        </app-autocomplete>
       </div>
       <div class="container row">
         <div class="col-sm-5">
@@ -46,13 +46,13 @@
           <div class="form-group">
             <label class="col-sm-4 control-label col1" for="IssueDateISO">Issue Date</label>
             <div class="col-sm-7">
-              <div class="input-group">
-                <input id="IssueDateISO" name="IssueDate" data-value="2017-07-13" class="form-control pickadate" />
-                <span class="input-group-btn">
+              <div>
+                <input type="date" name="issueDate" class="form-control" />
+                <!-- <span class="input-group-btn">
                 <button class="btn btn-default" type="button" onclick="$('#IssueDateISO').pickadate('open');event.stopPropagation();">
                   <span class="fa fa-calendar" style="color: #999;"></span>
                 </button>
-                </span>
+                </span> -->
               </div>
             </div>
           </div>
@@ -72,9 +72,10 @@
           <div class="form-group">
             <label class="col-sm-4 control-label col1" for="CurrencyCode">Currency</label>
             <div class="col-sm-7">
-              <select class="form-control" disabled="disabled" id="CurrencyCode" name="CurrencyCode"><option value="">Select..</option>
-                  <option selected="selected" value="EUR">EUR - Euro</option>
-                  <option value="USD">USD - United States Dollar</option>
+              <select class="form-control" name="currency" formControlName="currency" [(ngModel)]="fetchedQuote.detail.currency">
+                <option value="">Select..</option>
+                <option selected="selected" value="EUR">EUR - Euro</option>
+                <option value="USD">USD - United States Dollar</option>
               </select>
             </div>
           </div>

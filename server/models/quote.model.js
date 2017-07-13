@@ -7,13 +7,19 @@ var mongoose                = require('mongoose'),
 
 var quote = new Schema({
     ownerCompanies: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
-
-
     projects: [{type: Schema.Types.ObjectId, ref: 'Project'}],
     clients: [{type: Schema.Types.ObjectId, ref: 'User'}],
     // phoneNumber: {type: String, default: ['']},
     name: {type: String, default: ['']},
-    typeQuote: {type: String, default: ['salon']},
+    detail: {
+      currency: {type: String, default: ['']},
+      quoteRef: {type: String, default: ['']},
+      DateQuote:{
+        issueDate: {type: Date},
+        expiryDate: {type: Date},
+      }
+    },
+    // typeQuote: {type: String, default: ['salon']},
     _users : [{type: Schema.Types.ObjectId, ref: 'User'}],
     forms: [{type: Schema.Types.ObjectId, ref: 'Form'}],
     devisDetails: [{

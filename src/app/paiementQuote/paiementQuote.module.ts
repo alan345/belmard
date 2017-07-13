@@ -19,12 +19,12 @@ import { ProductModule } from '../product/product.module';
 
 import {SharedModule } from '../shared/shared.module';
 import { SignaturePadModule } from 'angular2-signaturepad';
-
+// import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   imports:      [
     // ProjectModule,
-
+    // NgbModule,
     PaiementQuoteRouting,
     CommonModule,
     FormsModule,

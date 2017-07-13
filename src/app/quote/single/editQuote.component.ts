@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from '../../auth/auth.service';
 import {QuoteService} from '../quote.service';
 import {ProductService} from '../../product/product.service';
@@ -79,6 +79,9 @@ export class EditQuoteComponent implements OnInit {
   ngOnInit() {
     this.myForm = this._fb.group({
       name: [''],
+      currency: ['', [Validators.required, Validators.minLength(1)]],
+      quoteRef: ['', [Validators.required, Validators.minLength(1)]],
+
     })
 
     // this.getCurrentUser();
@@ -88,9 +91,9 @@ export class EditQuoteComponent implements OnInit {
       if(params['idQuote'])
         this.getQuote(params['idQuote'])
       if(params['idClient'])
-       this.getUser(params['idClient'])
-     if(params['idProject'])
-      this.getProject(params['idProject'])
+        this.getUser(params['idClient'])
+      if(params['idProject'])
+        this.getProject(params['idProject'])
     })
   }
 
@@ -274,34 +277,32 @@ export class EditQuoteComponent implements OnInit {
 
     // Autocomplete User
     selectUser(user: User) {
-      this.autocompleteUser = ''
-      this.fetchedUsers = []
-      this.fetchedQuote.clients.push(user)
+      this.fetchedQuote.clients = [user]
     }
     // addPaiement(){
     //   let newPaiement:Paiement = new Paiement()
     //   this.fetchedQuote.paiements.push(newPaiement)
     // }
-    searchUsers() {
-      if(!this.autocompleteUser) {
-        this.fetchedUsers = []
-      } else {
-        let search = {
-            search: this.autocompleteUser,
-          };
-        this.getUsers(1, search)
-      }
-    }
-    getUsers(page: number, search: any) {
-      this.userService.getUsers(page, search)
-        .subscribe(
-          res => { this.fetchedUsers = res.data },
-          error => { console.log(error) }
-        );
-    }
-    removeUser(i: number) {
-      this.fetchedQuote.clients.splice(i, 1);
-    }
+    // searchUsers() {
+    //   if(!this.autocompleteUser) {
+    //     this.fetchedUsers = []
+    //   } else {
+    //     let search = {
+    //         search: this.autocompleteUser,
+    //       };
+    //     this.getUsers(1, search)
+    //   }
+    // }
+    // getUsers(page: number, search: any) {
+    //   this.userService.getUsers(page, search)
+    //     .subscribe(
+    //       res => { this.fetchedUsers = res.data },
+    //       error => { console.log(error) }
+    //     );
+    // }
+    // removeUser(i: number) {
+    //   this.fetchedQuote.clients.splice(i, 1);
+    // }
     // Autocomplete User
 
 
@@ -312,12 +313,8 @@ export class EditQuoteComponent implements OnInit {
     getProject(id: string) {
       this.projectService.getProject(id)
         .subscribe(
-          res => {
-            this.selectProject(res)
-          },
-          error => {
-            console.log(error);
-          }
+          res => { this.selectProject(res) },
+          error => { console.log(error) }
         );
     }
 
@@ -392,17 +389,17 @@ export class EditQuoteComponent implements OnInit {
 
 
 
-    searchProducts() {
-
-      if(!this.autocompleteProduct) {
-        this.fetchedProducts = []
-      } else {
-        let search = {
-            search: this.autocompleteProduct,
-          };
-        this.getProducts(1, search)
-      }
-    }
+    // searchProducts() {
+    //
+    //   if(!this.autocompleteProduct) {
+    //     this.fetchedProducts = []
+    //   } else {
+    //     let search = {
+    //         search: this.autocompleteProduct,
+    //       };
+    //     this.getProducts(1, search)
+    //   }
+    // }
 
     selectProduct(product: Product) {
 
@@ -420,8 +417,6 @@ export class EditQuoteComponent implements OnInit {
       this.autocompleteProduct = ''
       this.fetchedQuote.devisDetails.push(devisDetails)
       this.calculateQuote()
-
-
     }
     calculateQuote() {
       let this2 = this;

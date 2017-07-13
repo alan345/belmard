@@ -15,10 +15,21 @@ export class Quote {
   projects: Project[] = [];
   devisDetails: DevisDetails[] = []
   priceQuote: PriceQuote = new PriceQuote()
-  signature: Signature=new Signature()
+  signature: Signature = new Signature()
+  detail: Detail = new Detail()
   // paiements: Paiement[] = []
 }
 
+export class Detail {
+  currency: string = '';
+  quoteRef: string = '';
+  dateQuote: DateQuote = new DateQuote()
+}
+
+export class DateQuote {
+  issueDate: Date = new Date();
+  expiryDate: Date = new Date();
+}
 
 // export class Paiement {
 //   type: string = '';

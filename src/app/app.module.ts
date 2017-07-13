@@ -210,7 +210,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     MaterialModule,
     NavbarModule,
 
-  //  NgbModule.forRoot(),
+    // NgbModule.forRoot(),
     UserModule,
     // AutocompleteComponent,
 

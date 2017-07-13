@@ -77,6 +77,7 @@ export class EditPaiementQuoteComponent implements OnInit {
     this.myForm = this._fb.group({
       amount: [''],
       type: [''],
+      datePaiement: [ null, []],
     })
     this.activatedRoute.params.subscribe((params: Params) => {
       // console.log(params)
@@ -94,9 +95,9 @@ export class EditPaiementQuoteComponent implements OnInit {
       this.fetchedPaiementQuote.quotes = [quote]
     }
 
-    editDateMode() {
-      this.fetchedPaiementQuote.editDateMode = !this.fetchedPaiementQuote.editDateMode
-    }
+    // editDateMode() {
+    //   this.fetchedPaiementQuote.editDateMode = !this.fetchedPaiementQuote.editDateMode
+    // }
 
     getQuote(idQuote: string) {
       this.quoteService.getQuote(idQuote, {})
@@ -109,12 +110,9 @@ export class EditPaiementQuoteComponent implements OnInit {
     }
 
   save() {
-    // this.fetchedPaiementQuote.paiements.forEach((paiement, index) =>{
-    //   let year = Number(this.fetchedPaiementQuote.paiements[index].datePaiement.toString().substring(0, 4))
-    //   let month = Number(this.fetchedPaiementQuote.paiements[index].datePaiement.toString().substring(5, 7))
-    //   let day = Number(this.fetchedPaiementQuote.paiements[index].datePaiement.toString().substring(8, 10))
-    //   this.fetchedPaiementQuote.paiements[index].datePaiement = new Date(year, month-1, day)
-    // })
+
+    this.fetchedPaiementQuote.datePaiement = this.HTMLDatetoIsoDate(this.fetchedPaiementQuote.datePaiementString)
+
     if(this.fetchedPaiementQuote._id) {
       this.paiementQuoteService.updatePaiementQuote(this.fetchedPaiementQuote)
         .subscribe(
@@ -187,11 +185,14 @@ export class EditPaiementQuoteComponent implements OnInit {
   }
 
 
+
+
   getPaiementQuote(id: string) {
     this.paiementQuoteService.getPaiementQuote(id, {})
       .subscribe(
         res => {
           this.fetchedPaiementQuote = res
+          this.fetchedPaiementQuote.datePaiementString = this.isoDateToHtmlDate(this.fetchedPaiementQuote.datePaiement)
         },
         error => {
           console.log(error);
