@@ -38,7 +38,12 @@ router.post('/register', function (req, res, next) {
 
 // user login
 router.post('/login', function (req, res, next) {
-  User.findOne({email: req.body.email.toLowerCase()}, function (err, doc) {
+  User
+  //
+  .findOne({email: req.body.email.toLowerCase()})
+  .populate({path: 'companies', model: 'Companie'})
+  .exec(function (err, doc) {
+
     if (err) {
       return res.status(403).json({
         title: 'There was a problem',

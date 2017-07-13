@@ -15,7 +15,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { DeleteDialog } from '../deleteDialog/deleteDialog.component'
 import { UserService } from '../user/user.service'
 import { User } from '../user/user.model'
-
+import { AuthService} from '../auth/auth.service';
 
 
 @Component({
@@ -42,7 +42,7 @@ export class ProductSingleComponent implements OnInit {
 
   autocompleteCompanie: string = '';
 
-
+  // fetchedCurrentUser: User = new User()
 
 
 
@@ -67,6 +67,7 @@ export class ProductSingleComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private _fb: FormBuilder,
     private companieService: CompanieService,
+    private authService: AuthService,
   ) {
   }
 
@@ -92,31 +93,18 @@ export class ProductSingleComponent implements OnInit {
       })
     })
 
-    this.getCurrentUser();
+    this.getItemSteps();
 
 
   }
 
-  fetchedCurrentUser: User = new User()
-  getCurrentUser() {
-    this.userService.getUser('')
-      .subscribe(
-        res => {
-          this.fetchedCurrentUser = res
-          this.fetchedCurrentUser.companies.forEach((companie,index) => {
-            if(this.fetchedCurrentUser.companies[index].categJson.categProduct)
-              this.itemSteps = JSON.parse(this.fetchedCurrentUser.companies[index].categJson.categProduct)
-          })
 
-          this.activatedRoute.params.subscribe((params: Params) => {
-            if(params['id'])
-             this.getProduct(params['id'])
-          })
-        },
-        error => {
-          console.log(error);
-        }
-      )
+  getItemSteps() {
+    let currentUser = this.authService.getCurrentUser()
+    currentUser.companies.forEach((companie,index) => {
+      if(currentUser.companies[index].categJson.categProduct)
+        this.itemSteps = JSON.parse(currentUser.companies[index].categJson.categProduct)
+    })
   }
 
   removePic(i) {

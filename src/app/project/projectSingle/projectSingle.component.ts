@@ -14,6 +14,7 @@ import { QuoteService} from '../../quote/quote.service';
 
 import { User } from '../../user/user.model';
 import { Quote } from '../../quote/quote.model';
+import { AuthService} from '../../auth/auth.service';
 
 
 
@@ -72,6 +73,7 @@ export class ProjectSingleComponent implements OnInit {
     private _fb: FormBuilder,
     private userService: UserService,
     private quoteService: QuoteService,
+    private authService: AuthService,
   ) {
   }
 
@@ -93,11 +95,21 @@ export class ProjectSingleComponent implements OnInit {
       if(params['idClient'])
        this.getUser(params['idClient'])
     })
+
+    this.getItemSteps()
   }
 
-  buttonCascade0(itemStep){
-    console.log(itemStep)
+  getItemSteps() {
+    let currentUser = this.authService.getCurrentUser()
+    currentUser.companies.forEach((companie,index) => {
+      // console.log(companie)
+      // console.log(JSON.parse(currentUser.companies[index].categJson.categProject))
+      if(currentUser.companies[index].categJson.categProject)
+        this.itemSteps = JSON.parse(currentUser.companies[index].categJson.categProject)
+    })
   }
+
+
   addCalendar(){
     let queryParams = {}
     queryParams['new'] = true

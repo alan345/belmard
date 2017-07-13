@@ -51,7 +51,8 @@ export class EditCompanieComponent implements OnInit {
       name: ['', [Validators.required, Validators.minLength(2)]],
       phoneNumber: ['', [Validators.required, Validators.minLength(2)]],
       categJson: this._fb.group({
-        categProduct: ['']
+        categProduct: [''],
+        categProject: ['']
       }),
       option: this._fb.group({
         calendar: this._fb.group({

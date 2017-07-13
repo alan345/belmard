@@ -89,7 +89,18 @@
               [(ngModel)]="fetchedCompanie.categJson.categProduct"
               required
               minlength="1"
-              placeholder="categJson"
+              placeholder="categProduct"
+            >
+            </textarea>
+
+            <h4>categProject</h4>
+            <textarea
+              class="form-control"
+              formControlName="categProject"
+              [(ngModel)]="fetchedCompanie.categJson.categProject"
+              required
+              minlength="1"
+              placeholder="categProject"
             >
             </textarea>
 

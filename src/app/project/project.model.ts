@@ -59,27 +59,12 @@ export const StatusProject =
 ]
 export const ItemSteps =
 [
-  // {
-  //   'categ':'',
-  //   'subCateg': [
-  //     {
-  //       'categ':'',
-  //       'subCateg': [
-  //         {categ: ''},
-  //       ]
-  //     }
-  //   ]
-  // },
+
 
   {
     'categ':'Devis Rénovation',
     'subCateg': [
-      // {
-      //   'categ':'',
-      //   'subCateg': [
-      //     {categ: ''}
-      //   ]
-      // },
+
       {
         'categ':'Cuisine',
         'subCateg': [
@@ -125,12 +110,7 @@ export const ItemSteps =
   {
     'categ':'Intervention Immédiate',
     'subCateg': [
-      // {
-      //   'categ':'',
-      //   'subCateg': [
-      //     {categ: ''}
-      //   ]
-      // },
+
       {
         'categ':'Plomberie',
         'subCateg': [
@@ -182,12 +162,7 @@ export const ItemSteps =
   {
     'categ':'Devis Installation',
     'subCateg': [
-      // {
-      //   'categ':'',
-      //   'subCateg': [
-      //     {categ: ''}
-      //   ]
-      // },
+
       {
         'categ':'Menuiserie',
         'subCateg': [
@@ -246,12 +221,7 @@ export const ItemSteps =
   {
     'categ':'Électricité',
     'subCateg': [
-      // {
-      //   'categ':'',
-      //   'subCateg': [
-      //     {categ: ''}
-      //   ]
-      // },
+
       {
         'categ':'Convecteur',
         'subCateg': [
@@ -301,12 +271,7 @@ export const ItemSteps =
   {
     'categ': 'Chauffage',
     'subCateg': [
-      // {
-      //   'categ':'',
-      //   'subCateg': [
-      //     {categ: ''}
-      //   ]
-      // },
+
       {
         'categ': 'Radiateurs',
         'subCateg': [
