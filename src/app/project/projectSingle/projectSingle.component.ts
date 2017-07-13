@@ -337,12 +337,12 @@ export class ProjectSingleComponent implements OnInit {
               this.selectedIndex0 = index
           })
 
-          if(this.selectedIndex0>=0)
+          if(this.selectedIndex0 >= 0)
           this.itemSteps[this.selectedIndex0].subCateg.forEach((categ1,index) => {
             if(categ1.categ === categName1)
               this.selectedIndex1 = index
           })
-          if(this.selectedIndex1>=0)
+          if(this.selectedIndex1 >= 0)
           this.itemSteps[this.selectedIndex0].subCateg[this.selectedIndex1].subCateg.forEach((categ2,index) => {
             if(categ2.categ === categName2)
               this.selectedIndex2 = index
@@ -350,15 +350,6 @@ export class ProjectSingleComponent implements OnInit {
 
 
 
-
-          // this.changeCascade(categ0Index, categ1Index, categ2Index)
-
-          //this.fetchedProject.embedSecure = this.sanitizer.bypassSecurityTrustResourceUrl('https://player.vimeo.com/project/' + res.embed )
-          //this.fetchedProject.embedSecure = this.sanitizer.bypassSecurityTrustResourceUrl('//fast.wistia.net/embed/iframe/' + res.embed)
-          // this.fetchedProject.categories.forEach((categorie) => {
-          //   //this.addCategorie()
-          // })
-          //this.refreshHardCategories()
         },
         error => {
           console.log(error);

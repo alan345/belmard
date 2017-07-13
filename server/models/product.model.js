@@ -25,9 +25,9 @@ var product = new Schema({
       quantity:{type: Number},
     },
     categorie: {
+      categ0:[{name: {type: String}}],
       categ1:[{name: {type: String}}],
       categ2:[{name: {type: String}}],
-      categ3:[{name: {type: String}}],
     },
     vendors: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
     forms: [{type: Schema.Types.ObjectId, ref: 'Form'}],

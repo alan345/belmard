@@ -23,9 +23,9 @@ export class Details {
 }
 
 export class Categorie {
+  categ0: Categ[] = [];
   categ1: Categ[] = [];
   categ2: Categ[] = [];
-  categ3: Categ[] = [];
 }
 
 

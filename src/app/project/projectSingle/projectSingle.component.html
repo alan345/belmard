@@ -39,8 +39,7 @@
           *ngFor="let itemStep of itemSteps;let i=index;"
           type="button"
           class="btn"
-          [ngClass]="{'btn-success': i==selectedIndex0, '': i!=selectedIndex0}"
-        >
+          [ngClass]="{'btn-success': i==selectedIndex0, '': i!=selectedIndex0}">
           {{itemStep.categ}}
         </button>
       </div>
@@ -51,20 +50,17 @@
           *ngFor="let itemStep of itemSteps[selectedIndex0].subCateg;let i=index;"
           type="button"
           class="btn"
-          [ngClass]="{'btn-success': i==selectedIndex1, '': i!=selectedIndex1}"
-        >
+          [ngClass]="{'btn-success': i==selectedIndex1, '': i!=selectedIndex1}">
           {{itemStep.categ}}
         </button>
       </div>
-
       <br>
       <div *ngIf="selectedIndex1>=0">
         <button (click)="changeCascade(selectedIndex0, selectedIndex1, i)"
           *ngFor="let itemStep of itemSteps[selectedIndex0].subCateg[selectedIndex1].subCateg;let i=index;"
           type="button"
           class="btn"
-          [ngClass]="{'btn-success': i==selectedIndex2, '': i!=selectedIndex2}"
-        >
+          [ngClass]="{'btn-success': i==selectedIndex2, '': i!=selectedIndex2}">
           {{itemStep.categ}}
         </button>
       </div>
