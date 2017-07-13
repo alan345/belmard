@@ -95,9 +95,6 @@ export class EditPaiementQuoteComponent implements OnInit {
       this.fetchedPaiementQuote.quotes = [quote]
     }
 
-    // editDateMode() {
-    //   this.fetchedPaiementQuote.editDateMode = !this.fetchedPaiementQuote.editDateMode
-    // }
 
     getQuote(idQuote: string) {
       this.quoteService.getQuote(idQuote, {})
@@ -110,9 +107,7 @@ export class EditPaiementQuoteComponent implements OnInit {
     }
 
   save() {
-
-    this.fetchedPaiementQuote.datePaiement = this.HTMLDatetoIsoDate(this.fetchedPaiementQuote.datePaiementString)
-
+    this.fetchedPaiementQuote.datePaiement = this.authService.HTMLDatetoIsoDate(this.fetchedPaiementQuote.datePaiementString)
     if(this.fetchedPaiementQuote._id) {
       this.paiementQuoteService.updatePaiementQuote(this.fetchedPaiementQuote)
         .subscribe(
@@ -192,7 +187,7 @@ export class EditPaiementQuoteComponent implements OnInit {
       .subscribe(
         res => {
           this.fetchedPaiementQuote = res
-          this.fetchedPaiementQuote.datePaiementString = this.isoDateToHtmlDate(this.fetchedPaiementQuote.datePaiement)
+          this.fetchedPaiementQuote.datePaiementString = this.authService.isoDateToHtmlDate(this.fetchedPaiementQuote.datePaiement)
         },
         error => {
           console.log(error);
