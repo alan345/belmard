@@ -72,8 +72,101 @@
           <div>state:{{client.profile.address.state}}</div>
           <div>zip:{{client.profile.address.zip}}</div>
         </div>
+        
+ <!-- test guillaume -->
+<div class="create-invoice-header row">
+            <div class="col-sm-5">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label col1" for="EstimateCode">Estimate Number</label>
+                    <div class="col-sm-7">
+                        <div class="input-group">
+                            <span class="input-group-addon">DEV</span>
+                            <input class="form-control" id="EstimateCode" name="EstimateCode" type="text" value="28" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label col1" for="IssueDateISO">Issue Date</label>
+                    <div class="col-sm-7">
+                        <div class="input-group">
+
+                            <input id="IssueDateISO" name="IssueDate" data-value="2017-07-13" class="form-control pickadate"  />
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" onclick="$('#IssueDateISO').pickadate('open');event.stopPropagation();">
+                                    <span class="icon fa-calendar" style="color: #999;"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
 
 
+
+                <div class="form-group duedate">
+                    <label class="col-sm-4 control-label col1" for="DueDate">Expiry Date</label>
+                    <div class="col-sm-7">
+                        <div class="input-group">
+                            <input id="DueDate" name="DueDate" data-value="" data-bind="value:DueDate" class="form-control pickadate" />
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" type="button" onclick="$('#DueDate').pickadate('open');event.stopPropagation();">
+                                    <span class="icon fa-calendar" style="color: #999;"></span>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label col1" for="CurrencyCode">Currency</label>
+                    <div class="col-sm-7">
+                        <select class="form-control" disabled="disabled" id="CurrencyCode" name="CurrencyCode"><option value="">Select..</option>
+
+<option selected="selected" value="EUR">EUR - Euro</option>
+<option value="USD">USD - United States Dollar</option>
+
+</select>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-sm-offset-1">
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="InvoiceTemplateIDFK">Estimate Template</label>
+                    <div class="col-sm-6">
+                        <select class="form-control" data-val="true" data-val-number="The field Estimate Template must be a number." id="InvoiceTemplateIDFK" name="InvoiceTemplateIDFK"><option value="30390">Mod&#232;le Facture</option>
+<option selected="selected" value="30391">Mod&#232;le Devis</option>
+</select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="EstimateTaxConfigCode">Amounts are</label>
+                    <div class="col-sm-6">
+                        <select name="EstimateTaxConfigCode" class="form-control" id="EstimateTaxConfigCode" data-bind='options: EstimateTaxConfigCodes, optionsText: "Text", optionsValue:"Value", value: EstimateTaxConfigCode'></select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="DiscountPercent">Discount</label>
+                    <div class="col-sm-6">
+                        <div class="input-group">
+                            <input id="DiscountPercent" name="DiscountPercent" class="form-control" data-bind='value: formattedDefaultDiscount' />
+                            <span class="input-group-addon" style="color: #999;">%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-4 control-label" for="Subject">Subject</label>
+                    <div class="col-sm-6">
+                        <textarea class="form-control" cols="10" id="Subject" maxlength="255" name="Subject" rows="4">
+</textarea>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+<!-- test guillaume -->
         <br><br>
 
 
@@ -258,100 +351,4 @@
   </div>
 </div>
 
- <!-- test guillaume -->
-<div class="create-invoice-header row">
-            <div class="col-sm-5">
-                <div class="form-group">
-                    <label class="col-sm-4 control-label col1" for="EstimateCode">Estimate Number</label>
-                    <div class="col-sm-7">
-                        <div class="input-group">
-                            <span class="input-group-addon">DEV</span>
-                            <input class="form-control" id="EstimateCode" name="EstimateCode" type="text" value="28" />
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-4 control-label col1" for="IssueDateISO">Issue Date</label>
-                    <div class="col-sm-7">
-                        <div class="input-group">
 
-                            <input id="IssueDateISO" name="IssueDate" data-value="2017-07-13" class="form-control pickadate"  />
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="button" onclick="$('#IssueDateISO').pickadate('open');event.stopPropagation();">
-                                    <span class="icon fa-calendar" style="color: #999;"></span>
-                                </button>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-
-
-                <div class="form-group duedate">
-                    <label class="col-sm-4 control-label col1" for="DueDate">Expiry Date</label>
-                    <div class="col-sm-7">
-                        <div class="input-group">
-                            <input id="DueDate" name="DueDate" data-value="" data-bind="value:DueDate" class="form-control pickadate" />
-                            <span class="input-group-btn">
-                                <button class="btn btn-default" type="button" onclick="$('#DueDate').pickadate('open');event.stopPropagation();">
-                                    <span class="icon fa-calendar" style="color: #999;"></span>
-                                </button>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-
-
-
-                <div class="form-group">
-                    <label class="col-sm-4 control-label col1" for="CurrencyCode">Currency</label>
-                    <div class="col-sm-7">
-                        <select class="form-control" disabled="disabled" id="CurrencyCode" name="CurrencyCode"><option value="">Select..</option>
-
-<option selected="selected" value="EUR">EUR - Euro</option>
-<option value="USD">USD - United States Dollar</option>
-
-</select>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-sm-offset-1">
-                <div class="form-group">
-                    <label class="col-sm-4 control-label" for="InvoiceTemplateIDFK">Estimate Template</label>
-                    <div class="col-sm-6">
-                        <select class="form-control" data-val="true" data-val-number="The field Estimate Template must be a number." id="InvoiceTemplateIDFK" name="InvoiceTemplateIDFK"><option value="30390">Mod&#232;le Facture</option>
-<option selected="selected" value="30391">Mod&#232;le Devis</option>
-</select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-sm-4 control-label" for="EstimateTaxConfigCode">Amounts are</label>
-                    <div class="col-sm-6">
-                        <select name="EstimateTaxConfigCode" class="form-control" id="EstimateTaxConfigCode" data-bind='options: EstimateTaxConfigCodes, optionsText: "Text", optionsValue:"Value", value: EstimateTaxConfigCode'></select>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-4 control-label" for="DiscountPercent">Discount</label>
-                    <div class="col-sm-6">
-                        <div class="input-group">
-                            <input id="DiscountPercent" name="DiscountPercent" class="form-control" data-bind='value: formattedDefaultDiscount' />
-                            <span class="input-group-addon" style="color: #999;">%</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label class="col-sm-4 control-label" for="Subject">Subject</label>
-                    <div class="col-sm-6">
-                        <textarea class="form-control" cols="10" id="Subject" maxlength="255" name="Subject" rows="4">
-</textarea>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-        
-
-
-		
