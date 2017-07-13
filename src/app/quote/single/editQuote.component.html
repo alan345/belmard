@@ -21,7 +21,7 @@
       <div>
         <!-- Autocomplete user-->
         <label>Client</label>
-        <input *ngIf="!fetchedQuote.clients.length" [ngModelOptions]="{standalone: true}" [(ngModel)]="autocompleteUser" placeholder="Select" (ngModelChange)="searchUsers()" mdInput>
+        <input class="form-control" *ngIf="!fetchedQuote.clients.length" [ngModelOptions]="{standalone: true}" [(ngModel)]="autocompleteUser" placeholder="Select" (ngModelChange)="searchUsers()" mdInput>
         <div *ngFor="let user of fetchedUsers; let i=index">
           {{user.profile.name}} - {{user.profile.lastName}}
           <button type="button" (click)="selectUser(user)">select</button>
@@ -42,7 +42,7 @@
 
         <!-- Autocomplete Project-->
         <label>Projet</label>
-        <input *ngIf="!fetchedQuote.projects.length" [ngModelOptions]="{standalone: true}" [(ngModel)]="autocompleteProject" placeholder="Select" (ngModelChange)="searchProjects()" mdInput>
+        <input lass="form-control" *ngIf="!fetchedQuote.projects.length" [ngModelOptions]="{standalone: true}" [(ngModel)]="autocompleteProject" placeholder="Select" (ngModelChange)="searchProjects()" mdInput>
         <div *ngFor="let project of fetchedProjects; let i=index">
           {{project.details.name}}
           <button type="button" (click)="selectProject(project)">select</button>
