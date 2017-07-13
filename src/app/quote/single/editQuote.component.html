@@ -16,7 +16,7 @@
     </button>
 
 
-<div class="col-sm-5">
+<div class="col-sm-6">
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
       <div>
         <!-- Autocomplete user-->
@@ -54,7 +54,7 @@
         </div>
  </div>
 
-<div class="col-sm-5">
+<div class="col-sm-6">
         <!-- Autocomplete Project-->
         <label>Projet</label>
         <input class="form-control col-md-4" *ngIf="!fetchedQuote.projects.length" [ngModelOptions]="{standalone: true}" [(ngModel)]="autocompleteProject" placeholder="Select" (ngModelChange)="searchProjects()" mdInput>
