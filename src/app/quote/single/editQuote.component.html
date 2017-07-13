@@ -16,7 +16,7 @@
     </button>
 
 
-
+<div class="col-sm-5">
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
       <div>
         <!-- Autocomplete user-->
@@ -37,9 +37,24 @@
           <button type="button" (click)="removeUser(i)"><i class="fa fa-times"></i></button>
         </div>
         <!-- Autocomplete user-->
+        
+        <!-- Autocomplete -->
+        <label>Nom du Devis</label>
+        <input type="text" class="form-control col-md-4" formControlName="name" [(ngModel)]="fetchedQuote.name" required minlength="5" placeholder="Nom du quote">
+        <br>
 
+        <div *ngFor="let client of fetchedQuote.clients">
+          <div>name:{{client.profile.name}}</div>
+          <div>lastName:{{client.profile.lastName}}</div>
+          <div>phoneNumber:{{client.profile.phoneNumber}}</div>
+          <div>address:{{client.profile.address.address}}</div>
+          <div>city:{{client.profile.address.city}}</div>
+          <div>state:{{client.profile.address.state}}</div>
+          <div>zip:{{client.profile.address.zip}}</div>
+        </div>
+ </div>
 
-
+<div class="col-sm-5">
         <!-- Autocomplete Project-->
         <label>Projet</label>
         <input class="form-control col-md-4" *ngIf="!fetchedQuote.projects.length" [ngModelOptions]="{standalone: true}" [(ngModel)]="autocompleteProject" placeholder="Select" (ngModelChange)="searchProjects()" mdInput>
@@ -57,27 +72,14 @@
           {{project.details.name}}
           <button type="button" (click)="removeProject(i)"><i class="fa fa-times"></i></button>
         </div>
+</div>
 
-        <!-- Autocomplete -->
-
-        <input type="text" class="form-control col-md-4" formControlName="name" [(ngModel)]="fetchedQuote.name" required minlength="5" placeholder="Nom du quote">
-        <br>
-
-        <div *ngFor="let client of fetchedQuote.clients">
-          <div>name:{{client.profile.name}}</div>
-          <div>lastName:{{client.profile.lastName}}</div>
-          <div>phoneNumber:{{client.profile.phoneNumber}}</div>
-          <div>address:{{client.profile.address.address}}</div>
-          <div>city:{{client.profile.address.city}}</div>
-          <div>state:{{client.profile.address.state}}</div>
-          <div>zip:{{client.profile.address.zip}}</div>
-        </div>
-        
+              
  <!-- test guillaume -->
 <div class="container row">
             <div class="col-sm-5">
                 <div class="form-group">
-                    <label class="col-sm-4 control-label col1" for="EstimateCode">Estimate Number</label>
+                    <label class="col-sm-6 control-label col1" for="EstimateCode">Estimate Number</label>
                     <div class="col-sm-7">
                         <div class="input-group">
                             <span class="input-group-addon">DEV</span>
