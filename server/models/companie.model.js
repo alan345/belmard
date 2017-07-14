@@ -27,7 +27,10 @@ var companie = new Schema({
     categJson: {
       categProduct:{type: String, default: ['']},
       categProject:{type: String, default: ['']}
-    }
+    },
+    categories:[{
+      categ: {type: String, default: ['']},
+    }]
 
   },
   {

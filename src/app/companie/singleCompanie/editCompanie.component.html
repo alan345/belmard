@@ -80,6 +80,38 @@
             </div>
           </div>
 
+
+        <div *ngFor="let categorie of fetchedCompanie.categories; let i = index;">
+          Categ:
+          <input
+            type="text"
+            [(ngModel)]="fetchedCompanie.categories[i].categ"
+            [ngModelOptions]="{standalone: true}">
+            <button type="button" (click)="addCateg(1,i,0)">nez categ1</button>
+            <div *ngFor="let categorie of fetchedCompanie.categories[i].subCateg; let j = index;">
+              {{fetchedCompanie.categories[i].subCateg[j]|json}}
+              <input
+                type="text"
+                [(ngModel)]="fetchedCompanie.categories[0].subCateg[0].categ"
+                [ngModelOptions]="{standalone: true}">
+                <button type="button" (click)="addCateg(2,i,j)">nez categ2</button>
+                <div *ngFor="let categorie of fetchedCompanie.categories[i].subCateg[j].categ; let k = index;">
+                  <input
+                    type="text"
+                    [(ngModel)]="fetchedCompanie.categories[i].subCateg[j].subCateg[k].categ"
+                    [ngModelOptions]="{standalone: true}">
+ALAN
+                </div>
+            </div>
+        </div>
+
+        <button type="button" (click)="addCateg(0, 0, 0)">nez categ0</button>
+<code>
+<pre>
+{{fetchedCompanie.categories|json}}
+</pre>
+</code>
+
         <div formGroupName="categJson">
 
             <h4>categProduct</h4>

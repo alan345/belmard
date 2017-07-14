@@ -4,7 +4,7 @@ import {CompanieService} from '../companie.service';
 import {UserService} from '../../user/user.service';
 
 
-import {Companie} from '../companie.model';
+import {Companie, Categorie} from '../companie.model';
 
 import {ToastsManager} from 'ng2-toastr';
 
@@ -81,6 +81,16 @@ export class EditCompanieComponent implements OnInit {
       }
 
     })
+  }
+
+  addCateg(level, index1, index2) {
+    let newCategorie = new Categorie()
+    if(level === 0)
+      this.fetchedCompanie.categories.push(newCategorie)
+    if(level === 1)
+      this.fetchedCompanie.categories[index1].subCateg.push(newCategorie)
+    if(level === 2)
+      this.fetchedCompanie.categories[index1].subCateg[index2].subCateg.push(newCategorie)
   }
 
   fetchedCurrentUser: User = new User()
