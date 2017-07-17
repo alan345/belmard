@@ -8,7 +8,6 @@ import { MaterialModule } from '@angular/material';
 import { Ng2PaginationModule} from 'ng2-pagination';
 import { NavbarComponent} from './navbar.component';
 
-
 @NgModule({
   imports:      [
     // ProductRouting,

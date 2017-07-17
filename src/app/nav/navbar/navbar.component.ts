@@ -6,10 +6,12 @@ import { UserService} from '../../user/user.service';
 import { User} from '../../user/user.model';
 import { CompanieGuardService} from '../../companie/companieGuard.service'
 import { PaiementGuardService} from '../../user/paiement/paiementGuard.service'
+import { ChangeDetectionStrategy} from '@angular/core';
 
 
 @Component({
   selector: 'app-navbar',
+  changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
@@ -28,7 +30,9 @@ export class NavbarComponent implements OnInit {
     // private paiementGuardService: PaiementGuardService,
   ) {
   }
+  ngAfterViewInit() {
 
+  }
   ngOnInit() {
     if (this.authService.isLoggedIn()) {
       //let userId = localStorage.getItem('userId');
@@ -41,12 +45,14 @@ export class NavbarComponent implements OnInit {
   // }
 
   isCurrentUserIsInSubPeriod(){
-    return true;
-    // return this.authService.isCurrentUserIsInSubPeriod()
+    // console.log('aa')
+    //return true;
+    return this.authService.isCurrentUserIsInSubPeriod()
   }
   isCurrentUserHasCompanie(){
-    return true;
-    // return this.authService.isCurrentUserHasCompanie()
+    // console.log('bb')
+    // return true;
+    return this.authService.isCurrentUserHasCompanie()
   }
 
   getUser(id: string) {

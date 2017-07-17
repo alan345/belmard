@@ -1,7 +1,7 @@
-<!-- <div *ngIf="isLoggedIn()"> -->
+<div *ngIf="isLoggedIn()">
 
 
-  <div>
+  <!-- <div> -->
     <nav class="navbar navbar-toggleable-md navbar-light bg-faded">
       <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -17,7 +17,7 @@
             </div>
         </a>
       </div>
-      
+
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li *ngIf="isCurrentUserIsInSubPeriod() && isCurrentUserHasCompanie()" class="nav-item">
@@ -61,7 +61,7 @@
           <!-- <li class="nav-item">
             <a class="nav-link" routerLinkActive="active" [routerLink]="['/option']">Options</a>
           </li> -->
- 
+
         </ul>
         <p class="form-inline my-2 my-lg-0" align="right" style="margin-right:40px;">
          <button

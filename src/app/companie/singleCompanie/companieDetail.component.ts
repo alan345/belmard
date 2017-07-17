@@ -63,7 +63,7 @@ export class CompanieDetailComponent implements OnInit {
       //this.router.navigate(['companie/' + params['id'] ]);
       //console.log('init')
       this.myForm = this._fb.group({
-    
+
       })
       if(params['id'])
         this.getCompanie(params['id'])
