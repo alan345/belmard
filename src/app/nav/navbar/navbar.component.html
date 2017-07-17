@@ -102,6 +102,37 @@
           </li> -->
         </ul>
       </div>
+      <p align="right" style="margin-right:40px;">
+         <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="logout()"
+          *ngIf="isLoggedIn()">
+          Déconnexion
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          [routerLink]="['/user/profile']"
+          routerLinkActive="active">
+          Mon Profil
+        </button>
+        <!-- <button
+          *ngIf="fetchedUser.companies.length"
+          type="button"
+          class="btn btn-primary"
+          [routerLink]="['/companie/edit/mine']"
+          routerLinkActive="active">
+          Mon Entreprise
+        </button> -->
+        <button
+          type="button"
+          class="btn btn-primary"
+          [routerLink]="['/companie/edit/mine']"
+          routerLinkActive="active">
+          Mon Entreprise
+        </button>
+      </p>
     </nav>
   </div>
 <!-- </div> -->
