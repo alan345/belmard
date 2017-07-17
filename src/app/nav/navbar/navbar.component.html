@@ -103,14 +103,14 @@
  
         </ul>
         <p class="form-inline my-2 my-lg-0" align="right" style="margin-right:40px;">
-         <button
+         <button style="margin-right:10px;"
           type="button"
           class="btn btn-secondary"
           (click)="logout()"
           *ngIf="isLoggedIn()">
           Déconnexion
         </button>
-        <button
+        <button style="margin-right:10px;"
           type="button"
           class="btn btn-primary"
           [routerLink]="['/user/profile']"
@@ -125,7 +125,7 @@
           routerLinkActive="active">
           Mon Entreprise
         </button> -->
-        <button
+        <button style="margin-right:10px;"
           type="button"
           class="btn btn-primary"
           [routerLink]="['/companie/edit/mine']"
