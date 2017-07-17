@@ -24,18 +24,22 @@ export class AuthService {
   }
   jwtHelper: JwtHelper = new JwtHelper();
   //public userId: string;
-
+  user:any
 
   constructor(
     private http: Http,
     private errorService: ErrorService,
     private toastr: ToastsManager,
     private router: Router) {
+      console.log('s')
+      this.user = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')).user : null;
       // set token if saved in local storage
       //console.log('AuthService called')
       var currentUser = JSON.parse(localStorage.getItem('currentUser'));
       this.token = currentUser && currentUser.token;
       this.currentUser = currentUser;
+
+
   }
 
   // sending request to back end to register our user
@@ -69,6 +73,7 @@ export class AuthService {
 
           this.token = token
           this.currentUser = currentUser
+          this.user = this.jwtHelper.decodeToken(token).user
 
         //  console.log(this.currentUser)
           localStorage.setItem('currentUser', JSON.stringify(currentUser))
@@ -92,9 +97,9 @@ export class AuthService {
 
 
   isAdmin() {
-    let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
-    if (userInfo) {
-      if (userInfo.user.role[0] === 'admin') {
+    // let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
+    if (this.user) {
+      if (this.user.role[0] === 'admin') {
         return true;
       }
     }
@@ -105,9 +110,9 @@ export class AuthService {
 
   getCurrentUser(){
     // console.log(localStorage.getItem('id_token') )
-    let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
+    // let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
     // console.log(userInfo)
-    return userInfo.user
+    return this.user
     // return userInfo
     // if (userInfo) {
     //   if (userInfo.user.role[0] === 'admin') {
@@ -118,24 +123,25 @@ export class AuthService {
   }
 
   getLanguage() {
-    let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
+    // let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
     // console.log(userInfo.user.profile)
-    return userInfo.user.profile.language
+    return this.user.profile.language
   }
 
   getUserPlan() {
-    let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
-    return userInfo.user.paiement.stripe.plan
+    // let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
+    return this.user.paiement.stripe.plan
   }
   isCurrentUserIsInSubPeriod(){
-    let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
-    if (new Date(userInfo.user.paiement.stripe.current_period_end) > new Date())
+    console.log(this.user)
+    // let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
+    if (new Date(this.user.paiement.stripe.current_period_end) > new Date())
       return true;
     return false
   }
   isCurrentUserHasCompanie(){
-    let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
-    if(userInfo.user.companies.length)
+    // let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
+    if(this.user.companies.length)
       return true
     return false
   }

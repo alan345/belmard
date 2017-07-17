@@ -1,54 +1,50 @@
 <div class="row">
   <div class="col-md-1"></div>
   <div class="col-md-2"><button type="button" class="btn btn-warning" (click)="goBack()"><i class="fa fa-chevron-left"><a> Retour</a></i></button></div>
-  <div class="col-md-6"><h3 class="title">Produits</h3></div>
+  <div class="col-md-6">
+    <h3 class="title">Produits</h3></div>
   <div class="col-md-3"></div>
 </div>
 
 
 <div class="clearfix col-md-10">
-<button class="btn btn-success float-right" [routerLink]="['/product/productSingle/']" routerLinkActive="active"><i class=""></i>{{ 'Create a new product' | translate }}</button>
+  <button class="btn btn-success float-right" [routerLink]="['/product/productSingle/']" routerLinkActive="active"><i class=""></i>{{ 'Create a new product' | translate }}</button>
 </div>
 
 <div class="row">
   <div class="col-md-10">
     <div class="card">
-    <div class="card-header">
-      <h4 class="card-title">{{ 'List' | translate }}</h4>
-    </div>
-    <div class="card-block clearfix">
-      <div id="wrapper" class="subsubnav-clients float-left">
-          <input class="form-control col-md-12"
-            type="text"
-            name="Search"
-            placeholder="Rechercher"
-            [(ngModel)]="search.search"
-            (ngModelChange)="searchProducts()">
+      <div class="card-header">
+        <h4 class="card-title">{{ 'List' | translate }}</h4>
+      </div>
+      <div class="card-block clearfix">
+        <div id="wrapper" class="subsubnav-clients float-left">
+          <input class="form-control col-md-12" type="text" name="Search" placeholder="Rechercher" [(ngModel)]="search.search" (ngModelChange)="searchProducts()">
         </div>
-            <table class="table table-hover table-responsive table-condensed">
-              <thead>
-                <tr>
-                  <th class="tbl-left">
+        <table class="table table-hover table-responsive table-condensed">
+          <thead>
+            <tr>
+              <th class="tbl-left">
 
-                    <!-- <button class="updownbtn" (click)="orderBy('profile.name')"><i class="fa fa-chevron-down"></i></button>
+                <!-- <button class="updownbtn" (click)="orderBy('profile.name')"><i class="fa fa-chevron-down"></i></button>
                     <button class="updownbtn" (click)="orderBy('-profile.name')"><i class="fa fa-chevron-up"></i></button> -->
-                  </th>
-                </tr>
-              </thead>
-              <tbody class="clienttbl">
-                <tr *ngFor="let product of fetchedProducts | paginate: { id: 'server', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }"
-                  [routerLink]="['/product/' + product._id]"
-                  routerLinkActive="active">
-                  <td>{{product.details.referenceName}}</td>
-                </tr>
-              </tbody>
-            </table>
+              </th>
+            </tr>
+          </thead>
+          <tbody class="clienttbl">
+            <tr *ngFor="let product of fetchedProducts | paginate: { id: 'server', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }" [routerLink]="['/product/' + product._id]" routerLinkActive="active">
+              <td>{{product.details.referenceName}}</td>
+              <td>{{product.details.description}}</td>
+              <td>{{product.details.price.costPrice}}</td>
+            </tr>
+          </tbody>
+        </table>
 
-            <div class="has-text-centered">
-              <div [hidden]="!loading">Loading...</div>
-              <pagination-controls (pageChange)="getPage($event)" id="server" class="change-page"></pagination-controls>
-            </div>
-          </div>
+        <div class="has-text-centered">
+          <div [hidden]="!loading">Loading...</div>
+          <pagination-controls (pageChange)="getPage($event)" id="server" class="change-page"></pagination-controls>
+        </div>
+      </div>
 
     </div>
 

@@ -41,10 +41,12 @@ export class NavbarComponent implements OnInit {
   // }
 
   isCurrentUserIsInSubPeriod(){
-    return this.authService.isCurrentUserIsInSubPeriod()
+    return true;
+    // return this.authService.isCurrentUserIsInSubPeriod()
   }
   isCurrentUserHasCompanie(){
-    return this.authService.isCurrentUserHasCompanie()
+    return true;
+    // return this.authService.isCurrentUserHasCompanie()
   }
 
   getUser(id: string) {

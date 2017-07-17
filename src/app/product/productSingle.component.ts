@@ -95,15 +95,21 @@ export class ProductSingleComponent implements OnInit {
 
     this.getItemSteps();
 
+    this.activatedRoute.params.subscribe((params: Params) => {
+      if(params['id']) {
+        this.getProduct(params['id'])
+      }
+    })
 
   }
 
 
   getItemSteps() {
     let currentUser = this.authService.getCurrentUser()
-    currentUser.companies.forEach((companie,index) => {
-      if(currentUser.companies[index].categJson.categProduct)
-        this.itemSteps = JSON.parse(currentUser.companies[index].categJson.categProduct)
+    currentUser.companies.forEach((companie, index) => {
+      // console.log(currentUser.companies[index])
+      if(currentUser.companies[index].categories.categProduct)
+        this.itemSteps = currentUser.companies[index].categories.categProduct
     })
   }
 

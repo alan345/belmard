@@ -103,7 +103,7 @@ export class ProjectSingleComponent implements OnInit {
     let currentUser = this.authService.getCurrentUser()
     currentUser.companies.forEach((companie,index) => {
       // console.log(companie)
-      // console.log(JSON.parse(currentUser.companies[index].categJson.categProject))
+      console.log(JSON.parse(currentUser.companies[index].categJson.categProject))
       if(currentUser.companies[index].categJson.categProject)
         this.itemSteps = JSON.parse(currentUser.companies[index].categJson.categProject)
     })
