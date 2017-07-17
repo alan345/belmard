@@ -10,6 +10,36 @@
 
   <div class="beigeback single-wrpr">
     <h4 class="dspl-nn">id: {{fetchedCompanie._id}}</h4>
+
+
+
+
+
+      <div class="categ0" *ngFor="let categorie0 of fetchedCompanie.categories.categProject; let i = index;">
+        <input
+          type="text"
+          [(ngModel)]="fetchedCompanie.categories[i].categ"
+          >
+          <button type="button" (click)="addCategProject(1,i,0)">nez categ1</button>
+          <div class="categ1" *ngFor="let categorie1 of categorie0.subCateg; let j = index;">
+            <input
+              type="text"
+              [(ngModel)]="fetchedCompanie.categories[i].subCateg[j].categ"
+              >
+              <button type="button" (click)="addCategProject(2,i,j)">nez categ2</button>
+              <div class="categ2" *ngFor="let categorie2 of categorie1.subCateg; let k = index;">
+                <input
+                  type="text"
+                  [(ngModel)]="fetchedCompanie.categories[i].subCateg[j].subCateg[k].categ"
+                  >
+              </div>
+          </div>
+      </div>
+
+            <button type="button" (click)="addCategProject(0, 0, 0)">nez categ0</button>
+
+
+
     <!-- <form #f="ngForm" novalidate (ngSubmit)="save(f.value, f.valid)"> -->
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
       <div class="form-group sln-inffrm">
@@ -81,36 +111,7 @@
           </div>
 
 
-        <div *ngFor="let categorie of fetchedCompanie.categories; let i = index;">
-          Categ:
-          <input
-            type="text"
-            [(ngModel)]="fetchedCompanie.categories[i].categ"
-            [ngModelOptions]="{standalone: true}">
-            <button type="button" (click)="addCateg(1,i,0)">nez categ1</button>
-            <div *ngFor="let categorie of fetchedCompanie.categories[i].subCateg; let j = index;">
-              {{fetchedCompanie.categories[i].subCateg[j]|json}}
-              <input
-                type="text"
-                [(ngModel)]="fetchedCompanie.categories[0].subCateg[0].categ"
-                [ngModelOptions]="{standalone: true}">
-                <button type="button" (click)="addCateg(2,i,j)">nez categ2</button>
-                <div *ngFor="let categorie of fetchedCompanie.categories[i].subCateg[j].categ; let k = index;">
-                  <input
-                    type="text"
-                    [(ngModel)]="fetchedCompanie.categories[i].subCateg[j].subCateg[k].categ"
-                    [ngModelOptions]="{standalone: true}">
-ALAN
-                </div>
-            </div>
-        </div>
 
-        <button type="button" (click)="addCateg(0, 0, 0)">nez categ0</button>
-<code>
-<pre>
-{{fetchedCompanie.categories|json}}
-</pre>
-</code>
 
         <div formGroupName="categJson">
 

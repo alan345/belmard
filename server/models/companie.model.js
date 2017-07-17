@@ -28,9 +28,27 @@ var companie = new Schema({
       categProduct:{type: String, default: ['']},
       categProject:{type: String, default: ['']}
     },
-    categories:[{
-      categ: {type: String, default: ['']},
-    }]
+    categories: {
+      categProduct:[{
+        categ: {type: String, default: ['']},
+        subCateg:[{
+          categ: {type: String, default: ['']},
+          subCateg:[{
+            categ: {type: String, default: ['']},
+          }]
+        }]
+      }],
+      categProject:[{
+        categ: {type: String, default: ['']},
+        subCateg:[{
+          categ: {type: String, default: ['']},
+          subCateg:[{
+            categ: {type: String, default: ['']},
+          }]
+        }]
+      }]     
+    }
+
 
   },
   {

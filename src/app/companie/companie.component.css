@@ -40,7 +40,7 @@
 }
 .sln-mng .delete a {
   color: inherit !important;
-  padding: 10px 15px;  
+  padding: 10px 15px;
 }
 button.sln-styadd {
   width: 100% !important;
@@ -239,7 +239,7 @@ p.tblnav-cl {
 }
 
 @media screen and (min-width: 449px) and (max-width: 767px) {
-  
+
 .tbl-left, .tbl-center, .tbl-right {
   text-align: center;
   width: 95px;
@@ -255,4 +255,19 @@ p.tblnav-cl {
   text-align: center;
   width: 70px;
 }
+}
+
+
+
+.categ0 {
+  background: beige;
+  margin-left: 10px;
+}
+.categ1 {
+  background:rgba(0,0,0,0.1);
+  margin-left: 20px;
+}
+.categ2 {
+  background:rgba(0,0,0,0.1);
+  margin-left: 30px;
 }

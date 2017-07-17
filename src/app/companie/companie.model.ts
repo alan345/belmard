@@ -11,10 +11,16 @@ export class Companie {
   users: User[] = [];
   forms: Form[] = [];
   categJson: CategJson = new CategJson();
-  categories: Categorie[]
+  categories = new Categorie()
 }
 
 export class Categorie {
+  categProduct: Categorie0[] = []
+  categProject: Categorie0[] = []
+}
+
+
+export class Categorie0 {
   categ: string= '';
   subCateg: Categorie1[] = []
 }
