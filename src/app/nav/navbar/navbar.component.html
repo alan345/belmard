@@ -102,17 +102,17 @@
           </li> -->
  
         </ul>
-        <p class="spcright form-inline my-2 my-lg-0" align="right" style="margin-right:40px;">
+        <p class="form-inline my-2 my-lg-0" align="right" style="margin-right:40px;">
          <button
           type="button"
-          class="btn btn-secondary"
+          class="spcright btn btn-secondary"
           (click)="logout()"
           *ngIf="isLoggedIn()">
           Déconnexion
         </button>
         <button
           type="button"
-          class="btn btn-primary"
+          class="spcright btn btn-primary"
           [routerLink]="['/user/profile']"
           routerLinkActive="active">
           Mon Profil
@@ -127,7 +127,7 @@
         </button> -->
         <button
           type="button"
-          class="btn btn-primary"
+          class="spcright btn btn-primary"
           [routerLink]="['/companie/edit/mine']"
           routerLinkActive="active">
           Mon Entreprise
