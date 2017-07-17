@@ -14,29 +14,33 @@
 
 
 
-
+      <button type="button" (click)="addCategProject('project', 0, 0, 0, 0)">Add Categ Project</button>
       <div class="categ0" *ngFor="let categorie0 of fetchedCompanie.categories.categProject; let i = index;">
         <input
           type="text"
-          [(ngModel)]="fetchedCompanie.categories[i].categ"
+          [(ngModel)]="fetchedCompanie.categories.categProject[i].categ"
           >
-          <button type="button" (click)="addCategProject(1,i,0)">nez categ1</button>
+          <button type="button" (click)="removeCategProject('project', 1,i,0,0)">X</button>
+          <button type="button" (click)="addCategProject('project', 1,i,0,0)">+</button>
+
           <div class="categ1" *ngFor="let categorie1 of categorie0.subCateg; let j = index;">
             <input
               type="text"
-              [(ngModel)]="fetchedCompanie.categories[i].subCateg[j].categ"
+              [(ngModel)]="fetchedCompanie.categories.categProject[i].subCateg[j].categ"
               >
-              <button type="button" (click)="addCategProject(2,i,j)">nez categ2</button>
+              <button type="button" (click)="removeCategProject('project', 2,i,j,0)">X</button>
+              <button type="button" (click)="addCategProject('project', 2,i,j,0)">+</button>
               <div class="categ2" *ngFor="let categorie2 of categorie1.subCateg; let k = index;">
                 <input
                   type="text"
-                  [(ngModel)]="fetchedCompanie.categories[i].subCateg[j].subCateg[k].categ"
+                  [(ngModel)]="fetchedCompanie.categories.categProject[i].subCateg[j].subCateg[k].categ"
                   >
+                <button type="button" (click)="removeCategProject('project', 3,i,j,k)">X</button>
               </div>
           </div>
       </div>
 
-            <button type="button" (click)="addCategProject(0, 0, 0)">nez categ0</button>
+
 
 
 
