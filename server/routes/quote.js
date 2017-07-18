@@ -252,11 +252,7 @@ router.get('/page/:page', function (req, res, next) {
 
   Quote
   .find(search)
-  .populate(
-    {
-      path: '_users',
-      model: 'User',
-    })
+  .populate({ path: 'clients', model: 'User'})
   .limit(itemsPerPage)
   .skip(skip)
   .sort(req.query.orderBy)
