@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+
+import { ReactiveFormsModule} from '@angular/forms';
 
 import { UserRouting } from './userRouting.module';
 import { MaterialModule } from '@angular/material';
@@ -56,8 +56,8 @@ import {SharedModule } from '../shared/shared.module';
   imports:      [
 
     UserRouting,
-    CommonModule,
-    FormsModule,
+    // CommonModule,
+    // FormsModule,
     MaterialModule,
     Ng2PaginationModule,
     ReactiveFormsModule,

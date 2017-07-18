@@ -25,6 +25,8 @@ import { TRANSLATION_PROVIDERS, TranslatePipe, TranslateService }   from '../tra
   exports: [
     TranslatePipe,
     AutocompleteModule,
+    CommonModule,
+    FormsModule,
     // AutocompleteComponent,
   ],
   providers: [
