@@ -120,44 +120,18 @@
 
 
 
-        <!-- Autocomplete companie-->
-        <div>
-          <label>Fournisseur</label>
-          <input
-            *ngIf="!fetchedProduct.vendors.length"
-            class="form-control col-md-4"
-            [ngModelOptions]="{standalone: true}"
-            [(ngModel)]="autocompleteCompanie"
-            placeholder="Select"
-            (ngModelChange)="searchCompanies()"
-            mdInput
+        <app-autocomplete
+          [typeAutocomplete]="'companie'"
+          [title]="'Companie'"
+          [singleChoice]="'true'"
+          [arrayContent]="fetchedProduct.vendors"
+          (getResultAutocomplete)="selectCompanie($event[0])"
           >
-          <!-- test tableau Guillaume -->
-        <div class="form-control col-md-4" *ngFor="let fetchedCompanie of fetchedCompanies; let i=index">
-          <table>
-           <tr>
-               <td class="tdbtn1">{{fetchedCompanie.name}} - {{fetchedCompanie.name}}</td>
-               <td class="tdbtn2"><button class="btn btn-success" type="button" (click)="selectCompanie(fetchedCompanie)">select</button></td>
-           </tr>
-          </table>
+        </app-autocomplete>
 
-        </div>
-        <div *ngIf="fetchedCompanies.length == 0 && autocompleteCompanie !=''">
-            Pas de resultats,
-            <a [routerLink]="['/companie/new']" class="admn-btn">
-              Ajouter Entreprise
-            </a>
-        </div>
-        <div class="form-control col-md-4" *ngFor="let vendor of fetchedProduct.vendors; let i=index">
-          <table>
-           <tr>
-               <td class="tdbtn1">{{vendor.name}}</td>
-          <td class="tdbtn2"><button class="btn btn-danger btn-sm ferme" type="button" (click)="removeCompanie(i)"><i class="fa fa-times"></i></button></td>
-           </tr>
-          </table>
-        </div>
 
-          </div>
+        <!-- Autocomplete companie-->
+
         <!-- test tableau Guillaume -->
 
         <!-- Autocomplete -->

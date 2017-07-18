@@ -26,12 +26,16 @@
       </div>
 
       <div *ngIf="fetchedData.length == 0 && autocompleteSearch !=''">
-          No results.
-          <button *ngIf="typeAutocomplete=='user'" type="button" md-button (click)="openDialog('user')" class="">
-            Add new one
-            <br>
-            <i class="fa fa-plus"></i>
-          </button>
+        No results.
+        <button
+          *ngIf="typeAutocomplete=='user' || typeAutocomplete=='companie'"
+          type="button" md-button
+          (click)="openDialog(typeAutocomplete)"
+          class="">
+          Add new one
+          <br>
+          <i class="fa fa-plus"></i>
+        </button>
 
 
 

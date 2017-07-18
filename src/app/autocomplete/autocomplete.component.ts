@@ -70,8 +70,16 @@ export class AutocompleteComponent {
 
 
 
-  openDialog(positionImage: string) {
-    let dialogRef = this.dialog.open(UserDialogComponent, {
+  openDialog(typeObj: string) {
+    let dialogComp: any
+    if(typeObj == 'user')
+      dialogComp = UserDialogComponent
+
+    if(typeObj == 'companie')
+      dialogComp = UserDialogComponent
+
+
+    let dialogRef = this.dialog.open(dialogComp, {
       height: '500px'
     });
     dialogRef.afterClosed().subscribe(result => {

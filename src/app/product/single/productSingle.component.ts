@@ -140,9 +140,7 @@ export class ProductSingleComponent implements OnInit {
 
 
   selectCompanie(companie: Companie) {
-    this.autocompleteCompanie = ''
-    this.fetchedCompanies = []
-    this.fetchedProduct.vendors.push(companie)
+    this.fetchedProduct.vendors = [companie]
   }
 
   removeCompanie(i: number) {
