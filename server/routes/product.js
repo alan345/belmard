@@ -173,6 +173,7 @@ router.get('/page/:page', function (req, res, next) {
   Product
   .find(searchQuery)
   .sort('-createdAt')
+  .populate({path: 'forms', model: 'Form'})
   .limit(itemsPerPage)
   .skip(skip)
   .exec(function (err, item) {

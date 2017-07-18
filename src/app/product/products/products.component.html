@@ -41,7 +41,13 @@
           </thead>
           <tbody class="clienttbl">
             <tr *ngFor="let product of fetchedProducts | paginate: { id: 'server', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }" [routerLink]="['/product/' + product._id]" routerLinkActive="active">
-              <td class="centre">{{product.details.referenceName}}</td>
+              <td class="centre">
+                <div *ngFor="let singleForm of product.forms">
+                  <img height="50px" class="img" src="./uploads/forms/{{singleForm.owner}}/{{singleForm.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
+                </div>
+              </td>
+              <td class="centre">
+                {{product.details.referenceName}}</td>
               <td class="centre">{{product.details.description}}</td>
               <td class="centre">{{product.details.price.costPrice}}</td>
               <td class="centre">{{product.details.referenceName}}</td>
