@@ -152,20 +152,20 @@ export class ProjectSingleComponent implements OnInit {
 
   // autocomplete user
   selectUser(user: User) {
-    this.autocompleteUser=''
-    this.fetchedUsers = []
-    this.fetchedProject.clients.push(user)
+    // this.autocompleteUser=''
+    // this.fetchedUsers = []
+    this.fetchedProject.clients = [user]
   }
-  searchUsers() {
-    if(!this.autocompleteUser) {
-       this.fetchedUsers = []
-    } else {
-      let search = {
-          search: this.autocompleteUser,
-        };
-      this.getUsers(1, search)
-    }
-  }
+  // searchUsers() {
+  //   if(!this.autocompleteUser) {
+  //      this.fetchedUsers = []
+  //   } else {
+  //     let search = {
+  //         search: this.autocompleteUser,
+  //       };
+  //     this.getUsers(1, search)
+  //   }
+  // }
   getUsers(page: number, search: any) {
     this.userService.getUsers(page, search)
       .subscribe(
@@ -177,9 +177,9 @@ export class ProjectSingleComponent implements OnInit {
         }
       );
   }
-  removeUser(i: number) {
-    this.fetchedProject.clients.splice(i, 1);
-  }
+  // removeUser(i: number) {
+  //   this.fetchedProject.clients.splice(i, 1);
+  // }
   // autocomplete user
 
 
@@ -190,37 +190,37 @@ export class ProjectSingleComponent implements OnInit {
 
 
     // autocomplete AssignedTo
-    autocompleteAssignedTo: string = '';
-    fetchedAssignedTos: User[] = [];
+    // autocompleteAssignedTo: string = '';
+    // fetchedAssignedTos: User[] = [];
     selectAssignedTo(user: User) {
-      this.autocompleteAssignedTo=''
-      this.fetchedAssignedTos = []
-      this.fetchedProject.assignedTos.push(user)
+      // this.autocompleteAssignedTo=''
+      // this.fetchedAssignedTos = []
+      this.fetchedProject.assignedTos = [user]
     }
-    searchAssignedTos() {
-      if(!this.autocompleteAssignedTo) {
-         this.fetchedAssignedTos = []
-      } else {
-        let search = {
-            search: this.autocompleteAssignedTo,
-          };
-        this.getAssignedTos(1, search)
-      }
-    }
-    getAssignedTos(page: number, search: any) {
-      this.userService.getUsers(page, search)
-        .subscribe(
-          res => {
-            this.fetchedAssignedTos = res.data
-          },
-          error => {
-            console.log(error);
-          }
-        );
-    }
-    removeAssignedTo(i: number) {
-      this.fetchedProject.assignedTos.splice(i, 1);
-    }
+    // searchAssignedTos() {
+    //   if(!this.autocompleteAssignedTo) {
+    //      this.fetchedAssignedTos = []
+    //   } else {
+    //     let search = {
+    //         search: this.autocompleteAssignedTo,
+    //       };
+    //     this.getAssignedTos(1, search)
+    //   }
+    // }
+    // getAssignedTos(page: number, search: any) {
+    //   this.userService.getUsers(page, search)
+    //     .subscribe(
+    //       res => {
+    //         this.fetchedAssignedTos = res.data
+    //       },
+    //       error => {
+    //         console.log(error);
+    //       }
+    //     );
+    // }
+    // removeAssignedTo(i: number) {
+    //   this.fetchedProject.assignedTos.splice(i, 1);
+    // }
     // autocomplete user
 
 
