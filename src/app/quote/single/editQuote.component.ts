@@ -292,13 +292,10 @@ export class EditQuoteComponent implements OnInit {
     }
 
 
-    // autocomplete project
-    selectProject(project: Project) {
 
-      // this.autocompleteProject = ''
-      // this.fetchedProjects = []
-      this.fetchedQuote.projects = [project]
-    }
+  selectProject(project: Project) {
+    this.fetchedQuote.projects = [project]
+  }
 
   save() {
     this.fetchedQuote.detail.dateQuote.issueDate = this.authService.HTMLDatetoIsoDate(this.fetchedQuote.detail.dateQuote.issueDateString)
