@@ -1,27 +1,27 @@
 import { Component, OnInit} from '@angular/core';
-import { ProductService} from './product.service';
-import { CompanieService} from '../companie/companie.service';
+import { ProductService} from '../product.service';
+import { CompanieService} from '../../companie/companie.service';
 
 
 import { ToastsManager} from 'ng2-toastr';
 import { MdDialog } from '@angular/material';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
-import { Product, ItemSteps } from './product.model';
-import { Companie } from '../companie/companie.model';
-import { EditOptionsComponentDialog } from '../form/modalLibrary/modalLibrary.component';
+import { Product, ItemSteps } from '../product.model';
+import { Companie } from '../../companie/companie.model';
+import { EditOptionsComponentDialog } from '../../form/modalLibrary/modalLibrary.component';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
-import { DeleteDialog } from '../deleteDialog/deleteDialog.component'
-import { UserService } from '../user/user.service'
-import { User } from '../user/user.model'
-import { AuthService} from '../auth/auth.service';
+import { DeleteDialog } from '../../deleteDialog/deleteDialog.component'
+import { UserService } from '../../user/user.service'
+import { User } from '../../user/user.model'
+import { AuthService} from '../../auth/auth.service';
 
 
 @Component({
   selector: 'app-products',
   templateUrl: './productSingle.component.html',
-  styleUrls: ['./product.component.css'],
+  styleUrls: ['../product.component.css'],
 
 })
 
