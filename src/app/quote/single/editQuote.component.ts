@@ -279,33 +279,6 @@ export class EditQuoteComponent implements OnInit {
     selectUser(user: User) {
       this.fetchedQuote.clients = [user]
     }
-    // addPaiement(){
-    //   let newPaiement:Paiement = new Paiement()
-    //   this.fetchedQuote.paiements.push(newPaiement)
-    // }
-    // searchUsers() {
-    //   if(!this.autocompleteUser) {
-    //     this.fetchedUsers = []
-    //   } else {
-    //     let search = {
-    //         search: this.autocompleteUser,
-    //       };
-    //     this.getUsers(1, search)
-    //   }
-    // }
-    // getUsers(page: number, search: any) {
-    //   this.userService.getUsers(page, search)
-    //     .subscribe(
-    //       res => { this.fetchedUsers = res.data },
-    //       error => { console.log(error) }
-    //     );
-    // }
-    // removeUser(i: number) {
-    //   this.fetchedQuote.clients.splice(i, 1);
-    // }
-    // Autocomplete User
-
-
 
 
 
@@ -326,34 +299,6 @@ export class EditQuoteComponent implements OnInit {
       // this.fetchedProjects = []
       this.fetchedQuote.projects = [project]
     }
-    //
-    // searchProjects() {
-    //   if(!this.autocompleteProject) {
-    //     this.fetchedProjects = []
-    //   } else {
-    //     let search = {
-    //         search: this.autocompleteProject,
-    //       };
-    //     this.getProjects(1, search)
-    //   }
-    // }
-    // getProjects(page: number, search: any) {
-    //   this.projectService.getProjects(page, search)
-    //     .subscribe(
-    //       res => { this.fetchedProjects = res.data },
-    //       error => { console.log(error) }
-    //     );
-    // }
-    // removeProject(i: number) {
-    //   this.fetchedQuote.projects.splice(i, 1);
-    // }
-    // autocomplete project
-
-
-
-  // editDateMode(index) {
-  //   this.fetchedQuote.paiements[index].editDateMode = !this.fetchedQuote.paiements[index].editDateMode
-  // }
 
   save() {
     this.fetchedQuote.detail.dateQuote.issueDate = this.authService.HTMLDatetoIsoDate(this.fetchedQuote.detail.dateQuote.issueDateString)
@@ -384,18 +329,6 @@ export class EditQuoteComponent implements OnInit {
   }
 
 
-
-    // searchProducts() {
-    //
-    //   if(!this.autocompleteProduct) {
-    //     this.fetchedProducts = []
-    //   } else {
-    //     let search = {
-    //         search: this.autocompleteProduct,
-    //       };
-    //     this.getProducts(1, search)
-    //   }
-    // }
 
     selectProduct(product: Product) {
 

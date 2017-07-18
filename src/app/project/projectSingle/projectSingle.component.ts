@@ -230,7 +230,7 @@ export class ProjectSingleComponent implements OnInit {
   goBack() {
     this.location.back();
   }
-  
+
 
   openDialog(positionImage: string) {
     let dialogRef = this.dialog.open(EditOptionsComponentDialog);
@@ -244,6 +244,9 @@ export class ProjectSingleComponent implements OnInit {
 
 
   save() {
+
+    this.fetchedProject.dateProject.creationDate = this.authService.HTMLDatetoIsoDate(this.fetchedProject.dateProject.creationDateString)
+
     let categName0 = ''
     let categName1 = ''
     let categName2 = ''
@@ -362,6 +365,9 @@ export class ProjectSingleComponent implements OnInit {
             if(categ2.categ === categName2)
               this.selectedIndex2 = index
           })
+
+
+          this.fetchedProject.dateProject.creationDateString = this.authService.isoDateToHtmlDate(this.fetchedProject.dateProject.creationDate)
 
 
 

@@ -73,6 +73,7 @@ router.put('/:id', function (req, res, next) {
         item.categorie = req.body.categorie
         item.assignedTos = req.body.assignedTos
         item.bucketTasks = req.body.bucketTasks
+        item.dateProject = req.body.dateProject
 
 
 
@@ -185,7 +186,7 @@ router.get('/page/:page', function (req, res, next) {
   .sort('-createdAt')
   .populate({path: 'clients', model: 'User'})
 
-  .populate({ path: 'assignedTos', model: 'User'})  
+  .populate({ path: 'assignedTos', model: 'User'})
 
   // .populate({path: 'quotes', model: 'Quote'})
   // .populate(

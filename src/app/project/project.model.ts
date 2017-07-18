@@ -12,7 +12,14 @@ export class Project {
     forms: Form[] = [];
     categorie: Categorie = new Categorie();
     bucketTasks: BucketTasks[] = []
-    // quotes: Quote[] = [];
+    dateProject: DateProject = new DateProject()
+
+}
+
+
+export class DateProject {
+  creationDate: Date = new Date()
+  creationDateString: string = '';
 }
 export class BucketTasks {
   bucketName: string = '';

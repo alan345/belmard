@@ -17,6 +17,9 @@ var project = new Schema({
     status: {type: String, default: [0]},
     forms: [{type: Schema.Types.ObjectId, ref: 'Form'}],
     status: {type: Number},
+    dateProject:{
+      creationDate: {type: Date, default: [Date()]},
+    },
     categorie: {
       categ0:[{name: {type: String}}],
       categ1:[{name: {type: String}}],
