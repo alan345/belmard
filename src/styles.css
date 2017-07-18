@@ -154,3 +154,7 @@ height: 50px;
 .table th.centre {
   text-align: center;
 }
+
+.margebasse {
+margin-bottom: 5px;
+}  
