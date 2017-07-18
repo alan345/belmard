@@ -22,7 +22,7 @@ import { BaseChartDirective } from 'ng2-charts/ng2-charts';
 export class ReportingsComponent implements OnInit {
   // @Input() userId = '';
   // @Input() idQuote = '';
-  // @Input() showHeader: boolean = true;
+  @Input() showHeader: boolean = true;
   // @Output() getPaiementQuotesCross: EventEmitter<any> = new EventEmitter();
   // @Input() showCreate: boolean = true;
 
