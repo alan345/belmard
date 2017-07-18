@@ -216,7 +216,7 @@ export class NewUserComponent implements OnInit {
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
-            location.reload();
+            // location.reload();
             // if(redirect == 'profile')
             //   this.router.navigate(['user/profile/' + res.obj._id])
             // if(redirect == 'project')
@@ -228,14 +228,13 @@ export class NewUserComponent implements OnInit {
           }
         )
     } else {
-      this.fetchedUser.role=['client']
       this.userService.saveUser(this.fetchedUser)
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
             // if(redirect == 'profile')
             // this.router.navigate(['user/newuser/' + res.obj._id])
-            location.reload();
+            // location.reload();
             // if(redirect == 'project')
             //   this.router.navigate(['project/new/' + res.obj._id])
             // this.addUserIdToCompanie(res.obj)

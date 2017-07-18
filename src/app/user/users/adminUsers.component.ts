@@ -81,6 +81,7 @@ export class AdminUsersComponent implements OnInit {
   }
 
   getPage(page: number) {
+    
     this.loading = true;
     this.getUsers(page, this.search);
   }

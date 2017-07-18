@@ -1,6 +1,5 @@
-import {Component, ViewChild } from '@angular/core';
-
-import {MdDialogRef} from '@angular/material';
+import { Component, ViewChild } from '@angular/core';
+import { MdDialogRef} from '@angular/material';
 import { UserFormsComponent }  from '../userForms.component';
 
 
@@ -17,9 +16,7 @@ export class EditOptionsComponentDialog {
   constructor(public dialogRef: MdDialogRef<EditOptionsComponentDialog>) {}
 
 
-  onUploadFinisedChildToParent(){
-    // Parent to child
-    //https://angular.io/docs/ts/latest/cookbook/component-communication.html#!#parent-to-view-child
-    this.userFormsComponent.onUploadFinisedParentToChild()
+  onUploadFinisedChildToParent() {
+    this.userFormsComponent.onUploadFinisedParentToChild();
   }
 }

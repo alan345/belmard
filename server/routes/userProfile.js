@@ -386,58 +386,63 @@ router.put('/:id', function (req, res, next) {
   })
 });
 
-// function makeid() {
-//     var text = "";
-//     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-//     for( var i=0; i < 20; i++ )
-//         text += possible.charAt(Math.floor(Math.random() * possible.length));
-//     return text;
-// }
+function makeid() {
+    var text = "";
+    var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    for( var i=0; i < 20; i++ )
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    return text;
+}
 //
 // // user Create without email. See register
-// router.post('/', function (req, res, next) {
-// //  console.log(req.body)
-//   let uniqueString = makeid()
-//   let email = ''
-//   let role = ''
-//   if (req.body.email) {
-//     email = req.body.email
-//   } else {
-//     email = 'random_' + uniqueString + '@random.com'
-//   }
-//
-//   if (req.body.role) {
-//     role = req.body.role
-//   } else {
-//     role = ['client']
-//   }
-//
-//   if (!req.body.profile.parentUser.length) {
-//     req.body.profile.parentUser = [req.user._id]
-//   }
-//
-//
-//   var user = new User({
-//     email: email,
-//     password: passwordHash.generate(uniqueString),
-//     profile : req.body.profile,
-//     role : role
-//   });
-// //  console.log(user)
-//   user.save(function (err, result) {
-//     if (err) {
-//       console.log(err)
-//       return res.status(403).json({
-//         title: 'There was an issue',
-//         error: {message: 'The email you entered already exists'}
-//       });
-//     }
-//     res.status(200).json({
-//       message: 'Registration Successfull',
-//       obj: result
-//     })
-//   })
-// });
+router.post('/', function (req, res, next) {
+//  console.log(req.body)
+  // let uniqueString = makeid()
+  // let email = ''
+  // let role = ''
+  // if (req.body.email) {
+  //   email = req.body.email
+  // } else {
+  //   email = 'random_' + uniqueString + '@random.com'
+  // }
+
+  if (req.body.role) {
+    role = req.body.role
+  } else {
+    role = ['client']
+  }
+
+  if (!req.body.profile.parentUser.length) {
+    req.body.profile.parentUser = [req.user._id]
+  }
+
+  delete req.body._id
+  // var project = new Project(req.body)
+  var user = new User(req.body)
+
+  user.role = role
+  user.password = passwordHash.generate(makeid()),
+  // var user = new User({
+  //   email: email,
+  //   password: passwordHash.generate(uniqueString),
+  //   profile : req.body.profile,
+  //   role : role
+  // });
+//  console.log(user)
+  user.save(function (err, result) {
+    if (err) {
+      console.log(err)
+      return res.status(403).json({
+        title: 'There was an issue',
+        error: err
+      });
+    }
+    res.status(200).json({
+      message: 'Registration Successfull',
+      obj: result
+    })
+  })
+});
 
 
 var rmDir = function (dirPath, removeSelf) {

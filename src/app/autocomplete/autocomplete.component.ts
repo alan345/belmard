@@ -4,7 +4,9 @@ import { CompanieService} from '../companie/companie.service';
 import { ProductService} from '../product/product.service';
 import { QuoteService} from '../quote/quote.service';
 import { ProjectService} from '../project/project.service';
+import { MdDialog } from '@angular/material';
 
+import { UserDialogComponent } from '../user/singleUser/modal/userDialog.component';
 
 
 import { User } from '../user/user.model';
@@ -23,13 +25,14 @@ export class AutocompleteComponent {
   @Input() title: string = '';
   @Input() canDelete: boolean = true;
 
-  createNewItem: boolean = false;
+  // createNewItem: boolean = false;
   autocompleteSearch = ''
   fetchedData: User[] = [];
 
   @Output() getResultAutocomplete: EventEmitter<any> = new EventEmitter();
 
   constructor(
+    public dialog: MdDialog,
     private userService: UserService,
     private companieService: CompanieService,
     private productService: ProductService,
@@ -67,6 +70,18 @@ export class AutocompleteComponent {
 
 
 
+  openDialog(positionImage: string) {
+    let dialogRef = this.dialog.open(UserDialogComponent, {
+      height: '500px'
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      // if(result) {
+      //   console.log(result)
+      //   this.fetchedProject.forms.push( result)
+      // }
+    })
+  }
+
 
 
   selectData(data) {
@@ -90,7 +105,7 @@ export class AutocompleteComponent {
   }
 
 
-  createNewItemF(){
-    this.createNewItem = true
-  }
+  // createNewItemF(){
+  //   this.createNewItem = true
+  // }
 }

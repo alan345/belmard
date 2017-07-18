@@ -1,5 +1,9 @@
     {{title}}
 
+
+
+
+
     <input class="form-control"
       *ngIf="!arrayContent.length"
       class="champ"
@@ -23,12 +27,15 @@
 
       <div *ngIf="fetchedData.length == 0 && autocompleteSearch !=''">
           No results.
-          <div *ngIf="typeAutocomplete=='user'" (click)="createNewItemF()">
-            create New User
-          </div>
-          <div *ngIf="createNewItem">
-            <!-- <app-newUser></app-newUser> -->
-          </div>
+          <button *ngIf="typeAutocomplete=='user'" type="button" md-button (click)="openDialog('user')" class="">
+            Add new one
+            <br>
+            <i class="fa fa-plus"></i>
+          </button>
+
+
+
+
           <!-- <a [routerLink]="['/user/newuser']" class="admn-btn"> -->
             <!-- Créer un nouveau employe -->
           <!-- </a> -->

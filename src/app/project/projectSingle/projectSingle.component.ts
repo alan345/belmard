@@ -230,6 +230,7 @@ export class ProjectSingleComponent implements OnInit {
   goBack() {
     this.location.back();
   }
+  
 
   openDialog(positionImage: string) {
     let dialogRef = this.dialog.open(EditOptionsComponentDialog);

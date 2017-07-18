@@ -16,6 +16,7 @@ import { QuoteModule} from '../quote/quote.module';
 import { CompanieModule} from '../companie/companie.module';
 import { ProjectModule} from '../project/project.module';
 
+import { UserDialogComponent } from './singleUser/modal/userDialog.component';
 import { PaiementPipe } from './paiement/paiement.pipe';
 
 import { RegisterComponent} from './register/register.component';
@@ -72,6 +73,7 @@ import {SharedModule } from '../shared/shared.module';
 
     // AutocompleteComponent,
     NewUserComponent,
+    UserDialogComponent,
     // SingleUserComponent,
     // AddNoteComponent,
     // ChooseDateComponent,
@@ -105,6 +107,7 @@ import {SharedModule } from '../shared/shared.module';
     PaiementService,
   ],
   entryComponents: [
+    UserDialogComponent
   //  UserDeleteDialog,
 //    UserWhereDialogComponent,
   ]
