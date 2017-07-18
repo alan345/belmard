@@ -6,10 +6,11 @@ import { Ng2PaginationModule} from 'ng2-pagination';
 
 
 
-import { TasksComponent} from './tasks/tasks.component';
+import { TaskComponent} from './single/task.component';
 // import { TaskSingleComponent} from './taskSingle/taskSingle.component';
 import { TaskService} from './task.service';
 import { TaskRouting} from './taskRouting.module';
+import { TasksComponent} from './tasks/tasks.component';
 
 
 import { QuoteModule} from '../quote/quote.module';
@@ -37,12 +38,13 @@ import {SharedModule } from '../shared/shared.module';
   ],
   declarations: [
 
+    TaskComponent,
     TasksComponent,
     // TaskSingleComponent,
     // AutocompleteComponent,
   ],
   exports:      [
-    TasksComponent,
+    TaskComponent,
     // AutocompleteComponent,
   ],
   providers:    [ TaskService ],

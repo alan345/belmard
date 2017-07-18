@@ -1,146 +1,139 @@
-
-
-<app-autocomplete
-  [typeAutocomplete]="'project'"
-  [title]="'Project'"
-  [singleChoice]="'true'"
-  [arrayContent]="fetchedTask.projects"
-  (getResultAutocomplete)="selectProject($event[0])"
-  >
-</app-autocomplete>
-
-<div class='row'>
-
-
-  <div *ngFor='let bucketTask of fetchedTask.bucketTasks; let bucketTaskIndex = index;'>
-    {{bucketTask.bucketName}}
-    <button (click)="deleteBucketTask(bucketTaskIndex)">X</button>
-    <div class='container containerTasks'
-      [dragulaModel]='fetchedTask.bucketTasks[bucketTaskIndex].taskDetails'
-      [dragula]='"nested-bag"'>
-      <div
-        (click)='onClick(bucketTaskIndex, taskIndex)'
-        *ngFor='let task of bucketTask.taskDetails; let taskIndex = index;'>
-
-        <div
-          *ngFor='let user of task.assignedTos'
-          class="round"
-          [style.background-color]="user.profile.colorCalendar">
-        </div>
-
-        {{task.name}}
-        <button (click)="deleteTask(bucketTaskIndex, taskIndex)">X</button>
-      </div>
-
-      <button (click)="newTask(bucketTaskIndex)">Create Task</button>
-      <div *ngIf="bucketTask.openNewTask">
-        <textarea #content rows="4" cols="10"></textarea>
-        <button (click)="addTask(content.value, bucketTaskIndex)">Add</button>
-      </div>
-    </div>
-  </div>
-
-  <div>
-    <input
-      type="text"
-      #newBucketTaskInput
-      (keyup.enter)="newBucketTask(newBucketTaskInput.value);newBucketTaskInput.value='';"
-      placeholder="Name bucket"
-    >
-  </div>
+<div *ngIf="showHeader" class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-2"><button type="button" class="btn btn-warning" (click)="goBack()"><i class="fa fa-chevron-left"><a> {{ 'Back' | translate }}</a></i></button></div>
+  <div class="col-md-6">
+    <h3 class="title">{{ 'Task' | translate }}</h3></div>
+  <div class="col-md-3"></div>
 </div>
 
 
-<div *ngFor='let bucketTask of fetchedTask.bucketTasks; let bucketTaskIndex = index;'>
-  <div *ngFor='let task of bucketTask.taskDetails; let taskIndex = index;'>
-    <div *ngIf="task.editMode">
-      <input
-        type="text"
-        class="form-control"
-        (focusout)="save()"
-        [(ngModel)]="fetchedTask.bucketTasks[bucketTaskIndex].taskDetails[taskIndex].name"
-        placeholder="Nom du fournisseur"
-        (keyup.enter)="save()"
-      >
-      <textarea
-        class="form-control"
-        (focusout)="save()"
-        [(ngModel)]="fetchedTask.bucketTasks[bucketTaskIndex].taskDetails[taskIndex].description"
-        placeholder="Description"
-      >
-      </textarea>
-      <app-autocomplete
-        [typeAutocomplete]="'user'"
-        [singleChoice]="'true'"
-        [arrayContent]="fetchedTask.bucketTasks[bucketTaskIndex].taskDetails[taskIndex].assignedTos"
-        (getResultAutocomplete)="selectAssignedTo($event, bucketTaskIndex, taskIndex)"
-        >
-      </app-autocomplete>
+<div class="clearfix col-md-10">
+  <button class="btn btn-success float-right" [routerLink]="['/task/new/' + userId]" routerLinkActive="active"><i class=""></i>Créer un nouveau Projet</button>
+</div>
 
+<div class="row">
+  <div class="col-md-10">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">{{ 'List' | translate }}</h4>
+      </div>
+      <div class="card-block clearfix">
+        <div id="wrapper" class="subsubnav-clients float-left">
+          <input class="form-control margebasse col-md-12" type="text" name="Search" placeholder="Rechercher" [(ngModel)]="search.search" (ngModelChange)="searchTasks()">
+        </div>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <!--
+              <th class="tbl-left">
+                <!-- <button class="updownbtn" (click)="orderBy('profile.name')"><i class="fa fa-chevron-down"></i></button>
+                    <button class="updownbtn" (click)="orderBy('-profile.name')"><i class="fa fa-chevron-up"></i></button>
+              </th>
+               -->
+              <th class="centre">Type</th>
+              <th class="centre">Client</th>
+              <th class="centre">Nom</th>
+              <th class="centre">Date</th>
+              <th class="centre">Assigned to</th>
+              <th class="centre">Statut</th>
+            </tr>
+          </thead>
+          <tbody class="clienttbl">
+            <tr *ngFor="let task of fetchedTasks | paginate: { id: 'taskPagination', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }"
+            [routerLink]="['/task/' + task._id]"
+            routerLinkActive="active">
+              <td class="centre">{{task | json}}</td>
+
+              <td class="centre">
+                <div *ngFor="let assignedTo of task.assignedTos">
+                  {{assignedTo.profile.name}} {{assignedTo.profile.lastName}}
+                </div>
+
+              </td>
+              <td class="centre btn btn-outline-info">{{task.StatusTask}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+<div class="has-text-centered">
+          <div [hidden]="!loading">Loading...</div>
+          <pagination-controls (pageChange)="getPage($event)" id="taskPagination" class="change-page"></pagination-controls>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!--
+
+<div class="row">
+  <div class="col-md-4">
+    <div [ngClass]="{'card': showHeader, '': !showHeader}">
+      <div *ngIf="showHeader" class="card-header">
+        <h4 class="card-title">{{ 'Add a task' | translate }}</h4>
+      </div>
+      <div class="card-block">
+       <button class="btn btn-primary" [routerLink]="['/task/new/' + userId]" routerLinkActive="active"><i class=""></i>Créer un nouveau Projet</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div [ngClass]="{'card': showHeader, '': !showHeader}">
+      <div *ngIf="showHeader" class="card-header">
+        <h4 class="card-title">Consultation / Édition</h4>
+      </div>
+      <div class="card-block">
+        <div class="subsubnav-clients">
+          <input class="form-control"
+            celass="champ"
+            type="text"
+            name="Search"
+            placeholder="&#xf002; {{ ' Search' | translate }}"
+            [(ngModel)]="search.search"
+            (ngModelChange)="searchTasks()">
+        </div>
+
+        <div class="row">
+          <div
+            class="col-md-6"
+            *ngFor="let task of fetchedTasks | paginate: { id: 'taskPagination', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }"
+            [routerLink]="['/task/' + task._id]"
+            routerLinkActive="active"
+          >
+          {{task.details.name }}
+          </div>
+        </div>
+
+
+        <!-- <table class="table table-hover table-responsive table-condensed">
+          <thead>
+            <tr>
+              <th class="tbl-left">
+
+              </th>
+            </tr>
+          </thead>
+          <tbody class="clienttbl">
+            <tr *ngFor="let task of fetchedTasks | paginate: { id: 'taskPagination', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }"
+              [routerLink]="['/task/' + task._id]" routerLinkActive="active">
+              <td>{{task.details.name }}</td>
+            </tr>
+          </tbody>
+        </table> -->
+<!--        <div class="row">
+          <div class="col-md-12">
+            <div [hidden]="!loading">Loading...</div>
+            <pagination-controls (pageChange)="getPage($event)" id="taskPagination" class="change-page"></pagination-controls>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
-
-<!-- <pre>
-  <code>
-    {{fetchedTask|json}}
-</code>
-</pre> -->
-
-<!-- <div class='parent'>
-    <label for='hy'>
-    <strong>Angular-specific example.</strong> Fancy some <code>ngFor</code>?</label>
-    <div class='wrapper wrapperTasks'>
-        <div class='container containerTasks' [dragula]='"another-bag"' [dragulaModel]='many[0].taskDetails'>
-            {{many[0].bucketName}}
-            <div *ngFor='let text of many[0].taskDetails' [innerHtml]='text'></div>
-        </div>
-        <div class='container' [dragula]='"another-bag"' [dragulaModel]='many[1].taskDetails'>
-            <div *ngFor='let text of many[1].taskDetails' [innerHtml]='text'></div>
-        </div>
-    </div>
-    <div class='wrapper'>
-        <div class='container'>
-            <pre>{{many | json}}</pre>
-        </div>
-        <div class='container'>
-            <pre>{{many2 | json}}</pre>
-        </div>
-    </div>
-    <pre>
-      <code>
-&lt;div class='wrapper'&gt;
-  &lt;div class='container' [dragula]='&quot;another-bag&quot;' [dragulaModel]='many'&gt;
-    &lt;div *ngFor='let text of many' [innerHtml]='text'&gt;&lt;/div&gt;
-  &lt;/div&gt;
-  &lt;div class='container' [dragula]='&quot;another-bag&quot;' [dragulaModel]='many2'&gt;
-    &lt;div *ngFor='let text of many2' [innerHtml]='text'&gt;&lt;/div&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-class RepeatExample &#123;
-  public many: Array&lt;string&gt; = ['The', 'possibilities', 'are', 'endless!'];
-  public many2: Array&lt;string&gt; = ['Explore', 'them'];
-
-  constructor(private dragulaService: DragulaService) &#123;
-    dragulaService.dropModel.subscribe((value) => &#123;
-      this.onDropModel(value.slice(1));
-    });
-    dragulaService.removeModel.subscribe((value) => &#123;
-      this.onRemoveModel(value.slice(1));
-    });
-  }
-
-  private onDropModel(args) &#123;
-    let [el, target, source] = args;
-    // do something else
-  }
-
-  private onRemoveModel(args) &#123;
-    let [el, source] = args;
-    // do something else
-  }
-}
-      </code>
-    </pre>
-</div> -->
+-->
