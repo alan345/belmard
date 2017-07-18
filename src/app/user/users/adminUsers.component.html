@@ -5,7 +5,68 @@
   <div class="col-md-3"></div>
 </div>
 
+
+
+<div class="clearfix col-md-10">
+  <button class="btn btn-success float-right" [routerLink]="['/user/newuser']" routerLinkActive="active"><i class=""></i>Créer un nouvel utilisateur</button>
+</div>
+
 <div class="row">
+  <div class="col-md-10">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">{{ 'List' | translate }}</h4>
+      </div>
+      <div class="card-block clearfix">
+        <div id="wrapper" class="subsubnav-clients float-left">
+          <input class="form-control margebasse col-md-12" type="text" name="Search" placeholder="Rechercher" [(ngModel)]="search.search" (ngModelChange)="searchUsers()">
+        </div>
+        <md-tab-group (selectChange)="onSelectChange($event)" class="beigeback admin-users">
+
+          <md-tab label="client"></md-tab>
+          <md-tab label="admin"></md-tab>
+        </md-tab-group>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <!--  
+              <th class="tbl-left">
+                <!-- <button class="updownbtn" (click)="orderBy('profile.name')"><i class="fa fa-chevron-down"></i></button>
+                    <button class="updownbtn" (click)="orderBy('-profile.name')"><i class="fa fa-chevron-up"></i></button> 
+              </th>
+               -->
+              <th class="centre">Type</th>
+              <th class="centre">Client</th>
+              <th class="centre">Nom</th>
+              <th class="centre">Date</th>
+              <th class="centre">Responsable</th>
+              <th class="centre">Statut</th>
+            </tr>
+          </thead>
+          <tbody class="clienttbl">
+            <tr *ngFor="let user of fetchedUsers | paginate: { id: 'server', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }" [routerLink]="['/user/profile/' + user._id]" routerLinkActive="active">
+              <td class="centre">{{user.profile.name}}</td>
+              <td class="centre">{{project.details.customer}}</td>
+              <td class="centre">{{project.details.name}}</td>
+              <td class="centre">{{project.details.date}}</td>
+              <td class="centre">{{project.assignedTos}}</td>
+              <td class="centre btn btn-outline-info">{{project.StatusProject}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+<div class="has-text-centered">
+          <div [hidden]="!loading">Loading...</div>
+          <pagination-controls (pageChange)="getPage($event)" id="projectPagination" class="change-page"></pagination-controls>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+<!-- <div class="row">
    <div class="col-md-4">
     <div class="card">
     <div class="card-header">
@@ -65,3 +126,4 @@
   </div>
 
 </div>
+-->
