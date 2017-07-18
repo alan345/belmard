@@ -146,3 +146,11 @@ height: 50px;
 .element {
   @include clearfix;
 }
+
+.table td.centre {
+  text-align: center;
+}
+
+.table th.centre {
+  text-align: center;
+}
