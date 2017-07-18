@@ -18,10 +18,11 @@ import { DragulaModule } from 'ng2-dragula';
 // import { AutocompleteComponent } from '../autocomplete/autocomplete.component'
 // import { AutocompleteModule } from '../autocomplete/autocomplete.module'
 import {SharedModule } from '../shared/shared.module';
-
+import {UserModule} from '../user/user.module';
 
 @NgModule({
   imports:     [
+    UserModule,
     DragulaModule,
     ProjectRouting,
     CommonModule,
@@ -30,7 +31,8 @@ import {SharedModule } from '../shared/shared.module';
     Ng2PaginationModule,
     ReactiveFormsModule,
     QuoteModule,
-    SharedModule,
+    SharedModule
+
     // AutocompleteModule,
   ],
   declarations: [
