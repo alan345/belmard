@@ -11,6 +11,8 @@ import { ProjectSingleComponent} from './projectSingle/projectSingle.component';
 import { ProjectService} from './project.service';
 import { ProjectRouting} from './projectRouting.module';
 
+import { TasksComponent} from './tasks/tasks.component';
+
 
 import { QuoteModule} from '../quote/quote.module';
 
@@ -39,6 +41,7 @@ import {SharedModule } from '../shared/shared.module';
     ProjectTasksComponent,
     ProjectsComponent,
     ProjectSingleComponent,
+    TasksComponent,
     // AutocompleteComponent,
   ],
   exports:      [

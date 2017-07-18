@@ -4,9 +4,12 @@ import { ProjectsComponent} from './projects/projects.component';
 import { ProjectSingleComponent} from './projectSingle/projectSingle.component';
 import { ProjectTasksComponent} from './projectSingle/projectTasks.component';
 
+import { TasksComponent} from './tasks/tasks.component';
+
 
 export const routes: Routes = [
   {path: '', component: ProjectsComponent},
+  {path: 'tasks', component: TasksComponent},
   // {path: 'projectSingle', component: ProjectSingleComponent},
   // {path: 'projectSingle/:id', component: ProjectSingleComponent},
   {path: 'new', component: ProjectSingleComponent},

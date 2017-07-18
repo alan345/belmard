@@ -26,6 +26,12 @@
           <li *ngIf="isCurrentUserIsInSubPeriod() && isCurrentUserHasCompanie()" class="nav-item">
             <a class="nav-link" routerLinkActive="active" [routerLink]="['/project']">Projets </a>
           </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" [routerLink]="['/project/tasks']">Tasks </a>
+          </li>
+
+
           <li class="nav-item">
             <a class="nav-link" routerLinkActive="active" [routerLink]="['/user']">Utilisateurs</a>
           </li>

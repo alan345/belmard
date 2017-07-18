@@ -223,6 +223,49 @@ router.get('/page/:page', function (req, res, next) {
 
 
 
+
+
+
+
+
+router.get('/unwind', function (req, res, next) {
+  let searchQuery = {}
+  let dateBegin = req.params.year*1 + '-01-01'
+  let dateEnd = req.params.year*1 +1 + '-01-01'
+
+  let aggregate = []
+  if(req.query.idProject)
+    aggregate.push({ $match: {_id: mongoose.Types.ObjectId(req.query.idProject)}})
+
+  aggregate.push({ $unwind : "$bucketTasks" })
+  aggregate.push({ $unwind : "$bucketTasks.tasks" })
+
+
+//http://localhost/#/project/tasks;idProject=5966955c48d67d2d7f212034
+
+
+  Project
+  .aggregate(aggregate)
+  .exec(function (err, item) {
+   if (err) {
+     return res.status(404).json({
+       message: '',
+       err: err
+     })
+   } else {
+     res.status(200).json({
+       message: 'Success',
+       item: item
+     })
+   }
+ })
+
+})
+
+
+
+
+
 // getting user forms to display them on front end
 router.get('/:id', function (req, res, next) {
 

@@ -173,8 +173,7 @@ router.get('/page/:page', function (req, res, next) {
   Task
   .find(searchQuery)
   .sort('-createdAt')
-  .populate({path: 'clients', model: 'User'})
-
+  .populate({path: 'projects', model: 'Project'})
   .populate({ path: 'assignedTos', model: 'User'})
 
   // .populate({path: 'quotes', model: 'Quote'})

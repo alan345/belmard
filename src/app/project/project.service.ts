@@ -44,6 +44,27 @@ export class ProjectService {
       });
   }
 
+
+  getTasks(page: number, search: any) {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    headers.append('Authorization', '' + this.authService.currentUser.token);
+    let options = new RequestOptions({ headers: headers, search: search});
+    return this.http.get(this.url + 'project/unwind/'  , options)
+      .timeout(9000)
+      .map((response: Response) => {
+
+        const projects = response.json();
+
+        return projects;
+      })
+      .catch((error: Response) => {
+        this.errorService.handleError(error.json());
+        return Observable.throw(error.json());
+      });
+  }
+
+
+
   countNewItemForUser(){
     let headers = new Headers({'Content-Type': 'application/json'});
     headers.append('Authorization', '' + this.authService.currentUser.token);

@@ -30,7 +30,7 @@
                     <button class="updownbtn" (click)="orderBy('-profile.name')"><i class="fa fa-chevron-up"></i></button>
               </th>
                -->
-              <th class="centre">Type</th>
+              <th class="centre">Project</th>
               <th class="centre">Client</th>
               <th class="centre">Nom</th>
               <th class="centre">Date</th>
@@ -39,23 +39,23 @@
             </tr>
           </thead>
           <tbody class="clienttbl">
-            <tr *ngFor="let task of fetchedTasks | paginate: { id: 'taskPagination', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }"
-            [routerLink]="['/task/' + task._id]"
-            routerLinkActive="active">
-              <td class="centre">{{task | json}}</td>
+            <tr *ngFor="let task of fetchedTasks | paginate: { id: 'taskPagination', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }" [routerLink]="['/task/' + task._id]" routerLinkActive="active">
+              
 
-              <td class="centre">
-                <div *ngFor="let assignedTo of task.assignedTos">
-                  {{assignedTo.profile.name}} {{assignedTo.profile.lastName}}
+
+
+              <td class="center">
+                <div *ngFor="let project of task.projects">
+                  {{project.details.name}}
                 </div>
-
               </td>
-              <td class="centre btn btn-outline-info">{{task.StatusTask}}</td>
+
+
             </tr>
           </tbody>
         </table>
 
-<div class="has-text-centered">
+        <div class="has-text-centered">
           <div [hidden]="!loading">Loading...</div>
           <pagination-controls (pageChange)="getPage($event)" id="taskPagination" class="change-page"></pagination-controls>
         </div>
