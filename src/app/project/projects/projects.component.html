@@ -42,12 +42,12 @@
             <tr *ngFor="let project of fetchedProjects | paginate: { id: 'projectPagination', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }"
             [routerLink]="['/project/' + project._id]"
             routerLinkActive="active">
-              <td class="centre">{{product.details.referenceName}}</td>
-              <td class="centre">{{product.details.description}}</td>
-              <td class="centre">{{product.details.price.costPrice}}</td>
-              <td class="centre">{{product.details.referenceName}}</td>
-              <td class="centre">{{product.details.price.costPrice}}</td>
-              <td class="centre btn btn-outline-info">{{product.details.price.costPrice}}</td>
+              <td class="centre">{{project.details.referenceName}}</td>
+              <td class="centre">{{project.details.description}}</td>
+              <td class="centre">{{project.details.name}}</td>
+              <td class="centre">{{project.details.referenceName}}</td>
+              <td class="centre">{{project.details.price.costPrice}}</td>
+              <td class="centre btn btn-outline-info">{{project.details.price.costPrice}}</td>
             </tr>
           </tbody>
         </table>
