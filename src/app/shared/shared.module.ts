@@ -1,7 +1,10 @@
 import { NgModule }            from '@angular/core';
 import { CommonModule }        from '@angular/common';
 import { FormsModule }         from '@angular/forms';
-import { AutocompleteComponent } from '../autocomplete/autocomplete.component'
+
+// import { AutocompleteComponent } from '../autocomplete/autocomplete.component'
+import { AutocompleteModule } from '../autocomplete/autocomplete.module'
+
 
 import { TRANSLATION_PROVIDERS, TranslatePipe, TranslateService }   from '../translate';
 
@@ -10,16 +13,19 @@ import { TRANSLATION_PROVIDERS, TranslatePipe, TranslateService }   from '../tra
 @NgModule({
   imports:      [
     CommonModule,
-    FormsModule
+    FormsModule,
+    AutocompleteModule,
+
   ],
   declarations: [
-    AutocompleteComponent,
+    // AutocompleteComponent,
     TranslatePipe,
 
   ],
   exports: [
     TranslatePipe,
-    AutocompleteComponent,
+    AutocompleteModule,
+    // AutocompleteComponent,
   ],
   providers: [
     TRANSLATION_PROVIDERS,

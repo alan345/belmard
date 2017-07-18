@@ -95,6 +95,7 @@ import {SharedModule } from '../shared/shared.module';
 
   ],
   exports:      [
+    NewUserComponent,
     // AutocompleteComponent
     // UsersComponent
    ],

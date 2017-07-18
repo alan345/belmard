@@ -22,7 +22,13 @@
       </div>
 
       <div *ngIf="fetchedData.length == 0 && autocompleteSearch !=''">
-          Pas de resultats.
+          No results.
+          <div *ngIf="typeAutocomplete=='user'" (click)="createNewItemF()">
+            create New User
+          </div>
+          <div *ngIf="createNewItem">
+            <!-- <app-newUser></app-newUser> -->
+          </div>
           <!-- <a [routerLink]="['/user/newuser']" class="admn-btn"> -->
             <!-- Créer un nouveau employe -->
           <!-- </a> -->

@@ -223,6 +223,9 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 
 
   ],
+  exports: [
+    UserModule
+   ],
   providers: [
     AuthGuardService,
     {provide: LocationStrategy, useClass: HashLocationStrategy},
@@ -260,6 +263,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     // ProductWhereDialogComponent,
     SeePictureDialogComponent,
   ],
+
 
   bootstrap: [AppComponent],
 //  bootstrap: [AppComponent, EditOptionsComponentDialog],

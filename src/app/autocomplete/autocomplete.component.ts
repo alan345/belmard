@@ -23,6 +23,7 @@ export class AutocompleteComponent {
   @Input() title: string = '';
   @Input() canDelete: boolean = true;
 
+  createNewItem: boolean = false;
   autocompleteSearch = ''
   fetchedData: User[] = [];
 
@@ -88,4 +89,8 @@ export class AutocompleteComponent {
     this.arrayContent.splice(i, 1);
   }
 
+
+  createNewItemF(){
+    this.createNewItem = true
+  }
 }
