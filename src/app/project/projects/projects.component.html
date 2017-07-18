@@ -42,11 +42,11 @@
             <tr *ngFor="let project of fetchedProjects | paginate: { id: 'projectPagination', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }"
             [routerLink]="['/project/' + project._id]"
             routerLinkActive="active">
-              <td class="centre">{{project.details.id}}</td>
+              <td class="centre">{{project.details.categ}}</td>
               <td class="centre">{{project.details.client}}</td>
               <td class="centre">{{project.details.name}}</td>
               <td class="centre">{{project.details.date}}</td>
-              <td class="centre">{{project.details.assignedTo}}</td>
+              <td class="centre">{{project.detailsfetchedProject.assignedTos}}</td>
               <td class="centre btn btn-outline-info">{{project.details.StatusProject}}</td>
             </tr>
           </tbody>
