@@ -39,7 +39,7 @@
             </tr>
           </thead>
           <tbody class="clienttbl">
-            <tr *ngFor="let quote of fetchedQuotes | paginate: { id: 'quotePagination', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }">
+            <tr *ngFor="let quote of fetchedQuotes | paginate: { id: 'quotePagination', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }"
               [routerLink]="['/quote/edit/' + quote._id]" routerLinkActive="active">
               <td class="centre">{{project.details.categ}}</td>
               <td class="centre">{{project.details.customer}}</td>
