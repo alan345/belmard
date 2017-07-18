@@ -43,7 +43,11 @@
           </thead>
           <tbody class="clienttbl">
             <tr *ngFor="let user of fetchedUsers | paginate: { id: 'server', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }" [routerLink]="['/user/profile/' + user._id]" routerLinkActive="active">
-              <td class="centre">{{user.type|json}}</td>
+              <td class="centre">
+                <div *ngFor="let singleType of user.type">
+                  {{singleType}}
+                </div>
+              </td>
               <td class="centre">{{user.profile.name}}</td>
               <td class="centre">{{user.profile.lastName}}</td>
               <td class="centre">{{user.createdAt | date:'yyyy-MM-dd' }}</td>
@@ -60,65 +64,3 @@
     </div>
   </div>
 </div>
-{{paginationData|json}}
-<!-- <div class="row">
-   <div class="col-md-4">
-    <div class="card">
-    <div class="card-header">
-      <h4 class="card-title">Ajouter un utilisateur</h4>
-    </div>
-    <div class="card-block">
-      <button class="btn btn-primary" [routerLink]="['/user/newuser']" routerLinkActive="active"><i class=""></i>Créer un nouvel utilisateur</button>
-    </div>
-    </div>
-  </div>
-
-  <div class="col-md-4">
-    <div class="card">
-    <div class="card-header">
-      <h4 class="card-title">Consultation / Édition</h4>
-    </div>
-    <div class="card-block">
-      <div id="wrapper" class="subsubnav-clients">
-          <input class="form-control"
-            celass="champ"
-            type="text"
-            name="Search"
-            placeholder="Rechercher"
-            [(ngModel)]="search.search"
-            (ngModelChange)="searchUsers()">
-        </div>
-      <md-tab-group (selectChange)="onSelectChange($event)" class="beigeback admin-users">
-
-    <md-tab label="client"></md-tab>
-    <md-tab label="admin"></md-tab>
-  </md-tab-group>
-  <div class="beigeback">
-            <table class="table table-hover table-responsive table-condensed">
-              <thead>
-      <tr>
-        <th class="tbl-left">
-          <p class="tblnav-cl">Name</p>
-          <button class="updownbtn" (click)="orderBy('profile.name')"><i class="fa fa-chevron-down"></i></button>
-          <button class="updownbtn" (click)="orderBy('-profile.name')"><i class="fa fa-chevron-up"></i></button>
-        </th>
-      </tr>
-      </thead>
-              <tbody class="clienttbl">
-                <tr *ngFor="let user of fetchedUsers | paginate: { id: 'server', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }" [routerLink]="['/user/profile/' + user._id]" routerLinkActive="active">
-        <td>{{user.profile.name }}</td>
-      </tr>
-      </tbody>
-    </table>
-    <div class="has-text-centered">
-        <div [hidden]="!loading">Loading...</div>
-        <pagination-controls (pageChange)="getPage($event)" id="server" class="change-page"></pagination-controls>
-            </div>
-          </div>
-
-    </div>
-
-  </div>
-
-</div>
--->

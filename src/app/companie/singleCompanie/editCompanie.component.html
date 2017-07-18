@@ -1,197 +1,102 @@
-<div class="container">
 <div class="row">
   <div class="col-md-1"></div>
   <div class="col-md-2"><button type="button" class="btn btn-warning" (click)="goBack()"><i class="fa fa-chevron-left"><a> Retour</a></i></button></div>
-  <div class="col-md-6"><h3 class="title">Ajouter / Editer Fournisseur</h3></div>
+  <div class="col-md-6">
+    <h3 class="title">Ajouter / Editer Fournisseur</h3></div>
   <div class="col-md-3"></div>
 </div>
 
 <div class="container">
 
-  <div class="beigeback single-wrpr">
-    <h4 class="dspl-nn">id: {{fetchedCompanie._id}}</h4>
+
+  <h4 class="dspl-nn">id: {{fetchedCompanie._id}}</h4>
 
 
 
 
-      <button type="button" (click)="addCategProject('project', 0, 0, 0, 0)">Add Categ Project</button>
-      <div class="categ0" *ngFor="let categorie0 of fetchedCompanie.categories.categProject; let i = index;">
-        <input
-          type="text"
-          [(ngModel)]="fetchedCompanie.categories.categProject[i].categ"
-          >
-          <button type="button" (click)="removeCategProject('project', 1,i,0,0)">X</button>
-          <button type="button" (click)="addCategProject('project', 1,i,0,0)">+</button>
+  <button type="button" (click)="addCategProject('project', 0, 0, 0, 0)">Add Categ Project</button>
+  <div class="categ0" *ngFor="let categorie0 of fetchedCompanie.categories.categProject; let i = index;">
+    <input type="text" [(ngModel)]="fetchedCompanie.categories.categProject[i].categ">
+    <button type="button" (click)="removeCategProject('project', 1,i,0,0)">X</button>
+    <button type="button" (click)="addCategProject('project', 1,i,0,0)">+</button>
 
-          <div class="categ1" *ngFor="let categorie1 of categorie0.subCateg; let j = index;">
-            <input
-              type="text"
-              [(ngModel)]="fetchedCompanie.categories.categProject[i].subCateg[j].categ"
-              >
-              <button type="button" (click)="removeCategProject('project', 2,i,j,0)">X</button>
-              <button type="button" (click)="addCategProject('project', 2,i,j,0)">+</button>
-              <div class="categ2" *ngFor="let categorie2 of categorie1.subCateg; let k = index;">
-                <input
-                  type="text"
-                  [(ngModel)]="fetchedCompanie.categories.categProject[i].subCateg[j].subCateg[k].categ"
-                  >
-                <button type="button" (click)="removeCategProject('project', 3,i,j,k)">X</button>
-              </div>
-          </div>
+    <div class="categ1" *ngFor="let categorie1 of categorie0.subCateg; let j = index;">
+      <input type="text" [(ngModel)]="fetchedCompanie.categories.categProject[i].subCateg[j].categ">
+      <button type="button" (click)="removeCategProject('project', 2,i,j,0)">X</button>
+      <button type="button" (click)="addCategProject('project', 2,i,j,0)">+</button>
+      <div class="categ2" *ngFor="let categorie2 of categorie1.subCateg; let k = index;">
+        <input type="text" [(ngModel)]="fetchedCompanie.categories.categProject[i].subCateg[j].subCateg[k].categ">
+        <button type="button" (click)="removeCategProject('project', 3,i,j,k)">X</button>
       </div>
+    </div>
+  </div>
 
 
 
 
 
-    <!-- <form #f="ngForm" novalidate (ngSubmit)="save(f.value, f.valid)"> -->
-    <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
-      <div class="form-group sln-inffrm">
-        <!-- <div formGroupName="fetchedCompanie"> -->
-        <!-- <div ngModelGroup="fetchedCompanie"> -->
-          <input
-            type="text"
-            class="form-control"
-            formControlName="name"
-            [(ngModel)]="fetchedCompanie.name"
-            required
-            minlength="5"
-            placeholder="Nom du fournisseur"
-          >
-          <input
-            type="text"
-            class="form-control"
-            formControlName="phoneNumber"
-            [(ngModel)]="fetchedCompanie.phoneNumber"
-            required
-            minlength="5"
-            placeholder="Numéro de téléphone"
-          >
-          <!-- <div ngModelGroup="address"> -->
-          <div formGroupName="address">
-            <input
-              type="text"
-              class="form-control"
-              formControlName="address"
-              [(ngModel)]="fetchedCompanie.address.address"
-              required
-              minlength="5"
-              placeholder="Adresse"
-            >
-            <input
-              type="text"
-              class="form-control"
-              formControlName="city"
-              [(ngModel)]="fetchedCompanie.address.city"
-              required
-              minlength="2"
-              placeholder="Ville"
-            >
+  <!-- <form #f="ngForm" novalidate (ngSubmit)="save(f.value, f.valid)"> -->
+  <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
+    <div class="form-group sln-inffrm">
+      <!-- <div formGroupName="fetchedCompanie"> -->
+      <!-- <div ngModelGroup="fetchedCompanie"> -->
+      <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedCompanie.name" required minlength="5" placeholder="Nom du fournisseur">
+      <input type="text" class="form-control" formControlName="phoneNumber" [(ngModel)]="fetchedCompanie.phoneNumber" required minlength="5" placeholder="Numéro de téléphone">
+      <!-- <div ngModelGroup="address"> -->
+      <div formGroupName="address">
+        <input type="text" class="form-control" formControlName="address" [(ngModel)]="fetchedCompanie.address.address" required minlength="5" placeholder="Adresse">
+        <input type="text" class="form-control" formControlName="city" [(ngModel)]="fetchedCompanie.address.city" required minlength="2" placeholder="Ville">
 
-            <input
-              type="text"
-              class="form-control"
-              formControlName="zip"
-              [(ngModel)]="fetchedCompanie.address.zip"
-              required
-              minlength="5"
-              placeholder="Code postal"
-            >
-            <div class="form-group prmimg-cnt">
-              <div *ngFor="let singleForm of fetchedCompanie.forms; let i=index">
-                <img
-                  class="promo-img"
-                  height="50px"
-                  src="./uploads/forms/{{singleForm.owner}}/{{singleForm.imagePath}}"
-                  onerror="this.src ='assets/images/no-image-found.jpg'">
-                  <button type="button" class="dlt-btn" (click)="removeForm(i)">
+        <input type="text" class="form-control" formControlName="zip" [(ngModel)]="fetchedCompanie.address.zip" required minlength="5" placeholder="Code postal">
+        <div class="form-group prmimg-cnt">
+          <div *ngFor="let singleForm of fetchedCompanie.forms; let i=index">
+            <img class="promo-img" height="50px" src="./uploads/forms/{{singleForm.owner}}/{{singleForm.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
+            <button type="button" class="dlt-btn" (click)="removeForm(i)">
                     <i class="fa fa-trash"></i>
                   </button>
-              </div>
-              <div>
-                <button type="button" md-button (click)="openDialog('img')" class="addpic-squr">Ajouter une image<br><i class="fa fa-plus"></i></button>
-              </div>
-            </div>
           </div>
-
-
-
-
-        <div formGroupName="categJson">
-
-            <h4>categProduct</h4>
-            <textarea
-              class="form-control"
-              formControlName="categProduct"
-              [(ngModel)]="fetchedCompanie.categJson.categProduct"
-              required
-              minlength="1"
-              placeholder="categProduct"
-            >
-            </textarea>
-
-            <h4>categProject</h4>
-            <textarea
-              class="form-control"
-              formControlName="categProject"
-              [(ngModel)]="fetchedCompanie.categJson.categProject"
-              required
-              minlength="1"
-              placeholder="categProject"
-            >
-            </textarea>
-
+          <div>
+            <button type="button" md-button (click)="openDialog('img')" class="addpic-squr">Ajouter une image<br><i class="fa fa-plus"></i></button>
+          </div>
         </div>
-
-          <div formGroupName="option">
-            <div formGroupName="calendar">
-              <h4>Options</h4>
-              <input
-                type="text"
-                class="form-control"
-                formControlName="timeBegin"
-                [(ngModel)]="fetchedCompanie.option.calendar.timeBegin"
-                required
-                minlength="1"
-                placeholder="timeBegin"
-              >
-              <input
-                type="text"
-                class="form-control"
-                formControlName="timeEnd"
-                [(ngModel)]="fetchedCompanie.option.calendar.timeEnd"
-                required
-                minlength="1"
-                placeholder="timeEnd"
-              >
-            </div>
-          </div>
       </div>
 
-      <div class="valid-edit">
-        <button
-          *ngIf="fetchedCurrentUser.companies.length"
-          type="submit"
-          class="sln-edt done">
+
+
+
+      <div formGroupName="categJson">
+
+        <h4>categProduct</h4>
+        <textarea class="form-control" formControlName="categProduct" [(ngModel)]="fetchedCompanie.categJson.categProduct" required minlength="1" placeholder="categProduct">
+            </textarea>
+
+        <h4>categProject</h4>
+        <textarea class="form-control" formControlName="categProject" [(ngModel)]="fetchedCompanie.categJson.categProject" required minlength="1" placeholder="categProject">
+            </textarea>
+
+      </div>
+
+      <div formGroupName="option">
+        <div formGroupName="calendar">
+          <h4>Options</h4>
+          <input type="text" class="form-control" formControlName="timeBegin" [(ngModel)]="fetchedCompanie.option.calendar.timeBegin" required minlength="1" placeholder="timeBegin">
+          <input type="text" class="form-control" formControlName="timeEnd" [(ngModel)]="fetchedCompanie.option.calendar.timeEnd" required minlength="1" placeholder="timeEnd">
+        </div>
+      </div>
+    </div>
+
+    <div class="valid-edit">
+      <button *ngIf="fetchedCurrentUser.companies.length" type="submit" class="sln-edt done">
           Enregistrer
         </button>
-        <button
-          *ngIf="!fetchedCurrentUser.companies.length"
-          type="button"
-          class="sln-edt done"
-          (click)="saveToMyCompanie()">
+      <button *ngIf="!fetchedCurrentUser.companies.length" type="button" class="sln-edt done" (click)="saveToMyCompanie()">
           Enregistrer en tant que Ma companie
         </button>
 
-        <button
-          *ngIf="fetchedCompanie._id"
-          type="button"
-          class="sln-edt done"
-          (click)="onDelete(fetchedCompanie._id)">
+      <button *ngIf="fetchedCompanie._id" type="button" class="sln-edt done" (click)="onDelete(fetchedCompanie._id)">
           Delete
         </button>
-      </div>
-    </form>
-  </div>
-</div>
+    </div>
+    <div class="clearfix"></div>    
+  </form>
 </div>
