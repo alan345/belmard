@@ -160,11 +160,8 @@ router.get('/page/:page', function (req, res, next) {
 
   Companie
   .find(search)
-  .populate(
-    {
-      path: '_users',
-      model: 'User',
-    })
+  // .populate({ path: '_users', model: 'User'})
+  .populate({ path: 'forms', model: 'Form'})
   .limit(itemsPerPage)
   .skip(skip)
   .sort(req.query.orderBy)

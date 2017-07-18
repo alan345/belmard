@@ -29,10 +29,10 @@
         <table class="table table-hover">
           <thead>
             <tr>
-              <!--  
+              <!--
               <th class="tbl-left">
                 <!-- <button class="updownbtn" (click)="orderBy('profile.name')"><i class="fa fa-chevron-down"></i></button>
-                    <button class="updownbtn" (click)="orderBy('-profile.name')"><i class="fa fa-chevron-up"></i></button> 
+                    <button class="updownbtn" (click)="orderBy('-profile.name')"><i class="fa fa-chevron-up"></i></button>
               </th>
                -->
               <th class="centre">Type</th>
@@ -45,12 +45,12 @@
           </thead>
           <tbody class="clienttbl">
             <tr *ngFor="let user of fetchedUsers | paginate: { id: 'server', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }" [routerLink]="['/user/profile/' + user._id]" routerLinkActive="active">
+              <td class="centre">{{user.type|json}}</td>
               <td class="centre">{{user.profile.name}}</td>
-              <td class="centre">{{project.details.customer}}</td>
-              <td class="centre">{{project.details.name}}</td>
-              <td class="centre">{{project.details.date}}</td>
-              <td class="centre">{{project.assignedTos}}</td>
-              <td class="centre btn btn-outline-info">{{project.StatusProject}}</td>
+              <td class="centre">{{user.profile.lastName}}</td>
+              <td class="centre">{{user.createdAt |  date:'yyyy-MM-dd' }}</td>
+
+              <td class="centre btn btn-outline-info"></td>
             </tr>
           </tbody>
         </table>
