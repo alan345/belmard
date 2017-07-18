@@ -16,7 +16,7 @@ import { QuoteModule} from '../quote/quote.module';
 import { CompanieModule} from '../companie/companie.module';
 import { ProjectModule} from '../project/project.module';
 
-import { UserDialogComponent } from './singleUser/modal/userDialog.component';
+import { UserDialogComponent } from './singleUser/dialog/userDialog.component';
 import { PaiementPipe } from './paiement/paiement.pipe';
 
 import { RegisterComponent} from './register/register.component';

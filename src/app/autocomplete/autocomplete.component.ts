@@ -6,7 +6,7 @@ import { QuoteService} from '../quote/quote.service';
 import { ProjectService} from '../project/project.service';
 import { MdDialog } from '@angular/material';
 
-import { UserDialogComponent } from '../user/singleUser/modal/userDialog.component';
+import { UserDialogComponent } from '../user/singleUser/dialog/userDialog.component';
 import { CompanieDialogComponent } from '../companie/singleCompanie/dialog/companieDialog.component';
 
 
