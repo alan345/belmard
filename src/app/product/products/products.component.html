@@ -39,12 +39,12 @@
           </thead>
           <tbody class="clienttbl">
             <tr *ngFor="let product of fetchedProducts | paginate: { id: 'server', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }" [routerLink]="['/product/' + product._id]" routerLinkActive="active">
-              <td>{{product.details.referenceName}}</td>
-              <td>{{product.details.description}}</td>
-              <td>{{product.details.price.costPrice}}</td>
-              <td>{{product.details.referenceName}}</td>
-              <td>{{product.details.depth}}</td>
-              <td>{{product.details.price.costPrice}}</td>
+              <td class="tbl-left">{{product.details.referenceName}}</td>
+              <td class="tbl-left">{{product.details.description}}</td>
+              <td class="tbl-left">{{product.details.price.costPrice}}</td>
+              <td class="tbl-left">{{product.details.referenceName}}</td>
+              <td class="tbl-right">{{product.details.price.costPrice}}</td>
+              <td class="tbl-right">{{product.details.price.costPrice}}</td>
             </tr>
           </tbody>
         </table>
