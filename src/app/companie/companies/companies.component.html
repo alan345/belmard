@@ -40,7 +40,7 @@
           </thead>
           <tbody class="clienttbl">
             <tr *ngFor="let companie of fetchedCompanies | paginate: { id: 'server', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }"
-          [routerLink]="['/companie/' + companie._id]" routerLinkActive="active">>
+          [routerLink]="['/companie/' + companie._id]" routerLinkActive="active">
               <td class="centre">{{product.details.referenceName}}</td>
               <td class="centre">{{companie.name}}</td>
               <td class="centre">{{product.details.price.costPrice}}</td>
