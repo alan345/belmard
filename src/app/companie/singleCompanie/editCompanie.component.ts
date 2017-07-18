@@ -19,7 +19,7 @@ import { User } from '../../user/user.model';
 import { EditOptionsComponentDialog } from '../../form/modalLibrary/modalLibrary.component';
 
 @Component({
-  selector: 'app-companie',
+  selector: 'app-editCompanie',
   templateUrl: './editCompanie.component.html',
   styleUrls: ['../companie.component.css'],
 })
