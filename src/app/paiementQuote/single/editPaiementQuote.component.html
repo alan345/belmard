@@ -20,7 +20,6 @@
 
         <select class="form-control" formControlName="type" [(ngModel)]="fetchedPaiementQuote.type">
           <option *ngFor="let n of paiementsTypes" [attr.value]="n.value">{{n.label}}</option>
-
         </select>
 
         <input type="text" class="form-control" formControlName="amount" [(ngModel)]="fetchedPaiementQuote.amount" placeholder="Amount">

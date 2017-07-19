@@ -29,10 +29,22 @@ export class BucketTasks {
 
 export class Task {
   name: string = '';
+  status: string = '';
   editMode: boolean = false;
   description: string = '';
   assignedTos: User[] = [];
+  dateTask: DateTask = new DateTask()
 }
+
+
+export class DateTask {
+  creationDate: Date = new Date()
+  creationDateString: string = '';
+  endDate: Date = new Date()
+  endDateString: string = '';
+}
+
+
 
 
 export class Details {

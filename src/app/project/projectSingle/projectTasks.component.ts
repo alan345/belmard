@@ -16,6 +16,8 @@ import { Project, BucketTasks, Task } from '../project.model';
 // import { Quote } from '../quote/quote.model';
 import { DragulaService } from 'ng2-dragula';
 import { User } from '../../user/user.model';
+import { AuthService} from '../../auth/auth.service';
+
 
 
 @Component({
@@ -56,6 +58,13 @@ export class ProjectTasksComponent implements OnInit {
 
   ]
 
+
+  statusTypes = [
+    { label: 'Pending', value: 'pending' },
+    { label: 'Done', value: 'done' }
+]
+
+
   public many2: Array<string> = ['Explore', 'them'];
 
   constructor(
@@ -67,6 +76,7 @@ export class ProjectTasksComponent implements OnInit {
     private location: Location,
     private activatedRoute: ActivatedRoute,
     private dragulaService: DragulaService,
+    private authService: AuthService,
     //    private _fb: FormBuilder,
     //    private userService: UserService,
     //    private quoteService: QuoteService,
@@ -144,18 +154,29 @@ export class ProjectTasksComponent implements OnInit {
       .subscribe(
       res => {
         this.fetchedProject = <Project>res
+        this.fetchedProject.bucketTasks.forEach((bucketTask, bucketTaskIndex) => {
+          bucketTask.tasks.forEach((task, taskIndex) => {
 
-        // this.fetchedProject.bucketTasks.forEach((bucketTask,i) => {
-        //   this.fetchedProject.bucketTasks[i].openNewTask= false
-        // })
+            this.fetchedProject.bucketTasks[bucketTaskIndex]
+            .tasks[taskIndex].dateTask
+            .creationDateString = this.authService
+            .isoDateToHtmlDate(this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].dateTask.creationDate)
+
+            this.fetchedProject.bucketTasks[bucketTaskIndex]
+            .tasks[taskIndex].dateTask
+            .endDateString = this.authService
+            .isoDateToHtmlDate(this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].dateTask.endDate)
+
+          })
+        });
+        // this.fetchedProject.detail.dateQuote.issueDateString = this.authService.isoDateToHtmlDate(this.fetchedQuote.detail.dateQuote.issueDate)
+        // this.fetchedQuote.detail.dateQuote.expiryDateString = this.authService.isoDateToHtmlDate(this.fetchedQuote.detail.dateQuote.expiryDate)
 
 
-
-        //this.fetchedProject.bucketTasks = this.bucketTasks
-        // console.log(content, index)
-        // this.fetchedProject.bucketTasks[index].tasks.push({name:content})
-        //this.save()
-
+        // creationDate: Date = new Date()
+        // creationDateString: string = '';
+        // endDate: Date = new Date()
+        // endDateString: string = '';
 
       },
       error => {
@@ -185,6 +206,29 @@ export class ProjectTasksComponent implements OnInit {
 
 
   save() {
+
+
+
+    this.fetchedProject.bucketTasks.forEach((bucketTask, bucketTaskIndex) => {
+      bucketTask.tasks.forEach((task, taskIndex) => {
+
+        this.fetchedProject.bucketTasks[bucketTaskIndex]
+        .tasks[taskIndex].dateTask
+        .creationDate = this.authService
+        .HTMLDatetoIsoDate(this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].dateTask.creationDateString)
+
+        this.fetchedProject.bucketTasks[bucketTaskIndex]
+        .tasks[taskIndex].dateTask
+        .endDate = this.authService
+        .HTMLDatetoIsoDate(this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].dateTask.endDateString)
+
+      })
+    });
+
+
+
+
+
     if (this.fetchedProject._id) {
       this.projectService.updateProject(this.fetchedProject)
         .subscribe(

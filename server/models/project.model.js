@@ -29,8 +29,13 @@ var project = new Schema({
       bucketName:{type: String, default: ['']},
       tasks:[{
         name: {type: String},
+        status: {type: String},
         description: {type: String},
         assignedTos: [{type: Schema.Types.ObjectId, ref: 'User'}],
+        dateTask:{
+          creationDate: {type: Date, default: [Date()]},
+          endDate: {type: Date, default: [Date()]},
+        }
       }]
     }]
   },
