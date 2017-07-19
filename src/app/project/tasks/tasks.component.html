@@ -24,12 +24,17 @@
           [title]="'Project'"
           [singleChoice]="true"
           [arrayContent]="searchProjects"
-          (getResultAutocomplete)="selectProject($event[0])">
+          (getResultAutocomplete)="selectProject($event[0])"
+          (clearAutocomplete)="clearAutocomplete()">
         </app-autocomplete>
 
-        <div id="wrapper" class="subsubnav-clients float-left">
+
+        <md-checkbox class="example-margin" [(ngModel)]="search.myTasks" (change)="getTasksInit()">My tasks</md-checkbox>
+
+
+        <!-- <div id="wrapper" class="subsubnav-clients float-left">
           <input class="form-control margebasse col-md-12" type="text" name="Search" placeholder="Rechercher" [(ngModel)]="search.search" (ngModelChange)="searchProjects()">
-        </div>
+        </div> -->
         <table class="table table-hover">
           <thead>
             <tr>

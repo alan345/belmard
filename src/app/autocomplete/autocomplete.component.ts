@@ -32,6 +32,9 @@ export class AutocompleteComponent {
   fetchedData: User[] = [];
 
   @Output() getResultAutocomplete: EventEmitter<any> = new EventEmitter();
+  @Output() clearAutocomplete: EventEmitter<any> = new EventEmitter();
+
+
 
   constructor(
     public dialog: MdDialog,
@@ -112,6 +115,7 @@ export class AutocompleteComponent {
   }
   removeData(i: number) {
     this.arrayContent.splice(i, 1);
+    this.clearAutocomplete.emit()
   }
 
 

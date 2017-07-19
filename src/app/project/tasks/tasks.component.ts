@@ -24,7 +24,8 @@ export class TasksComponent implements OnInit {
   fetchedProjects: Project[] = [];
   search: any = {
     idProject : '',
-    search: ''
+    search: '',
+    myTasks: false
   };
   loading: boolean;
   searchProjects: Project[] = []
@@ -57,19 +58,27 @@ export class TasksComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
       if(params['idProject']) {this.search.idProject = params['idProject']}
-      this.getTasks(1, this.search)
+      this.getTasksInit()
     })
 
   }
   goBack() {
     this.location.back();
   }
-
+  getTasksInit(){
+    this.getTasks(1, this.search)
+  }
   selectProject(project: Project) {
     // this.searchProject = project
     this.search.idProject = project._id
-    this.getTasks(1, this.search)
+    this.getTasksInit()
   }
+  clearAutocomplete(){
+    this.search.idProject = ''
+    this.getTasksInit()
+  }
+
+
 
   // searchProjects() {
   //   this.getTasks(1, this.search)

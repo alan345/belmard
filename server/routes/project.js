@@ -237,9 +237,13 @@ router.get('/unwind', function (req, res, next) {
   if(req.query.idProject)
     aggregate.push({ $match: {_id: mongoose.Types.ObjectId(req.query.idProject)}})
 
+
   aggregate.push({ $unwind : "$bucketTasks" })
   aggregate.push({ $unwind : "$bucketTasks.tasks" })
 
+
+  if(req.query.myTasks === 'true')
+    aggregate.push({ $match: {'bucketTasks.tasks.assignedTos': mongoose.Types.ObjectId(req.user._id)}})
 
 //http://localhost/#/project/tasks;idProject=5966955c48d67d2d7f212034
 
