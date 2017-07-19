@@ -7,6 +7,10 @@ var mongoose                = require('mongoose'),
 var companie = new Schema({
   //  _id: String,
     ownerCompanies: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
+    planDetail:{
+      plan:{type: String, default: ['']},
+      current_period_end:{type: Date}
+    },    
     address: {
       address : {type: String, default: ['']},
       city : {type: String, default: ['']},

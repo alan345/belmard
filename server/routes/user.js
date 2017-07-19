@@ -56,7 +56,7 @@ router.post('/login', function (req, res, next) {
   User
   //
   .findOne({email: req.body.email.toLowerCase()})
-  .populate({path: 'companies', model: 'Companie'})
+  .populate({path: 'ownerCompanies', model: 'Companie'})
   .exec(function (err, doc) {
 
     if (err) {

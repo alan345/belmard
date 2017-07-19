@@ -31,7 +31,7 @@ export class AuthService {
     private errorService: ErrorService,
     private toastr: ToastsManager,
     private router: Router) {
-      console.log('s')
+
       this.user = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')).user : null;
       // set token if saved in local storage
       //console.log('AuthService called')
@@ -133,11 +133,15 @@ export class AuthService {
     return this.user.paiement.stripe.plan
   }
   isCurrentUserIsInSubPeriod(){
-    console.log(this.user)
+    // console.log(this.user)
+
+    let itemFounded = false
+    this.user.ownerCompanies.forEach(ownerCompanie => {
+      if (new Date(ownerCompanie.planDetail.current_period_end) > new Date())
+        itemFounded = true
+    });
     // let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
-    if (new Date(this.user.paiement.stripe.current_period_end) > new Date())
-      return true;
-    return false
+    return itemFounded
   }
   isCurrentUserHasCompanie(){
     // let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
@@ -225,7 +229,6 @@ export class AuthService {
 
   // check if the user is logged in or not, if token is expired, token is deleted from localstorage
   isLoggedIn() {
-    console.log('a')
     if (!tokenNotExpired()) {
       localStorage.clear();
     }

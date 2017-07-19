@@ -13,8 +13,11 @@ var user = new Schema({
     paiement: {
       stripe:{
         cusId:{type: String, default: ['']},
-        plan:{type: String, default: ['']},
-        current_period_end:{type: Date}
+        planDetail:{
+          plan:{type: String, default: ['']},
+          current_period_end:{type: Date}
+        }
+
       }
     },
     salesMan: [{type: Schema.Types.ObjectId, ref: 'User'}],

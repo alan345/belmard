@@ -2,6 +2,7 @@ var express = require('express'),
     router  = express.Router(),
     config  = require('../config/config'),
     User    = require('../models/user.model'),
+    Companie= require('../models/companie.model'),
     fs      = require('fs'),
     jwt     = require('jsonwebtoken'),
     stripe  = require("stripe")("sk_test_cg4vcpE5gV1ApywsErwoWL7u");
@@ -222,14 +223,28 @@ router.delete('/deleteCustInStripe', function (req, res, next) {
 
 function updateCurrent_period_endInDb(req, current_period_end, plan){
   let paiement = req.user.paiement
-  paiement.stripe.current_period_end = current_period_end*1000
-  paiement.stripe.plan = plan
+  paiement.stripe.planDetail.current_period_end = current_period_end*1000
+  paiement.stripe.planDetail.plan = plan
+
+
+  let planDetail = {
+    current_period_end: current_period_end*1000,
+    plan: plan
+  }
   return new Promise(function(resolve, reject) {
     User.update({ _id: req.user._id }, { $set: { paiement: paiement}}, function (err, item) {
-      if (item) { resolve(item) } else { reject(err) }
+      if (item) {
+        Companie.update({ _id: req.user.ownerCompanies[0] }, { $set: { planDetail: planDetail}}, function (err, item) {
+          if (item) { resolve(item) } else { reject(err) }
+        });
+      } else { reject(err) }
     });
+
   })
 }
+
+
+
 
 function updateStripeCustomerIdToDb(req, customer){
   let paiement = req.user.paiement
@@ -251,10 +266,10 @@ function createCustomerInStripe(req) {
     }, function(err, customer) {
       if(customer){
         console.log("customer Created in Stripe")
-        console.log(customer)
+        // console.log(customer)
         resolve(customer)
       } else {
-        console.log(err)
+        // console.log(err)
         reject(error)
       }
     })

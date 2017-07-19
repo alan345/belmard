@@ -12,6 +12,12 @@ export class Companie {
   forms: Form[] = [];
   categJson: CategJson = new CategJson();
   categories = new Categorie()
+  planDetail = new PlanDetail()
+}
+
+export class PlanDetail {
+  current_period_end: Date
+  plan: string= '';
 }
 
 export class Categorie {
