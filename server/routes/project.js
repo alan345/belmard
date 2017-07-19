@@ -245,7 +245,7 @@ router.get('/unwind', function (req, res, next) {
   if(req.query.myTasks === 'true')
     aggregate.push({ $match: {'bucketTasks.tasks.assignedTos': mongoose.Types.ObjectId(req.user._id)}})
 
-//http://localhost/#/project/tasks;idProject=5966955c48d67d2d7f212034
+  aggregate.push({ $lookup: {from: 'users', localField: 'bucketTasks.tasks.assignedTos', foreignField: '_id', as: 'bucketTasks.tasks.assignedTos'} })
 
 
   Project

@@ -115,9 +115,7 @@ export class TasksComponent implements OnInit {
     this.projectService.getTasks(page, search)
       .subscribe(
         res => {
-          // this.paginationData = res.paginationData;
           this.fetchedProjects = res.item
-          console.log(this.fetchedProjects)
           this.loading = false;
         },
         error => {

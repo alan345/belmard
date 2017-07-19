@@ -38,18 +38,11 @@
         <table class="table table-hover">
           <thead>
             <tr>
-              <!--
-              <th class="tbl-left">
-                <!-- <button class="updownbtn" (click)="orderBy('profile.name')"><i class="fa fa-chevron-down"></i></button>
-                    <button class="updownbtn" (click)="orderBy('-profile.name')"><i class="fa fa-chevron-up"></i></button>
-              </th>
-               -->
+
               <th class="centre">Project</th>
               <th class="centre">Name Task</th>
-              <th class="centre">Nom</th>
-              <th class="centre">Date</th>
               <th class="centre">Assigned to</th>
-              <th class="centre">Statut</th>
+
             </tr>
           </thead>
           <tbody class="clienttbl">
@@ -57,6 +50,11 @@
               [routerLink]="['/project/tasks/' + project._id]" routerLinkActive="active">
               <td class="centre">{{project.details.name}}</td>
               <td class="centre">{{project.bucketTasks.tasks.name}}</td>
+              <td class="centre">
+                <div *ngFor="let assignedTo of project.bucketTasks.tasks.assignedTos">
+                  {{assignedTo.profile.name}} {{assignedTo.profile.lastName}}
+                </div>
+              </td>
               <!-- <td class="centre">{{project.details.customer}}</td>
               <td class="centre">{{project.details.name}}</td>
               <td class="centre">{{project.details.date}}</td>
@@ -71,10 +69,7 @@
           </tbody>
         </table>
 
-        <div class="has-text-centered">
-          <div [hidden]="!loading">Loading...</div>
-          <pagination-controls (pageChange)="getPage($event)" id="projectPagination" class="change-page"></pagination-controls>
-        </div>
+
       </div>
 
     </div>
