@@ -1,7 +1,8 @@
 <div class="row">
   <div class="col-md-1"></div>
   <div class="col-md-2"><button type="button" class="btn btn-warning" (click)="goBack()"><i class="fa fa-chevron-left"><a> Retour</a></i></button></div>
-  <div class="col-md-6"><h3 class="title">Ajouter / Éditer un Projet</h3></div>
+  <div class="col-md-6">
+    <h3 class="title">Ajouter / Éditer un Projet</h3></div>
   <div class="col-md-3"></div>
 </div>
 
@@ -10,47 +11,28 @@
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()" (keydown.enter)="$event.preventDefault()">
       <div>
         <div>
-          <label>Id</label>
-          {{fetchedProject._id}}
+          <label>Id</label> {{fetchedProject._id}}
         </div>
       </div>
-
-
       <div>
-        <button (click)="changeCascade(i, -1, -1)"
-          *ngFor="let itemStep of itemSteps;let i=index;"
-          type="button"
-          class="btn"
-          [ngClass]="{'btn-success': i==selectedIndex0, '': i!=selectedIndex0}">
+        <button (click)="changeCascade(i, -1, -1)" *ngFor="let itemStep of itemSteps;let i=index;" type="button" class="btn" [ngClass]="{'btn-success': i==selectedIndex0, '': i!=selectedIndex0}">
           {{itemStep.categ}}
         </button>
       </div>
       <br>
       <div *ngIf="selectedIndex0>=0">
-        <button
-          (click)="changeCascade(selectedIndex0, i, -1)"
-          *ngFor="let itemStep of itemSteps[selectedIndex0].subCateg;let i=index;"
-          type="button"
-          class="btn"
-          [ngClass]="{'btn-success': i==selectedIndex1, '': i!=selectedIndex1}">
+        <button (click)="changeCascade(selectedIndex0, i, -1)" *ngFor="let itemStep of itemSteps[selectedIndex0].subCateg;let i=index;" type="button" class="btn" [ngClass]="{'btn-success': i==selectedIndex1, '': i!=selectedIndex1}">
           {{itemStep.categ}}
         </button>
       </div>
       <br>
       <div *ngIf="selectedIndex1>=0">
-        <button (click)="changeCascade(selectedIndex0, selectedIndex1, i)"
-          *ngFor="let itemStep of itemSteps[selectedIndex0].subCateg[selectedIndex1].subCateg;let i=index;"
-          type="button"
-          class="btn"
-          [ngClass]="{'btn-success': i==selectedIndex2, '': i!=selectedIndex2}">
+        <button (click)="changeCascade(selectedIndex0, selectedIndex1, i)" *ngFor="let itemStep of itemSteps[selectedIndex0].subCateg[selectedIndex1].subCateg;let i=index;" type="button" class="btn" [ngClass]="{'btn-success': i==selectedIndex2, '': i!=selectedIndex2}">
           {{itemStep.categ}}
         </button>
       </div>
-<!-- {{itemSteps[selectedIndex0].subCateg|json}} -->
+
       <br>
-      <!-- <button (click)="changeCascade(selectedIndex0, selectedIndex1, 0)" *ngFor="let itemStep of itemSteps[selectedIndex0].subCateg[selectedIndex1];let i=index;" type="button" class="btn btn-success">
-        {{itemStep | json}}
-      </button> -->
 
       <a *ngIf="fetchedProject._id" [routerLink]="['/project/tasks/' + fetchedProject._id]" class="admn-btn">
         Taches
@@ -69,22 +51,11 @@
       </div>
 
 
-      <!-- <div class="FormGroup whtxt">
-        <a class="btn btn-primary" (click)="addCalendar()">
-         <i class="fa fa-calendar" aria-hidden="true"></i>
-         <span>Choisir Date</span>
-        </a>
-      </div> -->
 
       <div class="form-group">
         <label>Creation Date</label>
         <div>
-          <input
-            type="date"
-            class="form-control"
-            [ngModelOptions]="{standalone: true}"
-            class="form-control"
-            [(ngModel)]="fetchedProject.dateProject.creationDateString" >
+          <input type="date" class="form-control" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedProject.dateProject.creationDateString">
         </div>
       </div>
 
@@ -92,79 +63,19 @@
       <div *ngIf="fetchedProject._id" class="FormGroup whtxt">
         <a class="btn btn-warning" (click)="seeCalendar()">
          <i class="fa fa-calendar" aria-hidden="true"></i>
-         <span>Voir calendrier du Projet</span>
+         <span>See calendar for this project</span>
         </a>
       </div>
 
 
       <app-autocomplete [typeAutocomplete]="'user'" [title]="'Customer'" [singleChoice]="'true'" [arrayContent]="fetchedProject.clients" (getResultAutocomplete)="selectUser($event[0])">
       </app-autocomplete>
-      <!-- <div>
-
-
-
-          <input class="form-control col-md-3" [ngModelOptions]="{standalone: true}"
-
-          [(ngModel)]="autocompleteUser"
-          placeholder="Select"
-          (ngModelChange)="searchUsers()"
-          mdInput>
-        </div>
-        <div class="form-control col-md-3" *ngFor="let user of fetchedUsers; let i=index">
-         <table>
-            <tr>
-              <td class="tdbtn1">{{user.profile.name}} - {{user.profile.lastName}}</td>
-              <td class="tdbtn2"><button class="btn btn-success" type="button" (click)="selectUser(user)">select</button></td>
-            </tr>
-          </table>
-        </div>
-        <div class="form-control col-md-3" *ngFor="let user of fetchedProject.clients; let i=index">
-          <table>
-            <tr>
-              <td class="tdbtn1">{{user.profile.name}} - {{user.profile.lastName}}</td>
-              <td class="tdbtn2"><button class="btn btn-danger btn-sm ferme" type="button" (click)="removeUser(i)"><i class="fa fa-times"></i></button></td>
-            </tr>
-          </table>
-        </div> -->
-      <!--
-      <input
-        *ngIf="!fetchedProject.clients.length"
-        [ngModelOptions]="{standalone: true}"
-        [(ngModel)]="autocompleteUser"
-        placeholder="Select"
-        (ngModelChange)="searchUsers()"
-        mdInput
-      >
-      <div *ngFor="let user of fetchedUsers; let i=index">
-        {{user.profile.name}} - {{user.profile.lastName}}
-        <button type="button" (click)="selectUser(user)">select</button>
-      </div>
-      <div *ngIf="fetchedUsers.length == 0 && autocompleteUser !=''">
-          Pas de resultats,
-          <a [routerLink]="['/user/newuser']" class="admn-btn">
-            Créer un nouveau client
-          </a>
-      </div>
-      <div *ngFor="let user of fetchedProject.clients; let i=index">
-        {{user.profile.name}} - {{user.profile.lastName}}
-        <button type="button" (click)="removeUser(i)"><i class="fa fa-times"></i></button>
-      </div> -->
-      <!-- Autocomplete User -->
-
 
       <br>
       <div *ngIf="fetchedProject._id">
         <div *ngFor="let user of fetchedProject.clients">
           <label>Devis</label>
-
-
-          <app-quotes
-            [showHeader]=false
-            [userId]="user._id"
-            [projectId]="fetchedProject._id"></app-quotes>
-          <!-- <app-projects [userId]="fetchedUser._id"></app-projects> -->
-
-
+          <app-quotes [showHeader]=false [userId]="user._id" [projectId]="fetchedProject._id"></app-quotes>
 
         </div>
       </div>
@@ -173,7 +84,6 @@
 
       <div class="form-group prmimg-cnt">
 
-        <!-- <input type="hidden" class="form-control" formControlName="_id" [(ngModel)]="fetchedProject.form._id"> -->
         <div *ngFor="let singleForm of fetchedProject.forms; let i=index;">
           <img class="promo-img" src="./uploads/forms/{{singleForm.owner}}/{{singleForm.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
           <button type="button" md-button (click)="removePic(i)">
@@ -193,36 +103,23 @@
 
 
       <div class="form-group">
-      <select class="form-control col-md-3"
-        formControlName="status"
-        [(ngModel)]="fetchedProject.status">
+        <select class="form-control col-md-3" formControlName="status" [(ngModel)]="fetchedProject.status">
         <option *ngFor="let n of status" [ngValue]="n.index">{{n.label}}</option>
       </select>
-    </div>
-
-
-
-
-    <div class="form-group">
-    <!-- Autocomplete AssignedTo-->
-
-    <app-autocomplete [typeAutocomplete]="'user'" [title]="'Assigned To'" [singleChoice]="'true'" [arrayContent]="fetchedProject.assignedTos" (getResultAutocomplete)="selectAssignedTo($event[0])">
-    </app-autocomplete>
-    <!-- <app-newUser></app-newUser> -->
       </div>
 
+      <div class="form-group">
+        <app-autocomplete [typeAutocomplete]="'user'" [title]="'Assigned To'" [singleChoice]="'true'" [arrayContent]="fetchedProject.assignedTos" (getResultAutocomplete)="selectAssignedTo($event[0])">
+        </app-autocomplete>
 
-    <div class="valid-edit">
-      <button type="submit" class="done btn btn-success" [disabled]="!myForm.valid">Valider</button>
-      <button
-        *ngIf="fetchedProject._id"
-        type="button"
-        class="delete"
-        md-button
-        (click)="openDialogDelete()">
+      </div>
+
+      <div class="valid-edit">
+        <button type="submit" class="done btn btn-success" [disabled]="!myForm.valid">Valider</button>
+        <button *ngIf="fetchedProject._id" type="button" class="delete" md-button (click)="openDialogDelete()">
         Delete
       </button>
-    </div>
-    <div class="clearfix"></div>
-  </form>
-</div>
+      </div>
+      <div class="clearfix"></div>
+    </form>
+  </div>
