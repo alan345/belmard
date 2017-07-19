@@ -176,6 +176,11 @@
         </div>
         <div class="form-group col-sm-12">
           <label>Couleur Calendrier</label>
+          <div
+            class="round"
+            [style.background-color]="fetchedUser.profile.colorCalendar">
+          </div>
+
           <input
             type="color"
             formControlName="colorCalendar"
@@ -236,7 +241,7 @@
                     >
                   </app-autocomplete>
                 </div>
-                      
+
       <div class="valid-edit">
         <button type="submit" [disabled]="!myForm.valid" [ngClass]="{'done':myForm.valid,'pas-done':!myForm.valid}">Done</button>
         <button

@@ -75,7 +75,10 @@ router.get('/page/:page', function (req, res, next) {
 
 
 if(req.query.isInTeam === 'true')
+  findQuery['companies'] = { $eq: [] }
+if(req.query.isInTeam === 'false')
   findQuery['companies'] = { $gt: [] }
+
 
 
 
@@ -94,6 +97,7 @@ if(req.query.isInTeam === 'true')
 
   User
   .find(findQuery)
+  .populate({ path: 'companies', model: 'Companie'})
   .limit(itemsPerPage)
   .skip(skip)
   .sort(req.query.orderBy)
@@ -383,16 +387,9 @@ router.post('/', function (req, res, next) {
 
   user.role = role
   user.password = passwordHash.generate(makeid()),
-  // var user = new User({
-  //   email: email,
-  //   password: passwordHash.generate(uniqueString),
-  //   profile : req.body.profile,
-  //   role : role
-  // });
-//  console.log(user)
-  user.save(function (err, result) {
+
+  user.save(function (err, user) {
     if (err) {
-      console.log(err)
       return res.status(403).json({
         title: 'There was an issue',
         error: err
@@ -400,34 +397,145 @@ router.post('/', function (req, res, next) {
     }
     res.status(200).json({
       message: 'Registration Successfull',
-      obj: result
+      obj: user
     })
+    sendEmailToUserToJoinCompanie(req, user)
   })
 });
 
 
-var rmDir = function (dirPath, removeSelf) {
-  if (removeSelf === undefined)
-    removeSelf = true;
-  try {
-    var files = fs.readdirSync(dirPath);
-  }
-  catch (e) {
-    return;
-  }
-  if (files.length > 0)
-    for (var i = 0; i < files.length; i++) {
-      var filePath = dirPath + '/' + files[i];
-      if (fs.statSync(filePath).isFile())
-        fs.unlinkSync(filePath);
-      else
-        rmDir(filePath);
+
+
+function sendEmailToUserToJoinCompanie(req, user) {
+  async.waterfall([
+    function (done) {
+      crypto.randomBytes(20, function (err, buf) {
+        var token = buf.toString('hex');
+        done(err, token);
+      });
+    },
+    function (token, done) {
+        user.resetPasswordToken   = token;
+        user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
+        user.save(function (err) {
+          done(err, token, user);
+        });
+
+    },
+    function (token, user, done) {
+      var mailer = nodemailer.createTransport({
+          service: "Gmail",
+          auth: {
+              user: config.userGmail,
+              pass: config.passGmail
+          }
+      })
+      var html = `
+      <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+      <html xmlns="http://www.w3.org/1999/xhtml">
+        <head>
+          <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+          <title>Email from My Chair App by Phyto Paris</title>
+          <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"></link>
+        </head>
+        <body style="margin: 0; padding: 0; font-family: 'Montserrat', sans-serif;">
+          <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border: 1px solid #cccccc;">
+            <tr>
+              <td align="center" bgcolor="#0a2f87" height="150">
+                <img
+                  src="http://${req.headers.host}/assets/images/mychair-logo-horizontal-white.png"
+                  alt="Invitation from Gooplus Management" width="305" height="100" style="display: block; color: #ffffff;"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td bgcolor="#ffffff" style="padding: 15px 15px 15px 15px;">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                  <tr>
+                    <td>Hi ${user.profile.name} ${user.profile.lastName},</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 15px 0 30px 0;">
+                      You have been invited to join a salon on the Gooplus Management App.
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="center" style="background-color: #0a2f87; padding: 10px 15px; cursor: pointer;">
+                      <a
+                        href="http://${req.headers.host}/#/user/reset/${token}"
+                        style="color: #ffffff; text-decoration: none;"
+                      >
+                        Accept the Invitation
+                      </a>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td bgcolor="#eeeeee">
+                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                 <tr>
+                  <td style="padding: 15px 15px 15px 15px;">
+                    <a href="https://www.phyto.com/" style="text-decoration: none;">Phyto Website</a>
+                  </td>
+                  <td style="padding: 15px 15px 15px 15px;">
+                    <a href="mailto:mychair@alesgroup.com?Subject=My%20Chair%20App%20Invitation%20Email" style="text-decoration: none;">Contact Us</a>
+                  </td>
+                 </tr>
+                </table>
+              </td>
+            </tr>
+          </table>
+        </body>
+      </html>
+      `;
+      var mailOptions = {
+        to: user.email,
+        from: config.userGmail,
+        subject: 'Gooplus Management | New Invitation ',
+        html: html
+      };
+      mailer.sendMail(mailOptions, function (err) {
+        console.log('info', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
+        return res.status(200).json({
+          message: 'Success',
+          token:'InMail'
+        })
+      });
     }
-  if (removeSelf)
-    fs.rmdirSync(dirPath);
-};
+  ], function (err) {
+    console.log(err)
+    if (err) return next(err);
+  });
+}
 
 
+
+//
+// var rmDir = function (dirPath, removeSelf) {
+//   if (removeSelf === undefined)
+//     removeSelf = true;
+//   try {
+//     var files = fs.readdirSync(dirPath);
+//   }
+//   catch (e) {
+//     return;
+//   }
+//   if (files.length > 0)
+//     for (var i = 0; i < files.length; i++) {
+//       var filePath = dirPath + '/' + files[i];
+//       if (fs.statSync(filePath).isFile())
+//         fs.unlinkSync(filePath);
+//       else
+//         rmDir(filePath);
+//     }
+//   if (removeSelf)
+//     fs.rmdirSync(dirPath);
+// };
+//
+//
 
 
 

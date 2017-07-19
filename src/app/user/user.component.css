@@ -9,3 +9,10 @@
 	cursor:pointer;
 	font-weight:bold;
 }
+.round {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 2px;
+}

@@ -22,7 +22,7 @@ export class AdminUsersComponent implements OnInit {
   search = {
     orderBy : '',
     search: '',
-    isInTeam: '',
+    isInTeam: 'true',
     role: ''
   };
   paginationData = {

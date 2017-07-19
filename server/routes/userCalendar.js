@@ -6,6 +6,15 @@ var express = require('express'),
     fs      = require('fs'),
     jwt     = require('jsonwebtoken')
 
+
+  
+        crypto      = require("crypto"),
+        nodemailer  = require('nodemailer'),
+        async       = require('async'),
+        sgTransport = require('nodemailer-sendgrid-transport'),
+        config      = require('../config/config');
+
+
 // this process does not hang the nodejs server on error
 process.on('uncaughtException', function (err) {
   console.log(err)
@@ -102,7 +111,7 @@ router.put('/:id', function (req, res, next) {
 })
 
 router.post('/', function (req, res, next) {
-  if(!req.user.companies.length) {
+  if(!req.user.ownerCompanies.length) {
     return res.status(404).json({
       message: 'You must belong to a companie',
       err: ''
@@ -111,7 +120,7 @@ router.post('/', function (req, res, next) {
   //console.log(req.body)
   //var UserCalendar = new UserCalendar(req.body)
   var userCalendar = new UserCalendar(req.body)
-  userCalendar.ownerCompanies = req.user.companies
+  userCalendar.ownerCompanies = req.user.ownerCompanies
   // console.log(userCalendar)
 
   userCalendar.save(function (err, result) {

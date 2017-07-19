@@ -37,7 +37,7 @@
               <th class="centre">Client</th>
               <th class="centre">Nom</th>
               <th class="centre">Date</th>
-              <th class="centre">Responsable</th>
+              <th class="centre">Company</th>
               <th class="centre">Statut</th>
             </tr>
           </thead>
@@ -51,7 +51,11 @@
               <td class="centre">{{user.profile.name}}</td>
               <td class="centre">{{user.profile.lastName}}</td>
               <td class="centre">{{user.createdAt | date:'yyyy-MM-dd' }}</td>
-
+              <td class="centre">
+                <div *ngFor="let companie of user.companies">
+                  {{companie.nameCompanie}}
+                </div>
+              </td>
               <td class="centre btn btn-outline-info"></td>
             </tr>
           </tbody>
