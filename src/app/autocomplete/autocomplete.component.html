@@ -18,7 +18,7 @@
       (ngModelChange)="searchData()">
       <div *ngFor="let data of fetchedData; let i=index">
         <div *ngIf="typeAutocomplete=='user'">{{data.profile.name}} {{data.profile.lastName}}</div>
-        <div *ngIf="typeAutocomplete=='companie'">{{data.name}}</div>
+        <div *ngIf="typeAutocomplete=='companie'">{{data.nameCompanie}}</div>
         <div *ngIf="typeAutocomplete=='quote'">{{data.name}}</div>
         <div *ngIf="typeAutocomplete=='project'">{{data.details.name}}</div>
         <div *ngIf="typeAutocomplete=='product'">{{data.details.referenceName}}</div>
@@ -48,7 +48,7 @@
         <!-- <div *ngIf="typeAutocomplete=='user'" class="round" [style.background-color]="user.profile.colorCalendar"></div> -->
 
         <div *ngIf="typeAutocomplete=='user'">{{data.profile.name}} {{data.profile.lastName}}</div>
-        <div *ngIf="typeAutocomplete=='companie'">{{data.name}}</div>
+        <div *ngIf="typeAutocomplete=='companie'">{{data.nameCompanie}}</div>
         <div *ngIf="typeAutocomplete=='quote'">{{data.name}}</div>
         <div *ngIf="typeAutocomplete=='project'">{{data.details.name}}</div>
         <div *ngIf="typeAutocomplete=='product'">{{data.details.referenceName}}</div>

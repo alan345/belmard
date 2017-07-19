@@ -5,14 +5,15 @@ var mongoose                = require('mongoose'),
     mongooseUniqueValidator = require('mongoose-unique-validator')
 
 var user = new Schema({
+    ownerCompanies: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
     companies: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
     email: {type: String, unique: true, required: true, lowercase: true},
     password: {type: String, required: true},
     forms: [{type: Schema.Types.ObjectId, ref: 'Form'}],
     paiement: {
       stripe:{
-        cusId:{type: String},
-        plan:{type: String},
+        cusId:{type: String, default: ['']},
+        plan:{type: String, default: ['']},
         current_period_end:{type: Date}
       }
     },

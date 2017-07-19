@@ -83,8 +83,12 @@ export class NewUserComponent implements OnInit {
         }
       );
   }
-  selectCompanie(companies) {
-    this.fetchedUser.companies = companies
+  selectCompanie(companie: Companie) {
+    this.fetchedUser.companies = [companie]
+  }
+
+  selectOwnerCompanies(companie: Companie) {
+    this.fetchedUser.ownerCompanies = [companie]
   }
   //
   // removeCompanie(i: number) {
@@ -135,7 +139,7 @@ export class NewUserComponent implements OnInit {
   ngOnInit() {
     this.myForm = this._fb.group({
         email: [this.emailValidator],
-
+        type: [''],
         profile: this._fb.group({
           language: [''],
           colorCalendar: [''],
@@ -205,8 +209,8 @@ export class NewUserComponent implements OnInit {
   saveAndCreateProject() {
     this.save()
     this.router.navigate(['project/new/' + this.fetchedUser._id])
-
   }
+
   save() {
     // this.userService.cleanCurrentUserInSession()
     //console.log(this.typeUserDropDown)

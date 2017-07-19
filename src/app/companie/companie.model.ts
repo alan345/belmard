@@ -3,7 +3,7 @@ import { User } from '../user/user.model';
 
 export class Companie {
   _id: string = '';
-  name: string = '';
+  nameCompanie: string = '';
   typeCompanie: string = '';
   phoneNumber: string= '';
   address: Address = new Address();

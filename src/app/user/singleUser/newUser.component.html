@@ -207,69 +207,36 @@
           </div>
         </div>
 
-        <div class="form-group col-sm-12">
-            <!-- Autocomplete -->
-            <label>Type User</label>
-            <input
-              *ngIf="!fetchedUser.type.length"
-              [ngModelOptions]="{standalone: true}"
-              [(ngModel)]="autocompleteTypeUser"
-              placeholder="Select type User"
-              (ngModelChange)="searchTypeUser()"
-              mdInput
-            >
-            <div *ngFor="let fetchedTypeUser of fetchedTypeUsers; let i=index">
-              {{fetchedTypeUser}}
-              <button type="button" (click)="selectTypeUser(fetchedTypeUser)">select</button>
-            </div>
-            <div *ngFor="let typeUser of fetchedUser.type; let i=index">
-              {{typeUser}}
-              <button type="button" (click)="removeTypeUser(i)"><i class="fa fa-times"></i></button>
-            </div>
-            <!-- Autocomplete -->
-          </div>
-
-
-          <div class="form-group col-sm-12">
-            <app-autocomplete
-              [title]="'Entreprise'"
-              [singleChoice]="'true'"
-              [typeAutocomplete]="'companie'"
-              [arrayContent]="fetchedUser.companies"
-              (getResultAutocomplete)="selectCompanie($event)"
-              >
-            </app-autocomplete>
-          </div>
-
 
         <div class="form-group col-sm-12">
-          <!-- Autocomplete companie -->
-          <!-- <label>Entreprise</label>
-          <input
-            *ngIf="!fetchedUser.companies.length"
-            [ngModelOptions]="{standalone: true}"
-            [(ngModel)]="autocompleteCompanie"
-            placeholder="Select"
-            (ngModelChange)="searchCompanies()"
-            mdInput
-          >
-          <div *ngFor="let fetchedCompanie of fetchedCompanies; let i=index">
-            {{fetchedCompanie.name}}
-            <button type="button" (click)="selectCompanie(fetchedCompanie)">select</button>
-          </div>
-          <div *ngIf="fetchedCompanies.length == 0 && autocompleteCompanie !=''">
-            Pas de resultats,
-            <a [routerLink]="['/companie/new']" class="admn-btn">
-              Ajouter Entreprise
-            </a>
-          </div>
-          <div *ngFor="let vendor of fetchedUser.companies; let i=index">
-            {{vendor.name}}
-            <button type="button" (click)="removeCompanie(i)"><i class="fa fa-times"></i></button>
-          </div> -->
-          <!-- Autocomplete companie -->
+
         </div>
       </div>
+
+
+
+              <div class="form-group col-sm-12">
+                  <!-- Autocomplete -->
+                  <label>Type User</label>
+
+                  <select class="form-control" formControlName="type" [(ngModel)]="fetchedUser.type">
+                    <option *ngFor="let n of typeUser" [attr.value]="n">{{n}}</option>
+                  </select>
+
+                </div>
+
+
+                <div class="form-group col-sm-12">
+                  <app-autocomplete
+                    [title]="'Entreprise'"
+                    [singleChoice]="'true'"
+                    [typeAutocomplete]="'companie'"
+                    [arrayContent]="fetchedUser.companies"
+                    (getResultAutocomplete)="selectCompanie($event[0])"
+                    >
+                  </app-autocomplete>
+                </div>
+                      
       <div class="valid-edit">
         <button type="submit" [disabled]="!myForm.valid" [ngClass]="{'done':myForm.valid,'pas-done':!myForm.valid}">Done</button>
         <button

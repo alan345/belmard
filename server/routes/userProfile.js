@@ -69,18 +69,26 @@ router.get('/page/:page', function (req, res, next) {
   let roleToSearch = []
   let findQuery = {}
 
-  if(req.query.parentUser)
-    findQuery['profile.parentUser'] = mongoose.Types.ObjectId(req.query.parentUser)
+  // if(req.query.parentUser)
+  //   findQuery['profile.parentUser'] = mongoose.Types.ObjectId(req.query.parentUser)
 
+
+
+if(req.query.isInTeam === 'true')
+  findQuery['companies'] = { $gt: [] }
+
+
+
+  findQuery['ownerCompanies'] = req.user.ownerCompanies
 
   if(req.query.search)
     findQuery['profile.name'] = new RegExp(req.query.search, 'i')
 
 
-  if(req.query.role) {
-    roleToSearch = [req.query.role]
-    findQuery['role'] = {$in: roleToSearch}
-  }
+  // if(req.query.role) {
+  //   roleToSearch = [req.query.role]
+  //   findQuery['role'] = {$in: roleToSearch}
+  // }
 
 
 
@@ -110,64 +118,16 @@ router.get('/page/:page', function (req, res, next) {
       })
     }
   })
-
-
 })
 
-
-//
-// router.get('/getUsersByEmail', function (req, res, next) {
-//   var itemsPerPage = 5
-//   var currentPage = 1
-//   var pageNumber = currentPage - 1
-//   var skip = (itemsPerPage * pageNumber)
-//   var limit = (itemsPerPage * pageNumber) + itemsPerPage
-//   //lastVisit
-//   //console.log(req.query.email)
-//
-//   User
-//   .find({
-//     'email' : new RegExp(req.query.email, 'i')
-//   })
-//   .limit(itemsPerPage)
-//   .skip(skip)
-//   .sort(req.query.orderBy)
-//   .exec(function (err, item) {
-//     if (err) {
-//       return res.status(404).json({
-//         message: 'No results',
-//         err: err
-//       })
-//     } else {
-//       User
-//       .find({
-//         'profile.name' : new RegExp(req.query.search, 'i')
-//       })
-//       .count().exec(function (err, count) {
-//       res.status(200).json({
-//           paginationData : {
-//             totalItems: count,
-//             currentPage : currentPage,
-//             itemsPerPage : itemsPerPage
-//           },
-//           data: item
-//         })
-//       })
-//     }
-//   })
-// })
 
 
 function getUser(req, res, next, id) {
     User
     .findById(id)
-    // .populate('products.product')
     .populate({path: 'forms', model: 'Form'})
     .populate({path: 'salesMan', model: 'User'})
-    // .populate('profile._profilePicture')
-    // .populate('profile.parentUser')
-
-
+    .populate({path: 'ownerCompanies', model: 'Companie'})
     .populate({
         path: 'companies',
         model: 'Companie',
@@ -335,23 +295,23 @@ router.post('/password', function (req, res, next) {
 
 
 
-
-router.put('/addCompanieToMyself', function (req, res, next) {
-  console.log(req.user._id)
-  User.update({ _id: req.user._id }, { $set: { companies: [req.body._id] }}, function (err, item) {
-    if (err) {
-      return res.status(404).json({
-        message: '',
-        err: err
-      })
-    } else {
-      res.status(201).json({
-        message: '',
-        obj: item
-      });
-    }
-  });
-});
+//
+// router.put('/addCompanieToMyself', function (req, res, next) {
+//   console.log(req.user._id)
+//   User.update({ _id: req.user._id }, { $set: { companies: [req.body._id] }}, function (err, item) {
+//     if (err) {
+//       return res.status(404).json({
+//         message: '',
+//         err: err
+//       })
+//     } else {
+//       res.status(201).json({
+//         message: '',
+//         obj: item
+//       });
+//     }
+//   });
+// });
 
 
 //update profile @alan
@@ -415,6 +375,7 @@ router.post('/', function (req, res, next) {
   if (!req.body.profile.parentUser.length) {
     req.body.profile.parentUser = [req.user._id]
   }
+  req.body.ownerCompanies = req.user.ownerCompanies
 
   delete req.body._id
   // var project = new Project(req.body)

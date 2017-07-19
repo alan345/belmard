@@ -150,17 +150,17 @@ export class UserService {
   }
 
 
-  addCompanieToMyself(companie: Companie) {
-    const body = JSON.stringify(companie);
-    const headers = new Headers({'Content-Type': 'application/json'});
-    headers.append('Authorization', '' + this.authService.currentUser.token);
-    return this.http.put(this.url + 'profile/addCompanieToMyself/', body, {headers: headers})
-      .map(response => response.json())
-      .catch((error: Response) => {
-        this.errorService.handleError(error.json());
-        return Observable.throw(error.json());
-      });
-  }
+  // addCompanieToMyself(companie: Companie) {
+  //   const body = JSON.stringify(companie);
+  //   const headers = new Headers({'Content-Type': 'application/json'});
+  //   headers.append('Authorization', '' + this.authService.currentUser.token);
+  //   return this.http.put(this.url + 'profile/addCompanieToMyself/', body, {headers: headers})
+  //     .map(response => response.json())
+  //     .catch((error: Response) => {
+  //       this.errorService.handleError(error.json());
+  //       return Observable.throw(error.json());
+  //     });
+  // }
 
 
   getUserDetails(userId: string) {

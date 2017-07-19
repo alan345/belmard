@@ -400,25 +400,25 @@ export class EditCompanieComponent implements OnInit {
     }
   }
 
-
-saveToMyCompanie(){
-  this.companieService.saveCompanie(this.fetchedCompanie)
-    .subscribe(
-      res => {
-        this.userService.addCompanieToMyself(res.obj)
-          .subscribe(
-            res => {
-              // this.userService.cleanCurrentUserInSession()
-              location.reload();
-              this.toastr.success('Great!', res.message)
-            },
-            error => {console.log(error)}
-          )
-        this.toastr.success('Great!', res.message)
-      },
-      error => {console.log(error)}
-    )
-}
+// 
+// saveToMyCompanie(){
+//   this.companieService.saveCompanie(this.fetchedCompanie)
+//     .subscribe(
+//       res => {
+//         this.userService.addCompanieToMyself(res.obj)
+//           .subscribe(
+//             res => {
+//               // this.userService.cleanCurrentUserInSession()
+//               location.reload();
+//               this.toastr.success('Great!', res.message)
+//             },
+//             error => {console.log(error)}
+//           )
+//         this.toastr.success('Great!', res.message)
+//       },
+//       error => {console.log(error)}
+//     )
+// }
   // move(i: number, incremet: number, typeUser: string) {
   //   if(i>=0 && i<=this[typeUser].length + incremet) {
   //     var tmp = this[typeUser][i];

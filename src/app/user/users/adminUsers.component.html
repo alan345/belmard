@@ -21,8 +21,8 @@
           <input class="form-control margebasse col-md-12" type="text" name="Search" placeholder="Rechercher" [(ngModel)]="search.search" (ngModelChange)="searchUsers()">
         </div>
         <md-tab-group (selectChange)="onSelectChange($event)" class="beigeback admin-users">
-          <md-tab label="client"></md-tab>
-          <md-tab label="admin"></md-tab>
+          <md-tab label="Team" data-isInTeam="true"></md-tab>
+          <md-tab label="External Contacts" data-isInTeam="false"></md-tab>
         </md-tab-group>
         <table class="table table-hover">
           <thead>

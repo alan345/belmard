@@ -141,7 +141,7 @@ export class AuthService {
   }
   isCurrentUserHasCompanie(){
     // let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
-    if(this.user.companies.length)
+    if(this.user.ownerCompanies.length)
       return true
     return false
   }

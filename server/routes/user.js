@@ -8,32 +8,47 @@ var express = require('express'),
   mime = require('mime'),
   path = require('path'),
   crypto = require("crypto"),
-  gm = require('gm').subClass({imageMagick: true});
-
-var User = require('../models/user.model');
+  gm = require('gm').subClass({imageMagick: true}),
+  Companie                = require('../models/companie.model'),
+  User = require('../models/user.model');
 
 // user register
 router.post('/register', function (req, res, next) {
-  var user = new User({
-    email: req.body.email,
-    password: passwordHash.generate(req.body.password),
-    profile: req.body.profile
-  });
-  // console.log(user)
-  user.save(function (err, result) {
+
+  var companie = new Companie()
+
+  companie.save(function (err, result) {
     if (err) {
-      // console.log(err)
-      // console.log(result)
       return res.status(403).json({
         title: 'There was an issue',
-        error: {message: 'The email you entered already exists'}
+        error: err
       });
     }
-    res.status(200).json({
-      message: 'Registration Successfull',
-      obj: result
+
+    var user = new User({
+      email: req.body.email,
+      password: passwordHash.generate(req.body.password),
+      profile: req.body.profile,
+      ownerCompanies : result._id,
+      companies : result._id
+    });
+    user.save(function (err, result) {
+      if (err) {
+        return res.status(403).json({
+          title: 'There was an issue',
+          error: {message: 'The email you entered already exists'}
+        });
+      }
+      res.status(200).json({
+        message: 'Registration Successfull',
+        obj: result
+      })
     })
   })
+
+
+
+
 });
 
 // user login

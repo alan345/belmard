@@ -12,6 +12,7 @@ export class User {
   profile: Profile = new Profile();
   password: string = '';
   companies: Companie[] = [];
+  ownerCompanies: Companie[] = [];
   salesMan: User[] = [];
   paiement: Paiement= new Paiement()
 }

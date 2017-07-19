@@ -40,7 +40,7 @@
     <div class="form-group sln-inffrm">
       <!-- <div formGroupName="fetchedCompanie"> -->
       <!-- <div ngModelGroup="fetchedCompanie"> -->
-      <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedCompanie.name" required minlength="5" placeholder="Nom du fournisseur">
+      <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedCompanie.nameCompanie" required minlength="5" placeholder="Nom du fournisseur">
       <input type="text" class="form-control" formControlName="phoneNumber" [(ngModel)]="fetchedCompanie.phoneNumber" required minlength="5" placeholder="Numéro de téléphone">
       <!-- <div ngModelGroup="address"> -->
       <div formGroupName="address">
@@ -86,17 +86,15 @@
     </div>
 
     <div class="valid-edit">
-      <button *ngIf="fetchedCurrentUser.companies.length" type="submit" class="sln-edt done">
+      <button type="submit" class="sln-edt done">
           Enregistrer
         </button>
-      <button *ngIf="!fetchedCurrentUser.companies.length" type="button" class="sln-edt done" (click)="saveToMyCompanie()">
-          Enregistrer en tant que Ma companie
-        </button>
+
 
       <button *ngIf="fetchedCompanie._id" type="button" class="sln-edt done" (click)="onDelete(fetchedCompanie._id)">
           Delete
         </button>
     </div>
-    <div class="clearfix"></div>    
+    <div class="clearfix"></div>
   </form>
 </div>

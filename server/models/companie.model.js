@@ -20,7 +20,7 @@ var companie = new Schema({
       }
     },
     phoneNumber: {type: String, default: ['']},
-    name: {type: String, default: ['']},
+    nameCompanie: {type: String, default: ['']},
     typeCompanie: {type: String, default: ['salon']},
     //users : [{type: Schema.Types.ObjectId, ref: 'User'}],
     forms: [{type: Schema.Types.ObjectId, ref: 'Form'}],
@@ -46,7 +46,7 @@ var companie = new Schema({
             categ: {type: String, default: ['']},
           }]
         }]
-      }]     
+      }]
     }
 
 

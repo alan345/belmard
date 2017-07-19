@@ -31,21 +31,21 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     this.password = new FormControl('', [Validators.required, Validators.minLength(6)]);
 
     this.myForm = this._fb.group({
+      nameCompanie:['', [Validators.required, Validators.minLength(2)]],
       email: this.email,
       password: this.password,
       profile: this._fb.group({
         name: ['', [Validators.required, Validators.minLength(2)]],
         lastName: ['', [Validators.required, Validators.minLength(2)]],
-        title: ['', [Validators.required, Validators.minLength(2)]],
       })
     });
   }
 
 
   ngAfterViewInit() {
-    setTimeout(() => {
-      this.renderer.invokeElementMethod(this.userEmail.nativeElement, 'focus', []);
-    }, 50);
+    // setTimeout(() => {
+    //   this.renderer.invokeElementMethod(this.userEmail.nativeElement, 'focus', []);
+    // }, 50);
   }
 
   // submit the register form to the backend with the user's desired credentials
