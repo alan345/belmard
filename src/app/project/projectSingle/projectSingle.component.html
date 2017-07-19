@@ -14,23 +14,7 @@
           {{fetchedProject._id}}
         </div>
       </div>
-      <!-- cascade -->
-      <!-- <div>
-        <select class="form-control col-md-3" [ngModelOptions]="{standalone: true}" [(ngModel)]="categ1" (ngModelChange)="changeCascade(categ1Index.selectedIndex, 0)" #categ1Index>
-          <option *ngFor="let n of itemSteps" [attr.value]="n.categ">{{n.categ}}</option>
-        </select>
-      </div>
-      <div [hidden]="itemSteps[selectedIndex1].categ==''">
-        <select class="form-control col-md-3" [ngModelOptions]="{standalone: true}" [(ngModel)]="categ2" (ngModelChange)="changeCascade(categ1Index.selectedIndex, categ2Index.selectedIndex)" #categ2Index>
-          <option *ngFor="let n of itemSteps[selectedIndex1].subCateg" [attr.value]="n.categ">{{n.categ}}</option>
-        </select>
-      </div>
-      <div [hidden]="itemSteps[selectedIndex1].subCateg[selectedIndex2].categ==''">
-        <select class="form-control col-md-3" [ngModelOptions]="{standalone: true}" [(ngModel)]="categ3">
-          <option *ngFor="let n of itemSteps[selectedIndex1].subCateg[selectedIndex2].subCateg" [attr.value]="n.categ">{{n.categ}}</option>
-        </select>
-      </div> -->
-      <!-- cascade -->
+
 
       <div>
         <button (click)="changeCascade(i, -1, -1)"
@@ -68,7 +52,7 @@
         {{itemStep | json}}
       </button> -->
 
-      <a [routerLink]="['/project/tasks/' + fetchedProject._id]" class="admn-btn">
+      <a *ngIf="fetchedProject._id" [routerLink]="['/project/tasks/' + fetchedProject._id]" class="admn-btn">
         Taches
       </a>
 
@@ -105,16 +89,16 @@
       </div>
 
 
-      <div class="FormGroup whtxt">
+      <div *ngIf="fetchedProject._id" class="FormGroup whtxt">
         <a class="btn btn-warning" (click)="seeCalendar()">
          <i class="fa fa-calendar" aria-hidden="true"></i>
          <span>Voir calendrier du Projet</span>
         </a>
       </div>
-      <!-- Autocomplete User-->
 
-<app-autocomplete [typeAutocomplete]="'user'" [title]="'Customer'" [singleChoice]="'true'" [arrayContent]="fetchedProject.clients" (getResultAutocomplete)="selectUser($event[0])">
-</app-autocomplete>
+
+      <app-autocomplete [typeAutocomplete]="'user'" [title]="'Customer'" [singleChoice]="'true'" [arrayContent]="fetchedProject.clients" (getResultAutocomplete)="selectUser($event[0])">
+      </app-autocomplete>
       <!-- <div>
 
 
