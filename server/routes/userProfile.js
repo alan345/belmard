@@ -387,7 +387,7 @@ router.post('/', function (req, res, next) {
   req.body.ownerCompanies = req.user.ownerCompanies
   req.body.ownerCompanies = req.user.ownerCompanies
 
-  if(req.body.companies.length)
+  // if(req.body.companies.length)
 
   delete req.body._id
   // var project = new Project(req.body)
