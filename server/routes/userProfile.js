@@ -329,7 +329,12 @@ router.put('/:id', function (req, res, next) {
     } else {
 
       for (var prop in req.body) {
-        if(prop !== '__v' && prop !== 'updatedAt' && prop !== 'createdAt')
+        if(
+          prop !== '__v' &&
+          prop !== 'updatedAt' &&
+          prop !== 'createdAt' &&
+          prop !== 'email'
+        )
           item[prop] = req.body[prop]
       }
 
@@ -381,6 +386,9 @@ router.post('/', function (req, res, next) {
   }
   req.body.ownerCompanies = req.user.ownerCompanies
   req.body.ownerCompanies = req.user.ownerCompanies
+
+  if(req.body.companies.length)
+
   delete req.body._id
   // var project = new Project(req.body)
   var user = new User(req.body)
