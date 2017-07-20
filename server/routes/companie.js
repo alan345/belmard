@@ -238,7 +238,7 @@ router.get('', function (req, res, next) {
           error: {message: 'Item not found!'}
         });
       }
-      getCompanie(req, res, next, user.ownerCompanies[0])
+      getCompanie(req, res, next, user.companies[0])
     })
 })
 

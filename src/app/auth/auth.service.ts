@@ -111,7 +111,7 @@ export class AuthService {
   getCurrentUser(){
     // console.log(localStorage.getItem('id_token') )
     // let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
-    // console.log(userInfo)
+    console.log(this.user)
     return this.user
     // return userInfo
     // if (userInfo) {
@@ -136,15 +136,15 @@ export class AuthService {
     // console.log(this.user)
 
     let itemFounded = false
-    this.user.ownerCompanies.forEach(ownerCompanie => {
-      if (new Date(ownerCompanie.planDetail.current_period_end) > new Date())
+    this.user.companies.forEach(companie => {
+      if (new Date(companie.planDetail.current_period_end) > new Date())
         itemFounded = true
     });
     // let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
     return itemFounded
   }
   isCurrentUserHasCompanie(){
-    console.log(this.user)
+    // console.log(this.user)
     // let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
     if(this.user.ownerCompanies.length)
       return true

@@ -55,12 +55,19 @@ export class NavbarComponent implements OnInit {
     return this.authService.isCurrentUserHasCompanie()
   }
 
+
   getUser(id: string) {
-    this.userService.getUser(id)
-      .subscribe(
-        res => { this.fetchedUser = res },
-        error => { console.log(error) }
-      )
+    this.fetchedUser = this.authService.getCurrentUser()
+    // let this2 = this
+    // setTimeout(function(){
+    //     this2.fetchedUser = this2.authService.getCurrentUser()
+    // }, 2000);
+
+    // this.userService.getUser(id)
+    //   .subscribe(
+    //     res => { this.fetchedUser = res },
+    //     error => { console.log(error) }
+    //   )
   }
 
 

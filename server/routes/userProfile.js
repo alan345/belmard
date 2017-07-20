@@ -73,13 +73,18 @@ router.get('/page/:page', function (req, res, next) {
   //   findQuery['profile.parentUser'] = mongoose.Types.ObjectId(req.query.parentUser)
 
 
+//
+// if(req.query.isInTeam === 'true')
+//   findQuery['companies'] = { $eq: [] }
+// if(req.query.isInTeam === 'false')
+//   findQuery['companies'] = { $gt: [] }
+//
+
 
 if(req.query.isInTeam === 'true')
-  findQuery['companies'] = { $eq: [] }
+  findQuery['companies'] = mongoose.Types.ObjectId(req.user.companies[0])
 if(req.query.isInTeam === 'false')
-  findQuery['companies'] = { $gt: [] }
-
-
+  findQuery['companies'] = { $ne: mongoose.Types.ObjectId(req.user.companies[0]) }
 
 
   findQuery['ownerCompanies'] = req.user.ownerCompanies
@@ -98,6 +103,7 @@ if(req.query.isInTeam === 'false')
   User
   .find(findQuery)
   .populate({ path: 'companies', model: 'Companie'})
+
   .limit(itemsPerPage)
   .skip(skip)
   .sort(req.query.orderBy)
@@ -131,7 +137,7 @@ function getUser(req, res, next, id) {
     .findById(id)
     .populate({path: 'forms', model: 'Form'})
     .populate({path: 'salesMan', model: 'User'})
-    .populate({path: 'ownerCompanies', model: 'Companie'})
+    .populate({path: 'companies', model: 'Companie'})
     .populate({
         path: 'companies',
         model: 'Companie',
@@ -328,15 +334,29 @@ router.put('/:id', function (req, res, next) {
       })
     } else {
 
-      for (var prop in req.body) {
-        if(
-          prop !== '__v' &&
-          prop !== 'updatedAt' &&
-          prop !== 'createdAt' &&
-          prop !== 'email'
-        )
-          item[prop] = req.body[prop]
-      }
+
+      req.body.ownerCompanies = req.user.ownerCompanies
+
+      if(!req.body.companies.length)
+        req.body.companies = req.body.ownerCompanies
+
+      req.body.isInOwnerCompanie = false
+      if(req.body.companies._id == req.body.ownerCompanies._id)
+        req.body.isInOwnerCompanie = true
+
+
+
+      // item.isInOwnerCompanie = isInOwnerCompanie
+      item.companies = req.body.companies
+      item.ownerCompanies = req.body.ownerCompanies
+      item.email = req.body.email
+      item.forms = req.body.forms
+      item.salesMan = req.body.salesMan
+      item.profile = req.body.profile
+
+
+
+
 
       item.save(function (err, result) {
         if (err) {
@@ -381,13 +401,16 @@ router.post('/', function (req, res, next) {
     role = ['client']
   }
 
-  if (!req.body.profile.parentUser.length) {
-    req.body.profile.parentUser = [req.user._id]
-  }
-  req.body.ownerCompanies = req.user.ownerCompanies
+
+
   req.body.ownerCompanies = req.user.ownerCompanies
 
-  // if(req.body.companies.length)
+  if(!req.body.companies.length)
+    req.body.companies = req.body.ownerCompanies
+
+  req.body.isInOwnerCompanie = false
+  if(req.body.companies._id == req.body.ownerCompanies._id)
+    req.body.isInOwnerCompanie = true
 
   delete req.body._id
   // var project = new Project(req.body)
