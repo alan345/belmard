@@ -19,6 +19,51 @@
       </div>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
+<div class="dropdown show">
+  <a class="btn btn-secondary dropdown-toggle" href="https://example.com" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Administration
+  </a>
+
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    <li *ngIf="isCurrentUserIsInSubPeriod() && isCurrentUserHasCompanie()" class="nav-item">
+            <a class="nav-link" routerLinkActive="active" [routerLink]="['/product']">Produits</a>
+          </li>
+          <li *ngIf="isCurrentUserIsInSubPeriod() && isCurrentUserHasCompanie()" class="nav-item">
+            <a class="nav-link" routerLinkActive="active" [routerLink]="['/project']">Projets </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" [routerLink]="['/project/tasks']">Tasks </a>
+          </li>
+
+
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" [routerLink]="['/user']">Utilisateurs</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLinkActive="active" [routerLink]="['/companie']">Entreprises</a>
+          </li>
+          <li *ngIf="isCurrentUserIsInSubPeriod() && isCurrentUserHasCompanie()" class="nav-item">
+            <a class="nav-link" routerLinkActive="active" [routerLink]="['/quote']">Devis</a>
+          </li>
+          <li *ngIf="isCurrentUserIsInSubPeriod() && isCurrentUserHasCompanie()" class="nav-item">
+            <a class="nav-link" routerLinkActive="active" [routerLink]="['/paiementQuote']">Paiements</a>
+          </li>
+
+          <li *ngIf="isCurrentUserIsInSubPeriod() && isCurrentUserHasCompanie()" class="nav-item">
+            <a class="nav-link" routerLinkActive="active" [routerLink]="['/reporting']">Reporting</a>
+          </li>
+
+          <li *ngIf="isCurrentUserIsInSubPeriod() && isCurrentUserHasCompanie()" class="nav-item">
+            <a
+              class="nav-link"
+              routerLinkActive="active"
+              [routerLink]="['/userCalendar', {idUserSearch: fetchedUser._id}]"
+              >Mon Planning</a>
+          </li>
+  </div>
+</div>
+      
         <ul class="navbar-nav mr-auto">
           <li *ngIf="isCurrentUserIsInSubPeriod() && isCurrentUserHasCompanie()" class="nav-item">
             <a class="nav-link" routerLinkActive="active" [routerLink]="['/product']">Produits</a>
