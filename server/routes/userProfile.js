@@ -380,7 +380,7 @@ router.post('/', function (req, res, next) {
     req.body.profile.parentUser = [req.user._id]
   }
   req.body.ownerCompanies = req.user.ownerCompanies
-
+  req.body.ownerCompanies = req.user.ownerCompanies
   delete req.body._id
   // var project = new Project(req.body)
   var user = new User(req.body)
