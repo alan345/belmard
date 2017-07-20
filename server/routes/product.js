@@ -62,7 +62,7 @@ router.put('/:id', function (req, res, next) {
         err: err
       })
     } else {
-      //console.log(req.body)
+
         item.details = req.body.details
         item.categorie = req.body.categorie
         item.vendors = req.body.vendors

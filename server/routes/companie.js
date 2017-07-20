@@ -64,11 +64,25 @@ router.put('/:id', function (req, res, next) {
         err: err
       })
     }
+    //
+    // for (var prop in req.body) {
+    //   if(prop !== '__v' && prop !== 'updatedAt' && prop !== 'createdAt')
+    //     item[prop] = req.body[prop]
+    // }
 
-    for (var prop in req.body) {
-      if(prop !== '__v' && prop !== 'updatedAt' && prop !== 'createdAt')
-        item[prop] = req.body[prop]
-    }
+    item.rights = req.body.rights
+    item.address = req.body.address
+    item.option = req.body.option
+    item.phoneNumber = req.body.phoneNumber
+    item.nameCompanie = req.body.nameCompanie
+
+    item.typeCompanie = req.body.typeCompanie
+    item.forms = req.body.forms
+
+    item.categJson = req.body.categJson
+    item.categories = req.body.categories
+
+
 
 
     item.save(function (err, result) {

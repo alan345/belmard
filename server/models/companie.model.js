@@ -10,7 +10,18 @@ var companie = new Schema({
     planDetail:{
       plan:{type: String, default: ['']},
       current_period_end:{type: Date}
-    },    
+    },
+    rights: [
+      {
+        nameRight: {type: String, default: ['']},
+        permissions:[{
+          namePermission: {type: String, default: ['']},
+          access:[{
+              typeAccess: {type: String, default: ['']},
+            }]
+          }]
+      }
+    ],
     address: {
       address : {type: String, default: ['']},
       city : {type: String, default: ['']},

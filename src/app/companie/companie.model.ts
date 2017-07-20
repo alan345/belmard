@@ -13,6 +13,23 @@ export class Companie {
   categJson: CategJson = new CategJson();
   categories = new Categorie()
   planDetail = new PlanDetail()
+  rights: Rigth[] = []
+}
+
+export class Rigth {
+  nameRight: string = '';
+  permissions: Permission[] = []
+}
+
+export class Permission {
+  namePermission: string = '';
+  access: Access[] = []
+}
+
+
+
+export class Access {
+  typeAccess: string= '';
 }
 
 export class PlanDetail {

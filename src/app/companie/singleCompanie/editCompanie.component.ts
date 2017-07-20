@@ -4,7 +4,7 @@ import {CompanieService} from '../companie.service';
 import {UserService} from '../../user/user.service';
 
 
-import {Companie, Categorie0} from '../companie.model';
+import {Companie, Categorie0, Rigth, Permission, Access} from '../companie.model';
 
 import {ToastsManager} from 'ng2-toastr';
 
@@ -26,13 +26,20 @@ import { EditOptionsComponentDialog } from '../../form/modalLibrary/modalLibrary
 export class EditCompanieComponent implements OnInit {
   fetchedCompanie: Companie = new Companie()
 
-  userAdmins : User[] = []
-  userManagers : User[] = []
-  userClients : User[] = []
-  usersSalesRep : User[] = []
-  userStylists : User[] = []
+  // userAdmins : User[] = []
+  // userManagers : User[] = []
+  // userClients : User[] = []
+  // usersSalesRep : User[] = []
+  // userStylists : User[] = []
   myForm: FormGroup;
-
+  seeRights = false;
+  seeCategProject = false;
+  seeCategProduct = false;
+  typesRights = [
+    {name : 'Project', value: 'project'},
+    {name : 'Quote', value: 'qute'},
+    {name : 'Reporting', value: 'reporting'},
+  ]
   constructor(
     private companieService: CompanieService,
 //    private modalService: NgbModal,
@@ -81,29 +88,61 @@ export class EditCompanieComponent implements OnInit {
     })
   }
 
-  addCategProject(type, level, index1, index2, index3) {
-    if(type==='project'){
-      let newCategorie = new Categorie0()
-      if(level === 0)
-        this.fetchedCompanie.categories.categProject.unshift(newCategorie)
-      if(level === 1)
-        this.fetchedCompanie.categories.categProject[index1].subCateg.unshift(newCategorie)
-      if(level === 2)
-        this.fetchedCompanie.categories.categProject[index1].subCateg[index2].subCateg.unshift(newCategorie)
-    }
+
+  addRight(level, index1, index2, index3) {
+      if(level === 0){
+        let newRight = new Rigth()
+        this.fetchedCompanie.rights.unshift(newRight)
+      }
+      if(level === 1){
+        let newRight = new Permission()
+        this.fetchedCompanie.rights[index1].permissions.unshift(newRight)
+      }
+      if(level === 2){
+
+        let newRight = new Access()
+        this.fetchedCompanie.rights[index1].permissions[index2].access.unshift(newRight)
+      }
   }
 
-  removeCategProject(type, level, index1, index2, index3) {
-    if(type==='project') {
+  openSection(nameSection){
+    this[nameSection] = !this[nameSection]
+  }
+  removeRight(level, index1, index2, index3) {
       if(level === 0)
-        this.fetchedCompanie.categories.categProject.splice(level, 1)
+        this.fetchedCompanie.rights.splice(level, 1)
       if(level === 1)
-        this.fetchedCompanie.categories.categProject.splice(index1, 1)
+        this.fetchedCompanie.rights.splice(index1, 1)
       if(level === 2)
-        this.fetchedCompanie.categories.categProject[index1].subCateg.splice(index2, 1)
+        this.fetchedCompanie.rights[index1].permissions.splice(index1, 1)
       if(level === 3)
-        this.fetchedCompanie.categories.categProject[index1].subCateg[index2].subCateg.splice(index3, 1)
-    }
+        this.fetchedCompanie.rights[index1].permissions[index1].access.splice(index2, 1)
+      // if(level === 3)
+      //   this.fetchedCompanie.rights[index1].permissions[index1].access[index2].subCateg.splice(index3, 1)
+  }
+
+
+  addCateg(typeCateg, level, index1, index2, index3) {
+
+      let newCategorie = new Categorie0()
+      if(level === 0)
+        this.fetchedCompanie.categories[typeCateg].unshift(newCategorie)
+      if(level === 1)
+        this.fetchedCompanie.categories[typeCateg][index1].subCateg.unshift(newCategorie)
+      if(level === 2)
+        this.fetchedCompanie.categories[typeCateg][index1].subCateg[index2].subCateg.unshift(newCategorie)
+
+  }
+
+  removeCateg(typeCateg, level, index1, index2, index3) {
+      if(level === 0)
+        this.fetchedCompanie.categories[typeCateg].splice(level, 1)
+      if(level === 1)
+        this.fetchedCompanie.categories[typeCateg].splice(index1, 1)
+      if(level === 2)
+        this.fetchedCompanie.categories[typeCateg][index1].subCateg.splice(index2, 1)
+      if(level === 3)
+        this.fetchedCompanie.categories[typeCateg][index1].subCateg[index2].subCateg.splice(index3, 1)
   }
 
 
@@ -142,6 +181,317 @@ export class EditCompanieComponent implements OnInit {
   // }
 
   save() {
+
+    // this.fetchedCompanie.categories.categProduct =[
+    //   {
+    //     "categ":"",
+    //     "subCateg": [
+    //       {
+    //         "categ":"",
+    //         "subCateg": [
+    //           {"categ": ""}
+    //         ]
+    //       }
+    //     ]
+    //   },
+    //   {
+    //     "categ":"Serrurerie",
+    //     "subCateg": [
+    //       {
+    //         "categ":"",
+    //         "subCateg": [
+    //           {"categ": ""}
+    //         ]
+    //       },
+    //       {
+    //         "categ":"Serrurerie de bâtiment",
+    //         "subCateg": [
+    //           {"categ": "Clés"},
+    //           {"categ": "Cylindres"},
+    //           {"categ": "Verrous"}
+    //         ]
+    //       },
+    //       {
+    //         "categ":"Ferme-portes",
+    //         "subCateg": [
+    //           {"categ": "Ferme-portes contemporains"},
+    //           {"categ": "Ferme-portes technologies à came"},
+    //           {"categ": "Ferme-portes technologies pignons à crémaillère"}
+    //         ]
+    //       },
+    //       {
+    //         "categ":"Garnitures de porte",
+    //         "subCateg": [
+    //           {"categ": "Equipements de la porte"},
+    //           {"categ": "Poignées"},
+    //           {"categ": "Judas"},
+    //           {"categ": "Garnitures inox"},
+    //           {"categ": "Accessoires de montage de garnitures de porte"}
+    //         ]
+    //       },
+    //       {
+    //         "categ":"Sécurité de porte",
+    //         "subCateg": [
+    //           {"categ": "Blindage"},
+    //           {"categ": "Tôles"},
+    //           {"categ": "Barres de pivot"},
+    //           {"categ": "Garnitures de sécurité"},
+    //           {"categ": "Pivots de sol"},
+    //           {"categ": "Pivots de linteau"}
+    //         ]
+    //       }
+    //     ]
+    //   },
+    //
+    //
+    //
+    //
+    //
+    //
+    //   {
+    //     "categ":"Menuiserie",
+    //     "subCateg": [
+    //       {
+    //         "categ":"",
+    //         "subCateg": [
+    //           {"categ": ""}
+    //         ]
+    //       },
+    //       {
+    //         "categ":"Portes",
+    //         "subCateg": [
+    //           {"categ": "Fenêtres bois ou PVC"},
+    //           {"categ": "Portes et portes fenêtres"},
+    //           {"categ": "Coulissants bois ou PVC"},
+    //           {"categ": "Blindage pivot"},
+    //           {"categ": "Super-blindages"},
+    //           {"categ": "Pivots"},
+    //           {"categ": "Blocs-portes"}
+    //         ]
+    //       },
+    //       {
+    //         "categ":"Fenêtres",
+    //         "subCateg": [
+    //           {"categ": "Equipement de la porte et de la fenêtre"},
+    //           {"categ": "Fermetures de la porte et de la fenêtre"},
+    //           {"categ": "Etanchéité de la porte et de la fenêtre"},
+    //           {"categ": "Vitrines"},
+    //           {"categ": "Habillage"}
+    //         ]
+    //       }
+    //     ]
+    //   },
+    //
+    //
+    //
+    //
+    //
+    //   {
+    //     "categ":"Fenêtres",
+    //     "subCateg": [
+    //       {
+    //         "categ":"",
+    //         "subCateg": [
+    //           {"categ": ""}
+    //         ]
+    //       },
+    //       {
+    //         "categ":"Vitrage",
+    //         "subCateg": [
+    //           {"categ": "Double vitrages"},
+    //           {"categ": "Double vitrages de rénovation composition 4-6-4 avec gaz Argon"},
+    //           {"categ": "Encadrement vitrage PVC"},
+    //           {"categ": "Double battants"},
+    //           {"categ": "Porte-fenêtre Bâti Renov Bicouleur double vitrage 442-16-4 avec gaz Argon"},
+    //           {"categ": "Survitrage"},
+    //           {"categ": "Vitrage droit avec parcloses"},
+    //           {"categ": "Vitrage en façade"},
+    //           {"categ": "Vitrine"},
+    //           {"categ": "Vitre fixe opaque avec bâti aluminium et fenêtre en ouverture oscillo battants"}
+    //         ]
+    //       },
+    //       {
+    //         "categ":"Isolation",
+    //         "subCateg": [
+    //           {"categ": "Habillage en double joint"},
+    //           {"categ": "Isolation phonique"},
+    //           {"categ": "Isolation thermique"}
+    //         ]
+    //       },
+    //       {
+    //         "categ":"Verre",
+    //         "subCateg": [
+    //           {"categ": "Verre couleur bronze sécurité 1"},
+    //           {"categ": "Verre à la découpe"},
+    //           {"categ": "Verre armé"},
+    //           {"categ": "Verre clair"},
+    //           {"categ": "Verre de sécurité composition"},
+    //           {"categ": "Verre dépoli acide (opaque)"},
+    //           {"categ": "Verre double vitrage avec gaz Argon"},
+    //           {"categ": "Verre feuilleté"},
+    //           {"categ": "Verre opaque"},
+    //           {"categ": "Verre simple"},
+    //           {"categ": "Verre anti-UV"}
+    //         ]
+    //       }
+    //     ]
+    //   },
+    //
+    //
+    //
+    //
+    //   {
+    //     "categ":"Plomberie",
+    //     "subCateg": [
+    //       {
+    //         "categ":"",
+    //         "subCateg": [
+    //           {"categ": ""}
+    //         ]
+    //       },
+    //       {
+    //         "categ":"Ballon d'eau chaude",
+    //         "subCateg": [
+    //           {"categ": "Chauffe-eau gaz"},
+    //           {"categ": "Chauffe-eau électrique"},
+    //           {"categ": "Equipement sécurité"}
+    //         ]
+    //       },
+    //       {
+    //         "categ":"Robinetterie",
+    //         "subCateg": [
+    //           {"categ": "Robinetterie de lavabo"},
+    //           {"categ": "Robinetterie de cuisine"},
+    //           {"categ": "Robinetterie de douche"}
+    //         ]
+    //       },
+    //       {
+    //         "categ":"Vanne",
+    //         "subCateg": [
+    //           {"categ": "Vanne-compteur"},
+    //           {"categ": "Electrovannes gaz à réarmement"},
+    //           {"categ": "Vannes soupape"}
+    //         ]
+    //       },
+    //       {
+    //         "categ":"Carrelage",
+    //         "subCateg": [
+    //           {"categ": "Receveurs"},
+    //           {"categ": "Receveurs céramiques"},
+    //           {"categ": "Receveurs à carreler"},
+    //           {"categ": "Pieds pour receveurs"}
+    //         ]
+    //       },
+    //       {
+    //         "categ":"Sanitaire",
+    //         "subCateg": [
+    //           {"categ": "Cuvettes"},
+    //           {"categ": "Broyeurs"},
+    //           {"categ": "Abattants"},
+    //           {"categ": "Pipes"},
+    //           {"categ": "Mécanisme de WC"},
+    //           {"categ": "Réservoir indépendant"},
+    //           {"categ": "Plaque de déclenchement"},
+    //           {"categ": "Bidets"},
+    //           {"categ": "Lavabos et colonnes"}
+    //         ]
+    //       }
+    //     ]
+    //   },
+    //
+    //
+    //
+    //
+    //
+    //   {
+    //     "categ":"Électricité",
+    //     "subCateg": [
+    //       {
+    //         "categ":"",
+    //         "subCateg": [
+    //           {"categ": ""}
+    //         ]
+    //       },
+    //       {
+    //         "categ":"Convecteur",
+    //         "subCateg": [
+    //           {"categ": "Convecteur électrique CASSETTE RAY SUNAIR 3600TC Thermor, ref : 497091"},
+    //           {"categ": "Convecteur électrique Thermor Equateur 2000W"},
+    //           {"categ": "Convecteur gamme Baleares 1500W horizontal tout compris"}
+    //         ]
+    //       },
+    //       {
+    //         "categ":"Disjoncteur",
+    //         "subCateg": [
+    //           {"categ": "Disjoncteur 10A"},
+    //           {"categ": "Disjoncteur 16A/ 30Mili"},
+    //           {"categ": "Disjoncteur 20A"},
+    //           {"categ": "Disjoncteur 32A"},
+    //           {"categ": "Disjoncteur C2"},
+    //           {"categ": "Disjoncteur Divers tri"}
+    //         ]
+    //       },
+    //       {
+    //         "categ":"Eclairage",
+    //         "subCateg": [
+    //           {"categ": "Interrupteur"},
+    //           {"categ": "Projecteurs"},
+    //           {"categ": "Lampes"}
+    //         ]
+    //       },
+    //       {
+    //         "categ":"Branchement",
+    //         "subCateg": [
+    //           {"categ": "Fils et câbles"},
+    //           {"categ": "Prises"}
+    //         ]
+    //       },
+    //       {
+    //         "categ":"Protection",
+    //         "subCateg": [
+    //           {"categ": "Protections de l\"habitat"},
+    //           {"categ": "Cartouches et fusibles"}
+    //         ]
+    //       }
+    //
+    //     ]
+    //   },
+    //
+    //
+    //   {
+    //     "categ": "Chauffage",
+    //     "subCateg": [
+    //       {
+    //         "categ":"",
+    //         "subCateg": [
+    //           {"categ": ""}
+    //         ]
+    //       },
+    //       {
+    //         "categ": "Radiateurs",
+    //         "subCateg": [
+    //           {"categ": "Fixations de radiateurs"},
+    //           {"categ": "Radiateur thermoactif"},
+    //           {"categ": "Robinetterie de radiateurs"},
+    //           {"categ": "Accessoires"},
+    //           {"categ": "Sèche-serviettes"},
+    //           {"categ": "Habillage"}
+    //         ]
+    //       },
+    //       {
+    //         "categ":"Chaudière",
+    //         "subCateg": [
+    //           {"categ": "Bloc hydraulique"},
+    //           {"categ": "Système de sécurité surchauffe"},
+    //           {"categ": "Chaudière électrique"},
+    //           {"categ": "Thermostat"}
+    //         ]
+    //       }
+    //     ]
+    //   }
+    // ]
+
+
 //      this.fetchedCompanie.categories.categProject = [
 //   {
 //     "categ":"Devis Rénovation",
@@ -400,7 +750,7 @@ export class EditCompanieComponent implements OnInit {
     }
   }
 
-// 
+//
 // saveToMyCompanie(){
 //   this.companieService.saveCompanie(this.fetchedCompanie)
 //     .subscribe(
