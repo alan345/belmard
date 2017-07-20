@@ -144,7 +144,7 @@ export class AuthService {
     return itemFounded
   }
   isCurrentUserHasCompanie(){
-    console.log(this.user.ownerCompanies)
+    console.log(this.user)
     // let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
     if(this.user.ownerCompanies.length)
       return true
