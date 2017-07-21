@@ -337,12 +337,12 @@ router.put('/:id', function (req, res, next) {
 
       req.body.ownerCompanies = req.user.ownerCompanies
 
-      if(!req.body.companies.length)
-        req.body.companies = req.body.ownerCompanies
-
-      req.body.isInOwnerCompanie = false
-      if(req.body.companies._id == req.body.ownerCompanies._id)
-        req.body.isInOwnerCompanie = true
+      // if(!req.body.companies.length)
+      //   req.body.companies = req.body.ownerCompanies
+      //
+      // req.body.isInOwnerCompanie = false
+      // if(req.body.companies._id == req.body.ownerCompanies._id)
+      //   req.body.isInOwnerCompanie = true
 
 
 
@@ -405,12 +405,12 @@ router.post('/', function (req, res, next) {
 
   req.body.ownerCompanies = req.user.ownerCompanies
 
-  if(!req.body.companies.length)
-    req.body.companies = req.body.ownerCompanies
+  // if(!req.body.companies.length)
+  //   req.body.companies = req.body.ownerCompanies
 
-  req.body.isInOwnerCompanie = false
-  if(req.body.companies._id == req.body.ownerCompanies._id)
-    req.body.isInOwnerCompanie = true
+  // req.body.isInOwnerCompanie = false
+  // if(req.body.companies._id == req.body.ownerCompanies._id)
+  //   req.body.isInOwnerCompanie = true
 
   delete req.body._id
   // var project = new Project(req.body)

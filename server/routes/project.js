@@ -63,6 +63,7 @@ router.put('/:id', function (req, res, next) {
       })
     } else {
       //console.log(req.body)
+        item.ownerCompanies = req.user.companies
         item.details = req.body.details
         item.forms = req.body.forms
         item.status = req.body.status
@@ -104,7 +105,6 @@ router.post('/', function (req, res, next) {
 
 
   var project = new Project(req.body)
-
   project.ownerCompanies = req.user.companies
 
   project.save(function (err, result) {

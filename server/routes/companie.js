@@ -138,7 +138,7 @@ router.get('/page/:page', function (req, res, next) {
   let arrObj = []
   search['ownerCompanies'] = req.user.ownerCompanies
 
-  
+
   // if(req.query.search) {
   //   arrObj.push({'name' : new RegExp(req.query.search, 'i')})
   //   arrObj.push({'address.city' : new RegExp(req.query.search, 'i')})
