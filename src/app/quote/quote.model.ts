@@ -13,7 +13,7 @@ export class Quote {
   forms: Form[] = [];
   products: Product[] = [];
   projects: Project[] = [];
-  devisDetails: DevisDetails[] = []
+  devisDetails: DevisDetail[] = []
   priceQuote: PriceQuote = new PriceQuote()
   signature: Signature = new Signature()
   detail: Detail = new Detail()
@@ -51,7 +51,7 @@ export class PriceQuote {
 }
 
 
-export class DevisDetails {
+export class BucketProduct {
   productInit: Product = new Product();
   priceWithoutTaxes: number;
   priceWithTaxes: number;
@@ -62,6 +62,13 @@ export class DevisDetails {
   discount: number;
 
 }
+
+
+export class DevisDetail {
+  nameBucketProducts: string = '';
+  bucketProducts: BucketProduct[] = []
+}
+
 
 // export class Address {
 //   address: string = '';

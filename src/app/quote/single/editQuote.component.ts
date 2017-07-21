@@ -4,7 +4,7 @@ import {QuoteService} from '../quote.service';
 import {ProductService} from '../../product/product.service';
 import { ProjectService} from '../../project/project.service';
 
-import {Quote, DevisDetails} from '../quote.model';
+import {Quote, DevisDetail, BucketProduct } from '../quote.model';
 
 import {ToastsManager} from 'ng2-toastr';
 
@@ -57,7 +57,7 @@ export class EditQuoteComponent implements OnInit {
   // userStylists : User[] = []
   totalPaiementAmount: number = 0
   myForm: FormGroup;
-  autocompleteProduct: String = ''
+  // autocompleteProduct: String = ''
   fetchedUsers: User[] = [];
   arrayContentToSearch =[]
   constructor(
@@ -243,11 +243,11 @@ export class EditQuoteComponent implements OnInit {
           doc.setFontSize(10);
           this2.fetchedQuote.devisDetails.forEach(detail => {
             verticalPointer += 6
-            doc.text(20, verticalPointer, detail.productInit.details.referenceName );
-            doc.text(50, verticalPointer, detail.productInit.details.reference );
-            doc.text(80, verticalPointer, detail.quantity.toString());
-            doc.text(110, verticalPointer, detail.totalPriceWithoutTaxes.toString() );
-            doc.text(140, verticalPointer, detail.totalPriceWithTaxes.toString() );
+            // doc.text(20, verticalPointer, detail.productInit.details.referenceName );
+            // doc.text(50, verticalPointer, detail.productInit.details.reference );
+            // doc.text(80, verticalPointer, detail.quantity.toString());
+            // doc.text(110, verticalPointer, detail.totalPriceWithoutTaxes.toString() );
+            // doc.text(140, verticalPointer, detail.totalPriceWithTaxes.toString() );
           });
 
           doc.setFontSize(12);
@@ -324,24 +324,30 @@ export class EditQuoteComponent implements OnInit {
     }
 
   }
+    removeBucketProducts(i){
+      this.fetchedQuote.devisDetails.splice(i, 1);
+      this.calculateQuote()
+    }
+    addBucketProducts() {
+      let newDevisDetail = new DevisDetail()
+      this.fetchedQuote.devisDetails.push(newDevisDetail)
+    }
 
-
-
-    selectProduct(product: Product) {
-
+    selectProduct(product: Product, i) {
       this.arrayContentToSearch = []
-      let devisDetails: DevisDetails = {
+      let bucketProduct: BucketProduct = {
         productInit: product,
         vat: 20,
         priceWithoutTaxes: product.details.price.sellingPrice,
-        priceWithTaxes:0,
-        totalPriceWithTaxes:0,
-        totalPriceWithoutTaxes:0,
+        priceWithTaxes: 0,
+        totalPriceWithTaxes: 0,
+        totalPriceWithoutTaxes: 0,
         quantity: 1,
         discount: 0,
       }
-      this.autocompleteProduct = ''
-      this.fetchedQuote.devisDetails.push(devisDetails)
+      // this.autocompleteProduct = ''
+
+      this.fetchedQuote.devisDetails[i].bucketProducts.push(bucketProduct)
       this.calculateQuote()
     }
     calculateQuote() {
@@ -349,14 +355,15 @@ export class EditQuoteComponent implements OnInit {
       setTimeout(function(){
         this2.fetchedQuote.priceQuote.priceQuoteWithTaxes = 0
         this2.fetchedQuote.priceQuote.priceQuoteWithoutTaxes = 0
-        this2.fetchedQuote.devisDetails.forEach((product, i) => {
+        this2.fetchedQuote.devisDetails.forEach((devisDetails, i) => {
+          this2.fetchedQuote.devisDetails[i].bucketProducts.forEach((product, j) => {
+            this2.fetchedQuote.devisDetails[i].bucketProducts[j].priceWithTaxes = product.priceWithoutTaxes * 1 + (product.priceWithoutTaxes * product.vat / 100)
+            this2.fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithTaxes = this2.fetchedQuote.devisDetails[i].bucketProducts[j].priceWithTaxes * product.quantity
+            this2.fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithoutTaxes = product.priceWithoutTaxes * product.quantity
 
-          this2.fetchedQuote.devisDetails[i].priceWithTaxes = product.priceWithoutTaxes * 1 + (product.priceWithoutTaxes * product.vat / 100)
-          this2.fetchedQuote.devisDetails[i].totalPriceWithTaxes = this2.fetchedQuote.devisDetails[i].priceWithTaxes * product.quantity
-          this2.fetchedQuote.devisDetails[i].totalPriceWithoutTaxes = product.priceWithoutTaxes * product.quantity
-
-          this2.fetchedQuote.priceQuote.priceQuoteWithTaxes = this2.fetchedQuote.priceQuote.priceQuoteWithTaxes*1 + this2.fetchedQuote.devisDetails[i].totalPriceWithTaxes*1
-          this2.fetchedQuote.priceQuote.priceQuoteWithoutTaxes = this2.fetchedQuote.priceQuote.priceQuoteWithoutTaxes*1 + this2.fetchedQuote.devisDetails[i].totalPriceWithoutTaxes*1
+            this2.fetchedQuote.priceQuote.priceQuoteWithTaxes = this2.fetchedQuote.priceQuote.priceQuoteWithTaxes*1 + this2.fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithTaxes*1
+            this2.fetchedQuote.priceQuote.priceQuoteWithoutTaxes = this2.fetchedQuote.priceQuote.priceQuoteWithoutTaxes*1 + this2.fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithoutTaxes*1
+          })
         })
 
 
@@ -365,8 +372,8 @@ export class EditQuoteComponent implements OnInit {
       }, 20)
 
     }
-    removeProduct(i: number) {
-      this.fetchedQuote.devisDetails.splice(i, 1);
+    removeProduct(i: number, j: number) {
+      this.fetchedQuote.devisDetails[i].bucketProducts.splice(j, 1);
       this.calculateQuote()
     }
 

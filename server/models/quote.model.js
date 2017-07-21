@@ -19,36 +19,45 @@ var quote = new Schema({
         expiryDate: {type: Date, default: [Date()]},
       }
     },
+    
     // typeQuote: {type: String, default: ['salon']},
     _users : [{type: Schema.Types.ObjectId, ref: 'User'}],
     forms: [{type: Schema.Types.ObjectId, ref: 'Form'}],
-    devisDetails: [{
-      productInit: {
-        _id:{type: String},
-        details: {
-          referenceName: {type: String},
-          reference: {type: String},
-          price: {
-            costPrice: {type: Number},
-            sellingPrice: { type: Number},
-          },
-          description: {type: String},
-          dimension: {
-            height: {type: Number},
-            width: {type: Number},
-            depth: {type: Number},
-          }
-        }
-      },
+    devisDetails: [
+      {
+        nameBucketProducts :{type: String},
+        bucketProducts:[
+          {
+            productInit: {
+              _id:{type: String},
+              details: {
+                referenceName: {type: String},
+                reference: {type: String},
+                price: {
+                  costPrice: {type: Number},
+                  sellingPrice: { type: Number},
+                },
+                description: {type: String},
+                dimension: {
+                  height: {type: Number},
+                  width: {type: Number},
+                  depth: {type: Number},
+                }
+              }
+            },
 
-      priceWithoutTaxes: {type: Number},
-      priceWithTaxes: {type: Number},
-      totalPriceWithoutTaxes: {type: Number},
-      totalPriceWithTaxes: {type: Number},
-      vat: {type: Number},
-      quantity: {type: Number},
-      discount: {type: Number},
-    }],
+            priceWithoutTaxes: {type: Number},
+            priceWithTaxes: {type: Number},
+            totalPriceWithoutTaxes: {type: Number},
+            totalPriceWithTaxes: {type: Number},
+            vat: {type: Number},
+            quantity: {type: Number},
+            discount: {type: Number},
+          }
+        ]
+      }
+
+    ],
     priceQuote: {
       priceQuoteWithoutTaxes: {type: Number, default: [0]},
       priceQuoteWithTaxes: {type: Number, default: [0]},

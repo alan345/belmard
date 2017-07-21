@@ -47,7 +47,7 @@
             <label class="col-sm-4 control-label col1" for="IssueDateISO">Issue Date</label>
             <div class="col-sm-7">
               <div>
-              
+
                 <input type="date" class="form-control" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedQuote.detail.dateQuote.issueDateString" >
               </div>
             </div>
@@ -115,45 +115,60 @@
           <div class="col-md-1">total HT</div>
           <div class="col-md-1">total TTC</div>
         </div>
-        <div *ngFor="let fetchedProduct of fetchedQuote.devisDetails; let i=index">
-          <div class="row">
-            <div class="col-md-1">
-              <button type="button" (click)="removeProduct(i)"><i class="fa fa-times"></i></button>
-            </div>
-            <div class="col-md-3">
-              {{fetchedProduct.productInit.details.referenceName}}
-            </div>
-            <div class="col-md-1">
-              <a [routerLink]="['/product/' + fetchedProduct.productInit._id]" class="admn-btn">
-                {{fetchedProduct.productInit.details.reference}}
-              </a>
-            </div>
-            <div class="col-md-1">
-              <input class="gooplusInput" type="text" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].quantity" placeholder="quantity">
-            </div>
-            <div class="col-md-1">
-              <input class="gooplusInput" type="text" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].priceWithoutTaxes" placeholder="priceWithoutTaxes">
-            </div>
 
-            <div class="col-md-1">
-              <input class="gooplusInput" type="text" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].vat" placeholder="vat">
-            </div>
-            <div class="col-md-1">
-              {{fetchedQuote.devisDetails[i].totalPriceWithoutTaxes | round}}
-            </div>
-            <div class="col-md-1">
-              {{fetchedQuote.devisDetails[i].totalPriceWithTaxes | round}}
-            </div>
+        <button type="button" (click)="addBucketProducts()">AddBucketProducts</button>
+        <div *ngFor="let devisDetail of fetchedQuote.devisDetails; let i=index">
+          <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].nameBucketProducts" placeholder="nameBucketProducts">
+          <button type="button" (click)="removeBucketProducts(i)">X</button>
+          <div *ngFor="let fetchedProduct of devisDetail.bucketProducts; let j=index">
+
+                    <div class="row">
+                      <div class="col-md-1">
+                        <button type="button" (click)="removeProduct(i, j)"><i class="fa fa-times"></i></button>
+                      </div>
+                      <div class="col-md-3">
+                        {{fetchedProduct.productInit.details.referenceName}}
+                      </div>
+                      <div class="col-md-1">
+                        <a [routerLink]="['/product/' + fetchedProduct.productInit._id]" class="admn-btn">
+                          {{fetchedProduct.productInit.details.reference}}
+                        </a>
+                      </div>
+                      <div class="col-md-1">
+                        <input class="gooplusInput" type="text" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].quantity" placeholder="quantity">
+                      </div>
+                      <div class="col-md-1">
+                        <input class="gooplusInput" type="text" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].priceWithoutTaxes" placeholder="priceWithoutTaxes">
+                      </div>
+
+                      <div class="col-md-1">
+                        <input class="gooplusInput" type="text" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].vat" placeholder="vat">
+                      </div>
+                      <div class="col-md-1">
+                        {{fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithoutTaxes | round}}
+                      </div>
+                      <div class="col-md-1">
+                        {{fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithTaxes | round}}
+                      </div>
+                    </div>
+          </div>
+          <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-3">
+            <app-autocomplete [typeAutocomplete]="'product'" [title]="" [singleChoice]="'false'" [arrayContent]="arrayContentToSearch" (getResultAutocomplete)="selectProduct($event[0], i)">
+            </app-autocomplete>
+          </div>
+          <div class="col-md-8"></div>
           </div>
         </div>
-        <div class="row">
+        <!-- <div class="row">
           <div class="col-md-1"></div>
           <div class="col-md-3">
             <app-autocomplete [typeAutocomplete]="'product'" [title]="" [singleChoice]="'false'" [arrayContent]="arrayContentToSearch" (getResultAutocomplete)="selectProduct($event[0])">
             </app-autocomplete>
           </div>
           <div class="col-md-8"></div>
-        </div>
+        </div> -->
         <div class="row">
           <div class="col-md-8">
           </div>
