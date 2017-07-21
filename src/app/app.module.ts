@@ -24,6 +24,8 @@ import { NavbarModule} from './nav/navbar/navbar.module';
 
 import { FooterComponent} from './nav/footer/footer.component';
 
+import { LoadingComponent} from './nav/loading/loading.component';
+
 // import { AutocompleteComponent } from './autocomplete/autocomplete.component'
 
 
@@ -128,6 +130,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   declarations: [
     AppComponent,
     FooterComponent,
+    LoadingComponent,
     // NavbarComponent,
   //  CalendarComponent,
 
