@@ -24,6 +24,8 @@ var userCalendars    = require('./routes/userCalendar')
 var paiements    = require('./routes/paiement')
 var paiementQuotes    = require('./routes/paiementQuote')
 var templateQuotes    = require('./routes/templateQuote')
+var right    = require('./routes/right')
+
 
 
 
@@ -70,6 +72,7 @@ app.use('/userCalendar', userCalendars)
 app.use('/paiement', paiements)
 app.use('/paiementQuote', paiementQuotes)
 app.use('/templateQuote', templateQuotes)
+app.use('/right', right)
 
 
 

@@ -2,7 +2,7 @@ var express = require('express'),
     router  = express.Router(),
     config  = require('../config/config'),
     User    = require('../models/user.model'),
-    Product    = require('../models/product.model'),
+    Right    = require('../models/right.model'),
     Form    = require('../models/form.model'),
     fs      = require('fs'),
     jwt     = require('jsonwebtoken')
@@ -55,7 +55,7 @@ router.use('/', function (req, res, next) {
 
 //update
 router.put('/:id', function (req, res, next) {
-  Product.findById(({_id: req.params.id}), function (err, item) {
+  Right.findById(({_id: req.params.id}), function (err, item) {
     if (err) {
       return res.status(404).json({
         message: '',
@@ -63,10 +63,7 @@ router.put('/:id', function (req, res, next) {
       })
     } else {
 
-        item.details = req.body.details
-        item.categorie = req.body.categorie
-        item.vendors = req.body.vendors
-        item.forms = req.body.forms
+        item.detailRight = req.body.detailRight
 
 
 
@@ -96,11 +93,11 @@ router.post('/', function (req, res, next) {
     })
   }
    console.log(req.user.companies)
-  //var Product = new Product(req.body)
-  var product = new Product(req.body)
-  product.ownerCompanies = req.user.companies
-  product.owner = req.user._id
-  product.save(function (err, result) {
+  //var Right = new Right(req.body)
+  var right = new Right(req.body)
+  right.ownerCompanies = req.user.companies
+  right.owner = req.user._id
+  right.save(function (err, result) {
     if (err) {
       console.log(err)
       return res.status(403).json({
@@ -170,7 +167,7 @@ router.get('/page/:page', function (req, res, next) {
   // console.log(hasWhatsNewCateg)
   // console.log(searchQuery)
 
-  Product
+  Right
   .find(searchQuery)
   .sort('-createdAt')
   .populate({path: 'forms', model: 'Form'})
@@ -183,7 +180,7 @@ router.get('/page/:page', function (req, res, next) {
         err: err
       })
     } else {
-      Product
+      Right
       .find(searchQuery)
       .count()
       .exec(function (err, count) {
@@ -205,7 +202,7 @@ router.get('/page/:page', function (req, res, next) {
 
 // getting user forms to display them on front end
 router.get('/:id', function (req, res, next) {
-  Product
+  Right
   .findById({_id: req.params.id})
   .populate('vendors')
   .populate('forms')
@@ -226,39 +223,10 @@ router.get('/:id', function (req, res, next) {
 
 
 
-// getting user forms to display them on front end
-// router.get('/countNewItemForUser/:id', function (req, res, next) {
-//   User
-//   .findOne({_id: req.params.id})
-//   .exec(function (err, user) {
-//     if (err) {
-//       return res.status(403).json({
-//         title: 'There was a problem',
-//         error: err
-//       });
-//     } else {
-//       Product
-//       .find({createdAt:{"$gt": user.trackinPage.lastVisitPageProduct}})
-//       .exec(function (err, item) {
-//         if (err) {
-//           return res.status(404).json({
-//             message: '',
-//             err: err
-//           })
-//         } else {
-//           res.status(200).json({
-//             message: 'Success',
-//             item: item
-//           })
-//         }
-//       })
-//     }
-//   })
-// })
 
 
 router.delete('/:id', function (req, res, next) {
-  Product.findById((req.params.id), function (err, item) {
+  Right.findById((req.params.id), function (err, item) {
     if (err) {
       return res.status(500).json({
         message: 'An error occured',
@@ -289,32 +257,5 @@ router.delete('/:id', function (req, res, next) {
 })
 
 
-// retrieving a single form
-// router.get('/edit/:id', function (req, res, next) {
-//   Form.findById((req.params.id), function (err, form) {
-//     if (err) {
-//       return res.status(500).json({
-//         message: 'An error occured',
-//         err: err
-//       })
-//     }
-//     if (!form) {
-//       return res.status(404).json({
-//         title: 'No form found',
-//         error: {message: 'Form not found!'}
-//       })
-//     }
-//     // checking if the owner of the form is correct
-//     if (form.owner != req.user._id.toString()) {
-//       return res.status(401).json({
-//         title: 'Not your form!',
-//         error: {message: 'Users do not match, not your form'}
-//       })
-//     }
-//     res.status(200).json({
-//       obj: form
-//     })
-//   })
-// })
 
 module.exports = router

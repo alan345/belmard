@@ -11,16 +11,16 @@ var companie = new Schema({
       plan:{type: String, default: ['']},
       current_period_end:{type: Date}
     },
-    rights: [
-      {
-        nameRight: {type: String, default: ['']},
-        permissions:[{
-          namePermission: {type: String, default: ['']},
-          access:[{
-              typeAccess: {type: String, default: ['']},
-            }]
-          }]
-      }
+    rights: [{type: Schema.Types.ObjectId, ref: 'Right'}
+      // {
+      //   nameRight: {type: String, default: ['']},
+      //   permissions:[{
+      //     namePermission: {type: String, default: ['']},
+      //     access:[{
+      //         typeAccess: {type: String, default: ['']},
+      //       }]
+      //     }]
+      // }
     ],
     address: {
       address : {type: String, default: ['']},

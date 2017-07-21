@@ -1,0 +1,51 @@
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-2"><button type="button" class="btn btn-warning" (click)="goBack()"><i class="fa fa-chevron-left"><a> Retour</a></i></button></div>
+  <div class="col-md-6">
+    <h3 class="title">Ajouter / Editer Fournisseur</h3></div>
+  <div class="col-md-3"></div>
+</div>
+
+<div class="container">
+
+
+  <h4 class="dspl-nn">id: {{fetchedRight._id}}</h4>
+
+  <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
+
+    <!-- <button type="button" (click)="addRight( 0, 0, 0, 0)">Add Right</button>
+    <div class="categ0" *ngFor="let right of fetchedRight.rights; let i = index;"> -->
+      <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.nameRight">
+      <button type="button" (click)="removeRight( 1,i,0,0)">X</button>
+      <button type="button" (click)="addRight(1,i,0,0)">+</button>
+      <div class="categ1" *ngFor="let permission of fetchedRight.detailRight.permissions; let j = index;">
+        <select [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].namePermission">
+            <option *ngFor="let n of typesRights" [attr.value]="n.value">{{n.name}}</option>
+          </select>
+        <button type="button" (click)="removeRight( 2,i,j,0)">X</button>
+        <button type="button" (click)="addRight(2,i,j,0)">+</button>
+        <div class="categ2" *ngFor="let singleAccess of permission.access; let k = index;">
+          <select [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].access[k].typeAccess">
+              <option [attr.value]="'read'">Read</option>
+              <option [attr.value]="'write'">write</option>
+            </select>
+          <button type="button" (click)="removeRight( 3,i,j,k)">X</button>
+        </div>
+      </div>
+    <!-- </div> -->
+
+
+    <div class="valid-edit">
+      <button type="submit" class="sln-edt done">
+          Enregistrer
+        </button>
+
+
+      <button *ngIf="fetchedRight._id" type="button" class="sln-edt done" (click)="onDelete(fetchedRight._id)">
+          Delete
+        </button>
+    </div>
+    <div class="clearfix"></div>
+  </form>
+
+</div>

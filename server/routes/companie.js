@@ -85,6 +85,7 @@ router.put('/:id', function (req, res, next) {
 
 
 
+
     item.save(function (err, result) {
       if (err) {
         return res.status(404).json({
@@ -211,10 +212,8 @@ router.get('/page/:page', function (req, res, next) {
 function getCompanie(req, res, next, id) {
   Companie
    .findById(id)
-   .populate({
-     path: 'forms',
-     model: 'Form'
-   })
+   .populate({path: 'forms', model: 'Form'})
+   .populate({path: 'rights', model: 'Right'})
    .exec(function (err, item) {
      if (err) {
        return res.status(404).json({
