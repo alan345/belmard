@@ -69,7 +69,7 @@ router.put('/:id', function (req, res, next) {
     //   if(prop !== '__v' && prop !== 'updatedAt' && prop !== 'createdAt')
     //     item[prop] = req.body[prop]
     // }
-
+    item.ownerCompanies = req.user.companies
     item.rights = req.body.rights
     item.address = req.body.address
     item.option = req.body.option
@@ -136,31 +136,35 @@ router.get('/page/:page', function (req, res, next) {
   let cityQuery = {}
   let search = {}
   let arrObj = []
-  if(req.query.search) {
-  //  nameQuery['name'] = new RegExp(req.query.search, 'i')
-  //  cityQuery['address.city'] = new RegExp(req.query.search, 'i')
-    arrObj.push({'name' : new RegExp(req.query.search, 'i')})
-    arrObj.push({'address.city' : new RegExp(req.query.search, 'i')})
-    arrObj.push({'address.address' : new RegExp(req.query.search, 'i')})
-    search = {$or:arrObj}
-    //findQuery['address.city'] = new RegExp(req.query.search, 'i')
-  }
+  search['ownerCompanies'] = req.user.ownerCompanies
+
+  
+  // if(req.query.search) {
+  //   arrObj.push({'name' : new RegExp(req.query.search, 'i')})
+  //   arrObj.push({'address.city' : new RegExp(req.query.search, 'i')})
+  //   arrObj.push({'address.address' : new RegExp(req.query.search, 'i')})
+  //   search = {$or:arrObj}
+  // }
 
 
-  if(req.query.typeCompanie)
-    search['typeCompanie'] = req.query.typeCompanie
+  // search['ownerCompanies'] = mongoose.Types.ObjectId(req.user.ownerCompanies[0])
 
-  if (req.user.role[0] === 'salesRep') {
-    search['_users'] = mongoose.Types.ObjectId(req.user._id)
-    search['typeCompanie'] = { $nin: 'HQ'}
+  // search['ownerCompanies'] = mongoose.Types.ObjectId(req.user.ownerCompanies[0])
+  // if(req.query.typeCompanie)
 
-  }
-  if (req.user.role[0] === 'manager') {
-    search['_users'] = mongoose.Types.ObjectId(req.user._id)
-  }
-  if (req.user.role[0] === 'stylist') {
-    search['_users'] = mongoose.Types.ObjectId(req.user._id)
-  }
+  //   search['typeCompanie'] = req.query.typeCompanie
+  //
+  // if (req.user.role[0] === 'salesRep') {
+  //   search['_users'] = mongoose.Types.ObjectId(req.user._id)
+  //   search['typeCompanie'] = { $nin: 'HQ'}
+  //
+  // }
+  // if (req.user.role[0] === 'manager') {
+  //   search['_users'] = mongoose.Types.ObjectId(req.user._id)
+  // }
+  // if (req.user.role[0] === 'stylist') {
+  //   search['_users'] = mongoose.Types.ObjectId(req.user._id)
+  // }
 
 
 
