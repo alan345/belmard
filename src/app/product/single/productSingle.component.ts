@@ -106,11 +106,12 @@ export class ProductSingleComponent implements OnInit {
 
   getItemSteps() {
     let currentUser = this.authService.getCurrentUser()
-    currentUser.companies.forEach((companie, index) => {
-      // console.log(currentUser.companies[index])
-      if(currentUser.companies[index].categories.categProduct)
-        this.itemSteps = currentUser.companies[index].categories.categProduct
-    })
+
+    for (let i in currentUser.companies) {
+      if(currentUser.companies[i].categories.categProduct)
+        this.itemSteps = currentUser.companies[i].categories.categProduct
+    }
+
   }
 
   removePic(i) {
