@@ -11,6 +11,7 @@ import { EditQuoteComponent} from './single/editQuote.component';
 
 import { QuoteDetailComponent} from './single/quoteDetail.component';
 import { QuoteService} from './quote.service';
+import { TemplateQuoteService} from './templateQuote.service';
 import { QuoteRouting} from './quoteRouting.module';
 import { MaterialModule } from '@angular/material';
 import { Ng2PaginationModule} from 'ng2-pagination';
@@ -49,7 +50,10 @@ import { PaiementQuoteModule} from '../paiementQuote/paiementQuote.module'
     QuotesComponent,
     // AutocompleteComponent,
   ],
-  providers:    [ QuoteService ],
+  providers:    [
+    QuoteService,
+    TemplateQuoteService
+  ],
   entryComponents: [ ]
 })
 export class QuoteModule { }

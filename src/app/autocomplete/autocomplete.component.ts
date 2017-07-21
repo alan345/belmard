@@ -3,6 +3,8 @@ import { UserService} from '../user/user.service';
 import { CompanieService} from '../companie/companie.service';
 import { ProductService} from '../product/product.service';
 import { QuoteService} from '../quote/quote.service';
+import { TemplateQuoteService} from '../quote/templateQuote.service';
+
 import { ProjectService} from '../project/project.service';
 import { MdDialog } from '@angular/material';
 
@@ -43,6 +45,7 @@ export class AutocompleteComponent {
     private productService: ProductService,
     private quoteService: QuoteService,
     private projectService: ProjectService,
+    private templateQuoteService: TemplateQuoteService,
   ) {}
 
 
@@ -64,16 +67,28 @@ export class AutocompleteComponent {
       this.quoteService.getQuotes(page, search)
       .subscribe( res => { this.fetchedData = res.data }, error => { console.log(error); });
 
-
     if(this.typeAutocomplete ==='project')
       this.projectService.getProjects(page, search)
       .subscribe( res => { this.fetchedData = res.data }, error => { console.log(error); });
 
 
+    if(this.typeAutocomplete ==='templateQuote')
+      this.templateQuoteService.getTemplateQuotes(page, search)
+      .subscribe( res => { this.fetchedData = res.data }, error => { console.log(error); });
 
   }
 
 
+
+  removeDataFromDb(id: string) {
+    if(this.typeAutocomplete ==='templateQuote')
+      this.templateQuoteService.deleteTemplateQuote(id)
+      .subscribe( res => {
+        console.log(res);
+        this.searchData()
+      }, error => { console.log(error); });
+
+  }
 
   openDialog(typeObj: string) {
     let dialogComp: any

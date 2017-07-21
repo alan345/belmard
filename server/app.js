@@ -23,6 +23,8 @@ var projects    = require('./routes/project')
 var userCalendars    = require('./routes/userCalendar')
 var paiements    = require('./routes/paiement')
 var paiementQuotes    = require('./routes/paiementQuote')
+var templateQuotes    = require('./routes/templateQuote')
+
 
 
 var app = express()
@@ -67,6 +69,8 @@ app.use('/option', options)
 app.use('/userCalendar', userCalendars)
 app.use('/paiement', paiements)
 app.use('/paiementQuote', paiementQuotes)
+app.use('/templateQuote', templateQuotes)
+
 
 
 // catch 404 and forward to error handler

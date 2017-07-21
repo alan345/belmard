@@ -1,10 +1,14 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {AuthService} from '../../auth/auth.service';
 import {QuoteService} from '../quote.service';
+import {TemplateQuoteService} from '../templateQuote.service';
+
+
 import {ProductService} from '../../product/product.service';
 import { ProjectService} from '../../project/project.service';
 
 import {Quote, DevisDetail, BucketProduct } from '../quote.model';
+import {TemplateQuote } from '../templateQuote.model';
 
 import {ToastsManager} from 'ng2-toastr';
 
@@ -18,6 +22,7 @@ import { User } from '../../user/user.model';
 import { Product } from '../../product/product.model';
 import { Project } from '../../project/project.model';
 import { PaiementQuote } from '../../paiementQuote/paiementQuote.model';
+
 
 
 declare let jsPDF;
@@ -41,7 +46,7 @@ export class EditQuoteComponent implements OnInit {
   // @Output() newPaiementQuoteSaved: EventEmitter<any> = new EventEmitter();
 
   showPaiements: boolean = false
-  fetchedQuote : Quote = new Quote()
+  fetchedQuote: Quote = new Quote()
   autocompleteUser: string = '';
   autocompleteProject: string = '';
   fetchedProducts: Product[] = []
@@ -59,14 +64,14 @@ export class EditQuoteComponent implements OnInit {
   myForm: FormGroup;
   // autocompleteProduct: String = ''
   fetchedUsers: User[] = [];
-  arrayContentToSearch =[]
+  arrayContentToSearch = []
   constructor(
     private quoteService: QuoteService,
-  //  private projectService: ProjectService,
+    private templateQuoteService: TemplateQuoteService,
     private projectService: ProjectService,
     private userService: UserService,
     private productService: ProductService,
-//    private modalService: NgbModal,
+    //    private modalService: NgbModal,
     private toastr: ToastsManager,
     public dialog: MdDialog,
     private activatedRoute: ActivatedRoute,
@@ -74,7 +79,7 @@ export class EditQuoteComponent implements OnInit {
     private location: Location,
     private _fb: FormBuilder,
     private authService: AuthService,
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.myForm = this._fb.group({
@@ -88,53 +93,53 @@ export class EditQuoteComponent implements OnInit {
 
     this.activatedRoute.params.subscribe((params: Params) => {
 
-      if(params['idQuote'])
+      if (params['idQuote'])
         this.getQuote(params['idQuote'])
-      if(params['idClient'])
+      if (params['idClient'])
         this.getUser(params['idClient'])
-      if(params['idProject'])
+      if (params['idProject'])
         this.getProject(params['idProject'])
     })
   }
 
 
 
-    private signaturePadOptions: Object = { // passed through to szimek/signature_pad constructor
-      minWidth: 1,
-      maxWidth: 7,
-      canvasWidth: 250,
-      canvasHeight: 200,
-      penColor: "rgb(36, 41, 46)"
-    };
+  private signaturePadOptions: Object = { // passed through to szimek/signature_pad constructor
+    minWidth: 1,
+    maxWidth: 7,
+    canvasWidth: 250,
+    canvasHeight: 200,
+    penColor: "rgb(36, 41, 46)"
+  };
 
-    togglePaiements(){
-      this.showPaiements = !this.showPaiements
-    }
+  togglePaiements() {
+    this.showPaiements = !this.showPaiements
+  }
 
-    ngAfterViewInit() {
-      // this.signaturePad is now available
-      this.signaturePad.set('minWidth', 1); // set szimek/signature_pad options at runtime
-      this.signaturePad.clear(); // invoke functions from szimek/signature_pad API
-    }
-    resetSignature() {
-      this.signaturePad.clear();
-    }
-    validateSignature(){
-      this.fetchedQuote.signature.base64 = this.imgSignatureBase64Temp
-      this.fetchedQuote.signature.dateSignature = new Date()
-      this.save()
-    }
-    drawComplete() {
-      // will be notified of szimek/signature_pad's onEnd event
-      // console.log(this.signaturePad.toDataURL());
-      this.imgSignatureBase64Temp = this.signaturePad.toDataURL()
+  ngAfterViewInit() {
+    // this.signaturePad is now available
+    this.signaturePad.set('minWidth', 1); // set szimek/signature_pad options at runtime
+    this.signaturePad.clear(); // invoke functions from szimek/signature_pad API
+  }
+  resetSignature() {
+    this.signaturePad.clear();
+  }
+  validateSignature() {
+    this.fetchedQuote.signature.base64 = this.imgSignatureBase64Temp
+    this.fetchedQuote.signature.dateSignature = new Date()
+    this.save()
+  }
+  drawComplete() {
+    // will be notified of szimek/signature_pad's onEnd event
+    // console.log(this.signaturePad.toDataURL());
+    this.imgSignatureBase64Temp = this.signaturePad.toDataURL()
 
-    }
+  }
 
-    drawStart() {
-      // will be notified of szimek/signature_pad's onBegin event
-      // console.log('begin drawing');
-    }
+  drawStart() {
+    // will be notified of szimek/signature_pad's onBegin event
+    // console.log('begin drawing');
+  }
 
 
   // getCurrentUser() {
@@ -172,7 +177,7 @@ export class EditQuoteComponent implements OnInit {
           ctx.drawImage(img, 0, 0);
           var dataURL = canvas.toDataURL("image/png");
           let dataImg = {
-            dataURL : dataURL,
+            dataURL: dataURL,
             width: img.width,
             height: img.height,
             ratioImg: img.width / img.height
@@ -189,107 +194,107 @@ export class EditQuoteComponent implements OnInit {
 
 
   downloadPDF() {
-      let this2 = this
-      let base64image = this.getBase64Image(this.imgLogoUrl).then(function(dataImg: any) {
+    let this2 = this
+    let base64image = this.getBase64Image(this.imgLogoUrl).then(function(dataImg: any) {
 
-          let marginLeft = 20
-          let verticalStep = 10
-          let heightLogo = 50
-          var doc = new jsPDF();
-          let verticalPointer = 0;
-          //doc.addPage();
-          doc.addImage( dataImg.dataURL, 'png', 15, 20, heightLogo * dataImg.ratioImg, heightLogo);
+      let marginLeft = 20
+      let verticalStep = 10
+      let heightLogo = 50
+      var doc = new jsPDF();
+      let verticalPointer = 0;
+      //doc.addPage();
+      doc.addImage(dataImg.dataURL, 'png', 15, 20, heightLogo * dataImg.ratioImg, heightLogo);
 
-          doc.setFontSize(22);
-          verticalPointer += 90
-          doc.text(120, 20, 'Devis');
-          doc.setFontSize(16);
-          if(this2.fetchedQuote.clients.length) {
-            verticalPointer += verticalStep
-            doc.text(marginLeft, verticalPointer, 'Client : ' + this2.fetchedQuote.clients[0].profile.lastName + ' ' + this2.fetchedQuote.clients[0].profile.name);
-          }
-          if(this2.fetchedQuote.projects.length) {
-            verticalPointer += verticalStep
-            doc.text(marginLeft, verticalPointer, 'Projet : ' + this2.fetchedQuote.projects[0].details.name);
-          }
+      doc.setFontSize(22);
+      verticalPointer += 90
+      doc.text(120, 20, 'Devis');
+      doc.setFontSize(16);
+      if (this2.fetchedQuote.clients.length) {
+        verticalPointer += verticalStep
+        doc.text(marginLeft, verticalPointer, 'Client : ' + this2.fetchedQuote.clients[0].profile.lastName + ' ' + this2.fetchedQuote.clients[0].profile.name);
+      }
+      if (this2.fetchedQuote.projects.length) {
+        verticalPointer += verticalStep
+        doc.text(marginLeft, verticalPointer, 'Projet : ' + this2.fetchedQuote.projects[0].details.name);
+      }
 
-          verticalPointer += verticalStep
-          doc.text(marginLeft, verticalPointer, 'Details');
+      verticalPointer += verticalStep
+      doc.text(marginLeft, verticalPointer, 'Details');
 
-          doc.setFontSize(10);
+      doc.setFontSize(10);
 
-          verticalPointer += 6
-          doc.text(marginLeft, verticalPointer, this2.fetchedQuote.name);
+      verticalPointer += 6
+      doc.text(marginLeft, verticalPointer, this2.fetchedQuote.name);
 
-          // verticalPointer += 6
-          // doc.text(marginLeft, verticalPointer, this2.fetchedQuote.phoneNumber);
+      // verticalPointer += 6
+      // doc.text(marginLeft, verticalPointer, this2.fetchedQuote.phoneNumber);
 
-          // verticalPointer += 6
-          // doc.text(marginLeft, verticalPointer, this2.fetchedQuote.address.address);
+      // verticalPointer += 6
+      // doc.text(marginLeft, verticalPointer, this2.fetchedQuote.address.address);
 
-          // verticalPointer += 6
-          // doc.text(marginLeft, verticalPointer, this2.fetchedQuote.address.city + ' ' + this2.fetchedQuote.address.zip + ' ' + this2.fetchedQuote.address.state + ' ');
-
-
-          doc.setFontSize(12);
-          verticalPointer += 15
-          doc.text(20, verticalPointer, 'reference' );
-          doc.text(50, verticalPointer, 'ref' );
-          doc.text(80, verticalPointer, 'quantite');
-          doc.text(110, verticalPointer, 'Prix HT' );
-          doc.text(140, verticalPointer, 'Prix TTC');
+      // verticalPointer += 6
+      // doc.text(marginLeft, verticalPointer, this2.fetchedQuote.address.city + ' ' + this2.fetchedQuote.address.zip + ' ' + this2.fetchedQuote.address.state + ' ');
 
 
-          doc.setFontSize(10);
-          this2.fetchedQuote.devisDetails.forEach(detail => {
-            verticalPointer += 6
-            // doc.text(20, verticalPointer, detail.productInit.details.referenceName );
-            // doc.text(50, verticalPointer, detail.productInit.details.reference );
-            // doc.text(80, verticalPointer, detail.quantity.toString());
-            // doc.text(110, verticalPointer, detail.totalPriceWithoutTaxes.toString() );
-            // doc.text(140, verticalPointer, detail.totalPriceWithTaxes.toString() );
-          });
-
-          doc.setFontSize(12);
-          verticalPointer += 12
-          doc.text(80, verticalPointer, 'Total');
-          doc.text(110, verticalPointer, this2.fetchedQuote.priceQuote.priceQuoteWithoutTaxes.toString() );
-          doc.text(140, verticalPointer, this2.fetchedQuote.priceQuote.priceQuoteWithTaxes.toString() );
+      doc.setFontSize(12);
+      verticalPointer += 15
+      doc.text(20, verticalPointer, 'reference');
+      doc.text(50, verticalPointer, 'ref');
+      doc.text(80, verticalPointer, 'quantite');
+      doc.text(110, verticalPointer, 'Prix HT');
+      doc.text(140, verticalPointer, 'Prix TTC');
 
 
-          doc.save('Test.pdf');
-
-      }, function(reason) {
-        console.log(reason); // Error!
+      doc.setFontSize(10);
+      this2.fetchedQuote.devisDetails.forEach(detail => {
+        verticalPointer += 6
+        // doc.text(20, verticalPointer, detail.productInit.details.referenceName );
+        // doc.text(50, verticalPointer, detail.productInit.details.reference );
+        // doc.text(80, verticalPointer, detail.quantity.toString());
+        // doc.text(110, verticalPointer, detail.totalPriceWithoutTaxes.toString() );
+        // doc.text(140, verticalPointer, detail.totalPriceWithTaxes.toString() );
       });
+
+      doc.setFontSize(12);
+      verticalPointer += 12
+      doc.text(80, verticalPointer, 'Total');
+      doc.text(110, verticalPointer, this2.fetchedQuote.priceQuote.priceQuoteWithoutTaxes.toString());
+      doc.text(140, verticalPointer, this2.fetchedQuote.priceQuote.priceQuoteWithTaxes.toString());
+
+
+      doc.save('Test.pdf');
+
+    }, function(reason) {
+      console.log(reason); // Error!
+    });
   }
 
-    getUser(id: string) {
-      this.userService.getUser(id)
-        .subscribe(
-          res => {
-            this.selectUser(res)
-          },
-          error => { console.log(error) }
-        );
-    }
+  getUser(id: string) {
+    this.userService.getUser(id)
+      .subscribe(
+      res => {
+        this.selectUser(res)
+      },
+      error => { console.log(error) }
+      );
+  }
 
 
-    // Autocomplete User
-    selectUser(user: User) {
-      this.fetchedQuote.clients = [user]
-    }
+  // Autocomplete User
+  selectUser(user: User) {
+    this.fetchedQuote.clients = [user]
+  }
 
 
 
 
-    getProject(id: string) {
-      this.projectService.getProject(id)
-        .subscribe(
-          res => { this.selectProject(res) },
-          error => { console.log(error) }
-        );
-    }
+  getProject(id: string) {
+    this.projectService.getProject(id)
+      .subscribe(
+      res => { this.selectProject(res) },
+      error => { console.log(error) }
+      );
+  }
 
 
 
@@ -301,81 +306,90 @@ export class EditQuoteComponent implements OnInit {
     this.fetchedQuote.detail.dateQuote.issueDate = this.authService.HTMLDatetoIsoDate(this.fetchedQuote.detail.dateQuote.issueDateString)
     this.fetchedQuote.detail.dateQuote.expiryDate = this.authService.HTMLDatetoIsoDate(this.fetchedQuote.detail.dateQuote.expiryDateString)
 
-    if(this.fetchedQuote._id) {
+    if (this.fetchedQuote._id) {
       this.quoteService.updateQuote(this.fetchedQuote)
         .subscribe(
-          res => {
-            this.toastr.success('Great!', res.message)
-            //this.router.navigate(['quote/edit/' + this.fetchedQuote._id])
-          },
-          error => {
-            this.toastr.error('error!', error)
-          }
+        res => {
+          this.toastr.success('Great!', res.message)
+          //this.router.navigate(['quote/edit/' + this.fetchedQuote._id])
+        },
+        error => {
+          this.toastr.error('error!', error)
+        }
         )
     } else {
       this.quoteService.saveQuote(this.fetchedQuote)
         .subscribe(
-          res => {
-            this.toastr.success('Great!', res.message)
-              this.router.navigate(['quote/edit/' + res.obj._id])
-          },
-          error => {console.log(error)}
+        res => {
+          this.toastr.success('Great!', res.message)
+          this.router.navigate(['quote/edit/' + res.obj._id])
+        },
+        error => { console.log(error) }
         )
     }
 
   }
-    removeBucketProducts(i){
-      this.fetchedQuote.devisDetails.splice(i, 1);
-      this.calculateQuote()
-    }
-    addBucketProducts() {
-      let newDevisDetail = new DevisDetail()
-      this.fetchedQuote.devisDetails.push(newDevisDetail)
-    }
+  removeBucketProducts(i) {
+    this.fetchedQuote.devisDetails.splice(i, 1);
+    this.calculateQuote()
+  }
+  addBucketProducts() {
+    let newDevisDetail = new DevisDetail()
+    this.fetchedQuote.devisDetails.push(newDevisDetail)
+  }
 
-    selectProduct(product: Product, i) {
-      this.arrayContentToSearch = []
-      let bucketProduct: BucketProduct = {
-        productInit: product,
-        vat: 20,
-        priceWithoutTaxes: product.details.price.sellingPrice,
-        priceWithTaxes: 0,
-        totalPriceWithTaxes: 0,
-        totalPriceWithoutTaxes: 0,
-        quantity: 1,
-        discount: 0,
-      }
-      // this.autocompleteProduct = ''
 
-      this.fetchedQuote.devisDetails[i].bucketProducts.push(bucketProduct)
-      this.calculateQuote()
+  selectTemplateQuote(templateQuote: TemplateQuote) {
+    this.arrayContentToSearch = []
+    templateQuote.devisDetails.forEach(devisDetail => {
+      this.fetchedQuote.devisDetails.push(devisDetail)
+    })
+
+    this.calculateQuote()
+  }
+  selectProduct(product: Product, i) {
+    this.arrayContentToSearch = []
+    let bucketProduct: BucketProduct = {
+      productInit: product,
+      vat: 20,
+      priceWithoutTaxes: product.details.price.sellingPrice,
+      priceWithTaxes: 0,
+      totalPriceWithTaxes: 0,
+      totalPriceWithoutTaxes: 0,
+      quantity: 1,
+      discount: 0,
     }
-    calculateQuote() {
-      let this2 = this;
-      setTimeout(function(){
-        this2.fetchedQuote.priceQuote.priceQuoteWithTaxes = 0
-        this2.fetchedQuote.priceQuote.priceQuoteWithoutTaxes = 0
-        this2.fetchedQuote.devisDetails.forEach((devisDetails, i) => {
-          this2.fetchedQuote.devisDetails[i].bucketProducts.forEach((product, j) => {
-            this2.fetchedQuote.devisDetails[i].bucketProducts[j].priceWithTaxes = product.priceWithoutTaxes * 1 + (product.priceWithoutTaxes * product.vat / 100)
-            this2.fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithTaxes = this2.fetchedQuote.devisDetails[i].bucketProducts[j].priceWithTaxes * product.quantity
-            this2.fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithoutTaxes = product.priceWithoutTaxes * product.quantity
+    // this.autocompleteProduct = ''
 
-            this2.fetchedQuote.priceQuote.priceQuoteWithTaxes = this2.fetchedQuote.priceQuote.priceQuoteWithTaxes*1 + this2.fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithTaxes*1
-            this2.fetchedQuote.priceQuote.priceQuoteWithoutTaxes = this2.fetchedQuote.priceQuote.priceQuoteWithoutTaxes*1 + this2.fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithoutTaxes*1
-          })
+    this.fetchedQuote.devisDetails[i].bucketProducts.push(bucketProduct)
+    this.calculateQuote()
+  }
+  calculateQuote() {
+    let this2 = this;
+    setTimeout(function() {
+      this2.fetchedQuote.priceQuote.priceQuoteWithTaxes = 0
+      this2.fetchedQuote.priceQuote.priceQuoteWithoutTaxes = 0
+      this2.fetchedQuote.devisDetails.forEach((devisDetails, i) => {
+        this2.fetchedQuote.devisDetails[i].bucketProducts.forEach((product, j) => {
+          this2.fetchedQuote.devisDetails[i].bucketProducts[j].priceWithTaxes = product.priceWithoutTaxes * 1 + (product.priceWithoutTaxes * product.vat / 100)
+          this2.fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithTaxes = this2.fetchedQuote.devisDetails[i].bucketProducts[j].priceWithTaxes * product.quantity
+          this2.fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithoutTaxes = product.priceWithoutTaxes * product.quantity
+
+          this2.fetchedQuote.priceQuote.priceQuoteWithTaxes = this2.fetchedQuote.priceQuote.priceQuoteWithTaxes * 1 + this2.fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithTaxes * 1
+          this2.fetchedQuote.priceQuote.priceQuoteWithoutTaxes = this2.fetchedQuote.priceQuote.priceQuoteWithoutTaxes * 1 + this2.fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithoutTaxes * 1
         })
+      })
 
 
 
-        //this2.save()
-      }, 20)
+      //this2.save()
+    }, 20)
 
-    }
-    removeProduct(i: number, j: number) {
-      this.fetchedQuote.devisDetails[i].bucketProducts.splice(j, 1);
-      this.calculateQuote()
-    }
+  }
+  removeProduct(i: number, j: number) {
+    this.fetchedQuote.devisDetails[i].bucketProducts.splice(j, 1);
+    this.calculateQuote()
+  }
 
   //   parseDate(dateString: string): Date {
   //     if (dateString) {
@@ -385,24 +399,35 @@ export class EditQuoteComponent implements OnInit {
   //     }
   // }
 
-    // removePaiement(i: number) {
-    //   this.fetchedQuote.paiements.splice(i, 1);
-    //   this.calculateQuote()
-    // }
+  // removePaiement(i: number) {
+  //   this.fetchedQuote.paiements.splice(i, 1);
+  //   this.calculateQuote()
+  // }
 
-    getProducts(page: number, search: any) {
-      this.productService.getProducts(page, search)
-        .subscribe(
-          res => {
-            this.fetchedProducts = res.data
-          },
-          error => {
-            console.log(error);
-          }
-        );
-    }
+  getProducts(page: number, search: any) {
+    this.productService.getProducts(page, search)
+      .subscribe(
+      res => {
+        this.fetchedProducts = res.data
+      },
+      error => {
+        console.log(error);
+      }
+      );
+  }
 
 
+  saveTemplateQuote() {
+    let newTemplateQuote = new TemplateQuote()
+    newTemplateQuote.devisDetails = this.fetchedQuote.devisDetails
+    this.templateQuoteService.saveTemplateQuote(newTemplateQuote)
+      .subscribe(
+      res => {
+        this.toastr.success('Great!', res.message)
+      },
+      error => { console.log(error) }
+      )
+  }
 
   // move(i: number, incremet: number, typeUser: string) {
   //   if(i>=0 && i<=this[typeUser].length + incremet) {
@@ -436,37 +461,37 @@ export class EditQuoteComponent implements OnInit {
     return new Promise(function(resolve, reject) {
       this2.quoteService.deleteQuote(id)
         .subscribe(
-          res => {
-            this2.toastr.success('Great!', res.message);
-            resolve(res)
-          },
-          error => {
-            console.log(error);
-            reject(error)
-          }
+        res => {
+          this2.toastr.success('Great!', res.message);
+          resolve(res)
+        },
+        error => {
+          console.log(error);
+          reject(error)
+        }
         )
-      })
+    })
   }
 
 
-  openDialogDelete(){
+  openDialogDelete() {
     let this2 = this
     let dialogRefDelete = this.dialog.open(DeleteDialog)
     dialogRefDelete.afterClosed().subscribe(result => {
-      if(result) {
-        this.onDelete(this.fetchedQuote._id).then(function(){
+      if (result) {
+        this.onDelete(this.fetchedQuote._id).then(function() {
           this2.router.navigate(['quote']);
         })
 
       }
     })
   }
-  newPaiementQuoteSaved(){
+  newPaiementQuoteSaved() {
     this.paiementQuotesComponent.getPaiementQuotesInit()
     // this.refreshPaiementQuotes.emit()
     // this.getPaiementQuotesCross.emit(this.fetchedPaiementQuotes)
   }
-  getPaiementQuotes(event){
+  getPaiementQuotes(event) {
     // console.log(event)
     this.totalPaiementAmount = 0
     this.fetchedPaiementQuotes = event
@@ -477,13 +502,13 @@ export class EditQuoteComponent implements OnInit {
   getQuote(id: string) {
     this.quoteService.getQuote(id, {})
       .subscribe(
-        res => {
-           this.fetchedQuote = res
-           this.fetchedQuote.detail.dateQuote.issueDateString = this.authService.isoDateToHtmlDate(this.fetchedQuote.detail.dateQuote.issueDate)
-           this.fetchedQuote.detail.dateQuote.expiryDateString = this.authService.isoDateToHtmlDate(this.fetchedQuote.detail.dateQuote.expiryDate)
+      res => {
+        this.fetchedQuote = res
+        this.fetchedQuote.detail.dateQuote.issueDateString = this.authService.isoDateToHtmlDate(this.fetchedQuote.detail.dateQuote.issueDate)
+        this.fetchedQuote.detail.dateQuote.expiryDateString = this.authService.isoDateToHtmlDate(this.fetchedQuote.detail.dateQuote.expiryDate)
 
-        },
-        error => { console.log(error) }
+      },
+      error => { console.log(error) }
       )
   }
 

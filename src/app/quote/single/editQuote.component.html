@@ -104,6 +104,15 @@
         </div>
       </div>
       <br><br>
+
+      <button type="button" (click)="saveTemplateQuote()">saveTemplateQuote</button>
+      <app-autocomplete
+        [typeAutocomplete]="'templateQuote'"
+        [title]="" [singleChoice]="'false'"
+        [arrayContent]="arrayContentToSearch"
+        (getResultAutocomplete)="selectTemplateQuote($event[0], i)">
+      </app-autocomplete>
+
       <div class="form-control">
         <div class="row">
           <div class="col-md-1"></div>
