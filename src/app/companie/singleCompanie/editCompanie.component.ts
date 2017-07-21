@@ -179,553 +179,570 @@ export class EditCompanieComponent implements OnInit {
   //     }
   //   })
   // }
+  initDataToRemove(){
+        this.fetchedCompanie.rights = [
+          {
+            nameRight: 'Président directeur general',
+            permissions:[
+              {
+                namePermission: 'reporting',
+                access: [{
+                  typeAccess:'read'
+                },
+                {
+                  typeAccess:'write'
+                },                
+              ]
+              }
+            ]
+
+          },
+          {
+            nameRight: 'Secretaire',
+            permissions:[
+              {
+                namePermission: 'reporting',
+                access: [{
+                  typeAccess:'read'
+                }]
+              }
+            ]
+
+          }
+        ]
+        this.fetchedCompanie.categories.categProduct = [
+          {
+            "categ":"Serrurerie",
+            "subCateg": [
+              {
+                "categ":"Serrurerie de bâtiment",
+                "subCateg": [
+                  {"categ": "Clés"},
+                  {"categ": "Cylindres"},
+                  {"categ": "Verrous"}
+                ]
+              },
+              {
+                "categ":"Ferme-portes",
+                "subCateg": [
+                  {"categ": "Ferme-portes contemporains"},
+                  {"categ": "Ferme-portes technologies à came"},
+                  {"categ": "Ferme-portes technologies pignons à crémaillère"}
+                ]
+              },
+              {
+                "categ":"Garnitures de porte",
+                "subCateg": [
+                  {"categ": "Equipements de la porte"},
+                  {"categ": "Poignées"},
+                  {"categ": "Judas"},
+                  {"categ": "Garnitures inox"},
+                  {"categ": "Accessoires de montage de garnitures de porte"}
+                ]
+              },
+              {
+                "categ":"Sécurité de porte",
+                "subCateg": [
+                  {"categ": "Blindage"},
+                  {"categ": "Tôles"},
+                  {"categ": "Barres de pivot"},
+                  {"categ": "Garnitures de sécurité"},
+                  {"categ": "Pivots de sol"},
+                  {"categ": "Pivots de linteau"}
+                ]
+              }
+            ]
+          },
+
+
+
+
+
+
+          {
+            "categ":"Menuiserie",
+            "subCateg": [
+              {
+                "categ":"",
+                "subCateg": [
+                  {"categ": ""}
+                ]
+              },
+              {
+                "categ":"Portes",
+                "subCateg": [
+                  {"categ": "Fenêtres bois ou PVC"},
+                  {"categ": "Portes et portes fenêtres"},
+                  {"categ": "Coulissants bois ou PVC"},
+                  {"categ": "Blindage pivot"},
+                  {"categ": "Super-blindages"},
+                  {"categ": "Pivots"},
+                  {"categ": "Blocs-portes"}
+                ]
+              },
+              {
+                "categ":"Fenêtres",
+                "subCateg": [
+                  {"categ": "Equipement de la porte et de la fenêtre"},
+                  {"categ": "Fermetures de la porte et de la fenêtre"},
+                  {"categ": "Etanchéité de la porte et de la fenêtre"},
+                  {"categ": "Vitrines"},
+                  {"categ": "Habillage"}
+                ]
+              }
+            ]
+          },
+
+
+
+
+
+          {
+            "categ":"Fenêtres",
+            "subCateg": [
+              {
+                "categ":"",
+                "subCateg": [
+                  {"categ": ""}
+                ]
+              },
+              {
+                "categ":"Vitrage",
+                "subCateg": [
+                  {"categ": "Double vitrages"},
+                  {"categ": "Double vitrages de rénovation composition 4-6-4 avec gaz Argon"},
+                  {"categ": "Encadrement vitrage PVC"},
+                  {"categ": "Double battants"},
+                  {"categ": "Porte-fenêtre Bâti Renov Bicouleur double vitrage 442-16-4 avec gaz Argon"},
+                  {"categ": "Survitrage"},
+                  {"categ": "Vitrage droit avec parcloses"},
+                  {"categ": "Vitrage en façade"},
+                  {"categ": "Vitrine"},
+                  {"categ": "Vitre fixe opaque avec bâti aluminium et fenêtre en ouverture oscillo battants"}
+                ]
+              },
+              {
+                "categ":"Isolation",
+                "subCateg": [
+                  {"categ": "Habillage en double joint"},
+                  {"categ": "Isolation phonique"},
+                  {"categ": "Isolation thermique"}
+                ]
+              },
+              {
+                "categ":"Verre",
+                "subCateg": [
+                  {"categ": "Verre couleur bronze sécurité 1"},
+                  {"categ": "Verre à la découpe"},
+                  {"categ": "Verre armé"},
+                  {"categ": "Verre clair"},
+                  {"categ": "Verre de sécurité composition"},
+                  {"categ": "Verre dépoli acide (opaque)"},
+                  {"categ": "Verre double vitrage avec gaz Argon"},
+                  {"categ": "Verre feuilleté"},
+                  {"categ": "Verre opaque"},
+                  {"categ": "Verre simple"},
+                  {"categ": "Verre anti-UV"}
+                ]
+              }
+            ]
+          },
+
+
+
+
+          {
+            "categ":"Plomberie",
+            "subCateg": [
+              {
+                "categ":"",
+                "subCateg": [
+                  {"categ": ""}
+                ]
+              },
+              {
+                "categ":"Ballon d'eau chaude",
+                "subCateg": [
+                  {"categ": "Chauffe-eau gaz"},
+                  {"categ": "Chauffe-eau électrique"},
+                  {"categ": "Equipement sécurité"}
+                ]
+              },
+              {
+                "categ":"Robinetterie",
+                "subCateg": [
+                  {"categ": "Robinetterie de lavabo"},
+                  {"categ": "Robinetterie de cuisine"},
+                  {"categ": "Robinetterie de douche"}
+                ]
+              },
+              {
+                "categ":"Vanne",
+                "subCateg": [
+                  {"categ": "Vanne-compteur"},
+                  {"categ": "Electrovannes gaz à réarmement"},
+                  {"categ": "Vannes soupape"}
+                ]
+              },
+              {
+                "categ":"Carrelage",
+                "subCateg": [
+                  {"categ": "Receveurs"},
+                  {"categ": "Receveurs céramiques"},
+                  {"categ": "Receveurs à carreler"},
+                  {"categ": "Pieds pour receveurs"}
+                ]
+              },
+              {
+                "categ":"Sanitaire",
+                "subCateg": [
+                  {"categ": "Cuvettes"},
+                  {"categ": "Broyeurs"},
+                  {"categ": "Abattants"},
+                  {"categ": "Pipes"},
+                  {"categ": "Mécanisme de WC"},
+                  {"categ": "Réservoir indépendant"},
+                  {"categ": "Plaque de déclenchement"},
+                  {"categ": "Bidets"},
+                  {"categ": "Lavabos et colonnes"}
+                ]
+              }
+            ]
+          },
+
+
+
+
+
+          {
+            "categ":"Électricité",
+            "subCateg": [
+              {
+                "categ":"",
+                "subCateg": [
+                  {"categ": ""}
+                ]
+              },
+              {
+                "categ":"Convecteur",
+                "subCateg": [
+                  {"categ": "Convecteur électrique CASSETTE RAY SUNAIR 3600TC Thermor, ref : 497091"},
+                  {"categ": "Convecteur électrique Thermor Equateur 2000W"},
+                  {"categ": "Convecteur gamme Baleares 1500W horizontal tout compris"}
+                ]
+              },
+              {
+                "categ":"Disjoncteur",
+                "subCateg": [
+                  {"categ": "Disjoncteur 10A"},
+                  {"categ": "Disjoncteur 16A/ 30Mili"},
+                  {"categ": "Disjoncteur 20A"},
+                  {"categ": "Disjoncteur 32A"},
+                  {"categ": "Disjoncteur C2"},
+                  {"categ": "Disjoncteur Divers tri"}
+                ]
+              },
+              {
+                "categ":"Eclairage",
+                "subCateg": [
+                  {"categ": "Interrupteur"},
+                  {"categ": "Projecteurs"},
+                  {"categ": "Lampes"}
+                ]
+              },
+              {
+                "categ":"Branchement",
+                "subCateg": [
+                  {"categ": "Fils et câbles"},
+                  {"categ": "Prises"}
+                ]
+              },
+              {
+                "categ":"Protection",
+                "subCateg": [
+                  {"categ": "Protections de l\"habitat"},
+                  {"categ": "Cartouches et fusibles"}
+                ]
+              }
+
+            ]
+          },
+
+
+          {
+            "categ": "Chauffage",
+            "subCateg": [
+              {
+                "categ":"",
+                "subCateg": [
+                  {"categ": ""}
+                ]
+              },
+              {
+                "categ": "Radiateurs",
+                "subCateg": [
+                  {"categ": "Fixations de radiateurs"},
+                  {"categ": "Radiateur thermoactif"},
+                  {"categ": "Robinetterie de radiateurs"},
+                  {"categ": "Accessoires"},
+                  {"categ": "Sèche-serviettes"},
+                  {"categ": "Habillage"}
+                ]
+              },
+              {
+                "categ":"Chaudière",
+                "subCateg": [
+                  {"categ": "Bloc hydraulique"},
+                  {"categ": "Système de sécurité surchauffe"},
+                  {"categ": "Chaudière électrique"},
+                  {"categ": "Thermostat"}
+                ]
+              }
+            ]
+          }
+        ]
+
+
+         this.fetchedCompanie.categories.categProject = [
+      {
+        "categ":"Devis Rénovation",
+        "subCateg": [
+          {
+            "categ":"Cuisine",
+            "subCateg": [
+              {"categ": "ok"}
+            ]
+          },
+          {
+            "categ":"Salle de Bain",
+            "subCateg": [
+              {"categ": "ok"}
+            ]
+          },
+          {
+            "categ":"Remise en conformité électrique",
+            "subCateg": [
+              {"categ": "ok"}
+            ]
+          },
+          {
+            "categ":"Maçonnerie",
+            "subCateg": [
+              {"categ": "ok"}
+            ]
+          },
+          {
+            "categ":"Peinture",
+            "subCateg": [
+              {"categ": "ok"}
+            ]
+          },
+          {
+            "categ":"PMR",
+            "subCateg": [
+              {"categ": "ok"}
+            ]
+          }
+        ]
+      },
+
+
+
+
+      {
+        "categ":"Intervention Immédiate",
+        "subCateg": [
+
+          {
+            "categ":"Plomberie",
+            "subCateg": [
+              {"categ": "Recherche de Fuite"},
+              {"categ": "Réparation De Fuite"},
+              {"categ": "Engorgement de canalisation"},
+              {"categ": "Ballon Eau chaude en panne"},
+              {"categ": "Robinneterie en panne"},
+              {"categ": "Wc en panne"},
+              {"categ": "Innondation"}
+            ]
+          },
+          {
+            "categ":"Electricité",
+            "subCateg": [
+              {"categ": "Recherche de panne électrique"},
+              {"categ": "Remplacement de tableau électrique "}
+            ]
+          },
+          {
+            "categ":"Serrurerie",
+            "subCateg": [
+              {"categ": "ouverture de porte"},
+              {"categ": "Remplacement de serrure"}
+            ]
+          },
+          {
+            "categ":"Vitrerie",
+            "subCateg": [
+              {"categ": "Remplacement de vitre à la coupe"},
+              {"categ": "Fermeture Provisoire"}
+            ]
+          },
+          {
+            "categ":"Chauffage",
+            "subCateg": [
+              {"categ": "Fuite Chaudiere ou Radiateur"},
+              {"categ": "Recherche de panne chaudiere"},
+              {"categ": "Contrat Entretien"},
+              {"categ": "Remplacement de Chaudiere "}
+            ]
+          }
+        ]
+      },
+
+
+
+
+      {
+        "categ":"Devis Installation",
+        "subCateg": [
+
+          {
+            "categ":"Menuiserie",
+            "subCateg": [
+              {"categ": "Double Vitrage rénovation"},
+              {"categ": "Vitre / Vitrine"},
+              {"categ": "Fenêtres"},
+              {"categ": "Survitrage"}
+            ]
+          },
+          {
+            "categ":"Chauffage",
+            "subCateg": [
+              {"categ": "Remplacement de chaudiere"},
+              {"categ": "Déplacement de chaudiere"},
+              {"categ": "Installation de radiateur"}
+            ]
+          },
+          {
+            "categ":"Petite Electricité",
+            "subCateg": [
+              {"categ": "Tirage de ligne électrique"},
+              {"categ": "Rajout de prise"}
+            ]
+          },
+          {
+            "categ":"Serrurerie",
+            "subCateg": [
+              {"categ": "Installation d\"une serrure de sécurité"},
+              {"categ": "Blindage de porte"},
+              {"categ": "Remplacement de porte"}
+            ]
+          },
+          {
+            "categ":"Plomberie",
+            "subCateg": [
+              {"categ": "Remplacement de Ballon eau chaude"},
+              {"categ": "Remplacement de robinneterie"},
+              {"categ": "Remplacement de WC"},
+              {"categ": "Tirage de ligne "}
+            ]
+          },
+          {
+            "categ":"Electricité",
+            "subCateg": [
+              {"categ": "Installation ou Remplacement Convecteur"}
+
+            ]
+          }
+        ]
+      },
+
+
+
+
+
+      {
+        "categ":"Électricité",
+        "subCateg": [
+
+          {
+            "categ":"Convecteur",
+            "subCateg": [
+              {"categ": "Convecteur électrique CASSETTE RAY SUNAIR 3600TC Thermor, ref : 497091"},
+              {"categ": "Convecteur électrique Thermor Equateur 2000W"},
+              {"categ": "Convecteur gamme Baleares 1500W horizontal tout compris"}
+            ]
+          },
+          {
+            "categ":"Disjoncteur",
+            "subCateg": [
+              {"categ": "Disjoncteur 10A"},
+              {"categ": "Disjoncteur 16A/ 30Mili"},
+              {"categ": "Disjoncteur 20A"},
+              {"categ": "Disjoncteur 32A"},
+              {"categ": "Disjoncteur C2"},
+              {"categ": "Disjoncteur Divers tri"}
+            ]
+          },
+          {
+            "categ":"Eclairage",
+            "subCateg": [
+              {"categ": "Interrupteur"},
+              {"categ": "Projecteurs"},
+              {"categ": "Lampes"}
+            ]
+          },
+          {
+            "categ":"Branchement",
+            "subCateg": [
+              {"categ": "Fils et câbles"},
+              {"categ": "Prises"}
+            ]
+          },
+          {
+            "categ":"Protection",
+            "subCateg": [
+              {"categ": "Protections de l\"habitat"},
+              {"categ": "Cartouches et fusibles"}
+            ]
+          }
+
+        ]
+      },
+
+
+      {
+        "categ": "Chauffage",
+        "subCateg": [
+
+          {
+            "categ": "Radiateurs",
+            "subCateg": [
+              {"categ": "Fixations de radiateurs"},
+              {"categ": "Radiateur thermoactif"},
+              {"categ": "Robinetterie de radiateurs"},
+              {"categ": "Accessoires"},
+              {"categ": "Sèche-serviettes"},
+              {"categ": "Habillage"}
+            ]
+          },
+          {
+            "categ":"Chaudière",
+            "subCateg": [
+              {"categ": "Bloc hydraulique"},
+              {"categ": "Système de sécurité surchauffe"},
+              {"categ": "Chaudière électrique"},
+              {"categ": "Thermostat"}
+            ]
+          }
+        ]
+      }
+    ]
+    this.save()
+  }
+
 
   save() {
 
-    // this.fetchedCompanie.categories.categProduct =[
-    //   {
-    //     "categ":"",
-    //     "subCateg": [
-    //       {
-    //         "categ":"",
-    //         "subCateg": [
-    //           {"categ": ""}
-    //         ]
-    //       }
-    //     ]
-    //   },
-    //   {
-    //     "categ":"Serrurerie",
-    //     "subCateg": [
-    //       {
-    //         "categ":"",
-    //         "subCateg": [
-    //           {"categ": ""}
-    //         ]
-    //       },
-    //       {
-    //         "categ":"Serrurerie de bâtiment",
-    //         "subCateg": [
-    //           {"categ": "Clés"},
-    //           {"categ": "Cylindres"},
-    //           {"categ": "Verrous"}
-    //         ]
-    //       },
-    //       {
-    //         "categ":"Ferme-portes",
-    //         "subCateg": [
-    //           {"categ": "Ferme-portes contemporains"},
-    //           {"categ": "Ferme-portes technologies à came"},
-    //           {"categ": "Ferme-portes technologies pignons à crémaillère"}
-    //         ]
-    //       },
-    //       {
-    //         "categ":"Garnitures de porte",
-    //         "subCateg": [
-    //           {"categ": "Equipements de la porte"},
-    //           {"categ": "Poignées"},
-    //           {"categ": "Judas"},
-    //           {"categ": "Garnitures inox"},
-    //           {"categ": "Accessoires de montage de garnitures de porte"}
-    //         ]
-    //       },
-    //       {
-    //         "categ":"Sécurité de porte",
-    //         "subCateg": [
-    //           {"categ": "Blindage"},
-    //           {"categ": "Tôles"},
-    //           {"categ": "Barres de pivot"},
-    //           {"categ": "Garnitures de sécurité"},
-    //           {"categ": "Pivots de sol"},
-    //           {"categ": "Pivots de linteau"}
-    //         ]
-    //       }
-    //     ]
-    //   },
-    //
-    //
-    //
-    //
-    //
-    //
-    //   {
-    //     "categ":"Menuiserie",
-    //     "subCateg": [
-    //       {
-    //         "categ":"",
-    //         "subCateg": [
-    //           {"categ": ""}
-    //         ]
-    //       },
-    //       {
-    //         "categ":"Portes",
-    //         "subCateg": [
-    //           {"categ": "Fenêtres bois ou PVC"},
-    //           {"categ": "Portes et portes fenêtres"},
-    //           {"categ": "Coulissants bois ou PVC"},
-    //           {"categ": "Blindage pivot"},
-    //           {"categ": "Super-blindages"},
-    //           {"categ": "Pivots"},
-    //           {"categ": "Blocs-portes"}
-    //         ]
-    //       },
-    //       {
-    //         "categ":"Fenêtres",
-    //         "subCateg": [
-    //           {"categ": "Equipement de la porte et de la fenêtre"},
-    //           {"categ": "Fermetures de la porte et de la fenêtre"},
-    //           {"categ": "Etanchéité de la porte et de la fenêtre"},
-    //           {"categ": "Vitrines"},
-    //           {"categ": "Habillage"}
-    //         ]
-    //       }
-    //     ]
-    //   },
-    //
-    //
-    //
-    //
-    //
-    //   {
-    //     "categ":"Fenêtres",
-    //     "subCateg": [
-    //       {
-    //         "categ":"",
-    //         "subCateg": [
-    //           {"categ": ""}
-    //         ]
-    //       },
-    //       {
-    //         "categ":"Vitrage",
-    //         "subCateg": [
-    //           {"categ": "Double vitrages"},
-    //           {"categ": "Double vitrages de rénovation composition 4-6-4 avec gaz Argon"},
-    //           {"categ": "Encadrement vitrage PVC"},
-    //           {"categ": "Double battants"},
-    //           {"categ": "Porte-fenêtre Bâti Renov Bicouleur double vitrage 442-16-4 avec gaz Argon"},
-    //           {"categ": "Survitrage"},
-    //           {"categ": "Vitrage droit avec parcloses"},
-    //           {"categ": "Vitrage en façade"},
-    //           {"categ": "Vitrine"},
-    //           {"categ": "Vitre fixe opaque avec bâti aluminium et fenêtre en ouverture oscillo battants"}
-    //         ]
-    //       },
-    //       {
-    //         "categ":"Isolation",
-    //         "subCateg": [
-    //           {"categ": "Habillage en double joint"},
-    //           {"categ": "Isolation phonique"},
-    //           {"categ": "Isolation thermique"}
-    //         ]
-    //       },
-    //       {
-    //         "categ":"Verre",
-    //         "subCateg": [
-    //           {"categ": "Verre couleur bronze sécurité 1"},
-    //           {"categ": "Verre à la découpe"},
-    //           {"categ": "Verre armé"},
-    //           {"categ": "Verre clair"},
-    //           {"categ": "Verre de sécurité composition"},
-    //           {"categ": "Verre dépoli acide (opaque)"},
-    //           {"categ": "Verre double vitrage avec gaz Argon"},
-    //           {"categ": "Verre feuilleté"},
-    //           {"categ": "Verre opaque"},
-    //           {"categ": "Verre simple"},
-    //           {"categ": "Verre anti-UV"}
-    //         ]
-    //       }
-    //     ]
-    //   },
-    //
-    //
-    //
-    //
-    //   {
-    //     "categ":"Plomberie",
-    //     "subCateg": [
-    //       {
-    //         "categ":"",
-    //         "subCateg": [
-    //           {"categ": ""}
-    //         ]
-    //       },
-    //       {
-    //         "categ":"Ballon d'eau chaude",
-    //         "subCateg": [
-    //           {"categ": "Chauffe-eau gaz"},
-    //           {"categ": "Chauffe-eau électrique"},
-    //           {"categ": "Equipement sécurité"}
-    //         ]
-    //       },
-    //       {
-    //         "categ":"Robinetterie",
-    //         "subCateg": [
-    //           {"categ": "Robinetterie de lavabo"},
-    //           {"categ": "Robinetterie de cuisine"},
-    //           {"categ": "Robinetterie de douche"}
-    //         ]
-    //       },
-    //       {
-    //         "categ":"Vanne",
-    //         "subCateg": [
-    //           {"categ": "Vanne-compteur"},
-    //           {"categ": "Electrovannes gaz à réarmement"},
-    //           {"categ": "Vannes soupape"}
-    //         ]
-    //       },
-    //       {
-    //         "categ":"Carrelage",
-    //         "subCateg": [
-    //           {"categ": "Receveurs"},
-    //           {"categ": "Receveurs céramiques"},
-    //           {"categ": "Receveurs à carreler"},
-    //           {"categ": "Pieds pour receveurs"}
-    //         ]
-    //       },
-    //       {
-    //         "categ":"Sanitaire",
-    //         "subCateg": [
-    //           {"categ": "Cuvettes"},
-    //           {"categ": "Broyeurs"},
-    //           {"categ": "Abattants"},
-    //           {"categ": "Pipes"},
-    //           {"categ": "Mécanisme de WC"},
-    //           {"categ": "Réservoir indépendant"},
-    //           {"categ": "Plaque de déclenchement"},
-    //           {"categ": "Bidets"},
-    //           {"categ": "Lavabos et colonnes"}
-    //         ]
-    //       }
-    //     ]
-    //   },
-    //
-    //
-    //
-    //
-    //
-    //   {
-    //     "categ":"Électricité",
-    //     "subCateg": [
-    //       {
-    //         "categ":"",
-    //         "subCateg": [
-    //           {"categ": ""}
-    //         ]
-    //       },
-    //       {
-    //         "categ":"Convecteur",
-    //         "subCateg": [
-    //           {"categ": "Convecteur électrique CASSETTE RAY SUNAIR 3600TC Thermor, ref : 497091"},
-    //           {"categ": "Convecteur électrique Thermor Equateur 2000W"},
-    //           {"categ": "Convecteur gamme Baleares 1500W horizontal tout compris"}
-    //         ]
-    //       },
-    //       {
-    //         "categ":"Disjoncteur",
-    //         "subCateg": [
-    //           {"categ": "Disjoncteur 10A"},
-    //           {"categ": "Disjoncteur 16A/ 30Mili"},
-    //           {"categ": "Disjoncteur 20A"},
-    //           {"categ": "Disjoncteur 32A"},
-    //           {"categ": "Disjoncteur C2"},
-    //           {"categ": "Disjoncteur Divers tri"}
-    //         ]
-    //       },
-    //       {
-    //         "categ":"Eclairage",
-    //         "subCateg": [
-    //           {"categ": "Interrupteur"},
-    //           {"categ": "Projecteurs"},
-    //           {"categ": "Lampes"}
-    //         ]
-    //       },
-    //       {
-    //         "categ":"Branchement",
-    //         "subCateg": [
-    //           {"categ": "Fils et câbles"},
-    //           {"categ": "Prises"}
-    //         ]
-    //       },
-    //       {
-    //         "categ":"Protection",
-    //         "subCateg": [
-    //           {"categ": "Protections de l\"habitat"},
-    //           {"categ": "Cartouches et fusibles"}
-    //         ]
-    //       }
-    //
-    //     ]
-    //   },
-    //
-    //
-    //   {
-    //     "categ": "Chauffage",
-    //     "subCateg": [
-    //       {
-    //         "categ":"",
-    //         "subCateg": [
-    //           {"categ": ""}
-    //         ]
-    //       },
-    //       {
-    //         "categ": "Radiateurs",
-    //         "subCateg": [
-    //           {"categ": "Fixations de radiateurs"},
-    //           {"categ": "Radiateur thermoactif"},
-    //           {"categ": "Robinetterie de radiateurs"},
-    //           {"categ": "Accessoires"},
-    //           {"categ": "Sèche-serviettes"},
-    //           {"categ": "Habillage"}
-    //         ]
-    //       },
-    //       {
-    //         "categ":"Chaudière",
-    //         "subCateg": [
-    //           {"categ": "Bloc hydraulique"},
-    //           {"categ": "Système de sécurité surchauffe"},
-    //           {"categ": "Chaudière électrique"},
-    //           {"categ": "Thermostat"}
-    //         ]
-    //       }
-    //     ]
-    //   }
-    // ]
-
-
-//      this.fetchedCompanie.categories.categProject = [
-//   {
-//     "categ":"Devis Rénovation",
-//     "subCateg": [
-//       {
-//         "categ":"Cuisine",
-//         "subCateg": [
-//           {"categ": "ok"}
-//         ]
-//       },
-//       {
-//         "categ":"Salle de Bain",
-//         "subCateg": [
-//           {"categ": "ok"}
-//         ]
-//       },
-//       {
-//         "categ":"Remise en conformité électrique",
-//         "subCateg": [
-//           {"categ": "ok"}
-//         ]
-//       },
-//       {
-//         "categ":"Maçonnerie",
-//         "subCateg": [
-//           {"categ": "ok"}
-//         ]
-//       },
-//       {
-//         "categ":"Peinture",
-//         "subCateg": [
-//           {"categ": "ok"}
-//         ]
-//       },
-//       {
-//         "categ":"PMR",
-//         "subCateg": [
-//           {"categ": "ok"}
-//         ]
-//       }
-//     ]
-//   },
-//
-//
-//
-//
-//   {
-//     "categ":"Intervention Immédiate",
-//     "subCateg": [
-//
-//       {
-//         "categ":"Plomberie",
-//         "subCateg": [
-//           {"categ": "Recherche de Fuite"},
-//           {"categ": "Réparation De Fuite"},
-//           {"categ": "Engorgement de canalisation"},
-//           {"categ": "Ballon Eau chaude en panne"},
-//           {"categ": "Robinneterie en panne"},
-//           {"categ": "Wc en panne"},
-//           {"categ": "Innondation"}
-//         ]
-//       },
-//       {
-//         "categ":"Electricité",
-//         "subCateg": [
-//           {"categ": "Recherche de panne électrique"},
-//           {"categ": "Remplacement de tableau électrique "}
-//         ]
-//       },
-//       {
-//         "categ":"Serrurerie",
-//         "subCateg": [
-//           {"categ": "ouverture de porte"},
-//           {"categ": "Remplacement de serrure"}
-//         ]
-//       },
-//       {
-//         "categ":"Vitrerie",
-//         "subCateg": [
-//           {"categ": "Remplacement de vitre à la coupe"},
-//           {"categ": "Fermeture Provisoire"}
-//         ]
-//       },
-//       {
-//         "categ":"Chauffage",
-//         "subCateg": [
-//           {"categ": "Fuite Chaudiere ou Radiateur"},
-//           {"categ": "Recherche de panne chaudiere"},
-//           {"categ": "Contrat Entretien"},
-//           {"categ": "Remplacement de Chaudiere "}
-//         ]
-//       }
-//     ]
-//   },
-//
-//
-//
-//
-//   {
-//     "categ":"Devis Installation",
-//     "subCateg": [
-//
-//       {
-//         "categ":"Menuiserie",
-//         "subCateg": [
-//           {"categ": "Double Vitrage rénovation"},
-//           {"categ": "Vitre / Vitrine"},
-//           {"categ": "Fenêtres"},
-//           {"categ": "Survitrage"}
-//         ]
-//       },
-//       {
-//         "categ":"Chauffage",
-//         "subCateg": [
-//           {"categ": "Remplacement de chaudiere"},
-//           {"categ": "Déplacement de chaudiere"},
-//           {"categ": "Installation de radiateur"}
-//         ]
-//       },
-//       {
-//         "categ":"Petite Electricité",
-//         "subCateg": [
-//           {"categ": "Tirage de ligne électrique"},
-//           {"categ": "Rajout de prise"}
-//         ]
-//       },
-//       {
-//         "categ":"Serrurerie",
-//         "subCateg": [
-//           {"categ": "Installation d\"une serrure de sécurité"},
-//           {"categ": "Blindage de porte"},
-//           {"categ": "Remplacement de porte"}
-//         ]
-//       },
-//       {
-//         "categ":"Plomberie",
-//         "subCateg": [
-//           {"categ": "Remplacement de Ballon eau chaude"},
-//           {"categ": "Remplacement de robinneterie"},
-//           {"categ": "Remplacement de WC"},
-//           {"categ": "Tirage de ligne "}
-//         ]
-//       },
-//       {
-//         "categ":"Electricité",
-//         "subCateg": [
-//           {"categ": "Installation ou Remplacement Convecteur"}
-//
-//         ]
-//       }
-//     ]
-//   },
-//
-//
-//
-//
-//
-//   {
-//     "categ":"Électricité",
-//     "subCateg": [
-//
-//       {
-//         "categ":"Convecteur",
-//         "subCateg": [
-//           {"categ": "Convecteur électrique CASSETTE RAY SUNAIR 3600TC Thermor, ref : 497091"},
-//           {"categ": "Convecteur électrique Thermor Equateur 2000W"},
-//           {"categ": "Convecteur gamme Baleares 1500W horizontal tout compris"}
-//         ]
-//       },
-//       {
-//         "categ":"Disjoncteur",
-//         "subCateg": [
-//           {"categ": "Disjoncteur 10A"},
-//           {"categ": "Disjoncteur 16A/ 30Mili"},
-//           {"categ": "Disjoncteur 20A"},
-//           {"categ": "Disjoncteur 32A"},
-//           {"categ": "Disjoncteur C2"},
-//           {"categ": "Disjoncteur Divers tri"}
-//         ]
-//       },
-//       {
-//         "categ":"Eclairage",
-//         "subCateg": [
-//           {"categ": "Interrupteur"},
-//           {"categ": "Projecteurs"},
-//           {"categ": "Lampes"}
-//         ]
-//       },
-//       {
-//         "categ":"Branchement",
-//         "subCateg": [
-//           {"categ": "Fils et câbles"},
-//           {"categ": "Prises"}
-//         ]
-//       },
-//       {
-//         "categ":"Protection",
-//         "subCateg": [
-//           {"categ": "Protections de l\"habitat"},
-//           {"categ": "Cartouches et fusibles"}
-//         ]
-//       }
-//
-//     ]
-//   },
-//
-//
-//   {
-//     "categ": "Chauffage",
-//     "subCateg": [
-//
-//       {
-//         "categ": "Radiateurs",
-//         "subCateg": [
-//           {"categ": "Fixations de radiateurs"},
-//           {"categ": "Radiateur thermoactif"},
-//           {"categ": "Robinetterie de radiateurs"},
-//           {"categ": "Accessoires"},
-//           {"categ": "Sèche-serviettes"},
-//           {"categ": "Habillage"}
-//         ]
-//       },
-//       {
-//         "categ":"Chaudière",
-//         "subCateg": [
-//           {"categ": "Bloc hydraulique"},
-//           {"categ": "Système de sécurité surchauffe"},
-//           {"categ": "Chaudière électrique"},
-//           {"categ": "Thermostat"}
-//         ]
-//       }
-//     ]
-//   }
-// ]
     //this.fetchedCompanie.categJson.categProduct = JSON.stringify(JSON.parse(this.fetchedCompanie.categJson.categProduct))
     if(this.fetchedCompanie._id) {
       this.companieService.updateCompanie(this.fetchedCompanie)

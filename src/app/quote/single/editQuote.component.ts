@@ -42,24 +42,17 @@ import { PaiementQuotesComponent } from '../../paiementQuote/paiementQuotes/paie
 export class EditQuoteComponent implements OnInit {
   @ViewChild(SignaturePad) signaturePad: SignaturePad;
   @ViewChild(PaiementQuotesComponent) paiementQuotesComponent: PaiementQuotesComponent;
-  // @Output() refreshPaiementQuotes: EventEmitter<any> = new EventEmitter();
-  // @Output() newPaiementQuoteSaved: EventEmitter<any> = new EventEmitter();
 
   showPaiements: boolean = false
   fetchedQuote: Quote = new Quote()
   autocompleteUser: string = '';
   autocompleteProject: string = '';
   fetchedProducts: Product[] = []
-  fetchedProjects: Project[] = []
-  // currentUser: User = new User()
+
   imgLogoUrl: string = './assets/images/profile-placeholder.jpg'
   imgSignatureBase64Temp = ''
   fetchedPaiementQuotes: PaiementQuote[] = []
-  // userAdmins : User[] = []
-  // userManagers : User[] = []
-  // userClients : User[] = []
-  // usersSalesRep : User[] = []
-  // userStylists : User[] = []
+
   totalPaiementAmount: number = 0
   myForm: FormGroup;
   // autocompleteProduct: String = ''
@@ -88,6 +81,9 @@ export class EditQuoteComponent implements OnInit {
       quoteRef: ['', [Validators.required, Validators.minLength(1)]],
 
     })
+
+    this.fetchedQuote.detail.dateQuote.issueDateString = this.authService.isoDateToHtmlDate(this.fetchedQuote.detail.dateQuote.issueDate)
+    this.fetchedQuote.detail.dateQuote.expiryDateString = this.authService.isoDateToHtmlDate(this.fetchedQuote.detail.dateQuote.expiryDate)
 
     // this.getCurrentUser();
 
@@ -404,17 +400,17 @@ export class EditQuoteComponent implements OnInit {
   //   this.calculateQuote()
   // }
 
-  getProducts(page: number, search: any) {
-    this.productService.getProducts(page, search)
-      .subscribe(
-      res => {
-        this.fetchedProducts = res.data
-      },
-      error => {
-        console.log(error);
-      }
-      );
-  }
+  // getProducts(page: number, search: any) {
+  //   this.productService.getProducts(page, search)
+  //     .subscribe(
+  //     res => {
+  //       this.fetchedProducts = res.data
+  //     },
+  //     error => {
+  //       console.log(error);
+  //     }
+  //     );
+  // }
 
 
   saveTemplateQuote() {
