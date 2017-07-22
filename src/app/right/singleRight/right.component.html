@@ -16,8 +16,8 @@
     <!-- <button type="button" (click)="addRight( 0, 0, 0, 0)">Add Right</button>
     <div class="categ0" *ngFor="let right of fetchedRight.rights; let i = index;"> -->
       <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.nameRight">
-      <button type="button" (click)="removeRight( 1,i,0,0)">X</button>
-      <button type="button" (click)="addRight(1,i,0,0)">+</button>
+      <button type="button" (click)="removeRight(1,0,0,0)">X</button>
+      <button type="button" (click)="addRight(1,0,0,0)">+</button>
       <div class="categ1" *ngFor="let permission of fetchedRight.detailRight.permissions; let j = index;">
         <select [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].namePermission">
             <option *ngFor="let n of typesRights" [attr.value]="n.value">{{n.name}}</option>

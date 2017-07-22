@@ -136,6 +136,7 @@ function getUser(req, res, next, id) {
     User
     .findById(id)
     .populate({path: 'forms', model: 'Form'})
+    .populate({path: 'rights', model: 'Right'})
     .populate({path: 'salesMan', model: 'User'})
     .populate({path: 'companies', model: 'Companie'})
     .populate({
@@ -305,25 +306,6 @@ router.post('/password', function (req, res, next) {
 
 
 
-//
-// router.put('/addCompanieToMyself', function (req, res, next) {
-//   console.log(req.user._id)
-//   User.update({ _id: req.user._id }, { $set: { companies: [req.body._id] }}, function (err, item) {
-//     if (err) {
-//       return res.status(404).json({
-//         message: '',
-//         err: err
-//       })
-//     } else {
-//       res.status(201).json({
-//         message: '',
-//         obj: item
-//       });
-//     }
-//   });
-// });
-
-
 //update profile @alan
 router.put('/:id', function (req, res, next) {
   User.findById(({_id: req.params.id}), function (err, item) {
@@ -335,8 +317,6 @@ router.put('/:id', function (req, res, next) {
     } else {
 
 
-      req.body.ownerCompanies = req.user.ownerCompanies
-
       // if(!req.body.companies.length)
       //   req.body.companies = req.body.ownerCompanies
       //
@@ -347,12 +327,16 @@ router.put('/:id', function (req, res, next) {
 
 
       // item.isInOwnerCompanie = isInOwnerCompanie
+
+      req.body.ownerCompanies = req.user.ownerCompanies
       item.companies = req.body.companies
       item.ownerCompanies = req.body.ownerCompanies
       item.email = req.body.email
       item.forms = req.body.forms
       item.salesMan = req.body.salesMan
       item.profile = req.body.profile
+      item.type = req.body.type
+      item.rights = req.body.rights
 
 
 

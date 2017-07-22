@@ -1,5 +1,7 @@
 import { Form } from '../form/form.model';
 import { Companie } from '../companie/companie.model';
+import { Right } from '../right/right.model';
+
 
 export const TypeUser = ['plombier', 'serrurier']
 
@@ -9,6 +11,7 @@ export class User {
   role: string[] = [];
   type: string[] = [];
   forms: Form[] = [];
+  rights: Right[] = []
   profile: Profile = new Profile();
   password: string = '';
   companies: Companie[] = [];

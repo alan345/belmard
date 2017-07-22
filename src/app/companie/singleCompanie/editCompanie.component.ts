@@ -180,36 +180,7 @@ export class EditCompanieComponent implements OnInit {
   //   })
   // }
   initDataToRemove(){
-        this.fetchedCompanie.rights = [
-          {
-            nameRight: 'Président directeur general',
-            permissions:[
-              {
-                namePermission: 'reporting',
-                access: [{
-                  typeAccess:'read'
-                },
-                {
-                  typeAccess:'write'
-                },                
-              ]
-              }
-            ]
-
-          },
-          {
-            nameRight: 'Secretaire',
-            permissions:[
-              {
-                namePermission: 'reporting',
-                access: [{
-                  typeAccess:'read'
-                }]
-              }
-            ]
-
-          }
-        ]
+      
         this.fetchedCompanie.categories.categProduct = [
           {
             "categ":"Serrurerie",

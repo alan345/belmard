@@ -66,8 +66,6 @@ router.put('/:id', function (req, res, next) {
         item.detailRight = req.body.detailRight
 
 
-
-
         item.save(function (err, result) {
           if (err) {
             return res.status(404).json({
@@ -156,13 +154,14 @@ router.get('/page/:page', function (req, res, next) {
   //  createdAt:{"$gt": dateRef},
   }
 
+
   // if(hasWhatsNewCateg)
   //   searchQuery['createdAt'] = {"$gt": dateRef}
   //
   // if(!hasWhatsNewCateg)
   //   searchQuery['categories'] = categoriesArray
   if(req.query.search)
-    searchQuery['details.referenceName'] = new RegExp(req.query.search, 'i')
+    searchQuery['detailRight.nameRight'] = new RegExp(req.query.search, 'i')
 
   // console.log(hasWhatsNewCateg)
   // console.log(searchQuery)

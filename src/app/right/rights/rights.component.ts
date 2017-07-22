@@ -44,22 +44,22 @@ export class RightsComponent implements OnInit {
     this.getRights(this.paginationData.currentPage, this.search)
   }
 
-  openDialog() {
-
-  }
+  // openDialog() {
+  //
+  // }
 
   goBack() {
     this.location.back();
   }
 
-  searchInput() {
-    this.getRights(this.paginationData.currentPage, this.search)
-  }
-
-  orderBy(orderBy: string) {
-    this.search.orderBy = orderBy
-    this.getRights(this.paginationData.currentPage, this.search)
-  }
+  // searchInput() {
+  //   this.getRights(this.paginationData.currentPage, this.search)
+  // }
+  //
+  // orderBy(orderBy: string) {
+  //   this.search.orderBy = orderBy
+  //   this.getRights(this.paginationData.currentPage, this.search)
+  // }
 
   onDelete(id: string) {
     this.rightService.deleteRight(id)
@@ -91,8 +91,6 @@ export class RightsComponent implements OnInit {
     this.rightService.getRights(page, search)
       .subscribe(
         res => {
-        //  console.log("rights");
-        //  console.log(res);
           this.paginationData = res.paginationData;
           this.fetchedRights =  res.data
           this.loading = false;

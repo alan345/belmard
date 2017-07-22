@@ -1,6 +1,9 @@
 import { Component, OnInit} from '@angular/core';
 import { AuthService} from '../../auth/auth.service';
 import { UserService} from '../user.service';
+import { Right} from '../../right/right.model';
+
+
 import { Companie } from '../../companie/companie.model';
 import { CompanieService } from '../../companie/companie.service';
 import { EditOptionsComponentDialog } from '../../form/modalLibrary/modalLibrary.component';
@@ -32,7 +35,7 @@ export class NewUserComponent implements OnInit {
   fetchedTypeUsers = []
   autocompleteTypeUser: string = '';
 
-
+  // fetchedRights: Right[] = []
 
   titleArray=['Mr.', 'Mrs.']
   languageArray=['fr','en']
@@ -87,6 +90,10 @@ export class NewUserComponent implements OnInit {
     this.fetchedUser.companies = [companie]
   }
 
+  selectRight(right: Right) {
+    this.fetchedUser.rights = [right]
+  }
+
   selectOwnerCompanies(companie: Companie) {
     this.fetchedUser.ownerCompanies = [companie]
   }
@@ -135,7 +142,6 @@ export class NewUserComponent implements OnInit {
 
 
 
-
   ngOnInit() {
     this.myForm = this._fb.group({
         email: [this.emailValidator],
@@ -169,7 +175,7 @@ export class NewUserComponent implements OnInit {
 
 
 
-
+    // this.getRights(1, {})
 
 
     this.activatedRoute.params.subscribe((params: Params) => {

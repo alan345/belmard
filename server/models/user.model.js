@@ -25,7 +25,7 @@ var user = new Schema({
     resetPasswordToken: String,
     resetPasswordExpires: String,
     role: {type: Array, default: ['client']},
-    subRole: {type: Array, default: ['']},
+    rights: [{type: Schema.Types.ObjectId, ref: 'Right'}],
     type: {type: Array},
     profile : {
       _profilePicture : [{type: Schema.Types.ObjectId, ref: 'Form'}],

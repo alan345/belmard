@@ -5,6 +5,7 @@ import { ProductService} from '../product/product.service';
 import { QuoteService} from '../quote/quote.service';
 import { TemplateQuoteService} from '../quote/templateQuote.service';
 
+import { RightService} from '../right/right.service';
 import { ProjectService} from '../project/project.service';
 import { MdDialog } from '@angular/material';
 
@@ -46,6 +47,7 @@ export class AutocompleteComponent {
     private quoteService: QuoteService,
     private projectService: ProjectService,
     private templateQuoteService: TemplateQuoteService,
+    private rightService: RightService,
   ) {}
 
 
@@ -74,6 +76,10 @@ export class AutocompleteComponent {
 
     if(this.typeAutocomplete ==='templateQuote')
       this.templateQuoteService.getTemplateQuotes(page, search)
+      .subscribe( res => { this.fetchedData = res.data }, error => { console.log(error); });
+
+    if(this.typeAutocomplete ==='right')
+      this.rightService.getRights(page, search)
       .subscribe( res => { this.fetchedData = res.data }, error => { console.log(error); });
 
   }

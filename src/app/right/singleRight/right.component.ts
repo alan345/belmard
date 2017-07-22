@@ -89,13 +89,11 @@ export class RightComponent implements OnInit {
     })
   }
 
+  removeRight(level, index1, index2, index3){
 
+  }
   addRight(level, index1, index2, index3) {
-      // if(level === 0){
-      //   let newRight = new Rigth()
-      //   this.fetchedRight.rights.unshift(newRight)
-      // }
-      console.log(this.fetchedRight)
+
       if(level === 1){
         let newRight = new Permission()
         this.fetchedRight.detailRight.permissions.unshift(newRight)

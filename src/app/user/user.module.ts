@@ -11,6 +11,8 @@ import { Ng2PaginationModule} from 'ng2-pagination';
 //import { UserComponent} from './user.component';
 //import { UsersComponent} from './users.component';
 // import { UserService} from './user.service';
+import { RightModule} from '../right/right.module';
+
 
 import { QuoteModule} from '../quote/quote.module';
 import { CompanieModule} from '../companie/companie.module';
@@ -44,6 +46,8 @@ import { ForgetPasswordComponent} from './accountRecover/forgetPassword.componen
 import { UserService} from './user.service';
 import { PaiementService} from './paiement/paiement.service';
 import { LoginComponent} from './login/login.component';
+
+
 //import { UserFormsComponent} from '../form/userForms.component';
 
 import{ AdminUsersComponent } from './users/adminUsers.component';
@@ -64,8 +68,10 @@ import {SharedModule } from '../shared/shared.module';
     ReactiveFormsModule,
     QuoteModule,
     ProjectModule,
+    RightModule,
     CompanieModule,
     SharedModule,
+    RightModule,
   ],
   declarations: [
 //    UserDeleteDialog,
@@ -103,6 +109,7 @@ import {SharedModule } from '../shared/shared.module';
    ],
   providers:    [
     // ProfileService,
+
     UserService,
     PaiementService,
   ],
