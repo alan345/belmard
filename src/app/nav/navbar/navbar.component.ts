@@ -44,16 +44,16 @@ export class NavbarComponent implements OnInit {
   //   return this.userService.isCurrentUserIsInSubPeriod()
   // }
 
-  isCurrentUserIsInSubPeriod(){
-    // console.log('aa')
-    //return true;
-    return this.authService.isCurrentUserIsInSubPeriod()
-  }
-  isCurrentUserHasCompanie(){
-    // console.log('bb')
-    // return true;
-    return this.authService.isCurrentUserHasCompanie()
-  }
+  // isCurrentUserIsInSubPeriod(){
+  //   // console.log('aa')
+  //   //return true;
+  //   return this.authService.isCurrentUserIsInSubPeriod()
+  // }
+  // isCurrentUserHasCompanie(){
+  //   // console.log('bb')
+  //   // return true;
+  //   return this.authService.isCurrentUserHasCompanie()
+  // }
 
 
   getUser(id: string) {
@@ -70,6 +70,18 @@ export class NavbarComponent implements OnInit {
     //   )
   }
 
+  showMenu(nameObject) {
+    let typeAccess = 'read'
+    if(
+      this.authService.isCurentUserHasAccess(nameObject, typeAccess) &&
+      this.authService.isCurrentUserIsInSubPeriod() &&
+      this.authService.isCurrentUserHasCompanie()
+    )
+    return true
+  }
+  // isCurentUserHasAccess(nameObject, typeAccess) {
+  //   return this.authService.isCurentUserHasAccess(nameObject, typeAccess);
+  // }
 
   // check if user is logged in by asking our authentication service, we use this function in html file *ngIf directive
   isLoggedIn() {

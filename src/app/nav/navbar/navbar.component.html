@@ -21,28 +21,28 @@
         </a>
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-          <li *ngIf="isCurrentUserIsInSubPeriod() && isCurrentUserHasCompanie()" class="nav-item">
+          <li *ngIf="showMenu('product')" class="nav-item">
             <a class="nav-link" routerLinkActive="active" [routerLink]="['/product']">Produits</a>
           </li>
 
           <li class="nav-item">
             <a class="nav-link" routerLinkActive="active" [routerLink]="['/user']">Utilisateurs</a>
           </li>
-          <li class="nav-item">
+          <li *ngIf="showMenu('companie')" class="nav-item">
             <a class="nav-link" routerLinkActive="active" [routerLink]="['/companie']">Entreprises</a>
           </li>
-          <li *ngIf="isCurrentUserIsInSubPeriod() && isCurrentUserHasCompanie()" class="nav-item">
+          <li *ngIf="showMenu('quote')" class="nav-item">
             <a class="nav-link" routerLinkActive="active" [routerLink]="['/quote']">Devis</a>
           </li>
-          <li *ngIf="isCurrentUserIsInSubPeriod() && isCurrentUserHasCompanie()" class="nav-item">
+          <li *ngIf="showMenu('paiementQuote')" class="nav-item">
             <a class="nav-link" routerLinkActive="active" [routerLink]="['/paiementQuote']">Paiements</a>
           </li>
 
-          <li *ngIf="isCurrentUserIsInSubPeriod() && isCurrentUserHasCompanie()" class="nav-item">
+          <li class="nav-item">
             <a class="nav-link" routerLinkActive="active" [routerLink]="['/right']">Rights</a>
           </li>
 
-          <li *ngIf="isCurrentUserIsInSubPeriod() && isCurrentUserHasCompanie()" class="nav-item">
+          <li *ngIf="showMenu('reporting')" class="nav-item">
             <a class="nav-link" routerLinkActive="active" [routerLink]="['/reporting']">Reporting</a>
           </li>
         </div>
@@ -50,26 +50,26 @@
 
       <ul class="navbar-nav mr-auto">
 
-        <li *ngIf="isCurrentUserIsInSubPeriod() && isCurrentUserHasCompanie()" class="nav-item">
+        <li *ngIf="showMenu('project')" class="nav-item">
           <a class="nav-link" routerLinkActive="active" [routerLink]="['/project']">Projets </a>
         </li>
 
-        <li class="nav-item">
+        <li *ngIf="showMenu('task')" class="nav-item">
           <a class="nav-link" routerLinkActive="active" [routerLink]="['/project/tasks']">Tasks </a>
         </li>
 
 
 
 
-        <li *ngIf="isCurrentUserIsInSubPeriod() && isCurrentUserHasCompanie()" class="nav-item">
+        <li *ngIf="showMenu('userCalendar')" class="nav-item">
           <a class="nav-link" routerLinkActive="active" [routerLink]="['/userCalendar', {idUserSearch: fetchedUser._id}]">Mon Planning</a>
         </li>
 
-        <li *ngIf="!isCurrentUserIsInSubPeriod()" class="nav-item">
+        <li *ngIf="showMenu('paiement')" class="nav-item">
           <a class="nav-link" routerLinkActive="active" [routerLink]="['/user/paiement']">Finish subscription</a>
         </li>
 
-        <li *ngIf="!isCurrentUserHasCompanie()" class="nav-item">
+        <li *ngIf="showMenu('companie')" class="nav-item">
           <a class="nav-link" routerLinkActive="active" [routerLink]="['/companie/edit/mine']">Rajouter mon entreprise</a>
         </li>
         <!-- <li class="nav-item">

@@ -151,6 +151,19 @@ export class AuthService {
     return false
   }
 
+
+  isCurentUserHasAccess(nameObject, typeAccess) {
+    return this.user.rights.some(right => {
+      return right.detailRight.permissions.some(permission => {
+        if(permission.namePermission === nameObject)
+          return permission.access.some(access => {
+            return access.typeAccess === typeAccess
+          })
+      })
+    })
+  }
+
+
   // isCurrentUserIsInSubPeriod(){
   //   if (new Date(this.currentUser.paiement.stripe.current_period_end) > new Date())
   //     return true;
