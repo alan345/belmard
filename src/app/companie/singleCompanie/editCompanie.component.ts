@@ -32,14 +32,14 @@ export class EditCompanieComponent implements OnInit {
   // usersSalesRep : User[] = []
   // userStylists : User[] = []
   myForm: FormGroup;
-  seeRights = false;
+  // seeRights = false;
   seeCategProject = false;
   seeCategProduct = false;
-  typesRights = [
-    {name : 'Project', value: 'project'},
-    {name : 'Quote', value: 'qute'},
-    {name : 'Reporting', value: 'reporting'},
-  ]
+  // typesRights = [
+  //   {name : 'Project', value: 'project'},
+  //   {name : 'Quote', value: 'qute'},
+  //   {name : 'Reporting', value: 'reporting'},
+  // ]
   constructor(
     private companieService: CompanieService,
 //    private modalService: NgbModal,
@@ -88,38 +88,38 @@ export class EditCompanieComponent implements OnInit {
     })
   }
 
-
-  addRight(level, index1, index2, index3) {
-      if(level === 0){
-        let newRight = new Rigth()
-        this.fetchedCompanie.rights.unshift(newRight)
-      }
-      if(level === 1){
-        let newRight = new Permission()
-        this.fetchedCompanie.rights[index1].permissions.unshift(newRight)
-      }
-      if(level === 2){
-
-        let newRight = new Access()
-        this.fetchedCompanie.rights[index1].permissions[index2].access.unshift(newRight)
-      }
-  }
+  //
+  // addRight(level, index1, index2, index3) {
+  //     if(level === 0){
+  //       let newRight = new Rigth()
+  //       this.fetchedCompanie.rights.unshift(newRight)
+  //     }
+  //     if(level === 1){
+  //       let newRight = new Permission()
+  //       this.fetchedCompanie.rights[index1].permissions.unshift(newRight)
+  //     }
+  //     if(level === 2){
+  //
+  //       let newRight = new Access()
+  //       this.fetchedCompanie.rights[index1].permissions[index2].access.unshift(newRight)
+  //     }
+  // }
 
   openSection(nameSection){
     this[nameSection] = !this[nameSection]
   }
-  removeRight(level, index1, index2, index3) {
-      if(level === 0)
-        this.fetchedCompanie.rights.splice(level, 1)
-      if(level === 1)
-        this.fetchedCompanie.rights.splice(index1, 1)
-      if(level === 2)
-        this.fetchedCompanie.rights[index1].permissions.splice(index1, 1)
-      if(level === 3)
-        this.fetchedCompanie.rights[index1].permissions[index1].access.splice(index2, 1)
-      // if(level === 3)
-      //   this.fetchedCompanie.rights[index1].permissions[index1].access[index2].subCateg.splice(index3, 1)
-  }
+  // removeRight(level, index1, index2, index3) {
+  //     if(level === 0)
+  //       this.fetchedCompanie.rights.splice(level, 1)
+  //     if(level === 1)
+  //       this.fetchedCompanie.rights.splice(index1, 1)
+  //     if(level === 2)
+  //       this.fetchedCompanie.rights[index1].permissions.splice(index1, 1)
+  //     if(level === 3)
+  //       this.fetchedCompanie.rights[index1].permissions[index1].access.splice(index2, 1)
+  //     // if(level === 3)
+  //     //   this.fetchedCompanie.rights[index1].permissions[index1].access[index2].subCateg.splice(index3, 1)
+  // }
 
 
   addCateg(typeCateg, level, index1, index2, index3) {
@@ -180,7 +180,7 @@ export class EditCompanieComponent implements OnInit {
   //   })
   // }
   initDataToRemove(){
-      
+
         this.fetchedCompanie.categories.categProduct = [
           {
             "categ":"Serrurerie",

@@ -89,8 +89,16 @@ export class RightComponent implements OnInit {
     })
   }
 
-  removeRight(level, index1, index2, index3){
-
+  removeRight(level, index1, index2, index3) {
+    console.log(level)
+      if(level === 2)
+        this.fetchedRight.detailRight.permissions.splice(index2, 1)
+      if(level === 3)
+        this.fetchedRight.detailRight.permissions[index2].access.splice(index3, 1)
+      // if(level === 3)
+        // this.fetchedRight.detailRight[index1].permissions[index1].access.splice(index2, 1)
+      // if(level === 3)
+      //   this.fetchedCompanie.rights[index1].permissions[index1].access[index2].subCateg.splice(index3, 1)
   }
   addRight(level, index1, index2, index3) {
 
@@ -159,6 +167,7 @@ export class RightComponent implements OnInit {
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
+            this.fetchedRight = res.obj
             //  this.router.navigate(['right/' + res.obj._id])
           },
           error => {console.log(error)}

@@ -242,6 +242,7 @@ export class NewUserComponent implements OnInit {
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
+            this.fetchedUser = res.obj
             // if(redirect == 'profile')
             // this.router.navigate(['user/newuser/' + res.obj._id])
             // location.reload();
