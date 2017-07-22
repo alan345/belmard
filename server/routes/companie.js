@@ -8,6 +8,7 @@ var express = require('express'),
     jwt     = require('jsonwebtoken');
     mongoose                = require('mongoose'),
     Schema                  = mongoose.Schema,
+    shared = require('./shared.js');
 
 // this process does not hang the nodejs server on error
 process.on('uncaughtException', function (err) {
@@ -32,7 +33,10 @@ router.use('/', function (req, res, next) {
       });
     }
     if (decoded) {
-      User.findById(decoded.user._id, function (err, doc) {
+      User
+      .findById(decoded.user._id)
+      .populate({ path: 'rights', model: 'Right'})
+      .exec(function (err, doc) {
         if (err) {
           return res.status(500).json({
             message: 'Fetching user failed',
@@ -45,6 +49,14 @@ router.use('/', function (req, res, next) {
             error: {message: 'The user was not found'}
           })
         }
+
+        if(!shared.isCurentUserHasAccess(doc.rights, 'companie', 'read')) {
+          return res.status(404).json({
+            title: 'No rights',
+            error: {message: 'No rights'}
+          })
+        }
+
         if (doc) {
           req.user = doc;
           next();
@@ -54,6 +66,21 @@ router.use('/', function (req, res, next) {
   })
 });
 
+
+// function isCurentUserHasAccess(rightsString, nameObject, typeAccess) {
+//   let rights = JSON.parse(JSON.stringify(rightsString))
+//   let permissionBool = false
+//   rights.forEach(right=>{
+//     right.detailRight.permissions.forEach(permission => {
+//       if(permission.namePermission === nameObject)
+//         permission.access.forEach(singleAccess=> {
+//           if(singleAccess.typeAccess === typeAccess)
+//             permissionBool = true
+//         })
+//     })
+//   })
+//   return permissionBool
+// }
 
 //update
 router.put('/:id', function (req, res, next) {
@@ -132,6 +159,8 @@ router.get('/page/:page', function (req, res, next) {
   var pageNumber = currentPage - 1
   var skip = (itemsPerPage * pageNumber)
   //var limit = (itemsPerPage * pageNumber) + itemsPerPage
+
+
 
   let nameQuery = {}
   let cityQuery = {}

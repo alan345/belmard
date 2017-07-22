@@ -40,6 +40,7 @@ export class RightComponent implements OnInit {
     {name : 'Project', value: 'project'},
     {name : 'Quote', value: 'qute'},
     {name : 'Reporting', value: 'reporting'},
+    {name : 'Companie', value: 'companie'},
   ]
   constructor(
     private rightService: RightService,
