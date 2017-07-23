@@ -7,6 +7,7 @@ module.exports = {
     },
     isCurentUserHasAccess(rightsString, nameObject, typeAccess) {
       let rights = JSON.parse(JSON.stringify(rightsString))
+      console.log(rights)
       let permissionBool = false
       rights.forEach(right=>{
         right.detailRight.permissions.forEach(permission => {
