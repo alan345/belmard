@@ -38,11 +38,15 @@ export class RightComponent implements OnInit {
   seeCategProduct = false;
   typesRights = [
     {name : 'Project', value: 'project'},
+    {name : 'Product', value: 'product'},
     {name : 'Quote', value: 'quote'},
     {name : 'Reporting', value: 'reporting'},
     {name : 'Companie', value: 'companie'},
     {name : 'User', value: 'user'},
     {name : 'Paiement', value: 'paiementQuote'},
+    {name : 'Task', value: 'task'},
+    {name : 'userCalendar', value: 'userCalendar'},
+
 
 
   ]
