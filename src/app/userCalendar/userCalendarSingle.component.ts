@@ -339,6 +339,7 @@ export class UserCalendarSingleComponent implements OnInit {
   //autocomplete userSearch
 
 
+
 //autocomplete clientSearch
   autocompleteClientSearch: string = '';
   fetchedClientSearchs: User[] = [];
