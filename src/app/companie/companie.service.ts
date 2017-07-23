@@ -42,36 +42,36 @@ export class CompanieService {
       });
   }
 
-
-  getCompanieForCurrentUser() {
-    // if(this.companiesForCurrentUser.length) {
-    //   return Observable.of(this.companiesForCurrentUser)
-    // } else {
-    //   let id = this.authService.currentUser.userId
-    //   let headers = new Headers({'Content-Type': 'application/json'});
-    //   headers.append('Authorization', '' + this.authService.currentUser.token);
-    //   return this.http.get(this.url + 'companie/byuserid/' + id, {headers: headers})
-    //     .map((response: Response) => {
-    //       this.companiesForCurrentUser = response.json().item
-    //       return this.companiesForCurrentUser
-    //     })
-    //     .catch((error: Response) => {
-    //       this.errorService.handleError(error.json());
-    //       return Observable.throw(error.json());
-    //     });
-    // }
-    let id = this.authService.currentUser.userId
-    let headers = new Headers({'Content-Type': 'application/json'});
-    headers.append('Authorization', '' + this.authService.currentUser.token);
-    return this.http.get(this.url + 'companie/byuserid/' + id, {headers: headers})
-      .map((response: Response) => {
-        return response.json().item
-      })
-      .catch((error: Response) => {
-        this.errorService.handleError(error.json());
-        return Observable.throw(error.json());
-      });
-  }
+  //
+  // getCompanieForCurrentUser() {
+  //   // if(this.companiesForCurrentUser.length) {
+  //   //   return Observable.of(this.companiesForCurrentUser)
+  //   // } else {
+  //   //   let id = this.authService.currentUser.userId
+  //   //   let headers = new Headers({'Content-Type': 'application/json'});
+  //   //   headers.append('Authorization', '' + this.authService.currentUser.token);
+  //   //   return this.http.get(this.url + 'companie/byuserid/' + id, {headers: headers})
+  //   //     .map((response: Response) => {
+  //   //       this.companiesForCurrentUser = response.json().item
+  //   //       return this.companiesForCurrentUser
+  //   //     })
+  //   //     .catch((error: Response) => {
+  //   //       this.errorService.handleError(error.json());
+  //   //       return Observable.throw(error.json());
+  //   //     });
+  //   // }
+  //   let id = this.authService.currentUser.userId
+  //   let headers = new Headers({'Content-Type': 'application/json'});
+  //   headers.append('Authorization', '' + this.authService.currentUser.token);
+  //   return this.http.get(this.url + 'companie/byuserid/' + id, {headers: headers})
+  //     .map((response: Response) => {
+  //       return response.json().item
+  //     })
+  //     .catch((error: Response) => {
+  //       this.errorService.handleError(error.json());
+  //       return Observable.throw(error.json());
+  //     });
+  // }
 
   getCompanieByUserId(id: string) {
     let headers = new Headers({'Content-Type': 'application/json'});

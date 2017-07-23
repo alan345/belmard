@@ -70,14 +70,8 @@ export class NavbarComponent implements OnInit {
     //   )
   }
 
-  showMenu(nameObject) {
-    let typeAccess = 'read'
-    if(
-      this.authService.isCurentUserHasAccess(nameObject, typeAccess) &&
-      this.authService.isCurrentUserIsInSubPeriod() &&
-      this.authService.isCurrentUserHasCompanie()
-    )
-    return true
+  showObjHTML(nameObject) {
+    return this.authService.showObjHTML(nameObject)
   }
   // isCurentUserHasAccess(nameObject, typeAccess) {
   //   return this.authService.isCurentUserHasAccess(nameObject, typeAccess);

@@ -38,9 +38,13 @@ export class RightComponent implements OnInit {
   seeCategProduct = false;
   typesRights = [
     {name : 'Project', value: 'project'},
-    {name : 'Quote', value: 'qute'},
+    {name : 'Quote', value: 'quote'},
     {name : 'Reporting', value: 'reporting'},
     {name : 'Companie', value: 'companie'},
+    {name : 'User', value: 'user'},
+    {name : 'Paiement', value: 'paiementQuote'},
+
+
   ]
   constructor(
     private rightService: RightService,
@@ -89,7 +93,20 @@ export class RightComponent implements OnInit {
       }
     })
   }
-
+  setAllRights(){
+    this.fetchedRight.detailRight.permissions = []
+    this.typesRights.forEach(typesRight => {
+      let newPermission = new Permission()
+      let newAccess1 = new Access()
+      newAccess1.typeAccess = 'read'
+      let newAccess2 = new Access()
+      newAccess2.typeAccess = 'write'
+      newPermission.namePermission = typesRight.value
+      newPermission.access.push(newAccess1)
+      newPermission.access.push(newAccess2)
+      this.fetchedRight.detailRight.permissions.push(newPermission)
+    })
+  }
   removeRight(level, index1, index2, index3) {
     console.log(level)
       if(level === 2)

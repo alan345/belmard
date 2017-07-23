@@ -163,6 +163,15 @@ export class AuthService {
     })
   }
 
+  showObjHTML(nameObject) {
+    let typeAccess = 'read'
+    if(
+      this.isCurentUserHasAccess(nameObject, typeAccess) &&
+      this.isCurrentUserIsInSubPeriod() &&
+      this.isCurrentUserHasCompanie()
+    )
+    return true
+  }
 
   // isCurrentUserIsInSubPeriod(){
   //   if (new Date(this.currentUser.paiement.stripe.current_period_end) > new Date())

@@ -10,11 +10,11 @@
 
 
   <h4 class="dspl-nn">id: {{fetchedRight._id}}</h4>
-
+  <button type="button" (click)="setAllRights()">setAllRights</button>
   <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
 
-    <!-- <button type="button" (click)="addRight( 0, 0, 0, 0)">Add Right</button>
-    <div class="categ0" *ngFor="let right of fetchedRight.rights; let i = index;"> -->
+
+    <!-- <div class="categ0" *ngFor="let right of fetchedRight.rights; let i = index;"> -->
       <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.nameRight">
 
       <button type="button" (click)="addRight(1,0,0,0)">+</button>
