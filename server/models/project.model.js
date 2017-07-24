@@ -25,6 +25,7 @@ var project = new Schema({
       categ1:[{name: {type: String}}],
       categ2:[{name: {type: String}}],
     },
+    progressTasks:{type: Number, default: [0]},
     bucketTasks:[{
       bucketName:{type: String, default: ['']},
       tasks:[{

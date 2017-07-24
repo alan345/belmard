@@ -1,4 +1,6 @@
 
+Progress = {{fetchedProject.progressTasks * 100 | round }}
+
 <div class='row'>
 
   <div *ngFor='let bucketTask of fetchedProject.bucketTasks; let bucketTaskIndex = index;'>
@@ -20,11 +22,14 @@
 
         {{task.name}}
         <button (click)="deleteTask(bucketTaskIndex, taskIndex)">X</button>
+        <div *ngIf="task.status == 'done'" class="round"
+        [style.background-color]="'#5BC75C'"></div>
+
       </div>
 
 
       <div *ngIf="bucketTask.openNewTask">
-        <textarea (focusout)="addTask(content.value, bucketTaskIndex)" #content rows="4" cols="10"></textarea>
+        <input type="text" (focusout)="addTask(content.value, bucketTaskIndex)" #content>
         <!-- <button (click)="addTask(content.value, bucketTaskIndex)">Add</button> -->
       </div>
       <button (click)="newTask(bucketTaskIndex)">Create Task</button>
@@ -50,7 +55,7 @@
         class="form-control"
         (focusout)="save()"
         [(ngModel)]="fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].name"
-        placeholder="Nom du fournisseur"
+        placeholder="{{'Task Name' | translate}}"
         (keyup.enter)="save()"
       >
 

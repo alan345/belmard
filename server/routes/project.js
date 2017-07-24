@@ -86,6 +86,7 @@ router.put('/:id', function (req, res, next) {
         item.categorie = req.body.categorie
         item.assignedTos = req.body.assignedTos
         item.bucketTasks = req.body.bucketTasks
+        item.progressTasks = req.body.progressTasks
         item.dateProject = req.body.dateProject
 
 

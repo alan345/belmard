@@ -93,11 +93,11 @@ export class ProjectTasksComponent implements OnInit {
   }
 
   newBucketTask(newBucketTask) {
-    let bucketTaskObj: BucketTasks = {
-      bucketName: newBucketTask,
-      openNewTask: false,
-      tasks: []
-    }
+    let bucketTaskObj: BucketTasks
+    bucketTaskObj.bucketName = newBucketTask,
+    bucketTaskObj.openNewTask = false,
+    bucketTaskObj.tasks = []
+
     this.fetchedProject.bucketTasks.push(bucketTaskObj)
     this.save()
   }
@@ -214,11 +214,14 @@ export class ProjectTasksComponent implements OnInit {
 
 
   save() {
-
-
+    let nbTasks = 0
+    let nbTasksCompleted = 0
 
     this.fetchedProject.bucketTasks.forEach((bucketTask, bucketTaskIndex) => {
+      nbTasks += bucketTask.tasks.length
       bucketTask.tasks.forEach((task, taskIndex) => {
+        if(task.status === 'done')
+          nbTasksCompleted++
 
         this.fetchedProject.bucketTasks[bucketTaskIndex]
         .tasks[taskIndex].dateTask
@@ -234,7 +237,7 @@ export class ProjectTasksComponent implements OnInit {
     });
 
 
-
+    this.fetchedProject.progressTasks =  nbTasksCompleted / nbTasks 
 
 
     if (this.fetchedProject._id) {

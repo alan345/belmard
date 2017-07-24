@@ -12,6 +12,7 @@ export class Project {
     forms: Form[] = [];
     categorie: Categorie = new Categorie();
     bucketTasks: BucketTasks[] = []
+    progressTasks: number = 0;
     dateProject: DateProject = new DateProject()
 
 }
