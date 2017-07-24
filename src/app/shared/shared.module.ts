@@ -8,7 +8,7 @@ import { AutocompleteModule } from '../autocomplete/autocomplete.module'
 
 import { TRANSLATION_PROVIDERS, TranslatePipe, TranslateService }   from '../translate';
 
-
+import { RoundPipe} from './round.pipe';
 
 @NgModule({
   imports:      [
@@ -18,6 +18,7 @@ import { TRANSLATION_PROVIDERS, TranslatePipe, TranslateService }   from '../tra
 
   ],
   declarations: [
+    RoundPipe,
     // AutocompleteComponent,
     TranslatePipe,
 
@@ -27,6 +28,7 @@ import { TRANSLATION_PROVIDERS, TranslatePipe, TranslateService }   from '../tra
     AutocompleteModule,
     CommonModule,
     FormsModule,
+    RoundPipe,
     // AutocompleteComponent,
   ],
   providers: [

@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RouterModule} from '@angular/router';
 
-import { RoundPipe} from './round.pipe';
+// import { RoundPipe} from './round.pipe';
 // import { ProjectModule} from '../project/project.module';
 
 import { QuotesComponent} from './quotes/quotes.component';
@@ -43,7 +43,7 @@ import { PaiementQuoteModule} from '../paiementQuote/paiementQuote.module'
     QuotesComponent,
     EditQuoteComponent,
     QuoteDetailComponent,
-    RoundPipe,
+    // RoundPipe,
     // AutocompleteComponent
   ],
   exports:      [
