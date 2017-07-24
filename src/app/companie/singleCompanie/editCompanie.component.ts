@@ -169,16 +169,6 @@ export class EditCompanieComponent implements OnInit {
       this.save();
   }
 
-  // removeUserFromCompanie(i:number, typeUser: string){
-  //   let this2 = this
-  //   let dialogRefDelete = this.dialog.open(DeleteDialog)
-  //   dialogRefDelete.afterClosed().subscribe(result => {
-  //     if(result) {
-  //       this[typeUser].splice(i, 1)
-  //       this.save()
-  //     }
-  //   })
-  // }
   initDataToRemove(){
 
         this.fetchedCompanie.categories.categProduct = [
@@ -225,20 +215,10 @@ export class EditCompanieComponent implements OnInit {
             ]
           },
 
-
-
-
-
-
           {
             "categ":"Menuiserie",
             "subCateg": [
-              {
-                "categ":"",
-                "subCateg": [
-                  {"categ": ""}
-                ]
-              },
+
               {
                 "categ":"Portes",
                 "subCateg": [
@@ -271,12 +251,7 @@ export class EditCompanieComponent implements OnInit {
           {
             "categ":"Fenêtres",
             "subCateg": [
-              {
-                "categ":"",
-                "subCateg": [
-                  {"categ": ""}
-                ]
-              },
+
               {
                 "categ":"Vitrage",
                 "subCateg": [
@@ -325,12 +300,7 @@ export class EditCompanieComponent implements OnInit {
           {
             "categ":"Plomberie",
             "subCateg": [
-              {
-                "categ":"",
-                "subCateg": [
-                  {"categ": ""}
-                ]
-              },
+
               {
                 "categ":"Ballon d'eau chaude",
                 "subCateg": [
@@ -388,12 +358,7 @@ export class EditCompanieComponent implements OnInit {
           {
             "categ":"Électricité",
             "subCateg": [
-              {
-                "categ":"",
-                "subCateg": [
-                  {"categ": ""}
-                ]
-              },
+
               {
                 "categ":"Convecteur",
                 "subCateg": [
@@ -443,12 +408,7 @@ export class EditCompanieComponent implements OnInit {
           {
             "categ": "Chauffage",
             "subCateg": [
-              {
-                "categ":"",
-                "subCateg": [
-                  {"categ": ""}
-                ]
-              },
+
               {
                 "categ": "Radiateurs",
                 "subCateg": [
@@ -478,12 +438,7 @@ export class EditCompanieComponent implements OnInit {
       {
         "categ":"Devis Rénovation",
         "subCateg": [
-          {
-            "categ":"Cuisine",
-            "subCateg": [
-              {"categ": "ok"}
-            ]
-          },
+
           {
             "categ":"Salle de Bain",
             "subCateg": [
@@ -737,35 +692,6 @@ export class EditCompanieComponent implements OnInit {
         )
     }
   }
-
-//
-// saveToMyCompanie(){
-//   this.companieService.saveCompanie(this.fetchedCompanie)
-//     .subscribe(
-//       res => {
-//         this.userService.addCompanieToMyself(res.obj)
-//           .subscribe(
-//             res => {
-//               // this.userService.cleanCurrentUserInSession()
-//               location.reload();
-//               this.toastr.success('Great!', res.message)
-//             },
-//             error => {console.log(error)}
-//           )
-//         this.toastr.success('Great!', res.message)
-//       },
-//       error => {console.log(error)}
-//     )
-// }
-  // move(i: number, incremet: number, typeUser: string) {
-  //   if(i>=0 && i<=this[typeUser].length + incremet) {
-  //     var tmp = this[typeUser][i];
-  //     this[typeUser][i] = this[typeUser][i + incremet]
-  //     this[typeUser][i + incremet] = tmp
-  //     this.save()
-  //   }
-  // }
-
 
   onDelete(id: string) {
     this.companieService.deleteCompanie(id)

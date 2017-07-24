@@ -13,7 +13,7 @@ import { RightService} from './right.service';
 import { RightRouting} from './rightRouting.module';
 import { MaterialModule } from '@angular/material';
 import { Ng2PaginationModule} from 'ng2-pagination';
-
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -25,6 +25,7 @@ import { Ng2PaginationModule} from 'ng2-pagination';
     Ng2PaginationModule,
     ReactiveFormsModule,
     RouterModule,
+    SharedModule,
   ],
   declarations: [
     // RightDetailUsersComponent,
