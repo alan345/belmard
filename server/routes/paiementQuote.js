@@ -6,6 +6,8 @@ var express = require('express'),
     Form    = require('../models/form.model'),
     fs      = require('fs'),
     jwt     = require('jsonwebtoken')
+    shared = require('./shared.js'),
+    nameObject = 'paiementQuote'
 
 // this process does not hang the nodejs server on error
 process.on('uncaughtException', function (err) {
@@ -29,7 +31,10 @@ router.use('/', function (req, res, next) {
       })
     }
     if (decoded) {
-      User.findById(decoded.user._id, function (err, doc) {
+      User
+      .findById(decoded.user._id)
+      .populate({ path: 'rights', model: 'Right'})
+      .exec(function (err, doc) {
         if (err) {
           return res.status(500).json({
             message: 'Fetching user failed',
@@ -40,6 +45,12 @@ router.use('/', function (req, res, next) {
           return res.status(404).json({
             title: 'User not found',
             error: {message: 'The user was not found'}
+          })
+        }
+        if(!shared.isCurentUserHasAccess(doc.rights, nameObject, 'read')) {
+          return res.status(404).json({
+            title: 'No rights',
+            error: {message: 'No rights'}
           })
         }
         if (doc) {
@@ -55,6 +66,10 @@ router.use('/', function (req, res, next) {
 
 //update
 router.put('/:id', function (req, res, next) {
+  if(!shared.isCurentUserHasAccess(req.user.rights, nameObject, 'write')) {
+    return res.status(404).json({ title: 'No rights', error: {message: 'No rights'} })
+  }
+
   PaiementQuote.findById(({_id: req.params.id}), function (err, item) {
     if (err) {
       return res.status(404).json({
@@ -88,6 +103,9 @@ router.put('/:id', function (req, res, next) {
 })
 
 router.post('/', function (req, res, next) {
+  if(!shared.isCurentUserHasAccess(req.user.rights, nameObject, 'write')) {
+    return res.status(404).json({ title: 'No rights', error: {message: 'No rights'} })
+  }
   if(!req.user.companies.length) {
     return res.status(404).json({
       message: 'You must belong to a companie',
@@ -124,46 +142,14 @@ router.get('/page/:page', function (req, res, next) {
   var currentPage = Number(req.params.page)
   var pageNumber = currentPage - 1
   var skip = (itemsPerPage * pageNumber)
-  //console.log(req.query.categories)
-  // var categories = []
-  // if(typeof req.query.categories === 'string') {
-  //   categories = [req.query.categories]
-  // } else {
-  //   categories = req.query.categories
-  // }
-  // var dateRef = new Date();
-  // dateRef.setDate(dateRef.getDate()-60)
-  // var matchRules = []
 
-  // let hasWhatsNewCateg = true
-  // categories.forEach(function (categ) {
-  //   categorie = JSON.parse(categ)
-  //   if(categorie.name !== 'what\'s new') {
-  //     hasWhatsNewCateg = false
-  //     if(categorie.name) {
-  //       matchRules.push({
-  //          '$elemMatch': categorie
-  //        })
-  //     }
-  //   } else {
-  //
-  //   }
-  // })
-
-  // let categoriesArray= {
-  //    "$all": matchRules
-  // }
   let searchQuery = {
   //  createdAt:{"$lt": dateRef}
 //    categories: categoriesArray,
   //  createdAt:{"$gt": dateRef},
   }
 
-  // if(hasWhatsNewCateg)
-  //   searchQuery['createdAt'] = {"$gt": dateRef}
-  //
-  // if(!hasWhatsNewCateg)
-  //   searchQuery['categories'] = categoriesArray
+
   if(req.query.search)
     searchQuery['details.name'] = new RegExp(req.query.search, 'i')
 
@@ -171,8 +157,6 @@ router.get('/page/:page', function (req, res, next) {
   if(req.query.idQuote)
     searchQuery['quotes'] = mongoose.Types.ObjectId(req.query.idQuote)
 
-  // console.log(hasWhatsNewCateg)
-  // console.log(searchQuery)
 
   PaiementQuote
   .find(searchQuery)
@@ -306,38 +290,12 @@ router.get('/:id', function (req, res, next) {
 
 
 
-// getting user forms to display them on front end
-router.get('/countNewItemForUser/:id', function (req, res, next) {
-  User
-  .findOne({_id: req.params.id})
-  .exec(function (err, user) {
-    if (err) {
-      return res.status(403).json({
-        title: 'There was a problem',
-        error: err
-      });
-    } else {
-      PaiementQuote
-      .find({createdAt:{"$gt": user.trackinPage.lastVisitPagePaiementQuote}})
-      .exec(function (err, item) {
-        if (err) {
-          return res.status(404).json({
-            message: '',
-            err: err
-          })
-        } else {
-          res.status(200).json({
-            message: 'Success',
-            item: item
-          })
-        }
-      })
-    }
-  })
-})
 
 
 router.delete('/:id', function (req, res, next) {
+  if(!shared.isCurentUserHasAccess(req.user.rights, nameObject, 'write')) {
+    return res.status(404).json({ title: 'No rights', error: {message: 'No rights'} })
+  }
   PaiementQuote.findById((req.params.id), function (err, item) {
     if (err) {
       return res.status(500).json({
@@ -369,32 +327,5 @@ router.delete('/:id', function (req, res, next) {
 })
 
 
-// retrieving a single form
-router.get('/edit/:id', function (req, res, next) {
-  Form.findById((req.params.id), function (err, form) {
-    if (err) {
-      return res.status(500).json({
-        message: 'An error occured',
-        err: err
-      })
-    }
-    if (!form) {
-      return res.status(404).json({
-        title: 'No form found',
-        error: {message: 'Form not found!'}
-      })
-    }
-    // checking if the owner of the form is correct
-    if (form.owner != req.user._id.toString()) {
-      return res.status(401).json({
-        title: 'Not your form!',
-        error: {message: 'Users do not match, not your form'}
-      })
-    }
-    res.status(200).json({
-      obj: form
-    })
-  })
-})
 
 module.exports = router

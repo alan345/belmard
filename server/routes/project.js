@@ -6,6 +6,7 @@ var express = require('express'),
     Form    = require('../models/form.model'),
     fs      = require('fs'),
     jwt     = require('jsonwebtoken'),
+    shared = require('./shared.js'),
     nameObject = 'project'
 
 // this process does not hang the nodejs server on error

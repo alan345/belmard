@@ -8,6 +8,7 @@ var express = require('express'),
   jwt = require('jsonwebtoken'),
   mongoose = require('mongoose'),
   Schema = mongoose.Schema,
+  shared = require('./shared.js'),
   nameObject = 'quote'
 
 // this process does not hang the nodejs server on error
