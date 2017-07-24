@@ -78,11 +78,11 @@ export class ProjectTasksComponent implements OnInit {
     private dragulaService: DragulaService,
     private authService: AuthService,
   ) {
-    dragulaService.setOptions('nested-bag', {
-      moves: function (el:any, container:any, handle:any):any {
-        return handle.className === 'move';
-      }
-    });
+    // dragulaService.setOptions('nested-bag', {
+    //   moves: function (el:any, container:any, handle:any):any {
+    //     return handle.className === 'move';
+    //   }
+    // });
 
     dragulaService.dropModel.subscribe((value) => {
       this.onDropModel(value.slice(1));
@@ -105,17 +105,21 @@ export class ProjectTasksComponent implements OnInit {
 
   deleteBucketTask(bucketTaskIndex) {
     this.fetchedProject.bucketTasks.splice(bucketTaskIndex, 1)
-    // this.save()
+    this.save()
   }
 
   deleteTask(bucketTaskIndex, taskIndex) {
     this.fetchedProject.bucketTasks[bucketTaskIndex].tasks.splice(taskIndex, 1)
-    // this.save()
+    this.save()
   }
   addTask(content, bucketTaskIndex) {
-    console.log(content, bucketTaskIndex)
     this.fetchedProject.bucketTasks[bucketTaskIndex].openNewTask = false
     let newTask = new Task()
+    newTask.dateTask.creationDateString = this.authService.isoDateToHtmlDate(newTask.dateTask.creationDate)
+    newTask.dateTask.endDateString = this.authService.isoDateToHtmlDate(newTask.dateTask.endDate)
+
+
+
     newTask.name = content
     this.fetchedProject.bucketTasks[bucketTaskIndex].tasks.push(newTask)
     // this.save()

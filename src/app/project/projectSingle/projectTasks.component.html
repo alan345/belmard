@@ -22,11 +22,12 @@
         <button (click)="deleteTask(bucketTaskIndex, taskIndex)">X</button>
       </div>
 
-      <button (click)="newTask(bucketTaskIndex)">Create Task</button>
+
       <div *ngIf="bucketTask.openNewTask">
-        <textarea #content rows="4" cols="10"></textarea>
-        <button (click)="addTask(content.value, bucketTaskIndex)">Add</button>
+        <textarea (focusout)="addTask(content.value, bucketTaskIndex)" #content rows="4" cols="10"></textarea>
+        <!-- <button (click)="addTask(content.value, bucketTaskIndex)">Add</button> -->
       </div>
+      <button (click)="newTask(bucketTaskIndex)">Create Task</button>
     </div>
   </div>
 

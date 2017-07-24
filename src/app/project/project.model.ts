@@ -29,7 +29,7 @@ export class BucketTasks {
 
 export class Task {
   name: string = '';
-  status: string = '';
+  status: string = 'pending';
   editMode: boolean = false;
   description: string = '';
   assignedTos: User[] = [];
