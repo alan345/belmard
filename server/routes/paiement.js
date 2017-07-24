@@ -38,12 +38,7 @@ router.use('/', function (req, res, next) {
             error: {message: 'The user was not found'}
           })
         }
-        if(!shared.isCurentUserHasAccess(doc.rights, 'paiement', 'read')) {
-          return res.status(404).json({
-            title: 'No rights',
-            error: {message: 'No rights'}
-          })
-        }
+
         if (doc) {
           req.user = doc;
           next();
