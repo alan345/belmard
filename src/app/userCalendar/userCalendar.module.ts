@@ -21,7 +21,7 @@ import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { DemoUtilsModule } from './demo-utils/module';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
+import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -37,7 +37,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
     Ng2PaginationModule,
     ReactiveFormsModule,
     QuoteModule,
-    DemoUtilsModule
+    DemoUtilsModule,
+    SharedModule
 
   ],
   declarations: [

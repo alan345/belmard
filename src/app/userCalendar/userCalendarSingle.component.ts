@@ -17,7 +17,7 @@ import { TypeUser } from '../user/user.model';
 import { Subject } from 'rxjs/Subject';
 //import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { CalendarEvent, CalendarEventAction, CalendarEventTimesChangedEvent } from 'angular-calendar';
-
+import { AuthService} from '../auth/auth.service';
 
 const colors: any = {
   red: {
@@ -61,9 +61,9 @@ export class UserCalendarSingleComponent implements OnInit {
     timeEnd: number= 19
     search= {
       typeUser:[],
-      clientSearch:[],
-      userSearch:[],
-      projectSearch:[],
+      clientSearch:'',
+      userSearch:'',
+      projectSearch:'',
       endDate: '',
       startDate: '',
     }
@@ -80,7 +80,8 @@ export class UserCalendarSingleComponent implements OnInit {
       private activatedRoute: ActivatedRoute,
       private _fb: FormBuilder,
       private userService: UserService,
-      private projectService: ProjectService
+      private projectService: ProjectService,
+      private authService: AuthService
     ) {}
 
     ngOnInit() {
@@ -102,7 +103,7 @@ export class UserCalendarSingleComponent implements OnInit {
             this2.addEvent()
             if(params['idUserNew']) { this2.getUser(params['idUserNew']) }
             if(params['idProjectNew']) { this2.getProject(params['idProjectNew']) }
-            if(params['idClientNew']) { this2.getClient(params['idClientNew']) }
+            // if(params['idClientNew']) { this2.getClient(params['idClientNew']) }
             this2.refresh.next();
           }, 800);
         }
@@ -115,17 +116,18 @@ export class UserCalendarSingleComponent implements OnInit {
 
 
     getCurrentUser() {
-      this.userService.getUser('')
-        .subscribe(
-          res => {
-            this.currentUser = res
+      // this.userService.getUser('')
+      //   .subscribe(
+      //     res => {
+      //       this.currentUser = res
+            this.currentUser = this.authService.getCurrentUser()
             this.currentUser.companies.forEach(companie => {
               this.timeEnd = companie.option.calendar.timeEnd
               this.timeBegin = companie.option.calendar.timeBegin
             })
-          },
-          error => { console.log(error) }
-        )
+        //   },
+        //   error => { console.log(error) }
+        // )
     }
 
     fetchCalendarEvents(){
@@ -251,8 +253,7 @@ export class UserCalendarSingleComponent implements OnInit {
     endDate.setHours(endDate.getHours() + 4);
     // pointeur not value
 
-    console.log(this.viewDate)
-    console.log(endDate)
+
     let newEvent = new UserCalendar();
     newEvent.title = ''
     newEvent.start = this.viewDate
@@ -294,46 +295,70 @@ export class UserCalendarSingleComponent implements OnInit {
 
 
 
+selectProjectSearch(projectSearch: Project) {
+
+  this.search.projectSearch = projectSearch._id
+  this.fetchEvents();
+}
+
 //autocomplete userSearch
   autocompleteUserSearch: string = '';
   fetchedUserSearchs: User[] = [];
+  fetchedProjectSearchs: Project[] = [];
   selectUserSearch(userSearch: User) {
-    this.autocompleteUserSearch = '';
-    this.fetchedUserSearchs = []
-    this.search.userSearch.push(userSearch)
+    // this.autocompleteUserSearch = '';
+    // this.fetchedUserSearchs = []
+    this.search.userSearch = userSearch._id
     this.fetchEvents();
   }
-  searchUserSearchs() {
-    if(!this.autocompleteUserSearch) {
-      this.fetchedUserSearchs  = []
-    } else {
-      let search = {
-          search: this.autocompleteUserSearch,
-        };
-      this.getUserSearchs(1, search);
-    }
+  // searchUserSearchs() {
+  //   if(!this.autocompleteUserSearch) {
+  //     this.fetchedUserSearchs  = []
+  //   } else {
+  //     let search = {
+  //         search: this.autocompleteUserSearch,
+  //       };
+  //     this.getUserSearchs(1, search);
+  //   }
+  // }
+
+  getProjectSearch(id: string) {
+    this.projectService.getProject(id)
+      .subscribe(
+        res => {
+          this.fetchedProjectSearchs = [res]
+          this.selectProjectSearch(res)
+        },
+        error => { console.log(error) }
+      )
   }
+
   getUserSearch(id: string) {
     this.userService.getUser(id)
       .subscribe(
         res => {
+          this.fetchedUserSearchs = [res]
           this.selectUserSearch(res)
         },
         error => { console.log(error) }
       )
   }
-  getUserSearchs(page: number, search: any) {
-    this.userService.getUsers(page, search)
-      .subscribe(
-        res => {
-           this.fetchedUserSearchs = res.data
-           this.refresh.next();
-        },
-        error => {console.log(error); }
-      );
+  // getUserSearchs(page: number, search: any) {
+  //   this.userService.getUsers(page, search)
+  //     .subscribe(
+  //       res => {
+  //          this.fetchedUserSearchs = res.data
+  //          this.refresh.next();
+  //       },
+  //       error => {console.log(error); }
+  //     );
+  // }
+  removeUserSearch() {
+    this.search.userSearch = ''
+    this.fetchEvents();
   }
-  removeUserSearch(i: number) {
-    this.search.userSearch.splice(i, 1);
+  removeProjectSearch(i: number) {
+    this.search.projectSearch = ''
     this.fetchEvents();
   }
   //autocomplete userSearch
@@ -341,24 +366,24 @@ export class UserCalendarSingleComponent implements OnInit {
 
 
 //autocomplete clientSearch
-  autocompleteClientSearch: string = '';
-  fetchedClientSearchs: User[] = [];
+  // autocompleteClientSearch: string = '';
+  // fetchedClientSearchs: User[] = [];
   selectClientSearch(userSearch: User) {
-    this.autocompleteClientSearch = '';
-    this.fetchedClientSearchs = []
-    this.search.clientSearch.push(userSearch)
+    // this.autocompleteClientSearch = '';
+    // this.fetchedClientSearchs = []
+    // this.search.clientSearch.push(userSearch)
     this.fetchEvents();
   }
-  searchClientSearchs() {
-    if(!this.autocompleteClientSearch) {
-      this.fetchedClientSearchs = []
-    } else {
-      let search = {
-          search: this.autocompleteClientSearch,
-        };
-      this.getClientSearchs(1, search)
-    }
-  }
+  // searchClientSearchs() {
+  //   if(!this.autocompleteClientSearch) {
+  //     this.fetchedClientSearchs = []
+  //   } else {
+  //     let search = {
+  //         search: this.autocompleteClientSearch,
+  //       };
+  //     this.getClientSearchs(1, search)
+  //   }
+  // }
   getClientSearch(id: string) {
     this.userService.getUser(id)
       .subscribe(
@@ -368,18 +393,18 @@ export class UserCalendarSingleComponent implements OnInit {
         error => { console.log(error) }
       )
   }
-  getClientSearchs(page: number, search: any) {
-    this.userService.getUsers(page, search)
-      .subscribe(
-        res => {
-           this.fetchedClientSearchs = res.data
-           this.refresh.next();
-        },
-        error => {console.log(error);}
-      );
-  }
+  // getClientSearchs(page: number, search: any) {
+  //   this.userService.getUsers(page, search)
+  //     .subscribe(
+  //       res => {
+  //          this.fetchedClientSearchs = res.data
+  //          this.refresh.next();
+  //       },
+  //       error => {console.log(error);}
+  //     );
+  // }
   removeClientSearch(i: number) {
-    this.search.clientSearch.splice(i, 1);
+    // this.search.clientSearch.splice(i, 1);
     this.fetchEvents();
   }
 //autocomplete clientSearch
@@ -387,100 +412,89 @@ export class UserCalendarSingleComponent implements OnInit {
 
 
 //autocomplete projectSearch
-  autocompleteProjectSearch: string = '';
-  fetchedProjectSearchs: Project[] = [];
-  selectProjectSearch(projectSearch: Project) {
-    this.autocompleteProjectSearch = '';
-    this.fetchedProjectSearchs = []
-    this.search.projectSearch.push(projectSearch)
-    this.fetchEvents();
-  }
-  searchProjectSearchs() {
-    if(!this.autocompleteProjectSearch) {
-      this.fetchedProjectSearchs = []
-    } else {
-      let search = {
-          search: this.autocompleteProjectSearch,
-        };
-      this.getProjectSearchs(1, search)
-    }
-  }
-  getProjectSearch(id: string) {
-    this.projectService.getProject(id)
-      .subscribe(
-        res => {
-          this.selectProjectSearch(res)
-        },
-        error => { console.log(error) }
-      )
-  }
-  getProjectSearchs(page: number, search: any) {
-    this.projectService.getProjects(page, search)
-      .subscribe(
-        res => {
-           this.fetchedProjectSearchs = res.data
-           this.refresh.next();
-        },
-        error => {console.log(error);}
-      );
-  }
-  removeProjectSearch(i: number) {
-    this.search.projectSearch.splice(i, 1);
-    this.fetchEvents();
-  }
+  // autocompleteProjectSearch: string = '';
+  // fetchedProjectSearchs: Project[] = [];
+  // selectProjectSearch(projectSearch: Project) {
+  //   this.autocompleteProjectSearch = '';
+  //   this.fetchedProjectSearchs = []
+  //   this.search.projectSearch.push(projectSearch)
+  //   this.fetchEvents();
+  // }
+  // searchProjectSearchs() {
+  //   if(!this.autocompleteProjectSearch) {
+  //     this.fetchedProjectSearchs = []
+  //   } else {
+  //     let search = {
+  //         search: this.autocompleteProjectSearch,
+  //       };
+  //     this.getProjectSearchs(1, search)
+  //   }
+  // }
+
+  // getProjectSearchs(page: number, search: any) {
+  //   this.projectService.getProjects(page, search)
+  //     .subscribe(
+  //       res => {
+  //          this.fetchedProjectSearchs = res.data
+  //          this.refresh.next();
+  //       },
+  //       error => {console.log(error);}
+  //     );
+  // }
+
 //autocomplete projectSearch
 
 
 
 //autocomplete client
-  autocompleteClient: string = '';
-  fetchedClients: User[] = [];
-  selectClient(client: User) {
-    this.autocompleteClient = ''
-    this.fetchedClients = []
-    this.events.forEach(event => {
-      if(event.isActiveEvent) {
-        event.clients.push(client)
-      }
-    })
-  }
-  searchClients() {
-    if(!this.autocompleteClient) {
-       this.fetchedClients = []
-    } else {
-      let search = {
-          search: this.autocompleteClient,
-        };
-      this.getClients(1, search)
-    }
-  }
-  getClient(id: string) {
-    this.userService.getUser(id)
-      .subscribe(
-        res => {
-          this.selectClient(res)
-        },
-        error => { console.log(error) }
-      )
-  }
-
-  getClients(page: number, search: any) {
-    this.userService.getUsers(page, search)
-      .subscribe(
-        res => {
-           this.fetchedClients = res.data
-           this.refresh.next();
-        },
-        error => {console.log(error);}
-      );
-  }
-  removeClient(i: number) {
-    this.events.forEach(event => {
-      if(event.isActiveEvent) {
-        event.clients.splice(i, 1);
-      }
-    })
-  }
+  // autocompleteClient: string = '';
+  // fetchedClients: User[] = [];
+  // selectClient(client: User) {
+  //   this.autocompleteClient = ''
+  //   this.fetchedClients = []
+  //   this.events.forEach(event => {
+  //     if(event.isActiveEvent) {
+  //       event.clients.push(client)
+  //     }
+  //   })
+  // }
+  // searchClients() {
+  //   if(!this.autocompleteClient) {
+  //      this.fetchedClients = []
+  //   } else {
+  //     let search = {
+  //         search: this.autocompleteClient,
+  //       };
+  //     this.getClients(1, search)
+  //   }
+  // }
+  // getClient(id: string) {
+  //   this.userService.getUser(id)
+  //     .subscribe(
+  //       res => {
+  //         this.selectClient(res)
+  //       },
+  //       error => { console.log(error) }
+  //     )
+  // }
+  //
+  // getClients(page: number, search: any) {
+  //   this.userService.getUsers(page, search)
+  //     .subscribe(
+  //       res => {
+  //          this.fetchedClients = res.data
+  //          this.refresh.next();
+  //       },
+  //       error => {console.log(error);}
+  //     );
+  // }
+  // removeClient(i: number) {
+  //   this.events.forEach(event => {
+  //     if(event.isActiveEvent) {
+  //       event.clients.splice(i, 1);
+  //     }
+  //   })
+  // }
 //autocomplete client
 
 
@@ -496,16 +510,16 @@ export class UserCalendarSingleComponent implements OnInit {
       }
     })
   }
-  searchUsers() {
-    if(!this.autocompleteUser) {
-      this.fetchedUsers = []
-    } else {
-      let search = {
-          search: this.autocompleteUser,
-        };
-      this.getUsers(1, search);
-    }
-  }
+  // searchUsers() {
+  //   if(!this.autocompleteUser) {
+  //     this.fetchedUsers = []
+  //   } else {
+  //     let search = {
+  //         search: this.autocompleteUser,
+  //       };
+  //     this.getUsers(1, search);
+  //   }
+  // }
   getUser(id: string) {
     this.userService.getUser(id)
       .subscribe(
@@ -515,16 +529,18 @@ export class UserCalendarSingleComponent implements OnInit {
         error => { console.log(error) }
       )
   }
-  getUsers(page: number, search: any) {
-    this.userService.getUsers(page, search)
-      .subscribe(
-        res => {
-           this.fetchedUsers = res.data
-           this.refresh.next();
-        },
-        error => {console.log(error);}
-      );
-  }
+  // getUsers(page: number, search: any) {
+  //   this.userService.getUsers(page, search)
+  //     .subscribe(
+  //       res => {
+  //          this.fetchedUsers = res.data
+  //          this.refresh.next();
+  //       },
+  //       error => {console.log(error);}
+  //     );
+  // }
+
+  //ok
   removeUser(i: number) {
     this.events.forEach(event => {
       if(event.isActiveEvent) {
@@ -546,16 +562,16 @@ export class UserCalendarSingleComponent implements OnInit {
       }
     })
   }
-  searchProjects() {
-    if(!this.autocompleteProject) {
-      this.fetchedProjects = []
-    } else {
-      let search = {
-          search: this.autocompleteProject,
-        };
-      this.getProjects(1, search);
-    }
-  }
+  // searchProjects() {
+  //   if(!this.autocompleteProject) {
+  //     this.fetchedProjects = []
+  //   } else {
+  //     let search = {
+  //         search: this.autocompleteProject,
+  //       };
+  //     this.getProjects(1, search);
+  //   }
+  // }
   getProject(id: string) {
     this.projectService.getProject(id)
       .subscribe(
@@ -565,16 +581,16 @@ export class UserCalendarSingleComponent implements OnInit {
         error => { console.log(error) }
       )
   }
-  getProjects(page: number, search: any) {
-    this.projectService.getProjects(page, search)
-      .subscribe(
-        res => {
-          this.fetchedProjects = res.data;
-          this.refresh.next();
-        },
-        error => {console.log(error);}
-      );
-  }
+  // getProjects(page: number, search: any) {
+  //   this.projectService.getProjects(page, search)
+  //     .subscribe(
+  //       res => {
+  //         this.fetchedProjects = res.data;
+  //         this.refresh.next();
+  //       },
+  //       error => {console.log(error);}
+  //     );
+  // }
   removeProject(i: number) {
     this.events.forEach(event => {
       if(event.isActiveEvent) {

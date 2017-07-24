@@ -53,7 +53,7 @@ router.use('/', function (req, res, next) {
             error: {message: 'The user was not found'}
           })
         }
-        if(!shared.isCurentUserHasAccess(doc.rights, 'companie', 'userCalendar')) {
+        if(!shared.isCurentUserHasAccess(doc.rights, 'userCalendar', 'read')) {
           return res.status(404).json({
             title: 'No rights',
             error: {message: 'No rights'}
@@ -162,9 +162,10 @@ router.get('/page/:page', function (req, res, next) {
    start:{"$gt": req.query.startDate},
    end:{"$lt": req.query.endDate},
   }
-
+  console.log('saaaaaa')
+  console.log(req.query.userSearch)
   if(req.query.userSearch)
-    searchQuery['users'] = mongoose.Types.ObjectId(JSON.parse(req.query.userSearch)._id)
+    searchQuery['users'] = mongoose.Types.ObjectId(req.query.userSearch)
 
   if(req.query.projectSearch)
     searchQuery['projects'] = mongoose.Types.ObjectId(JSON.parse(req.query.projectSearch)._id)
@@ -265,37 +266,37 @@ router.get('/:id', function (req, res, next) {
   })
 })
 
-
-
-// getting user forms to display them on front end
-router.get('/countNewItemForUser/:id', function (req, res, next) {
-  User
-  .findOne({_id: req.params.id})
-  .exec(function (err, user) {
-    if (err) {
-      return res.status(403).json({
-        title: 'There was a problem',
-        error: err
-      });
-    } else {
-      UserCalendar
-      .find({createdAt:{"$gt": user.trackinPage.lastVisitPageUserCalendar}})
-      .exec(function (err, item) {
-        if (err) {
-          return res.status(404).json({
-            message: '',
-            err: err
-          })
-        } else {
-          res.status(200).json({
-            message: 'Success',
-            item: item
-          })
-        }
-      })
-    }
-  })
-})
+//
+//
+// // getting user forms to display them on front end
+// router.get('/countNewItemForUser/:id', function (req, res, next) {
+//   User
+//   .findOne({_id: req.params.id})
+//   .exec(function (err, user) {
+//     if (err) {
+//       return res.status(403).json({
+//         title: 'There was a problem',
+//         error: err
+//       });
+//     } else {
+//       UserCalendar
+//       .find({createdAt:{"$gt": user.trackinPage.lastVisitPageUserCalendar}})
+//       .exec(function (err, item) {
+//         if (err) {
+//           return res.status(404).json({
+//             message: '',
+//             err: err
+//           })
+//         } else {
+//           res.status(200).json({
+//             message: 'Success',
+//             item: item
+//           })
+//         }
+//       })
+//     }
+//   })
+// })
 
 
 router.delete('/:id', function (req, res, next) {
@@ -329,33 +330,33 @@ router.delete('/:id', function (req, res, next) {
   })
 })
 
-
-// retrieving a single form
-router.get('/edit/:id', function (req, res, next) {
-  Form.findById((req.params.id), function (err, form) {
-    if (err) {
-      return res.status(500).json({
-        message: 'An error occured',
-        err: err
-      })
-    }
-    if (!form) {
-      return res.status(404).json({
-        title: 'No form found',
-        error: {message: 'Form not found!'}
-      })
-    }
-    // checking if the owner of the form is correct
-    if (form.owner != req.user._id.toString()) {
-      return res.status(401).json({
-        title: 'Not your form!',
-        error: {message: 'Users do not match, not your form'}
-      })
-    }
-    res.status(200).json({
-      obj: form
-    })
-  })
-})
+//
+// // retrieving a single form
+// router.get('/edit/:id', function (req, res, next) {
+//   Form.findById((req.params.id), function (err, form) {
+//     if (err) {
+//       return res.status(500).json({
+//         message: 'An error occured',
+//         err: err
+//       })
+//     }
+//     if (!form) {
+//       return res.status(404).json({
+//         title: 'No form found',
+//         error: {message: 'Form not found!'}
+//       })
+//     }
+//     // checking if the owner of the form is correct
+//     if (form.owner != req.user._id.toString()) {
+//       return res.status(401).json({
+//         title: 'Not your form!',
+//         error: {message: 'Users do not match, not your form'}
+//       })
+//     }
+//     res.status(200).json({
+//       obj: form
+//     })
+//   })
+// })
 
 module.exports = router

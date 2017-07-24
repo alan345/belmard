@@ -20,9 +20,5 @@ export class LoadingComponent implements OnInit {
 
   ngOnInit() {}
 
-  isLoggedIn() {
-    return this.authService.isLoggedIn();
-  }
-
 
 }
