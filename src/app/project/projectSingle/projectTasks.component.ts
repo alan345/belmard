@@ -77,13 +77,9 @@ export class ProjectTasksComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private dragulaService: DragulaService,
     private authService: AuthService,
-    //    private _fb: FormBuilder,
-    //    private userService: UserService,
-    //    private quoteService: QuoteService,
   ) {
     dragulaService.setOptions('nested-bag', {
       moves: function (el:any, container:any, handle:any):any {
-        console.log(handle.className);
         return handle.className === 'move';
       }
     });
