@@ -79,17 +79,10 @@
         <button type="button" class="spcright btn btn-secondary" (click)="logout()">
           Déconnexion
         </button>
-        <button type="button" class="spcright btn btn-primary" [routerLink]="['/user/profile']" routerLinkActive="active">
+        <button type="button" class="spcright btn btn-primary" [routerLink]="['/user/newuser/' + fetchedUser._id]" routerLinkActive="active">
           Mon Profil
         </button>
-        <!-- <button
-          *ngIf="fetchedUser.companies.length"
-          type="button"
-          class="btn btn-primary"
-          [routerLink]="['/companie/edit/mine']"
-          routerLinkActive="active">
-          Mon Entreprise
-        </button> -->
+
         <button type="button" class="spcright btn btn-primary" [routerLink]="['/companie/edit/mine']" routerLinkActive="active">
           Mon Entreprise
         </button>

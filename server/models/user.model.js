@@ -10,7 +10,7 @@ var user = new Schema({
 
     email: {type: String, unique: true, required: true, lowercase: true},
     password: {type: String, required: true},
-    forms: [{type: Schema.Types.ObjectId, ref: 'Form'}],
+    // forms: [{type: Schema.Types.ObjectId, ref: 'Form'}],
     paiement: {
       stripe:{
         cusId:{type: String, default: ['']},
@@ -25,11 +25,12 @@ var user = new Schema({
     resetPasswordToken: String,
     resetPasswordExpires: String,
     role: {type: Array, default: ['client']},
-    isAdminOfHisCompanie:{type: Boolean, default: [false]},    
+    isAdminOfHisCompanie:{type: Boolean, default: [false]},
+    isExternalUser:{type: Boolean, default: [false]},
     rights: [{type: Schema.Types.ObjectId, ref: 'Right'}],
     type: {type: Array},
     profile : {
-      _profilePicture : [{type: Schema.Types.ObjectId, ref: 'Form'}],
+      profilePicture : [{type: Schema.Types.ObjectId, ref: 'Form'}],
       language: {type: String, default: ['en']},
       name: {type: String, default: ['']},
       fax:{type: String, default: ['']},

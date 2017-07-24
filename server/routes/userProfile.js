@@ -139,14 +139,15 @@ function getUser(req, res, next, id) {
     .populate({path: 'rights', model: 'Right'})
     .populate({path: 'salesMan', model: 'User'})
     .populate({path: 'companies', model: 'Companie'})
-    .populate({
-        path: 'companies',
-        model: 'Companie',
-        populate: {
-          path: 'forms',
-          model: 'Form'
-        }
-      })
+    .populate({path: 'profile.profilePicture', model: 'Form'})
+    // .populate({
+    //     path: 'companies',
+    //     model: 'Companie',
+    //     populate: {
+    //       path: 'forms',
+    //       model: 'Form'
+    //     }
+    //   })
     .exec(function (err, user) {
       if (err) {
         return res.status(403).json({

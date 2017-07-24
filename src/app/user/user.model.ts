@@ -8,10 +8,11 @@ export const TypeUser = ['plombier', 'serrurier']
 export class User {
   _id: string = '';
   isAdminOfHisCompanie: Boolean = false;
+  isExternalUser: Boolean = false;
   email: string = '';
   role: string[] = [];
   type: string[] = [];
-  forms: Form[] = [];
+  // forms: Form[] = [];
   rights: Right[] = []
   profile: Profile = new Profile();
   password: string = '';
@@ -34,7 +35,7 @@ export class Profile {
   phoneNumber: string = '';
   otherData: string = '';
   parentUser: User[] = [];
-  _profilePicture: Form[] = [];
+  profilePicture: Form[] = [];
   colorCalendar: string = '';
   fax: string = '';
   title: string = '';

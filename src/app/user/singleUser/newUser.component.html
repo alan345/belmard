@@ -16,10 +16,41 @@
 
 
 
+    <div *ngIf="this.fetchedUser.isExternalUser" class="form-group col-sm-12">
+      <label>Type User</label>
+      <select class="form-control" formControlName="type" [(ngModel)]="fetchedUser.type">
+        <option *ngFor="let n of typeUser" [attr.value]="n">{{n}}</option>
+      </select>
+
+      <label>Rights</label>
+
+      <app-autocomplete
+        [typeAutocomplete]="'right'"
+        [canDelete]="true"
+        [title]=""
+        [singleChoice]="true"
+        [arrayContent]="fetchedUser.rights"
+        (getResultAutocomplete)="selectRight($event[0])">
+      </app-autocomplete>
+      <div *ngIf="!fetchedUser.isAdminOfHisCompanie">
+        <app-autocomplete [title]="'Entreprise'" [singleChoice]="'true'" [typeAutocomplete]="'companie'" [arrayContent]="fetchedUser.companies" (getResultAutocomplete)="selectCompanie($event[0])">
+        </app-autocomplete>
+      </div>
+      <div>
+        <label>Couleur Calendrier</label>
+        <div class="round" [style.background-color]="fetchedUser.profile.colorCalendar"></div>
+        <input type="color" formControlName="colorCalendar" [(ngModel)]="fetchedUser.profile.colorCalendar">
+      </div>
+      <div>
+        <app-autocomplete [typeAutocomplete]="'user'" [title]="'Apporteur Affaire'" [singleChoice]="'true'" [arrayContent]="fetchedUser.salesMan" (getResultAutocomplete)="selectSalesMan($event)">
+        </app-autocomplete>
+      </div>
+    </div>
+
     <div class="form-group col-sm-12">
       <input type="text" class="form-control" formControlName="email" [(ngModel)]="fetchedUser.email" placeholder="Email">
     </div>
-    <div formGroupName="profile">
+
       <div class="form-group col-sm-12">
         <select [(ngModel)]="fetchedUser.profile.language" class="form-control" formControlName="language">
             <option *ngFor="let n of languageArray" [attr.value]="n">{{n}}</option>
@@ -68,7 +99,7 @@
           <input type="text" class="form-control" formControlName="zip" [(ngModel)]="fetchedUser.profile.address.zip" placeholder="zip">
         </div>
       </div>
-      <div formGroupName="detailHouse">
+      <div *ngIf="!this.fetchedUser.isExternalUser" formGroupName="detailHouse">
         <h5>detailHouse</h5>
         <div class="form-group col-sm-12">
           <select [(ngModel)]="fetchedUser.profile.detailHouse.typeHouse" class="form-control" formControlName="typeHouse">
@@ -92,22 +123,12 @@
         <textarea class="form-control" formControlName="otherData" [(ngModel)]="fetchedUser.profile.otherData" placeholder="Autres">
           </textarea>
       </div>
-      <div class="form-group col-sm-12">
-        <label>Couleur Calendrier</label>
-        <div class="round" [style.background-color]="fetchedUser.profile.colorCalendar">
-        </div>
 
-        <input type="color" formControlName="colorCalendar" [(ngModel)]="fetchedUser.profile.colorCalendar">
-      </div>
-      <div class="form-group col-sm-12">
-        <app-autocomplete [typeAutocomplete]="'user'" [title]="'Apporteur Affaire'" [singleChoice]="'true'" [arrayContent]="fetchedUser.salesMan" (getResultAutocomplete)="selectSalesMan($event)">
-        </app-autocomplete>
-      </div>
 
 
 
       <div class="form-group prmimg-cnt">
-        <div *ngFor="let singleForm of fetchedUser.forms">
+        <div *ngFor="let singleForm of fetchedUser.profile.profilePicture">
           <img style="height:120px" class="promo-img" src="./uploads/forms/{{singleForm.owner}}/{{singleForm.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
           <button type="button" md-button (click)="removePic(i)">
               <i class="fa fa-times"></i>
@@ -122,39 +143,9 @@
       <div class="form-group col-sm-12">
 
       </div>
-    </div>
 
 
 
-    <div class="form-group col-sm-12">
-      <!-- Autocomplete -->
-      <label>Type User</label>
-
-      <select class="form-control" formControlName="type" [(ngModel)]="fetchedUser.type">
-        <option *ngFor="let n of typeUser" [attr.value]="n">{{n}}</option>
-      </select>
-
-      <label>Rights</label>
-
-      <app-autocomplete
-        [typeAutocomplete]="'right'"
-        [canDelete]="true"
-        [title]=""
-        [singleChoice]="true"
-        [arrayContent]="fetchedUser.rights"
-        (getResultAutocomplete)="selectRight($event[0])">
-      </app-autocomplete>
-
-      <!-- <select class="form-control" formControlName="type" [(ngModel)]="idRight">
-          <option *ngFor="let n of fetchedRights" [attr.value]="n._id">{{n.detailRight.nameRight}}</option>
-        </select> -->
-    </div>
-
-
-    <div *ngIf="!fetchedUser.isAdminOfHisCompanie" class="form-group col-sm-12">
-      <app-autocomplete [title]="'Entreprise'" [singleChoice]="'true'" [typeAutocomplete]="'companie'" [arrayContent]="fetchedUser.companies" (getResultAutocomplete)="selectCompanie($event[0])">
-      </app-autocomplete>
-    </div>
 
     <div class="valid-edit">
       <button type="submit" [disabled]="!myForm.valid" [ngClass]="{'done':myForm.valid,'pas-done':!myForm.valid}">Done</button>

@@ -1,5 +1,4 @@
 
-
 <div class='row'>
 
   <div *ngFor='let bucketTask of fetchedProject.bucketTasks; let bucketTaskIndex = index;'>
@@ -9,6 +8,7 @@
       [dragulaModel]='fetchedProject.bucketTasks[bucketTaskIndex].tasks'
       [dragula]='"nested-bag"'>
       <div
+        class="move"
         (click)='onClick(bucketTaskIndex, taskIndex)'
         *ngFor='let task of bucketTask.tasks; let taskIndex = index;'>
 

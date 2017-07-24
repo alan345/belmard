@@ -97,10 +97,6 @@ export class NewUserComponent implements OnInit {
   selectOwnerCompanies(companie: Companie) {
     this.fetchedUser.ownerCompanies = [companie]
   }
-  //
-  // removeCompanie(i: number) {
-  //   this.fetchedUser.companies.splice(i, 1);
-  // }
 
   selectSalesMan(users) {
     this.fetchedUser.salesMan = users
@@ -111,12 +107,12 @@ export class NewUserComponent implements OnInit {
     let dialogRef = this.dialog.open(EditOptionsComponentDialog);
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        this.fetchedUser.forms.push(result)
+        this.fetchedUser.profile.profilePicture.push(result)
       }
     })
   }
   removePic(i) {
-    this.fetchedUser.forms.splice(i, 1);
+    this.fetchedUser.profile.profilePicture.splice(i, 1);
   }
 
   // autocolplete typeUser
@@ -146,31 +142,31 @@ export class NewUserComponent implements OnInit {
     this.myForm = this._fb.group({
         email: [this.emailValidator],
         type: [''],
-        profile: this._fb.group({
-          language: [''],
-          colorCalendar: [''],
-          otherData: [''],
-          name: ['', [Validators.required, Validators.minLength(3)]],
-          lastName: ['', [Validators.required, Validators.minLength(3)]],
-          phoneNumber: [''],
-          fax: [''],
-          title: [''],
-          typeClient: [''],
-          statusHouse: [''],
-          detailHouse: this._fb.group({
-            typeHouse: [''],
-            surface: [''],
-            accesCode: [''],
-            floor: [''],
-            accessType: [''],
-          }),
-          address: this._fb.group({
-            address: [''],
-            city: [''],
-            state: [''],
-            zip: [''],
-          })
+
+        language: [''],
+        colorCalendar: [''],
+        otherData: [''],
+        name: ['', [Validators.required, Validators.minLength(3)]],
+        lastName: ['', [Validators.required, Validators.minLength(3)]],
+        phoneNumber: [''],
+        fax: [''],
+        title: [''],
+        typeClient: [''],
+        statusHouse: [''],
+        detailHouse: this._fb.group({
+          typeHouse: [''],
+          surface: [''],
+          accesCode: [''],
+          floor: [''],
+          accessType: [''],
+        }),
+        address: this._fb.group({
+          address: [''],
+          city: [''],
+          state: [''],
+          zip: [''],
         })
+
     })
 
 
@@ -181,7 +177,12 @@ export class NewUserComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: Params) => {
       if(params['id']) {
         this.getUser(params['id'])
+      } else {
+        if(params['isExternalUser']) {
+          this.fetchedUser.isExternalUser = true
+        }
       }
+
 
     })
   }
