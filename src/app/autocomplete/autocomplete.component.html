@@ -19,10 +19,7 @@
         <div *ngIf="typeAutocomplete=='project'">{{data.details.name}}</div>
         <div *ngIf="typeAutocomplete=='product'">{{data.details.referenceName}}</div>
         <div *ngIf="typeAutocomplete=='right'">{{data.detailRight.nameRight}}</div>
-        <div *ngIf="typeAutocomplete=='templateQuote'">
-          <div *ngFor="let devisDetail of data.devisDetails">
-            {{devisDetail.nameBucketProducts}}
-          </div>
+        <div *ngIf="typeAutocomplete=='templateQuote'">{{data.nameTemplate}}
           <button type="button" (click)="removeDataFromDb(data._id)">X</button>
         </div>
 

@@ -9,7 +9,7 @@ import { RouterModule} from '@angular/router';
 import { QuotesComponent} from './quotes/quotes.component';
 import { EditQuoteComponent} from './single/editQuote.component';
 
-import { QuoteDetailComponent} from './single/quoteDetail.component';
+// import { QuoteDetailComponent} from './single/quoteDetail.component';
 import { QuoteService} from './quote.service';
 import { TemplateQuoteService} from './templateQuote.service';
 import { QuoteRouting} from './quoteRouting.module';
@@ -42,7 +42,7 @@ import { PaiementQuoteModule} from '../paiementQuote/paiementQuote.module'
   declarations: [
     QuotesComponent,
     EditQuoteComponent,
-    QuoteDetailComponent,
+    // QuoteDetailComponent,
     // RoundPipe,
     // AutocompleteComponent
   ],

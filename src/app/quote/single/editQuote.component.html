@@ -104,7 +104,8 @@
       </div>
       <br><br>
 
-      <button type="button" (click)="saveTemplateQuote()">saveTemplateQuote</button>
+      <button type="button" (click)="saveTemplateQuote(nameTemplate.value)">saveTemplateQuote</button>
+      <input type="text" placeholder="nameTemplate" #nameTemplate>
       <app-autocomplete
         [typeAutocomplete]="'templateQuote'"
         [title]="" [singleChoice]="'false'"

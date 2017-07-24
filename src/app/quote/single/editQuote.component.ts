@@ -413,8 +413,10 @@ export class EditQuoteComponent implements OnInit {
   // }
 
 
-  saveTemplateQuote() {
+  saveTemplateQuote(nameTemplate: string) {
     let newTemplateQuote = new TemplateQuote()
+    newTemplateQuote.nameTemplate = nameTemplate
+
     newTemplateQuote.devisDetails = this.fetchedQuote.devisDetails
     this.templateQuoteService.saveTemplateQuote(newTemplateQuote)
       .subscribe(

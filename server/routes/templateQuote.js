@@ -194,7 +194,7 @@ router.get('/page/:page', function (req, res, next) {
   if(req.query.search) {
   //  nameQuery['name'] = new RegExp(req.query.search, 'i')
   //  cityQuery['address.city'] = new RegExp(req.query.search, 'i')
-    arrObj.push({'devisDetails.nameBucketProducts' : new RegExp(req.query.search, 'i')})
+    arrObj.push({'nameTemplate' : new RegExp(req.query.search, 'i')})
     // arrObj.push({'address.city' : new RegExp(req.query.search, 'i')})
     // arrObj.push({'address.address' : new RegExp(req.query.search, 'i')})
     search = {$or:arrObj}

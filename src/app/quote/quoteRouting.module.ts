@@ -1,6 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { QuoteDetailComponent} from './single/quoteDetail.component';
+// import { QuoteDetailComponent} from './single/quoteDetail.component';
 import { EditQuoteComponent} from './single/editQuote.component';
 
 import { AdminGuardService} from '../admin/services/adminGuard';
@@ -19,7 +19,7 @@ export const routes: Routes = [
   {path: 'new/:idClient', component: EditQuoteComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
   {path: 'new/:idClient/:idProject', component: EditQuoteComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
   {path: 'edit/:idQuote', component: EditQuoteComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
-  {path: ':id', component: QuoteDetailComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
+  // {path: ':id', component: QuoteDetailComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
   {path: 'public/:idQuote', component: EditQuoteComponent},
 
 ];

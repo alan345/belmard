@@ -7,6 +7,7 @@ var mongoose                = require('mongoose'),
 
 var templateQuote = new Schema({
     ownerCompanies: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
+    nameTemplate:{type: String, default: ['']},
     devisDetails: [
       {
         nameBucketProducts :{type: String},
