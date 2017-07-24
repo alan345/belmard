@@ -502,11 +502,11 @@ selectProjectSearch(projectSearch: Project) {
 
 //autocomplete
   selectUser(user: User) {
-    this.autocompleteUser = ''
-    this.fetchedUsers = []
+    // this.autocompleteUser = ''
+    // this.fetchedUsers = []
     this.events.forEach(event => {
       if(event.isActiveEvent) {
-        event.users.push(user)
+        event.users = [user]
       }
     })
   }
@@ -554,11 +554,11 @@ selectProjectSearch(projectSearch: Project) {
 
 //autocomplete
   selectProject(project: Project) {
-    this.autocompleteProject = ''
-    this.fetchedProjects = []
+    // this.autocompleteProject = ''
+    // this.fetchedProjects = []
     this.events.forEach(event => {
       if(event.isActiveEvent) {
-        event.projects.push(project)
+        event.projects = [project]
       }
     })
   }

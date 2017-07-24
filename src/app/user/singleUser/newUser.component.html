@@ -151,7 +151,7 @@
     </div>
 
 
-    <div class="form-group col-sm-12">
+    <div *ngIf="!fetchedUser.isAdminOfHisCompanie" class="form-group col-sm-12">
       <app-autocomplete [title]="'Entreprise'" [singleChoice]="'true'" [typeAutocomplete]="'companie'" [arrayContent]="fetchedUser.companies" (getResultAutocomplete)="selectCompanie($event[0])">
       </app-autocomplete>
     </div>

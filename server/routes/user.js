@@ -29,8 +29,9 @@ router.post('/register', function (req, res, next) {
       email: req.body.email,
       password: passwordHash.generate(req.body.password),
       profile: req.body.profile,
-      ownerCompanies : result._id,
-      companies : result._id
+      ownerCompanies: result._id,
+      companies: result._id,
+      isAdminOfHisCompanie: true,
     });
     user.save(function (err, result) {
       if (err) {

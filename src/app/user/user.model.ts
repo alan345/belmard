@@ -7,6 +7,7 @@ export const TypeUser = ['plombier', 'serrurier']
 
 export class User {
   _id: string = '';
+  isAdminOfHisCompanie: Boolean = false;
   email: string = '';
   role: string[] = [];
   type: string[] = [];
