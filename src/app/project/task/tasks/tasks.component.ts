@@ -1,19 +1,19 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AuthService} from '../../auth/auth.service';
-import { ProjectService} from '../project.service';
-import { Project} from '../project.model';
+import { AuthService} from '../../../auth/auth.service';
+import { ProjectService} from '../../project.service';
+import { Project} from '../../project.model';
 import { ToastsManager} from 'ng2-toastr';
 import { MdDialog} from '@angular/material';
 import { Location } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ViewEncapsulation} from '@angular/core';
-import { UserService} from '../../user/user.service';
+import { UserService} from '../../../user/user.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-projects',
   templateUrl: './tasks.component.html',
-  styleUrls: ['../project.component.css'],
+  styleUrls: ['../task.component.css'],
   encapsulation: ViewEncapsulation.None
 
 })

@@ -1,9 +1,5 @@
     {{title}}
 
-
-
-
-
     <input class="form-control"
       *ngIf="!arrayContent.length"
       class="champ"
@@ -13,7 +9,7 @@
       autocorrect="none"
       type="text"
       name="Search"
-      placeholder="Rechercher"
+      placeholder="🔎 {{typeAutocomplete}}"
       [(ngModel)]="autocompleteSearch"
       (ngModelChange)="searchData()">
       <div *ngFor="let data of fetchedData; let i=index">

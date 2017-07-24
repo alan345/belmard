@@ -106,12 +106,12 @@ export class UserProfileComponent implements OnInit {
 
 
 
-  removeForm(i: number) {
-      this.fetchedUser.forms.splice(i, 1)
-      const control = <FormArray>this.myForm.controls['forms'];
-      control.removeAt(i)
-      this.save()
-  }
+  // removeForm(i: number) {
+  //     this.fetchedUser.forms.splice(i, 1)
+  //     const control = <FormArray>this.myForm.controls['forms'];
+  //     control.removeAt(i)
+  //     this.save()
+  // }
   addForm(form: Form) {
     const control = <FormArray>this.myForm.controls['forms'];
     const addrCtrl = this._fb.group({
@@ -138,38 +138,36 @@ export class UserProfileComponent implements OnInit {
     })
   }
 
-
-  openDialog(positionImage: string) {
-    if(positionImage == '_profilePicture') {
-      let dialogRef = this.dialog.open(EditOptionsComponentDialog);
-      dialogRef.afterClosed().subscribe(result => {
-        if(result) {
-          if(result.type === 'pdf') {
-            this.toastr.error('No pdf!');
-          } else {
-            this.fetchedUser.profile._profilePicture[0] = result
-            this.save()
-          }
-
-
-        }
-      })
-    } else {
-      let dialogRef = this.dialog.open(EditOptionsComponentDialog);
-      dialogRef.afterClosed().subscribe(result => {
-        if(result) {
-          if(result.type==='pdf') {
-            this.toastr.error('No pdf!');
-          } else {
-            this.addForm(result)
-            this.fetchedUser.forms.unshift(result)
-            this.save()
-          }
-
-        }
-      })
-    }
-  }
+  // 
+  // openDialog(positionImage: string) {
+  //   if(positionImage == '_profilePicture') {
+  //     let dialogRef = this.dialog.open(EditOptionsComponentDialog);
+  //     dialogRef.afterClosed().subscribe(result => {
+  //       if(result) {
+  //
+  //           this.fetchedUser.profile._profilePicture[0] = result
+  //           this.save()
+  //
+  //
+  //
+  //       }
+  //     })
+  //   } else {
+  //     let dialogRef = this.dialog.open(EditOptionsComponentDialog);
+  //     dialogRef.afterClosed().subscribe(result => {
+  //       if(result) {
+  //         if(result.type==='pdf') {
+  //           this.toastr.error('No pdf!');
+  //         } else {
+  //           // this.addForm(result)
+  //           this.fetchedUser.profile.profilePicture.unshift(result)
+  //           this.save()
+  //         }
+  //
+  //       }
+  //     })
+  //   }
+  // }
 
   save() {
     this.isEditMode = false

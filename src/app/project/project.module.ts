@@ -5,13 +5,13 @@ import { MaterialModule } from '@angular/material';
 import { Ng2PaginationModule} from 'ng2-pagination';
 
 
-import { ProjectTasksComponent} from './projectSingle/projectTasks.component';
+import { ProjectTasksComponent} from './task/singleTask/projectTasks.component';
 import { ProjectsComponent} from './projects/projects.component';
 import { ProjectSingleComponent} from './projectSingle/projectSingle.component';
 import { ProjectService} from './project.service';
 import { ProjectRouting} from './projectRouting.module';
 
-import { TasksComponent} from './tasks/tasks.component';
+import { TasksComponent} from './task/tasks/tasks.component';
 
 
 import { QuoteModule} from '../quote/quote.module';

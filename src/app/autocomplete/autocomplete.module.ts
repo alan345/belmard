@@ -21,7 +21,7 @@ import { FormsModule }         from '@angular/forms';
     AutocompleteComponent,
   ],
   providers: [
-    
+
   ]
 })
 export class AutocompleteModule { }
