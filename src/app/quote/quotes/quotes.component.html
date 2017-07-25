@@ -8,7 +8,8 @@
 
 
 <div class="clearfix col-md-10">
-  <button class="btn btn-success float-right" [routerLink]="['/quote/new/' + userId]" routerLinkActive="active"><i class=""></i>Créer un nouveau Devis</button>
+  <button class="btn btn-success float-right" [routerLink]="['/quote/new/' + userId]" routerLinkActive="active"><i class="">
+  </i>{{'Create a new quote' | translate}}</button>
 </div>
 
 <div class="row">
@@ -39,8 +40,7 @@
             </tr>
           </thead>
           <tbody class="">
-            <tr *ngFor="let quote of fetchedQuotes | paginate: { id: 'quotePagination', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }"
-              [routerLink]="['/quote/edit/' + quote._id]" routerLinkActive="active">
+            <tr *ngFor="let quote of fetchedQuotes | paginate: { id: 'quotePagination', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }" [routerLink]="['/quote/edit/' + quote._id]" routerLinkActive="active">
               <td class="centre"></td>
               <td class="centre">
 
@@ -56,70 +56,11 @@
             </tr>
           </tbody>
         </table>
-
-<div class="has-text-centered">
+        <div class="has-text-centered">
           <div [hidden]="!loading">Loading...</div>
           <pagination-controls (pageChange)="getPage($event)" id="quotePagination" class="change-page"></pagination-controls>
         </div>
       </div>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-
-<!--
-<div class="row">
-  <div class="col-md-4">
-    <div [ngClass]="{'card': showHeader, '': !showHeader}">
-      <div *ngIf="showHeader" class="card-header">
-        <h4 class="card-title">Création de Devis</h4>
-      </div>
-      <div class="card-block">
-        <button class="btn btn-primary" [routerLink]="['/quote/new/' + userId]" routerLinkActive="active">
-        <i class=""></i>Créer un nouveau Devis
-      </button>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-md-4">
-    <div [ngClass]="{'card': showHeader, '': !showHeader}">
-      <div *ngIf="showHeader" class="card-header">
-        <h4 class="card-title">Consultation / Édition</h4>
-      </div>
-      <div class="card-block">
-        <div class="subsubnav-clients">
-          <input class="form-control" celass="champ" type="text" name="Search" placeholder="Rechercher" [(ngModel)]="search.search" (ngModelChange)="searchQuotes()">
-        </div>
-        <table class="table table-hover table-responsive table-condensed">
-          <thead>
-            <tr>
-              <th class="tbl-left">
-
-                <!-- <button class="updownbtn" (click)="orderBy('profile.name')"><i class="fa fa-chevron-down"></i></button>
-                    <button class="updownbtn" (click)="orderBy('-profile.name')"><i class="fa fa-chevron-up"></i></button> -->
-   <!--       </th>
-            </tr>
-          </thead>
-          <tbody class="clienttbl">
-            <tr *ngFor="let quote of fetchedQuotes | paginate: { id: 'quotePagination', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }">
-              <a [routerLink]="['/quote/edit/' + quote._id]" routerLinkActive="active">
-                <td>{{quote.name}}</td>
-              </a>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="has-text-centered">
-        <div [hidden]="!loading">Loading...</div>
-        <pagination-controls (pageChange)="getPage($event)" id="quotePagination" class="change-page"></pagination-controls>
-      </div>
     </div>
   </div>
 </div>
-
--->
