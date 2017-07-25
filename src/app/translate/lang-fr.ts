@@ -10,10 +10,15 @@ export const LANG_FR_TRANS = {
     'right': 'droit',
     'Rights': 'Droits',
     'Back': 'Retour',
+
+    'Quotes': 'Devis',
+    'quote': 'devis',
     'project': 'Project',
     'Projects': 'Projects',
 
     'task': 'tâche',
     'Tasks': 'Tâches',
-    'Add a project': 'Ajouter un project'
+    'Add a project': 'Ajouter un project',
+    'Logout': 'Déconexion',
+
 };
