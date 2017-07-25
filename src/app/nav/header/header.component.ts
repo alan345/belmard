@@ -78,6 +78,8 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(['/project/new/']);
     if(this.nameObject === 'right')
       this.router.navigate(['/right/new/']);
+    if(this.nameObject === 'project')
+      this.router.navigate(['/project/new/']);
 
     if(this.nameObject === 'user') {
       if(this.option === 'internal')

@@ -201,27 +201,31 @@ router.get('/page/:page', function (req, res, next) {
 
 
 router.get('/graph/:year', function (req, res, next) {
-  let searchQuery = {}
+  // let searchQuery = {}
   let dateBegin = req.params.year*1 + '-01-01'
   let dateEnd = req.params.year*1 +1 + '-01-01'
+  //
+  // console.log(dateBegin, dateEnd)
+  // if(req.query.search)
+  //   searchQuery['details.name'] = new RegExp(req.query.search, 'i')
+  //
+  // if(req.query.idQuote)
+  //   searchQuery['quotes'] = mongoose.Types.ObjectId(req.query.idQuote)
 
-  console.log(dateBegin, dateEnd)
-  if(req.query.search)
-    searchQuery['details.name'] = new RegExp(req.query.search, 'i')
 
-  if(req.query.idQuote)
-    searchQuery['quotes'] = mongoose.Types.ObjectId(req.query.idQuote)
+  let aggregate = {
+    'datePaiement': {
+      '$gte': new Date(dateBegin),
+      '$lt': new Date(dateEnd)
+    }
+  }
+
+  aggregate.ownerCompanies = req.user.ownerCompanies
 
   PaiementQuote
   .aggregate(
     {
-      $match: {
-        datePaiement :
-         {
-           '$gte': new Date(dateBegin),
-           '$lt': new  Date(dateEnd)
-         }
-       }
+      $match: aggregate
     },
     {
      $group : {

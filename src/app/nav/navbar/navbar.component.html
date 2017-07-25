@@ -38,7 +38,7 @@
             <a class="nav-link" routerLinkActive="active" [routerLink]="['/paiementQuote']">{{'Paiements' | translate}}</a>
           </li>
 
-          <li class="nav-item">
+          <li *ngIf="showObjHTML('right')" class="nav-item">
             <a class="nav-link" routerLinkActive="active" [routerLink]="['/right']">{{'Rights' | translate}}</a>
           </li>
 

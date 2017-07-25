@@ -193,9 +193,9 @@ export class AuthService {
 
 
   isCurentUserHasAccess(nameObject, typeAccess) {
-    if(this.isCurrentUserIsInSubPeriod())
-      if(this.user.isAdminOfHisCompanie)
-        return true
+    
+    if(this.user.isAdminOfHisCompanie)
+      return true
 
     return this.user.rights.some(right => {
       return right.detailRight.permissions.some(permission => {
