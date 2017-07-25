@@ -10,6 +10,8 @@ import { TRANSLATION_PROVIDERS, TranslatePipe, TranslateService }   from '../tra
 
 import { RoundPipe} from './round.pipe';
 import { HeaderComponent } from '../nav/header/header.component';
+import { LoginInAppComponent } from '../nav/loginInApp/loginInApp.component';
+
 
 
 @NgModule({
@@ -24,6 +26,7 @@ import { HeaderComponent } from '../nav/header/header.component';
     // AutocompleteComponent,
     TranslatePipe,
     HeaderComponent,
+    LoginInAppComponent,
 
   ],
   exports: [
@@ -33,6 +36,7 @@ import { HeaderComponent } from '../nav/header/header.component';
     FormsModule,
     RoundPipe,
     HeaderComponent,
+    LoginInAppComponent,
     // AutocompleteComponent,
   ],
   providers: [

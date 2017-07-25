@@ -99,12 +99,12 @@ export class PaiementComponent implements OnInit {
           // this.userService.cleanCurrentUserInSession()
           this.toastr.success('Great!')
           this.getStripeCust()
-          console.log(res);
+          // console.log(res);
         },
         error => { console.log(error); }
       );
   }
-  saveSubscriptionInStripe(planValue){
+  saveSubscriptionInStripe(planValue) {
     let plan = {
       plan: planValue
     }
@@ -113,8 +113,12 @@ export class PaiementComponent implements OnInit {
         res => {
           // this.userService.cleanCurrentUserInSession()
           this.toastr.success('Great!')
+          this.getStripeCust()
+
+
           // this.getStripeCust()
-          location.reload();
+          // this.authService.refreshCookiesOfCurrentUser()
+          // location.reload();
           // console.log(res);
         },
         error => { console.log(error); }
@@ -129,8 +133,9 @@ export class PaiementComponent implements OnInit {
           // this.userService.cleanCurrentUserInSession()
           // console.log(res.message)
           this.toastr.success('Great!');
+          this.getStripeCust()
           // this.getStripeCust()
-          location.reload();
+          // location.reload();
         },
         error => {
           console.log(error);

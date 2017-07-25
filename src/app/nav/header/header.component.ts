@@ -12,6 +12,11 @@ import { TranslateService } from '../../translate/translate.service';
 })
 export class HeaderComponent implements OnInit {
   @Input() nameObject: String = '';
+  @Input() title: String = '';
+  @Input() nameButton: String = '';
+  @Input() option: String = '';
+
+
   @Input() showHeader: Boolean = true;
 
   nameObjectPlur: String= ''
@@ -46,7 +51,18 @@ export class HeaderComponent implements OnInit {
     if(this.nameObject === 'right')
       this.nameObjectPlur = this.translateService.instant('Rights')
     if(this.nameObject === 'task')
-      this.nameObjectPlur = this.translateService.instant('Tasks')    
+      this.nameObjectPlur = this.translateService.instant('Tasks')
+    if(this.nameObject === 'user') {
+      this.nameObjectPlur = this.translateService.instant('Users')
+      if(this.option === 'internal')
+        this.nameButton = this.translateService.instant('Create a new team member')
+      if(this.option === 'external')
+        this.nameButton = this.translateService.instant('Create a new external contact')
+    }
+
+
+    if(!this.nameButton)
+      this.nameButton = this.translateService.instant('Create a new') + ' ' + this.translateService.instant(<string>this.nameObjectSing)
 
   }
   redirectCreateObj() {
@@ -60,7 +76,15 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(['/companie/new/']);
     if(this.nameObject === 'companie')
       this.router.navigate(['/project/new/']);
+    if(this.nameObject === 'right')
+      this.router.navigate(['/right/new/']);
 
+    if(this.nameObject === 'user') {
+      if(this.option === 'internal')
+        this.router.navigate(['/user/new/']);
+      if(this.option === 'external')
+        this.router.navigate(['/user/new/']);
+    }
 
 
 

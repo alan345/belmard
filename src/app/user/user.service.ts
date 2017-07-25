@@ -57,43 +57,43 @@ export class UserService {
   //   this.currentUser = new User();
   // }
 
-  getCurrentUserInSession(){
-    return this.currentUser
-  }
+  // getCurrentUserInSession(){
+  //   return this.currentUser
+  // }
 
-  isCurrentUserIsInSubPeriod(){
-    if (new Date(this.currentUser.paiement.stripe.current_period_end) > new Date())
-      return true;
-    return false
-
-  }
-  isCurrentUserHasCompanie(){
-    if(this.currentUser.companies.length)
-      return true
-    return false
-  }
+  // isCurrentUserIsInSubPeriod(){
+  //   if (new Date(this.currentUser.paiement.stripe.current_period_end) > new Date())
+  //     return true;
+  //   return false
+  //
+  // }
+  // isCurrentUserHasCompanie(){
+  //   if(this.currentUser.companies.length)
+  //     return true
+  //   return false
+  // }
 
 
 
 
   getUser(id: string) {
-    if(!id) {
-      // console.log(this.currentUser)
-      if(this.currentUser._id) {
-        // console.log(this.currentUser)
-        return Observable.of(this.currentUser)
-      }
-    }
+    // if(!id) {
+    //   // console.log(this.currentUser)
+    //   if(this.currentUser._id) {
+    //     // console.log(this.currentUser)
+    //     return Observable.of(this.currentUser)
+    //   }
+    // }
 
     let headers = new Headers({'Content-Type': 'application/json'});
     headers.append('Authorization', '' + this.authService.currentUser.token);
     return this.http.get(this.url + 'profile/' + id, {headers: headers})
       .map((response: Response) => {
 
-       if(!id) {
-         this.currentUser = response.json().user
-      //   console.log(this.currentUser)
-       }
+      //  if(!id) {
+      //    this.authService.refreshCookiesOfCurrentUser( response.json().user)
+      // //   console.log(this.currentUser)
+      //  }
 
         return response.json().user;
 

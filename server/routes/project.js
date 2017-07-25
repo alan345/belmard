@@ -29,7 +29,10 @@ router.use('/', function(req, res, next) {
       })
     }
     if (decoded) {
-      User.findById(decoded.user._id).populate({path: 'rights', model: 'Right'}).exec(function(err, doc) {
+      User
+      .findById(decoded.user._id)
+      .populate({path: 'rights', model: 'Right'})
+      .exec(function(err, doc) {
         if (err) {
           return res.status(500).json({message: 'Fetching user failed', err: err})
         }

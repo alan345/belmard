@@ -1,7 +1,11 @@
 import {Injectable} from '@angular/core';
-import {Http, Headers, Response} from '@angular/http';
+
 import {User} from './user.model';
-import {Observable} from 'rxjs';
+
+
+import {Observable} from 'rxjs/Observable';
+import {Response, Headers, Http, RequestOptions} from '@angular/http';
+
 import 'rxjs/operator/map';
 import 'rxjs/operator/catch';
 import {ToastsManager} from 'ng2-toastr';
@@ -10,10 +14,13 @@ import {Reset} from './resetPassword';
 import {tokenNotExpired} from 'angular2-jwt';
 import {Router} from '@angular/router';
 import {JwtHelper} from 'angular2-jwt';
+// import {UserService} from '../user/user.service'
+
 
 @Injectable()
 
 export class AuthService {
+  private url: string = '/';
   public token: string;
   public currentUser={
     userId: '',
@@ -30,7 +37,9 @@ export class AuthService {
     private http: Http,
     private errorService: ErrorService,
     private toastr: ToastsManager,
-    private router: Router) {
+    private router: Router,
+    // private userService: UserService,
+  ) {
 
       this.user = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')).user : null;
       // set token if saved in local storage
@@ -62,7 +71,7 @@ export class AuthService {
       .map((response: Response) => {
         let token = response.json() && response.json().token;
         let userId = response.json() && response.json().userId;
-        let user = response.json() && response.json().user;
+        // let user = response.json() && response.json().user;
         if (token) {
 
           let currentUser = {
@@ -93,6 +102,37 @@ export class AuthService {
         return Observable.throw(error.json());
       });
   }
+  //
+  // refreshCookiesOfCurrentUser() {
+  //   console.log('refreshCookiesOfCurrentUser')
+  //
+  //
+  //   this.getUser('')
+  //     .subscribe(
+  //       res => {
+  //         this.user = res
+  //          console.log(res)
+  //        },
+  //       error => { console.log(error) }
+  //     )
+  //
+  //
+  // }
+
+
+  //
+  // getUser(id: string) {
+  //   let headers = new Headers({'Content-Type': 'application/json'});
+  //   headers.append('Authorization', '' + this.currentUser.token);
+  //   return this.http.get(this.url + 'profile/' + id, {headers: headers})
+  //     .map((response: Response) => {
+  //       return response.json().user;
+  //     })
+  //     .catch((error: Response) => {
+  //       this.errorService.handleError(error.json());
+  //       return Observable.throw(error.json());
+  //     });
+  // }
 
 
 
@@ -108,7 +148,7 @@ export class AuthService {
 
 
 
-  getCurrentUser(){
+  getCurrentUser() {
     // console.log(localStorage.getItem('id_token') )
     // let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
     console.log(this.user)

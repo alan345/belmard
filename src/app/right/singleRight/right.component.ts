@@ -46,8 +46,7 @@ export class RightComponent implements OnInit {
     {name : 'Paiement', value: 'paiementQuote'},
     {name : 'Task', value: 'task'},
     {name : 'userCalendar', value: 'userCalendar'},
-
-
+    {name : 'Plan', value: 'plan'},
 
   ]
   constructor(

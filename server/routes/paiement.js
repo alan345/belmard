@@ -24,7 +24,11 @@ router.use('/', function (req, res, next) {
       });
     }
     if (decoded) {
-      User.findById(decoded.user._id, function (err, doc) {
+
+      User
+      .findById(decoded.user._id)
+      .populate({ path: 'rights', model: 'Right'})
+      .exec(function (err, doc) {
         if (err) {
           return res.status(500).json({
             title: 'Fetching user failed',
@@ -38,7 +42,14 @@ router.use('/', function (req, res, next) {
             error: {message: 'The user was not found'}
           })
         }
-
+        if (!shared.isCurentUserHasAccess(doc, nameObject, 'plan')) {
+          return res.status(404).json({
+            title: 'No rights',
+            error: {
+              message: 'No rights'
+            }
+          })
+        }
         if (doc) {
           req.user = doc;
           next();
