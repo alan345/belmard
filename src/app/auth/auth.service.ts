@@ -172,7 +172,7 @@ export class AuthService {
     // let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
     return this.user.paiement.stripe.plan
   }
-  isCurrentUserIsInSubPeriod(){
+  isCurrentUserIsInSubPeriod() {
     // console.log(this.user)
 
     let itemFounded = false
@@ -193,8 +193,9 @@ export class AuthService {
 
 
   isCurentUserHasAccess(nameObject, typeAccess) {
-    if(this.user.isAdminOfHisCompanie)
-      return true
+    if(this.isCurrentUserIsInSubPeriod())
+      if(this.user.isAdminOfHisCompanie)
+        return true
 
     return this.user.rights.some(right => {
       return right.detailRight.permissions.some(permission => {
