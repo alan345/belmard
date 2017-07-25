@@ -7,6 +7,7 @@ import { Routes, RouterModule} from '@angular/router';
 import { MaterialModule } from '@angular/material';
 import { Ng2PaginationModule} from 'ng2-pagination';
 import { NavbarComponent} from './navbar.component';
+import {SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   imports:      [
@@ -15,6 +16,7 @@ import { NavbarComponent} from './navbar.component';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
+    SharedModule,
     //  FormsModule,
     // MaterialModule,
     // Ng2PaginationModule,

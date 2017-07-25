@@ -22,28 +22,28 @@
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
           <li *ngIf="showObjHTML('product')" class="nav-item">
-            <a class="nav-link" routerLinkActive="active" [routerLink]="['/product']">Produits</a>
+            <a class="nav-link" routerLinkActive="active" [routerLink]="['/product']">{{'Products' | translate}}</a>
           </li>
 
           <li *ngIf="showObjHTML('user')" class="nav-item">
-            <a class="nav-link" routerLinkActive="active" [routerLink]="['/user']">Utilisateurs</a>
+            <a class="nav-link" routerLinkActive="active" [routerLink]="['/user']">{{'Users' | translate}}</a>
           </li>
           <li *ngIf="showObjHTML('companie')" class="nav-item">
-            <a class="nav-link" routerLinkActive="active" [routerLink]="['/companie']">Entreprises</a>
+            <a class="nav-link" routerLinkActive="active" [routerLink]="['/companie']">{{'Companies' | translate}}</a>
           </li>
           <li *ngIf="showObjHTML('quote')" class="nav-item">
-            <a class="nav-link" routerLinkActive="active" [routerLink]="['/quote']">Devis</a>
+            <a class="nav-link" routerLinkActive="active" [routerLink]="['/quote']">{{'Quotes' | translate}}</a>
           </li>
           <li *ngIf="showObjHTML('paiementQuote')" class="nav-item">
-            <a class="nav-link" routerLinkActive="active" [routerLink]="['/paiementQuote']">Paiements</a>
+            <a class="nav-link" routerLinkActive="active" [routerLink]="['/paiementQuote']">{{'Paiements' | translate}}</a>
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" routerLinkActive="active" [routerLink]="['/right']">Rights</a>
+            <a class="nav-link" routerLinkActive="active" [routerLink]="['/right']">{{'Rights' | translate}}</a>
           </li>
 
           <li *ngIf="showObjHTML('reporting')" class="nav-item">
-            <a class="nav-link" routerLinkActive="active" [routerLink]="['/reporting']">Reporting</a>
+            <a class="nav-link" routerLinkActive="active" [routerLink]="['/reporting']">{{'Reporting' | translate}}</a>
           </li>
         </div>
       </div>
@@ -51,22 +51,22 @@
       <ul class="navbar-nav mr-auto">
 
         <li *ngIf="showObjHTML('project')" class="nav-item">
-          <a class="nav-link" routerLinkActive="active" [routerLink]="['/project']">Projets </a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/project']">{{'Projets' | translate}} </a>
         </li>
 
         <li *ngIf="showObjHTML('task')" class="nav-item">
-          <a class="nav-link" routerLinkActive="active" [routerLink]="['/project/tasks']">Tasks </a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/project/tasks']">{{'Tasks' | translate}} </a>
         </li>
 
 
 
 
         <li *ngIf="showObjHTML('userCalendar')" class="nav-item">
-          <a class="nav-link" routerLinkActive="active" [routerLink]="['/userCalendar', {idUserSearch: fetchedUser._id}]">Mon Planning</a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/userCalendar', {idUserSearch: fetchedUser._id}]">{{'My Planning' | translate}}</a>
         </li>
 
         <li *ngIf="!isCurrentUserIsInSubPeriod()" class="nav-item">
-          <a class="nav-link" routerLinkActive="active" [routerLink]="['/user/paiement']">Finish subscription</a>
+          <a class="nav-link" routerLinkActive="active" [routerLink]="['/user/paiement']">{{'Finish subscription' | translate}}</a>
         </li>
 
 
@@ -77,14 +77,14 @@
       </ul>
       <p class="form-inline my-2 my-lg-0" align="right" style="margin-right:40px;">
         <button type="button" class="spcright btn btn-secondary" (click)="logout()">
-          Déconnexion
+          {{'Logout' | translate}}
         </button>
         <button type="button" class="spcright btn btn-primary" [routerLink]="['/user/newuser/' + fetchedUser._id]" routerLinkActive="active">
-          Mon Profil
+          {{'My Profile' | translate}}
         </button>
 
         <button type="button" class="spcright btn btn-primary" [routerLink]="['/companie/edit/mine']" routerLinkActive="active">
-          Mon Entreprise
+          {{'My company' | translate}}
         </button>
       </p>
     </div>

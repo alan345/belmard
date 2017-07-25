@@ -1,18 +1,18 @@
-<div *ngIf="showHeader" class="row">
+<!-- <div *ngIf="showHeader" class="row">
   <div class="col-md-1"></div>
   <div class="col-md-2"><button type="button" class="btn btn-warning" (click)="goBack()"><i class="fa fa-chevron-left"><a> {{ 'Back' | translate }}</a></i></button></div>
   <div class="col-md-6">
     <h3 class="title">{{ 'Project' | translate }}</h3></div>
   <div class="col-md-3"></div>
-</div>
+</div> -->
 
-<!-- <app-header [showHeader]="showHeader" [nameObject]="'project'"></app-header> -->
+<app-header [showHeader]="showHeader" [nameObject]="'project'"></app-header>
 
 
 
-<div class="clearfix col-md-10">
+<!-- <div class="clearfix col-md-10">
   <button class="btn btn-success float-right" [routerLink]="['/project/new/' + userId]" routerLinkActive="active"><i class=""></i>Créer un nouveau Projet</button>
-</div>
+</div> -->
 
 <div class="row">
   <div class="col-md-10">

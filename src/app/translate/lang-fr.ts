@@ -7,5 +7,13 @@ export const LANG_FR_TRANS = {
     'Create a new': 'Créer un nouveau',
     'product': 'produit',
     'Products': 'Produits',
+    'right': 'droit',
+    'Rights': 'Droits',
+    'Back': 'Retour',
+    'project': 'Project',
+    'Projects': 'Projects',
+
+    'task': 'tâche',
+    'Tasks': 'Tâches',
     'Add a project': 'Ajouter un project'
 };

@@ -26,28 +26,27 @@ export class HeaderComponent implements OnInit {
 
 
   ngOnInit() {
-    this.translateService.use('fr');
+    this.translateService.use(this.authService.getLanguage());
     this.nameObjectSing = this.translateService.instant(<string>this.nameObject)
     this.nameObjectPlur = this.translateService.instant(<string>this.nameObject)
 
 
     if(this.nameObject === 'product')
       this.nameObjectPlur = this.translateService.instant('Products')
-
     if(this.nameObject === 'quote')
       this.nameObjectPlur = this.translateService.instant('Quotes')
-
     if(this.nameObject === 'project')
       this.nameObjectPlur = this.translateService.instant('Projects')
-
     if(this.nameObject === 'paiementQuote')
       this.nameObjectPlur = this.translateService.instant('Paiements')
-
     if(this.nameObject === 'companie')
       this.nameObjectPlur = this.translateService.instant('Companies')
-
     if(this.nameObject === 'userCalendar')
       this.nameObjectPlur = this.translateService.instant('Calendar')
+    if(this.nameObject === 'right')
+      this.nameObjectPlur = this.translateService.instant('Rights')
+    if(this.nameObject === 'task')
+      this.nameObjectPlur = this.translateService.instant('Tasks')    
 
   }
   redirectCreateObj() {
@@ -59,6 +58,9 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(['/paiementQuote/new/']);
     if(this.nameObject === 'companie')
       this.router.navigate(['/companie/new/']);
+    if(this.nameObject === 'companie')
+      this.router.navigate(['/project/new/']);
+
 
 
 

@@ -40,7 +40,7 @@ router.use('/', function(req, res, next) {
             }
           })
         }
-        if (!shared.isCurentUserHasAccess(doc.rights, 'userCalendar', 'read')) {
+        if (!shared.isCurentUserHasAccess(doc, 'userCalendar', 'read')) {
           return res.status(404).json({
             title: 'No rights',
             error: {

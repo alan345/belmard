@@ -79,6 +79,13 @@ export class EditPaiementQuoteComponent implements OnInit {
       type: [''],
       datePaiement: [ null, []],
     })
+
+    this.fetchedPaiementQuote
+    .datePaiementString =
+    this.authService
+    .isoDateToHtmlDate(this.fetchedPaiementQuote.datePaiement)
+
+
     this.activatedRoute.params.subscribe((params: Params) => {
       // console.log(params)
       if(params['idPaiementQuote'])
@@ -187,7 +194,11 @@ export class EditPaiementQuoteComponent implements OnInit {
       .subscribe(
         res => {
           this.fetchedPaiementQuote = res
-          this.fetchedPaiementQuote.datePaiementString = this.authService.isoDateToHtmlDate(this.fetchedPaiementQuote.datePaiement)
+
+          this.fetchedPaiementQuote
+          .datePaiementString =
+          this.authService
+          .isoDateToHtmlDate(this.fetchedPaiementQuote.datePaiement)
         },
         error => {
           console.log(error);
