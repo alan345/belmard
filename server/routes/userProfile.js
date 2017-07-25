@@ -67,48 +67,23 @@ router.get('/page/:page', function (req, res, next) {
 
 //  let parentUserToSearch = ''
   let roleToSearch = []
-  let findQuery = {}
+  let searchQuery = {}
 
-  // if(req.query.parentUser)
-  //   findQuery['profile.parentUser'] = mongoose.Types.ObjectId(req.query.parentUser)
-
-
-//
-// if(req.query.isInTeam === 'true')
-//   findQuery['companies'] = { $eq: [] }
-// if(req.query.isInTeam === 'false')
-//   findQuery['companies'] = { $gt: [] }
-//
+  searchQuery['ownerCompanies'] = req.user.ownerCompanies
 
 
-// if(req.query.isInTeam === 'true')
-//   findQuery['companies'] = mongoose.Types.ObjectId(req.user.companies[0])
-// if(req.query.isInTeam === 'false')
-//   findQuery['companies'] = { $ne: mongoose.Types.ObjectId(req.user.companies[0]) }
 if(req.query.isExternalUser === 'true')
-  findQuery['isExternalUser'] = true
+  searchQuery['isExternalUser'] = true
 if(req.query.isExternalUser === 'false')
-  findQuery['isExternalUser'] = false
-
-
-
-
-
-  findQuery['ownerCompanies'] = req.user.ownerCompanies
+  searchQuery['isExternalUser'] = false
 
   if(req.query.search)
-    findQuery['profile.name'] = new RegExp(req.query.search, 'i')
-
-
-  // if(req.query.role) {
-  //   roleToSearch = [req.query.role]
-  //   findQuery['role'] = {$in: roleToSearch}
-  // }
+    searchQuery['profile.name'] = new RegExp(req.query.search, 'i')
 
 
 
   User
-  .find(findQuery)
+  .find(searchQuery)
   .populate({ path: 'companies', model: 'Companie'})
 
   .limit(itemsPerPage)
@@ -122,7 +97,7 @@ if(req.query.isExternalUser === 'false')
       })
     } else {
       User
-      .find(findQuery)
+      .find(searchQuery)
       .count().exec(function (err, count) {
       res.status(200).json({
           paginationData : {

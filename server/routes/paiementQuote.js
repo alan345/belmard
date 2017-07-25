@@ -149,6 +149,8 @@ router.get('/page/:page', function (req, res, next) {
   //  createdAt:{"$gt": dateRef},
   }
 
+  searchQuery['ownerCompanies'] = req.user.ownerCompanies
+
 
   if(req.query.search)
     searchQuery['details.name'] = new RegExp(req.query.search, 'i')

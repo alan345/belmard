@@ -141,17 +141,17 @@ router.get('/page/:page', function(req, res, next) {
       "$lt": req.query.endDate
     }
   }
-  console.log('saaaaaa')
-  console.log(req.query.userSearch)
+  searchQuery['ownerCompanies'] = req.user.ownerCompanies
+
+
+
   if (req.query.userSearch)
     searchQuery['users'] = mongoose.Types.ObjectId(req.query.userSearch)
 
   if (req.query.projectSearch)
     searchQuery['projects'] = mongoose.Types.ObjectId(JSON.parse(req.query.projectSearch)._id)
 
-    // if(req.query.clientSearch)
-  //   searchQuery['clients'] = mongoose.Types.ObjectId(JSON.parse(req.query.clientSearch)._id)
-  //
+
 
   if (req.query.search)
     searchQuery['name'] = new RegExp(req.query.search, 'i')

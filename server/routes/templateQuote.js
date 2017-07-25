@@ -189,7 +189,9 @@ router.get('/page/:page', function (req, res, next) {
 
   let nameQuery = {}
   let cityQuery = {}
-  let search = {}
+  let searchQuery = {}
+  searchQuery['ownerCompanies'] = req.user.ownerCompanies
+
   let arrObj = []
   if(req.query.search) {
   //  nameQuery['name'] = new RegExp(req.query.search, 'i')
@@ -197,22 +199,22 @@ router.get('/page/:page', function (req, res, next) {
     arrObj.push({'nameTemplate' : new RegExp(req.query.search, 'i')})
     // arrObj.push({'address.city' : new RegExp(req.query.search, 'i')})
     // arrObj.push({'address.address' : new RegExp(req.query.search, 'i')})
-    search = {$or:arrObj}
+    searchQuery = {$or:arrObj}
     //findQuery['address.city'] = new RegExp(req.query.search, 'i')
   }
 
 
   if(req.query.userId)
-    search['clients'] = mongoose.Types.ObjectId(req.query.userId)
+    searchQuery['clients'] = mongoose.Types.ObjectId(req.query.userId)
 
   if(req.query.projectId)
-    search['projects'] = mongoose.Types.ObjectId(req.query.projectId)
+    searchQuery['projects'] = mongoose.Types.ObjectId(req.query.projectId)
 
 
 
 
   TemplateQuote
-  .find(search)
+  .find(searchQuery)
   .populate({ path: 'clients', model: 'User'})
   .limit(itemsPerPage)
   .skip(skip)
@@ -225,7 +227,7 @@ router.get('/page/:page', function (req, res, next) {
       })
     } else {
       TemplateQuote
-      .find(search)
+      .find(searchQuery)
       .count().exec(function (err, count) {
       res.status(200).json({
           paginationData : {

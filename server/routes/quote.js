@@ -78,7 +78,7 @@ router.use('/', function(req, res, next) {
             }
           })
         }
-        if (!shared.isCurentUserHasAccess(doc.rights, 'quote', 'read')) {
+        if(!shared.isCurentUserHasAccess(doc, 'quote', 'read')) {
           return res.status(404).json({
             title: 'No rights',
             error: {
@@ -205,8 +205,12 @@ router.get('/page/:page', function(req, res, next) {
 
   let nameQuery = {}
   let cityQuery = {}
-  let search = {}
+  let searchQuery = {}
   let arrObj = []
+
+  searchQuery['ownerCompanies'] = req.user.ownerCompanies
+
+
   if (req.query.search) {
     //  nameQuery['name'] = new RegExp(req.query.search, 'i')
     //  cityQuery['address.city'] = new RegExp(req.query.search, 'i')
@@ -219,23 +223,23 @@ router.get('/page/:page', function(req, res, next) {
     arrObj.push({
       'address.address': new RegExp(req.query.search, 'i')
     })
-    search = {
+    searchQuery = {
       $or: arrObj
     }
     //findQuery['address.city'] = new RegExp(req.query.search, 'i')
   }
 
   if (req.query.userId)
-    search['clients'] = mongoose.Types.ObjectId(req.query.userId)
+    searchQuery['clients'] = mongoose.Types.ObjectId(req.query.userId)
 
   if (req.query.projectId)
-    search['projects'] = mongoose.Types.ObjectId(req.query.projectId)
+    searchQuery['projects'] = mongoose.Types.ObjectId(req.query.projectId)
 
-  Quote.find(search).populate({path: 'clients', model: 'User'}).limit(itemsPerPage).skip(skip).sort(req.query.orderBy).exec(function(err, item) {
+  Quote.find(searchQuery).populate({path: 'clients', model: 'User'}).limit(itemsPerPage).skip(skip).sort(req.query.orderBy).exec(function(err, item) {
     if (err) {
       return res.status(404).json({message: 'No results', err: err})
     } else {
-      Quote.find(search).count().exec(function(err, count) {
+      Quote.find(searchQuery).count().exec(function(err, count) {
         res.status(200).json({
           paginationData: {
             totalItems: count,

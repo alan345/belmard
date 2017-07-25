@@ -142,6 +142,7 @@ router.get('/page/:page', function (req, res, next) {
 //    categories: categoriesArray,
   //  createdAt:{"$gt": dateRef},
   }
+  findQuery['ownerCompanies'] = req.user.ownerCompanies
 
 
   if(req.query.search)

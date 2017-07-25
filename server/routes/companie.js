@@ -157,13 +157,13 @@ router.get('/page/:page', function (req, res, next) {
 
   let nameQuery = {}
   let cityQuery = {}
-  let search = {}
+  let searchQuery = {}
   let arrObj = []
-  search['ownerCompanies'] = req.user.ownerCompanies
+  searchQuery['ownerCompanies'] = req.user.ownerCompanies
 
 
   Companie
-  .find(search)
+  .find(searchQuery)
   .populate({ path: 'forms', model: 'Form'})
   .limit(itemsPerPage)
   .skip(skip)
@@ -176,7 +176,7 @@ router.get('/page/:page', function (req, res, next) {
       })
     } else {
       Companie
-      .find(search)
+      .find(searchQuery)
       .count().exec(function (err, count) {
       res.status(200).json({
           paginationData : {
