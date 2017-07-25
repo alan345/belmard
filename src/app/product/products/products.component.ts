@@ -5,11 +5,10 @@ import { Product} from '../product.model';
 import { ToastsManager} from 'ng2-toastr';
 import { MdDialog} from '@angular/material';
 import { Router} from '@angular/router';
-import { Location } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ViewEncapsulation} from '@angular/core';
 import { UserService} from '../../user/user.service';
-import { TranslateService } from '../../translate/translate.service';
+// import { TranslateService } from '../../translate/translate.service';
 
 @Component({
   selector: 'app-products',
@@ -44,17 +43,15 @@ export class ProductsComponent implements OnInit {
     private toastr: ToastsManager,
     public dialog: MdDialog,
     private router: Router,
-    private location: Location,
+    // private location: Location,
     private authService: AuthService,
     private userService: UserService,
-    private translateService: TranslateService,
+    // private translateService: TranslateService,
   ) {
   }
 
 
-  goBack() {
-    this.location.back();
-  }
+
 
 
 
@@ -107,6 +104,8 @@ export class ProductsComponent implements OnInit {
 
 
   ngOnInit() {
+    // this.translateService.use('fr');
+    // console.log(this.translateService.instant('Add a product'))
     this.getProducts(1, this.search)
   }
 

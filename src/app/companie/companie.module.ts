@@ -14,7 +14,7 @@ import { CompanieRouting} from './companieRouting.module';
 import { MaterialModule } from '@angular/material';
 import { Ng2PaginationModule} from 'ng2-pagination';
 import { CompanieDialogComponent } from './singleCompanie/dialog/companieDialog.component';
-
+import {SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
@@ -26,6 +26,7 @@ import { CompanieDialogComponent } from './singleCompanie/dialog/companieDialog.
     Ng2PaginationModule,
     ReactiveFormsModule,
     RouterModule,
+    SharedModule,
   ],
   declarations: [
     // CompanieDetailUsersComponent,
