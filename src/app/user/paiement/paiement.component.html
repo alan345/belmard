@@ -85,8 +85,10 @@
       <button type="button" class="done" (click)="deleteSubInStripe(sub.id)">deleteSubInStripe</button>
 
     </div>
-
-    <app-loginInApp></app-loginInApp>
+    <div *ngIf="showReLoginInApp">
+      {{'You must loggin agin to apply changes:' | translate}}
+      <app-loginInApp></app-loginInApp>
+    </div>
 
   </div>
 

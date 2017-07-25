@@ -26,9 +26,10 @@ export class PaiementComponent implements OnInit {
   //fetchedUser : User;
   isUserBelongToHQ=false
   maxPictureToShow=3;
-  instapic=1;
+  // instapic=1;
   companies: Companie[] = [];
-  isEditMode:boolean = false
+  // isEditMode:boolean = false
+  showReLoginInApp:boolean = false
   fetchedUser : User = new User()
   stripeCust: StripeCustomer = new StripeCustomer()
   newCard: DataSource = new DataSource()
@@ -114,6 +115,7 @@ export class PaiementComponent implements OnInit {
           // this.userService.cleanCurrentUserInSession()
           this.toastr.success('Great!')
           this.getStripeCust()
+          this.showReLoginInApp = true
 
 
           // this.getStripeCust()
@@ -186,7 +188,7 @@ export class PaiementComponent implements OnInit {
 
 
   save() {
-    this.isEditMode = false
+    // this.isEditMode = false
     this.userService.updateUser(this.fetchedUser)
       .subscribe(
         res => {

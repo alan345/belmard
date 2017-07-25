@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
     this.password = new FormControl('', [Validators.required, Validators.minLength(6)]);
 
     this.myForm = this._fb.group({
-      nameCompanie:['', [Validators.required, Validators.minLength(2)]],
+      // nameCompanie:['', [Validators.required, Validators.minLength(2)]],
       email: this.email,
       password: this.password,
       profile: this._fb.group({
