@@ -21,7 +21,7 @@
   <!-- <form #f="ngForm" novalidate (ngSubmit)="save(f.value, f.valid)"> -->
   <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
 
-
+    <button type="button" [routerLink]="['/user/paiement']">PLAN</button>
     Plan: {{fetchedCompanie.planDetail.plan}} ({{fetchedCompanie.planDetail.current_period_end | date:'yyyy-MM-dd'}})
     <div class="form-group sln-inffrm">
       <!-- <div formGroupName="fetchedCompanie"> -->

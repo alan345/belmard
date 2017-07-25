@@ -81,10 +81,17 @@ router.get('/page/:page', function (req, res, next) {
 //
 
 
-if(req.query.isInTeam === 'true')
-  findQuery['companies'] = mongoose.Types.ObjectId(req.user.companies[0])
-if(req.query.isInTeam === 'false')
-  findQuery['companies'] = { $ne: mongoose.Types.ObjectId(req.user.companies[0]) }
+// if(req.query.isInTeam === 'true')
+//   findQuery['companies'] = mongoose.Types.ObjectId(req.user.companies[0])
+// if(req.query.isInTeam === 'false')
+//   findQuery['companies'] = { $ne: mongoose.Types.ObjectId(req.user.companies[0]) }
+if(req.query.isExternalUser === 'true')
+  findQuery['isExternalUser'] = true
+if(req.query.isExternalUser === 'false')
+  findQuery['isExternalUser'] = false
+
+
+
 
 
   findQuery['ownerCompanies'] = req.user.ownerCompanies
@@ -394,8 +401,8 @@ router.post('/', function (req, res, next) {
   //   req.body.companies = req.body.ownerCompanies
 
   // req.body.isInOwnerCompanie = false
-  // if(req.body.companies._id == req.body.ownerCompanies._id)
-  //   req.body.isInOwnerCompanie = true
+  if(!req.body.isExternalUser)
+    req.body.companies = req.user.ownerCompanies
 
   delete req.body._id
   // var project = new Project(req.body)

@@ -140,7 +140,7 @@ router.get('/graph/:year', function(req, res, next) {
 
 //update
 router.put('/:id', function(req, res, next) {
-  if (!shared.isCurentUserHasAccess(req.user.rights, nameObject, 'write')) {
+  if (!shared.isCurentUserHasAccess(req.user, nameObject, 'write')) {
     return res.status(404).json({
       title: 'No rights',
       error: {
@@ -169,7 +169,7 @@ router.put('/:id', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-  if (!shared.isCurentUserHasAccess(req.user.rights, nameObject, 'write')) {
+  if (!shared.isCurentUserHasAccess(req.user, nameObject, 'write')) {
     return res.status(404).json({
       title: 'No rights',
       error: {
@@ -250,7 +250,7 @@ router.get('/page/:page', function(req, res, next) {
 })
 
 router.delete('/:id', function(req, res, next) {
-  if (!shared.isCurentUserHasAccess(req.user.rights, nameObject, 'write')) {
+  if (!shared.isCurentUserHasAccess(req.user, nameObject, 'write')) {
     return res.status(404).json({
       title: 'No rights',
       error: {

@@ -51,7 +51,7 @@ router.use('/', function (req, res, next) {
           })
         }
 
-        if(!shared.isCurentUserHasAccess(doc.rights, nameObject, 'read')) {
+        if(!shared.isCurentUserHasAccess(doc, nameObject, 'read')) {
           return res.status(404).json({
             title: 'No rights',
             error: {message: 'No rights'}
@@ -68,25 +68,9 @@ router.use('/', function (req, res, next) {
 });
 
 
-// function isCurentUserHasAccess(rightsString, nameObject, typeAccess) {
-//   let rights = JSON.parse(JSON.stringify(rightsString))
-//   let permissionBool = false
-//   rights.forEach(right=>{
-//     right.detailRight.permissions.forEach(permission => {
-//       if(permission.namePermission === nameObject)
-//         permission.access.forEach(singleAccess=> {
-//           if(singleAccess.typeAccess === typeAccess)
-//             permissionBool = true
-//         })
-//     })
-//   })
-//   return permissionBool
-// }
-
-//update
 router.put('/:id', function (req, res, next) {
 
-  if(!shared.isCurentUserHasAccess(req.user.rights, nameObject, 'write')) {
+  if (!shared.isCurentUserHasAccess(req.user, nameObject, 'write')) {
     return res.status(404).json({
       title: 'No rights',
       error: {message: 'No rights'}
@@ -139,7 +123,7 @@ router.put('/:id', function (req, res, next) {
 
 
 router.post('/', function (req, res, next) {
-  if(!shared.isCurentUserHasAccess(req.user.rights, nameObject, 'write')) {
+  if (!shared.isCurentUserHasAccess(req.user, nameObject, 'write')) {
     return res.status(404).json({
       title: 'No rights',
       error: {message: 'No rights'}
@@ -192,7 +176,7 @@ router.get('/page/:page', function (req, res, next) {
       })
     } else {
       Companie
-      .find()
+      .find(search)
       .count().exec(function (err, count) {
       res.status(200).json({
           paginationData : {
@@ -269,7 +253,7 @@ router.get('/:id', function (req, res, next) {
 
 
 router.delete('/:id', function (req, res, next) {
-  if(!shared.isCurentUserHasAccess(req.user.rights, nameObject, 'write')) {
+  if (!shared.isCurentUserHasAccess(req.user, nameObject, 'write')) {
     return res.status(404).json({
       title: 'No rights',
       error: {message: 'No rights'}

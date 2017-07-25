@@ -65,7 +65,7 @@
           <a class="nav-link" routerLinkActive="active" [routerLink]="['/userCalendar', {idUserSearch: fetchedUser._id}]">Mon Planning</a>
         </li>
 
-        <li *ngIf="showObjHTML('paiement')" class="nav-item">
+        <li *ngIf="!isCurrentUserIsInSubPeriod()" class="nav-item">
           <a class="nav-link" routerLinkActive="active" [routerLink]="['/user/paiement']">Finish subscription</a>
         </li>
 

@@ -153,6 +153,9 @@ export class AuthService {
 
 
   isCurentUserHasAccess(nameObject, typeAccess) {
+    if(this.user.isAdminOfHisCompanie)
+      return true
+
     return this.user.rights.some(right => {
       return right.detailRight.permissions.some(permission => {
         if(permission.namePermission === nameObject)

@@ -70,6 +70,9 @@ export class NavbarComponent implements OnInit {
     //   )
   }
 
+  isCurrentUserIsInSubPeriod() {
+    return this.authService.isCurrentUserIsInSubPeriod()
+  }
   showObjHTML(nameObject) {
     return this.authService.showObjHTML(nameObject)
   }

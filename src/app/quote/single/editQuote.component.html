@@ -47,7 +47,7 @@
             <label class="col-sm-4 control-label col1" for="IssueDateISO">Issue Date</label>
             <div class="col-sm-7">
               <div>
-                <input type="date" class="form-control" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedQuote.detail.dateQuote.issueDateString" >
+                <input type="date" class="form-control" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedQuote.detail.dateQuote.issueDateString">
               </div>
             </div>
           </div>
@@ -55,7 +55,7 @@
             <label class="col-sm-4 control-label col1" for="DueDate">Expiry Date</label>
             <div class="col-sm-7">
 
-                <input type="date" class="form-control" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedQuote.detail.dateQuote.expiryDateString" >
+              <input type="date" class="form-control" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedQuote.detail.dateQuote.expiryDateString">
 
             </div>
           </div>
@@ -104,13 +104,9 @@
       </div>
       <br><br>
 
-      <button type="button" (click)="saveTemplateQuote(nameTemplate.value)">saveTemplateQuote</button>
-      <input type="text" placeholder="nameTemplate" #nameTemplate>
-      <app-autocomplete
-        [typeAutocomplete]="'templateQuote'"
-        [title]="" [singleChoice]="'false'"
-        [arrayContent]="arrayContentToSearch"
-        (getResultAutocomplete)="selectTemplateQuote($event[0])">
+
+
+      <app-autocomplete [typeAutocomplete]="'templateQuote'" [title]="" [singleChoice]="'false'" [arrayContent]="arrayContentToSearch" (getResultAutocomplete)="selectTemplateQuote($event[0])">
       </app-autocomplete>
 
       <div class="form-control">
@@ -131,53 +127,47 @@
           <button type="button" (click)="removeBucketProducts(i)">X</button>
           <div *ngFor="let fetchedProduct of devisDetail.bucketProducts; let j=index">
 
-                    <div class="row">
-                      <div class="col-md-1">
-                        <button type="button" (click)="removeProduct(i, j)"><i class="fa fa-times"></i></button>
-                      </div>
-                      <div class="col-md-3">
-                        {{fetchedProduct.productInit.details.referenceName}}
-                      </div>
-                      <div class="col-md-1">
-                        <a [routerLink]="['/product/' + fetchedProduct.productInit._id]" class="admn-btn">
+            <div class="row">
+              <div class="col-md-1">
+                <button type="button" (click)="removeProduct(i, j)"><i class="fa fa-times"></i></button>
+              </div>
+              <div class="col-md-3">
+                {{fetchedProduct.productInit.details.referenceName}}
+              </div>
+              <div class="col-md-1">
+                <a [routerLink]="['/product/' + fetchedProduct.productInit._id]" class="admn-btn">
                           {{fetchedProduct.productInit.details.reference}}
                         </a>
-                      </div>
-                      <div class="col-md-1">
-                        <input class="gooplusInput" type="text" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].quantity" placeholder="quantity">
-                      </div>
-                      <div class="col-md-1">
-                        <input class="gooplusInput" type="text" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].priceWithoutTaxes" placeholder="priceWithoutTaxes">
-                      </div>
+              </div>
+              <div class="col-md-1">
+                <input class="gooplusInput" type="text" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].quantity" placeholder="quantity">
+              </div>
+              <div class="col-md-1">
+                <input class="gooplusInput" type="text" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].priceWithoutTaxes" placeholder="priceWithoutTaxes">
+              </div>
 
-                      <div class="col-md-1">
-                        <input class="gooplusInput" type="text" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].vat" placeholder="vat">
-                      </div>
-                      <div class="col-md-1">
-                        {{fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithoutTaxes | round}}
-                      </div>
-                      <div class="col-md-1">
-                        {{fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithTaxes | round}}
-                      </div>
-                    </div>
+              <div class="col-md-1">
+                <input class="gooplusInput" type="text" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].vat" placeholder="vat">
+              </div>
+              <div class="col-md-1">
+                {{fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithoutTaxes | round}}
+              </div>
+              <div class="col-md-1">
+                {{fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithTaxes | round}}
+              </div>
+            </div>
           </div>
           <div class="row">
             <div class="col-md-1"></div>
             <div class="col-md-3">
-            <app-autocomplete [typeAutocomplete]="'product'" [title]="" [singleChoice]="'false'" [arrayContent]="arrayContentToSearch" (getResultAutocomplete)="selectProduct($event[0], i)">
-            </app-autocomplete>
-          </div>
-          <div class="col-md-8"></div>
+              <app-autocomplete [typeAutocomplete]="'product'" [title]="" [singleChoice]="'false'" [arrayContent]="arrayContentToSearch" (getResultAutocomplete)="selectProduct($event[0], i)">
+              </app-autocomplete>
+            </div>
+            <div class="col-md-8"></div>
           </div>
         </div>
-        <!-- <div class="row">
-          <div class="col-md-1"></div>
-          <div class="col-md-3">
-            <app-autocomplete [typeAutocomplete]="'product'" [title]="" [singleChoice]="'false'" [arrayContent]="arrayContentToSearch" (getResultAutocomplete)="selectProduct($event[0])">
-            </app-autocomplete>
-          </div>
-          <div class="col-md-8"></div>
-        </div> -->
+
+
         <div class="row">
           <div class="col-md-8">
           </div>
@@ -192,6 +182,11 @@
           </div>
         </div>
       </div>
+
+      <input type="text" placeholder="nameTemplate" #nameTemplate>
+      <button type="button" (click)="saveTemplateQuote(nameTemplate.value)">saveTemplateQuote</button>
+
+
       <div class="row">
         <div class="col-md-6">
         </div>

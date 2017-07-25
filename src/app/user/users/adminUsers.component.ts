@@ -22,7 +22,7 @@ export class AdminUsersComponent implements OnInit {
   search = {
     orderBy : '',
     search: '',
-    isInTeam: 'true',
+    isExternalUser: 'false',
     role: ''
   };
   paginationData = {
@@ -52,7 +52,7 @@ export class AdminUsersComponent implements OnInit {
 
   onSelectChange = ($event: any): void => {
     // console.log($event.tab.content.viewContainerRef.element.nativeElement.getAttribute('data-value'))
-    this.search.isInTeam = $event.tab.content.viewContainerRef.element.nativeElement.getAttribute('data-isInTeam')
+    this.search.isExternalUser = $event.tab.content.viewContainerRef.element.nativeElement.getAttribute('data-isExternalUser')
     this.getUsers(this.paginationData.currentPage, this.search);
 
   }

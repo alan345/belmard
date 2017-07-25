@@ -64,6 +64,48 @@ export class NewUserComponent implements OnInit {
   }
 
 
+    ngOnInit() {
+      this.myForm = this._fb.group({
+          email: [this.emailValidator],
+          type: [''],
+          language: [''],
+          colorCalendar: [''],
+          otherData: [''],
+          name: ['', [Validators.required, Validators.minLength(3)]],
+          lastName: ['', [Validators.required, Validators.minLength(3)]],
+          phoneNumber: [''],
+          fax: [''],
+          title: [''],
+          typeClient: [''],
+          statusHouse: [''],
+          detailHouse: this._fb.group({
+            typeHouse: [''],
+            surface: [''],
+            accesCode: [''],
+            floor: [''],
+            accessType: [''],
+          }),
+          address: this._fb.group({
+            address: [''],
+            city: [''],
+            state: [''],
+            zip: [''],
+          })
+
+      })
+
+      this.activatedRoute.params.subscribe((params: Params) => {
+        if(params['id']) {
+          this.getUser(params['id'])
+        } else {
+          if(params['isExternalUser']) {
+            this.fetchedUser.isExternalUser = true
+          }
+        }
+
+      })
+    }
+
   searchCompanies() {
     if(!this.autocompleteCompanie) {
       this.fetchedCompanies = []
@@ -138,54 +180,6 @@ export class NewUserComponent implements OnInit {
 
 
 
-  ngOnInit() {
-    this.myForm = this._fb.group({
-        email: [this.emailValidator],
-        type: [''],
-
-        language: [''],
-        colorCalendar: [''],
-        otherData: [''],
-        name: ['', [Validators.required, Validators.minLength(3)]],
-        lastName: ['', [Validators.required, Validators.minLength(3)]],
-        phoneNumber: [''],
-        fax: [''],
-        title: [''],
-        typeClient: [''],
-        statusHouse: [''],
-        detailHouse: this._fb.group({
-          typeHouse: [''],
-          surface: [''],
-          accesCode: [''],
-          floor: [''],
-          accessType: [''],
-        }),
-        address: this._fb.group({
-          address: [''],
-          city: [''],
-          state: [''],
-          zip: [''],
-        })
-
-    })
-
-
-
-    // this.getRights(1, {})
-
-
-    this.activatedRoute.params.subscribe((params: Params) => {
-      if(params['id']) {
-        this.getUser(params['id'])
-      } else {
-        if(params['isExternalUser']) {
-          this.fetchedUser.isExternalUser = true
-        }
-      }
-
-
-    })
-  }
 
 
   emailValidator(control: any) {
