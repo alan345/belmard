@@ -77,20 +77,20 @@ export class ProductSingleComponent implements OnInit {
   ngOnInit() {
     this.myForm = this._fb.group({
 
-      details: this._fb.group({
+
         referenceName: ['', [Validators.required, Validators.minLength(2)]],
         reference: ['', [Validators.required, Validators.minLength(2)]],
         description: [''],
-        price: this._fb.group({
+
           costPrice: ['', [Validators.required, Validators.minLength(1)]],
           sellingPrice: ['', [Validators.required, Validators.minLength(1)]],
-        }),
-        dimension: this._fb.group({
+
+
           height: [''],
           width: [''],
           depth: [''],
-        }),
-      })
+
+
     })
 
     this.getItemSteps();
