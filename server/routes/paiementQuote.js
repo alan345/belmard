@@ -143,12 +143,7 @@ router.get('/page/:page', function (req, res, next) {
   var pageNumber = currentPage - 1
   var skip = (itemsPerPage * pageNumber)
 
-  let searchQuery = {
-  //  createdAt:{"$lt": dateRef}
-//    categories: categoriesArray,
-  //  createdAt:{"$gt": dateRef},
-  }
-
+  let searchQuery = {}
   searchQuery['ownerCompanies'] = req.user.ownerCompanies
 
 
@@ -164,6 +159,16 @@ router.get('/page/:page', function (req, res, next) {
   .find(searchQuery)
   .sort('-createdAt')
   .populate({path: 'quotes', model: 'Quote'})
+  .populate({
+    path: 'quotes',
+    model: 'Quote',
+    populate: {
+      path: 'clients',
+      model: 'User'
+    }
+  })
+
+
   // .populate({path: 'quotes', model: 'Quote'})
   // .populate(
   //   {

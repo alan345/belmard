@@ -24,19 +24,31 @@
               <th class="centre">Nom</th>
               <th class="centre">Date</th>
               <th class="centre">Montant</th>
-              <th class="centre">Statut</th>
+
             </tr>
           </thead>
           <tbody class="">
             <tr *ngFor="let paiementQuote of fetchedPaiementQuotes | paginate: { id: 'paiementQuotePagination', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }"
             [routerLink]="['/paiementQuote/edit/' + paiementQuote._id]"
             routerLinkActive="active">
-              <td class="centre"></td>
-              <td class="centre"></td>
-              <td class="centre"></td>
-              <td class="centre"></td>
-              <td class="centre"></td>
+              <td class="centre">{{paiementQuote.type}}</td>
+              <td class="centre">
+                <div *ngFor="let quote of paiementQuote.quotes">
+                  <div *ngFor="let client of quote.clients">
+                  {{client.profile.name}}
+                  </div>
+                </div>
+              </td>
+              <td class="centre">
+                <div *ngFor="let quote of paiementQuote.quotes">
+                  <div *ngFor="let client of quote.clients">
+                  {{client.profile.lastName}}
+                  </div>
+                </div>
+              </td>
+              <td class="centre">{{paiementQuote.datePaiement | date:'yyyy-MM-dd' }}</td>
               <td class="centre">{{paiementQuote.amount}}</td>
+
             </tr>
           </tbody>
         </table>

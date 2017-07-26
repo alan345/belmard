@@ -60,7 +60,7 @@ export class HeaderComponent implements OnInit {
         this.nameButton = this.translateService.instant('Create a new external contact')
     }
 
-
+    console.log(this.nameButton)
     if(!this.nameButton)
       this.nameButton = this.translateService.instant('Create a new') + ' ' + this.translateService.instant(<string>this.nameObjectSing)
 
@@ -80,6 +80,9 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(['/right/new/']);
     if(this.nameObject === 'project')
       this.router.navigate(['/project/new/']);
+
+    if(this.nameObject === 'task')
+      this.router.navigate(['/project/']);
 
     if(this.nameObject === 'user') {
       if(this.option === 'internal')

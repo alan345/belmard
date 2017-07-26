@@ -19,6 +19,7 @@
 
 
         <select class="form-control" formControlName="type" [(ngModel)]="fetchedPaiementQuote.type">
+          <option [attr.value]="''">Please Select</option>
           <option *ngFor="let n of paiementsTypes" [attr.value]="n.value">{{n.label}}</option>
         </select>
 
