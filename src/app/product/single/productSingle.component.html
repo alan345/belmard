@@ -39,7 +39,73 @@
             </button>
           </div>
 
-
+<form [formGroup]="myForm" novalidate (ngSubmit)="save()" (keydown.enter)="$event.preventDefault()">
+<div class="row">
+  <div class="col-5">
+    <div formGroupName="details">
+        <div>
+          <label>Nom du produit</label>
+          <input
+          type="text"
+          class="form-control col-md-6"
+          formControlName="referenceName"
+          placeholder="referenceName"
+          [(ngModel)]="fetchedProduct.details.referenceName">
+        </div>
+        <div>
+          <label>Référence</label>
+          <input
+          type="text"
+          class="form-control col-md-6"
+          formControlName="reference"
+          placeholder="reference"
+          [(ngModel)]="fetchedProduct.details.reference">
+        </div>
+        <div>
+          <label>Description</label>
+          <input
+          type="text"
+          class="form-control col-md-6"
+          formControlName="description"
+          placeholder="description"
+          [(ngModel)]="fetchedProduct.details.description">
+        </div>      
+     </div>
+</div>
+  <div class="col-5">
+    <div formGroupName="dimension">
+              <div>
+                <label>longueur</label>
+                <input
+                type="text"
+                class="form-control col-md-6"
+                formControlName="height"
+                placeholder="height"
+                [(ngModel)]="fetchedProduct.details.dimension.height">
+              </div>
+              <div>
+                <label>largeur</label>
+                <input
+                type="text"
+                class="form-control col-md-6"
+                formControlName="width"
+                placeholder="width"
+                [(ngModel)]="fetchedProduct.details.dimension.width">
+              </div>
+              <div>
+                <label>hauteur</label>
+                <input
+                type="text"
+                class="form-control col-md-6"
+                formControlName="depth"
+                placeholder="depth"
+                [(ngModel)]="fetchedProduct.details.dimension.depth">
+              </div>
+            </div>
+    </div>
+</div>
+    
+    
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()" (keydown.enter)="$event.preventDefault()">
       <div formGroupName="details">
         <div>
