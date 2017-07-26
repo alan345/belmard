@@ -27,7 +27,7 @@
               <th class="centre">Statut</th>
             </tr>
           </thead>
-          <tbody class="clienttbl">
+          <tbody class="">
             <tr *ngFor="let paiementQuote of fetchedPaiementQuotes | paginate: { id: 'paiementQuotePagination', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }"
             [routerLink]="['/paiementQuote/edit/' + paiementQuote._id]"
             routerLinkActive="active">
