@@ -32,10 +32,10 @@
             <tr *ngFor="let paiementQuote of fetchedPaiementQuotes | paginate: { id: 'projectPagination', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }"
             [routerLink]="['/paiementQuote/edit/' + paiementQuote._id]"
             routerLinkActive="active">
-              <td class="centre">{{project.details.categ}}</td>
-              <td class="centre">{{project.details.customer}}</td>
-              <td class="centre">{{project.details.name}}</td>
-              <td class="centre">{{project.details.date}}</td>
+              <td class="centre"></td>
+              <td class="centre"></td>
+              <td class="centre"></td>
+              <td class="centre"></td>
               <td class="centre">
                 <div *ngFor="let assignedTo of project.assignedTos">
                   {{assignedTo.profile.name}} {{assignedTo.profile.lastName}}
