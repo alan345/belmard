@@ -60,7 +60,6 @@ export class HeaderComponent implements OnInit {
         this.nameButton = this.translateService.instant('Create a new external contact')
     }
 
-    console.log(this.nameButton)
     if(!this.nameButton)
       this.nameButton = this.translateService.instant('Create a new') + ' ' + this.translateService.instant(<string>this.nameObjectSing)
 
