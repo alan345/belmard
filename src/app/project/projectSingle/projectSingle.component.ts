@@ -88,6 +88,14 @@ export class ProjectSingleComponent implements OnInit {
       description: ['', [Validators.required, Validators.minLength(5)]],
     });
 
+
+    this.fetchedProject
+    .dateProject.creationDateString =
+    this.authService
+    .isoDateToHtmlDate(this.fetchedProject
+    .dateProject.creationDate)
+
+
     this.activatedRoute.params.subscribe((params: Params) => {
       if(params['id'])
        this.getProject(params['id'])

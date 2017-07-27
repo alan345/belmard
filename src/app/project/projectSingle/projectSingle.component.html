@@ -5,9 +5,12 @@
     <h3 class="title">Ajouter / Éditer un Projet</h3></div>
   <div class="col-md-3"></div>
 </div> -->
-<app-header [showHeader]="true" [showCreateButton]="false" [showBackButton]="showBackButton" [nameObject]="'project'"></app-header>
 
 <div class="container">
+
+  <app-header [showBackButton]="true" [nameObject]="'project'" [showCreateButton]="false"></app-header>
+
+
   <div>
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()" (keydown.enter)="$event.preventDefault()">
       <div>
@@ -39,9 +42,7 @@
 
       <br>
 
-      <a *ngIf="fetchedProject._id" [routerLink]="['/project/tasks/' + fetchedProject._id]" class="admn-btn">
-        Taches
-      </a>
+
 
       <div class="form-group">
 
@@ -65,10 +66,21 @@
       </div>
 
 
+
+
+
+      <div *ngIf="fetchedProject._id" class="FormGroup whtxt">
+        <a class="btn btn-warning" [routerLink]="['/project/tasks/' + fetchedProject._id]">
+         <i class="fa fa-calendar" aria-hidden="true"></i>
+         <span>{{'Tasks' | translate}}</span>
+        </a>
+      </div>
+
+
       <div *ngIf="fetchedProject._id" class="FormGroup whtxt">
         <a class="btn btn-warning" (click)="seeCalendar()">
          <i class="fa fa-calendar" aria-hidden="true"></i>
-         <span>See calendar for this project</span>
+         <span>{{'See calendar for this project' | translate}}</span>
         </a>
       </div>
 
@@ -128,3 +140,4 @@
       <div class="clearfix"></div>
     </form>
   </div>
+</div>
