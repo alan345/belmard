@@ -58,6 +58,7 @@ export class UserFormsComponent implements OnInit {
   }
 
   getUserForms(page: number){
+    this.loading = true;
     this.search['id'] = this.authService.currentUser.userId,
     this.search['itemsPerPage'] = this.itemsPerPage,
 
@@ -65,6 +66,7 @@ export class UserFormsComponent implements OnInit {
     this.formService.getUserForms(page, this.search)
       .subscribe(
         res => {
+          this.loading = false;
           this.paginationData = res.paginationData;
           this.fetchedForms = res.data
         },
