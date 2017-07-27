@@ -9,7 +9,6 @@
   <app-header [showBackButton]="true" [nameObject]="'right'" [showCreateButton]="false"></app-header>
 
 
-
   <h4 class="dspl-nn">id: {{fetchedRight._id}}</h4>
   <button type="button" (click)="setAllRights()">setAllRights</button>
   <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
