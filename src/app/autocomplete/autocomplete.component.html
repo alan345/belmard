@@ -36,7 +36,7 @@
 
       <div *ngIf="fetchedData.length == 0 && autocompleteSearch !=''">
         No results.
-        <button
+        <button class="btn btn-success"
           *ngIf="typeAutocomplete=='user' || typeAutocomplete=='companie'"
           type="button" md-button
           (click)="openDialog(typeAutocomplete)"
