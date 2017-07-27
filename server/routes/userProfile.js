@@ -441,14 +441,7 @@ function sendEmailToUserToJoinCompanie(req, user) {
         </head>
         <body style="margin: 0; padding: 0; font-family: 'Montserrat', sans-serif;">
           <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border: 1px solid #cccccc;">
-            <tr>
-              <td align="center" bgcolor="#0a2f87" height="150">
-                <img
-                  src="http://${req.headers.host}/assets/images/mychair-logo-horizontal-white.png"
-                  alt="Invitation from Gooplus Management" width="305" height="100" style="display: block; color: #ffffff;"
-                />
-              </td>
-            </tr>
+
             <tr>
               <td bgcolor="#ffffff" style="padding: 15px 15px 15px 15px;">
                 <table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -473,20 +466,7 @@ function sendEmailToUserToJoinCompanie(req, user) {
                 </table>
               </td>
             </tr>
-            <tr>
-              <td bgcolor="#eeeeee">
-                <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                 <tr>
-                  <td style="padding: 15px 15px 15px 15px;">
-                    <a href="https://www.phyto.com/" style="text-decoration: none;">Phyto Website</a>
-                  </td>
-                  <td style="padding: 15px 15px 15px 15px;">
-                    <a href="mailto:mychair@alesgroup.com?Subject=My%20Chair%20App%20Invitation%20Email" style="text-decoration: none;">Contact Us</a>
-                  </td>
-                 </tr>
-                </table>
-              </td>
-            </tr>
+
           </table>
         </body>
       </html>
