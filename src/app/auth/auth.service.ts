@@ -176,7 +176,7 @@ export class AuthService {
     // console.log(this.user)
 
     let itemFounded = false
-    this.user.companies.forEach(companie => {
+    this.user.ownerCompanies.forEach(companie => {
       if (new Date(companie.planDetail.current_period_end) > new Date())
         itemFounded = true
     });
@@ -193,9 +193,12 @@ export class AuthService {
 
 
   isCurentUserHasAccess(nameObject, typeAccess) {
-    
-    if(this.user.isAdminOfHisCompanie)
+
+    // if(this.user.isAdminOfHisCompanie)
+    //   return true
+    if(!this.user.rights.length)
       return true
+
 
     return this.user.rights.some(right => {
       return right.detailRight.permissions.some(permission => {
@@ -209,6 +212,9 @@ export class AuthService {
 
   showObjHTML(nameObject) {
     let typeAccess = 'read'
+    // console.log(this.isCurentUserHasAccess(nameObject, typeAccess))
+    // console.log(this.isCurrentUserIsInSubPeriod())
+    // console.log(this.isCurrentUserHasCompanie())
     if(
       this.isCurentUserHasAccess(nameObject, typeAccess) &&
       this.isCurrentUserIsInSubPeriod() &&

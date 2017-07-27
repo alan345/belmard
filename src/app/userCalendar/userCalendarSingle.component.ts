@@ -121,7 +121,7 @@ export class UserCalendarSingleComponent implements OnInit {
       //     res => {
       //       this.currentUser = res
             this.currentUser = this.authService.getCurrentUser()
-            this.currentUser.companies.forEach(companie => {
+            this.currentUser.ownerCompanies.forEach(companie => {
               this.timeEnd = companie.option.calendar.timeEnd
               this.timeBegin = companie.option.calendar.timeBegin
             })

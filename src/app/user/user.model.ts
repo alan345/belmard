@@ -7,7 +7,9 @@ export const TypeUser = ['plombier', 'serrurier']
 
 export class User {
   _id: string = '';
-  isAdminOfHisCompanie: Boolean = false;
+  canBeSeenByCompanies: Companie[] = [];
+  ownerCompanies: Companie[] = [];
+  // isAdminOfHisCompanie: Boolean = false;
   isExternalUser: Boolean = true;
   email: string = '';
   role: string[] = [];
@@ -16,8 +18,6 @@ export class User {
   rights: Right[] = []
   profile: Profile = new Profile();
   password: string = '';
-  companies: Companie[] = [];
-  ownerCompanies: Companie[] = [];
   salesMan: User[] = [];
   paiement: Paiement= new Paiement()
 }

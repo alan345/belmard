@@ -51,12 +51,12 @@ router.use('/', function (req, res, next) {
           })
         }
 
-        if(!shared.isCurentUserHasAccess(doc, nameObject, 'read')) {
-          return res.status(404).json({
-            title: 'No rights',
-            error: {message: 'No rights'}
-          })
-        }
+        // if(!shared.isCurentUserHasAccess(doc, nameObject, 'read')) {
+        //   return res.status(404).json({
+        //     title: 'No rights',
+        //     error: {message: 'No rights'}
+        //   })
+        // }
 
         if (doc) {
           req.user = doc;
@@ -129,8 +129,12 @@ router.post('/', function (req, res, next) {
       error: {message: 'No rights'}
     })
   }
+
   var companie = new Companie(req.body);
-  companie.ownerCompanies = req.user.companies
+  //push
+  companie.canBeSeenByCompanies = req.user.ownerCompanies
+
+  // console.log(companie)
   companie.save(function (err, result) {
     if (err) {
       return res.status(403).json({
@@ -159,7 +163,7 @@ router.get('/page/:page', function (req, res, next) {
   let cityQuery = {}
   let searchQuery = {}
   let arrObj = []
-  searchQuery['ownerCompanies'] = req.user.ownerCompanies
+  searchQuery['canBeSeenByCompanies'] = req.user.ownerCompanies
 
   if(req.query.search)
     searchQuery['nameCompanie'] = new RegExp(req.query.search, 'i')
@@ -241,7 +245,7 @@ router.get('', function (req, res, next) {
           error: {message: 'Item not found!'}
         });
       }
-      getCompanie(req, res, next, user.companies[0])
+      getCompanie(req, res, next, user.ownerCompanies[0])
     })
 })
 

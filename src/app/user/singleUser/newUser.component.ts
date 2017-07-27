@@ -129,7 +129,7 @@ export class NewUserComponent implements OnInit {
       );
   }
   selectCompanie(companie: Companie) {
-    this.fetchedUser.companies = [companie]
+    this.fetchedUser.canBeSeenByCompanies = [companie]
   }
 
   selectRight(right: Right) {

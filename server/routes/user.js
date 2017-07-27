@@ -31,7 +31,7 @@ router.post('/register', function (req, res, next) {
       profile: req.body.profile,
       ownerCompanies: result._id,
       companies: result._id,
-      isAdminOfHisCompanie: true,
+      // isAdminOfHisCompanie: true,
     });
     user.save(function (err, result) {
       if (err) {
@@ -54,7 +54,7 @@ router.post('/login', function (req, res, next) {
   User
   //
   .findOne({email: req.body.email.toLowerCase()})
-  .populate({path: 'companies', model: 'Companie'})
+  .populate({path: 'ownerCompanies', model: 'Companie'})
   .populate({path: 'rights', model: 'Right'})
   .exec(function (err, doc) {
 

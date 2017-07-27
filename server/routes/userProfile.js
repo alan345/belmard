@@ -71,13 +71,19 @@ router.get('/page/:page', function (req, res, next) {
   let roleToSearch = []
   let searchQuery = {}
 
+
+
+if(req.query.isExternalUser === 'true') {
+  searchQuery['isExternalUser'] = true
+  searchQuery['canBeSeenByCompanies'] = req.user.ownerCompanies
+}
+
+if(req.query.isExternalUser === 'false') {
+  searchQuery['isExternalUser'] = false
   searchQuery['ownerCompanies'] = req.user.ownerCompanies
 
+}
 
-if(req.query.isExternalUser === 'true')
-  searchQuery['isExternalUser'] = true
-if(req.query.isExternalUser === 'false')
-  searchQuery['isExternalUser'] = false
 
   if(req.query.search)
     searchQuery['profile.name'] = new RegExp(req.query.search, 'i')
@@ -372,14 +378,21 @@ router.post('/', function (req, res, next) {
 
 
 
-  req.body.ownerCompanies = req.user.ownerCompanies
+
 
   // if(!req.body.companies.length)
   //   req.body.companies = req.body.ownerCompanies
 
   // req.body.isInOwnerCompanie = false
   if(!req.body.isExternalUser)
-    req.body.companies = req.user.ownerCompanies
+    req.body.ownerCompanies = req.user.ownerCompanies
+
+
+  if(req.body.isExternalUser) {
+    req.body.ownerCompanies = req.body.canBeSeenByCompanies
+    req.body.canBeSeenByCompanies = req.user.ownerCompanies
+  }
+
 
   delete req.body._id
   // var project = new Project(req.body)

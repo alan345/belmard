@@ -5,8 +5,10 @@ var mongoose                = require('mongoose'),
     mongooseUniqueValidator = require('mongoose-unique-validator');
 
 var companie = new Schema({
-  //  _id: String,
+  
     ownerCompanies: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
+    canBeSeenByCompanies: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
+
     planDetail:{
       plan:{type: String, default: ['']},
       current_period_end:{type: Date}

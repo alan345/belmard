@@ -6,7 +6,10 @@ var mongoose                = require('mongoose'),
 
 var user = new Schema({
     ownerCompanies: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
-    companies: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
+    canBeSeenByCompanies: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
+
+    // isAdminOfHisCompanie:{type: Boolean, default: [false]},
+    isExternalUser:{type: Boolean, default: [false]},
 
     email: {type: String, unique: true, required: true, lowercase: true},
     password: {type: String, required: true},
@@ -25,8 +28,7 @@ var user = new Schema({
     resetPasswordToken: String,
     resetPasswordExpires: String,
     role: {type: Array, default: ['client']},
-    isAdminOfHisCompanie:{type: Boolean, default: [false]},
-    isExternalUser:{type: Boolean, default: [false]},
+
     rights: [{type: Schema.Types.ObjectId, ref: 'Right'}],
     type: {type: Array},
     profile : {

@@ -5,150 +5,146 @@
     <h3 class="title">Client</h3></div>
   <div class="col-md-3"></div>
 </div> -->
-<app-header [showHeader]="true" [showCreateButton]="false" [showBackButton]="true" [nameObject]="'user'"></app-header>
+<div class="container">
+  <app-header [showHeader]="true" [showCreateButton]="false" [showBackButton]="true" [nameObject]="'user'"></app-header>
 
 
-<div class="single-wrpr beigeback">
-  <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
-    <div class="form-group col-sm-12">
-      <label>Code Client :</label> {{fetchedUser._id}}
-    </div>
+  <div class="single-wrpr beigeback">
+    <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
+      <div class="form-group col-sm-12">
+        <label>Code Client :</label> {{fetchedUser._id}}
+      </div>
 
 
-    <div *ngIf="!fetchedUser.isExternalUser" class="form-group col-sm-12">
-      <label>Type User</label>
-      <select class="form-control" formControlName="type" [(ngModel)]="fetchedUser.type">
+      <div *ngIf="!fetchedUser.isExternalUser" class="form-group col-sm-12">
+        <label>Type User</label>
+        <select class="form-control" formControlName="type" [(ngModel)]="fetchedUser.type">
         <option *ngFor="let n of typeUser" [attr.value]="n">{{n}}</option>
       </select>
-      <div *ngIf="!fetchedUser.isAdminOfHisCompanie">
-        <label>Rights</label>
-        <app-autocomplete [typeAutocomplete]="'right'" [canDelete]="true" [title]="" [singleChoice]="true" [arrayContent]="fetchedUser.rights" (getResultAutocomplete)="selectRight($event[0])">
+        <div *ngIf="!fetchedUser.isAdminOfHisCompanie">
+          <label>Rights</label>
+          <app-autocomplete [typeAutocomplete]="'right'" [canDelete]="true" [title]="" [singleChoice]="true" [arrayContent]="fetchedUser.rights" (getResultAutocomplete)="selectRight($event[0])">
+          </app-autocomplete>
+        </div>
+
+        <div>
+          <label>Couleur Calendrier</label>
+          <div class="round" [style.background-color]="fetchedUser.profile.colorCalendar"></div>
+          <input type="color" formControlName="colorCalendar" [(ngModel)]="fetchedUser.profile.colorCalendar">
+        </div>
+        <div>
+          <app-autocomplete [typeAutocomplete]="'user'" [title]="'Apporteur Affaire'" [singleChoice]="'true'" [arrayContent]="fetchedUser.salesMan" (getResultAutocomplete)="selectSalesMan($event)">
+          </app-autocomplete>
+        </div>
+      </div>
+      <div class="form-group col-sm-12" *ngIf="fetchedUser.isExternalUser">
+        <app-autocomplete [title]="''" [singleChoice]="'true'" [typeAutocomplete]="'companie'" [arrayContent]="fetchedUser.canBeSeenByCompanies" (getResultAutocomplete)="selectCompanie($event[0])">
         </app-autocomplete>
       </div>
-
-      <div>
-        <label>Couleur Calendrier</label>
-        <div class="round" [style.background-color]="fetchedUser.profile.colorCalendar"></div>
-        <input type="color" formControlName="colorCalendar" [(ngModel)]="fetchedUser.profile.colorCalendar">
+      <div class="form-group col-sm-12">
+        <input type="text" class="form-control" formControlName="email" [(ngModel)]="fetchedUser.email" placeholder="Email">
       </div>
-      <div>
-        <app-autocomplete [typeAutocomplete]="'user'" [title]="'Apporteur Affaire'" [singleChoice]="'true'" [arrayContent]="fetchedUser.salesMan" (getResultAutocomplete)="selectSalesMan($event)">
-        </app-autocomplete>
-      </div>
-    </div>
-    <div class="form-group col-sm-12" *ngIf="fetchedUser.isExternalUser">
-      <app-autocomplete [title]="''" [singleChoice]="'true'" [typeAutocomplete]="'companie'" [arrayContent]="fetchedUser.companies" (getResultAutocomplete)="selectCompanie($event[0])">
-      </app-autocomplete>
-    </div>
-    <div class="form-group col-sm-12">
-      <input type="text" class="form-control" formControlName="email" [(ngModel)]="fetchedUser.email" placeholder="Email">
-    </div>
 
-    <div class="form-group col-sm-12">
-      <select [(ngModel)]="fetchedUser.profile.language" class="form-control" formControlName="language">
+      <div class="form-group col-sm-12">
+        <select [(ngModel)]="fetchedUser.profile.language" class="form-control" formControlName="language">
             <option *ngFor="let n of languageArray" [attr.value]="n">{{n}}</option>
           </select>
-    </div>
-    <div class="form-group col-sm-12">
-      <select [(ngModel)]="fetchedUser.profile.title" class="form-control" formControlName="title">
+      </div>
+      <div class="form-group col-sm-12">
+        <select [(ngModel)]="fetchedUser.profile.title" class="form-control" formControlName="title">
             <option *ngFor="let n of titleArray" [attr.value]="n">{{n}}</option>
           </select>
-    </div>
+      </div>
 
-    <div class="form-group col-sm-12">
-      <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedUser.profile.name" placeholder="Client's Name">
-    </div>
+      <div class="form-group col-sm-12">
+        <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedUser.profile.name" placeholder="Client's Name">
+      </div>
 
-    <div class="form-group col-sm-12">
-      <input type="text" class="form-control" formControlName="lastName" [(ngModel)]="fetchedUser.profile.lastName" placeholder="Client's lastName">
-    </div>
-    <div class="form-group col-sm-12">
-      <select [(ngModel)]="fetchedUser.profile.typeClient" class="form-control" formControlName="typeClient">
+      <div class="form-group col-sm-12">
+        <input type="text" class="form-control" formControlName="lastName" [(ngModel)]="fetchedUser.profile.lastName" placeholder="Client's lastName">
+      </div>
+      <div class="form-group col-sm-12">
+        <select [(ngModel)]="fetchedUser.profile.typeClient" class="form-control" formControlName="typeClient">
             <option *ngFor="let n of typeClientArray" [attr.value]="n">{{n}}</option>
           </select>
-    </div>
-    <div class="form-group col-sm-12">
-      <select [(ngModel)]="fetchedUser.profile.statusHouse" class="form-control" formControlName="statusHouse">
+      </div>
+      <div class="form-group col-sm-12">
+        <select [(ngModel)]="fetchedUser.profile.statusHouse" class="form-control" formControlName="statusHouse">
             <option *ngFor="let n of statusHouseArray" [attr.value]="n">{{n}}</option>
           </select>
-    </div>
+      </div>
 
-    <div class="form-group col-sm-12">
-      <input type="text" class="form-control" formControlName="phoneNumber" [(ngModel)]="fetchedUser.profile.phoneNumber" placeholder="Phone Number">
-    </div>
+      <div class="form-group col-sm-12">
+        <input type="text" class="form-control" formControlName="phoneNumber" [(ngModel)]="fetchedUser.profile.phoneNumber" placeholder="Phone Number">
+      </div>
 
-    <div formGroupName="address">
-      <h5>Address</h5>
-      <div class="form-group col-sm-12">
-        <input type="text" class="form-control" formControlName="address" [(ngModel)]="fetchedUser.profile.address.address" placeholder="address">
+      <div formGroupName="address">
+        <h5>Address</h5>
+        <div class="form-group col-sm-12">
+          <input type="text" class="form-control" formControlName="address" [(ngModel)]="fetchedUser.profile.address.address" placeholder="address">
+        </div>
+        <div class="form-group col-sm-12">
+          <input type="text" class="form-control" formControlName="city" [(ngModel)]="fetchedUser.profile.address.city" placeholder="city">
+        </div>
+        <div class="form-group col-sm-12">
+          <input type="text" class="form-control" formControlName="state" [(ngModel)]="fetchedUser.profile.address.state" placeholder="state">
+        </div>
+        <div class="form-group col-sm-12">
+          <input type="text" class="form-control" formControlName="zip" [(ngModel)]="fetchedUser.profile.address.zip" placeholder="zip">
+        </div>
       </div>
-      <div class="form-group col-sm-12">
-        <input type="text" class="form-control" formControlName="city" [(ngModel)]="fetchedUser.profile.address.city" placeholder="city">
-      </div>
-      <div class="form-group col-sm-12">
-        <input type="text" class="form-control" formControlName="state" [(ngModel)]="fetchedUser.profile.address.state" placeholder="state">
-      </div>
-      <div class="form-group col-sm-12">
-        <input type="text" class="form-control" formControlName="zip" [(ngModel)]="fetchedUser.profile.address.zip" placeholder="zip">
-      </div>
-    </div>
-    <div *ngIf="this.fetchedUser.isExternalUser" formGroupName="detailHouse">
-      <h5>detailHouse</h5>
-      <div class="form-group col-sm-12">
-        <select [(ngModel)]="fetchedUser.profile.detailHouse.typeHouse" class="form-control" formControlName="typeHouse">
+      <div *ngIf="this.fetchedUser.isExternalUser" formGroupName="detailHouse">
+        <h5>detailHouse</h5>
+        <div class="form-group col-sm-12">
+          <select [(ngModel)]="fetchedUser.profile.detailHouse.typeHouse" class="form-control" formControlName="typeHouse">
               <option *ngFor="let n of typeHouseArray" [attr.value]="n">{{n}}</option>
             </select>
+        </div>
+        <div class="form-group col-sm-12">
+          <input type="text" class="form-control" formControlName="surface" [(ngModel)]="fetchedUser.profile.detailHouse.surface" placeholder="surface">
+        </div>
+        <div class="form-group col-sm-12">
+          <input type="text" class="form-control" formControlName="accesCode" [(ngModel)]="fetchedUser.profile.detailHouse.accesCode" placeholder="accesCode">
+        </div>
+        <div class="form-group col-sm-12">
+          <input type="text" class="form-control" formControlName="floor" [(ngModel)]="fetchedUser.profile.detailHouse.floor" placeholder="floor">
+        </div>
+        <div class="form-group col-sm-12">
+          <input type="text" class="form-control" formControlName="accessType" [(ngModel)]="fetchedUser.profile.detailHouse.accessType" placeholder="accessType">
+        </div>
       </div>
       <div class="form-group col-sm-12">
-        <input type="text" class="form-control" formControlName="surface" [(ngModel)]="fetchedUser.profile.detailHouse.surface" placeholder="surface">
-      </div>
-      <div class="form-group col-sm-12">
-        <input type="text" class="form-control" formControlName="accesCode" [(ngModel)]="fetchedUser.profile.detailHouse.accesCode" placeholder="accesCode">
-      </div>
-      <div class="form-group col-sm-12">
-        <input type="text" class="form-control" formControlName="floor" [(ngModel)]="fetchedUser.profile.detailHouse.floor" placeholder="floor">
-      </div>
-      <div class="form-group col-sm-12">
-        <input type="text" class="form-control" formControlName="accessType" [(ngModel)]="fetchedUser.profile.detailHouse.accessType" placeholder="accessType">
-      </div>
-    </div>
-    <div class="form-group col-sm-12">
-      <textarea class="form-control" formControlName="otherData" [(ngModel)]="fetchedUser.profile.otherData" placeholder="Autres">
+        <textarea class="form-control" formControlName="otherData" [(ngModel)]="fetchedUser.profile.otherData" placeholder="Autres">
           </textarea>
-    </div>
+      </div>
 
 
 
 
-    <div class="form-group prmimg-cnt">
-      <div *ngFor="let singleForm of fetchedUser.profile.profilePicture">
-        <img style="height:120px" class="promo-img" src="./uploads/forms/{{singleForm.owner}}/{{singleForm.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
-        <button type="button" md-button (click)="removePic(i)">
+      <div class="form-group prmimg-cnt">
+        <div *ngFor="let singleForm of fetchedUser.profile.profilePicture">
+          <img style="height:120px" class="promo-img" src="./uploads/forms/{{singleForm.owner}}/{{singleForm.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
+          <button type="button" md-button (click)="removePic(i)">
               <i class="fa fa-times"></i>
             </button>
+        </div>
+        <div>
+          <button type="button" md-button (click)="openDialog('img')" class="addpic-squr">Ajouter une image<br><i class="fa fa-plus"></i></button>
+        </div>
       </div>
-      <div>
-        <button type="button" md-button (click)="openDialog('img')" class="addpic-squr">Ajouter une image<br><i class="fa fa-plus"></i></button>
+
+      <div class="form-group col-sm-12">
       </div>
-    </div>
-
-
-    <div class="form-group col-sm-12">
-
-    </div>
-
-
-
-
-    <div class="valid-edit">
-      <button type="submit" [disabled]="!myForm.valid" [ngClass]="{'done':myForm.valid,'pas-done':!myForm.valid}">Done</button>
-      <button *ngIf="fetchedUser._id" type="button" (click)="saveAndCreateProject()" [disabled]="!myForm.valid">
+      <div class="valid-edit">
+        <button type="submit" [disabled]="!myForm.valid" [ngClass]="{'done':myForm.valid,'pas-done':!myForm.valid}">Done</button>
+        <button *ngIf="fetchedUser._id" type="button" (click)="saveAndCreateProject()" [disabled]="!myForm.valid">
           Save & Create project
         </button>
-      <div *ngIf="!fetchedUser.isAdminOfHisCompanie">
-        <button type="button" *ngIf="fetchedUser._id" class="delete" md-button (click)="openDialogDelete()">Delete</button>
+        <div *ngIf="!fetchedUser.isAdminOfHisCompanie">
+          <button type="button" *ngIf="fetchedUser._id" class="delete" md-button (click)="openDialogDelete()">Delete</button>
+        </div>
       </div>
-    </div>
-    <div class="clearfix"></div>
-  </form>
+      <div class="clearfix"></div>
+    </form>
+  </div>
 </div>
