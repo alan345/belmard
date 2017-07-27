@@ -161,6 +161,9 @@ router.get('/page/:page', function (req, res, next) {
   let arrObj = []
   searchQuery['ownerCompanies'] = req.user.ownerCompanies
 
+  if(req.query.search)
+    searchQuery['nameCompanie'] = new RegExp(req.query.search, 'i')
+
 
   Companie
   .find(searchQuery)

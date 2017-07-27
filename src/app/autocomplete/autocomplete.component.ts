@@ -11,6 +11,8 @@ import { MdDialog } from '@angular/material';
 
 import { UserDialogComponent } from '../user/singleUser/dialog/userDialog.component';
 import { CompanieDialogComponent } from '../companie/singleCompanie/dialog/companieDialog.component';
+import { ProjectDialogComponent } from '../project/projectSingle/dialog/projectDialog.component';
+
 
 
 
@@ -104,11 +106,16 @@ export class AutocompleteComponent {
     if(typeObj == 'companie')
       dialogComp = CompanieDialogComponent
 
+    if(typeObj == 'project')
+      dialogComp = ProjectDialogComponent
+
 
     let dialogRef = this.dialog.open(dialogComp, {
       height: '500px'
     });
     dialogRef.afterClosed().subscribe(result => {
+      console.log(result)
+      this.autocompleteSearch = ''
       // if(result) {
       //   console.log(result)
       //   this.fetchedProject.forms.push( result)

@@ -1,8 +1,11 @@
 <div *ngIf="showHeader">
   <div class="row">
     <div class="col-md-1"></div>
-    <div class="col-md-2"><button type="button" class="btn btn-warning" (click)="goBack()">
-    <i class="fa fa-chevron-left"><a> {{'Back' | translate}}</a></i></button></div>
+    <div class="col-md-2">
+      <button *ngIf="showBackButton" type="button" class="btn btn-warning" (click)="goBack()">
+        <i class="fa fa-chevron-left"><a> {{'Back' | translate}}</a></i>
+      </button>
+    </div>
     <div class="col-md-6">
       <h3 class="title">{{nameObjectPlur}}</h3></div>
     <div class="col-md-3"></div>
@@ -12,7 +15,7 @@
   <button class="btn btn-success float-right" [routerLink]="['/product/productSingle/']" routerLinkActive="active"><i class=""></i>{{ 'Create a new product' | translate }}</button>
 </div> -->
 
-  <div *ngIf="nameObject!='userCalendar'" class="clearfix col-md-10">
+  <div *ngIf="showCreateButton" class="clearfix col-md-10">
     <button class="btn btn-success float-right" (click)="redirectCreateObj()" routerLinkActive="active">
     <i class=""></i>{{nameButton}}</button>
   </div>

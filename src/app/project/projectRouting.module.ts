@@ -10,12 +10,15 @@ import { TasksComponent} from './task/tasks/tasks.component';
 export const routes: Routes = [
   {path: '', component: ProjectsComponent},
   {path: 'tasks', component: TasksComponent},
+  {path: 'tasks/new', component: ProjectTasksComponent},
+  {path: 'tasks/:id', component: ProjectTasksComponent},
+
   // {path: 'projectSingle', component: ProjectSingleComponent},
   // {path: 'projectSingle/:id', component: ProjectSingleComponent},
   {path: 'new', component: ProjectSingleComponent},
   {path: 'new/:idClient', component: ProjectSingleComponent},
   {path: ':id', component: ProjectSingleComponent},
-  {path: 'tasks/:id', component: ProjectTasksComponent},
+
 ];
 
 @NgModule({

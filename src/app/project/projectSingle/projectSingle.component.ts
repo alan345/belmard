@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { ProjectService} from '../project.service';
 import { ToastsManager} from 'ng2-toastr';
 import { MdDialog } from '@angular/material';
@@ -19,7 +19,7 @@ import { AuthService} from '../../auth/auth.service';
 
 
 @Component({
-  selector: 'app-projects',
+  selector: 'app-projectSingle',
   templateUrl: './projectSingle.component.html',
   styleUrls: ['../project.component.css'],
 
@@ -27,20 +27,20 @@ import { AuthService} from '../../auth/auth.service';
 
 export class ProjectSingleComponent implements OnInit {
 
+  @Input() showBackButton: Boolean = true;
 
-
-  listBoxers: Array<string> = ['Sugar Ray Robinson', 'Muhammad Ali', 'George Foreman', 'Joe Frazier', 'Jake LaMotta', 'Joe Louis', 'Jack Dempsey', 'Rocky Marciano', 'Mike Tyson', 'Oscar De La Hoya'];
-  listTeamOne: Array<string> = ['aaa'];
-  listTeamTwo: Array<string> = [];
-
+  // listBoxers: Array<string> = ['Sugar Ray Robinson', 'Muhammad Ali', 'George Foreman', 'Joe Frazier', 'Jake LaMotta', 'Joe Louis', 'Jack Dempsey', 'Rocky Marciano', 'Mike Tyson', 'Oscar De La Hoya'];
+  // listTeamOne: Array<string> = ['aaa'];
+  // listTeamTwo: Array<string> = [];
+  //
 
 
 
   selectedIndex0: number = -1
   selectedIndex1: number = -1
   selectedIndex2: number = -1
-  show1 = false
-  show2 = false
+  // show1 = false
+  // show2 = false
   // categ0: string = '';
   // categ1: string = '';
   // categ2: string = '';
@@ -51,8 +51,8 @@ export class ProjectSingleComponent implements OnInit {
   status = StatusProject
   categ: string = 'Electricité';
   subCateg: string = 'file';
-  autocompleteUser: string = '';
-  autocompleteQuote: string = '';
+  // autocompleteUser: string = '';
+  // autocompleteQuote: string = '';
   fetchedUsers: User[] = [];
   fetchedQuotes: Quote[] = [];
 
@@ -269,7 +269,8 @@ export class ProjectSingleComponent implements OnInit {
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
-            this.router.navigate(['project/' + res.obj._id]);
+            this.fetchedProject = res.obj
+            // this.router.navigate(['project/' + res.obj._id]);
           },
           error => {console.log(error)}
         );
@@ -279,7 +280,8 @@ export class ProjectSingleComponent implements OnInit {
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
-            this.router.navigate(['project/' + res.obj._id]);
+            this.fetchedProject = res.obj
+            // this.router.navigate(['project/' + res.obj._id]);
           },
           error => {
             this.toastr.error('Error!', error.message)

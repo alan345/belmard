@@ -98,8 +98,8 @@ export class NewUserComponent implements OnInit {
         if(params['id']) {
           this.getUser(params['id'])
         } else {
-          if(params['isExternalUser']) {
-            this.fetchedUser.isExternalUser = true
+          if(params['isExternalUser'] === 'false') {
+            this.fetchedUser.isExternalUser = false
           }
         }
 

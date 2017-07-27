@@ -1,10 +1,11 @@
-<div class="row">
+<!-- <div class="row">
   <div class="col-md-1"></div>
   <div class="col-md-2"><button type="button" class="btn btn-warning" (click)="goBack()"><i class="fa fa-chevron-left"><a> Retour</a></i></button></div>
   <div class="col-md-6">
     <h3 class="title">Client</h3></div>
   <div class="col-md-3"></div>
-</div>
+</div> -->
+<app-header [showHeader]="true" [showCreateButton]="false" [showBackButton]="true" [nameObject]="'user'"></app-header>
 
 
 <div class="single-wrpr beigeback">
@@ -14,7 +15,7 @@
     </div>
 
 
-    <div *ngIf="!this.fetchedUser.isExternalUser" class="form-group col-sm-12">
+    <div *ngIf="!fetchedUser.isExternalUser" class="form-group col-sm-12">
       <label>Type User</label>
       <select class="form-control" formControlName="type" [(ngModel)]="fetchedUser.type">
         <option *ngFor="let n of typeUser" [attr.value]="n">{{n}}</option>
@@ -24,10 +25,7 @@
         <app-autocomplete [typeAutocomplete]="'right'" [canDelete]="true" [title]="" [singleChoice]="true" [arrayContent]="fetchedUser.rights" (getResultAutocomplete)="selectRight($event[0])">
         </app-autocomplete>
       </div>
-      <div *ngIf="fetchedUser.isExternalUser">
-        <app-autocomplete [title]="'Entreprise'" [singleChoice]="'true'" [typeAutocomplete]="'companie'" [arrayContent]="fetchedUser.companies" (getResultAutocomplete)="selectCompanie($event[0])">
-        </app-autocomplete>
-      </div>
+
       <div>
         <label>Couleur Calendrier</label>
         <div class="round" [style.background-color]="fetchedUser.profile.colorCalendar"></div>
@@ -38,7 +36,10 @@
         </app-autocomplete>
       </div>
     </div>
-
+    <div class="form-group col-sm-12" *ngIf="fetchedUser.isExternalUser">
+      <app-autocomplete [title]="''" [singleChoice]="'true'" [typeAutocomplete]="'companie'" [arrayContent]="fetchedUser.companies" (getResultAutocomplete)="selectCompanie($event[0])">
+      </app-autocomplete>
+    </div>
     <div class="form-group col-sm-12">
       <input type="text" class="form-control" formControlName="email" [(ngModel)]="fetchedUser.email" placeholder="Email">
     </div>

@@ -30,33 +30,34 @@ import { AuthService} from '../../../auth/auth.service';
 export class ProjectTasksComponent implements OnInit {
 
 
-  public bucketTasks: Array<any> = [
-    {
-      bucketName: 'Group A',
-      openNewTask: false,
-      tasks: [{ name: 'Item A' }, { name: 'Item B' }, { name: 'Item C' }, { name: 'Item D' }]
-    },
-    {
-      bucketName: 'Group B',
-      openNewTask: false,
-      tasks: [{ name: 'Item 1' }, { name: 'Item 2' }, { name: 'Item 3' }, { name: 'Item 4' }]
-    }
-  ];
+  // public bucketTasks: Array<any> = [
+  //   {
+  //     bucketName: 'Group A',
+  //     openNewTask: false,
+  //     tasks: [{ name: 'Item A' }, { name: 'Item B' }, { name: 'Item C' }, { name: 'Item D' }]
+  //   },
+  //   {
+  //     bucketName: 'Group B',
+  //     openNewTask: false,
+  //     tasks: [{ name: 'Item 1' }, { name: 'Item 2' }, { name: 'Item 3' }, { name: 'Item 4' }]
+  //   }
+  // ];
   fetchedProject: Project = new Project();
-
-  public many = [
-
-    {
-      bucketName: 'Group A',
-      tasks: ['The', 'possibilities', 'are', 'endless!']
-    },
-
-    {
-      bucketName: 'Group B',
-      tasks: ['The', 'toto', 'tata', 'titi!']
-    },
-
-  ]
+  fetchedProjects: Project[] = []
+  //
+  // public many = [
+  //
+  //   {
+  //     bucketName: 'Group A',
+  //     tasks: ['The', 'possibilities', 'are', 'endless!']
+  //   },
+  //
+  //   {
+  //     bucketName: 'Group B',
+  //     tasks: ['The', 'toto', 'tata', 'titi!']
+  //   },
+  //
+  // ]
 
 
   statusTypes = [
@@ -154,29 +155,37 @@ export class ProjectTasksComponent implements OnInit {
 
   }
 
+  selectProject(project: Project) {
+    this.getProject(project)
 
+  }
+  clearAutocomplete() {
+    this.fetchedProject = new Project()
+  }
+  getProject(project: Project){
+    this.fetchedProject = project
+    this.fetchedProject.bucketTasks.forEach((bucketTask, bucketTaskIndex) => {
+      bucketTask.tasks.forEach((task, taskIndex) => {
 
+        this.fetchedProject.bucketTasks[bucketTaskIndex]
+        .tasks[taskIndex].dateTask
+        .creationDateString = this.authService
+        .isoDateToHtmlDate(this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].dateTask.creationDate)
 
-  getProject(id: string) {
+        this.fetchedProject.bucketTasks[bucketTaskIndex]
+        .tasks[taskIndex].dateTask
+        .endDateString = this.authService
+        .isoDateToHtmlDate(this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].dateTask.endDate)
+
+      })
+    });
+  }
+  getProjectById(id: string) {
     this.projectService.getProject(id)
       .subscribe(
       res => {
-        this.fetchedProject = <Project>res
-        this.fetchedProject.bucketTasks.forEach((bucketTask, bucketTaskIndex) => {
-          bucketTask.tasks.forEach((task, taskIndex) => {
-
-            this.fetchedProject.bucketTasks[bucketTaskIndex]
-            .tasks[taskIndex].dateTask
-            .creationDateString = this.authService
-            .isoDateToHtmlDate(this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].dateTask.creationDate)
-
-            this.fetchedProject.bucketTasks[bucketTaskIndex]
-            .tasks[taskIndex].dateTask
-            .endDateString = this.authService
-            .isoDateToHtmlDate(this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].dateTask.endDate)
-
-          })
-        });
+        this.getProject(<Project>res)
+        this.fetchedProjects = [<Project>res]
         // this.fetchedProject.detail.dateQuote.issueDateString = this.authService.isoDateToHtmlDate(this.fetchedQuote.detail.dateQuote.issueDate)
         // this.fetchedQuote.detail.dateQuote.expiryDateString = this.authService.isoDateToHtmlDate(this.fetchedQuote.detail.dateQuote.expiryDate)
 
@@ -196,7 +205,7 @@ export class ProjectTasksComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
       if (params['id'])
-        this.getProject(params['id'])
+        this.getProjectById(params['id'])
 
     })
   }

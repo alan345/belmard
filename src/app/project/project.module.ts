@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MaterialModule } from '@angular/material';
 import { Ng2PaginationModule} from 'ng2-pagination';
-
+import { ProjectDialogComponent } from './projectSingle/dialog/projectDialog.component';
 
 import { ProjectTasksComponent} from './task/singleTask/projectTasks.component';
 import { ProjectsComponent} from './projects/projects.component';
@@ -42,6 +42,7 @@ import {SharedModule } from '../shared/shared.module';
     ProjectsComponent,
     ProjectSingleComponent,
     TasksComponent,
+    ProjectDialogComponent,
     // AutocompleteComponent,
   ],
   exports:      [
@@ -50,7 +51,7 @@ import {SharedModule } from '../shared/shared.module';
   ],
   providers:    [ ProjectService ],
   entryComponents: [
-
+    ProjectDialogComponent
   ]
 })
 export class ProjectModule { }

@@ -15,9 +15,11 @@ export class HeaderComponent implements OnInit {
   @Input() title: String = '';
   @Input() nameButton: String = '';
   @Input() option: String = '';
-
-
+  @Input() showBackButton: Boolean = true;
   @Input() showHeader: Boolean = true;
+  @Input() showCreateButton: Boolean = true;
+
+
 
   nameObjectPlur: String= ''
   nameObjectSing: String= ''
@@ -73,15 +75,12 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(['/paiementQuote/new/']);
     if(this.nameObject === 'companie')
       this.router.navigate(['/companie/new/']);
-    if(this.nameObject === 'companie')
-      this.router.navigate(['/project/new/']);
     if(this.nameObject === 'right')
       this.router.navigate(['/right/new/']);
     if(this.nameObject === 'project')
       this.router.navigate(['/project/new/']);
-
     if(this.nameObject === 'task')
-      this.router.navigate(['/project/']);
+      this.router.navigate(['/project/tasks/new/']);
 
     if(this.nameObject === 'user') {
       if(this.option === 'internal')
