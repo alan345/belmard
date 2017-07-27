@@ -493,7 +493,7 @@ function sendEmailToUserToJoinCompanie(req, user) {
       `;
       var mailOptions = {
         to: user.email,
-        from: config.userGmail,
+        from: 'hello@gooplus.fr',
         subject: 'Gooplus Management | New Invitation ',
         html: html
       };
