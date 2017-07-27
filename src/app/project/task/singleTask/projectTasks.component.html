@@ -36,10 +36,10 @@
 
 
       <div *ngIf="bucketTask.openNewTask">
-        <input type="text" (focusout)="addTask(content.value, bucketTaskIndex)" #content>
+        <input type="text" (keyup.enter)="addTask(content.value, bucketTaskIndex)" (focusout)="addTask(content.value, bucketTaskIndex)" #content>
         <!-- <button (click)="addTask(content.value, bucketTaskIndex)">Add</button> -->
       </div>
-      <button (click)="newTask(bucketTaskIndex)">Create Task</button>
+      <button *ngIf="!bucketTask.openNewTask" (click)="newTask(bucketTaskIndex)">Create Task</button>
     </div>
   </div>
 
@@ -47,7 +47,7 @@
     <input
       type="text"
       #newBucketTaskInput
-      (keyup.enter)="newBucketTask(newBucketTaskInput.value);newBucketTaskInput.value='';"
+      (keyup.enter)="newBucketTaskF(newBucketTaskInput.value);newBucketTaskInput.value='';"
       placeholder="Name bucket"
     >
   </div>

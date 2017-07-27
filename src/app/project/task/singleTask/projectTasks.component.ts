@@ -92,8 +92,8 @@ export class ProjectTasksComponent implements OnInit {
     });
   }
 
-  newBucketTask(newBucketTask) {
-    let bucketTaskObj: BucketTasks
+  newBucketTaskF(newBucketTask) {
+    let bucketTaskObj: BucketTasks = new BucketTasks()
     bucketTaskObj.bucketName = newBucketTask,
     bucketTaskObj.openNewTask = false,
     bucketTaskObj.tasks = []
@@ -237,7 +237,7 @@ export class ProjectTasksComponent implements OnInit {
     });
 
 
-    this.fetchedProject.progressTasks =  nbTasksCompleted / nbTasks 
+    this.fetchedProject.progressTasks =  nbTasksCompleted / nbTasks
 
 
     if (this.fetchedProject._id) {
