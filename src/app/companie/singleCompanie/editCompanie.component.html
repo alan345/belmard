@@ -1,11 +1,12 @@
-<div class="row">
+<!-- <div class="row">
   <div class="col-md-1"></div>
   <div class="col-md-2"><button type="button" class="btn btn-warning" (click)="goBack()"><i class="fa fa-chevron-left"><a> Retour</a></i></button></div>
   <div class="col-md-6">
     <h3 class="title">Ajouter / Editer Fournisseur</h3></div>
   <div class="col-md-3"></div>
-</div>
+</div> -->
 
+<app-header [showBackButton]="showBackButton" [nameObject]="'companie'" [showCreateButton]="false"></app-header>
 
 
 <div class="container">
@@ -13,24 +14,15 @@
 
   <h4 class="dspl-nn">id: {{fetchedCompanie._id}}</h4>
 
-
-
-
-
-
-
-
-  <!-- <form #f="ngForm" novalidate (ngSubmit)="save(f.value, f.valid)"> -->
   <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
-
-    <button type="button" [routerLink]="['/user/paiement']">PLAN</button>
-    Plan: {{fetchedCompanie.planDetail.plan}} ({{fetchedCompanie.planDetail.current_period_end | date:'yyyy-MM-dd'}})
+    <div *ngIf="isMyCompany">
+      <button type="button" [routerLink]="['/user/paiement']">PLAN</button> Plan: {{fetchedCompanie.planDetail.plan}} ({{fetchedCompanie.planDetail.current_period_end | date:'yyyy-MM-dd'}})
+    </div>
     <div class="form-group sln-inffrm">
-      <!-- <div formGroupName="fetchedCompanie"> -->
-      <!-- <div ngModelGroup="fetchedCompanie"> -->
+
       <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedCompanie.nameCompanie" required minlength="5" placeholder="Nom du fournisseur">
       <input type="text" class="form-control" formControlName="phoneNumber" [(ngModel)]="fetchedCompanie.phoneNumber" required minlength="5" placeholder="Numéro de téléphone">
-      <!-- <div ngModelGroup="address"> -->
+
       <div formGroupName="address">
         <input type="text" class="form-control" formControlName="address" [(ngModel)]="fetchedCompanie.address.address" required minlength="5" placeholder="Adresse">
         <input type="text" class="form-control" formControlName="city" [(ngModel)]="fetchedCompanie.address.city" required minlength="2" placeholder="Ville">
@@ -51,20 +43,8 @@
 
 
 
-<!--
-      <div formGroupName="categJson">
 
-        <h4>categProduct</h4>
-        <textarea class="form-control" formControlName="categProduct" [(ngModel)]="fetchedCompanie.categJson.categProduct" required minlength="1" placeholder="categProduct">
-            </textarea>
-
-        <h4>categProject</h4>
-        <textarea class="form-control" formControlName="categProject" [(ngModel)]="fetchedCompanie.categJson.categProject" required minlength="1" placeholder="categProject">
-            </textarea>
-
-      </div> -->
-
-      <div formGroupName="option">
+      <div *ngIf="isMyCompany" formGroupName="option">
         <div formGroupName="calendar">
           <h4>Options Calendar</h4>
           <input type="text" class="form-control" formControlName="timeBegin" [(ngModel)]="fetchedCompanie.option.calendar.timeBegin" required minlength="1" placeholder="timeBegin">
@@ -73,72 +53,48 @@
       </div>
     </div>
 
-<!--
-    <div (click)="openSection('seeRights')">See rights</div>
-    <div *ngIf="seeRights">
-      <button type="button" (click)="addRight( 0, 0, 0, 0)">Add Right</button>
-      <div class="categ0" *ngFor="let right of fetchedCompanie.rights; let i = index;">
-        <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.rights[i].nameRight">
-        <button type="button" (click)="removeRight( 1,i,0,0)">X</button>
-        <button type="button" (click)="addRight(1,i,0,0)">+</button>
-        <div class="categ1" *ngFor="let permission of right.permissions; let j = index;">
-          <select [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.rights[i].permissions[j].namePermission">
-            <option *ngFor="let n of typesRights" [attr.value]="n.value">{{n.name}}</option>
-          </select>
-          <button type="button" (click)="removeRight( 2,i,j,0)">X</button>
-          <button type="button" (click)="addRight(2,i,j,0)">+</button>
-          <div class="categ2" *ngFor="let singleAccess of permission.access; let k = index;">
-            <select [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.rights[i].permissions[j].access[k].typeAccess">
-              <option [attr.value]="'read'">Read</option>
-              <option [attr.value]="'write'">write</option>
-            </select>
-            <button type="button" (click)="removeRight( 3,i,j,k)">X</button>
+    <div *ngIf="isMyCompany">
+      <h4>Categories</h4>
+      <div (click)="openSection('seeCategProject')">See Categs Project</div>
+      <div *ngIf="seeCategProject">
+        <button type="button" (click)="addCateg('project', 0, 0, 0, 0)">Add Categ Project</button>
+        <div class="categ0" *ngFor="let categorie0 of fetchedCompanie.categories.categProject; let i = index;">
+          <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.categories.categProject[i].categ">
+          <button type="button" (click)="removeCateg('categProject', 1,i,0,0)">X</button>
+          <button type="button" (click)="addCateg('categProject', 1,i,0,0)">+</button>
+          <div class="categ1" *ngFor="let categorie1 of categorie0.subCateg; let j = index;">
+            <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.categories.categProject[i].subCateg[j].categ">
+            <button type="button" (click)="removeCateg('categProject', 2,i,j,0)">X</button>
+            <button type="button" (click)="addCateg('categProject', 2,i,j,0)">+</button>
+            <div class="categ2" *ngFor="let categorie2 of categorie1.subCateg; let k = index;">
+              <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.categories.categProject[i].subCateg[j].subCateg[k].categ">
+              <button type="button" (click)="removeCateg('categProject', 3,i,j,k)">X</button>
+            </div>
           </div>
         </div>
       </div>
-    </div> -->
 
 
-    <div (click)="openSection('seeCategProject')">See Categs Project</div>
-    <div *ngIf="seeCategProject">
-      <button type="button" (click)="addCateg('project', 0, 0, 0, 0)">Add Categ Project</button>
-      <div class="categ0" *ngFor="let categorie0 of fetchedCompanie.categories.categProject; let i = index;">
-        <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.categories.categProject[i].categ">
-        <button type="button" (click)="removeCateg('categProject', 1,i,0,0)">X</button>
-        <button type="button" (click)="addCateg('categProject', 1,i,0,0)">+</button>
-        <div class="categ1" *ngFor="let categorie1 of categorie0.subCateg; let j = index;">
-          <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.categories.categProject[i].subCateg[j].categ">
-          <button type="button" (click)="removeCateg('categProject', 2,i,j,0)">X</button>
-          <button type="button" (click)="addCateg('categProject', 2,i,j,0)">+</button>
-          <div class="categ2" *ngFor="let categorie2 of categorie1.subCateg; let k = index;">
-            <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.categories.categProject[i].subCateg[j].subCateg[k].categ">
-            <button type="button" (click)="removeCateg('categProject', 3,i,j,k)">X</button>
+      <div (click)="openSection('seeCategProduct')">See Categs Products</div>
+      <div *ngIf="seeCategProduct">
+        <button type="button" (click)="addCateg('categProduct', 0, 0, 0, 0)">Add Categ Project</button>
+        <div class="categ0" *ngFor="let categorie0 of fetchedCompanie.categories.categProduct; let i = index;">
+          <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.categories.categProduct[i].categ">
+          <button type="button" (click)="removeCateg('categProduct', 1,i,0,0)">X</button>
+          <button type="button" (click)="addCateg('categProduct', 1,i,0,0)">+</button>
+          <div class="categ1" *ngFor="let categorie1 of categorie0.subCateg; let j = index;">
+            <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.categories.categProduct[i].subCateg[j].categ">
+            <button type="button" (click)="removeCateg('categProduct', 2,i,j,0)">X</button>
+            <button type="button" (click)="addCateg('categProduct', 2,i,j,0)">+</button>
+            <div class="categ2" *ngFor="let categorie2 of categorie1.subCateg; let k = index;">
+              <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.categories.categProduct[i].subCateg[j].subCateg[k].categ">
+              <button type="button" (click)="removeCateg('categProduct', 3,i,j,k)">X</button>
+            </div>
           </div>
         </div>
       </div>
+      <button type="button" (click)="initDataToRemove()">Init Data</button>
     </div>
-
-
-    <div (click)="openSection('seeCategProduct')">See Categs Products</div>
-    <div *ngIf="seeCategProduct">
-      <button type="button" (click)="addCateg('categProduct', 0, 0, 0, 0)">Add Categ Project</button>
-      <div class="categ0" *ngFor="let categorie0 of fetchedCompanie.categories.categProduct; let i = index;">
-        <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.categories.categProduct[i].categ">
-        <button type="button" (click)="removeCateg('categProduct', 1,i,0,0)">X</button>
-        <button type="button" (click)="addCateg('categProduct', 1,i,0,0)">+</button>
-        <div class="categ1" *ngFor="let categorie1 of categorie0.subCateg; let j = index;">
-          <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.categories.categProduct[i].subCateg[j].categ">
-          <button type="button" (click)="removeCateg('categProduct', 2,i,j,0)">X</button>
-          <button type="button" (click)="addCateg('categProduct', 2,i,j,0)">+</button>
-          <div class="categ2" *ngFor="let categorie2 of categorie1.subCateg; let k = index;">
-            <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.categories.categProduct[i].subCateg[j].subCateg[k].categ">
-            <button type="button" (click)="removeCateg('categProduct', 3,i,j,k)">X</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <button type="button" (click)="initDataToRemove()">Init Data</button>
-
     <div class="valid-edit">
       <button type="submit" class="sln-edt done">
           Enregistrer

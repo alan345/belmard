@@ -1,10 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {AuthService} from '../../auth/auth.service';
 import {CompanieService} from '../companie.service';
 import {UserService} from '../../user/user.service';
 
 
-import {Companie, Categorie0, Rigth, Permission, Access} from '../companie.model';
+import {Companie, Categorie0} from '../companie.model';
 
 import {ToastsManager} from 'ng2-toastr';
 
@@ -24,6 +24,8 @@ import { EditOptionsComponentDialog } from '../../form/modalLibrary/modalLibrary
   styleUrls: ['../companie.component.css'],
 })
 export class EditCompanieComponent implements OnInit {
+
+  @Input() showBackButton: Boolean = true;
   fetchedCompanie: Companie = new Companie()
 
   // userAdmins : User[] = []
@@ -35,6 +37,7 @@ export class EditCompanieComponent implements OnInit {
   // seeRights = false;
   seeCategProject = false;
   seeCategProduct = false;
+  isMyCompany: Boolean = false
   // typesRights = [
   //   {name : 'Project', value: 'project'},
   //   {name : 'Quote', value: 'qute'},
@@ -81,6 +84,7 @@ export class EditCompanieComponent implements OnInit {
       if(params['id']) {
         if(params['id'] === 'mine') {
           this.getCompanie('')
+          this.isMyCompany = true
         } else {
           this.getCompanie(params['id'])
         }
