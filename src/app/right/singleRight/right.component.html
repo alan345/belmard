@@ -5,7 +5,8 @@
     <h3 class="title">Ajouter / Editer Fournisseur</h3></div>
   <div class="col-md-3"></div>
 </div> -->
-<app-header [showBackButton]="true" [nameObject]="'right'" [showCreateButton]="false"></app-header>
+<div class="container">
+  <app-header [showBackButton]="true" [nameObject]="'right'" [showCreateButton]="false"></app-header>
 
 
 
@@ -15,23 +16,23 @@
 
 
     <!-- <div class="categ0" *ngFor="let right of fetchedRight.rights; let i = index;"> -->
-      <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.nameRight">
+    <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.nameRight">
 
-      <button type="button" (click)="addRight(1,0,0,0)">+</button>
-      <div class="categ1" *ngFor="let permission of fetchedRight.detailRight.permissions; let j = index;">
-        <select [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].namePermission">
+    <button type="button" (click)="addRight(1,0,0,0)">+</button>
+    <div class="categ1" *ngFor="let permission of fetchedRight.detailRight.permissions; let j = index;">
+      <select [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].namePermission">
             <option *ngFor="let n of typesRights" [attr.value]="n.value">{{n.name}}</option>
           </select>
-        <button type="button" (click)="removeRight( 2,i,j,0)">X</button>
-        <button type="button" (click)="addRight(2,i,j,0)">+</button>
-        <div class="categ2" *ngFor="let singleAccess of permission.access; let k = index;">
-          <select [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].access[k].typeAccess">
+      <button type="button" (click)="removeRight( 2,i,j,0)">X</button>
+      <button type="button" (click)="addRight(2,i,j,0)">+</button>
+      <div class="categ2" *ngFor="let singleAccess of permission.access; let k = index;">
+        <select [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].access[k].typeAccess">
               <option [attr.value]="'read'">Read</option>
               <option [attr.value]="'write'">write</option>
             </select>
-          <button type="button" (click)="removeRight( 3,i,j,k)">X</button>
-        </div>
+        <button type="button" (click)="removeRight( 3,i,j,k)">X</button>
       </div>
+    </div>
     <!-- </div> -->
 
 
@@ -47,3 +48,4 @@
     </div>
     <div class="clearfix"></div>
   </form>
+</div>
