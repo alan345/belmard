@@ -21,7 +21,7 @@
           <option *ngFor="let n of paiementsTypes" [attr.value]="n.value">{{n.label}}</option>
         </select>
 
-        <input type="text" class="form-control" formControlName="amount" [(ngModel)]="fetchedPaiementQuote.amount" placeholder="Amount">
+        <input type="number" class="form-control" formControlName="amount" [(ngModel)]="fetchedPaiementQuote.amount" placeholder="Amount">
 
         <input type="date" class="form-control" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedPaiementQuote.datePaiementString" >
 
@@ -49,7 +49,7 @@
 
 
       <div class="valid-edit">
-        <button type="submit" class="sln-edt done">Enregistrer</button>
+        <button type="submit" class="sln-edt done">{{'Save' | translate}}</button>
         <button *ngIf="fetchedPaiementQuote._id" type="button" class="delete" md-button (click)="openDialogDelete()">
           Delete
         </button>

@@ -65,29 +65,29 @@
 
             <div>
               <label>longueur</label>
-              <input type="text" class="form-control col-md-6" formControlName="height" placeholder="height" [(ngModel)]="fetchedProduct.details.dimension.height">
+              <input type="number" class="form-control col-md-6" formControlName="height" placeholder="height" [(ngModel)]="fetchedProduct.details.dimension.height">
             </div>
             <div>
               <label>largeur</label>
-              <input type="text" class="form-control col-md-6" formControlName="width" placeholder="width" [(ngModel)]="fetchedProduct.details.dimension.width">
+              <input type="number" class="form-control col-md-6" formControlName="width" placeholder="width" [(ngModel)]="fetchedProduct.details.dimension.width">
             </div>
             <div>
               <label>hauteur</label>
-              <input type="text" class="form-control col-md-6" formControlName="depth" placeholder="depth" [(ngModel)]="fetchedProduct.details.dimension.depth">
+              <input type="number" class="form-control col-md-6" formControlName="depth" placeholder="depth" [(ngModel)]="fetchedProduct.details.dimension.depth">
             </div>
 
           <div>
             <label>Prix d'achat HT</label>
-            <input type="text" class="form-control col-md-6" formControlName="costPrice" placeholder="costPrice" [(ngModel)]="fetchedProduct.details.price.costPrice">
+            <input type="number" class="form-control col-md-6" formControlName="costPrice" placeholder="costPrice" [(ngModel)]="fetchedProduct.details.price.costPrice">
           </div>
           <div>
             <label>Prix de vente HT</label>
-            <input type="text" class="form-control col-md-6" formControlName="sellingPrice" placeholder="sellingPrice" [(ngModel)]="fetchedProduct.details.price.sellingPrice">
+            <input type="number" class="form-control col-md-6" formControlName="sellingPrice" placeholder="sellingPrice" [(ngModel)]="fetchedProduct.details.price.sellingPrice">
           </div>
         </div>
       </div>
       <div class="valid-edit">
-        <button type="submit" class="done btn btn-success" [disabled]="!myForm.valid">Enregistrer</button>
+        <button type="submit" class="done btn btn-success" [disabled]="!myForm.valid">{{'Save' | translate}}</button>
         <button *ngIf="fetchedProduct._id" type="button" class="delete" md-button (click)="openDialogDelete()">Effacer produit</button>
         <div class="col-2">
         </div>
