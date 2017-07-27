@@ -82,13 +82,12 @@ export class ProductSingleComponent implements OnInit {
         reference: ['', [Validators.required, Validators.minLength(2)]],
         description: [''],
 
-          costPrice: ['', [Validators.required, Validators.minLength(1)]],
-          sellingPrice: ['', [Validators.required, Validators.minLength(1)]],
+        costPrice: [''],
+        sellingPrice: [''],
 
-
-          height: [''],
-          width: [''],
-          depth: [''],
+        height: [''],
+        width: [''],
+        depth: [''],
 
 
     })
