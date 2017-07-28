@@ -112,10 +112,11 @@ router.post('/', function(req, res, next) {
   // if (!req.user.companies.length) {
   //   return res.status(404).json({message: 'You must belong to a companie', err: ''})
   // }
+  console.log(req.user.companies)
+  req.body.ownerCompanies = req.user.ownerCompanies
 
+  // project.ownerCompanies = req.user.companies
   var project = new Project(req.body)
-  project.ownerCompanies = req.user.companies
-
   project.save(function(err, result) {
     if (err) {
       console.log(err)
