@@ -134,23 +134,20 @@ export class ProjectService {
   }
 
   updateProject(project) {
-    console.log(project)
-    project.bucketTasks.forEach((bucketTask, i) => {
+    let projectTemp = JSON.parse(JSON.stringify(project))
+    projectTemp.bucketTasks.forEach((bucketTask, i) => {
       bucketTask.tasks.forEach((task, j) => {
         task.assignedTos.forEach((assignedTo, k) => {
-
           let assignedToId = assignedTo._id
-          project.bucketTasks[i].tasks[j].assignedTos = []
-          project.bucketTasks[i].tasks[j].assignedTos.push({
+          projectTemp.bucketTasks[i].tasks[j].assignedTos = []
+          projectTemp.bucketTasks[i].tasks[j].assignedTos.push({
             _id: assignedToId
           })
-
         })
-
       })
     })
-    console.log(project)
-    const body = JSON.stringify(project);
+    // console.log(projectTemp)
+    const body = JSON.stringify(projectTemp);
     const headers = new Headers({'Content-Type': 'application/json'});
     headers.append('Authorization', '' + this.authService.currentUser.token);
     return this.http.put(this.url + 'project/' + project._id, body, {headers: headers})
