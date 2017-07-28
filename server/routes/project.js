@@ -109,9 +109,9 @@ router.post('/', function(req, res, next) {
       }
     })
   }
-  if (!req.user.companies.length) {
-    return res.status(404).json({message: 'You must belong to a companie', err: ''})
-  }
+  // if (!req.user.companies.length) {
+  //   return res.status(404).json({message: 'You must belong to a companie', err: ''})
+  // }
 
   var project = new Project(req.body)
   project.ownerCompanies = req.user.companies
