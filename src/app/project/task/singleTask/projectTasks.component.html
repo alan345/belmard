@@ -18,7 +18,7 @@
     </div>
   </div>
   <div class='row'>
-    <div class='form-control' *ngFor='let bucketTask of fetchedProject.bucketTasks; let bucketTaskIndex = index;'>
+    <div *ngFor='let bucketTask of fetchedProject.bucketTasks; let bucketTaskIndex = index;'>
       {{bucketTask.bucketName}}
       <button (click)="deleteBucketTask(bucketTaskIndex)">X</button>
       <div class='container containerTasks form-control' [dragulaModel]='fetchedProject.bucketTasks[bucketTaskIndex].tasks' [dragula]='"nested-bag"'>
