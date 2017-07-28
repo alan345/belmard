@@ -228,13 +228,14 @@ router.get('/:id', function (req, res, next) {
     Task
     .findById({_id: req.params.id})
     .populate({path: 'projects', model: 'Project'})
+    .populate({ path: 'assignedTos', model: 'User'})
     // .populate({path: 'forms', model: 'Form'})
     // .populate({path: 'assignedTos', model: 'User'})
-    .populate(
-      {
-        path: 'bucketTasks.tasks.assignedTos',
-        model: 'User',
-      })
+    // .populate(
+    //   {
+    //     path: 'bucketTasks.tasks.assignedTos',
+    //     model: 'User',
+    //   })
     .exec(function (err, item) {
       if (err) {
         return res.status(404).json({

@@ -33,6 +33,13 @@ export class TaskComponent implements OnInit {
   @Output() newTaskSaved: EventEmitter<any> = new EventEmitter();
   @Input() showHeader = true;
 
+
+  statusTypes = [
+    { label: 'Not Started', value: '' },
+    { label: 'Pending', value: 'pending' },
+    { label: 'Done', value: 'done' }
+  ]
+
   showPaiements: boolean = false
   fetchedTask : Task = new Task()
   // autocompleteUser: string = '';
@@ -76,7 +83,15 @@ export class TaskComponent implements OnInit {
   ngOnInit() {
     this.myForm = this._fb.group({
       description: [''],
+      name: [''],
+      status: [''],
+      creationDateString: [''],
+      endDateString: [''],
+
+
     })
+
+
 
     // this.fetchedTask
     // .datePaiementString =
@@ -97,7 +112,9 @@ export class TaskComponent implements OnInit {
 
 
 
-
+  selectAssignedTo(event) {
+    this.fetchedTask.assignedTos = [event]
+  }
 
 
   save() {

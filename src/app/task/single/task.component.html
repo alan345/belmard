@@ -1,5 +1,5 @@
 <div class="container">
-  <app-header [showBackButton]="true" [nameObject]="'paiementQuote'" [showCreateButton]="false"></app-header>
+  <app-header [showBackButton]="true" [nameObject]="'task'" [showCreateButton]="false"></app-header>
 
   <div>
     <h4 class="dspl-nn">id: {{fetchedTask._id}}</h4>
@@ -9,9 +9,20 @@
       <div>
 
 
-        <input type="text" class="form-control" formControlName="description" [(ngModel)]="fetchedTask.description" placeholder="description">
+
+        <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedTask.name" placeholder="name">
 
 
+        <select class="form-control" formControlName="status" [(ngModel)]="fetchedTask.status">
+          <option *ngFor="let n of statusTypes" [attr.value]="n.value">{{n.label}}</option>
+        </select>
+
+        <textarea class="form-control" formControlName="description" [(ngModel)]="fetchedTask.description" placeholder="Description">
+        </textarea>
+        <app-autocomplete [typeAutocomplete]="'user'" [singleChoice]="'true'" [arrayContent]="fetchedTask.assignedTos" (getResultAutocomplete)="selectAssignedTo($event[0])">
+        </app-autocomplete>
+        <input type="date" class="form-control" formControlName="creationDateString" [(ngModel)]="fetchedTask.creationDateString">
+        <input type="date" class="form-control" formControlName="endDateString" [(ngModel)]="fetchedTask.endDateString">
 
 
 <!--

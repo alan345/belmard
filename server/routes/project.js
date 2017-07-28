@@ -189,8 +189,16 @@ router.get('/page/:page', function(req, res, next) {
   .sort('-createdAt')
   .populate({path: 'clients', model: 'User'})
   .populate({path: 'assignedTos', model: 'User'})
-  .populate({path: 'bucketTasks.tasks', model: 'Task'})
-  .populate({path: 'bucketTasks.tasks.assignedTos', model: 'User'})
+  // .populate({path: 'bucketTasks.tasks', model: 'Task'})
+  // .populate({path: 'bucketTasks.tasks.assignedTos', model: 'User'})
+  .populate({
+    path: 'bucketTasks.tasks',
+    model: 'Task',
+    populate: {
+      path: 'assignedTos',
+      model: 'User'
+    }
+  })
   // .populate({path: 'quotes', model: 'Quote'})
   // .populate(
   //   {
