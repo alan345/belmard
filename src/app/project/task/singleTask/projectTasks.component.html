@@ -24,7 +24,7 @@
       <div class='container containerTasks form-control' [dragulaModel]='fetchedProject.bucketTasks[bucketTaskIndex].tasks' [dragula]='"nested-bag"'>
         <div class="move form-control btn-outline-info" (click)='onClick(bucketTaskIndex, taskIndex)' *ngFor='let task of bucketTask.tasks; let taskIndex = index;'>
 
-          <div *ngFor='let user of task.assignedTos' class="round" [style.background-color]="user.profile.colorCalendar" {{task.name}} *ngIf="task.status == 'done'" class="round" [style.background-color]="'#5BC75C'" <button type="button" class="btn btn-danger btn-sm ferme" (click)="deleteTask(bucketTaskIndex, taskIndex)">X</button> > 
+          <div *ngFor='let user of task.assignedTos' class="round" [style.background-color]="user.profile.colorCalendar" > {{task.name}} *ngIf="task.status == 'done'" class="round" [style.background-color]="'#5BC75C'" <button type="button" class="btn btn-danger btn-sm ferme" (click)="deleteTask(bucketTaskIndex, taskIndex)">X</button> 
           </div>
 
           {{task.name}}
