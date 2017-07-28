@@ -216,7 +216,15 @@ router.get('/page/:page', function(req, res, next) {
   let arrObj = []
 
   let searchQuery = {}
-  searchQuery['ownerCompanies'] = req.user.ownerCompanies
+
+
+  if(req.query.isQuoteAssignedToMe === 'true') {
+    searchQuery['clients'] = req.user._id
+  } else {
+    searchQuery['ownerCompanies'] = req.user.ownerCompanies
+
+  }
+
 
 
   if (req.query.search) {

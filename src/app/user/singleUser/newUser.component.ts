@@ -129,7 +129,7 @@ export class NewUserComponent implements OnInit {
       );
   }
   selectCompanie(companie: Companie) {
-    this.fetchedUser.canBeSeenByCompanies = [companie]
+    this.fetchedUser.ownerCompanies = [companie]
   }
 
   selectRight(right: Right) {
@@ -259,6 +259,11 @@ export class NewUserComponent implements OnInit {
     this.router.navigate(['user/' + id])
   }
 
+isUserIsMyself() {
+  if(this.authService.getCurrentUser()._id === this.fetchedUser._id)
+    return true
+  return false
+}
 
 
   getUser(id: string) {

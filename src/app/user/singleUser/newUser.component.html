@@ -12,7 +12,7 @@
   <div class="single-wrpr beigeback">
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
       <div class="form-group col-sm-12">
-        <label>Code Client :</label> {{fetchedUser._id}}
+        <label>Code Client:</label> {{fetchedUser._id}}
       </div>
 
 
@@ -32,13 +32,13 @@
           <div class="round" [style.background-color]="fetchedUser.profile.colorCalendar"></div>
           <input type="color" formControlName="colorCalendar" [(ngModel)]="fetchedUser.profile.colorCalendar">
         </div>
-        <div>
+        <!-- <div>
           <app-autocomplete [typeAutocomplete]="'user'" [title]="'Apporteur Affaire'" [singleChoice]="'true'" [arrayContent]="fetchedUser.salesMan" (getResultAutocomplete)="selectSalesMan($event)">
           </app-autocomplete>
-        </div>
+        </div> -->
       </div>
       <div class="form-group col-sm-12" *ngIf="fetchedUser.isExternalUser">
-        <app-autocomplete [title]="''" [singleChoice]="'true'" [typeAutocomplete]="'companie'" [arrayContent]="fetchedUser.canBeSeenByCompanies" (getResultAutocomplete)="selectCompanie($event[0])">
+        <app-autocomplete [title]="''" [singleChoice]="'true'" [typeAutocomplete]="'companie'" [arrayContent]="fetchedUser.ownerCompanies" (getResultAutocomplete)="selectCompanie($event[0])">
         </app-autocomplete>
       </div>
       <div class="form-group col-sm-12">
@@ -140,7 +140,7 @@
         <button *ngIf="fetchedUser._id" type="button" (click)="saveAndCreateProject()" [disabled]="!myForm.valid">
           Save & Create project
         </button>
-        <div *ngIf="!fetchedUser.isAdminOfHisCompanie">
+        <div *ngIf="!isUserIsMyself()">
           <button type="button" *ngIf="fetchedUser._id" class="delete" md-button (click)="openDialogDelete()">Delete</button>
         </div>
       </div>

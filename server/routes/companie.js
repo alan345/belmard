@@ -85,7 +85,7 @@ router.put('/:id', function (req, res, next) {
       })
     }
 
-    item.ownerCompanies = req.user.companies
+    // item.ownerCompanies = req.user.companies
     item.rights = req.body.rights
     item.address = req.body.address
     item.option = req.body.option
@@ -134,7 +134,7 @@ router.post('/', function (req, res, next) {
   //push
   companie.canBeSeenByCompanies = req.user.ownerCompanies
 
-  // console.log(companie)
+
   companie.save(function (err, result) {
     if (err) {
       return res.status(403).json({
@@ -146,6 +146,49 @@ router.post('/', function (req, res, next) {
       message: 'Registration Successfull',
       obj: result
     })
+  })
+});
+
+
+router.post('/saveMyCompanie/', function (req, res, next) {
+  if (!shared.isCurentUserHasAccess(req.user, nameObject, 'write')) {
+    return res.status(404).json({
+      title: 'No rights',
+      error: {message: 'No rights'}
+    })
+  }
+
+  var companie = new Companie(req.body);
+  //push
+  // companie.canBeSeenByCompanies = req.user.ownerCompanies
+
+  companie.save(function (err, result) {
+    if (err) {
+      return res.status(403).json({
+        title: 'There was an issue',
+        error: {message: 'The email you entered already exists'}
+      });
+    }
+    req.user.ownerCompanies = result._id
+    req.user.save(function (err, result2) {
+      if (err) {
+        return res.status(403).json({
+          title: 'There was an issue',
+          error: {message: 'The email you entered already exists'}
+        });
+      }
+
+      res.status(200).json({
+        message: 'Registration Successfull2',
+        obj: result
+      })
+
+
+    // res.status(200).json({
+    //   message: 'Registration Successfull',
+    //   obj: result
+    // })
+  })
   })
 });
 

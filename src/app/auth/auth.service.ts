@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 
-import {User} from './user.model';
+import {UserAuth} from './user.model';
 
 
 import {Observable} from 'rxjs/Observable';
@@ -15,6 +15,7 @@ import {tokenNotExpired} from 'angular2-jwt';
 import {Router} from '@angular/router';
 import {JwtHelper} from 'angular2-jwt';
 // import {UserService} from '../user/user.service'
+import {User} from '../user/user.model'
 
 
 @Injectable()
@@ -31,7 +32,7 @@ export class AuthService {
   }
   jwtHelper: JwtHelper = new JwtHelper();
   //public userId: string;
-  user:any
+  user:User
 
   constructor(
     private http: Http,
@@ -52,7 +53,7 @@ export class AuthService {
   }
 
   // sending request to back end to register our user
-  signup(user: User) {
+  signup(user: UserAuth) {
     const body = JSON.stringify(user);
     const headers = new Headers({'Content-Type': 'application/json'});
     return this.http.post('/user/register', body, {headers: headers})
@@ -64,7 +65,7 @@ export class AuthService {
   }
 
   // sending request to back end to login the user
-  signin(user: User) {
+  signin(user: UserAuth) {
     const body = JSON.stringify(user);
     const headers = new Headers({'Content-Type': 'application/json'});
     return this.http.post('/user/login', body, {headers: headers})
@@ -151,7 +152,7 @@ export class AuthService {
   getCurrentUser() {
     // console.log(localStorage.getItem('id_token') )
     // let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
-    console.log(this.user)
+    // console.log(this.user)
     return this.user
     // return userInfo
     // if (userInfo) {
@@ -170,7 +171,16 @@ export class AuthService {
 
   getUserPlan() {
     // let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
-    return this.user.paiement.stripe.plan
+    // return this.user.paiement.stripe.plan
+
+    let plan = ''
+    this.user.ownerCompanies.forEach(companie => {
+      plan = companie.planDetail.plan
+
+    });
+    // let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
+    return plan
+
   }
   isCurrentUserIsInSubPeriod() {
     // console.log(this.user)

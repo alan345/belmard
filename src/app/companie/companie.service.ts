@@ -73,18 +73,18 @@ export class CompanieService {
   //     });
   // }
 
-  getCompanieByUserId(id: string) {
-    let headers = new Headers({'Content-Type': 'application/json'});
-    headers.append('Authorization', '' + this.authService.currentUser.token);
-    return this.http.get(this.url + 'companie/byuserid/' + id, {headers: headers})
-      .map((response: Response) => {
-        return response.json().item
-      })
-      .catch((error: Response) => {
-        this.errorService.handleError(error.json());
-        return Observable.throw(error.json());
-      });
-  }
+  // getCompanieByUserId(id: string) {
+  //   let headers = new Headers({'Content-Type': 'application/json'});
+  //   headers.append('Authorization', '' + this.authService.currentUser.token);
+  //   return this.http.get(this.url + 'companie/byuserid/' + id, {headers: headers})
+  //     .map((response: Response) => {
+  //       return response.json().item
+  //     })
+  //     .catch((error: Response) => {
+  //       this.errorService.handleError(error.json());
+  //       return Observable.throw(error.json());
+  //     });
+  // }
 
 
   getCompanie(id: string, search: any) : Observable<Companie> {
@@ -121,13 +121,25 @@ export class CompanieService {
 
 
   saveCompanie(companie: Companie) {
-  //  console.log("this.authService.currentUser.token",this.authService.currentUser.token);
     delete companie._id;
     const body = JSON.stringify(companie);
     const headers = new Headers({'Content-Type': 'application/json'});
-  //  let headers = new Headers({'Content-Type': 'application/json'});
     headers.append('Authorization', '' + this.authService.currentUser.token);
-    return this.http.post(this.url + 'companie/',body, {headers: headers})
+    return this.http.post(this.url + 'companie/', body, {headers: headers})
+      .map(response => response.json())
+      .catch((error: Response) => {
+        this.errorService.handleError(error.json());
+        return Observable.throw(error.json());
+      });
+  }
+
+
+  saveMyCompanie(companie: Companie) {
+    delete companie._id;
+    const body = JSON.stringify(companie);
+    const headers = new Headers({'Content-Type': 'application/json'});
+    headers.append('Authorization', '' + this.authService.currentUser.token);
+    return this.http.post(this.url + 'companie/saveMyCompanie/', body, {headers: headers})
       .map(response => response.json())
       .catch((error: Response) => {
         this.errorService.handleError(error.json());

@@ -37,7 +37,7 @@ export class EditCompanieComponent implements OnInit {
   // seeRights = false;
   seeCategProject = false;
   seeCategProduct = false;
-  isMyCompany: Boolean = false
+  isMyCompanyRoute: Boolean = false
   // typesRights = [
   //   {name : 'Project', value: 'project'},
   //   {name : 'Quote', value: 'qute'},
@@ -85,7 +85,8 @@ export class EditCompanieComponent implements OnInit {
       if(params['id']) {
         if(params['id'] === 'mine') {
           this.getCompanie('')
-          this.isMyCompany = true
+          this.isMyCompanyRoute = true
+
         } else {
           this.getCompanie(params['id'])
         }
@@ -93,6 +94,14 @@ export class EditCompanieComponent implements OnInit {
     })
   }
 
+  isMyCompanie() {
+    let currentUser = this.authService.getCurrentUser()
+    // console.log(currentUser)
+    return currentUser.ownerCompanies.some(obj => {
+      return obj._id === this.fetchedCompanie._id
+    })
+
+  }
   //
   // addRight(level, index1, index2, index3) {
   //     if(level === 0){
@@ -680,6 +689,7 @@ export class EditCompanieComponent implements OnInit {
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
+            this.fetchedCompanie = res.obj
           //  this.router.navigate(['companie/' + this.fetchedCompanie._id])
           },
           error => {
@@ -691,11 +701,22 @@ export class EditCompanieComponent implements OnInit {
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
+            this.fetchedCompanie = res.obj
             //  this.router.navigate(['companie/' + res.obj._id])
           },
           error => {console.log(error)}
         )
     }
+  }
+  saveMyCompanie(){
+    this.companieService.saveMyCompanie(this.fetchedCompanie)
+      .subscribe(
+        res => {
+          this.toastr.success('Great!', res.message)
+          this.fetchedCompanie = res.obj
+        },
+        error => {console.log(error)}
+      )
   }
 
   onDelete(id: string) {

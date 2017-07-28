@@ -106,9 +106,9 @@ export class ProductSingleComponent implements OnInit {
   getItemSteps() {
     let currentUser = this.authService.getCurrentUser()
 
-    for (let i in currentUser.companies) {
-      if(currentUser.companies[i].categories.categProduct)
-        this.itemSteps = currentUser.companies[i].categories.categProduct
+    for (let i in currentUser.ownerCompanies) {
+      if(currentUser.ownerCompanies[i].categories.categProduct)
+        this.itemSteps = currentUser.ownerCompanies[i].categories.categProduct
     }
 
   }

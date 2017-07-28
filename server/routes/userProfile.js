@@ -74,12 +74,15 @@ router.get('/page/:page', function (req, res, next) {
 
 
 if(req.query.isExternalUser === 'true') {
-  searchQuery['isExternalUser'] = true
+  // searchQuery['isExternalUser'] = true
   searchQuery['canBeSeenByCompanies'] = req.user.ownerCompanies
+  searchQuery['ownerCompanies'] = {
+    $ne: req.user.ownerCompanies
+  }
 }
 
 if(req.query.isExternalUser === 'false') {
-  searchQuery['isExternalUser'] = false
+  // searchQuery['isExternalUser'] = false
   searchQuery['ownerCompanies'] = req.user.ownerCompanies
 
 }
@@ -93,7 +96,6 @@ if(req.query.isExternalUser === 'false') {
   User
   .find(searchQuery)
   .populate({ path: 'companies', model: 'Companie'})
-
   .limit(itemsPerPage)
   .skip(skip)
   .sort(req.query.orderBy)
@@ -128,7 +130,7 @@ function getUser(req, res, next, id) {
     .populate({path: 'forms', model: 'Form'})
     .populate({path: 'rights', model: 'Right'})
     .populate({path: 'salesMan', model: 'User'})
-    .populate({path: 'companies', model: 'Companie'})
+    .populate({path: 'ownerCompanies', model: 'Companie'})
     .populate({path: 'profile.profilePicture', model: 'Form'})
     // .populate({
     //     path: 'companies',
@@ -153,6 +155,17 @@ function getUser(req, res, next, id) {
         });
       }
 
+      // user.isExternalUser = false
+      user.isExternalUser = true
+      user.ownerCompanies.forEach((companie, index) => {
+        // console.log(companie._id )
+        // console.log(req.user.ownerCompanies , companie._id.toString()  )
+        console.log(req.user.ownerCompanies.toString(), companie._id.toString()  )
+        if(req.user.ownerCompanies.toString() == companie._id.toString()  )
+          user.isExternalUser = false
+      })
+      console.log(user.isExternalUser)
+      // console.log(user)
       return res.status(200).json({
         user: user
       })

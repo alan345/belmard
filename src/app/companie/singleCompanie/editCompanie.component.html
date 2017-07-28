@@ -6,16 +6,16 @@
   <div class="col-md-3"></div>
 </div> -->
 
-<app-header [showBackButton]="showBackButton" [nameObject]="'companie'" [showCreateButton]="false"></app-header>
-
 
 <div class="container">
+<app-header [showBackButton]="showBackButton" [nameObject]="'companie'" [showCreateButton]="false"></app-header>
+
 
 
   <h4 class="dspl-nn">id: {{fetchedCompanie._id}}</h4>
 
   <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
-    <div *ngIf="isMyCompany">
+    <div *ngIf="isMyCompanie()">
       <button type="button" [routerLink]="['/user/paiement']">PLAN</button> Plan: {{fetchedCompanie.planDetail.plan}} ({{fetchedCompanie.planDetail.current_period_end | date:'yyyy-MM-dd'}})
     </div>
     <div class="form-group sln-inffrm">
@@ -44,7 +44,7 @@
 
 
 
-      <div *ngIf="isMyCompany" formGroupName="option">
+      <div *ngIf="isMyCompanie()" formGroupName="option">
         <div formGroupName="calendar">
           <h4>Options Calendar</h4>
           <input type="text" class="form-control" formControlName="timeBegin" [(ngModel)]="fetchedCompanie.option.calendar.timeBegin" required minlength="1" placeholder="timeBegin">
@@ -53,7 +53,7 @@
       </div>
     </div>
 
-    <div *ngIf="isMyCompany">
+    <div *ngIf="isMyCompanie()">
       <h4>Categories</h4>
       <div (click)="openSection('seeCategProject')">See Categs Project</div>
       <div *ngIf="seeCategProject">
@@ -100,10 +100,14 @@
           Enregistrer
         </button>
 
+        <button *ngIf="isMyCompanyRoute && fetchedCompanie._id==''" type="button" (click)="saveMyCompanie()" class="sln-edt done">
+            Save my companie
+        </button>
+
 
       <button *ngIf="fetchedCompanie._id" type="button" class="sln-edt done" (click)="onDelete(fetchedCompanie._id)">
           Delete
-        </button>
+      </button>
     </div>
     <div class="clearfix"></div>
   </form>

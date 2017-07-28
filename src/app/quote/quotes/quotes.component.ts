@@ -28,6 +28,7 @@ export class QuotesComponent implements OnInit {
   };
 
   search = {
+    isQuoteAssignedToMe: false,
     orderBy : '',
     search: '',
     quoteType: '',
@@ -55,6 +56,12 @@ export class QuotesComponent implements OnInit {
       this2.search.orderBy = 'name'
       this2.getQuotes(1, this2.search)
     }, 200);
+
+  }
+
+  onSelectChange = ($event: any): void => {
+    this.search.isQuoteAssignedToMe = $event.tab.content.viewContainerRef.element.nativeElement.getAttribute('data-isQuoteAssignedToMe')
+    this.getQuotes(this.paginationData.currentPage, this.search);
 
   }
 

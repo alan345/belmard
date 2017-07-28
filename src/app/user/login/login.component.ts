@@ -3,7 +3,7 @@ import {FormGroup, FormControl, FormBuilder, Validators} from '@angular/forms';
 import {ToastsManager} from 'ng2-toastr';
 import {Router} from '@angular/router';
 import {AuthService} from '../../auth/auth.service';
-import {User} from '../../auth/user.model';
+import {UserAuth} from '../../auth/user.model';
 
 @Component({
   selector: 'app-login',
@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
   // submit the login form with the user credentials and navigate the user to the index page of our app
   onSubmit() {
-    const user = new User(this.myForm.value.email, this.myForm.value.password);
+    const user = new UserAuth(this.myForm.value.email, this.myForm.value.password);
     this._authService.signin(user)
       .subscribe(
         data => {
