@@ -27,11 +27,11 @@
          <table>
           <tr>
             <td> <div *ngFor='let user of task.assignedTos' class="round" [style.background-color]="user.profile.colorCalendar"> 
-                </div></td>
-
-                <td>{{task.name}}</td>
-                <button type="button" class="btn btn-danger btn-sm ferme" (click)="deleteTask(bucketTaskIndex, taskIndex)">X</button>
-                <td><div *ngIf="task.status == 'done'" class="round" [style.background-color]="'#5BC75C'"></div></td>
+                 </div></td>
+            <td>{{task.name}}</td>
+            <td><div *ngIf="task.status == 'done'" class="round" [style.background-color]="'#5BC75C'"></div></td>
+            <td><button type="button" class="btn btn-danger btn-sm ferme" (click)="deleteTask(bucketTaskIndex, taskIndex)">X</button></td>
+                
           </tr>
          </table>  
         </div>
