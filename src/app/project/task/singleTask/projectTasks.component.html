@@ -12,10 +12,6 @@
 
 
   <div *ngIf="fetchedProject._id">
-
-
-
-
     <div class="progress">
       <div class="progress-bar progress-bar-striped" role="progressbar" [style.width]="(fetchedProject.progressTasks)*100 + '%'"  aria-valuemin="0" aria-valuemax="100">
         {{fetchedProject.progressTasks * 100 | round }}%
@@ -52,8 +48,8 @@
 
 
                 </td>
-                <td class="tdbtn6"><button type="button" class="btn btn-danger btn-sm ferme" (click)="deleteTask(bucketTaskIndex, taskIndex)">X</button></td>
-
+                <td class="tdbtn6"><button type="button" class="btn btn-danger btn-sm ferme"
+                  (click)="deleteTask(task, bucketTaskIndex, taskIndex)">X</button></td>
               </tr>
             </table>
           </div>
@@ -78,7 +74,12 @@
     <div *ngFor='let bucketTask of fetchedProject.bucketTasks; let bucketTaskIndex = index;'>
       <div *ngFor='let task of bucketTask.tasks; let taskIndex = index;'>
         <div *ngIf="task.editMode">
-          <input type="text" class="form-control" (focusout)="saveTask(task, bucketTaskIndex)" [(ngModel)]="fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].name" placeholder="{{'Task Name' | translate}}" (keyup.enter)="saveTask(bucketTaskIndex, taskIndex)">
+          <input type="text"
+          class="form-control"
+          (focusout)="saveTask(task, bucketTaskIndex)"
+          [(ngModel)]="fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].name"
+          placeholder="{{'Task Name' | translate}}"
+          (keyup.enter)="saveTask(task, bucketTaskIndex)">
 
 
           <select class="form-control" (focusout)="saveTask(task, taskIndex)" [(ngModel)]="fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].status">

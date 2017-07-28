@@ -112,9 +112,21 @@ export class ProjectTasksComponent implements OnInit {
     this.save()
   }
 
-  deleteTask(bucketTaskIndex, taskIndex) {
-    this.fetchedProject.bucketTasks[bucketTaskIndex].tasks.splice(taskIndex, 1)
-    this.save()
+
+  deleteTask(task, bucketTaskIndex, taskIndex) {
+    console.log(task, bucketTaskIndex, taskIndex)
+    this.taskService.deleteTask(task._id)
+      .subscribe(
+        res => {
+          this.toastr.success('Great!', res.message);
+          this.fetchedProject.bucketTasks[bucketTaskIndex].tasks.splice(taskIndex, 1)
+          this.save()
+        },
+        error => {
+          console.log(error);
+        }
+      )
+
   }
 
 
