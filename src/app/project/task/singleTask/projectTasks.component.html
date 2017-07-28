@@ -20,7 +20,7 @@
   <div class='row'>
     <div *ngFor='let bucketTask of fetchedProject.bucketTasks; let bucketTaskIndex = index;'>
       {{bucketTask.bucketName}}
-      <button (click)="deleteBucketTask(bucketTaskIndex)">X</button>
+      <button type="button" class="btn btn-danger btn-sm ferme" (click)="deleteBucketTask(bucketTaskIndex)">X</button>
       <div class='container containerTasks form-control' [dragulaModel]='fetchedProject.bucketTasks[bucketTaskIndex].tasks' [dragula]='"nested-bag"'>
         <div class="move form-control btn-outline-info" (click)='onClick(bucketTaskIndex, taskIndex)' *ngFor='let task of bucketTask.tasks; let taskIndex = index;'>
 
@@ -28,7 +28,7 @@
           </div>
 
           {{task.name}}
-          <button (click)="deleteTask(bucketTaskIndex, taskIndex)">X</button>
+          <button type="button" class="btn btn-danger btn-sm ferme" (click)="deleteTask(bucketTaskIndex, taskIndex)">X</button>
           <div *ngIf="task.status == 'done'" class="round" [style.background-color]="'#5BC75C'"></div>
 
         </div>
