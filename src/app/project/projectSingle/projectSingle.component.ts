@@ -277,8 +277,7 @@ export class ProjectSingleComponent implements OnInit {
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
-            this.getProject(res.obj._id)
-            // this.fetchedProject = res.obj
+            this.fetchedProject = res.obj
             // this.router.navigate(['project/' + res.obj._id]);
           },
           error => {console.log(error)}
@@ -289,8 +288,7 @@ export class ProjectSingleComponent implements OnInit {
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
-            this.getProject(res.obj._id)
-            // this.fetchedProject = res.obj
+            this.fetchedProject = res.obj
             // this.router.navigate(['project/' + res.obj._id]);
           },
           error => {
@@ -346,7 +344,7 @@ export class ProjectSingleComponent implements OnInit {
 
 
 
-  getProject(id: string) {
+  getProject(id : string) {
     this.projectService.getProject(id)
       .subscribe(
         res => {
