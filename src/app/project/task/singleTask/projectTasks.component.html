@@ -21,7 +21,8 @@
          <div *ngFor='let bucketTask of fetchedProject.bucketTasks; let bucketTaskIndex = index;'>
            <table class="form-control col-md-6">
           <tr>
-            <td class="tdbtn1">    
+            <td class="tdbtn1">
+               
             {{bucketTask.bucketName}}
           </td>
             <td class="tdbtn7"><button type="button" class="btn btn-danger btn-sm ferme" (click)="deleteBucketTask(bucketTaskIndex)">X</button>
