@@ -75,7 +75,7 @@ router.put('/:id', function(req, res, next) {
       return res.status(404).json({message: '', err: err})
     } else {
       //console.log(req.body)
-      item.ownerCompanies = req.user.companies
+      // item.ownerCompanies = req.user.ownerCompanies
       item.details = req.body.details
       item.forms = req.body.forms
       item.status = req.body.status
