@@ -38,7 +38,7 @@
           <input type="text" (keyup.enter)="addTask(content.value, bucketTaskIndex)" (focusout)="addTask(content.value, bucketTaskIndex)" #content>
           <!-- <button (click)="addTask(content.value, bucketTaskIndex)">Add</button> -->
         </div>
-        <button *ngIf="!bucketTask.openNewTask" (click)="newTask(bucketTaskIndex)">Create Task</button>
+        <button type="button" class="btn btn-success" *ngIf="!bucketTask.openNewTask" (click)="newTask(bucketTaskIndex)"><i class="fa fa-plus"></i> Create Task</button>
       </div>
     </div>
 
@@ -73,7 +73,7 @@
         </app-autocomplete>
         <input type="date" class="form-control" [(ngModel)]="fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].dateTask.creationDateString">
         <input type="date" class="form-control" [(ngModel)]="fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].dateTask.endDateString">
-        <button (click)="save()">Save</button>
+        <button type="button" class="btn btn-success" (click)="save()">Save</button>
       </div>
     </div>
   </div>
