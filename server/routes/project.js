@@ -2,6 +2,7 @@ var express = require('express'),
   router = express.Router(),
   config = require('../config/config'),
   User = require('../models/user.model'),
+  Task = require('../models/task.model'),
   Project = require('../models/project.model'),
   Form = require('../models/form.model'),
   fs = require('fs'),
@@ -75,8 +76,12 @@ router.put('/updateTask/:id', function(req, res, next) {
     if (err) {
       return res.status(404).json({message: '', err: err})
     } else {
-      console.log(req.body.task)
-      item.bucketTasks[req.body.bucketTaskIndex].tasks[req.body.taskIndex] = (req.body.task)
+
+
+      var task = new Task(req.body.task)
+      // console.log(Task)
+      // item.bucketTasks[req.body.bucketTaskIndex].tasks[req.body.taskIndex] = task
+      item.bucketTasks[req.body.bucketTaskIndex].tasks.push( task)
       // console.log(item)
 
       item.save(function(err, result) {
@@ -184,6 +189,7 @@ router.get('/page/:page', function(req, res, next) {
   .sort('-createdAt')
   .populate({path: 'clients', model: 'User'})
   .populate({path: 'assignedTos', model: 'User'})
+  .populate({path: 'bucketTasks.tasks', model: 'Task'})
   .populate({path: 'bucketTasks.tasks.assignedTos', model: 'User'})
   // .populate({path: 'quotes', model: 'Quote'})
   // .populate(
@@ -274,6 +280,7 @@ router.get('/:id', function(req, res, next) {
     .populate({path: 'clients', model: 'User'})
     .populate({path: 'forms', model: 'Form'})
     .populate({path: 'assignedTos', model: 'User'})
+    .populate({path: 'bucketTasks.tasks', model: 'Task'})
     .populate({path: 'bucketTasks.tasks.assignedTos', model: 'User'})
     .exec(function(err, item) {
       if (err) {

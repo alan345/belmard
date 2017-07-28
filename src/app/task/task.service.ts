@@ -44,21 +44,21 @@ export class TaskService {
       });
   }
 
-  countNewItemForUser(){
-    let headers = new Headers({'Content-Type': 'application/json'});
-    headers.append('Authorization', '' + this.authService.currentUser.token);
-    let options = new RequestOptions({ headers: headers});
-    return this.http.get(this.url + 'task/countNewItemForUser/' + this.authService.currentUser.userId, options)
-      .timeout(9000)
-      .map((response: Response) => {
-        const tasks = response.json();
-        return tasks;
-      })
-      .catch((error: Response) => {
-        this.errorService.handleError(error.json());
-        return Observable.throw(error.json());
-      });
-  }
+  // countNewItemForUser(){
+  //   let headers = new Headers({'Content-Type': 'application/json'});
+  //   headers.append('Authorization', '' + this.authService.currentUser.token);
+  //   let options = new RequestOptions({ headers: headers});
+  //   return this.http.get(this.url + 'task/countNewItemForUser/' + this.authService.currentUser.userId, options)
+  //     .timeout(9000)
+  //     .map((response: Response) => {
+  //       const tasks = response.json();
+  //       return tasks;
+  //     })
+  //     .catch((error: Response) => {
+  //       this.errorService.handleError(error.json());
+  //       return Observable.throw(error.json());
+  //     });
+  // }
 
   //getTask(id: string) : Observable<Task> {
   getTask(id: string) {
@@ -96,7 +96,7 @@ export class TaskService {
       });
   }
 
-  saveTask(task : Task) {
+  saveTask(task: Task) {
     //  console.log("this.authService.currentUser.token",this.authService.currentUser.token);
     //  delete task._id;
     delete task._id

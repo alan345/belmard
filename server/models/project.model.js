@@ -28,16 +28,18 @@ var project = new Schema({
     progressTasks:{type: Number, default: [0]},
     bucketTasks:[{
       bucketName:{type: String, default: ['']},
-      tasks:[{
-        name: {type: String},
-        status: {type: String},
-        description: {type: String},
-        assignedTos: [{type: Schema.Types.ObjectId, ref: 'User'}],
-        dateTask:{
-          creationDate: {type: Date, default: [Date()]},
-          endDate: {type: Date, default: [Date()]},
-        }
-      }]
+      tasks:[{type: Schema.Types.ObjectId, ref: 'Task'}
+      //   {
+      //   name: {type: String},
+      //   status: {type: String},
+      //   description: {type: String},
+      //   assignedTos: [{type: Schema.Types.ObjectId, ref: 'User'}],
+      //   dateTask:{
+      //     creationDate: {type: Date, default: [Date()]},
+      //     endDate: {type: Date, default: [Date()]},
+      //   }
+      // }
+    ]
     }]
   },
   {

@@ -76,8 +76,13 @@ router.put('/:id', function (req, res, next) {
       })
     } else {
       //console.log(req.body)
-        item.projects = req.body.projects
-        item.bucketTasks = req.body.bucketTasks
+        item.assignedTos = req.body.assignedTos
+        item.dateTask = req.body.dateTask
+        item.description = req.body.description
+        item.name = req.body.name
+        item.dateTask = req.body.dateTask
+        item.status = req.body.status
+
 
         item.save(function (err, result) {
           if (err) {
@@ -143,6 +148,14 @@ router.get('/page/:page', function (req, res, next) {
   //  createdAt:{"$gt": dateRef},
   }
 
+
+  if (req.query.myTasks === 'true')
+    searchQuery['assignedTos'] = mongoose.Types.ObjectId(req.user._id)
+    // aggregate.push({
+    //   $match: {
+    //     'bucketTasks.tasks.assignedTos': mongoose.Types.ObjectId(req.user._id)
+    //   }
+    // })
 
   if(req.query.search)
     searchQuery['details.name'] = new RegExp(req.query.search, 'i')

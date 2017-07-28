@@ -13,7 +13,7 @@ import { ProjectRouting} from './projectRouting.module';
 
 import { TasksComponent} from './task/tasks/tasks.component';
 
-
+import { TaskService} from '../task/task.service';
 import { QuoteModule} from '../quote/quote.module';
 
 import { DragulaModule } from 'ng2-dragula';
@@ -49,7 +49,9 @@ import {SharedModule } from '../shared/shared.module';
     ProjectsComponent,
     // AutocompleteComponent,
   ],
-  providers:    [ ProjectService ],
+  providers:    [
+    ProjectService,
+    TaskService],
   entryComponents: [
     ProjectDialogComponent
   ]

@@ -4,7 +4,8 @@ import { ToastsManager} from 'ng2-toastr';
 //import { MdDialog } from '@angular/material';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
-import { Project, BucketTasks, Task } from '../../project.model';
+import { Project, BucketTasks } from '../../project.model';
+import { Task } from '../../../task/task.model';
 // import { EditOptionsComponentDialog } from '../form/modalLibrary/modalLibrary.component';
 //import { FormGroup} from '@angular/forms';
 // import { DomSanitizer } from '@angular/platform-browser';
@@ -17,7 +18,7 @@ import { Project, BucketTasks, Task } from '../../project.model';
 import { DragulaService } from 'ng2-dragula';
 import { User } from '../../../user/user.model';
 import { AuthService} from '../../../auth/auth.service';
-
+import { TaskService } from '../../../task/task.service'
 
 
 @Component({
@@ -64,7 +65,7 @@ export class ProjectTasksComponent implements OnInit {
     { label: 'Not Started', value: '' },
     { label: 'Pending', value: 'pending' },
     { label: 'Done', value: 'done' }
-]
+  ]
 
 
   public many2: Array<string> = ['Explore', 'them'];
@@ -79,6 +80,7 @@ export class ProjectTasksComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private dragulaService: DragulaService,
     private authService: AuthService,
+    private taskService: TaskService,
   ) {
     // dragulaService.setOptions('nested-bag', {
     //   moves: function (el:any, container:any, handle:any):any {
@@ -97,8 +99,8 @@ export class ProjectTasksComponent implements OnInit {
   newBucketTaskF(newBucketTask) {
     let bucketTaskObj: BucketTasks = new BucketTasks()
     bucketTaskObj.bucketName = newBucketTask,
-    bucketTaskObj.openNewTask = false,
-    bucketTaskObj.tasks = []
+      bucketTaskObj.openNewTask = false,
+      bucketTaskObj.tasks = []
 
     this.fetchedProject.bucketTasks.push(bucketTaskObj)
     this.save()
@@ -114,43 +116,58 @@ export class ProjectTasksComponent implements OnInit {
     this.fetchedProject.bucketTasks[bucketTaskIndex].tasks.splice(taskIndex, 1)
     this.save()
   }
+
+
   addTask(content, bucketTaskIndex) {
+
+    console.log(content, bucketTaskIndex)
     this.fetchedProject.bucketTasks[bucketTaskIndex].openNewTask = false
     let newTask = new Task()
-    newTask.dateTask.creationDateString = this.authService.isoDateToHtmlDate(newTask.dateTask.creationDate)
-    newTask.dateTask.endDateString = this.authService.isoDateToHtmlDate(newTask.dateTask.endDate)
+    // newTask.dateTask.creationDateString = this.authService.isoDateToHtmlDate(newTask.dateTask.creationDate)
+    // newTask.dateTask.endDateString = this.authService.isoDateToHtmlDate(newTask.dateTask.endDate)
+    newTask.projects = [this.fetchedProject]
 
     newTask.name = content
-    this.fetchedProject.bucketTasks[bucketTaskIndex].tasks.push(newTask)
-    let taskIndex =  this.fetchedProject.bucketTasks[bucketTaskIndex].tasks.length-1
-    this.saveTask(bucketTaskIndex, taskIndex)
+    // this.fetchedProject.bucketTasks[bucketTaskIndex].tasks.push(newTask)
+    // let taskIndex =  this.fetchedProject.bucketTasks[bucketTaskIndex].tasks.length-1
+    this.saveTask(newTask, bucketTaskIndex)
+
   }
 
 
-  saveTask(bucketTaskIndex, taskIndex) {
-    console.log('s')
-    this.fetchedProject.bucketTasks[bucketTaskIndex]
-    .tasks[taskIndex].dateTask
-    .creationDate = this.authService
-    .HTMLDatetoIsoDate(this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].dateTask.creationDateString)
 
-    this.fetchedProject.bucketTasks[bucketTaskIndex]
-    .tasks[taskIndex].dateTask
-    .endDate = this.authService
-    .HTMLDatetoIsoDate(this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].dateTask.endDateString)
-
-    let taskData = {
-      task: this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex],
-      bucketTaskIndex: bucketTaskIndex,
-      taskIndex: taskIndex
+  saveTask(newTask, bucketTaskIndex) {
+    this.doCalc()
+    if (newTask._id) {
+      this.taskService.updateTask(newTask)
+        .subscribe(
+        res => {
+          this.toastr.success('Great!', res.message)
+        },
+        error => { console.log(error) }
+        );
+    } else {
+      this.taskService.saveTask(newTask)
+        .subscribe(
+        res => {
+          this.fetchedProject.bucketTasks[bucketTaskIndex].tasks.push(res.obj)
+          this.save()
+        },
+        error => {
+          this.toastr.error('Error!', error.message)
+          console.log(error)
+        }
+        );
     }
-    this.projectService.updateTask(taskData, this.fetchedProject)
-      .subscribe(
-      res => {
-        this.toastr.success('Great!', res.message)
-      },
-      error => { console.log(error) }
-      );
+
+    // this.authService.saveTask(this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex])
+    // this.projectService.updateTask(taskData, this.fetchedProject)
+    //   .subscribe(
+    //   res => {
+    //     this.toastr.success('Great!', res.message)
+    //   },
+    //   error => { console.log(error) }
+    //   );
   }
 
   newTask(index) {
@@ -191,20 +208,20 @@ export class ProjectTasksComponent implements OnInit {
   clearAutocomplete() {
     this.fetchedProject = new Project()
   }
-  getProject(project: Project){
+  getProject(project: Project) {
     this.fetchedProject = project
     this.fetchedProject.bucketTasks.forEach((bucketTask, bucketTaskIndex) => {
       bucketTask.tasks.forEach((task, taskIndex) => {
 
         this.fetchedProject.bucketTasks[bucketTaskIndex]
-        .tasks[taskIndex].dateTask
-        .creationDateString = this.authService
-        .isoDateToHtmlDate(this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].dateTask.creationDate)
+          .tasks[taskIndex].dateTask
+          .creationDateString = this.authService
+            .isoDateToHtmlDate(this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].dateTask.creationDate)
 
         this.fetchedProject.bucketTasks[bucketTaskIndex]
-        .tasks[taskIndex].dateTask
-        .endDateString = this.authService
-        .isoDateToHtmlDate(this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].dateTask.endDate)
+          .tasks[taskIndex].dateTask
+          .endDateString = this.authService
+            .isoDateToHtmlDate(this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].dateTask.endDate)
 
       })
     });
@@ -250,35 +267,51 @@ export class ProjectTasksComponent implements OnInit {
     console.log(event)
   }
 
-
-  save() {
+  doCalc() {
     let nbTasks = 0
     let nbTasksCompleted = 0
-
     this.fetchedProject.bucketTasks.forEach((bucketTask, bucketTaskIndex) => {
       nbTasks += bucketTask.tasks.length
       bucketTask.tasks.forEach((task, taskIndex) => {
-        if(task.status === 'done')
+        if (task.status === 'done')
           nbTasksCompleted++
 
-        if(task.status === 'pending')
+        if (task.status === 'pending')
           nbTasksCompleted = nbTasksCompleted + 0.5
-
-
-        this.fetchedProject.bucketTasks[bucketTaskIndex]
-        .tasks[taskIndex].dateTask
-        .creationDate = this.authService
-        .HTMLDatetoIsoDate(this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].dateTask.creationDateString)
-
-        this.fetchedProject.bucketTasks[bucketTaskIndex]
-        .tasks[taskIndex].dateTask
-        .endDate = this.authService
-        .HTMLDatetoIsoDate(this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].dateTask.endDateString)
 
       })
     });
+    this.fetchedProject.progressTasks = nbTasksCompleted / nbTasks
 
-    this.fetchedProject.progressTasks =  nbTasksCompleted / nbTasks
+  }
+  save() {
+    this.doCalc()
+    // let nbTasks = 0
+    // let nbTasksCompleted = 0
+    //
+    // this.fetchedProject.bucketTasks.forEach((bucketTask, bucketTaskIndex) => {
+    //   nbTasks += bucketTask.tasks.length
+    //   bucketTask.tasks.forEach((task, taskIndex) => {
+    //     if (task.status === 'done')
+    //       nbTasksCompleted++
+    //
+    //     if (task.status === 'pending')
+    //       nbTasksCompleted = nbTasksCompleted + 0.5
+    //
+    //     //
+    //     // this.fetchedProject.bucketTasks[bucketTaskIndex]
+    //     // .tasks[taskIndex].dateTask
+    //     // .creationDate = this.authService
+    //     // .HTMLDatetoIsoDate(this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].dateTask.creationDateString)
+    //     //
+    //     // this.fetchedProject.bucketTasks[bucketTaskIndex]
+    //     // .tasks[taskIndex].dateTask
+    //     // .endDate = this.authService
+    //     // .HTMLDatetoIsoDate(this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].dateTask.endDateString)
+    //
+    //   })
+    // });
+
 
 
     if (this.fetchedProject._id) {

@@ -1,6 +1,7 @@
 import { Form } from '../form/form.model';
 import { User } from '../user/user.model';
 import { Quote } from '../quote/quote.model';
+import { Task } from '../task/task.model';
 
 
 export class Project {
@@ -27,23 +28,23 @@ export class BucketTasks {
   openNewTask: boolean = false;
   tasks: Task[] = []
 }
-
-export class Task {
-  name: string = '';
-  status: string = '';
-  editMode: boolean = false;
-  description: string = '';
-  assignedTos: User[] = [];
-  dateTask: DateTask = new DateTask()
-}
-
-
-export class DateTask {
-  creationDate: Date = new Date()
-  creationDateString: string = '';
-  endDate: Date = new Date()
-  endDateString: string = '';
-}
+//
+// export class Task {
+//   name: string = '';
+//   status: string = '';
+//   editMode: boolean = false;
+//   description: string = '';
+//   assignedTos: User[] = [];
+//   dateTask: DateTask = new DateTask()
+// }
+//
+//
+// export class DateTask {
+//   creationDate: Date = new Date()
+//   creationDateString: string = '';
+//   endDate: Date = new Date()
+//   endDateString: string = '';
+// }
 
 
 

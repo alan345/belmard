@@ -65,7 +65,9 @@ export class TasksComponent implements OnInit {
   goBack() {
     this.location.back();
   }
-  getTasksInit(){
+
+  getTasksInit() {
+    console.log('aaaa')
     this.getTasks(1, this.search)
   }
   selectProject(project: Project) {
