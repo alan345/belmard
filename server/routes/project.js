@@ -150,8 +150,11 @@ router.get('/page/:page', function(req, res, next) {
     // console.log(hasWhatsNewCateg)
   // console.log(searchQuery)
 
-  Project.find(searchQuery).sort('-createdAt').populate({path: 'clients', model: 'User'}).populate({path: 'assignedTos', model: 'User'})
-
+  Project.find(searchQuery)
+  .sort('-createdAt')
+  .populate({path: 'clients', model: 'User'})
+  .populate({path: 'assignedTos', model: 'User'})
+  .populate({path: 'bucketTasks.tasks.assignedTos', model: 'User'})
   // .populate({path: 'quotes', model: 'Quote'})
   // .populate(
   //   {
@@ -237,7 +240,12 @@ router.get('/:id', function(req, res, next) {
       })
     }
 
-    Project.findById({_id: req.params.id}).populate({path: 'clients', model: 'User'}).populate({path: 'forms', model: 'Form'}).populate({path: 'assignedTos', model: 'User'}).populate({path: 'bucketTasks.tasks.assignedTos', model: 'User'}).exec(function(err, item) {
+    Project.findById({_id: req.params.id})
+    .populate({path: 'clients', model: 'User'})
+    .populate({path: 'forms', model: 'Form'})
+    .populate({path: 'assignedTos', model: 'User'})
+    .populate({path: 'bucketTasks.tasks.assignedTos', model: 'User'})
+    .exec(function(err, item) {
       if (err) {
         return res.status(404).json({message: '', err: err})
       } else {

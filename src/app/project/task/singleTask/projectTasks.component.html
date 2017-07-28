@@ -1,92 +1,107 @@
 
-<app-header [showHeader]="'true'" [nameObject]="'task'" [showCreateButton]='false'></app-header>
+<div class="container">
+
+  <app-header [showHeader]="'true'" [nameObject]="'task'" [showCreateButton]='false'>
+  </app-header>
 
 
-<div class='row'>
-  <app-autocomplete [typeAutocomplete]="'project'" [title]="''" [singleChoice]="'true'" [arrayContent]="fetchedProjects" (getResultAutocomplete)="selectProject($event[0])" (clearAutocomplete)="clearAutocomplete()">
-  </app-autocomplete>
-</div>
-
-
-<div *ngIf="fetchedProject._id">
   <div class='row'>
-    <div class="col-md-4" [routerLink]="['/project/' + fetchedProject._id]">
-      {{'Project' | translate}}: {{fetchedProject.details.name }}
-    </div>
-    <div class="col-md-4">
-      {{'Progress' | translate}} = {{fetchedProject.progressTasks * 100 | round }}%
-    </div>
+    <app-autocomplete [typeAutocomplete]="'project'" [title]="''" [singleChoice]="'true'" [arrayContent]="fetchedProjects" (getResultAutocomplete)="selectProject($event[0])" (clearAutocomplete)="clearAutocomplete()">
+    </app-autocomplete>
   </div>
-  <div class='row'>
-         <div *ngFor='let bucketTask of fetchedProject.bucketTasks; let bucketTaskIndex = index;'>
-           <table class="form-control col-md-6">
-          <tr>
-            <td class="tdbtn1">
-               
-            {{bucketTask.bucketName}}
-          </td>
-            <td class="tdbtn7"><button type="button" class="btn btn-danger btn-sm ferme" (click)="deleteBucketTask(bucketTaskIndex)">X</button>
-            </td>
-          </tr>
-         </table>
 
 
-    <div class='container containerTasks form-control' [dragulaModel]='fetchedProject.bucketTasks[bucketTaskIndex].tasks' [dragula]='"nested-bag"'>
-        <div class="move form-control btn-outline-info" (click)='onClick(bucketTaskIndex, taskIndex)' *ngFor='let task of bucketTask.tasks; let taskIndex = index;'>
-
-         <table>
-          <tr>
-            <td class="tdbtn3"> <div *ngFor='let user of task.assignedTos' class="round" [style.background-color]="user.profile.colorCalendar">
-                 </div></td>
-            <td class="tdbtn4">{{task.name}}</td>
-            <td class="tdbtn5"><div *ngIf="task.status == 'done'" class="round" [style.background-color]="'#5BC75C'"></div></td>
-            <td class="tdbtn6"><button type="button" class="btn btn-danger btn-sm ferme" (click)="deleteTask(bucketTaskIndex, taskIndex)">X</button></td>
-
-          </tr>
-         </table>
-        </div>
+  <div *ngIf="fetchedProject._id">
 
 
-        <div *ngIf="bucketTask.openNewTask">
-          <input type="text" (keyup.enter)="addTask(content.value, bucketTaskIndex)" (focusout)="addTask(content.value, bucketTaskIndex)" #content>
-          <!-- <button (click)="addTask(content.value, bucketTaskIndex)">Add</button> -->
-        </div>
-        <button type="button" class="btn btn-success" *ngIf="!bucketTask.openNewTask" (click)="newTask(bucketTaskIndex)"><i class="fa fa-plus"></i> Create Task</button>
+
+
+    <div class="progress">
+      <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
+        {{fetchedProject.progressTasks * 100 | round }}%
       </div>
     </div>
 
-    <div>
-      <input class="form-control" type="text" #newBucketTaskInput (keyup.enter)="newBucketTaskF(newBucketTaskInput.value);newBucketTaskInput.value='';" placeholder="Name bucket">
+
+    <div class='row'>
+      <div *ngFor='let bucketTask of fetchedProject.bucketTasks; let bucketTaskIndex = index;'>
+        <table class="form-control col-md-6">
+          <tr>
+            <td class="tdbtn1">
+
+              {{bucketTask.bucketName}}
+            </td>
+            <td class="tdbtn7"><button type="button" class="btn btn-danger btn-sm ferme" (click)="deleteBucketTask(bucketTaskIndex)">X</button>
+            </td>
+          </tr>
+        </table>
+
+        <div class='container containerTasks form-control' [dragulaModel]='fetchedProject.bucketTasks[bucketTaskIndex].tasks' [dragula]='"nested-bag"'>
+          <div *ngFor='let task of bucketTask.tasks; let taskIndex = index;' class="move form-control btn-outline-info" (click)='onClick(bucketTaskIndex, taskIndex)' >
+            <table>
+              <tr>
+                <td class="tdbtn3">
+                  <div *ngFor='let user of task.assignedTos' class="round" [style.background-color]="user.profile.colorCalendar">
+                  </div>
+                </td>
+                <td class="tdbtn4">{{task.name}}</td>
+                <td class="tdbtn5">
+                  <div *ngIf="task.status == 'done'" class="round" [style.background-color]="'#5BC75C'"></div>
+                  <div *ngIf="task.status == 'pending'" class="round" [style.background-color]="'#EC971F'"></div>
+                  <div *ngIf="task.status == ''" class="round" [style.background-color]="'#F5F5F5'"></div>
+
+
+                </td>
+                <td class="tdbtn6"><button type="button" class="btn btn-danger btn-sm ferme" (click)="deleteTask(bucketTaskIndex, taskIndex)">X</button></td>
+
+              </tr>
+            </table>
+          </div>
+
+
+          <div *ngIf="bucketTask.openNewTask">
+            <input type="text" (keyup.enter)="addTask(content.value, bucketTaskIndex)" (focusout)="addTask(content.value, bucketTaskIndex)" #content>
+            <!-- <button (click)="addTask(content.value, bucketTaskIndex)">Add</button> -->
+          </div>
+          <button type="button" class="btn btn-success" *ngIf="!bucketTask.openNewTask" (click)="newTask(bucketTaskIndex)">
+            <i class="fa fa-plus"></i> Create Task
+          </button>
+        </div>
+      </div>
+
+      <div>
+        <input class="form-control" type="text" #newBucketTaskInput (keyup.enter)="newBucketTaskF(newBucketTaskInput.value);newBucketTaskInput.value='';" placeholder="Name bucket">
+      </div>
     </div>
-  </div>
 
 
-  <div *ngFor='let bucketTask of fetchedProject.bucketTasks; let bucketTaskIndex = index;'>
-    <div *ngFor='let task of bucketTask.tasks; let taskIndex = index;'>
-      <div *ngIf="task.editMode">
-        <input type="text" class="form-control" (focusout)="save()" [(ngModel)]="fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].name" placeholder="{{'Task Name' | translate}}" (keyup.enter)="save()">
+    <div *ngFor='let bucketTask of fetchedProject.bucketTasks; let bucketTaskIndex = index;'>
+      <div *ngFor='let task of bucketTask.tasks; let taskIndex = index;'>
+        <div *ngIf="task.editMode">
+          <input type="text" class="form-control" (focusout)="save()" [(ngModel)]="fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].name" placeholder="{{'Task Name' | translate}}" (keyup.enter)="save()">
 
 
-        <select class="form-control" [(ngModel)]="fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].status">
-        <option *ngFor="let n of statusTypes" [attr.value]="n.value">{{n.label}}</option>
-      </select>
-        <!--
-      <input
-        type="text"
-        class="form-control"
-        (focusout)="save()"
-        [(ngModel)]="fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].name"
-        placeholder="Nom du fournisseur"
-        (keyup.enter)="save()"
-      > -->
+          <select class="form-control" (focusout)="save()" [(ngModel)]="fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].status">
+            <option *ngFor="let n of statusTypes" [attr.value]="n.value">{{n.label}}</option>
+          </select>
+          <!--
+        <input
+          type="text"
+          class="form-control"
+          (focusout)="save()"
+          [(ngModel)]="fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].name"
+          placeholder="Nom du fournisseur"
+          (keyup.enter)="save()"
+        > -->
 
-        <textarea class="form-control" [(ngModel)]="fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].description" placeholder="Description">
-      </textarea>
-        <app-autocomplete [typeAutocomplete]="'user'" [singleChoice]="'true'" [arrayContent]="fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].assignedTos" (getResultAutocomplete)="selectAssignedTo($event, bucketTaskIndex, taskIndex)">
-        </app-autocomplete>
-        <input type="date" class="form-control" [(ngModel)]="fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].dateTask.creationDateString">
-        <input type="date" class="form-control" [(ngModel)]="fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].dateTask.endDateString">
-        <button type="button" class="btn btn-success" (click)="save()">Save</button>
+          <textarea class="form-control" (focusout)="save()" [(ngModel)]="fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].description" placeholder="Description">
+          </textarea>
+          <app-autocomplete [typeAutocomplete]="'user'" [singleChoice]="'true'" [arrayContent]="fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].assignedTos" (getResultAutocomplete)="selectAssignedTo($event, bucketTaskIndex, taskIndex)">
+          </app-autocomplete>
+          <input type="date" class="form-control" (focusout)="save()" [(ngModel)]="fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].dateTask.creationDateString">
+          <input type="date" class="form-control" (focusout)="save()" [(ngModel)]="fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].dateTask.endDateString">
+          <button type="button" class="btn btn-success" (click)="save()">Save</button>
+        </div>
       </div>
     </div>
   </div>

@@ -61,6 +61,7 @@ export class ProjectTasksComponent implements OnInit {
 
 
   statusTypes = [
+    { label: 'Not Started', value: '' },
     { label: 'Pending', value: 'pending' },
     { label: 'Done', value: 'done' }
 ]
@@ -123,7 +124,7 @@ export class ProjectTasksComponent implements OnInit {
 
     newTask.name = content
     this.fetchedProject.bucketTasks[bucketTaskIndex].tasks.push(newTask)
-    // this.save()
+    this.save()
   }
   newTask(index) {
     this.fetchedProject.bucketTasks[index].openNewTask = true
@@ -232,6 +233,10 @@ export class ProjectTasksComponent implements OnInit {
         if(task.status === 'done')
           nbTasksCompleted++
 
+        if(task.status === 'pending')
+          nbTasksCompleted = nbTasksCompleted + 0.5
+
+
         this.fetchedProject.bucketTasks[bucketTaskIndex]
         .tasks[taskIndex].dateTask
         .creationDate = this.authService
@@ -244,9 +249,9 @@ export class ProjectTasksComponent implements OnInit {
 
       })
     });
-    console.log(nbTasksCompleted, nbTasks)
+
     this.fetchedProject.progressTasks =  nbTasksCompleted / nbTasks
-    console.log(this.fetchedProject.progressTasks)
+
 
     if (this.fetchedProject._id) {
       this.projectService.updateProject(this.fetchedProject)
