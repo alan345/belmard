@@ -120,18 +120,46 @@ export class ProjectTasksComponent implements OnInit {
     newTask.dateTask.creationDateString = this.authService.isoDateToHtmlDate(newTask.dateTask.creationDate)
     newTask.dateTask.endDateString = this.authService.isoDateToHtmlDate(newTask.dateTask.endDate)
 
-
-
     newTask.name = content
     this.fetchedProject.bucketTasks[bucketTaskIndex].tasks.push(newTask)
-    this.save()
+    let taskIndex =  this.fetchedProject.bucketTasks[bucketTaskIndex].tasks.length-1
+    this.saveTask(bucketTaskIndex, taskIndex)
   }
+
+
+  saveTask(bucketTaskIndex, taskIndex) {
+    console.log('s')
+    this.fetchedProject.bucketTasks[bucketTaskIndex]
+    .tasks[taskIndex].dateTask
+    .creationDate = this.authService
+    .HTMLDatetoIsoDate(this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].dateTask.creationDateString)
+
+    this.fetchedProject.bucketTasks[bucketTaskIndex]
+    .tasks[taskIndex].dateTask
+    .endDate = this.authService
+    .HTMLDatetoIsoDate(this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].dateTask.endDateString)
+
+    let taskData = {
+      task: this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex],
+      bucketTaskIndex: bucketTaskIndex,
+      taskIndex: taskIndex
+    }
+    this.projectService.updateTask(taskData, this.fetchedProject)
+      .subscribe(
+      res => {
+        this.toastr.success('Great!', res.message)
+      },
+      error => { console.log(error) }
+      );
+  }
+
   newTask(index) {
     this.fetchedProject.bucketTasks[index].openNewTask = true
   }
   private onDropModel(args) {
     let [el, target, source] = args;
     // do something else
+    this.save()
   }
 
   private onRemoveModel(args) {

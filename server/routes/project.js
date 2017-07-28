@@ -61,6 +61,36 @@ router.use('/', function(req, res, next) {
   })
 })
 
+
+router.put('/updateTask/:id', function(req, res, next) {
+  if (!shared.isCurentUserHasAccess(req.user, nameObject, 'write')) {
+    return res.status(404).json({
+      title: 'No rights',
+      error: {
+        message: 'No rights'
+      }
+    })
+  }
+  Project.findById(({_id: req.params.id}), function(err, item) {
+    if (err) {
+      return res.status(404).json({message: '', err: err})
+    } else {
+      console.log(req.body.task)
+      item.bucketTasks[req.body.bucketTaskIndex].tasks[req.body.taskIndex] = (req.body.task)
+      // console.log(item)
+
+      item.save(function(err, result) {
+        if (err) {
+          return res.status(404).json({message: 'There was an error, please try again', err: err})
+        }
+        res.status(201).json({message: 'Updated successfully', obj: result})
+      })
+
+    }
+  })
+})
+
+
 router.put('/:id', function(req, res, next) {
   if (!shared.isCurentUserHasAccess(req.user, nameObject, 'write')) {
     return res.status(404).json({

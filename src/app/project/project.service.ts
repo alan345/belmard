@@ -99,7 +99,17 @@ export class ProjectService {
   }
 
 
-
+  updateTask(newTaskData, project) {
+    const body = JSON.stringify(newTaskData);
+    const headers = new Headers({'Content-Type': 'application/json'});
+    headers.append('Authorization', '' + this.authService.currentUser.token);
+    return this.http.put(this.url + 'project/updateTask/' + project._id, body, {headers: headers})
+      .map(response => response.json())
+      .catch((error: Response) => {
+        this.errorService.handleError(error.json());
+        return Observable.throw(error.json());
+      });
+  }
 
   deleteProject(id: string) {
     let headers = new Headers({'Content-Type': 'application/json'});
