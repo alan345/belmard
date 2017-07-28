@@ -244,9 +244,9 @@ export class ProjectTasksComponent implements OnInit {
 
       })
     });
-
+    console.log(nbTasksCompleted, nbTasks)
     this.fetchedProject.progressTasks =  nbTasksCompleted / nbTasks
-
+    console.log(this.fetchedProject.progressTasks)
 
     if (this.fetchedProject._id) {
       this.projectService.updateProject(this.fetchedProject)
