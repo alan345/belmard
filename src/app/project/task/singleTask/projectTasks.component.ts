@@ -245,7 +245,6 @@ export class ProjectTasksComponent implements OnInit {
       })
     });
 
-
     this.fetchedProject.progressTasks =  nbTasksCompleted / nbTasks
 
 
