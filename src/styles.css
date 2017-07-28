@@ -112,6 +112,26 @@ text-align: right;
 width: 20%;
 }
 
+.tdbtn3 {
+text-align: left;
+width: 15%;
+}
+
+.tdbtn4 {
+text-align: left;
+width: 55%;
+}
+
+.tdbtn5 {
+text-align: left;
+width: 15%;
+}
+
+.tdbtn6 {
+text-align: right;
+width: 15%;
+}
+
 table {
 width: 100%;
 }
