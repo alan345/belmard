@@ -1,0 +1,139 @@
+<div *ngIf="showHeader" class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-2"><button type="button" class="btn btn-warning" (click)="goBack()"><i class="fa fa-chevron-left"><a> {{ 'Back' | translate }}</a></i></button></div>
+  <div class="col-md-6">
+    <h3 class="title">{{ 'Task' | translate }}</h3></div>
+  <div class="col-md-3"></div>
+</div>
+
+
+<div class="clearfix col-md-10">
+  <button class="btn btn-success float-right" [routerLink]="['/task/new/' + userId]" routerLinkActive="active"><i class=""></i>Créer un nouveau Projet</button>
+</div>
+
+<div class="row">
+  <div class="col-md-10">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">{{ 'List' | translate }}</h4>
+      </div>
+      <div class="card-block clearfix">
+        <div id="wrapper" class="subsubnav-clients float-left">
+          <input class="form-control margebasse col-md-12" type="text" name="Search" placeholder="Rechercher" [(ngModel)]="search.search" (ngModelChange)="searchTasks()">
+        </div>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <!--
+              <th class="tbl-left">
+                <!-- <button class="updownbtn" (click)="orderBy('profile.name')"><i class="fa fa-chevron-down"></i></button>
+                    <button class="updownbtn" (click)="orderBy('-profile.name')"><i class="fa fa-chevron-up"></i></button>
+              </th>
+               -->
+              <th class="centre">Project</th>
+              <th class="centre">Client</th>
+              <th class="centre">Nom</th>
+              <th class="centre">Date</th>
+              <th class="centre">Assigned to</th>
+              <th class="centre">Statut</th>
+            </tr>
+          </thead>
+          <tbody class="clienttbl">
+            <tr *ngFor="let task of fetchedTasks | paginate: { id: 'taskPagination', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }" [routerLink]="['/task/' + task._id]" routerLinkActive="active">
+              
+
+
+
+              <td class="center">
+                <div *ngFor="let project of task.projects">
+                  {{project.details.name}}
+                </div>
+              </td>
+
+
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="has-text-centered">
+          <div [hidden]="!loading">Loading...</div>
+          <pagination-controls (pageChange)="getPage($event)" id="taskPagination" class="change-page"></pagination-controls>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<!--
+
+<div class="row">
+  <div class="col-md-4">
+    <div [ngClass]="{'card': showHeader, '': !showHeader}">
+      <div *ngIf="showHeader" class="card-header">
+        <h4 class="card-title">{{ 'Add a task' | translate }}</h4>
+      </div>
+      <div class="card-block">
+       <button class="btn btn-primary" [routerLink]="['/task/new/' + userId]" routerLinkActive="active"><i class=""></i>Créer un nouveau Projet</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <div [ngClass]="{'card': showHeader, '': !showHeader}">
+      <div *ngIf="showHeader" class="card-header">
+        <h4 class="card-title">Consultation / Édition</h4>
+      </div>
+      <div class="card-block">
+        <div class="subsubnav-clients">
+          <input class="form-control"
+            celass="champ"
+            type="text"
+            name="Search"
+            placeholder="&#xf002; {{ ' Search' | translate }}"
+            [(ngModel)]="search.search"
+            (ngModelChange)="searchTasks()">
+        </div>
+
+        <div class="row">
+          <div
+            class="col-md-6"
+            *ngFor="let task of fetchedTasks | paginate: { id: 'taskPagination', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }"
+            [routerLink]="['/task/' + task._id]"
+            routerLinkActive="active"
+          >
+          {{task.details.name }}
+          </div>
+        </div>
+
+
+        <!-- <table class="table table-hover table-responsive table-condensed">
+          <thead>
+            <tr>
+              <th class="tbl-left">
+
+              </th>
+            </tr>
+          </thead>
+          <tbody class="clienttbl">
+            <tr *ngFor="let task of fetchedTasks | paginate: { id: 'taskPagination', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }"
+              [routerLink]="['/task/' + task._id]" routerLinkActive="active">
+              <td>{{task.details.name }}</td>
+            </tr>
+          </tbody>
+        </table> -->
+<!--        <div class="row">
+          <div class="col-md-12">
+            <div [hidden]="!loading">Loading...</div>
+            <pagination-controls (pageChange)="getPage($event)" id="taskPagination" class="change-page"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+-->
