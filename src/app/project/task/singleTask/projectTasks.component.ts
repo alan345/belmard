@@ -225,6 +225,7 @@ export class ProjectTasksComponent implements OnInit {
     this.fetchedProject.bucketTasks.forEach((bucketTask, bucketTaskIndex) => {
       bucketTask.tasks.forEach((task, taskIndex) => {
 
+
         this.fetchedProject.bucketTasks[bucketTaskIndex]
           .tasks[taskIndex].dateTask
           .creationDateString = this.authService

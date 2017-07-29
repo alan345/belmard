@@ -21,8 +21,8 @@
         </textarea>
         <app-autocomplete [typeAutocomplete]="'user'" [singleChoice]="'true'" [arrayContent]="fetchedTask.assignedTos" (getResultAutocomplete)="selectAssignedTo($event[0])">
         </app-autocomplete>
-        <input type="date" class="form-control" formControlName="creationDateString" [(ngModel)]="fetchedTask.creationDateString">
-        <input type="date" class="form-control" formControlName="endDateString" [(ngModel)]="fetchedTask.endDateString">
+        <input type="date" class="form-control" formControlName="creationDateString" [(ngModel)]="fetchedTask.dateTask.creationDateString">
+        <input type="date" class="form-control" formControlName="endDateString" [(ngModel)]="fetchedTask.dateTask.endDateString">
 
 
 <!--

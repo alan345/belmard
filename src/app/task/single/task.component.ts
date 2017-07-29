@@ -118,13 +118,23 @@ export class TaskComponent implements OnInit {
 
 
   save() {
+
+      this.fetchedTask.dateTask
+      .creationDate = this.authService
+      .HTMLDatetoIsoDate(this.fetchedTask.dateTask.creationDateString)
+
+      this.fetchedTask.dateTask
+      .endDate = this.authService
+      .HTMLDatetoIsoDate(this.fetchedTask.dateTask.endDateString)
+
+
     // this.fetchedTask.datePaiement = this.authService.HTMLDatetoIsoDate(this.fetchedTask.datePaiementString)
     if(this.fetchedTask._id) {
       this.taskService.updateTask(this.fetchedTask)
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
-            this.fetchedTask = res.obj
+            // this.fetchedTask = res.obj
             //this.router.navigate(['task/edit/' + this.fetchedTask._id])
           },
           error => {
@@ -136,7 +146,7 @@ export class TaskComponent implements OnInit {
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
-            this.fetchedTask = res.obj
+            // this.fetchedTask = res.obj
             // this.newTaskSaved.emit()
             // if(this.showHeader)
             //   this.router.navigate(['task/edit/' + res.obj._id])
@@ -200,6 +210,17 @@ export class TaskComponent implements OnInit {
       .subscribe(
         res => {
           this.fetchedTask = res
+
+
+          this.fetchedTask.dateTask
+            .creationDateString = this.authService
+              .isoDateToHtmlDate(this.fetchedTask.dateTask.creationDate)
+
+          this.fetchedTask.dateTask
+            .endDateString = this.authService
+              .isoDateToHtmlDate(this.fetchedTask.dateTask.endDate)
+
+
 
           // this.fetchedTask
           // .datePaiementString =
