@@ -129,7 +129,7 @@
         <button type="button" class="btn btn-success" (click)="addBucketProducts()">AddBucketProducts</button>
         <div *ngFor="let devisDetail of fetchedQuote.devisDetails; let i=index">
           <input class="form-control col-md-3" type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].nameBucketProducts" placeholder="nameBucketProducts">
-          <button type="button" class="btn btn-danger btn-sm" (click)="removeBucketProducts(i)">X</button>
+          <button type="button" class="btn btn-danger btn-sm" (click)="removeBucketProducts(i)"><i class="fa fa-times"></i></button>
           <div *ngFor="let fetchedProduct of devisDetail.bucketProducts; let j=index">
 
             <div class="row">
