@@ -110,7 +110,7 @@
 
 
 
-      <app-autocomplete [typeAutocomplete]="'templateQuote'" class="col-mb-2 col-mr-sm-2 col-mb-sm-0" [title]="" [singleChoice]="'false'" [arrayContent]="arrayContentToSearch" (getResultAutocomplete)="selectTemplateQuote($event[0])">
+      <app-autocomplete [typeAutocomplete]="'templateQuote'" class="col-md-2" [title]="" [singleChoice]="'false'" [arrayContent]="arrayContentToSearch" (getResultAutocomplete)="selectTemplateQuote($event[0])">
       </app-autocomplete>
 
       <div class="form-control">
@@ -127,7 +127,7 @@
 
         <button type="button" class="btn btn-success" (click)="addBucketProducts()">AddBucketProducts</button>
         <div *ngFor="let devisDetail of fetchedQuote.devisDetails; let i=index">
-          <input class="form-control col-mb-2 col-mr-sm-2 col-mb-sm-0" type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].nameBucketProducts" placeholder="nameBucketProducts">
+          <input class="form-control col-md-2" type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].nameBucketProducts" placeholder="nameBucketProducts">
           <button type="button" class="btn btn-danger" (click)="removeBucketProducts(i)">X</button>
           <div *ngFor="let fetchedProduct of devisDetail.bucketProducts; let j=index">
 
