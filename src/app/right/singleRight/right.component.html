@@ -8,24 +8,24 @@
 <div class="container">
   <app-header [showBackButton]="true" [nameObject]="'right'" [showCreateButton]="false"></app-header>
 
-<div class="col-md-3">
+
   <h4 class="dspl-nn">id: {{fetchedRight._id}}</h4>
   <button type="button" class="btn btn-outline-primary" (click)="setAllRights()">setAllRights</button>
   <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
 
 
     <!-- <div class="categ0" *ngFor="let right of fetchedRight.rights; let i = index;"> -->
-    <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.nameRight">
+    <input type="text" class="form-control col-md-3" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.nameRight">
 
     <button type="button" class="btn btn-success" (click)="addRight(1,0,0,0)">+</button>
     <div class="categ1" *ngFor="let permission of fetchedRight.detailRight.permissions; let j = index;">
-      <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].namePermission">
+      <select class="form-control col-md-3" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].namePermission">
             <option *ngFor="let n of typesRights" [attr.value]="n.value">{{n.name}}</option>
           </select>
       <button type="button" class="btn btn-danger btn-sm" (click)="removeRight( 2,i,j,0)">X</button>
       <button type="button" class="btn btn-success btn-sm" (click)="addRight(2,i,j,0)">+</button>
       <div class="form-control" class="categ2" *ngFor="let singleAccess of permission.access; let k = index;">
-        <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].access[k].typeAccess">
+        <select class="form-control col-md-3" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].access[k].typeAccess">
               <option [attr.value]="'read'">Read</option>
               <option [attr.value]="'write'">write</option>
             </select>
@@ -48,4 +48,4 @@
     <div class="clearfix"></div>
   </form>
 </div>
-</div>
+
