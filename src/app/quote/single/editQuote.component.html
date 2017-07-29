@@ -109,10 +109,10 @@
       <br><br>
 
 
-
+      <div class="col-md-3">
       <app-autocomplete [typeAutocomplete]="'templateQuote'" class="col-md-2" [title]="" [singleChoice]="'false'" [arrayContent]="arrayContentToSearch" (getResultAutocomplete)="selectTemplateQuote($event[0])">
       </app-autocomplete>
-
+      </div>
       <div class="form-control">
         <div class="row">
           <div class="col-md-1"></div>
@@ -127,13 +127,13 @@
 
         <button type="button" class="btn btn-success" (click)="addBucketProducts()">AddBucketProducts</button>
         <div *ngFor="let devisDetail of fetchedQuote.devisDetails; let i=index">
-          <input class="form-control col-md-2" type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].nameBucketProducts" placeholder="nameBucketProducts">
-          <button type="button" class="btn btn-danger" (click)="removeBucketProducts(i)">X</button>
+          <input class="form-control col-md-3" type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].nameBucketProducts" placeholder="nameBucketProducts">
+          <button type="button" class="btn btn-danger btn-sm" (click)="removeBucketProducts(i)">X</button>
           <div *ngFor="let fetchedProduct of devisDetail.bucketProducts; let j=index">
 
             <div class="row">
               <div class="col-md-1">
-                <button type="button" (click)="removeProduct(i, j)"><i class="fa fa-times"></i></button>
+                <button type="button" class="btn btn-danger btn-sm" (click)="removeProduct(i, j)"><i class="fa fa-times"></i></button>
               </div>
               <div class="col-md-3">
                 {{fetchedProduct.productInit.details.referenceName}}
@@ -146,11 +146,11 @@
               <div class="col-md-1">
                 <input class="gooplusInput form-control" type="text" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].quantity" placeholder="quantity">
               </div>
-              <div class="col-md-1">
+              <div class="col-md-2">
                 <input class="gooplusInput form-control" type="text" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].priceWithoutTaxes" placeholder="priceWithoutTaxes">
               </div>
 
-              <div class="col-md-1">
+              <div class="col-md-2">
                 <input class="gooplusInput form-control" type="text" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].vat" placeholder="vat">
               </div>
               <div class="col-md-1">
@@ -187,7 +187,7 @@
         </div>
       </div>
 
-      <input type="text" placeholder="nameTemplate" #nameTemplate>
+      <input type="text" class="form-control col-md-3" placeholder="nameTemplate" #nameTemplate>
       <button type="button" class="btn btn-success" (click)="saveTemplateQuote(nameTemplate.value)">saveTemplateQuote</button>
 
 
