@@ -8,7 +8,7 @@
 <div class="container">
   <app-header [showBackButton]="true" [nameObject]="'right'" [showCreateButton]="false"></app-header>
 
-
+<div class="col-md-3">
   <h4 class="dspl-nn">id: {{fetchedRight._id}}</h4>
   <button type="button" class="btn btn-outline-primary" (click)="setAllRights()">setAllRights</button>
   <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
@@ -33,7 +33,7 @@
       </div>
     </div>
     <!-- </div> -->
-
+</div>
 
     <div class="valid-edit">
       <button type="submit" class="btn btn-success sln-edt done">
