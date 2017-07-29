@@ -25,11 +25,11 @@
       <button type="button" class="btn btn-danger btn-sm" (click)="removeRight( 2,i,j,0)">X</button>
       <button type="button" class="btn btn-success btn-sm" (click)="addRight(2,i,j,0)">+</button>
       <div class="form-control" class="categ2" *ngFor="let singleAccess of permission.access; let k = index;">
-        <select class="form-control col-md-3" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].access[k].typeAccess">
+        <select class="form-control col-md-2" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].access[k].typeAccess">
               <option [attr.value]="'read'">Read</option>
               <option [attr.value]="'write'">write</option>
             </select>
-        <button class="btn btn-danger" type="button" (click)="removeRight( 3,i,j,k)">X</button>
+        <button class="btn btn-danger btn-sm" type="button" (click)="removeRight( 3,i,j,k)">X</button>
       </div>
     </div>
     <!-- </div> -->
