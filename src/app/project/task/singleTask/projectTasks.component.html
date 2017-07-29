@@ -32,7 +32,7 @@
           </tr>
         </table>
 
-        <div class='container containerTasks form-control' [dragulaModel]='fetchedProject.bucketTasks[bucketTaskIndex].tasks' [dragula]='"nested-bag"'>
+        <div class='container  form-control' [dragulaModel]='fetchedProject.bucketTasks[bucketTaskIndex].tasks' [dragula]='"nested-bag"'>
           <div *ngFor='let task of bucketTask.tasks; let taskIndex = index;' class="move form-control btn-outline-info" (click)='onClick(bucketTaskIndex, taskIndex)' >
             <table>
               <tr>
