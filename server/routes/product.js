@@ -114,7 +114,7 @@ router.post('/', function (req, res, next) {
    console.log(req.user.companies)
   //var Product = new Product(req.body)
   var product = new Product(req.body)
-  product.ownerCompanies = req.user.companies
+  product.ownerCompanies = req.user.ownerCompanies
   product.owner = req.user._id
   product.save(function (err, result) {
     if (err) {
