@@ -6,10 +6,16 @@
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div *ngFor="let companie of fetchedUser.companies">
+
+    <div *ngFor="let companie of fetchedUser.ownerCompanies">
+      
       <a href="#">
         <div *ngFor="let form of companie.forms">
           <img class="logo-img" src="./uploads/forms/{{form.owner}}/{{form.imagePath}}" onerror="this.src ='assets/images/marker.png'">
+        </div>
+
+        <div *ngIf="!companie.forms.length">
+          <img class="logo-img" src="./assets/images/marker.png">
         </div>
       </a>
     </div>

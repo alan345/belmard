@@ -57,7 +57,9 @@ export class NavbarComponent implements OnInit {
 
 
   getUser(id: string) {
+
     this.fetchedUser = this.authService.getCurrentUser()
+    console.log(this.fetchedUser)
     // let this2 = this
     // setTimeout(function(){
     //     this2.fetchedUser = this2.authService.getCurrentUser()
