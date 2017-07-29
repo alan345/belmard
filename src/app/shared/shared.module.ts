@@ -10,6 +10,7 @@ import { TRANSLATION_PROVIDERS, TranslatePipe, TranslateService }   from '../tra
 
 import { RoundPipe} from './round.pipe';
 import { HeaderComponent } from '../nav/header/header.component';
+// import { LoadingComponent } from '../nav/loading/loading.component';
 import { LoginInAppComponent } from '../nav/loginInApp/loginInApp.component';
 
 
@@ -20,13 +21,16 @@ import { LoginInAppComponent } from '../nav/loginInApp/loginInApp.component';
     FormsModule,
     AutocompleteModule,
 
+
   ],
   declarations: [
     RoundPipe,
     // AutocompleteComponent,
     TranslatePipe,
     HeaderComponent,
+    // LoadingComponent,
     LoginInAppComponent,
+
 
   ],
   exports: [
@@ -36,6 +40,7 @@ import { LoginInAppComponent } from '../nav/loginInApp/loginInApp.component';
     FormsModule,
     RoundPipe,
     HeaderComponent,
+    // LoadingComponent,
     LoginInAppComponent,
     // AutocompleteComponent,
   ],
