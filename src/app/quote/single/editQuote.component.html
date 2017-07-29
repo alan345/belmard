@@ -115,9 +115,10 @@
       </div>
       <div class="form-control">
         <div class="row">
+          <div class="h6 col-md-1"></div>
           <div class="h6 col-md-1">Image</div>
           <div class="h6 col-md-3">Produit</div>
-          <div class="h6 col-md-1">Ref.</div>
+          <div class="h6 col-md-2">Ref.</div>
           <div class="h6 col-md-1">Quanité</div>
           <div class="h6 col-md-1">Price HT</div>
           <div class="h6 col-md-1">VAT(%)</div>
@@ -135,10 +136,16 @@
               <div class="col-md-1">
                 <button type="button" class="btn btn-danger btn-sm" (click)="removeProduct(i, j)"><i class="fa fa-times"></i></button>
               </div>
+              <div class="row">
+              <div class="col-md-1">
+                <a [routerLink]="['/product/' + fetchedProduct.productInit._id]" class="admn-btn">
+                          {{fetchedProduct.productInit.details.reference}}
+                        </a>
+              </div>
               <div class="col-md-3">
                 {{fetchedProduct.productInit.details.referenceName}}
               </div>
-              <div class="col-md-1">
+              <div class="col-md-2">
                 <a [routerLink]="['/product/' + fetchedProduct.productInit._id]" class="admn-btn">
                           {{fetchedProduct.productInit.details.reference}}
                         </a>
