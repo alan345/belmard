@@ -15,7 +15,7 @@
 
 
     <!-- <div class="categ0" *ngFor="let right of fetchedRight.rights; let i = index;"> -->
-    <input type="text" class="form-control col-md-3" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.nameRight">
+    <input type="text" class="form-control col-md-3" placeholder="Name Right Profile" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.nameRight">
 
     <button type="button" class="btn btn-success" (click)="addRight(1,0,0,0)">+ Add Type</button>
     <div class="categ1" *ngFor="let permission of fetchedRight.detailRight.permissions; let j = index;">
