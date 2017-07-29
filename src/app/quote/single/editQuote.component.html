@@ -125,10 +125,10 @@
           <div class="col-md-1">total TTC</div>
         </div>
 
-        <button type="button" (click)="addBucketProducts()">AddBucketProducts</button>
+        <button type="button" class="btn btn-success" (click)="addBucketProducts()">AddBucketProducts</button>
         <div *ngFor="let devisDetail of fetchedQuote.devisDetails; let i=index">
-          <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].nameBucketProducts" placeholder="nameBucketProducts">
-          <button type="button" (click)="removeBucketProducts(i)">X</button>
+          <input class="form-control" type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].nameBucketProducts" placeholder="nameBucketProducts">
+          <button type="button" class="btn btn-danger" (click)="removeBucketProducts(i)">X</button>
           <div *ngFor="let fetchedProduct of devisDetail.bucketProducts; let j=index">
 
             <div class="row">
@@ -188,7 +188,7 @@
       </div>
 
       <input type="text" placeholder="nameTemplate" #nameTemplate>
-      <button type="button" (click)="saveTemplateQuote(nameTemplate.value)">saveTemplateQuote</button>
+      <button type="button" class="btn btn-success" (click)="saveTemplateQuote(nameTemplate.value)">saveTemplateQuote</button>
 
 
       <div class="row">
