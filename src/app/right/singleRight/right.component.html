@@ -10,38 +10,38 @@
 
 
   <h4 class="dspl-nn">id: {{fetchedRight._id}}</h4>
-  <button type="button" (click)="setAllRights()">setAllRights</button>
+  <button type="button" class="btn btn-outline-primary" (click)="setAllRights()">setAllRights</button>
   <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
 
 
     <!-- <div class="categ0" *ngFor="let right of fetchedRight.rights; let i = index;"> -->
-    <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.nameRight">
+    <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.nameRight">
 
-    <button type="button" (click)="addRight(1,0,0,0)">+</button>
+    <button type="button" class="btn btn-success" (click)="addRight(1,0,0,0)">+</button>
     <div class="categ1" *ngFor="let permission of fetchedRight.detailRight.permissions; let j = index;">
       <select [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].namePermission">
             <option *ngFor="let n of typesRights" [attr.value]="n.value">{{n.name}}</option>
           </select>
-      <button type="button" (click)="removeRight( 2,i,j,0)">X</button>
-      <button type="button" (click)="addRight(2,i,j,0)">+</button>
-      <div class="categ2" *ngFor="let singleAccess of permission.access; let k = index;">
+      <button type="button" class="btn btn-danger" (click)="removeRight( 2,i,j,0)">X</button>
+      <button type="button" class="btn btn-success" (click)="addRight(2,i,j,0)">+</button>
+      <div class="form-control" class="categ2" *ngFor="let singleAccess of permission.access; let k = index;">
         <select [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].access[k].typeAccess">
-              <option [attr.value]="'read'">Read</option>
-              <option [attr.value]="'write'">write</option>
+              <option class="form-control" [attr.value]="'read'">Read</option>
+              <option class="form-control" [attr.value]="'write'">write</option>
             </select>
-        <button type="button" (click)="removeRight( 3,i,j,k)">X</button>
+        <button class="btn btn-danger" type="button" (click)="removeRight( 3,i,j,k)">X</button>
       </div>
     </div>
     <!-- </div> -->
 
 
     <div class="valid-edit">
-      <button type="submit" class="sln-edt done">
+      <button type="submit" class="btn btn-success sln-edt done">
           Enregistrer
         </button>
 
 
-      <button *ngIf="fetchedRight._id" type="button" class="sln-edt done" (click)="onDelete(fetchedRight._id)">
+      <button *ngIf="fetchedRight._id" type="button" class="btn btn-danger sln-edt done" (click)="onDelete(fetchedRight._id)">
           Delete
         </button>
     </div>
