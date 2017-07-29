@@ -32,6 +32,7 @@ import { Project } from '../../project/project.model';
 export class EditPaiementQuoteComponent implements OnInit {
   @Output() newPaiementQuoteSaved: EventEmitter<any> = new EventEmitter();
   @Input() showHeader = true;
+  @Input() fetchedQuote:Quote = new Quote()
 
   showPaiements: boolean = false
   fetchedPaiementQuote : PaiementQuote = new PaiementQuote()
@@ -74,6 +75,7 @@ export class EditPaiementQuoteComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.fetchedPaiementQuote.quotes = [this.fetchedQuote]
     this.myForm = this._fb.group({
       amount: [''],
       type: [''],
@@ -132,8 +134,8 @@ export class EditPaiementQuoteComponent implements OnInit {
           res => {
             this.toastr.success('Great!', res.message)
             this.newPaiementQuoteSaved.emit()
-            if(this.showHeader)
-              this.router.navigate(['paiementQuote/edit/' + res.obj._id])
+            // if(this.showHeader)
+            //   this.router.navigate(['paiementQuote/edit/' + res.obj._id])
           },
           error => {console.log(error)}
         )

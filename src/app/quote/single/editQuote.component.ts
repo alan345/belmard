@@ -22,7 +22,8 @@ import { User } from '../../user/user.model';
 import { Product } from '../../product/product.model';
 import { Project } from '../../project/project.model';
 import { PaiementQuote } from '../../paiementQuote/paiementQuote.model';
-
+// import { PaiementQuoteDialogComponent } from '../paiementQuote/single/dialog/paiementQuoteDialog.component';
+import { PaiementQuoteDialogComponent } from '../../paiementQuote/single/dialog/paiementQuoteDialog.component'
 
 
 declare let jsPDF;
@@ -155,6 +156,29 @@ export class EditQuoteComponent implements OnInit {
   //       }
   //     )
   // }
+
+
+
+    openDialog() {
+
+      // dialogComp = PaiementQuoteDialogComponent
+      //
+
+      let dialogRef = this.dialog.open(PaiementQuoteDialogComponent, {
+        height: '500px',
+        data:this.fetchedQuote
+      });
+      // dialogRef.componentInstance.fetchedQuote = this.fetchedQuote;
+      dialogRef.afterClosed().subscribe(result => {
+        console.log(result)
+        // this.autocompleteSearch = ''
+        // if(result) {
+        //   console.log(result)
+        //   this.fetchedProject.forms.push( result)
+        // }
+      })
+    }
+
 
   getBase64Image(imgUrl) {
     return new Promise(
