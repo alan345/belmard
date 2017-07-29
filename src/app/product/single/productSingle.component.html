@@ -91,7 +91,7 @@
       </div>
       <div class="valid-edit">
         <button type="submit" class="done btn btn-success" [disabled]="!myForm.valid">{{'Save' | translate}}</button>
-        <button *ngIf="fetchedProduct._id" type="button" class="delete" md-button (click)="openDialogDelete()">Effacer produit</button>
+        <button *ngIf="fetchedProduct._id" type="button" class="delete btn btn-danger" md-button (click)="openDialogDelete()">Effacer produit</button>
 
       </div>
       </div>
