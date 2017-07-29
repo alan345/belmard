@@ -106,12 +106,12 @@ router.post('/', function (req, res, next) {
   if (!shared.isCurentUserHasAccess(req.user, nameObject, 'write')) {
     return res.status(404).json({ title: 'No rights', error: {message: 'No rights'} })
   }
-  // if(!req.user.companies.length) {
-  //   return res.status(404).json({
-  //     message: 'You must belong to a companie',
-  //     err: ''
-  //   })
-  // }
+  if(!req.user.ownerCompanies.length) {
+    return res.status(404).json({
+      message: 'You must belong to a companie',
+      err: ''
+    })
+  }
 
 
   var paiementQuote = new PaiementQuote(req.body)

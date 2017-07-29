@@ -155,12 +155,12 @@ router.put('/:id', function (req, res, next) {
 });
 
 router.post('/', function (req, res, next) {
-  // if(!req.user.companies.length) {
-  //   return res.status(404).json({
-  //     message: 'You must belong to a companie',
-  //     err: ''
-  //   })
-  // }
+  if(!req.user.ownerCompanies.length) {
+    return res.status(404).json({
+      message: 'You must belong to a companie',
+      err: ''
+    })
+  }
   var templateQuote = new TemplateQuote(req.body);
   templateQuote.ownerCompanies = req.user.companies
   templateQuote.save(function (err, result) {

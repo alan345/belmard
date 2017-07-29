@@ -84,12 +84,12 @@ router.put('/:id', function (req, res, next) {
 })
 
 router.post('/', function (req, res, next) {
-  // if(!req.user.companies.length) {
-  //   return res.status(404).json({
-  //     message: 'You must belong to a companie',
-  //     err: ''
-  //   })
-  // }
+  if(!req.user.ownerCompanies.length) {
+    return res.status(404).json({
+      message: 'You must belong to a companie',
+      err: ''
+    })
+  }
    console.log(req.user.companies)
   //var Right = new Right(req.body)
   var right = new Right(req.body)
