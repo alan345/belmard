@@ -1,7 +1,7 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 // import { QuoteDetailComponent} from './single/quoteDetail.component';
-import { EditQuoteComponent} from './single/editQuote.component';
+import { QuoteComponent} from './single/quote.component';
 
 import { AdminGuardService} from '../admin/services/adminGuard';
 
@@ -15,12 +15,12 @@ import { AuthGuardService} from '../auth/authguard.service';
 
 export const routes: Routes = [
   {path: '', component: QuotesComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
-  {path: 'new', component: EditQuoteComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
-  {path: 'new/:idClient', component: EditQuoteComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
-  {path: 'new/:idClient/:idProject', component: EditQuoteComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
-  {path: 'edit/:idQuote', component: EditQuoteComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
+  {path: 'new', component: QuoteComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
+  {path: 'new/:idClient', component: QuoteComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
+  {path: 'new/:idClient/:idProject', component: QuoteComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
+  {path: 'edit/:idQuote', component: QuoteComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
   // {path: ':id', component: QuoteDetailComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
-  {path: 'public/:idQuote', component: EditQuoteComponent},
+  {path: 'public/:idQuote', component: QuoteComponent},
 
 ];
 

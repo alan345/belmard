@@ -37,10 +37,10 @@ import { PaiementQuotesComponent } from '../../paiementQuote/paiementQuotes/paie
 
 @Component({
   selector: 'app-quote',
-  templateUrl: './editQuote.component.html',
+  templateUrl: './quote.component.html',
   styleUrls: ['../quote.component.css'],
 })
-export class EditQuoteComponent implements OnInit {
+export class QuoteComponent implements OnInit {
   @ViewChild(SignaturePad) signaturePad: SignaturePad;
   @ViewChild(PaiementQuotesComponent) paiementQuotesComponent: PaiementQuotesComponent;
 
