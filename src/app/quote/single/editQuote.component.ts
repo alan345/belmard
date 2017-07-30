@@ -170,7 +170,8 @@ export class EditQuoteComponent implements OnInit {
       });
       // dialogRef.componentInstance.fetchedQuote = this.fetchedQuote;
       dialogRef.afterClosed().subscribe(result => {
-        console.log(result)
+        this.paiementQuotesComponent.getPaiementQuotesInit()
+        // console.log(result)
         // this.autocompleteSearch = ''
         // if(result) {
         //   console.log(result)

@@ -122,6 +122,7 @@ export class EditPaiementQuoteComponent implements OnInit {
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
+            this.newPaiementQuoteSaved.emit()
             //this.router.navigate(['paiementQuote/edit/' + this.fetchedPaiementQuote._id])
           },
           error => {

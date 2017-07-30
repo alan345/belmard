@@ -115,7 +115,7 @@ router.post('/', function (req, res, next) {
 
 
   var paiementQuote = new PaiementQuote(req.body)
-
+  paiementQuote.addedBy = req.user._id
   paiementQuote.ownerCompanies = req.user.ownerCompanies
 
   paiementQuote.save(function (err, result) {

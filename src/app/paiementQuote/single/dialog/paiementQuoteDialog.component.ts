@@ -12,9 +12,9 @@ import { Quote } from '../../../quote/quote.model'
 export class PaiementQuoteDialogComponent {
   fetchedQuote: Quote
 
-
-  @ViewChild(EditPaiementQuoteComponent)
-  private editPaiementQuoteComponent: EditPaiementQuoteComponent;
+  //
+  // @ViewChild(EditPaiementQuoteComponent)
+  // private editPaiementQuoteComponent: EditPaiementQuoteComponent;
 
   constructor(
     public dialogRef: MdDialogRef<EditPaiementQuoteComponent>,
@@ -25,6 +25,7 @@ export class PaiementQuoteDialogComponent {
 
 
   newPaiementQuoteSaved() {
+    this.dialogRef.close()
     // this.userFormsComponent.onUploadFinisedParentToChild();
   }
 }

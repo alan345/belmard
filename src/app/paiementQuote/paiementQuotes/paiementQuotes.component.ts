@@ -20,7 +20,7 @@ export class PaiementQuotesComponent implements OnInit {
   @Input() showHeader: boolean = true;
   @Output() getPaiementQuotesCross: EventEmitter<any> = new EventEmitter();
   @Input() showCreate: boolean = true;
-  
+
   fetchedPaiementQuotes: PaiementQuote[] = [];
   loading: boolean;
   paginationData = {

@@ -3,7 +3,6 @@ import { AuthService} from '../../auth/auth.service';
 import { UserService} from '../user.service';
 import { Right} from '../../right/right.model';
 
-
 import { Companie } from '../../companie/companie.model';
 import { CompanieService } from '../../companie/companie.service';
 import { EditOptionsComponentDialog } from '../../form/modalLibrary/modalLibrary.component';
