@@ -33,16 +33,27 @@
       <button type="button" class="btn btn-success btn-sm" (click)="addRight(2,i,j,0)"><i class="fa fa-plus"></i></button>
               </td>
             </tr>
-          </table>  
-      <div class="form-control" class="categ2" *ngFor="let singleAccess of permission.access; let k = index;">
+      <div class="form-control" class="categ2" *ngFor="let singleAccess of permission.access; let k = index;">            
+          </table>
+          <table>
+            <tr>
+              <td>
+
         <select class="form-control col-md-2" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].access[k].typeAccess">
               
+                
               <option [attr.value]="'read'">Read</option>
               <option [attr.value]="'write'">write</option>
                
             </select>
+                
+             </td>   
+             <td>
+            
         <button class="btn btn-danger btn-sm" type="button" (click)="removeRight( 3,i,j,k)"><i class="fa fa-times"></i></button>
-       
+             </td>
+            </tr> 
+           </table> 
         </div>
      </div>
     <!-- </div> -->
