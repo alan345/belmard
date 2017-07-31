@@ -28,6 +28,17 @@ var quote = new Schema({
         nameBucketProducts :{type: String},
         bucketProducts:[
           {
+            typeRow:{type: String},
+            title:{type: String, default: ['']},
+            // isProduct: {type: Boolean, default: [true]},
+            title: {type: String},
+            priceWithoutTaxes: {type: Number},
+            priceWithTaxes: {type: Number},
+            totalPriceWithoutTaxes: {type: Number},
+            totalPriceWithTaxes: {type: Number},
+            vat: {type: Number},
+            quantity: {type: Number},
+            discount: {type: Number},
             productInit: {
               _id:{type: String},
               details: {
@@ -45,15 +56,7 @@ var quote = new Schema({
                 }
               }
             },
-            isProduct: {type: Boolean, default: [true]},
-            title: {type: String},
-            priceWithoutTaxes: {type: Number},
-            priceWithTaxes: {type: Number},
-            totalPriceWithoutTaxes: {type: Number},
-            totalPriceWithTaxes: {type: Number},
-            vat: {type: Number},
-            quantity: {type: Number},
-            discount: {type: Number},
+
           }
         ]
       }

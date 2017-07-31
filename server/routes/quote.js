@@ -161,10 +161,27 @@ router.put('/:id', function(req, res, next) {
       return res.status(404).json({message: '', err: err})
     }
 
-    for (var prop in req.body) {
-      if (prop !== '__v' && prop !== 'updatedAt' && prop !== 'createdAt')
-        item[prop] = req.body[prop]
-    }
+    // for (var prop in req.body) {
+    //   if (prop !== '__v' && prop !== 'updatedAt' && prop !== 'createdAt')
+    //     item[prop] = req.body[prop]
+    // }
+
+
+
+
+
+    item.clients = req.body.clients
+    item.name = req.body.name
+    item.typeQuote = req.body.typeQuote
+    item._users = req.body._users
+    item.forms = req.body.forms
+    item.products = req.body.products
+    item.projects = req.body.projects
+    item.devisDetails = req.body.devisDetails
+    item.priceQuote = req.body.priceQuote
+    item.signature = req.body.signature
+    item.detail = req.body.detail
+
 
     item.save(function(err, result) {
       if (err) {

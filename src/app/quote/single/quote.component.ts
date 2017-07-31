@@ -61,7 +61,10 @@ export class QuoteComponent implements OnInit {
   arrayContentToSearch = []
   ckeditorContent=''
   ckeConfig: any;
-
+  rowTypes = [
+      { label: 'Product', value: 'product' },
+      { label: 'Text', value: 'text' }
+  ]
   constructor(
     private quoteService: QuoteService,
     private templateQuoteService: TemplateQuoteService,
@@ -178,6 +181,29 @@ export class QuoteComponent implements OnInit {
     // console.log('begin drawing');
   }
 
+  newRow(typeRow) {
+
+    // if(typeRaw === 'product') {
+
+      let bucketProduct: BucketProduct = new BucketProduct()
+      bucketProduct.typeRow = typeRow
+      // bucketProduct.productInit= product,
+      // bucketProduct.vat= 20,
+      // bucketProduct.priceWithoutTaxes= product.details.price.sellingPrice,
+      // bucketProduct.priceWithTaxes= 0,
+      // bucketProduct.totalPriceWithTaxes= 0,
+      // bucketProduct.totalPriceWithoutTaxes= 0,
+      // bucketProduct.quantity= 1,
+      // bucketProduct.discount= 0,
+
+      // this.autocompleteProduct = ''
+
+      this.fetchedQuote.devisDetails[this.fetchedQuote.devisDetails.length-1].bucketProducts.push(bucketProduct)
+      this.calculateQuote()
+
+    // }
+
+  }
 
   // getCurrentUser() {
   //   this.userService.getUser('')
@@ -379,6 +405,7 @@ export class QuoteComponent implements OnInit {
         .subscribe(
         res => {
           this.toastr.success('Great!', res.message)
+          this.getQuote(res.obj._id)
           //this.router.navigate(['quote/edit/' + this.fetchedQuote._id])
         },
         error => {
@@ -390,7 +417,8 @@ export class QuoteComponent implements OnInit {
         .subscribe(
         res => {
           this.toastr.success('Great!', res.message)
-          this.router.navigate(['quote/edit/' + res.obj._id])
+          this.getQuote(res.obj._id)
+          // this.router.navigate(['quote/edit/' + res.obj._id])
         },
         error => { console.log(error) }
         )
@@ -415,21 +443,22 @@ export class QuoteComponent implements OnInit {
 
     this.calculateQuote()
   }
-  selectProduct(product: Product, i) {
-    this.arrayContentToSearch = []
-    let bucketProduct: BucketProduct = {
-      productInit: product,
-      vat: 20,
-      priceWithoutTaxes: product.details.price.sellingPrice,
-      priceWithTaxes: 0,
-      totalPriceWithTaxes: 0,
-      totalPriceWithoutTaxes: 0,
-      quantity: 1,
-      discount: 0,
-    }
+  selectProduct(product: Product, i, j) {
+
+    // let bucketProduct: BucketProduct = new BucketProduct()
+
+    this.fetchedQuote.devisDetails[i].bucketProducts[j].productInit = product,
+    this.fetchedQuote.devisDetails[i].bucketProducts[j].vat= 20,
+    this.fetchedQuote.devisDetails[i].bucketProducts[j].priceWithoutTaxes= product.details.price.sellingPrice,
+    this.fetchedQuote.devisDetails[i].bucketProducts[j].priceWithTaxes= 0,
+    this.fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithTaxes= 0,
+    this.fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithoutTaxes= 0,
+    this.fetchedQuote.devisDetails[i].bucketProducts[j].quantity= 1,
+    this.fetchedQuote.devisDetails[i].bucketProducts[j].discount= 0,
+
     // this.autocompleteProduct = ''
 
-    this.fetchedQuote.devisDetails[i].bucketProducts.push(bucketProduct)
+    // this.fetchedQuote.devisDetails[i].bucketProducts.push(bucketProduct)
     this.calculateQuote()
   }
   calculateQuote() {
@@ -454,10 +483,15 @@ export class QuoteComponent implements OnInit {
     }, 20)
 
   }
-  removeProduct(i: number, j: number) {
+  removeRaw(i: number, j: number) {
     this.fetchedQuote.devisDetails[i].bucketProducts.splice(j, 1);
     this.calculateQuote()
   }
+
+  // editRaw(i: number, j: number) {
+  //   this.fetchedQuote.devisDetails[i].bucketProducts[j].isRawEditModer = true;
+  //   // this.calculateQuote()
+  // }
 
   //   parseDate(dateString: string): Date {
   //     if (dateString) {

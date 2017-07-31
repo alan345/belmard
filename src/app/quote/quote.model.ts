@@ -52,7 +52,9 @@ export class PriceQuote {
 
 
 export class BucketProduct {
-  productInit: Product = new Product();
+  typeRow: string = '';
+  title: string = '';
+  productInit: Product;
   priceWithoutTaxes: number;
   priceWithTaxes: number;
   totalPriceWithoutTaxes: number;
