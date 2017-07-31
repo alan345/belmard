@@ -21,6 +21,9 @@ import { ProductModule } from '../product/product.module';
 import { SharedModule } from '../shared/shared.module';
 import { SignaturePadModule } from 'angular2-signaturepad';
 import { PaiementQuoteModule} from '../paiementQuote/paiementQuote.module'
+import { CKEditorModule } from 'ng2-ckeditor';
+
+
 
 @NgModule({
   imports:      [
@@ -37,6 +40,7 @@ import { PaiementQuoteModule} from '../paiementQuote/paiementQuote.module'
     SharedModule,
     SignaturePadModule,
     PaiementQuoteModule,
+    CKEditorModule,
     // AutocompleteComponent,
   ],
   declarations: [

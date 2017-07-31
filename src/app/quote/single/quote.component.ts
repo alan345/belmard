@@ -59,6 +59,9 @@ export class QuoteComponent implements OnInit {
   // autocompleteProduct: String = ''
   fetchedUsers: User[] = [];
   arrayContentToSearch = []
+  ckeditorContent=''
+  ckeConfig: any;
+
   constructor(
     private quoteService: QuoteService,
     private templateQuoteService: TemplateQuoteService,
@@ -73,9 +76,35 @@ export class QuoteComponent implements OnInit {
     private location: Location,
     private _fb: FormBuilder,
     private authService: AuthService,
-  ) { }
+  ) {
+
+  }
 
   ngOnInit() {
+
+
+          this.ckeConfig = {
+              // height: 500,
+              language: "en",
+              height: 50,
+
+
+              toolbar: [
+                  // { name: "editing", items: ["Scayt", "Find", "Replace", "SelectAll"] },
+                  // { name: "clipboard", items: ["Cut", "Copy", "Paste", "PasteText", "PasteFromWord", "-", "Undo", "Redo"] },
+                  // { name: "links", items: ["Link", "Unlink", "Anchor"] },
+                  // { name: "tools", items: ["Maximize", "ShowBlocks", "Preview", "Print", "Templates"] },
+                  // { name: "document", items: ["Source"] },
+                  // { name: "insert", items: ["Image", "Table", "HorizontalRule", "SpecialChar", "Iframe", "imageExplorer"] },
+                  // "/",
+                  { name: "basicstyles", items: ["Bold", "Italic", "Underline", "RemoveFormat"] },
+                  { name: "paragraph", items: ["NumberedList", "BulletedList", "-", "Blockquote"] },
+                  { name: "justify", items: ["JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock"] },
+                  // { name: "styles", items: ["Styles", "Format", "FontSize", "-", "TextColor", "BGColor"] }
+              ]
+          };
+
+
     this.myForm = this._fb.group({
       name: [''],
       currency: ['', [Validators.required, Validators.minLength(1)]],
@@ -98,7 +127,18 @@ export class QuoteComponent implements OnInit {
         this.getProject(params['idProject'])
     })
   }
-
+  onChange(event){
+    console.log(event)
+  }
+  onReady(event){
+    console.log(event)
+  }
+  onFocus(event){
+    console.log(event)
+  }
+  onBlur(event){
+    console.log(event)
+  }
 
 
   private signaturePadOptions: Object = { // passed through to szimek/signature_pad constructor

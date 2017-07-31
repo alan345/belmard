@@ -19,7 +19,7 @@ var quote = new Schema({
         expiryDate: {type: Date, default: [Date()]},
       }
     },
-    
+
     // typeQuote: {type: String, default: ['salon']},
     _users : [{type: Schema.Types.ObjectId, ref: 'User'}],
     forms: [{type: Schema.Types.ObjectId, ref: 'Form'}],
@@ -45,7 +45,8 @@ var quote = new Schema({
                 }
               }
             },
-
+            isProduct: {type: Boolean, default: [true]},
+            title: {type: String},
             priceWithoutTaxes: {type: Number},
             priceWithTaxes: {type: Number},
             totalPriceWithoutTaxes: {type: Number},

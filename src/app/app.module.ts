@@ -16,6 +16,7 @@ import { AuthHttp, AuthConfig} from 'angular2-jwt';
 import { ToastModule} from 'ng2-toastr/ng2-toastr';
 import { ToastOptions} from 'ng2-toastr';
 import { CustomOption } from './toast-options';
+// import { CKEditorModule } from 'ng2-ckeditor';
 
 
 
@@ -212,7 +213,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     Ng2PaginationModule,
     MaterialModule,
     NavbarModule,
-
+    // CKEditorModule,
     // NgbModule.forRoot(),
     UserModule,
     // AutocompleteComponent,
