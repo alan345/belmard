@@ -19,7 +19,7 @@
 
     <button type="button" class="btn btn-success" (click)="addRight(1,0,0,0)">+ Add Type</button>
     <div class="categ1" *ngFor="let permission of fetchedRight.detailRight.permissions; let j = index;">
-      <div><select class="form-control col-md-3" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].namePermission">
+      <div class="row"><select class="form-control col-md-3" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].namePermission">
             <option *ngFor="let n of typesRights" [attr.value]="n.value">{{n.name}}</option>
           </select>
       <button type="button" class="btn btn-danger btn-sm" (click)="removeRight( 2,i,j,0)">X</button>
