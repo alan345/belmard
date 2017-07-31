@@ -19,7 +19,7 @@
 
     <button type="button" class="btn btn-success" (click)="addRight(1,0,0,0)"><i class="fa fa-plus"></i> Add Type</button>
     <div class="categ1" *ngFor="let permission of fetchedRight.detailRight.permissions; let j = index;">
-          <table>
+          <table class="col-md-6">
             <tr>
               <td>
             <select class="form-control col-md-3" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].namePermission">
@@ -36,7 +36,7 @@
            </table>
       <div class="form-control" class="categ2" *ngFor="let singleAccess of permission.access; let k = index;">            
          
-          <table>
+          <table class="col-md-4">
             <tr>
               <td>
 
