@@ -21,7 +21,7 @@
     <div class="categ1" *ngFor="let permission of fetchedRight.detailRight.permissions; let j = index;">
           <table class="col-md-6">
             <tr>
-              <td>
+              <td class="tdbtn1">
             <select class="form-control col-md-3" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].namePermission">
             <option *ngFor="let n of typesRights" [attr.value]="n.value">{{n.name}}</option>
           </select>
@@ -38,7 +38,7 @@
          
           <table class="col-md-4">
             <tr>
-              <td>
+              <td class="tdbtn1">
 
         <select class="form-control col-md-2" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].access[k].typeAccess">
               
