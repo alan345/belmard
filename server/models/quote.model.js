@@ -39,23 +39,7 @@ var quote = new Schema({
             vat: {type: Number},
             quantity: {type: Number},
             discount: {type: Number},
-            productInit: {
-              _id:{type: String},
-              details: {
-                referenceName: {type: String},
-                reference: {type: String},
-                price: {
-                  costPrice: {type: Number},
-                  sellingPrice: { type: Number},
-                },
-                description: {type: String},
-                dimension: {
-                  height: {type: Number},
-                  width: {type: Number},
-                  depth: {type: Number},
-                }
-              }
-            },
+            productInit: [{type: Schema.Types.ObjectId, ref: 'User'}],
 
           }
         ]

@@ -62,8 +62,10 @@ export class QuoteComponent implements OnInit {
   ckeditorContent=''
   ckeConfig: any;
   rowTypes = [
+      { label: 'Category', value: 'category' },
       { label: 'Product', value: 'product' },
-      { label: 'Text', value: 'text' }
+      { label: 'Text', value: 'text' },
+
   ]
   constructor(
     private quoteService: QuoteService,
@@ -100,9 +102,9 @@ export class QuoteComponent implements OnInit {
                   // { name: "document", items: ["Source"] },
                   // { name: "insert", items: ["Image", "Table", "HorizontalRule", "SpecialChar", "Iframe", "imageExplorer"] },
                   // "/",
-                  { name: "basicstyles", items: ["Bold", "Italic", "Underline", "RemoveFormat"] },
+                  { name: "basicstyles", items: ["Bold", "Italic", "Underline"] },
                   { name: "paragraph", items: ["NumberedList", "BulletedList", "-", "Blockquote"] },
-                  { name: "justify", items: ["JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock"] },
+                  // { name: "justify", items: ["JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock"] },
                   // { name: "styles", items: ["Styles", "Format", "FontSize", "-", "TextColor", "BGColor"] }
               ]
           };
@@ -181,28 +183,22 @@ export class QuoteComponent implements OnInit {
     // console.log('begin drawing');
   }
 
-  newRow(typeRow) {
+  addRow(typeRow) {
 
-    // if(typeRaw === 'product') {
+    if(typeRow) {
+      if(typeRow === 'category')
+        this.addBucketProducts()
 
-      let bucketProduct: BucketProduct = new BucketProduct()
-      bucketProduct.typeRow = typeRow
-      // bucketProduct.productInit= product,
-      // bucketProduct.vat= 20,
-      // bucketProduct.priceWithoutTaxes= product.details.price.sellingPrice,
-      // bucketProduct.priceWithTaxes= 0,
-      // bucketProduct.totalPriceWithTaxes= 0,
-      // bucketProduct.totalPriceWithoutTaxes= 0,
-      // bucketProduct.quantity= 1,
-      // bucketProduct.discount= 0,
+      if(!this.fetchedQuote.devisDetails.length)
+        this.addBucketProducts()
 
-      // this.autocompleteProduct = ''
-
-      this.fetchedQuote.devisDetails[this.fetchedQuote.devisDetails.length-1].bucketProducts.push(bucketProduct)
-      this.calculateQuote()
-
-    // }
-
+      if(typeRow === 'product' || typeRow === 'text') {
+        let bucketProduct: BucketProduct = new BucketProduct()
+        bucketProduct.typeRow = typeRow
+        this.fetchedQuote.devisDetails[this.fetchedQuote.devisDetails.length-1].bucketProducts.push(bucketProduct)
+        this.calculateQuote()
+      }
+    }
   }
 
   // getCurrentUser() {
@@ -447,7 +443,7 @@ export class QuoteComponent implements OnInit {
 
     // let bucketProduct: BucketProduct = new BucketProduct()
 
-    this.fetchedQuote.devisDetails[i].bucketProducts[j].productInit = product,
+    this.fetchedQuote.devisDetails[i].bucketProducts[j].productInit = [product],
     this.fetchedQuote.devisDetails[i].bucketProducts[j].vat= 20,
     this.fetchedQuote.devisDetails[i].bucketProducts[j].priceWithoutTaxes= product.details.price.sellingPrice,
     this.fetchedQuote.devisDetails[i].bucketProducts[j].priceWithTaxes= 0,
@@ -483,7 +479,7 @@ export class QuoteComponent implements OnInit {
     }, 20)
 
   }
-  removeRaw(i: number, j: number) {
+  removeRow(i: number, j: number) {
     this.fetchedQuote.devisDetails[i].bucketProducts.splice(j, 1);
     this.calculateQuote()
   }

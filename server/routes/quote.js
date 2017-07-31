@@ -32,7 +32,11 @@ router.get('/:id', function(req, res, next) {
     let findQuery = {}
     findQuery['_id'] = req.params.id
 
-    Quote.findOne(findQuery).populate({path: 'projects', model: 'Project'}).populate({path: 'clients', model: 'User'}).exec(function(err, item) {
+    Quote.findOne(findQuery)
+    .populate({path: 'projects', model: 'Project'})
+    .populate({path: 'clients', model: 'User'})
+    .populate({path: 'devisDetails.bucketProducts.productInit', model: 'Product'})
+    .exec(function(err, item) {
       if (err) {
         return res.status(404).json({message: '', err: err})
       }
@@ -268,7 +272,11 @@ router.get('/page/:page', function(req, res, next) {
   if (req.query.projectId)
     searchQuery['projects'] = mongoose.Types.ObjectId(req.query.projectId)
 
-  Quote.find(searchQuery).populate({path: 'clients', model: 'User'}).limit(itemsPerPage).skip(skip).sort(req.query.orderBy).exec(function(err, item) {
+  Quote.find(searchQuery)
+  .populate({path: 'clients', model: 'User'})
+  // .populate({path: 'devisDetails.bucketProducts.productInit', model: 'Product'})
+  .limit(itemsPerPage).skip(skip)
+  .sort(req.query.orderBy).exec(function(err, item) {
     if (err) {
       return res.status(404).json({message: 'No results', err: err})
     } else {
