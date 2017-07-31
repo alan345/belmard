@@ -8,6 +8,9 @@
 margin-top: 20px; 
 }
 
+.form-control {
+margin-bottom: 3px;
+}  
 
 .container {
 margin-bottom: 20px; 
