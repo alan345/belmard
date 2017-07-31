@@ -84,8 +84,8 @@ export class ProjectSingleComponent implements OnInit {
   ngOnInit() {
     this.myForm = this._fb.group({
       status: [''],
-      name: ['', [Validators.required, Validators.minLength(5)]],
-      description: ['', [Validators.required, Validators.minLength(5)]],
+      name: ['', [Validators.required, Validators.minLength(2)]],
+      description: [''],
     });
 
 
@@ -120,19 +120,32 @@ export class ProjectSingleComponent implements OnInit {
   }
 
 
-  addCalendar(){
+
+
+
+  addCalendar() {
     let queryParams = {}
-    queryParams['new'] = true
+    // queryParams['new'] = true
+    queryParams['showCreateEvent'] = true
+    queryParams['showSearchEvent'] = false
+
+
     if(this.fetchedProject.assignedTos.length) {queryParams['idUserNew'] = this.fetchedProject.assignedTos[0]._id}
     if(this.fetchedProject._id) {queryParams['idProjectNew'] = this.fetchedProject._id}
     if(this.fetchedProject.clients.length) {queryParams['idClientNew'] = this.fetchedProject.clients[0]._id }
+    // if(this.fetchedProject.assignedTos.length)  {queryParams['idUserSearch'] = this.fetchedProject.assignedTos[0]._id }
+    if(this.fetchedProject._id)                 {queryParams['idProjectSearch'] = this.fetchedProject._id}
+
     this.router.navigate(['userCalendar/', queryParams])
   }
-  seeCalendar(){
+  seeCalendar() {
     let queryParams = {}
+    // queryParams['showCreateEvent'] = true
+    queryParams['showSearchEvent'] = false
+
     if(this.fetchedProject.assignedTos.length)  {queryParams['idUserSearch'] = this.fetchedProject.assignedTos[0]._id }
     if(this.fetchedProject._id)                 {queryParams['idProjectSearch'] = this.fetchedProject._id}
-    if(this.fetchedProject.clients.length)      {queryParams['idClientSearch'] = this.fetchedProject.clients[0]._id}
+    // if(this.fetchedProject.clients.length)      {queryParams['idClientSearch'] = this.fetchedProject.clients[0]._id}
     this.router.navigate(['userCalendar/', queryParams])
   }
 
@@ -155,7 +168,9 @@ export class ProjectSingleComponent implements OnInit {
     this.selectedIndex2 = selectedIndex2
 
   }
+  addQuote(){
 
+  }
 
 
   // autocomplete user

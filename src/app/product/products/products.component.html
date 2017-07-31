@@ -21,12 +21,12 @@
                     <button class="updownbtn" (click)="orderBy('-profile.name')"><i class="fa fa-chevron-up"></i></button>
               </th>
                -->
-                <th class="centre">Image</th>
-                <th class="centre">Nom</th>
-                <th class="centre">description</th>
-                <th class="centre">Fournisseur</th>
-                <th class="centre">Qté Stock</th>
-                <th class="centre">Prix HT</th>
+                <th class="centre">{{'Image' | translate}}</th>
+                <th class="centre">{{'Name' | translate}}</th>
+                <th class="centre">{{'Description' | translate}}</th>
+                <th class="centre">{{'Companie' | translate}}</th>
+                <th class="centre">{{'# Stock' | translate}}</th>
+                <th class="centre">{{'Price without taxes' | translate}}</th>
               </tr>
             </thead>
             <tbody class="clienttbl">
@@ -42,7 +42,7 @@
                 <td class="centre">{{product.details.price.costPrice}}</td>
                 <td class="centre">{{product.details.referenceName}}</td>
                 <td class="centre">{{product.details.price.costPrice}}</td>
-                
+
               </tr>
             </tbody>
           </table>

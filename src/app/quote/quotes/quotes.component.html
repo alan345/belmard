@@ -11,7 +11,13 @@
   <button class="btn btn-success float-right" [routerLink]="['/quote/new/' + userId]" routerLinkActive="active"><i class="">
   </i>{{'Create a new quote' | translate}}</button>
 </div> -->
-<app-header [showHeader]="showHeader" [nameObject]="'quote'"></app-header>
+<app-header
+  [showHeader]="showHeader"
+  showBackButton="showBackButton"
+  [nameObject]="'quote'"
+  [idProject]="idProject"
+  [idClient]="idClient">
+</app-header>
 
 
 <div class="row">
@@ -37,12 +43,12 @@
                     <button class="updownbtn" (click)="orderBy('-profile.name')"><i class="fa fa-chevron-up"></i></button>
               </th>
                -->
-              <th class="centre">Type</th>
-              <th class="centre">Client</th>
-              <th class="centre">Nom</th>
-              <th class="centre">Date</th>
-              <th class="centre">Responsable</th>
-              <th class="centre">Statut</th>
+              <th class="centre">{{'Type' | translate}}</th>
+              <th class="centre">{{'Client' | translate}}</th>
+              <th class="centre">{{'Name' | translate}}</th>
+              <th class="centre">{{'Date' | translate}}</th>
+              <th class="centre">{{'Owner' | translate}}</th>
+              <th class="centre">{{'Status' | translate}}</th>
             </tr>
           </thead>
           <tbody class="">

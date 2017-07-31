@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, Input} from '@angular/core';
 import { UserCalendarService} from './userCalendar.service';
 import { ToastsManager} from 'ng2-toastr';
 import { MdDialog } from '@angular/material';
@@ -45,6 +45,8 @@ const colors: any = {
 export class UserCalendarSingleComponent implements OnInit {
 //  @ViewChild('modalContent') modalContent: TemplateRef<any>;
     // testcolor = "background-color:#ffff00"
+    @Input() showCreateEvent: boolean = true
+    @Input() showSearchEvent: boolean = true
     typeUser = TypeUser
     view: string = 'month';
     viewDate: Date = new Date();
@@ -95,8 +97,12 @@ export class UserCalendarSingleComponent implements OnInit {
         if(params['idProjectSearch']) {this.getProjectSearch(params['idProjectSearch'])}
         if(params['idClientSearch']) {this.getClientSearch(params['idClientSearch'])}
         if(params['typeUserSearch']) {this.selectTypeUser(params['typeUserSearch'])}
+        if(params['showCreateEvent']) {this.showCreateEvent = params['showCreateEvent']}
+        if(params['showSearchEvent']) {this.showSearchEvent = params['showSearchEvent']}
 
-        if(params['new']) {
+
+
+        if(params['showCreateEvent']) {
           let this2 = this
           setTimeout(function(){
             this2.clearSelectedEvents()

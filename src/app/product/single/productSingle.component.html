@@ -33,15 +33,15 @@
         <div class="col-4">
 
             <div>
-              <label>Nom du produit</label>
+              <label>{{'Product Name' | translate}}</label>
               <input type="text" class="form-control col-md-8" formControlName="referenceName" placeholder="referenceName" [(ngModel)]="fetchedProduct.details.referenceName">
             </div>
             <div>
-              <label>Référence</label>
+              <label>{{'Ref' | translate}}</label>
               <input type="text" class="form-control col-md-8" formControlName="reference" placeholder="reference" [(ngModel)]="fetchedProduct.details.reference">
             </div>
             <div>
-              <label>Description</label>
+              <label>{{'description' | translate}}</label>
               <input type="text" class="form-control col-md-10" formControlName="description" placeholder="description" [(ngModel)]="fetchedProduct.details.description">
             </div>
             <app-autocomplete [typeAutocomplete]="'companie'" [title]="'Companie'" [singleChoice]="'true'" [arrayContent]="fetchedProduct.vendors" (getResultAutocomplete)="selectCompanie($event[0])">
@@ -64,24 +64,24 @@
 
 
             <div>
-              <label>longueur</label>
+              <label>{{'Height' | translate}}</label>
               <input type="number" class="form-control col-md-6" formControlName="height" placeholder="height" [(ngModel)]="fetchedProduct.details.dimension.height">
             </div>
             <div>
-              <label>largeur</label>
+              <label>{{'Width' | translate}}</label>
               <input type="number" class="form-control col-md-6" formControlName="width" placeholder="width" [(ngModel)]="fetchedProduct.details.dimension.width">
             </div>
             <div>
-              <label>hauteur</label>
+              <label>{{'Depth' | translate}}</label>
               <input type="number" class="form-control col-md-6" formControlName="depth" placeholder="depth" [(ngModel)]="fetchedProduct.details.dimension.depth">
             </div>
 
           <div>
-            <label>Prix d'achat HT</label>
+            <label>{{'CostPrice' | translate}}</label>
             <input type="number" class="form-control col-md-6" formControlName="costPrice" placeholder="costPrice" [(ngModel)]="fetchedProduct.details.price.costPrice">
           </div>
           <div>
-            <label>Prix de vente HT</label>
+            <label>{{'Selling Price' | translate}}</label>
             <input type="number" class="form-control col-md-6" formControlName="sellingPrice" placeholder="sellingPrice" [(ngModel)]="fetchedProduct.details.price.sellingPrice">
           </div>
         </div>

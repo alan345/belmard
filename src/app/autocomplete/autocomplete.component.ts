@@ -13,6 +13,7 @@ import { UserDialogComponent } from '../user/singleUser/dialog/userDialog.compon
 import { CompanieDialogComponent } from '../companie/singleCompanie/dialog/companieDialog.component';
 import { ProjectDialogComponent } from '../project/projectSingle/dialog/projectDialog.component';
 
+import {Router} from '@angular/router';
 
 
 
@@ -31,7 +32,7 @@ export class AutocompleteComponent {
   @Input() singleChoice: boolean = true;
   @Input() title: string = '';
   @Input() canDelete: boolean = true;
-
+  @Input() enableLink: boolean = true;
   // createNewItem: boolean = false;
   autocompleteSearch = ''
   fetchedData: User[] = [];
@@ -50,6 +51,7 @@ export class AutocompleteComponent {
     private projectService: ProjectService,
     private templateQuoteService: TemplateQuoteService,
     private rightService: RightService,
+    private router: Router,
   ) {}
 
 
@@ -144,6 +146,13 @@ export class AutocompleteComponent {
   removeData(i: number) {
     this.arrayContent.splice(i, 1);
     this.clearAutocomplete.emit()
+  }
+
+  linkToObject(data) {
+    if(this.enableLink) {
+      if(this.typeAutocomplete === 'project')
+        this.router.navigate(['project/' + data._id]);
+    }
   }
 
 

@@ -148,8 +148,11 @@ router.get('/page/:page', function(req, res, next) {
   if (req.query.userSearch)
     searchQuery['users'] = mongoose.Types.ObjectId(req.query.userSearch)
 
+  // if (req.query.projectSearch)
+  //   searchQuery['projects'] = mongoose.Types.ObjectId(JSON.parse(req.query.projectSearch)._id)
+
   if (req.query.projectSearch)
-    searchQuery['projects'] = mongoose.Types.ObjectId(JSON.parse(req.query.projectSearch)._id)
+    searchQuery['projects'] = mongoose.Types.ObjectId(req.query.projectSearch)
 
 
 

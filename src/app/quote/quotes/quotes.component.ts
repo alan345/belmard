@@ -18,6 +18,9 @@ export class QuotesComponent implements OnInit {
   @Input() userId = '';
   @Input() projectId = '';
   @Input() showHeader = true;
+  @Input() showBackButton = true;
+  @Input() idProject: string = '';
+  @Input() idClient: string = '';
 
   fetchedQuotes: Quote[] = [];
   loading: boolean;

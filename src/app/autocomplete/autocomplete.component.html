@@ -1,5 +1,4 @@
- {{title}}
-
+{{title}}
 <input class="form-control" *ngIf="!arrayContent.length" autofocus autocapitalize="none" autocomplete="off" spellcheck="false" autocorrect="none" type="text" name="Search" placeholder="🔎 {{typeAutocomplete}}" [(ngModel)]="autocompleteSearch" (ngModelChange)="searchData()">
 <div class="form-control" *ngFor="let data of fetchedData; let i=index">
   <table>
@@ -18,8 +17,6 @@
       </td>
     </tr>
   </table>
-
-
 
 
 </div>
@@ -45,7 +42,7 @@
   <!-- <div *ngIf="typeAutocomplete=='user'" class="round" [style.background-color]="user.profile.colorCalendar"></div> -->
   <table>
     <tr>
-      <td class="tdbtn1">
+      <td class="tdbtn1" (click)="linkToObject(data)">
         <div *ngIf="typeAutocomplete=='user'">{{data.profile.name}} {{data.profile.lastName}}</div>
         <div *ngIf="typeAutocomplete=='companie'">{{data.nameCompanie}}</div>
         <div *ngIf="typeAutocomplete=='quote'">{{data.name}}</div>

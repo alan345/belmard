@@ -16,7 +16,7 @@
 
   <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
     <div *ngIf="isMyCompanie()">
-      <button type="button" [routerLink]="['/user/paiement']">PLAN</button> Plan: {{fetchedCompanie.planDetail.plan}} ({{fetchedCompanie.planDetail.current_period_end | date:'yyyy-MM-dd'}})
+      <button type="button" [routerLink]="['/user/paiement']">{{'Plan' | translate}}</button> {{'Plan' | translate}}: {{fetchedCompanie.planDetail.plan}} ({{fetchedCompanie.planDetail.current_period_end | date:'yyyy-MM-dd'}})
     </div>
     <div class="form-group sln-inffrm">
 
@@ -36,7 +36,7 @@
                   </button>
           </div>
           <div>
-            <button type="button" md-button (click)="openDialog('img')" class="addpic-squr">Ajouter une image<br><i class="fa fa-plus"></i></button>
+            <button type="button" md-button (click)="openDialog('img')" class="addpic-squr">{{'Add a picture' | translate}}<br><i class="fa fa-plus"></i></button>
           </div>
         </div>
       </div>

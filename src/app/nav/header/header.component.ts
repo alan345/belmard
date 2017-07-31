@@ -18,6 +18,10 @@ export class HeaderComponent implements OnInit {
   @Input() showBackButton: Boolean = true;
   @Input() showHeader: Boolean = true;
   @Input() showCreateButton: Boolean = true;
+  @Input() idProject: string= '';
+  @Input() idClient: string= '';
+
+
 
 
 
@@ -67,10 +71,17 @@ export class HeaderComponent implements OnInit {
 
   }
   redirectCreateObj() {
+    let queryParams = {}
     if(this.nameObject === 'product')
       this.router.navigate(['product/productSingle/']);
-    if(this.nameObject === 'quote')
-      this.router.navigate(['/quote/new/' ]);
+    if(this.nameObject === 'quote') {
+
+      if(this.idProject) {queryParams['idProject'] = this.idProject}
+      if(this.idClient) {queryParams['idClient'] = this.idClient}
+      this.router.navigate(['/quote/new/' , queryParams]);
+
+    }
+
     if(this.nameObject === 'paiementQuote')
       this.router.navigate(['/paiementQuote/new/']);
     if(this.nameObject === 'companie')

@@ -117,14 +117,14 @@
       <div class="form-control">
         <div class="row">
           <div class="h6 col-md-1"></div>
-          <div class="h6 col-md-1">Image</div>
-          <div class="h6 col-md-3">Produit</div>
-          <div class="h6 col-md-2">Ref.</div>
-          <div class="h6 col-md-1">Quantité</div>
-          <div class="h6 col-md-1">Prix HT</div>
-          <div class="h6 col-md-1">VAT(%)</div>
-          <div class="h6 col-md-1">Total HT</div>
-          <div class="h6 col-md-1">Total TTC</div>
+          <div class="h6 col-md-1">{{'Image' | translate}}</div>
+          <div class="h6 col-md-3">{{'Product' | translate}}</div>
+          <div class="h6 col-md-2">{{'Ref' | translate}}</div>
+          <div class="h6 col-md-1">{{'Quantity' | translate}}</div>
+          <div class="h6 col-md-1">{{'Price whithout taxes' | translate}}</div>
+          <div class="h6 col-md-1">{{'VAT(%)' | translate}}</div>
+          <div class="h6 col-md-1">{{'Total wihout taxes' | translate}}</div>
+          <div class="h6 col-md-1">{{'Total with taxes' | translate}}</div>
         </div>
 
         <button type="button" class="btn btn-success" (click)="addBucketProducts()">AddBucketProducts</button>
@@ -139,11 +139,9 @@
               </div>
 
               <div class="col-md-1">
-              
-                   
-                  image
-                  
-                 
+                <a [routerLink]="['/product/' + fetchedProduct.productInit._id]" class="admn-btn">
+                          {{fetchedProduct.productInit.details.reference}}
+                        </a>
               </div>
               <div class="col-md-3">
                 {{fetchedProduct.productInit.details.referenceName}}
@@ -198,7 +196,7 @@
           <div class="col-md-8">
           </div>
           <div class="col-md-1">
-            Total
+            {{'Total' | translate}}
           </div>
           <div class="col-md-1">
             {{fetchedQuote.priceQuote.priceQuoteWithoutTaxes | round}}
@@ -243,8 +241,8 @@
         <br>
         <app-paiementQuotes (getPaiementQuotesCross)="getPaiementQuotes($event)" [showHeader]="false" [showCreate]="true" [idQuote]="fetchedQuote._id">
         </app-paiementQuotes>
-        Total Paiement = {{totalPaiementAmount}}
-        <br> Reste a payer = {{fetchedQuote.priceQuote.priceQuoteWithoutTaxes*1 - totalPaiementAmount*1| round}}
+        {{'Total Paiement' | translate}} = {{totalPaiementAmount}}
+        <br> {{'To be paid' | translate}} = {{fetchedQuote.priceQuote.priceQuoteWithoutTaxes*1 - totalPaiementAmount*1| round}}
         <!-- <app-paiementQuote [showHeader]="false" (newPaiementQuoteSaved)="newPaiementQuoteSaved()">
         </app-paiementQuote> -->
 

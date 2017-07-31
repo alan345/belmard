@@ -14,248 +14,117 @@
     <div class="col-sm-3">
       <div style="height: 60px;">
       </div>
-      <div>
-        <h3>{{viewDate | date:'longDate'}}</h3>
+
+
+      <div *ngIf="showSearchEvent == 'true'">
+        <!-- <h3>{{viewDate | date:'longDate'}}</h3> -->
         <!-- <h3>{{viewDate}}</h3> -->
         <h4>Search</h4>
-
-        <div *ngIf="!search.typeUser.length">
-          <input class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="autocompleteTypeUser" placeholder="Select type User" (ngModelChange)="searchTypeUser()" mdInput>
+        <div>
+          <div *ngIf="!search.typeUser.length">
+            <input class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="autocompleteTypeUser" placeholder="Select type User" (ngModelChange)="searchTypeUser()" mdInput>
+          </div>
+          <div class="form-control" *ngFor="let fetchedTypeUser of fetchedTypeUsers; let i=index">
+            <table>
+              <tr>
+                <td class="tdbtn1">{{fetchedTypeUser}}</td>
+                <td class="tdbtn2"><button class="btn btn-success" type="button" (click)="selectTypeUser(fetchedTypeUser)">select</button></td>
+              </tr>
+            </table>
+          </div>
+          <div class="form-control" *ngFor="let typeUser of search.typeUser; let i=index">
+            <table>
+              <tr>
+                <td class="tdbtn1">{{typeUser}}</td>
+                <td class="tdbtn2"><button class="btn btn-danger btn-sm ferme" type="button" (click)="removeTypeUser(i)"><i class="fa fa-times"></i></button></td>
+              </tr>
+            </table>
+          </div>
+          <app-autocomplete [typeAutocomplete]="'user'" [title]="''" [singleChoice]="'true'" [arrayContent]="fetchedUserSearchs" (getResultAutocomplete)="selectUserSearch($event[0])" (clearAutocomplete)="removeUserSearch()">
+          </app-autocomplete>
+          <app-autocomplete [typeAutocomplete]="'project'" [title]="''" [singleChoice]="'true'" [arrayContent]="fetchedProjectSearchs" (getResultAutocomplete)="selectUserSearch($event[0])" (clearAutocomplete)="removeUserSearch()">
+          </app-autocomplete>
         </div>
-        <div class="form-control" *ngFor="let fetchedTypeUser of fetchedTypeUsers; let i=index">
-          <table>
-            <tr>
-              <td class="tdbtn1">{{fetchedTypeUser}}</td>
-              <td class="tdbtn2"><button class="btn btn-success" type="button" (click)="selectTypeUser(fetchedTypeUser)">select</button></td>
-            </tr>
-          </table>
-        </div>
-        <div class="form-control" *ngFor="let typeUser of search.typeUser; let i=index">
-          <table>
-            <tr>
-              <td class="tdbtn1">{{typeUser}}</td>
-              <td class="tdbtn2"><button class="btn btn-danger btn-sm ferme" type="button" (click)="removeTypeUser(i)"><i class="fa fa-times"></i></button></td>
-            </tr>
-          </table>
-        </div>
-
-
-        <app-autocomplete
-          [typeAutocomplete]="'user'"
-          [title]="''"
-          [singleChoice]="'true'"
-          [arrayContent]="fetchedUserSearchs"
-          (getResultAutocomplete)="selectUserSearch($event[0])"
-          (clearAutocomplete)="removeUserSearch()"
-          >
-        </app-autocomplete>
-        <app-autocomplete
-          [typeAutocomplete]="'project'"
-          [title]="''"
-          [singleChoice]="'true'"
-          [arrayContent]="fetchedProjectSearchs"
-          (getResultAutocomplete)="selectUserSearch($event[0])"
-          (clearAutocomplete)="removeUserSearch()"
-          >
-        </app-autocomplete>
-<!--
-        <div *ngIf="!search.userSearch.length">
-          <input class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="autocompleteUserSearch" placeholder="Select User to search" (ngModelChange)="searchUserSearchs()" mdInput>
-        </div>
-        <div class="form-control" *ngFor="let user of fetchedUserSearchs; let i=index">
-          <table>
-            <tr>
-              <td class="tdbtn1">{{user.profile.name}} - {{user.profile.lastName}}</td>
-              <td class="tdbtn2"><button class="btn btn-success" type="button" (click)="selectUserSearch(user)">select</button></td>
-            </tr>
-          </table>
-        </div>
-        <div class="form-control" *ngFor="let user of search.userSearch; let i=index">
-          <table>
-            <tr>
-              <td class="tdbtn1">{{user.profile.name}} - {{user.profile.lastName}}</td>
-              <td class="tdbtn2"><button class="btn btn-danger btn-sm ferme" type="button" (click)="removeUserSearch(i)"><i class="fa fa-times"></i></button></td>
-            </tr>
-          </table>
-        </div> -->
-        <!-- <div *ngIf="!search.projectSearch.length">
-          <input class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="autocompleteProjectSearch" placeholder="Select Project to search" (ngModelChange)="searchProjectSearchs()" mdInput>
-        </div>
-        <div class="form-control" *ngFor="let project of fetchedProjectSearchs; let i=index">
-          <table>
-            <tr>
-              <td class="tdbtn1">{{project.details.name}} - {{project.details.lastName}}</td>
-              <td class="tdbtn2"><button class="btn btn-success" type="button" (click)="selectProjectSearch(project)">select</button></td>
-            </tr>
-          </table>
-        </div>
-        <div class="form-control" *ngFor="let project of search.projectSearch; let i=index">
-          <table>
-            <tr>
-              <td class="tdbtn1">{{project.details.name}} - {{project.details.lastName}}</td>
-              <td class="tdbtn2"><button class="btn btn-danger btn-sm ferme" type="button" (click)="removeProjectSearch(i)"><i class="fa fa-times"></i></button></td>
-            </tr>
-          </table>
-        </div> -->
       </div>
 
-
-
-
-
-
-      <div class="row">
-        <h4>Event</h4>
-        <div class="col-md-12">
-          <button class="btn btn-primary pull-right" (click)="addEvent()">
+      <div *ngIf="showCreateEvent=='true'">
+        <div class="row">
+          <h4>Event</h4>
+          <div class="col-md-12">
+            <button class="btn btn-primary pull-right" (click)="addEvent()">
             <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
           </button>
-        </div>
-        <!-- <div class="clearfix"></div> -->
-        <div *ngFor="let event of events; let index = index" [hidden]="!event.isActiveEvent">
-          <div class="col-md-12">
-            <div *ngFor="let user of event.users">
-              <div class="round" [style.background-color]="user.profile.colorCalendar">
-
+          </div>
+          <div *ngFor="let event of events; let index = index" [hidden]="!event.isActiveEvent">
+            <div class="col-md-12">
+              <div *ngFor="let user of event.users">
+                <div class="round" [style.background-color]="user.profile.colorCalendar">
+                </div>
               </div>
             </div>
-          </div>
-          <div class="col-md-12">
-            <input type="text" class="form-control" [(ngModel)]="event.title" placeholder="Name" (keyup)="refresh.next()">
-          </div>
-          <!-- <div class="col-md-12">
-            <div *ngIf="!event.clients.length">
-              <input *ngIf="!event.clients.length" [ngModelOptions]="{standalone: true}" [(ngModel)]="autocompleteClient" placeholder="Select Client" (ngModelChange)="searchClients()" mdInput>
+            <div class="col-md-12">
+              <input type="text" class="form-control" [(ngModel)]="event.title" placeholder="Name" (keyup)="refresh.next()">
             </div>
-            <div *ngFor="let user of fetchedClients; let i=index">
-              {{user.profile.name}} - {{user.profile.lastName}}
-              <button type="button" (click)="selectClient(user)">select</button>
-            </div>
-            <div *ngIf="fetchedClients.length == 0 && autocompleteClient !=''">
-              Pas de resultats,
-              <a [routerLink]="['/user/newuser']" class="admn-btn">
-                  Créer un nouveau client
-                </a>
-            </div>
-            <div *ngFor="let user of event.clients; let i=index">
-              {{user.profile.name}} - {{user.profile.lastName}}
-              <button type="button" (click)="removeClient(i)"><i class="fa fa-times"></i></button>
-            </div>
-          </div> -->
-          <div class="col-md-12">
 
-            <app-autocomplete
-              [typeAutocomplete]="'user'"
-              [title]="''"
-              [singleChoice]="'true'"
-              [arrayContent]="event.users"
-              (getResultAutocomplete)="selectUser($event[0])"
-              (clearAutocomplete)="removeUser(i)"
-              >
-            </app-autocomplete>
+            <div class="col-md-12">
+              <app-autocomplete [typeAutocomplete]="'user'" [title]="''" [singleChoice]="'true'" [arrayContent]="event.users" (getResultAutocomplete)="selectUser($event[0])" (clearAutocomplete)="removeUser(i)">
+              </app-autocomplete>
+            </div>
+            <div class="col-md-12">
+              <app-autocomplete [typeAutocomplete]="'project'" [title]="''" [singleChoice]="'true'" [arrayContent]="event.projects" (getResultAutocomplete)="selectProject($event[0])" (clearAutocomplete)="removeProject(i)">
+              </app-autocomplete>
+            </div>
+            <div class="col-md-12">
+              <textarea class="form-control" [(ngModel)]="events[index].details.description" required placeholder="Description">
+              </textarea>
+            </div>            
+            <div class="col-md-12">
+              <mwl-demo-utils-date-time-picker [(date)]="event.start" (dateChange)="refresh.next()" placeholder="Not set">
+              </mwl-demo-utils-date-time-picker>
+            </div>
+            <div class="col-md-12">
+              <mwl-demo-utils-date-time-picker [(date)]="event.end" (dateChange)="refresh.next()" placeholder="Not set">
+              </mwl-demo-utils-date-time-picker>
+            </div>
+            <div class="col-md-12">
+              <button class="btn btn-danger" (click)="deleteEvent(event, index)">Delete</button>
+              <button class="btn btn-succes" (click)="saveEvent(event)">Update</button>
+            </div>
+          </div>
 
-<!--
-            <div *ngIf="!event.users.length">
-              <input *ngIf="!event.users.length" [ngModelOptions]="{standalone: true}" [(ngModel)]="autocompleteUser" placeholder="Select User" (ngModelChange)="searchUsers()" mdInput>
-            </div>
-            <div *ngFor="let user of fetchedUsers; let i=index">
-              {{user.profile.name}} - {{user.profile.lastName}}
-              <button type="button" (click)="selectUser(user)">select</button>
-            </div>
-            <div *ngIf="fetchedUsers.length == 0 && autocompleteUser !=''">
-              Pas de resultats,
-              <a [routerLink]="['/user/newuser']" class="admn-btn">
-                  Créer un nouveau User
-                </a>
-            </div>
-            <div *ngFor="let user of event.users; let i=index">
-              {{user.profile.name}} - {{user.profile.lastName}}
-              <button type="button" (click)="removeUser(i)"><i class="fa fa-times"></i></button>
-            </div> -->
-          </div>
-          <div class="col-md-12">
-            <app-autocomplete
-              [typeAutocomplete]="'project'"
-              [title]="''"
-              [singleChoice]="'true'"
-              [arrayContent]="event.projects"
-              (getResultAutocomplete)="selectProject($event[0])"
-              (clearAutocomplete)="removeProject(i)"
-              >
-            </app-autocomplete>
-            <!-- <div *ngIf="!event.projects.length">
-              <input *ngIf="!event.projects.length" [ngModelOptions]="{standalone: true}" [(ngModel)]="autocompleteProject" placeholder="Select Projet" (ngModelChange)="searchProjects()" mdInput>
-            </div>
-            <div *ngFor="let project of fetchedProjects; let i=index">
-              {{project.details.name}}
-              <button type="button" (click)="selectProject(project)">select</button>
-            </div>
-            <div *ngIf="fetchedProjects.length == 0 && autocompleteProject !=''">
-              Pas de resultats,
-              <a [routerLink]="['/user/newuser']" class="admn-btn">
-                  Créer un nouveau Project
-                </a>
-            </div>
-            <div *ngFor="let project of event.projects; let i=index">
-              {{project.details.name}}
-              <button type="button" (click)="removeProject(i)"><i class="fa fa-times"></i></button>
-            </div> -->
-          </div>
-          <div class="col-md-12">
-            <mwl-demo-utils-date-time-picker [(date)]="event.start" (dateChange)="refresh.next()" placeholder="Not set">
-            </mwl-demo-utils-date-time-picker>
-          </div>
-          <div class="col-md-12">
-            <mwl-demo-utils-date-time-picker [(date)]="event.end" (dateChange)="refresh.next()" placeholder="Not set">
-            </mwl-demo-utils-date-time-picker>
-          </div>
-          <div class="col-md-12">
-            <textarea
-              class="form-control"
-              [(ngModel)]="events[index].details.description"
-              required
-              placeholder="Description"
-            >
-          </textarea>
-          </div>
-          <div class="col-md-12">
-            <button class="btn btn-danger" (click)="deleteEvent(event, index)">Delete</button>
-            <button class="btn btn-succes" (click)="saveEvent(event)">Update</button>
-          </div>
         </div>
-
       </div>
-
     </div>
     <div class="col-sm-9">
       <div class="row text-center">
         <div class="col-md-5">
           <div class="btn-group">
-            <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="fetchCalendarEvents()" (viewChange)="fetchCalendarEvents()"><<</div>
-            <div class="btn btn-secondary" mwlCalendarToday [(viewDate)]="viewDate" (viewDateChange)="fetchCalendarEvents()" (viewChange)="fetchCalendarEvents()">Today</div>
-            <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="fetchCalendarEvents()" (viewChange)="fetchCalendarEvents()">>></div>
+            <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="fetchCalendarEvents()" (viewChange)="fetchCalendarEvents()">
+              <<</div>
+                <div class="btn btn-secondary" mwlCalendarToday [(viewDate)]="viewDate" (viewDateChange)="fetchCalendarEvents()" (viewChange)="fetchCalendarEvents()">Today</div>
+                <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="fetchCalendarEvents()" (viewChange)="fetchCalendarEvents()">>></div>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <h5>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h5>
+          </div>
+          <div class="col-md-5">
+            <div class="btn-group">
+              <div class="btn btn-primary" (click)="view = 'month'" [class.active]="view === 'month'">
+                Month</div>
+              <div class="btn btn-primary" (click)="view = 'week'" [class.active]="view === 'week'">
+                Week</div>
+              <div class="btn btn-primary" (click)="view = 'day'" [class.active]="view === 'day'">
+                Day</div>
+            </div>
           </div>
         </div>
-        <div class="col-md-2">
-          <h5>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h5>
+        <br>
+        <div [ngSwitch]="view">
+          <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)" (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)"></mwl-calendar-month-view>
+          <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events" [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)"></mwl-calendar-week-view>
+          <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="events" [refresh]="refresh" [dayStartHour]=timeBegin [dayEndHour]=timeEnd (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)"></mwl-calendar-day-view>
         </div>
-        <div class="col-md-5">
-          <div class="btn-group">
-            <div class="btn btn-primary" (click)="view = 'month'" [class.active]="view === 'month'">
-              Month</div>
-            <div class="btn btn-primary" (click)="view = 'week'" [class.active]="view === 'week'">
-              Week</div>
-            <div class="btn btn-primary" (click)="view = 'day'" [class.active]="view === 'day'">
-              Day</div>
-          </div>
-        </div>
-      </div>
-      <br>
-      <div [ngSwitch]="view">
-        <mwl-calendar-month-view *ngSwitchCase="'month'" [viewDate]="viewDate" [events]="events" [refresh]="refresh" [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)" (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)"></mwl-calendar-month-view>
-        <mwl-calendar-week-view *ngSwitchCase="'week'" [viewDate]="viewDate" [events]="events" [refresh]="refresh" (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)"></mwl-calendar-week-view>
-        <mwl-calendar-day-view *ngSwitchCase="'day'" [viewDate]="viewDate" [events]="events" [refresh]="refresh" [dayStartHour]=timeBegin [dayEndHour]=timeEnd (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)"></mwl-calendar-day-view>
       </div>
     </div>
   </div>
-</div>
