@@ -137,7 +137,7 @@
                 <button type="button" class="btn btn-danger btn-sm" (click)="removeProduct(i, j)"><i class="fa fa-times"></i></button>
               </div>
 
-              <div class="col-md-1"  *ngFor="let singleForm of product.forms; let i = index;">
+              <div class="col-md-1">
               
                    
                     <img *ngIf="i<=0" height="50px" class="img" src="./uploads/forms/{{singleForm.owner}}/{{singleForm.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
