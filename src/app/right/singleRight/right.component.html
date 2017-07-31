@@ -22,7 +22,7 @@
           <table class="col-md-6">
             <tr>
               <td class="tdbtn1">
-            <select class="form-control col-md-3" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].namePermission">
+            <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].namePermission">
             <option *ngFor="let n of typesRights" [attr.value]="n.value">{{n.name}}</option>
           </select>
               </td>
