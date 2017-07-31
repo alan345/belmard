@@ -185,22 +185,36 @@ router.get('/page/:page', function (req, res, next) {
 
 
 router.get('/:id', function (req, res, next) {
-  Product
-  .findById({_id: req.params.id})
-  .populate('vendors')
-  .populate('forms')
-  .exec(function (err, item) {
+  Product.findById((req.params.id), function(err, obj) {
     if (err) {
+      return res.status(500).json({message: 'An error occured', err: err})
+    }
+    if (!obj) {
       return res.status(404).json({
-        message: '',
-        err: err
-      })
-    } else {
-      res.status(200).json({
-        message: 'Success',
-        item: item
+        title: 'No obj found',
+        error: {
+          message: 'Obj not found!'
+        }
       })
     }
+
+    Product
+    .findById({_id: req.params.id})
+    .populate('vendors')
+    .populate('forms')
+    .exec(function (err, item) {
+      if (err) {
+        return res.status(404).json({
+          message: '',
+          err: err
+        })
+      } else {
+        res.status(200).json({
+          message: 'Success',
+          item: item
+        })
+      }
+    })
   })
 })
 

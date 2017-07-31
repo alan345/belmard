@@ -149,10 +149,8 @@ export class AutocompleteComponent {
   }
 
   linkToObject(data) {
-    if(this.enableLink) {
-      if(this.typeAutocomplete === 'project')
-        this.router.navigate(['project/' + data._id]);
-    }
+    if(this.enableLink)
+      this.router.navigate([this.typeAutocomplete + '/' + data._id]);
   }
 
 
