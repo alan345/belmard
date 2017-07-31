@@ -133,12 +133,15 @@
             [(ngModel)]="fetchedQuote.devisDetails[i].nameBucketProducts"
             placeholder="Category">
           <button type="button" class="btn btn-danger btn-sm" (click)="removeBucketProducts(i)"><i class="fa fa-times"></i></button>
-          <div *ngFor="let bucketProduct of devisDetail.bucketProducts; let j=index">
+          <div [dragulaModel]='fetchedQuote.devisDetails[i].bucketProducts' [dragula]='"third-bag"'>
+          <div *ngFor="let bucketProduct of devisDetail.bucketProducts; let j=index" >
 
             <div class="row">
               <div class="col-md-1"></div>
               <div class="col-md-1">
                 <button type="button" class="btn btn-danger btn-sm" (click)="removeRow(i, j)"><i class="fa fa-times"></i></button>
+
+                <button type="button" class="btn btn-sm handle"><i class="fa fa-arrows handle"></i></button>
                 <!-- <button type="button" class="btn btn-sm" (click)="editRaw(i, j)"><i class="fa fa-times"></i></button> -->
               </div>
 
@@ -156,8 +159,35 @@
                     {{bucketProduct.productInit.details.reference}}
                   </a> -->
                 <div *ngIf="bucketProduct.typeRow=='text'">
+                  <quill-editor
+                    [ngModelOptions]="{standalone: true}"
+                    [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].title">
+                    <div quill-editor-toolbar>
+                      <span class="ql-formats">
+                        <button class="ql-bold" [title]="'Bold'"></button>
+                        <button class="ql-italic" [title]="'Italic'"></button>
+                        <button class="ql-underline" [title]="'Underline'"></button>
 
-                  <ckeditor
+                      </span>
+                      <span class="ql-formats">
+                        <button class="ql-list" [title]="'list'" value='ordered'></button>
+                        <button class="ql-list" [title]="'list'" value='bullet'></button>
+                        <!-- <button class="ql-italic" [title]="'Italic'"></button> -->
+
+                      </span>
+
+                      <span class="ql-formats">
+                        <select class="ql-align" [title]="'Aligment'">
+                          <option selected></option>
+                          <option value="center"></option>
+                          <option value="right"></option>
+                          <option value="justify"></option>
+                        </select>
+                      </span>
+                    </div>
+                  </quill-editor>
+
+                  <!-- <ckeditor
                     [ngModelOptions]="{standalone: true}"
                     [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].title"
                     [config]="ckeConfig"
@@ -167,7 +197,7 @@
                     (focus)="onFocus($event)"
                     (blur)="onBlur($event)"
                     debounce="500">
-                  </ckeditor>
+                  </ckeditor> -->
                 </div>
               </div>
               <!-- <div class="col-md-2">
@@ -196,6 +226,7 @@
               <!-- <div class="col-md-1">
                 {{fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithTaxes | round}}
               </div> -->
+            </div>
             </div>
           </div>
         </div>

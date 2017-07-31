@@ -3,7 +3,7 @@ import {AuthService} from '../../auth/auth.service';
 import {QuoteService} from '../quote.service';
 import {TemplateQuoteService} from '../templateQuote.service';
 
-
+import { DragulaService } from 'ng2-dragula';
 import {ProductService} from '../../product/product.service';
 import { ProjectService} from '../../project/project.service';
 
@@ -59,7 +59,7 @@ export class QuoteComponent implements OnInit {
   // autocompleteProduct: String = ''
   fetchedUsers: User[] = [];
   arrayContentToSearch = []
-  ckeditorContent=''
+  // ckeditorContent=''
   ckeConfig: any;
   rowTypes = [
       { label: 'Category', value: 'category' },
@@ -81,8 +81,17 @@ export class QuoteComponent implements OnInit {
     private location: Location,
     private _fb: FormBuilder,
     private authService: AuthService,
+    private dragulaService: DragulaService,
   ) {
-
+    // dragulaService.setOptions('third-bag', {
+    //   removeOnSpill: true
+    // });
+    dragulaService.setOptions('third-bag', {
+      moves: function (el, container, handle) {
+        console.log(handle.className)
+        return (handle.className === 'fa fa-arrows handle' || handle.className === 'btn btn-sm handle');
+      }
+    });
   }
 
   ngOnInit() {

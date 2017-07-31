@@ -21,14 +21,17 @@ import { ProductModule } from '../product/product.module';
 import { SharedModule } from '../shared/shared.module';
 import { SignaturePadModule } from 'angular2-signaturepad';
 import { PaiementQuoteModule} from '../paiementQuote/paiementQuote.module'
-import { CKEditorModule } from 'ng2-ckeditor';
+// import { CKEditorModule } from 'ng2-ckeditor';
 
+import { DragulaModule } from 'ng2-dragula';
+
+import { QuillModule } from 'ngx-quill'
 
 
 @NgModule({
   imports:      [
     // ProjectModule,
-
+    QuillModule,
     QuoteRouting,
     CommonModule,
     FormsModule,
@@ -40,7 +43,8 @@ import { CKEditorModule } from 'ng2-ckeditor';
     SharedModule,
     SignaturePadModule,
     PaiementQuoteModule,
-    CKEditorModule,
+    // CKEditorModule,
+    DragulaModule,
     // AutocompleteComponent,
   ],
   declarations: [
