@@ -25,7 +25,7 @@
       <button type="button" class="btn btn-danger btn-sm" (click)="removeRight( 2,i,j,0)"><i class="fa fa-times"></i></button>
       <button type="button" class="btn btn-success btn-sm" (click)="addRight(2,i,j,0)"><i class="fa fa-plus"></i></button>
       <div class="form-control" class="categ2" *ngFor="let singleAccess of permission.access; let k = index;">
-        <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].access[k].typeAccess">
+        <select class="form-control col-md-2" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].access[k].typeAccess">
               
               <option [attr.value]="'read'">Read</option>
               <option [attr.value]="'write'">write</option>
