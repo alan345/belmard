@@ -120,8 +120,8 @@
           <div class="h6 col-md-1">Image</div>
           <div class="h6 col-md-3">Produit</div>
           <div class="h6 col-md-2">Ref.</div>
-          <div class="h6 col-md-1">Quanité</div>
-          <div class="h6 col-md-1">Price HT</div>
+          <div class="h6 col-md-1">Quantité</div>
+          <div class="h6 col-md-1">Prix HT</div>
           <div class="h6 col-md-1">VAT(%)</div>
           <div class="h6 col-md-1">Total HT</div>
           <div class="h6 col-md-1">Total TTC</div>
@@ -139,9 +139,11 @@
               </div>
 
               <div class="col-md-1">
-                <a [routerLink]="['/product/' + fetchedProduct.productInit._id]" class="admn-btn">
-                          {{fetchedProduct.productInit.details.reference}}
-                        </a>
+              
+                   
+                  image
+                  
+                 
               </div>
               <div class="col-md-3">
                 {{fetchedProduct.productInit.details.referenceName}}
