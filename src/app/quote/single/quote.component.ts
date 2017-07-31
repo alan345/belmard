@@ -264,7 +264,11 @@ export class QuoteComponent implements OnInit {
       doc.text(80, verticalPointer, 'quantite');
       doc.text(110, verticalPointer, 'Prix HT');
       doc.text(140, verticalPointer, 'Prix TTC');
-      doc.text(199, verticalPointer, '1');
+      doc.text(150, verticalPointer, '1');
+      doc.text(160, verticalPointer, '1');
+      doc.text(170, verticalPointer, '1');
+      doc.text(180, verticalPointer, '1');
+      doc.text(190, verticalPointer, '1');
 
 
       doc.setFontSize(10);
