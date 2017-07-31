@@ -20,5 +20,7 @@ export const LANG_FR_TRANS = {
     'Tasks': 'Tâches',
     'Add a project': 'Ajouter un project',
     'Logout': 'Déconexion',
+  
+    'Create a new quote': 'Creer un nouveau devis',
 
 };
