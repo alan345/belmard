@@ -253,7 +253,6 @@ export class QuoteComponent implements OnInit {
 
   }
 
-
   downloadPDF() {
     let this2 = this
     let base64image = this.getBase64Image(this.imgLogoUrl).then(function(dataImg: any) {
