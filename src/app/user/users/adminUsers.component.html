@@ -7,10 +7,12 @@
 </div>
 
 <div class="clearfix col-md-10">
-  <button class="btn btn-success float-right" [routerLink]="['/user/newuser', {isExternalUser: false}]" routerLinkActive="active"><i class="">
+
+
+  <button *ngIf="search.isExternalUser == 'false'" class="btn btn-success float-right" [routerLink]="['/user/newuser', {isExternalUser: false}]" routerLinkActive="active"><i class="">
   </i>{{ 'Create a new team member' | translate }}
   </button>
-  <button class="btn btn-success float-right" [routerLink]="['/user/newuser', {isExternalUser: true}]" routerLinkActive="active"><i class="">
+  <button *ngIf="search.isExternalUser== 'true'" class="btn btn-success float-right" [routerLink]="['/user/newuser', {isExternalUser: true}]" routerLinkActive="active"><i class="">
   </i>{{ 'Create a new external member' | translate }}
   </button>
 </div>

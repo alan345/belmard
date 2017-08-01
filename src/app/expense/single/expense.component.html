@@ -7,14 +7,8 @@
 
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
       <div>
-
-
-
         <app-autocomplete [typeAutocomplete]="'project'" [canDelete]="true" [title]="" [singleChoice]=true [arrayContent]="fetchedExpense.projects" (getResultAutocomplete)="selectProject($event[0])">
         </app-autocomplete>
-
-
-
 
         <select class="form-control" formControlName="type" [(ngModel)]="fetchedExpense.type">
           <option [attr.value]="''">Please Select</option>

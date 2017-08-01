@@ -10,6 +10,14 @@
       <div>
 
 
+        <app-autocomplete
+          [typeAutocomplete]="'project'"
+          [canDelete]="false"
+          [title]="Project"
+          [singleChoice]=true
+          [arrayContent]="fetchedTask.projects">
+        </app-autocomplete>
+
 
         <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedTask.name" placeholder="name">
 
