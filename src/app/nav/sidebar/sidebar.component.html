@@ -1,0 +1,49 @@
+
+    <div class="sidebar-nav">
+      <div class="navbar navbar-default" role="navigation">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <span class="visible-xs navbar-brand">Sidebar menu</span>
+        </div>
+        <div class="navbar-collapse collapse sidebar-navbar-collapse">
+          <ul class="nav navbar-nav">
+
+
+              <li *ngIf="showObjHTML('product')" class="nav-item">
+                <a class="nav-link" routerLinkActive="active" [routerLink]="['/product']">{{'Products' | translate}}</a>
+              </li>
+
+              <li *ngIf="showObjHTML('user')" class="nav-item">
+                <a class="nav-link" routerLinkActive="active" [routerLink]="['/user']">{{'Users' | translate}}</a>
+              </li>
+              <li *ngIf="showObjHTML('companie')" class="nav-item">
+                <a class="nav-link" routerLinkActive="active" [routerLink]="['/companie']">{{'Companies' | translate}}</a>
+              </li>
+              <li *ngIf="showObjHTML('quote')" class="nav-item">
+                <a class="nav-link" routerLinkActive="active" [routerLink]="['/quote']">{{'Quotes' | translate}}</a>
+              </li>
+              <li *ngIf="showObjHTML('expense')" class="nav-item">
+                <a class="nav-link" routerLinkActive="active" [routerLink]="['/expense']">{{'Expenses' | translate}}</a>
+              </li>
+              <li *ngIf="showObjHTML('paiementQuote')" class="nav-item">
+                <a class="nav-link" routerLinkActive="active" [routerLink]="['/paiementQuote']">{{'Paiements' | translate}}</a>
+              </li>
+
+              <li *ngIf="showObjHTML('right')" class="nav-item">
+                <a class="nav-link" routerLinkActive="active" [routerLink]="['/right']">{{'Rights' | translate}}</a>
+              </li>
+
+              <li *ngIf="showObjHTML('reporting')" class="nav-item">
+                <a class="nav-link" routerLinkActive="active" [routerLink]="['/reporting']">{{'Reporting' | translate}}</a>
+              </li>
+
+
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
