@@ -99,7 +99,7 @@ export class QuotesComponent implements OnInit {
   }
 
   getPage(page: number) {
-
+    console.log(page)
     this.loading = true;
     this.getQuotes(page, this.search);
   }

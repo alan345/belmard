@@ -4,7 +4,11 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpModule, RequestOptions, Http} from '@angular/http';
 import { AppComponent} from './app.component';
 // import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { MaterialModule } from '@angular/material';
+// import { MaterialModule } from '@angular/material';
+import {MdSidenavModule} from '@angular/material';
+
+
+
 import { Ng2PaginationModule} from 'ng2-pagination';
 import { ProgressBarModule} from 'ng2-progress-bar';
 import { RouterModule} from '@angular/router';
@@ -23,7 +27,6 @@ import { CustomOption } from './toast-options';
 // import { NavbarComponent} from './nav/navbar/navbar.component';
 import { NavbarModule} from './nav/navbar/navbar.module';
 import { SidebarModule} from './nav/sidebar/sidebar.module';
-
 
 import { FooterComponent} from './nav/footer/footer.component';
 
@@ -145,7 +148,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 
     DeleteDialog,
     SeePictureDialogComponent,
-    // NavbarModule,
+
+
     // PressComponent,
     // PressesComponent,
     // PressSingleComponent,
@@ -213,9 +217,10 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ProgressBarModule,
     FormsModule,
     Ng2PaginationModule,
-    MaterialModule,
+    // MaterialModule,
     NavbarModule,
     SidebarModule,
+    MdSidenavModule,
     // CKEditorModule,
     // NgbModule.forRoot(),
     UserModule,
@@ -231,7 +236,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 
   ],
   exports: [
-    UserModule
+    UserModule,
+    MdSidenavModule
    ],
   providers: [
     AuthGuardService,

@@ -72,6 +72,12 @@
           <div [hidden]="!loading">Loading...</div>
           <pagination-controls (pageChange)="getPage($event)" id="quotePagination" class="change-page"></pagination-controls>
         </div>
+
+        <md-paginator [length]="paginationData.totalItems"
+                      [pageSize]="paginationData.itemsPerPage"
+                      (page)="pageEvent = $event; getPage($event.pageIndex*1 +1)">
+                  >
+        </md-paginator>
       </div>
     </div>
   </div>
