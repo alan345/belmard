@@ -13,7 +13,7 @@ import {Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup} from '@angular/forms';
 import { UserService} from '../../user/user.service';
-import { QuoteService } from '../../quote/quote.service';
+
 import { DeleteDialog } from '../../deleteDialog/deleteDialog.component';
 import { User } from '../../user/user.model';
 import { Quote } from '../../quote/quote.model';
@@ -60,7 +60,7 @@ export class ExpenseComponent implements OnInit {
 ]
   constructor(
     private expenseService: ExpenseService,
-    private quoteService: QuoteService,
+    private projectService: ProjectService,
     // private projectService: ProjectService,
     // private userService: UserService,
     // private productService: ProductService,
@@ -75,7 +75,7 @@ export class ExpenseComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.fetchedExpense.quotes = [this.fetchedQuote]
+    this.fetchedExpense.projects = this.fetchedProjects
     this.myForm = this._fb.group({
       amount: [''],
       type: [''],
@@ -93,23 +93,23 @@ export class ExpenseComponent implements OnInit {
       if(params['idExpense'])
         this.getExpense(params['idExpense'])
       if(params['idQuote'])
-       this.getQuote(params['idQuote'])
+       this.getProject(params['idProject'])
     //  if(params['idProject'])
     //   this.getProject(params['idProject'])
     })
   }
 
 
-    selectQuote(quote: Quote){
-      this.fetchedExpense.quotes = [quote]
+    selectProject(project: Project){
+      this.fetchedExpense.projects = [project]
     }
 
 
-    getQuote(idQuote: string) {
-      this.quoteService.getQuote(idQuote, {})
+    getProject(idProject: string) {
+      this.projectService.getProject(idProject)
         .subscribe(
           res => {
-            this.fetchedExpense.quotes = [res]
+            this.fetchedExpense.projects = [res]
           },
           error => { console.log(error) }
         )
@@ -123,6 +123,7 @@ export class ExpenseComponent implements OnInit {
           res => {
             this.toastr.success('Great!', res.message)
             this.newExpenseSaved.emit()
+            this.getExpense(res.obj._id)
             //this.router.navigate(['expense/edit/' + this.fetchedExpense._id])
           },
           error => {
@@ -135,6 +136,7 @@ export class ExpenseComponent implements OnInit {
           res => {
             this.toastr.success('Great!', res.message)
             this.newExpenseSaved.emit()
+            this.getExpense(res.obj._id)
             // if(this.showHeader)
             //   this.router.navigate(['expense/edit/' + res.obj._id])
           },

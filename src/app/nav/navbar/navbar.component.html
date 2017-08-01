@@ -40,6 +40,9 @@
           <li *ngIf="showObjHTML('quote')" class="nav-item">
             <a class="nav-link" routerLinkActive="active" [routerLink]="['/quote']">{{'Quotes' | translate}}</a>
           </li>
+          <li *ngIf="showObjHTML('expense')" class="nav-item">
+            <a class="nav-link" routerLinkActive="active" [routerLink]="['/expense']">{{'Expenses' | translate}}</a>
+          </li>
           <li *ngIf="showObjHTML('paiementQuote')" class="nav-item">
             <a class="nav-link" routerLinkActive="active" [routerLink]="['/paiementQuote']">{{'Paiements' | translate}}</a>
           </li>

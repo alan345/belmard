@@ -41,7 +41,8 @@ export class HeaderComponent implements OnInit {
     this.nameObjectSing = this.translateService.instant(<string>this.nameObject)
     this.nameObjectPlur = this.translateService.instant(<string>this.nameObject)
 
-
+    if(this.nameObject === 'expense')
+      this.nameObjectPlur = this.translateService.instant('Expenses')
     if(this.nameObject === 'product')
       this.nameObjectPlur = this.translateService.instant('Products')
     if(this.nameObject === 'quote')
@@ -92,6 +93,10 @@ export class HeaderComponent implements OnInit {
       this.router.navigate(['/project/new/']);
     if(this.nameObject === 'task')
       this.router.navigate(['/project/tasks/new/']);
+
+    if(this.nameObject === 'expense')
+      this.router.navigate(['/expense/new/']);
+
 
     if(this.nameObject === 'user') {
       if(this.option === 'internal')

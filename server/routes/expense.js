@@ -282,7 +282,7 @@ router.get('/:id', function (req, res, next) {
 
     Expense
     .findById({_id: req.params.id})
-    .populate({path: 'quotes', model: 'Quote'})
+    .populate({path: 'projects', model: 'Project'})
     .exec(function (err, item) {
       if (err) {
         return res.status(404).json({
