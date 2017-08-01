@@ -28,7 +28,8 @@ import{ AdminUsersComponent } from './users/adminUsers.component';
 export const routes: Routes = [
   {path: '', component: AdminUsersComponent, canActivate: [AuthGuardService]},
   {path: 'newuser', component: NewUserComponent, canActivate: [AuthGuardService]},
-  {path: ':id', component: NewUserComponent, canActivate: [AuthGuardService]},
+  {path: 'newuser/:id', component: NewUserComponent, canActivate: [AuthGuardService]},
+  // {path: ':id', component: NewUserComponent, canActivate: [AuthGuardService]},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'reset', component: ForgetPasswordComponent},
