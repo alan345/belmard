@@ -17,8 +17,8 @@ export const routes: Routes = [
   // {path: 'addUserByCompanie', component: AddUserByCompanieComponent},
   //{path: 'mine', component: EditCompanieComponent},
   {path: 'new', component: EditCompanieComponent},
-  {path: 'edit/:id', component: EditCompanieComponent},
-  {path: ':id', component: CompanieDetailComponent},
+  // {path: 'edit/:id', component: EditCompanieComponent},
+  {path: ':id', component: EditCompanieComponent},
   // {path: ':id/users', component: CompanieDetailUsersComponent},
 ];
 
