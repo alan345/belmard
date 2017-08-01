@@ -1,0 +1,66 @@
+
+<app-header [showHeader]="showHeader" [nameButton]="'Create a new Paiement'" [nameObject]="'expense'"></app-header>
+<div class="row">
+  <div class="col-md-10">
+    <div class="card">
+      <div class="card-header">
+        <h4 class="card-title">{{ 'List' | translate }}</h4>
+      </div>
+      <div class="card-block clearfix">
+        <div id="wrapper" class="subsubnav-clients float-left">
+          <input class="form-control margebasse col-md-12" type="text" name="Search" placeholder="Rechercher" [(ngModel)]="search.search" (ngModelChange)="searchExpenses()">
+        </div>
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <!--
+              <th class="tbl-left">
+                <!-- <button class="updownbtn" (click)="orderBy('profile.name')"><i class="fa fa-chevron-down"></i></button>
+                    <button class="updownbtn" (click)="orderBy('-profile.name')"><i class="fa fa-chevron-up"></i></button>
+              </th>
+               -->
+              <th class="centre">Type</th>
+              <th class="centre">Client</th>
+              <th class="centre">Nom</th>
+              <th class="centre">Date</th>
+              <th class="centre">Montant</th>
+
+            </tr>
+          </thead>
+          <tbody class="">
+            <tr *ngFor="let expense of fetchedExpenses | paginate: { id: 'expensePagination', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }"
+            [routerLink]="['/expense/edit/' + expense._id]"
+            routerLinkActive="active">
+              <td class="centre">{{expense.type}}</td>
+              <td class="centre">
+                <div *ngFor="let quote of expense.quotes">
+                  <div *ngFor="let client of quote.clients">
+                  {{client.profile.name}}
+                  </div>
+                </div>
+              </td>
+              <td class="centre">
+                <div *ngFor="let quote of expense.quotes">
+                  <div *ngFor="let client of quote.clients">
+                  {{client.profile.lastName}}
+                  </div>
+                </div>
+              </td>
+              <td class="centre">{{expense.datePaiement | date:'yyyy-MM-dd' }}</td>
+              <td class="centre">{{expense.amount}}</td>
+
+            </tr>
+          </tbody>
+        </table>
+
+<div class="has-text-centered">
+          <div [hidden]="!loading">Loading...</div>
+          <pagination-controls (pageChange)="getPage($event)" id="expensePagination" class="change-page"></pagination-controls>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

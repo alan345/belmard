@@ -1,0 +1,59 @@
+<div class="container">
+  <app-header [showBackButton]="true" [nameObject]="'expense'" [showCreateButton]="false"></app-header>
+
+  <div>
+    <h4 class="dspl-nn">id: {{fetchedExpense._id}}</h4>
+
+
+    <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
+      <div>
+
+
+
+        <app-autocomplete [typeAutocomplete]="'quote'" [canDelete]="true" [title]="" [singleChoice]="true" [arrayContent]="fetchedExpense.quotes" (getResultAutocomplete)="selectQuote($event[0])">
+        </app-autocomplete>
+
+
+
+
+        <select class="form-control" formControlName="type" [(ngModel)]="fetchedExpense.type">
+          <option [attr.value]="''">Please Select</option>
+          <option *ngFor="let n of paiementsTypes" [attr.value]="n.value">{{n.label}}</option>
+        </select>
+
+        <input type="number" class="form-control" formControlName="amount" [(ngModel)]="fetchedExpense.amount" placeholder="Amount">
+
+        <input type="date" class="form-control" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedExpense.datePaiementString" >
+
+        <!-- <ngb-datepicker #dp [(ngModel)]="fetchedExpense.datePaiement" formControlName="datePaiement" (navigate)="date = $event.next"></ngb-datepicker> -->
+
+        <!-- <div class="form-group">
+          <div class="input-group">
+            <input
+            class="form-control"
+            placeholder="yyyy-mm-dd"
+            name="dp"
+            formControlName="datePaiement"
+            [(ngModel)]="fetchedExpense.datePaiement" ngbDatepicker #d="ngbDatepicker">
+            <div class="input-group-addon" (click)="d.toggle()" >
+              <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+            </div>
+          </div>
+        </div>
+
+{{fetchedExpense.datePaiement|json}} -->
+        <!-- <div (click)="fetchedExpense.editModeDate = !fetchedExpense.editModeDate">{{fetchedExpense.datePaiement | date:'yyyy-MM-dd' }}</div> -->
+        <!-- <input *ngIf="fetchedExpense.editModeDate" type="date" (focusout)="fetchedExpense.editModeDate = !fetchedExpense.editModeDate" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedExpense.datePaiement" placeholder="Amount"> -->
+      </div>
+
+
+
+      <div class="valid-edit">
+        <button type="submit" class="sln-edt done">{{'Save' | translate}}</button>
+        <button *ngIf="fetchedExpense._id" type="button" class="delete" md-button (click)="openDialogDelete()">
+          Delete
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

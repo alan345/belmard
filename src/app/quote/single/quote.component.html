@@ -301,7 +301,9 @@
           <i class="fa fa-plus"></i> Add new one
         </button>
         <br>
-        <app-paiementQuotes (getPaiementQuotesCross)="getPaiementQuotes($event)" [showHeader]="false" [showCreate]="true" [idQuote]="fetchedQuote._id">
+        <app-paiementQuotes
+          (getPaiementQuotesCross)="getPaiementQuotes($event)"
+          [showHeader]="false" [showCreate]="false" [idQuote]="fetchedQuote._id">
         </app-paiementQuotes>
         {{'Total Paiement' | translate}} = {{totalPaiementAmount}}
         <br> {{'To be paid' | translate}} = {{fetchedQuote.priceQuote.priceQuoteWithoutTaxes*1 - totalPaiementAmount*1| round}}

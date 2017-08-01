@@ -45,6 +45,7 @@ export const routes: Routes = [
   {path: 'right', loadChildren: 'app/right/right.module#RightModule', canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
   {path: 'quote', loadChildren: 'app/quote/quote.module#QuoteModule'},
   {path: 'paiementQuote', loadChildren: 'app/paiementQuote/paiementQuote.module#PaiementQuoteModule', canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
+  {path: 'expense', loadChildren: 'app/expense/expense.module#ExpenseModule', canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},  
   {path: 'reporting', loadChildren: 'app/reporting/reporting.module#ReportingModule', canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
   {path: 'product', loadChildren: 'app/product/product.module#ProductModule', canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
   {path: 'project', loadChildren: 'app/project/project.module#ProjectModule', canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},

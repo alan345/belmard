@@ -8,7 +8,7 @@
     </button>
 
     <div *ngFor="let companie of fetchedUser.ownerCompanies">
-      
+
       <a href="#">
         <div *ngFor="let form of companie.forms">
           <img class="logo-img" src="./uploads/forms/{{form.owner}}/{{form.imagePath}}" onerror="this.src ='assets/images/marker.png'">
@@ -23,7 +23,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <div class="dropdown">
         <a class="btn btn-secondary dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Administration
+          {{'Administration' | translate}}
         </a>
 
         <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
