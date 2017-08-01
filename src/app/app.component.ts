@@ -53,7 +53,7 @@ loading: boolean = true;
       }
 
 
-  isLoggedIn() {
-    return this.authService.isLoggedIn();
-  }
+  // isLoggedIn() {
+  //   return this.authService.isLoggedIn();
+  // }
 }
