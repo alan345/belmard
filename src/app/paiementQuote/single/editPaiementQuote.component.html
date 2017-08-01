@@ -8,9 +8,10 @@
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
       <div>
 
-
-
-        <app-autocomplete [typeAutocomplete]="'quote'" [canDelete]="true" [title]="" [singleChoice]="true" [arrayContent]="fetchedPaiementQuote.quotes" (getResultAutocomplete)="selectQuote($event[0])">
+        <app-autocomplete
+          [typeAutocomplete]="'quote'"
+          [canDelete]="true" [title]="" [singleChoice]="true"
+          [arrayContent]="fetchedPaiementQuote.quotes" (getResultAutocomplete)="selectQuote($event[0])">
         </app-autocomplete>
 
 

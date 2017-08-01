@@ -32,10 +32,10 @@ import { Project } from '../../project/project.model';
 export class EditPaiementQuoteComponent implements OnInit {
   @Output() newPaiementQuoteSaved: EventEmitter<any> = new EventEmitter();
   @Input() showHeader = true;
-  @Input() fetchedQuote:Quote = new Quote()
+  @Input() fetchedQuotes: Quote[] = []
 
   showPaiements: boolean = false
-  fetchedPaiementQuote : PaiementQuote = new PaiementQuote()
+  fetchedPaiementQuote: PaiementQuote = new PaiementQuote()
   autocompleteUser: string = '';
   autocompleteProject: string = '';
   fetchedProducts: Product[] = []
@@ -75,7 +75,8 @@ export class EditPaiementQuoteComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.fetchedPaiementQuote.quotes = [this.fetchedQuote]
+    console.log(this.fetchedQuotes)
+    this.fetchedPaiementQuote.quotes = this.fetchedQuotes
     this.myForm = this._fb.group({
       amount: [''],
       type: [''],
@@ -100,7 +101,7 @@ export class EditPaiementQuoteComponent implements OnInit {
   }
 
 
-    selectQuote(quote: Quote){
+    selectQuote(quote: Quote) {
       this.fetchedPaiementQuote.quotes = [quote]
     }
 
@@ -123,6 +124,7 @@ export class EditPaiementQuoteComponent implements OnInit {
           res => {
             this.toastr.success('Great!', res.message)
             this.newPaiementQuoteSaved.emit()
+            this.getPaiementQuote(res.obj._id)
             //this.router.navigate(['paiementQuote/edit/' + this.fetchedPaiementQuote._id])
           },
           error => {
@@ -135,6 +137,7 @@ export class EditPaiementQuoteComponent implements OnInit {
           res => {
             this.toastr.success('Great!', res.message)
             this.newPaiementQuoteSaved.emit()
+            this.getPaiementQuote(res.obj._id)
             // if(this.showHeader)
             //   this.router.navigate(['paiementQuote/edit/' + res.obj._id])
           },
