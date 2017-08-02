@@ -8,7 +8,7 @@ import { AppComponent} from './app.component';
 import {MdSidenavModule} from '@angular/material';
 
 
-import { GlobalEventsManager } from './GlobalEventsManager';
+import { GlobalEventsManager } from './globalEventsManager';
 
 import { Ng2PaginationModule} from 'ng2-pagination';
 import { ProgressBarModule} from 'ng2-progress-bar';
