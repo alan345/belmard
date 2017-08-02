@@ -4,6 +4,8 @@ import {ToastsManager} from 'ng2-toastr';
 import {Router} from '@angular/router';
 import {AuthService} from '../../auth/auth.service';
 import {UserAuth} from '../../auth/user.model';
+import {GlobalEventsManager} from "../../GlobalEventsManager";
+
 
 @Component({
   selector: 'app-login',
@@ -17,7 +19,10 @@ export class LoginComponent implements OnInit, AfterViewInit {
   password: FormControl;
   @ViewChild('userEmail') userEmail: ElementRef;
 
-  constructor(private _fb: FormBuilder, private _authService: AuthService,
+  constructor(
+    private _fb: FormBuilder,
+    private globalEventsManager: GlobalEventsManager,
+    private _authService: AuthService,
               private _router: Router, private toastr: ToastsManager, private renderer: Renderer) {
   }
 
@@ -49,6 +54,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this._authService.signin(user)
       .subscribe(
         data => {
+          this.globalEventsManager.showNavBar(true);
           //console.log(data)
           // if the user credentials are correct, set the localStorage token and userId,
           // we need these info in order to do stuff later when the user is signed in and verified
@@ -59,7 +65,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
           //gooplus
           this._router.navigate(['/']);
-          location.reload();
+          // location.reload();
 
 
           // display toastr success message pop up to inform the user that he logged in successfully

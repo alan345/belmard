@@ -8,6 +8,7 @@ import { AppComponent} from './app.component';
 import {MdSidenavModule} from '@angular/material';
 
 
+import { GlobalEventsManager } from './GlobalEventsManager';
 
 import { Ng2PaginationModule} from 'ng2-pagination';
 import { ProgressBarModule} from 'ng2-progress-bar';
@@ -256,6 +257,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     AdminGuardService,
     CompanieGuardService,
     PaiementGuardService,
+    GlobalEventsManager,
     // TRANSLATION_PROVIDERS,
     // TranslateService,
   //  ProfileService,

@@ -7,21 +7,23 @@ import { User} from '../../user/user.model';
 import { CompanieGuardService} from '../../companie/companieGuard.service'
 import { PaiementGuardService} from '../../user/paiement/paiementGuard.service'
 import { ChangeDetectionStrategy} from '@angular/core';
-
+import {GlobalEventsManager} from "../../GlobalEventsManager";
 
 @Component({
   selector: 'app-navbar',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
   @Input() sidenav: any;
+  showNavBar: boolean = false;
  // private userId: string = localStorage.getItem('userId');
   // private userId: string;
   fetchedUser: User = new User();
 
   constructor(
+    private globalEventsManager: GlobalEventsManager,
     private authService: AuthService,
     private adminService: AdminService,
     private userService: UserService,
@@ -29,13 +31,19 @@ export class NavbarComponent implements OnInit {
     // private companieGuardService: CompanieGuardService,
     // private paiementGuardService: PaiementGuardService,
   ) {
+    this.globalEventsManager.showNavBarEmitter.subscribe((mode)=>{
+        // mode will be null the first time it is created, so you need to igonore it when null
+        if (mode !== null) {
+          this.showNavBar = mode;
+        }
+    });
   }
-  ngAfterViewInit() {
 
-  }
   ngOnInit() {
     if (this.authService.isLoggedIn()) {
       //let userId = localStorage.getItem('userId');
+
+      this.globalEventsManager.showNavBar(true);
       this.getUser('')
     }
   }
@@ -84,12 +92,14 @@ export class NavbarComponent implements OnInit {
 
   // check if user is logged in by asking our authentication service, we use this function in html file *ngIf directive
   isLoggedIn() {
+
     return this.authService.isLoggedIn();
   }
 
   // this calls the logout function from our authentication service, it's activated when user clicks logout in front end.
   // It's called by the (click)='logout()' when the user presses the button
   logout() {
+    this.globalEventsManager.showNavBar(false);
     this.authService.logout();
     let this2 = this
     setTimeout(function(){

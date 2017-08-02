@@ -1,6 +1,9 @@
 <div *ngIf="isLoggedIn()">
 
-
+  <button type="button" class="spcright btn btn-secondary" (click)="logout()">
+    {{'Logout' | translate}}
+  </button>
+  
     <div class="sidebar-nav">
       <div class="navbar navbar-default" role="navigation">
         <div class="navbar-header">
