@@ -62,6 +62,12 @@ export const LANG_FR_TRANS = {
     'Quantity': 'Quantité', 
     'nameTemplate': 'Nom du modèle',
     'templateQuote': 'Recherche',
+    'Save TemplateQuote': 'Sauvegarder le Modèle', 
+    'Add new one': 'Ajouter', 
+    'Create a new Paiement': 'Nouveau Paiement',
+    'Please Select': 'Mode de Paiement', 
+    'Amount': 'Montant', 
+    
     
   
     'project': 'Project',
