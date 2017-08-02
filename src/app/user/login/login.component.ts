@@ -4,7 +4,7 @@ import {ToastsManager} from 'ng2-toastr';
 import {Router} from '@angular/router';
 import {AuthService} from '../../auth/auth.service';
 import {UserAuth} from '../../auth/user.model';
-import {GlobalEventsManager} from "../../GlobalEventsManager";
+import {GlobalEventsManager} from '../../globalEventsManager';
 
 
 @Component({

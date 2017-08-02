@@ -7,7 +7,7 @@ import { User} from '../../user/user.model';
 import { CompanieGuardService} from '../../companie/companieGuard.service'
 import { PaiementGuardService} from '../../user/paiement/paiementGuard.service'
 import { ChangeDetectionStrategy} from '@angular/core';
-import {GlobalEventsManager} from "../../GlobalEventsManager";
+import {GlobalEventsManager} from '../../globalEventsManager';
 
 @Component({
   selector: 'app-navbar',
