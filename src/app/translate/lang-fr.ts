@@ -82,7 +82,5 @@ export const LANG_FR_TRANS = {
   
     'right': 'droit',
     'Rights': 'Droits',
-  
-    'Create a new quote': 'Creer un nouveau devis',
 
 };
