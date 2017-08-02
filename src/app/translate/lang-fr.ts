@@ -70,13 +70,13 @@ export const LANG_FR_TRANS = {
     
     
   
-    'project': 'Project',
-    'Projects': 'Projects',
+    'project': 'Projet',
+    'Projects': 'Projets',
     
 
     'task': 'tâche',
     'Tasks': 'Tâches',
-    'Add a project': 'Ajouter un project',
+    'Add a project': 'Ajouter un projet',
   
 
   
