@@ -14,7 +14,7 @@ export class User {
   email: string = '';
   role: string[] = [];
   type: string[] = [];
-  // forms: Form[] = [];
+  forms: Form[] = [];
   rights: Right[] = []
   profile: Profile = new Profile();
   password: string = '';
