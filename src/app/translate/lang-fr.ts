@@ -61,7 +61,8 @@ export const LANG_FR_TRANS = {
     'Item': 'Objet',
     'Quantity': 'Quantité', 
     'nameTemplate': 'Nom du modèle',
-    'templateQuote': 'Recherche 
+    'templateQuote': 'Recherche',
+    
   
     'project': 'Project',
     'Projects': 'Projects',
