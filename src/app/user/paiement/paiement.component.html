@@ -65,6 +65,16 @@
       </div>
 
 
+      <h4>Pay</h4>
+      <app-autocomplete
+        [typeAutocomplete]="'quote'"
+        [canDelete]="true" [title]="" [singleChoice]=true
+        [arrayContent]="quotes" (getResultAutocomplete)="selectQuote($event[0])">
+      </app-autocomplete>
+      <input type="number" #amountToPay placeholder="Amount" class="form-control">
+      <button type="button" class="done" (click)="payInStripe(amountToPay.value)">Pay!</button>
+
+
       <h4>Abonnement</h4>
       <div *ngIf="!stripeCust.subscriptions.data.length">
         <button type="button" class="done" (click)="saveSubscriptionInStripe('gold')">Plan Gold!</button>

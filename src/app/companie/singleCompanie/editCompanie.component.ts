@@ -17,6 +17,8 @@ import { DeleteDialog } from '../../deleteDialog/deleteDialog.component';
 import { User } from '../../user/user.model';
 
 import { EditOptionsComponentDialog } from '../../form/modalLibrary/modalLibrary.component';
+import { PaiementService} from '../../user/paiement/paiement.service';
+
 
 @Component({
   selector: 'app-editCompanie',
@@ -38,6 +40,7 @@ export class EditCompanieComponent implements OnInit {
   seeCategProject = false;
   seeCategProduct = false;
   isMyCompanyRoute: Boolean = false
+  servicesBancks = ['stripe', 'paypal']
   // typesRights = [
   //   {name : 'Project', value: 'project'},
   //   {name : 'Quote', value: 'qute'},
@@ -53,10 +56,12 @@ export class EditCompanieComponent implements OnInit {
     private location: Location,
     private _fb: FormBuilder,
     private authService:AuthService,
-    private userService:UserService
+    private userService: UserService,
+    private paiementService: PaiementService,
   ) {}
 
   ngOnInit() {
+    this.getStripeAccountDetails()
     this.myForm = this._fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
       phoneNumber: ['', [Validators.required, Validators.minLength(2)]],
@@ -76,7 +81,10 @@ export class EditCompanieComponent implements OnInit {
         state: [''],
         zip: [''],
       }),
-      _users: this._fb.array([])
+      _users: this._fb.array([]),
+
+      secretKey:[''],
+      serviceSelected:[''],
     })
 
 
@@ -92,6 +100,16 @@ export class EditCompanieComponent implements OnInit {
         }
       }
     })
+  }
+
+  getStripeAccountDetails() {
+    this.paiementService.getStripeCust()
+      .subscribe(
+        res => {
+          console.log(res)
+        },
+        error => { console.log(error) }
+      )
   }
 
   isMyCompanie() {

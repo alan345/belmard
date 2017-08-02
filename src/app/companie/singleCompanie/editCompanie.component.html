@@ -94,7 +94,30 @@
         </div>
       </div>
       <button type="button" (click)="initDataToRemove()">Init Data</button>
+
+
+
+
+      <h4>{{'banck' | translate}}</h4>
+
+      <h4>{{'Stripe' | translate}}</h4>
+
+      <md-radio-group class="example-radio-group" formControlName="serviceSelected" [(ngModel)]="fetchedCompanie.banck.serviceSelected">
+        <md-radio-button class="example-radio-button" *ngFor="let servicesBank of servicesBanks" [value]="servicesBank">
+          {{servicesBank}}
+        </md-radio-button>
+      </md-radio-group>
+
+      <input type="text"
+        class="form-control"
+        formControlName="secretKey"
+        [(ngModel)]="fetchedCompanie.banck.stripe.secretKey"
+        placeholder="secretKey">
+
     </div>
+
+
+
     <div class="valid-edit">
       <button type="submit" class="sln-edt done">
           Enregistrer

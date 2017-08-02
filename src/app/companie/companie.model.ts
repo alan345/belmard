@@ -13,7 +13,16 @@ export class Companie {
   categJson: CategJson = new CategJson();
   categories = new Categorie()
   planDetail = new PlanDetail()
-  rights: Rigth[] = []
+  rights: Rigth[] = [];
+  banck: Banck = new Banck()
+}
+
+export class Banck {
+  serviceSelected: string = '';
+  stripe: Stripe = new Stripe()
+}
+export class Stripe {
+  secretKey: string = '';
 }
 
 export class Rigth {

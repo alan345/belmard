@@ -7,6 +7,7 @@ import { ToastsManager} from 'ng2-toastr';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { User } from '../user.model';
+import { Quote } from '../../quote/quote.model';
 import { StripeCustomer, DataSource } from './paiement.model';
 import { Companie } from '../../companie/companie.model';
 import { FormBuilder, FormGroup, FormArray, Validators} from '@angular/forms';
@@ -33,6 +34,7 @@ export class PaiementComponent implements OnInit {
   fetchedUser : User = new User()
   stripeCust: StripeCustomer = new StripeCustomer()
   newCard: DataSource = new DataSource()
+  quotes: Quote[] = []
   // public myForm: FormGroup;
 
   constructor(
@@ -52,8 +54,6 @@ export class PaiementComponent implements OnInit {
     this.getStripeCust()
   }
 
-
-
   getStripeCust() {
     this.paiementService.getStripeCust()
       .subscribe(
@@ -69,6 +69,29 @@ export class PaiementComponent implements OnInit {
         error => { console.log(error) }
       )
   }
+  selectQuote(quote){
+    this.quotes = [quote]
+  }
+  payInStripe(amount) {
+    if(this.quotes.length) {
+      let payInStripeData = {
+        amount: amount,
+        quote: this.quotes[0]
+      }
+      this.paiementService.payInStripe(payInStripeData)
+        .subscribe(
+          res => {
+            // this.userService.cleanCurrentUserInSession()
+            this.toastr.success('Great!')
+            this.getStripeCust()
+            // console.log(res);
+          },
+          error => { console.log(error); }
+        );
+    }
+
+  }
+
   deleteCustInStripe(){
     this.paiementService.deleteCustInStripe()
       .subscribe(

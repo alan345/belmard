@@ -90,6 +90,39 @@ router.get('/getStripeCust', function (req, res, next) {
 })
 
 
+router.get('/getStripeAccountDetails', function (req, res, next) {
+    // if(!req.user.paiement.stripe.cusId) {
+    //   return res.status(404).json({
+    //     title: 'No data',
+    //     error: 'noData'
+    //   });
+    // }
+
+
+    stripe.accounts.retrieve(
+      // req.user.paiement.stripe.cusId,
+      '',
+      function(err, customer) {
+        if(err) {
+          return res.status(404).json({
+            title: 'No data in stripe',
+            error: 'noData'
+          });
+        } else {
+          if(customer.deleted) {
+            return res.status(404).json({
+              title: 'Deleted',
+              error: customer
+            });
+          }
+          return res.status(200).json({
+            customer: customer
+          })
+        }
+      }
+    );
+})
+
 
 
 router.post('/saveCustInStripe/', function (req, res, next) {
@@ -134,6 +167,26 @@ router.post('/saveCardInStripe/', function (req, res, next) {
     });
   }
 });
+router.post('/payInStripe/', function (req, res, next) {
+  // if(req.user.paiement.stripe.cusId) {
+    payInStripe(req)
+    .then((card) => {
+      return res.status(200).json({
+        card: card
+      })
+    })
+    .catch((error) => {
+      return res.status(404).json({
+        title: 'Error Not saved in stripe',
+        error: error
+      });
+    });
+  // }
+});
+
+
+
+
 router.post('/saveSubscriptionInStripe/', function (req, res, next) {
     createSubInStripe(req)
     .then(function(subscription){
@@ -231,7 +284,6 @@ router.delete('/deleteCustInStripe', function (req, res, next) {
 })
 
 
-///to do here !!
 
 function updateCurrent_period_endInDb(req, current_period_end, plan){
   let paiement = req.user.paiement
@@ -290,7 +342,36 @@ function createCustomerInStripe(req) {
 
 
 
+function payInStripe(req){
+  return new Promise(function(resolve, reject) {
+    var stripe = require("stripe")(
+      "sk_test_uGq5JgMivZapIzAj14uAZKqw"
+    );
+
+    // console.log(req.body.quote.name)
+    let cusId = req.user.paiement.stripe.cusId
+
+    stripe.charges.create({
+      amount: req.body.amount*100,
+      // customer: cusId,
+      currency: "usd",
+      // source: "tok_visa", // obtained with Stripe.js
+      description: req.body.quote.name
+    }, function(err, charge) {
+      if(charge) {
+        console.log(charge)
+        resolve(charge)
+      } else {
+        console.log(err)
+        reject(err)
+      }
+      // asynchronously called
+    });
+  })
+}
+
 function createSubInStripe(req){
+
     let cusId = req.user.paiement.stripe.cusId
     // console.log(req.body)
     return new Promise(function(resolve, reject) {

@@ -5,10 +5,15 @@ var mongoose                = require('mongoose'),
     mongooseUniqueValidator = require('mongoose-unique-validator');
 
 var companie = new Schema({
-  
+
     ownerCompanies: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
     canBeSeenByCompanies: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
-
+    banck: {
+      serviceSelected:{type: String, default: ['']},
+      stripe:{
+        secretKey:{type: String, default: ['']},
+      }
+    },
     planDetail:{
       plan:{type: String, default: ['']},
       current_period_end:{type: Date}
