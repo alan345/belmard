@@ -11,6 +11,7 @@ import { EditPaiementQuoteComponent} from './single/editPaiementQuote.component'
 
 
 import { PaiementQuoteService} from './paiementQuote.service';
+import { PaiementService} from './paiement.service';
 import { PaiementQuoteRouting} from './paiementQuoteRouting.module';
 import { MaterialModule } from '@angular/material';
 import { Ng2PaginationModule} from 'ng2-pagination';
@@ -20,6 +21,8 @@ import { ProductModule } from '../product/product.module';
 import {SharedModule } from '../shared/shared.module';
 import { SignaturePadModule } from 'angular2-signaturepad';
 // import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { PaiementPipe } from './paiement.pipe';
+
 
 @NgModule({
   imports:      [
@@ -41,6 +44,7 @@ import { SignaturePadModule } from 'angular2-signaturepad';
     PaiementQuotesComponent,
     EditPaiementQuoteComponent,
     PaiementQuoteDialogComponent,
+    PaiementPipe,
 
     // AutocompleteComponent
   ],
@@ -49,7 +53,10 @@ import { SignaturePadModule } from 'angular2-signaturepad';
     EditPaiementQuoteComponent,
     // AutocompleteComponent,
   ],
-  providers:    [ PaiementQuoteService ],
+  providers:    [
+    PaiementQuoteService,
+    PaiementService
+  ],
   entryComponents: [
     PaiementQuoteDialogComponent,
   ]

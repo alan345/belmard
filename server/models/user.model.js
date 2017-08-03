@@ -14,18 +14,18 @@ var user = new Schema({
     email: {type: String, unique: true, required: true, lowercase: true},
     password: {type: String, required: true},
     forms: [{type: Schema.Types.ObjectId, ref: 'Form'}],
-    // paiement: {
-    //
-    //   stripe:[{
-    //     companie:[{type: Schema.Types.ObjectId, ref: 'Companie'}],
-    //     cusId:{type: String, default: ['']},
-    //     planDetail:{
-    //       plan:{type: String, default: ['']},
-    //       current_period_end:{type: Date}
-    //     }
-    //
-    //   }]
-    // },
+    paiement: {
+
+      stripe:[{
+        companies:[{type: Schema.Types.ObjectId, ref: 'Companie'}],
+        cusId:{type: String, default: ['']},
+        planDetail:{
+          plan:{type: String, default: ['']},
+          current_period_end:{type: Date}
+        }
+
+      }]
+    },
     salesMan: [{type: Schema.Types.ObjectId, ref: 'User'}],
     resetPasswordToken: String,
     resetPasswordExpires: String,

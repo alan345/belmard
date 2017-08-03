@@ -8,11 +8,22 @@ var mongoose                = require('mongoose'),
 
 var paiementQuote = new Schema({
     ownerCompanies: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
-    addedBy: [{type: Schema.Types.ObjectId, ref: 'User'}],
+    createdBy: [{type: Schema.Types.ObjectId, ref: 'User'}],
+    userDebiteds: [{type: Schema.Types.ObjectId, ref: 'User'}],
     quotes: [{type: Schema.Types.ObjectId, ref: 'Quote'}],
+    projects: [{type: Schema.Types.ObjectId, ref: 'Project'}],
     datePaiement: {type: Date},
     amount: {type: Number},
-    type: {type: String},
+    type: {type: String, default: ['']},
+    isExpense: {type: Boolean, default: [false]},
+    stripe: {
+      cusId: {type: String, default: ['']},
+      isSubscription:{type: Boolean, default: [false]},
+      planDetail:{
+        plan:{type: String, default: ['']},
+        current_period_end:{type: Date}
+      }
+    }
   },
   {
     timestamps: true

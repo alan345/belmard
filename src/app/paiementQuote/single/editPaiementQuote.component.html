@@ -13,38 +13,131 @@
           [canDelete]="true" [title]="" [singleChoice]="true"
           [arrayContent]="fetchedPaiementQuote.quotes" (getResultAutocomplete)="selectQuote($event[0])">
         </app-autocomplete>
+        <app-autocomplete
+          [typeAutocomplete]="'project'"
+          [canDelete]="true" [title]="" [singleChoice]="true"
+          [arrayContent]="fetchedPaiementQuote.projects" (getResultAutocomplete)="selectProject($event[0])">
+        </app-autocomplete>
 
-
-
+        <app-autocomplete
+          [typeAutocomplete]="'user'"
+          [canDelete]="true" [title]="" [singleChoice]="true"
+          [arrayContent]="fetchedPaiementQuote.userDebiteds" (getResultAutocomplete)="selectUserDebited($event[0])">
+        </app-autocomplete>
 
         <select class="form-control" formControlName="type" [(ngModel)]="fetchedPaiementQuote.type">
           <option [attr.value]="''">Please Select</option>
           <option *ngFor="let n of paiementsTypes" [attr.value]="n.value">{{n.label}}</option>
         </select>
 
+
+
         <input type="number" class="form-control" formControlName="amount" [(ngModel)]="fetchedPaiementQuote.amount" placeholder="Amount">
 
         <input type="date" class="form-control" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedPaiementQuote.datePaiementString" >
 
-        <!-- <ngb-datepicker #dp [(ngModel)]="fetchedPaiementQuote.datePaiement" formControlName="datePaiement" (navigate)="date = $event.next"></ngb-datepicker> -->
 
-        <!-- <div class="form-group">
-          <div class="input-group">
-            <input
-            class="form-control"
-            placeholder="yyyy-mm-dd"
-            name="dp"
-            formControlName="datePaiement"
-            [(ngModel)]="fetchedPaiementQuote.datePaiement" ngbDatepicker #d="ngbDatepicker">
-            <div class="input-group-addon" (click)="d.toggle()" >
-              <img src="img/calendar-icon.svg" style="width: 1.2rem; height: 1rem; cursor: pointer;"/>
+
+
+
+
+
+
+
+
+
+
+            <h4>Customer</h4>
+            <div *ngIf="!stripeCust.id">
+              <button type="button" class="done" (click)="saveCustInStripe()">I go for it!</button>
             </div>
-          </div>
-        </div>
+            <div *ngIf="stripeCust.id">
+              <button type="button" class="done" (click)="deleteCustInStripe()">deleteCustInStripe</button>
+              <div class="form-control">
+                {{stripeCust.id}}
+              </div>
+              <div class="form-control">
+                {{stripeCust.created | timestampToDate}}
+              </div>
+              <div class="form-control">
+                {{stripeCust.email}}
+              </div>
 
-{{fetchedPaiementQuote.datePaiement|json}} -->
-        <!-- <div (click)="fetchedPaiementQuote.editModeDate = !fetchedPaiementQuote.editModeDate">{{fetchedPaiementQuote.datePaiement | date:'yyyy-MM-dd' }}</div> -->
-        <!-- <input *ngIf="fetchedPaiementQuote.editModeDate" type="date" (focusout)="fetchedPaiementQuote.editModeDate = !fetchedPaiementQuote.editModeDate" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedPaiementQuote.datePaiement" placeholder="Amount"> -->
+              <h4>Card</h4>
+              <div *ngIf="!stripeCust.sources.data.length">
+                <h6>Create a new card</h6>
+                <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="newCard.address_city" placeholder="address_city" class="form-control">
+                <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="newCard.address_country" placeholder="address_country" class="form-control">
+                <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="newCard.address_line1" placeholder="address_line1" class="form-control">
+                <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="newCard.address_line2" placeholder="address_line2" class="form-control">
+                <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="newCard.address_state" placeholder="address_state" class="form-control">
+                <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="newCard.address_zip" placeholder="address_zip" class="form-control"> eg: 8
+                <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="newCard.exp_month" placeholder="exp_month" class="form-control"> eg: 2018
+                <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="newCard.exp_year" placeholder="exp_year" class="form-control"> eg: 4242424242424242
+                <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="newCard.number" placeholder="number" class="form-control">
+                <button type="button" class="done" (click)="saveCardInStripe()">saveCardInStripe</button>
+              </div>
+
+
+              <div *ngFor="let card of stripeCust.sources.data; let i=index;">
+                <div class="form-control">{{card.id}}</div>
+                <div class="form-control">{{card.address_city}}</div>
+                <div class="form-control">{{card.address_country}}</div>
+                <div class="form-control">{{card.address_line1}}</div>
+                <div class="form-control">{{card.address_line2}}</div>
+                <div class="form-control">{{card.address_state}}</div>
+                <div class="form-control">{{card.address_zip}}</div>
+                <div class="form-control">{{card.brand}}</div>
+                <div class="form-control">{{card.country}}</div>
+                <div class="form-control">{{card.exp_month}}</div>
+                <div class="form-control">{{card.exp_year}}</div>
+                <div class="form-control">{{card.funding}}</div>
+                <div class="form-control">{{card.last4}}</div>
+                <button type="button" class="done" (click)="deleteCardInStripe(card.id)">delete Card</button>
+              </div>
+
+
+
+              <h4>Abonnement</h4>
+
+
+
+
+            <button type="button" class="done" (click)="payInStripe()">Pay!</button>
+
+
+
+              <div *ngIf="!stripeCust.subscriptions.data.length">
+                <button type="button" class="done" (click)="saveSubscriptionInStripe('gold')">Plan Gold!</button>
+              </div>
+              <div *ngFor="let sub of stripeCust.subscriptions.data">
+                <div class="form-control">{{sub.id}}</div>
+                <div class="form-control">{{sub.created | timestampToDate}}</div>
+                <div class="form-control">{{sub.current_period_start | timestampToDate}}</div>
+                <div class="form-control">{{sub.current_period_end | timestampToDate}}</div>
+
+
+                <h4>Plan</h4>
+                <div class="form-control">{{sub.plan.id}}</div>
+                <div class="form-control">{{sub.plan.amount}}</div>
+                <div class="form-control">{{sub.plan.created | timestampToDate}}</div>
+                <div class="form-control">{{sub.plan.currency}}</div>
+                <div class="form-control">{{sub.plan.interval}}</div>
+                <div class="form-control">{{sub.plan.interval_count}}</div>
+                <div class="form-control">{{sub.plan.name}}</div>
+                <button type="button" class="done" (click)="deleteSubInStripe(sub.id)">deleteSubInStripe</button>
+
+              </div>
+              <div *ngIf="showReLoginInApp">
+                {{'You must loggin agin to apply changes:' | translate}}
+                <app-loginInApp></app-loginInApp>
+              </div>
+
+            </div>
+
+
+
+
       </div>
 
 

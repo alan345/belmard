@@ -3,6 +3,7 @@ var express = require('express'),
     config  = require('../config/config'),
     User    = require('../models/user.model'),
     Companie= require('../models/companie.model'),
+    PaiementQuote=require('../models/paiementQuote.model'),
     fs      = require('fs'),
     jwt     = require('jsonwebtoken'),
     stripe  = require("stripe")("sk_test_cg4vcpE5gV1ApywsErwoWL7u");
@@ -60,33 +61,46 @@ router.use('/', function (req, res, next) {
 });
 
 
-router.get('/getStripeCust', function (req, res, next) {
-    if(!req.user.paiement.stripe.cusId) {
-      return res.status(404).json({
-        title: 'No data',
-        error: 'noData'
-      });
-    }
-    stripe.customers.retrieve(req.user.paiement.stripe.cusId,
-      function(err, customer) {
-        if(err) {
-          return res.status(404).json({
-            title: 'No data in stripe',
-            error: 'noData'
-          });
-        } else {
-          if(customer.deleted) {
-            return res.status(404).json({
-              title: 'Deleted',
-              error: customer
-            });
-          }
-          return res.status(200).json({
-            customer: customer
-          })
-        }
+router.get('/getStripeCust/:paiementQuoteId', function (req, res, next) {
+
+
+    PaiementQuote.findById((req.params.paiementQuoteId), function (err, obj) {
+      if (err) {
+        return res.status(500).json({
+          message: 'An error occured',
+          err: err
+        })
       }
-    );
+      if (!obj) {
+        return res.status(404).json({
+          title: 'No obj found',
+          error: {message: 'Obj not found!'}
+        })
+      }
+
+
+                stripe.customers.retrieve(obj.stripe.cusId,
+                  function(err, customer) {
+                    if(err) {
+                      return res.status(404).json({
+                        title: 'No data in stripe',
+                        error: 'noData'
+                      });
+                    } else {
+                      if(customer.deleted) {
+                        return res.status(404).json({
+                          title: 'Deleted',
+                          error: customer
+                        });
+                      }
+                      return res.status(200).json({
+                        customer: customer
+                      })
+                    }
+                  }
+                );
+          })
+
 })
 
 
@@ -151,9 +165,24 @@ router.post('/saveCustInStripe/', function (req, res, next) {
       });
     });
 });
-router.post('/saveCardInStripe/', function (req, res, next) {
-  if(req.user.paiement.stripe.cusId) {
-    createCardInStripe(req)
+router.post('/saveCardInStripe/:paiementQuoteId', function (req, res, next) {
+
+
+  PaiementQuote.findById((req.params.paiementQuoteId), function (err, obj) {
+    if (err) {
+      return res.status(500).json({
+        message: 'An error occured',
+        err: err
+      })
+    }
+    if (!obj) {
+      return res.status(404).json({
+        title: 'No obj found',
+        error: {message: 'Obj not found!'}
+      })
+    }
+
+    createCardInStripe(req, obj)
     .then((card) => {
       return res.status(200).json({
         card: card
@@ -165,32 +194,79 @@ router.post('/saveCardInStripe/', function (req, res, next) {
         error: error
       });
     });
-  }
+  })
 });
-router.post('/payInStripe/', function (req, res, next) {
-  // if(req.user.paiement.stripe.cusId) {
-    payInStripe(req)
-    .then((card) => {
-      return res.status(200).json({
-        card: card
-      })
-    })
-    .catch((error) => {
-      return res.status(404).json({
-        title: 'Error Not saved in stripe',
-        error: error
+router.post('/payInStripe/:paiementQuoteId', function (req, res, next) {
+
+    PaiementQuote.findById((req.params.paiementQuoteId), function (err, obj) {
+      if (err) {
+        return res.status(500).json({
+          message: 'An error occured',
+          err: err
+        })
+      }
+      if (!obj) {
+        return res.status(404).json({
+          title: 'No obj found',
+          error: {message: 'Obj not found!'}
+        })
+      }
+
+      // var stripe = require("stripe")(
+      //   "sk_test_uGq5JgMivZapIzAj14uAZKqw"
+      // );
+
+      // console.log(req.body.quote.name)
+      // let cusId = req.user.paiement.stripe.cusId
+
+      stripe.charges.create({
+        amount: obj.amount*100,
+        customer: obj.stripe.cusId,
+        currency: "usd",
+        // source: "tok_visa", // obtained with Stripe.js
+        description: 'quote'
+      }, function(err, charge) {
+        if(charge) {
+          return res.status(200).json({
+            charge: charge
+          })
+        } else {
+          return res.status(404).json({
+            title: 'Error Not saved in stripe',
+            error: error
+          });
+
+
+        }
+        // asynchronously called
       });
-    });
-  // }
+
+  })
 });
 
 
 
 
-router.post('/saveSubscriptionInStripe/', function (req, res, next) {
-    createSubInStripe(req)
+router.post('/saveSubscriptionInStripe/:paiementQuoteId', function (req, res, next) {
+
+  PaiementQuote.findById((req.params.paiementQuoteId), function (err, obj) {
+    if (err) {
+      return res.status(500).json({
+        message: 'An error occured',
+        err: err
+      })
+    }
+    if (!obj) {
+      return res.status(404).json({
+        title: 'No obj found',
+        error: {message: 'Obj not found!'}
+      })
+    }
+
+
+    createSubInStripe(req, obj)
     .then(function(subscription){
-      console.log(subscription)
+      console.log('ssssss')
       updateCurrent_period_endInDb(req, subscription.current_period_end, subscription.plan.id)
       .then(item => { console.log(item) })
       .catch(err => {
@@ -210,6 +286,7 @@ router.post('/saveSubscriptionInStripe/', function (req, res, next) {
         error: error
       });
     });
+  })
 });
 
 
@@ -247,10 +324,61 @@ router.post('/saveSubscriptionInStripe/', function (req, res, next) {
     );
   })
 
-  router.delete('/deleteCard/:idCard', function (req, res, next) {
-    stripe.customers.deleteCard(
-      req.user.paiement.stripe.cusId,
-      req.params.idCard,
+  router.delete('/deleteCard/:idCard/:paiementQuoteId', function (req, res, next) {
+
+
+        PaiementQuote.findById((req.params.paiementQuoteId), function (err, obj) {
+          if (err) {
+            return res.status(500).json({
+              message: 'An error occured',
+              err: err
+            })
+          }
+          if (!obj) {
+            return res.status(404).json({
+              title: 'No obj found',
+              error: {message: 'Obj not found!'}
+            })
+          }
+
+
+        stripe.customers.deleteCard(
+          obj.stripe.cusId,
+          req.params.idCard,
+          function(err, confirmation) {
+            if(confirmation) {
+              return res.status(200).json({
+                message: confirmation
+              })
+            } else {
+              return res.status(404).json({
+                title: 'Error',
+                error: err
+              });
+            }
+          }
+        );
+    })
+  })
+
+router.delete('/deleteCustInStripe/:paiementQuoteId', function (req, res, next) {
+
+  PaiementQuote.findById((req.params.paiementQuoteId), function (err, obj) {
+    if (err) {
+      return res.status(500).json({
+        message: 'An error occured',
+        err: err
+      })
+    }
+    if (!obj) {
+      return res.status(404).json({
+        title: 'No obj found',
+        error: {message: 'Obj not found!'}
+      })
+    }
+
+
+    stripe.customers.del(obj.stripe.cusId,
       function(err, confirmation) {
         if(confirmation) {
           return res.status(200).json({
@@ -265,56 +393,41 @@ router.post('/saveSubscriptionInStripe/', function (req, res, next) {
       }
     );
   })
-
-router.delete('/deleteCustInStripe', function (req, res, next) {
-  stripe.customers.del(req.user.paiement.stripe.cusId,
-    function(err, confirmation) {
-      if(confirmation) {
-        return res.status(200).json({
-          message: confirmation
-        })
-      } else {
-        return res.status(404).json({
-          title: 'Error',
-          error: err
-        });
-      }
-    }
-  );
 })
 
 
 
 function updateCurrent_period_endInDb(req, current_period_end, plan){
-  let paiement = req.user.paiement
-  paiement.stripe.planDetail.current_period_end = current_period_end*1000
-  paiement.stripe.planDetail.plan = plan
-
-
-  let planDetail = {
-    current_period_end: current_period_end*1000,
-    plan: plan
-  }
   return new Promise(function(resolve, reject) {
-    User.update({ _id: req.user._id }, { $set: { paiement: paiement}}, function (err, item) {
-      if (item) {
-        Companie.update({ _id: req.user.ownerCompanies[0] }, { $set: { planDetail: planDetail}}, function (err, item) {
-          if (item) { resolve(item) } else { reject(err) }
-        });
-      } else { reject(err) }
-    });
-
+    resolve()
   })
+  // let paiement = req.user.paiement
+  // paiement.stripe.planDetail.current_period_end = current_period_end*1000
+  // paiement.stripe.planDetail.plan = plan
+  //
+  //
+  // let planDetail = {
+  //   current_period_end: current_period_end*1000,
+  //   plan: plan
+  // }
+  // return new Promise(function(resolve, reject) {
+  //   User.update({ _id: req.user._id }, { $set: { paiement: paiement}}, function (err, item) {
+  //     if (item) {
+  //       Companie.update({ _id: req.user.ownerCompanies[0] }, { $set: { planDetail: planDetail}}, function (err, item) {
+  //         if (item) { resolve(item) } else { reject(err) }
+  //       });
+  //     } else { reject(err) }
+  //   });
+  //
+  // })
 }
 
 
 
 
-function updateStripeCustomerIdToDb(req, customer){
-  let paiement = req.user.paiement
-  paiement.stripe.cusId = customer.id
+function updateStripeCustomerIdToDb(req, customer) {
   return new Promise(function(resolve, reject) {
-    User.update({ _id: req.user._id }, { $set: { paiement: paiement}}, function (err, item) {
+    PaiementQuote.update({ _id: req.body._id }, { $set: { stripe: {cusId : customer.id}}}, function (err, item) {
       if (item) { resolve(item) } else { reject(err) }
     });
   })
@@ -322,7 +435,6 @@ function updateStripeCustomerIdToDb(req, customer){
 
 
 function createCustomerInStripe(req) {
-
   return new Promise(function(resolve, reject) {
     stripe.customers.create({
       description: 'Customer for' + req.user.email,
@@ -342,58 +454,34 @@ function createCustomerInStripe(req) {
 
 
 
-function payInStripe(req){
-  return new Promise(function(resolve, reject) {
-    var stripe = require("stripe")(
-      "sk_test_uGq5JgMivZapIzAj14uAZKqw"
-    );
 
-    // console.log(req.body.quote.name)
-    let cusId = req.user.paiement.stripe.cusId
 
-    stripe.charges.create({
-      amount: req.body.amount*100,
-      // customer: cusId,
-      currency: "usd",
-      // source: "tok_visa", // obtained with Stripe.js
-      description: req.body.quote.name
-    }, function(err, charge) {
-      if(charge) {
-        console.log(charge)
-        resolve(charge)
-      } else {
-        console.log(err)
-        reject(err)
-      }
-      // asynchronously called
-    });
-  })
-}
+function createSubInStripe(req, obj){
 
-function createSubInStripe(req){
-
-    let cusId = req.user.paiement.stripe.cusId
+    // let cusId = req.user.paiement.stripe.cusId
     // console.log(req.body)
     return new Promise(function(resolve, reject) {
       stripe.subscriptions.create({
-        customer: cusId,
+        customer: obj.stripe.cusId,
         plan: req.body.plan
       }, function(err, subscription) {
         if(subscription) {
-          console.log(subscription)
+          // console.log(subscription)
           resolve(subscription)
         } else {
-          console.log(err)
+          // console.log(err)
           reject(err)
         }
       });
     })
 }
 
-function createCardInStripe(req){
-  let cusId = req.user.paiement.stripe.cusId
+function createCardInStripe(req, obj){
+  let cusId = obj.stripe.cusId
+  console.log(obj.stripe.cusId)
   let card = req.body
-  console.log(req.body)
+  // console.log(card)
+  // console.log(req.body)
   delete card.id
   delete card.brand
   delete card.country

@@ -14,7 +14,6 @@ import { FormBuilder, FormGroup, FormArray, Validators} from '@angular/forms';
 
 
 
-
 @Component({
   selector: 'app-paiement',
   templateUrl: './paiement.component.html',
@@ -31,9 +30,10 @@ export class PaiementComponent implements OnInit {
   companies: Companie[] = [];
   // isEditMode:boolean = false
   showReLoginInApp:boolean = false
+  newCard: DataSource = new DataSource()
   fetchedUser : User = new User()
   stripeCust: StripeCustomer = new StripeCustomer()
-  newCard: DataSource = new DataSource()
+
   quotes: Quote[] = []
   // public myForm: FormGroup;
 

@@ -1,10 +1,14 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {AuthService} from '../../auth/auth.service';
 import {PaiementQuoteService} from '../paiementQuote.service';
+import {PaiementService} from '../paiement.service';
+
+
 import {ProductService} from '../../product/product.service';
 import { ProjectService} from '../../project/project.service';
 
-import {PaiementQuote} from '../paiementQuote.model';
+
+import {PaiementQuote, StripeCustomer, DataSource} from '../paiementQuote.model';
 
 import {ToastsManager} from 'ng2-toastr';
 
@@ -19,7 +23,6 @@ import { User } from '../../user/user.model';
 import { Quote } from '../../quote/quote.model';
 import { Product } from '../../product/product.model';
 import { Project } from '../../project/project.model';
-
 
 
 
@@ -40,9 +43,13 @@ export class EditPaiementQuoteComponent implements OnInit {
   autocompleteProject: string = '';
   fetchedProducts: Product[] = []
   fetchedProjects: Project[] = []
+  stripeCust: StripeCustomer = new StripeCustomer()
   // currentUser: User = new User()
   imgLogoUrl: string = './assets/images/profile-placeholder.jpg'
   imgSignatureBase64Temp = ''
+
+  showReLoginInApp:boolean = false
+  newCard: DataSource = new DataSource()
   // userAdmins : User[] = []
   // userManagers : User[] = []
   // userClients : User[] = []
@@ -56,10 +63,12 @@ export class EditPaiementQuoteComponent implements OnInit {
 
   paiementsTypes = [
     { label: 'cheque', value: 'check' },
-    { label: 'Espece', value: 'cash' }
+    { label: 'Espece', value: 'cash' },
+    { label: 'Stripe', value: 'stripe' },
 ]
   constructor(
     private paiementQuoteService: PaiementQuoteService,
+    private paiementService: PaiementService,
     private quoteService: QuoteService,
     // private projectService: ProjectService,
     // private userService: UserService,
@@ -75,7 +84,8 @@ export class EditPaiementQuoteComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log(this.fetchedQuotes)
+
+    // console.log(this.fetchedQuotes)
     this.fetchedPaiementQuote.quotes = this.fetchedQuotes
     this.myForm = this._fb.group({
       amount: [''],
@@ -104,7 +114,12 @@ export class EditPaiementQuoteComponent implements OnInit {
     selectQuote(quote: Quote) {
       this.fetchedPaiementQuote.quotes = [quote]
     }
-
+    selectProject(project: Project) {
+      this.fetchedPaiementQuote.projects = [project]
+    }
+    selectUserDebited(user: User) {
+      this.fetchedPaiementQuote.userDebiteds = [user]
+    }
 
     getQuote(idQuote: string) {
       this.quoteService.getQuote(idQuote, {})
@@ -199,8 +214,9 @@ export class EditPaiementQuoteComponent implements OnInit {
     this.paiementQuoteService.getPaiementQuote(id, {})
       .subscribe(
         res => {
-          this.fetchedPaiementQuote = res
 
+          this.fetchedPaiementQuote = res
+          // this.getStripeCust()
           this.fetchedPaiementQuote
           .datePaiementString =
           this.authService
@@ -211,9 +227,135 @@ export class EditPaiementQuoteComponent implements OnInit {
         }
       )
   }
-  isAdmin() {
-    return this.authService.isAdmin();
-  }
+  // isAdmin() {
+  //   return this.authService.isAdmin();
+  // }
+
+
+
+    getStripeCust() {
+      this.paiementService.getStripeCust(this.fetchedPaiementQuote._id)
+        .subscribe(
+          res => {
+            // console.log(res)
+            if(res.customer.deleted) {
+              this.stripeCust = new StripeCustomer()
+            } else {
+              this.stripeCust = res.customer
+            }
+
+          },
+          error => { console.log(error) }
+        )
+    }
+
+    payInStripe() {
+
+
+        this.paiementService.payInStripe(this.fetchedPaiementQuote._id)
+          .subscribe(
+            res => {
+              // this.userService.cleanCurrentUserInSession()
+              this.toastr.success('Great!')
+              this.getStripeCust()
+              // console.log(res);
+            },
+            error => { console.log(error); }
+          );
+
+
+    }
+
+    deleteCustInStripe() {
+      this.paiementService.deleteCustInStripe(this.fetchedPaiementQuote._id)
+        .subscribe(
+          res => {
+            // this.userService.cleanCurrentUserInSession()
+            this.toastr.success('Great!')
+            this.getStripeCust()
+          },
+          error => { console.log(error); }
+        );
+    }
+    saveCustInStripe(){
+      this.paiementService.saveCustInStripe(this.fetchedPaiementQuote)
+        .subscribe(
+          res => {
+            // this.userService.cleanCurrentUserInSession()
+            this.toastr.success('Great!')
+            this.stripeCust = res.customer
+            console.log(res);
+          },
+          error => { console.log(error); }
+        );
+    }
+    saveCardInStripe() {
+      // console.log(this.newCard)
+      this.paiementService.saveCardInStripe(this.newCard, this.fetchedPaiementQuote._id)
+        .subscribe(
+          res => {
+            // this.userService.cleanCurrentUserInSession()
+            this.toastr.success('Great!')
+            this.getStripeCust()
+            // console.log(res);
+          },
+          error => { console.log(error); }
+        );
+    }
+    saveSubscriptionInStripe(planValue) {
+      let plan = {
+        plan: planValue
+      }
+      this.paiementService.saveSubscriptionInStripe(plan, this.fetchedPaiementQuote._id)
+        .subscribe(
+          res => {
+            // this.userService.cleanCurrentUserInSession()
+            this.toastr.success('Great!')
+            this.getStripeCust()
+            this.showReLoginInApp = true
+
+
+            // this.getStripeCust()
+            // this.authService.refreshCookiesOfCurrentUser()
+            // location.reload();
+            // console.log(res);
+          },
+          error => { console.log(error); }
+        );
+    }
+
+
+    deleteSubInStripe(subId){
+      this.paiementService.deleteSub(subId)
+        .subscribe(
+          res => {
+            // this.userService.cleanCurrentUserInSession()
+            // console.log(res.message)
+            this.toastr.success('Great!');
+            this.getStripeCust()
+            // this.getStripeCust()
+            // location.reload();
+          },
+          error => {
+            console.log(error);
+          }
+        );
+    }
+
+    deleteCardInStripe(cardId){
+      this.paiementService.deleteCard(cardId, this.fetchedPaiementQuote._id)
+        .subscribe(
+          res => {
+            // this.userService.cleanCurrentUserInSession()
+            this.toastr.success('Great!');
+            this.getStripeCust()
+          },
+          error => {
+            console.log(error);
+          }
+        );
+    }
+
 
 
 
