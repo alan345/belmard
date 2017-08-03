@@ -34,6 +34,7 @@
           <li *ngIf="showObjHTML('user')" class="nav-item">
             <a class="nav-link" routerLinkActive="active" [routerLink]="['/user']">{{'Users' | translate}}</a>
           </li>
+          
           <li *ngIf="showObjHTML('companie')" class="nav-item">
             <a class="nav-link" routerLinkActive="active" [routerLink]="['/companie']">{{'Companies' | translate}}</a>
           </li>
@@ -74,6 +75,17 @@
           <a class="nav-link" routerLinkActive="active" [routerLink]="['/userCalendar', {idUserSearch: fetchedUser._id}]">{{'My Planning' | translate}}</a>
         </li>
 
+                            <li>
+                        <a href="#">
+                            <i class="pe-7s-mail">
+                                <span class="label"> 23 </span>
+                            </i>
+                            <p>Messages</p>
+                        </a>
+                    </li>
+        
+        
+        
         <li *ngIf="!isCurrentUserIsInSubPeriod()" class="nav-item">
           <a class="nav-link" routerLinkActive="active" [routerLink]="['/user/paiement']">{{'Finish subscription' | translate}}</a>
         </li>
@@ -91,15 +103,7 @@
         <button type="button" class="spcright btn btn-primary" [routerLink]="['/user/newuser/' + fetchedUser._id]" routerLinkActive="active">
           {{'My Profile' | translate}}
         </button>
-                            <li>
-                        <a [routerLink]="['/user/newuser/' + fetchedUser._id]" routerLinkActive="active">
-                            <i class="fa fa-user-circle-o"></i>
-                      
-                        </a>
-                    </li>
-        <li class="nav-item">
-          <a [routerLink]="['/user/newuser/' + fetchedUser._id]" routerLinkActive="active"><i class="fa fa-user-circle-o fa-3x" aria-hidden="true"></i></a>
-        </li>  
+                            
         <button type="button" class="spcright btn btn-primary" [routerLink]="['/companie/mine']" routerLinkActive="active">
           {{'My company' | translate}}
         </button>
