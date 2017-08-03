@@ -11,7 +11,7 @@
       <div class="">
         <div class="nav navbar-nav">
           <a class="nav-item">
-            <a class="nav-link" (click)="redirect('user')" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+            <a class="nav-link" (click)="redirect('/user/true')" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
               <span class="fa fa-user" aria-hidden="true"></span>
                 Contacts
             </a>
@@ -21,17 +21,17 @@
           <div class="panel-body">
             <table class="table">
               <tr>
-                <td class="nav-item">
+                <td class="nav-item subItem">
                   <a class="nav-link" [routerLink]="['/user/true']" routerLinkActive="active">{{'customers'|translate}}</a>
                 </td>
               </tr>
               <tr>
-                <td class="nav-item">
+                <td class="nav-item subItem">
                   <a class="nav-link" [routerLink]="['/companie']" routerLinkActive="active">{{'supplier'|translate}}</a>
                 </td>
               </tr>
               <tr>
-                <td class="nav-item">
+                <td class="nav-item subItem">
                   <a class="nav-link" [routerLink]="['/user/false']" routerLinkActive="active">{{'team'|translate}}</a>
                 </td>
               </tr>
@@ -61,18 +61,18 @@
           <div class="panel-body">
             <table class="table">
               <tr>
-                <td class="nav-item">
-                  <a class="nav-link" [routerLink]="" routerLinkActive="active">{{'service1'|translate}}</a>
+                <td class="nav-item subItem">
+                  <a class="nav-link" [routerLink]="['/service1']" routerLinkActive="active">{{'service1'|translate}}</a>
                 </td>
               </tr>
               <tr>
-                <td class="nav-item">
-                  <a class="nav-link" [routerLink]="" routerLinkActive="active">{{'service2'|translate}}</a>
+                <td class="nav-item subItem">
+                  <a class="nav-link" [routerLink]="['/servic2']" routerLinkActive="active">{{'service2'|translate}}</a>
                 </td>
               </tr>
               <tr>
-                <td class="nav-item">
-                  <a class="nav-link" [routerLink]="" routerLinkActive="active">{{'service3'|translate}}</a>
+                <td class="nav-item subItem">
+                  <a class="nav-link" [routerLink]="['/service3']" routerLinkActive="active">{{'service3'|translate}}</a>
                 </td>
               </tr>
 
