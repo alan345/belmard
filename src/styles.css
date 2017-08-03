@@ -4,6 +4,10 @@
 /*@import "~@ng-bootstrap/ng-bootstrap/dist/css/bootstrap.min.css";*/
 
 
+.a {
+  color: #464a4c;
+}
+
 .btn-outline-primary {
 margin-top: 20px; 
 }
