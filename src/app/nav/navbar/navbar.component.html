@@ -91,7 +91,7 @@
         <button type="button" class="spcright btn btn-primary" [routerLink]="['/user/newuser/' + fetchedUser._id]" routerLinkActive="active">
           {{'My Profile' | translate}}
         </button>
-        <li *ngIf="!isCurrentUserIsInSubPeriod()" class="nav-item">
+        <li class="nav-item">
           <a class="nav-link" [routerLink]="['/user/newuser/' + fetchedUser._id]" routerLinkActive="active"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a>
         </li>  
         <button type="button" class="spcright btn btn-primary" [routerLink]="['/companie/mine']" routerLinkActive="active">
