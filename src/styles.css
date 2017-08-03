@@ -59,15 +59,14 @@ border-radius: 5px;
 
 .nav-link:hover {
     color: #ffffff;
-    background-color: rgba(143, 143, 143, 1);
-  border-radius: 5px;
+    background-color: rgba(148, 17, 17, 1);
+ 
 }
 
 .active {
     color: #ffffff;
-    background-color: rgba(91, 199, 92, 1);
-  border-radius: 5px;
-}
+    background-color: rgba(148, 17, 17, 1);
+  }
 
 .header {
 text-align: center;
