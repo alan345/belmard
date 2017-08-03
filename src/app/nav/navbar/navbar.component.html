@@ -92,7 +92,7 @@
           {{'My Profile' | translate}}
         </button>
         <li>
-          <a class="nav-link" [routerLink]="['/user/newuser/' + fetchedUser._id]" routerLinkActive="active"><i class="fa fa-user-circle-o fa-3x" aria-hidden="true"></i></a>
+          <a [routerLink]="['/user/newuser/' + fetchedUser._id]" routerLinkActive="active"><i class="fa fa-user-circle-o fa-3x" aria-hidden="true"></i></a>
         </li>  
         <button type="button" class="spcright btn btn-primary" [routerLink]="['/companie/mine']" routerLinkActive="active">
           {{'My company' | translate}}
