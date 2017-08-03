@@ -3,6 +3,9 @@
 @import "~angular-calendar/dist/css/angular-calendar.css";
 /*@import "~@ng-bootstrap/ng-bootstrap/dist/css/bootstrap.min.css";*/
 
+.example-container {
+margin-top: 50px !important;
+}
 
 .a {
   color: #464a4c;
