@@ -62,8 +62,8 @@ border-radius: 5px;
 }
 
 .nav-link:hover {
-    color: #ffffff;
-    background-color: rgba(148, 17, 17, 1);
+    color: #ffffff !important;
+    background-color: rgba(204, 204, 204, 1);
  
 }
 
@@ -76,7 +76,7 @@ border-radius: 5px;
 
 
 .active {
-    color: #ffffff;
+    color: #ffffff !important;
     background-color: rgba(148, 17, 17, 1);
   }
 
