@@ -16,8 +16,8 @@
 
 
   <div class="example-sidenav-content">
-  
-    <button *ngIf="sidenav.open" type="button" (click)="sidenav.toggle()">
+
+    <button *ngIf="!sidenav.opened" type="button" (click)="sidenav.toggle()">
       Nav
     </button>
 
