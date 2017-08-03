@@ -42,6 +42,11 @@ export class SidebarComponent implements OnInit {
   redirect(typeObj) {
     if(typeObj === 'user')
       this.router.navigate(['/user/']);
+    if(typeObj === 'companie')
+      this.router.navigate(['/companie/']);
+
+
+
 
   }
   // isCurrentUserIsInSubPeriod(){
