@@ -40,7 +40,7 @@ export class SidebarComponent implements OnInit {
     }
   }
   redirect(typeObj) {
-    if(typeObj === 'user')
+    if(typeObj === 'user/true')
       this.router.navigate(['/user/']);
     if(typeObj === 'companie')
       this.router.navigate(['/companie/']);
