@@ -8,6 +8,9 @@
 
 <md-sidenav-container class="example-container">
   <md-sidenav #sidenav mode="side" opened="true" class="example-sidenav">
+    <button md-mini-fab class="example-fab" (click)="sidenav.toggle()">
+      <md-icon>add</md-icon>
+    </button>
     <app-sidebar></app-sidebar>
   </md-sidenav>
 
