@@ -3,6 +3,13 @@
 @import "~angular-calendar/dist/css/angular-calendar.css";
 /*@import "~@ng-bootstrap/ng-bootstrap/dist/css/bootstrap.min.css";*/
 
+.bg-goo {
+  background-color: #2b3b4b;
+}
+
+
+
+
 .example-container {
 margin-top: 50px !important;
 }
