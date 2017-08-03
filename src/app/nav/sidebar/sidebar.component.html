@@ -1,17 +1,11 @@
 <div *ngIf="isLoggedIn()">
-
-  <button type="button" class="spcright btn btn-secondary" (click)="logout()">
-    {{'Logout' | translate}}
-  </button>
-  
     <div class="sidebar-nav">
-      <div class="navbar navbar-default" role="navigation">
-        
+      <div class="navbar navbar-default" role="navigation">        
         <div class="" id="accordion">
                 <div class="">
                     <div class="nav navbar-nav">
                         <a class="nav-item">
-                            <a class="nav-link" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Contacts</a>
+                            <a class="nav-link" data-toggle="collapse" data-parent="#accordion" href="#collapseOne"><span class="fa fa-user" aria-hidden="true"></span>Contacts</a>
                         </a>
                     </div>
                     <div id="collapseOne" class="panel-collapse collapse in">
@@ -62,7 +56,7 @@
             
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" routerLinkActive="active" [routerLink]="['/user']" routerLinkActive="active">
-                  <span class="fa fa-address-card" aria-hidden="true"></span> Contacts
+                  <span class="fa fa-user" aria-hidden="true"></span> Contacts
 
                 </a>
                   <ul class="nav navbar-nav" role="menu">
