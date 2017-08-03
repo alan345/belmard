@@ -34,7 +34,7 @@
           <li *ngIf="showObjHTML('user')" class="nav-item">
             <a class="nav-link" routerLinkActive="active" [routerLink]="['/user']">{{'Users' | translate}}</a>
           </li>
-          
+
           <li *ngIf="showObjHTML('companie')" class="nav-item">
             <a class="nav-link" routerLinkActive="active" [routerLink]="['/companie']">{{'Companies' | translate}}</a>
           </li>
@@ -75,10 +75,10 @@
           <a class="nav-link" routerLinkActive="active" [routerLink]="['/userCalendar', {idUserSearch: fetchedUser._id}]">{{'My Planning' | translate}}</a>
         </li>
 
-                            
-        
-        
-        
+
+
+
+
         <li *ngIf="!isCurrentUserIsInSubPeriod()" class="nav-item">
           <a class="nav-link" routerLinkActive="active" [routerLink]="['/user/paiement']">{{'Finish subscription' | translate}}</a>
         </li>
@@ -99,7 +99,7 @@
 
             </a>
           </li>
-          
+
           <li>
               <a routerLinkActive="active2" [routerLink]="['/task']">
                 <i class="fa fa-tasks fa-2x icomarg" aria-hidden="true">
@@ -108,7 +108,7 @@
 
               </a>
             </li>
-          
+
             <li>
               <a [routerLink]="" routerLinkActive="active2">
                 <i class="fa fa-bell fa-2x icomarg" aria-hidden="true">
@@ -134,11 +134,11 @@
               </a>
           </li>
          </ul>
-    
-        
-        
-        
-        
+
+
+
+
+
         <!--
         <button type="button" class="spcright btn btn-secondary" (click)="logout()">
           {{'Logout' | translate}}
@@ -146,12 +146,12 @@
         <button type="button" class="spcright btn btn-primary" [routerLink]="['/user/newuser/' + fetchedUser._id]" routerLinkActive="active">
           {{'My Profile' | translate}}
         </button>
-                            
+
         <button type="button" class="spcright btn btn-primary" [routerLink]="['/companie/mine']" routerLinkActive="active">
           {{'My company' | translate}}
         </button>
-          --> 
-      
+          -->
+
     </div>
 
   </nav>
