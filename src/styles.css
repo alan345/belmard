@@ -63,6 +63,13 @@ border-radius: 5px;
  
 }
 
+.nav-link { padding-left: 10px;
+}
+
+.navbar-nav {
+}
+
+
 .active {
     color: #ffffff;
     background-color: rgba(148, 17, 17, 1);
