@@ -63,7 +63,7 @@ border-radius: 5px;
  
 }
 
-.nav-link { padding-left: 10px;
+.nav-link { padding-left: 10px !important;
 }
 
 .navbar { padding: 0px !important;
