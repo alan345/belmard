@@ -75,14 +75,7 @@
           <a class="nav-link" routerLinkActive="active" [routerLink]="['/userCalendar', {idUserSearch: fetchedUser._id}]">{{'My Planning' | translate}}</a>
         </li>
 
-                            <li>
-                        <a [routerLink]="['/user/newuser/' + fetchedUser._id]" routerLinkActive="active">
-                            <i class="fa fa-user fa-2x" aria-hidden="true">
-                          
-                            </i>
-                          
-                        </a>
-                    </li>
+                            
         
         
         
@@ -97,6 +90,48 @@
 
       </ul>
       <p class="form-inline my-2 my-lg-0" align="right" style="margin-right:40px;">
+        <ul class="navbar-nav mr-auto">
+          <li>
+            <a [routerLink]="['/user/newuser/' + fetchedUser._id]" routerLinkActive="active">
+              <i class="fa fa-user fa-2x" aria-hidden="true">
+
+              </i>
+
+            </a>
+          </li>
+          
+          <li>
+              <a routerLinkActive="active" [routerLink]="['/task']">
+                <i class="fa fa-tasks fa-2x" aria-hidden="true">
+
+                </i>
+
+              </a>
+            </li>
+          
+            <li>
+              <a [routerLink]="" routerLinkActive="active">
+                <i class="fa fa-plus fa-2x" aria-hidden="true">
+
+                </i>
+
+              </a>
+            </li>
+          <li>
+              <a [routerLink]="['/user/newuser/' + fetchedUser._id]" routerLinkActive="active">
+                  <i class="fa fa-user fa-2x" aria-hidden="true">
+
+                  </i>
+
+              </a>
+          </li>
+          </ul>
+        
+        
+        
+        
+        
+        <!--
         <button type="button" class="spcright btn btn-secondary" (click)="logout()">
           {{'Logout' | translate}}
         </button>
@@ -107,6 +142,7 @@
         <button type="button" class="spcright btn btn-primary" [routerLink]="['/companie/mine']" routerLinkActive="active">
           {{'My company' | translate}}
         </button>
+          --> 
       </p>
     </div>
 
