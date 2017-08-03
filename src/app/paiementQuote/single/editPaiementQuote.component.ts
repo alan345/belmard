@@ -216,7 +216,12 @@ export class EditPaiementQuoteComponent implements OnInit {
         res => {
 
           this.fetchedPaiementQuote = res
-          // this.getStripeCust()
+          //
+          if(this.fetchedPaiementQuote.type ==='stripe')
+            this.getStripeCust()
+
+
+            
           this.fetchedPaiementQuote
           .datePaiementString =
           this.authService
