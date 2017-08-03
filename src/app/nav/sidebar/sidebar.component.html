@@ -1,6 +1,19 @@
 <div *ngIf="isLoggedIn()">
   <div class="sidebar-nav">
     <div class="navbar navbar-default" role="navigation">
+      
+      
+          <div class="nav navbar-nav">
+            <a class="nav-item">
+              <a class="nav-link" data-toggle="collapse" data-parent="#accordion"><span class="fa fa-tachometer" aria-hidden="true"></span>{{'dashboard'|translate}}</a>
+            </a>
+          </div>
+          
+        
+
+      </div>
+      
+      
       <div class="" id="accordion">
         <div class="">
           <div class="nav navbar-nav">
@@ -33,6 +46,8 @@
         </div>
 
       </div>
+      
+      
 
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-navbar-collapse">
