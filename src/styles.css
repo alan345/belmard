@@ -94,6 +94,10 @@ border-radius: 5px;
     background-color: rgba(148, 17, 17, 1);
   }
 
+.active2 {
+    color: #d0505c !important;
+  }
+
 .header {
 text-align: center;
 background-color: #b5b5b5;  
