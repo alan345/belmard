@@ -91,6 +91,12 @@
         <button type="button" class="spcright btn btn-primary" [routerLink]="['/user/newuser/' + fetchedUser._id]" routerLinkActive="active">
           {{'My Profile' | translate}}
         </button>
+                            <li>
+                        <a [routerLink]="['/user/newuser/' + fetchedUser._id]" routerLinkActive="active">
+                            <i class="fa fa-user-circle-o fa-3x" aria-hidden="true"></i>
+                            <p>User</p>
+                        </a>
+                    </li>
         <li class="nav-item">
           <a [routerLink]="['/user/newuser/' + fetchedUser._id]" routerLinkActive="active"><i class="fa fa-user-circle-o fa-3x" aria-hidden="true"></i></a>
         </li>  
