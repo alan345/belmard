@@ -159,6 +159,12 @@ table {
 width: 100%;
 }
 
+.table td{
+    padding: 0rem;
+    vertical-align: bottom;
+    border-top: 0px;
+}
+
 .ferme {
 border-radius: 8px; 
 }
