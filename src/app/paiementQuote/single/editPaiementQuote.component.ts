@@ -132,34 +132,42 @@ export class EditPaiementQuoteComponent implements OnInit {
     }
 
   save() {
-    this.fetchedPaiementQuote.datePaiement = this.authService.HTMLDatetoIsoDate(this.fetchedPaiementQuote.datePaiementString)
-    if(this.fetchedPaiementQuote._id) {
-      this.paiementQuoteService.updatePaiementQuote(this.fetchedPaiementQuote)
-        .subscribe(
-          res => {
-            this.toastr.success('Great!', res.message)
-            this.newPaiementQuoteSaved.emit()
-            this.getPaiementQuote(res.obj._id)
-            //this.router.navigate(['paiementQuote/edit/' + this.fetchedPaiementQuote._id])
-          },
-          error => {
-            this.toastr.error('error!', error)
-          }
-        )
-    } else {
-      this.paiementQuoteService.savePaiementQuote(this.fetchedPaiementQuote)
-        .subscribe(
-          res => {
-            this.toastr.success('Great!', res.message)
-            this.newPaiementQuoteSaved.emit()
-            this.getPaiementQuote(res.obj._id)
-            // if(this.showHeader)
-            //   this.router.navigate(['paiementQuote/edit/' + res.obj._id])
-          },
-          error => {console.log(error)}
-        )
-    }
+    let this2=this
+    return new Promise(function(resolve, reject) {
+      this2.fetchedPaiementQuote
+      .datePaiement = this2.authService
+      .HTMLDatetoIsoDate(this2.fetchedPaiementQuote.datePaiementString)
 
+      if(this2.fetchedPaiementQuote._id) {
+        this2.paiementQuoteService.updatePaiementQuote(this2.fetchedPaiementQuote)
+          .subscribe(
+            res => {
+              this2.toastr.success('Great!', res.message)
+              this2.newPaiementQuoteSaved.emit()
+              this2.getPaiementQuote(res.obj._id)
+              resolve(true)
+              //this.router.navigate(['paiementQuote/edit/' + this.fetchedPaiementQuote._id])
+            },
+            error => {
+              reject(true)
+              this2.toastr.error('error!', error)
+            }
+          )
+      } else {
+        this2.paiementQuoteService.savePaiementQuote(this2.fetchedPaiementQuote)
+          .subscribe(
+            res => {
+              this2.toastr.success('Great!', res.message)
+              this2.newPaiementQuoteSaved.emit()
+              this2.getPaiementQuote(res.obj._id)
+              // if(this.showHeader)
+              //   this.router.navigate(['paiementQuote/edit/' + res.obj._id])
+            },
+            error => {console.log(error)}
+          )
+      }
+
+    })
   }
 
 
@@ -214,14 +222,10 @@ export class EditPaiementQuoteComponent implements OnInit {
     this.paiementQuoteService.getPaiementQuote(id, {})
       .subscribe(
         res => {
-
           this.fetchedPaiementQuote = res
-          //
-          if(this.fetchedPaiementQuote.type ==='stripe')
+          if(this.fetchedPaiementQuote.type === 'stripe')
             this.getStripeCust()
 
-
-            
           this.fetchedPaiementQuote
           .datePaiementString =
           this.authService
@@ -243,32 +247,40 @@ export class EditPaiementQuoteComponent implements OnInit {
         .subscribe(
           res => {
             // console.log(res)
-            if(res.customer.deleted) {
-              this.stripeCust = new StripeCustomer()
-            } else {
-              this.stripeCust = res.customer
-            }
+
+            this.stripeCust = res.customer
+
 
           },
-          error => { console.log(error) }
+          error => {
+            this.stripeCust = new StripeCustomer()
+            console.log(error)
+          }
         )
     }
 
-    payInStripe() {
+    payInStripe(amount) {
+        this.save().then(() => {
 
-
-        this.paiementService.payInStripe(this.fetchedPaiementQuote._id)
-          .subscribe(
-            res => {
-              // this.userService.cleanCurrentUserInSession()
-              this.toastr.success('Great!')
-              this.getStripeCust()
-              // console.log(res);
-            },
-            error => { console.log(error); }
-          );
-
-
+          let dataPayInStripe = {
+            amount: amount
+          }
+          console.log(dataPayInStripe)
+          this.paiementService.payInStripe(this.fetchedPaiementQuote._id, dataPayInStripe)
+            .subscribe(
+              res => {
+                // this.userService.cleanCurrentUserInSession()
+                this.toastr.success('Great!')
+                // this.getStripeCust()
+                this.getPaiementQuote(this.fetchedPaiementQuote._id)
+                // console.log(res);
+              },
+              error => { console.log(error); }
+            );
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
 
     deleteCustInStripe() {

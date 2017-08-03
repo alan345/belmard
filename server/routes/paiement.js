@@ -218,22 +218,34 @@ router.post('/payInStripe/:paiementQuoteId', function (req, res, next) {
 
       // console.log(req.body.quote.name)
       // let cusId = req.user.paiement.stripe.cusId
-
+      console.log(req.body)
       stripe.charges.create({
-        amount: obj.amount*100,
+        amount: req.body.amount*100,
         customer: obj.stripe.cusId,
         currency: "usd",
         // source: "tok_visa", // obtained with Stripe.js
         description: 'quote'
       }, function(err, charge) {
         if(charge) {
-          return res.status(200).json({
-            charge: charge
-          })
+
+
+          PaiementQuote.update({ _id: req.params.paiementQuoteId}, { $set: { amount: req.body.amount }}, function (err, item) {
+            if (item) {
+              return res.status(200).json({
+                charge: charge
+              })
+            } else {
+              return res.status(404).json({
+                title: 'Error Not Updtaed price',
+                error: err
+              });
+            }
+          });
+
         } else {
           return res.status(404).json({
             title: 'Error Not saved in stripe',
-            error: error
+            error: err
           });
 
 

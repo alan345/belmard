@@ -15,7 +15,7 @@ export class PaiementQuote {
   projects: Project[] = []
   datePaiement: Date = new Date();
   datePaiementString: string = '';
-  amount: number;
+  amount: number = 0;
   type: string = '';
   isExpense: boolean = false;
   editModeDate: boolean = false;

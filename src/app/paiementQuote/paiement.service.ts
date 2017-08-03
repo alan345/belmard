@@ -54,7 +54,7 @@ export class PaiementService {
         return response.json();
       })
       .catch((error: Response) => {
-        this.errorService.handleError(error.json());
+        // this.errorService.handleError(error.json());
         return Observable.throw(error.json());
       });
   }
@@ -149,10 +149,9 @@ export class PaiementService {
 
 
 
-  payInStripe(fetchedPaiementQuoteId){
-    const body = JSON.stringify({});
+  payInStripe(fetchedPaiementQuoteId, dataPayInStripe){
+    const body = JSON.stringify(dataPayInStripe);
     const headers = new Headers({'Content-Type': 'application/json'});
-  //  let headers = new Headers({'Content-Type': 'application/json'});
     headers.append('Authorization', '' + this.authService.currentUser.token);
     return this.http.post(this.url + 'paiement/payInStripe/' + fetchedPaiementQuoteId, body, {headers: headers})
       .map(response => response.json())
