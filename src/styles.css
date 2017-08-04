@@ -191,7 +191,7 @@ width: 10%;
 }
 
 .table-responsive {
-      display: flex;
+      display: table;
   
 }
 
