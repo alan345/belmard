@@ -6,13 +6,6 @@
   <div id="accordion" role="tablist" aria-multiselectable="true">
 
 
-
-
-
-
-
-
-
     <div class="card">
       <div class="" role="tab" id="headingZero">
         <a [routerLink]="['/']" data-toggle="collapse" class="nav-link" data-parent="#accordion" href="#collapseZero" aria-expanded="true" aria-controls="collapseZero">
@@ -102,6 +95,38 @@
         </div>
       </div>
     </div>
+
+
+
+
+        <div class="card">
+          <div class="" role="tab" id="headingFive">
+            <a class="nav-link" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
+              <span class="fa fa-university" aria-hidden="true"></span>{{'Projects'|translate}}
+            </a>
+          </div>
+          <div id="collapseFive" class="collapse" role="tabpanel" aria-labelledby="headingFive">
+            <div class="card-block">
+              <div class="panel-body">
+                <table class="table">
+                  <tr>
+                    <td class="nav-item">
+                      <a class="nav-link" [routerLink]="['/project']" routerLinkActive="active">{{'Projects'|translate}}</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="nav-item">
+                      <a class="nav-link" [routerLink]="['/task']" routerLinkActive="active">{{'Tasks'|translate}}</a>
+                    </td>
+                  </tr>
+
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
 
 
     <div class="card">
