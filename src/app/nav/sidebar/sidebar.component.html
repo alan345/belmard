@@ -71,6 +71,83 @@
       </div>
     </div>
   </div>
+  
+  <div class="card">
+      <div class="" role="tab" id="headingthree">
+
+        <a data-toggle="collapse" class="nav-link" data-parent="#accordion" href="#collapsethree" aria-expanded="true" aria-controls="collapsethree">
+
+            <span class="fa fa-user" aria-hidden="true"></span>
+              {{'services'|translate}}
+
+        </a>
+
+      </div>
+
+      <div id="collapsethree" class="collapse show" role="tabpanel" aria-labelledby="headingthree">
+        <div class="card-block">
+          <div class="panel-body">
+            <table class="table">
+              <tr>
+                <td class="nav-item subItem">
+                  <a class="nav-link" [routerLink]="['/user/true']" routerLinkActive="active">{{'service1'|translate}}</a>
+                </td>
+              </tr>
+              <tr>
+                <td class="nav-item subItem">
+                  <a class="nav-link" [routerLink]="['/companie']" routerLinkActive="active">{{'service2'|translate}}</a>
+                </td>
+              </tr>
+              <tr>
+                <td class="nav-item subItem">
+                  <a class="nav-link" [routerLink]="['/user/false']" routerLinkActive="active">{{'service3'|translate}}</a>
+                </td>
+              </tr>
+
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+  
+    <div class="card">
+      <div class="" role="tab" id="headingfour">
+
+        <a data-toggle="collapse" class="nav-link" data-parent="#accordion" href="#collapsefour" aria-expanded="true" aria-controls="collapsefour">
+
+            <span class="fa fa-user" aria-hidden="true"></span>
+              {{'settings'|translate}}
+
+        </a>
+
+      </div>
+
+      <div id="collapsefour" class="collapse show" role="tabpanel" aria-labelledby="headingfour">
+        <div class="card-block">
+          <div class="panel-body">
+            <table class="table">
+              <tr>
+                <td class="nav-item subItem">
+                  <a class="nav-link" [routerLink]="['/user/true']" routerLinkActive="active">{{'my company'|translate}}</a>
+                </td>
+              </tr>
+              <tr>
+                <td class="nav-item subItem">
+                  <a class="nav-link" [routerLink]="['/companie']" routerLinkActive="active">{{'products'|translate}}</a>
+                </td>
+              </tr>
+              <tr>
+                <td class="nav-item subItem">
+                  <a class="nav-link" [routerLink]="['/user/false']" routerLinkActive="active">{{'rights'|translate}}</a>
+                </td>
+              </tr>
+
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>  
 
 
 
