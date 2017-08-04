@@ -1,27 +1,41 @@
 <div class="page1" *ngIf="isLoggedIn()">
 
-  <div class="navbar navbar-default" role="navigation">
-    <div class="nav navbar-nav">
-      <a class="nav-item">
-        <a class="nav-link" data-toggle="collapse" [routerLink]="['/']"><span class="fa fa-tachometer" aria-hidden="true"></span>{{'dashboard'|translate}}</a>
-      </a>
-    </div>
-  </div>
 
-  
+
+
   <div id="accordion" role="tablist" aria-multiselectable="true">
+
+
+
+
+
+
+
+
+
+    <div class="card">
+      <div class="" role="tab" id="headingZero">
+        <a [routerLink]="['/']" data-toggle="collapse" class="nav-link" data-parent="#accordion" href="#collapseZero" aria-expanded="true" aria-controls="collapseZero">
+          <span class="fa fa-tachometer" aria-hidden="true">
+          </span>{{'dashboard'|translate}}
+        </a>
+      </div>
+      <div id="collapseZero" class="collapse show" role="tabpanel" aria-labelledby="headingZero">
+      </div>
+    </div>
+
+
+
+
+
+
     <div class="card">
       <div class="" role="tab" id="headingOne">
-
         <a data-toggle="collapse" class="nav-link" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-
-            <span class="fa fa-user" aria-hidden="true"></span>
-              Contacts
-
+          <span class="fa fa-user" aria-hidden="true"></span>
+            Contacts
         </a>
-
       </div>
-
       <div id="collapseOne" class="collapse show" role="tabpanel" aria-labelledby="headingOne">
         <div class="card-block">
           <div class="panel-body">
@@ -41,32 +55,26 @@
                   <a class="nav-link" [routerLink]="['/user/false']" routerLinkActive="active">{{'team'|translate}}</a>
                 </td>
               </tr>
-
             </table>
           </div>
         </div>
       </div>
     </div>
-    
-    <div class="navbar navbar-default" role="navigation">
-      <div class="nav navbar-nav">
-        <a class="nav-item">
-          <a class="nav-link" [routerLink]="['/userCalendar', {idUserSearch: fetchedUser._id}]" data-toggle="collapse" data-parent="#accordion" routerLinkActive="active"><span class="fa fa-calendar" aria-hidden="true"></span>{{'planning'|translate}}</a>
-        </a>
+
+
+    <div class="card">
+      <div class="">
+        <a class="nav-link" [routerLink]="['/userCalendar', {idUserSearch: fetchedUser._id}]" data-toggle="collapse" data-parent="#accordion" routerLinkActive="active">
+          <span class="fa fa-calendar" aria-hidden="true"></span>{{'planning'|translate}}</a>
       </div>
     </div>
-    
-  
-  <div class="card">
+
+    <div class="card">
       <div class="" role="tab" id="headingthree">
-
         <a data-toggle="collapse" class="nav-link" data-parent="#accordion" href="#collapsethree" aria-expanded="true" aria-controls="collapsethree">
-
             <span class="fa fa-user" aria-hidden="true"></span>
               {{'services'|translate}}
-
         </a>
-
       </div>
 
       <div id="collapsethree" class="collapse" role="tabpanel" aria-labelledby="headingthree">
@@ -94,14 +102,17 @@
         </div>
       </div>
     </div>
-  
-    <div class="navbar navbar-default" role="navigation">
-      <div class="nav navbar-nav">
-        <a class="nav-item">
-          <a class="nav-link" [routerLink]="['/quote']" data-toggle="collapse" data-parent="#accordion" routerLinkActive="active"><span class="fa fa-calculator" aria-hidden="true"></span>{{'Quotes'|translate}}</a>
+
+
+    <div class="card">
+      <div class="">
+        <a class="nav-link" [routerLink]="['/quote']" data-toggle="collapse" data-parent="#accordion" routerLinkActive="active">
+          <span class="fa fa-calculator" aria-hidden="true"></span>
+          {{'Quotes'|translate}}
         </a>
       </div>
     </div>
+
 
     <div class="card">
       <div class="" role="tab" id="headingTwo">
@@ -134,26 +145,26 @@
         </div>
       </div>
     </div>
-  </div>    
-  
-      <div class="navbar navbar-default" role="navigation">
-      <div class="nav navbar-nav">
-        <a class="nav-item">
-          <a [routerLink]="['/reporting']" data-toggle="collapse" routerLinkActive="active" class="nav-link" data-parent="#accordion"><span class="fa fa-bar-chart" aria-hidden="true"></span>{{'reporting'|translate}}</a>
+
+
+
+    <div class="card">
+      <div class="">
+        <a [routerLink]="['/reporting']" data-toggle="collapse" routerLinkActive="active" class="nav-link" data-parent="#accordion">
+          <span class="fa fa-bar-chart" aria-hidden="true"></span>
+          {{'reporting'|translate}}
         </a>
       </div>
     </div>
-  
+
+
+
     <div class="card">
       <div class="" role="tab" id="headingfour">
-
         <a data-toggle="collapse" class="nav-link" data-parent="#accordion" href="#collapsefour" aria-expanded="true" aria-controls="collapsefour">
-
             <span class="fa fa-user" aria-hidden="true"></span>
               {{'settings'|translate}}
-
         </a>
-
       </div>
 
       <div id="collapsefour" class="collapse" role="tabpanel" aria-labelledby="headingfour">
@@ -162,175 +173,23 @@
             <table class="table">
               <tr>
                 <td class="nav-item subItem">
-                  <a class="nav-link" [routerLink]="['/user/true']" routerLinkActive="active">{{'my company'|translate}}</a>
+                  <a class="nav-link" [routerLink]="['/companie/mine']" routerLinkActive="active">{{'my company'|translate}}</a>
                 </td>
               </tr>
               <tr>
                 <td class="nav-item subItem">
-                  <a class="nav-link" [routerLink]="['/companie']" routerLinkActive="active">{{'products'|translate}}</a>
+                  <a class="nav-link" [routerLink]="['/product']" routerLinkActive="active">{{'products'|translate}}</a>
                 </td>
               </tr>
               <tr>
                 <td class="nav-item subItem">
-                  <a class="nav-link" [routerLink]="['/user/false']" routerLinkActive="active">{{'rights'|translate}}</a>
+                  <a class="nav-link" [routerLink]="['/right']" routerLinkActive="active">{{'rights'|translate}}</a>
                 </td>
               </tr>
-
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>  
-
-
-
-
-  <div class="sidebar-nav">
-
-    
-    <!--
-    
-    <div class="" id="accordion">
-      <div class="">
-        <div class="nav navbar-nav">
-          <a class="nav-item">
-            <a class="nav-link" (click)="redirect('/user/true')" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-              <span class="fa fa-user" aria-hidden="true"></span>
-                Contacts
-            </a>
-          </a>
-        </div>
-        <div id="collapseOne" class="panel-collapse collapse in">
-          <div class="panel-body">
-            <table class="table">
-              <tr>
-                <td class="nav-item subItem">
-                  <a class="nav-link" [routerLink]="['/user/true']" routerLinkActive="active">{{'customers'|translate}}</a>
-                </td>
-              </tr>
-              <tr>
-                <td class="nav-item subItem">
-                  <a class="nav-link" [routerLink]="['/companie']" routerLinkActive="active">{{'supplier'|translate}}</a>
-                </td>
-              </tr>
-              <tr>
-                <td class="nav-item subItem">
-                  <a class="nav-link" [routerLink]="['/user/false']" routerLinkActive="active">{{'team'|translate}}</a>
-                </td>
-              </tr>
-
             </table>
           </div>
         </div>
       </div>
     </div>
--->
-
-<!--
-    <div class="" id="accordion2">
-      <div class="">
-        <div class="nav navbar-nav">
-          <a class="nav-item">
-              <a class="nav-link" data-toggle="collapse" data-parent="#accordion" href="#collapse1"><span class="fa fa-user" aria-hidden="true"></span>{{'services'|translate}}</a>
-          </a>
-        </div>
-        <div id="collapse1" class="panel-collapse collapse in">
-          <div class="panel-body">
-            <table class="table">
-              <tr>
-                <td class="nav-item subItem">
-                  <a class="nav-link" [routerLink]="['/service1']" routerLinkActive="active">{{'service1'|translate}}</a>
-                </td>
-              </tr>
-              <tr>
-                <td class="nav-item subItem">
-                  <a class="nav-link" [routerLink]="['/servic2']" routerLinkActive="active">{{'service2'|translate}}</a>
-                </td>
-              </tr>
-              <tr>
-                <td class="nav-item subItem">
-                  <a class="nav-link" [routerLink]="['/service3']" routerLinkActive="active">{{'service3'|translate}}</a>
-                </td>
-              </tr>
-
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
--->
-
-<!--
-    <div class="" id="accordion3">
-      <div class="">
-        <div class="nav navbar-nav">
-          <a class="nav-item">
-              <a class="nav-link" data-toggle="collapse" data-parent="#accordion" href="#collapse2"><span class="fa fa-university" aria-hidden="true"></span>{{'accoutancy'|translate}}</a>
-          </a>
-        </div>
-        <div id="collapse2" class="panel-collapse collapse in">
-          <div class="panel-body">
-            <table class="table">
-              <!-- <tr>
-                <td class="nav-item">
-                  <a class="nav-link" [routerLink]="" routerLinkActive="active">{{'Invoices'|translate}}</a>
-                </td>
-              </tr> 
-              <tr>
-                <td class="nav-item">
-                  <a class="nav-link" [routerLink]="['/paiementQuote/false']" routerLinkActive="active">{{'Payments'|translate}}</a>
-                </td>
-              </tr>
-              <tr>
-                <td class="nav-item">
-                  <a class="nav-link" [routerLink]="['/paiementQuote/true']" routerLinkActive="active">{{'Expenses'|translate}}</a>
-                </td>
-              </tr>
-
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
--->
-
-<!--
-    <div class="" id="accordion4">
-      <div class="">
-        <div class="nav navbar-nav">
-          <a class="nav-item">
-              <a class="nav-link" data-toggle="collapse" data-parent="#accordion" href="#collapse3"><span class="fa fa-cog" aria-hidden="true"></span>{{'settings'|translate}}</a>
-          </a>
-        </div>
-        <div id="collapse3" class="panel-collapse collapse in">
-          <div class="panel-body">
-            <table class="table">
-              <tr>
-                <td class="nav-item">
-                  <a class="nav-link" [routerLink]="" routerLinkActive="active">{{'my company'|translate}}</a>
-                </td>
-              </tr>
-              <tr>
-                <td class="nav-item">
-                  <a class="nav-link" [routerLink]="" routerLinkActive="active">{{'products'|translate}}</a>
-                </td>
-              </tr>
-              <tr>
-                <td class="nav-item">
-                  <a class="nav-link" [routerLink]="" routerLinkActive="active">{{'rights'|translate}}</a>
-                </td>
-              </tr>
-
-            </table>
-          </div>
-        </div>
-      </div>
-    </div>
-
--->
-
-
-
-    <!--/.nav-collapse -->
   </div>
 </div>
