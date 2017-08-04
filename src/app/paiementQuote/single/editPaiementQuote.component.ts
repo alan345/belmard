@@ -100,13 +100,9 @@ export class EditPaiementQuoteComponent implements OnInit {
 
 
     this.activatedRoute.params.subscribe((params: Params) => {
-      // console.log(params)
-      if(params['idPaiementQuote'])
-        this.getPaiementQuote(params['idPaiementQuote'])
-      if(params['idQuote'])
-       this.getQuote(params['idQuote'])
-    //  if(params['idProject'])
-    //   this.getProject(params['idProject'])
+      if(params['isExpense']) {this.fetchedPaiementQuote.isExpense = true}
+      if(params['idPaiementQuote']) {this.getPaiementQuote(params['idPaiementQuote'])}
+      if(params['idQuote']) {this.getQuote(params['idQuote'])}
     })
   }
 

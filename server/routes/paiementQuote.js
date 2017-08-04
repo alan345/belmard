@@ -155,6 +155,11 @@ router.get('/page/:page', function (req, res, next) {
     searchQuery['quotes'] = mongoose.Types.ObjectId(req.query.idQuote)
 
 
+// console.log(req.query.isExpense)
+  searchQuery['isExpense'] = false
+  if(req.query.isExpense === 'true')
+    searchQuery['isExpense'] = true
+
   PaiementQuote
   .find(searchQuery)
   .sort('-createdAt')

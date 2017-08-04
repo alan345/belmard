@@ -4,7 +4,7 @@ import { PaiementQuoteService} from '../../paiementQuote/paiementQuote.service';
 import { PaiementQuote} from '../../paiementQuote/paiementQuote.model';
 import { ToastsManager} from 'ng2-toastr';
 import { MdDialog} from '@angular/material';
-import { Router} from '@angular/router';
+import { Router, ActivatedRoute, Params} from '@angular/router';
 import { Location} from '@angular/common';
 
 
@@ -33,12 +33,13 @@ export class PaiementQuotesComponent implements OnInit {
     orderBy : '',
     search: '',
     idQuote:'',
+    isExpense: false
   };
 
   constructor(
     private paiementQuoteService: PaiementQuoteService,
     private authService: AuthService,
-  //  private modalService: NgbModal,
+    private activatedRoute: ActivatedRoute,
     private toastr: ToastsManager,
     public dialog: MdDialog,
     private router: Router,
@@ -48,7 +49,13 @@ export class PaiementQuotesComponent implements OnInit {
 
 
   ngOnInit() {
-    this.getPaiementQuotesInit()
+    this.activatedRoute.params.subscribe((params: Params) => {
+      if(params['isExpense']=='true') {this.search.isExpense = true} else {this.search.isExpense = false}
+        this.getPaiementQuotesInit()
+    })
+
+
+
   }
 
 

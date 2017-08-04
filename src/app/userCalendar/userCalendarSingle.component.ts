@@ -88,11 +88,6 @@ export class UserCalendarSingleComponent implements OnInit {
 
     ngOnInit() {
       this.activatedRoute.params.subscribe((params: Params) => {
-
-
-        //http://localhost/#/userCalendar;idUserSearch=5954ac1c801cb7430e963d96;idProjectSearch=5953b829801cb7430e963d8a;idClientSearch=5950ba5defcface933c2b72a;typeUserSearch=boulanger
-        // console.log(params)
-
         if(params['idUserSearch']) {this.getUserSearch(params['idUserSearch'])}
         if(params['idProjectSearch']) {this.getProjectSearch(params['idProjectSearch'])}
         if(params['idClientSearch']) {this.getClientSearch(params['idClientSearch'])}
