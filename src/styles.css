@@ -3,6 +3,11 @@
 @import "~angular-calendar/dist/css/angular-calendar.css";
 /*@import "~@ng-bootstrap/ng-bootstrap/dist/css/bootstrap.min.css";*/
 
+.ml { 
+  marin-left: 100%;
+  
+}
+
 .page { 
   height: 100%;
   
