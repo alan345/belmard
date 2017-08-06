@@ -122,6 +122,7 @@ export class CompanieDetailComponent implements OnInit {
     return myForm.get('forms').controls
   }
 
+
   openDialog(positionImage: string) {
     let dialogRef = this.dialog.open(EditOptionsComponentDialog);
     dialogRef.afterClosed().subscribe(result => {

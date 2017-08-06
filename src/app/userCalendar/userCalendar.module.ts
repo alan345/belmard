@@ -1,55 +1,62 @@
-
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { RouterModule} from '@angular/router';
+import { UserCalendarDialogComponent } from './single/dialog/userCalendarDialog.component'
+
+// import { ProjectModule} from '../project/project.module';
+
+import { UserCalendarsComponent} from './userCalendars/userCalendars.component';
+import { UserCalendarComponent} from './single/userCalendar.component';
 
 
-
-import { UserCalendarSingleComponent} from './userCalendarSingle.component';
 import { UserCalendarService} from './userCalendar.service';
 import { UserCalendarRouting} from './userCalendarRouting.module';
 import { MaterialModule } from '@angular/material';
 import { Ng2PaginationModule} from 'ng2-pagination';
+import { ProductModule } from '../product/product.module';
+// import { AutocompleteComponent } from '../autocomplete/autocomplete.component'
 
-import { QuoteModule} from '../quote/quote.module';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {SharedModule } from '../shared/shared.module';
+import { SignaturePadModule } from 'angular2-signaturepad';
+// import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {CalendarModule} from 'ap-angular2-fullcalendar';
 
-// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CalendarModule } from 'angular-calendar';
-import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { DemoUtilsModule } from './demo-utils/module';
-
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import { SharedModule } from '../shared/shared.module';
 
 
 @NgModule({
   imports:      [
-    // BrowserAnimationsModule,
-    NgbModule,
-    NgbModalModule.forRoot(),
-    CalendarModule.forRoot(),
+    // ProjectModule,
+    // NgbModule,
     UserCalendarRouting,
     CommonModule,
     FormsModule,
     MaterialModule,
     Ng2PaginationModule,
     ReactiveFormsModule,
-    QuoteModule,
-    DemoUtilsModule,
-    SharedModule
-
+    RouterModule,
+    ProductModule,
+    SharedModule,
+    SignaturePadModule,
+    CalendarModule,
+    // AutocompleteComponent,
   ],
   declarations: [
+    UserCalendarsComponent,
+    UserCalendarComponent,
+    UserCalendarDialogComponent,
 
-    UserCalendarSingleComponent,
-
+    // AutocompleteComponent
   ],
-  exports:      [ UserCalendarSingleComponent ],
+  exports:      [
+    UserCalendarsComponent,
+    UserCalendarComponent,
+    // AutocompleteComponent,
+  ],
   providers:    [ UserCalendarService ],
   entryComponents: [
-
+    UserCalendarDialogComponent,
   ]
 })
 export class UserCalendarModule { }

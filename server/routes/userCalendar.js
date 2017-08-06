@@ -215,7 +215,11 @@ router.get('/:id', function(req, res, next) {
       })
     }
 
-    UserCalendar.findById({_id: req.params.id}).populate({path: 'clients', model: 'User'}).populate({path: 'quotes', model: 'Quote'}).exec(function(err, item) {
+    UserCalendar.findById({_id: req.params.id})
+    .populate({path: 'users', model: 'User'})
+    .populate({path: 'projects', model: 'Project'})
+    // .populate({path: 'quotes', model: 'Quote'})
+    .exec(function(err, item) {
       if (err) {
         return res.status(404).json({message: '', err: err})
       } else {

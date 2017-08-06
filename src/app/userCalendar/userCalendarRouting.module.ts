@@ -1,21 +1,29 @@
 import { Routes, RouterModule } from '@angular/router';
-import { NgModule }            from '@angular/core';
-//import { UserCalendarsComponent} from './userCalendars/userCalendars.component';
-import { UserCalendarSingleComponent} from './userCalendarSingle.component';
+import { NgModule } from '@angular/core';
+
+import { UserCalendarComponent} from './single/userCalendar.component';
+
+import { AdminGuardService} from '../admin/services/adminGuard';
+
+import { UserCalendarsComponent} from './userCalendars/userCalendars.component';
+
+import { CompanieGuardService} from '../companie/companieGuard.service';
+import { PaiementGuardService} from '../user/paiement/paiementGuard.service';
+import { AuthGuardService} from '../auth/authguard.service';
 
 
 export const routes: Routes = [
-//  {path: '', component: UserCalendarsComponent},
-  // {path: 'userCalendarSingle', component: UserCalendarSingleComponent},
-  // {path: 'userCalendarSingle/:id', component: UserCalendarSingleComponent},
-  // {path: 'new', component: UserCalendarSingleComponent},
-  // {path: 'new/:idClient', component: UserCalendarSingleComponent},
-  {path: '', component: UserCalendarSingleComponent},
-  // {path: ':idUser', component: UserCalendarSingleComponent},
-  // {path: ':idUser/:idProject', component: UserCalendarSingleComponent},
-  // {path: ':idUser/:idProject/:idClient', component: UserCalendarSingleComponent},
-  // {path: ':idUser/:idProject/:idClient/:typeUser', component: UserCalendarSingleComponent},
+  {path: '', component: UserCalendarsComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
+  {path: 'new', component: UserCalendarComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
+  {path: 'new/:idQuote', component: UserCalendarComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
+  // {path: 'new/:idClient/:idProject', component: EditUserCalendarComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
+  {path: 'edit/:idUserCalendar', component: UserCalendarComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
+  // {path: ':id', component: UserCalendarDetailComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
+  // {path: 'public/:idUserCalendar', component: UserCalendarComponent},
+
 ];
+
+
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
