@@ -32,14 +32,14 @@ import { UserCalendarDialogComponent } from '../single/dialog/userCalendarDialog
 export class UserCalendarsComponent implements OnInit {
   // @Output() newUserCalendarSaved: EventEmitter<any> = new EventEmitter();
   // @Input() showHeader = true;
-  @Input() fetchedQuote:Quote = new Quote()
+  @Input() fetchedQuote: Quote = new Quote()
 
   // @ViewChild('myCal', { read: ElementRef }) myCal: ElementRef;
   @ViewChild(CalendarComponent) myCalendar: CalendarComponent;
 
 
   showPaiements: boolean = false
-  fetchedUserCalendar : UserCalendar = new UserCalendar()
+  fetchedUserCalendar: UserCalendar = new UserCalendar()
   autocompleteUser: string = '';
   autocompleteProject: string = '';
   fetchedProducts: Product[] = []
@@ -52,126 +52,127 @@ export class UserCalendarsComponent implements OnInit {
   // userClients : User[] = []
   // usersSalesRep : User[] = []
   // userStylists : User[] = []
-  search= {
-    typeUser:[],
-    clientSearch:'',
-    userSearch:'',
-    projectSearch:'',
-    endDate: '2017/09/01',
-    startDate: '2007/09/01',
+  search = {
+    typeUser: [],
+    clientSearch: '',
+    userSearch: '',
+    projectSearch: '',
+    endDate: new Date(),
+    startDate: new Date(),
   }
   // events: UserCalendar[] = []
   events: UserCalendar[] = []
   myForm: FormGroup;
   autocompleteProduct: String = ''
   fetchedUsers: User[] = [];
-  arrayContentToSearch =[]
+  arrayContentToSearch = []
 
   paiementsTypes = [
     { label: 'cheque', value: 'check' },
     { label: 'Espece', value: 'cash' }
-]
+  ]
 
 
 
 
-    calendarOptions:Object = {
-      height: '600px',
-      selectable: true,
-      firstDay: 1,
-      minTime: "06:00:00",
-      maxTime: "22:00:00",
-      locale: 'fr',
-      slotLabelFormat: "HH:mm",
-      allDaySlot: false,
-      businessHours: {
-          // days of week. an array of zero-based day of week integers (0=Sunday)
-          dow: [ 1, 2, 3, 4, 5 ], // Monday - Thursday
+  calendarOptions: Object = {
+    height: '600px',
+    selectable: true,
+    firstDay: 1,
+    minTime: "06:00:00",
+    maxTime: "22:00:00",
+    locale: 'fr',
+    slotLabelFormat: "HH:mm",
+    allDaySlot: false,
+    businessHours: {
+      // days of week. an array of zero-based day of week integers (0=Sunday)
+      dow: [1, 2, 3, 4, 5], // Monday - Thursday
 
-          start: '10:00', // a start time (10am in this example)
-          end: '18:00', // an end time (6pm in this example)
-      },
-      dayClick: this.dayClick.bind(this),
-      eventClick: this.eventClick.bind(this),
-      eventMouseover: this.eventMouseover.bind(this),
-      eventMouseout: this.eventMouseout.bind(this),
-      select: this.select.bind(this),
-      unselect: this.unselect.bind(this),
-      eventDragStart: this.eventDragStart.bind(this),
-      eventDragStop: this.eventDragStop.bind(this),
-      eventDrop: this.eventDrop.bind(this),
-      eventResizeStart: this.eventResizeStart.bind(this),
-      eventResizeStop: this.eventResizeStop.bind(this),
-      eventResize: this.eventResize.bind(this),
-      header: {
-          left:   'title',
-          center: '',
-          right:  'today prev,next agendaWeek,month'
-      },
-      fixedWeekCount : false,
-      defaultDate: '2016-09-12',
-      defaultView: 'agendaWeek',
-      editable: true,
-      eventLimit: true, // allow "more" link when too many events
-      // events: this.events,
+      start: '10:00', // a start time (10am in this example)
+      end: '18:00', // an end time (6pm in this example)
+    },
+    dayClick: this.dayClick.bind(this),
+    eventClick: this.eventClick.bind(this),
+    eventMouseover: this.eventMouseover.bind(this),
+    eventMouseout: this.eventMouseout.bind(this),
+    select: this.select.bind(this),
+    unselect: this.unselect.bind(this),
+    eventDragStart: this.eventDragStart.bind(this),
+    eventDragStop: this.eventDragStop.bind(this),
+    eventDrop: this.eventDrop.bind(this),
+    eventResizeStart: this.eventResizeStart.bind(this),
+    eventResizeStop: this.eventResizeStop.bind(this),
+    eventResize: this.eventResize.bind(this),
+    viewRender: this.viewRender.bind(this),
+    header: {
+      left: 'title',
+      center: '',
+      right: 'today prev,next month,agendaWeek'
+    },
+    // fixedWeekCount : false,
+    // defaultDate: '2016-09-12',
+    defaultView: 'agendaWeek',
+    editable: true,
+    eventLimit: true, // allow "more" link when too many events
+    // events: this.events,
 
-      // events: [
-      //   {
-      //     title: 'All Day Event',
-      //     start: '2016-09-01'
-      //   },
-      //   {
-      //     title: 'Long Event',
-      //     start: '2016-09-07',
-      //     end: '2016-09-10'
-      //   },
-      //   {
-      //     id: 999,
-      //     title: 'Repeating Event',
-      //     start: '2016-09-09T16:00:00'
-      //   },
-      //   {
-      //     id: 999,
-      //     title: 'Repeating Event',
-      //     start: '2016-09-16T16:00:00'
-      //   },
-      //   {
-      //     title: 'Conference',
-      //     start: '2016-09-11',
-      //     end: '2016-09-13'
-      //   },
-      //   {
-      //     title: 'Meeting',
-      //     start: '2016-09-12T10:30:00',
-      //     end: '2016-09-12T12:30:00'
-      //   },
-      //   {
-      //     title: 'Lunch',
-      //     start: '2016-09-12T12:00:00'
-      //   },
-      //   {
-      //     title: 'Meeting',
-      //     start: '2016-09-12T14:30:00'
-      //   },
-      //   {
-      //     title: 'Happy Hour',
-      //     start: '2016-09-12T17:30:00'
-      //   },
-      //   {
-      //     title: 'Dinner',
-      //     start: '2016-09-12T20:00:00'
-      //   },
-      //   {
-      //     title: 'Birthday Party',
-      //     start: '2016-09-13T07:00:00'
-      //   },
-      //   {
-      //     title: 'Click for Google',
-      //     url: 'http://google.com/',
-      //     start: '2016-09-28'
-      //   }
-      // ]
-    };
+    // events: [
+    //   {
+    //     title: 'All Day Event',
+    //     start: '2016-09-01'
+    //   },
+    //   {
+    //     title: 'Long Event',
+    //     start: '2016-09-07',
+    //     end: '2016-09-10'
+    //   },
+    //   {
+    //     id: 999,
+    //     title: 'Repeating Event',
+    //     start: '2016-09-09T16:00:00'
+    //   },
+    //   {
+    //     id: 999,
+    //     title: 'Repeating Event',
+    //     start: '2016-09-16T16:00:00'
+    //   },
+    //   {
+    //     title: 'Conference',
+    //     start: '2016-09-11',
+    //     end: '2016-09-13'
+    //   },
+    //   {
+    //     title: 'Meeting',
+    //     start: '2016-09-12T10:30:00',
+    //     end: '2016-09-12T12:30:00'
+    //   },
+    //   {
+    //     title: 'Lunch',
+    //     start: '2016-09-12T12:00:00'
+    //   },
+    //   {
+    //     title: 'Meeting',
+    //     start: '2016-09-12T14:30:00'
+    //   },
+    //   {
+    //     title: 'Happy Hour',
+    //     start: '2016-09-12T17:30:00'
+    //   },
+    //   {
+    //     title: 'Dinner',
+    //     start: '2016-09-12T20:00:00'
+    //   },
+    //   {
+    //     title: 'Birthday Party',
+    //     start: '2016-09-13T07:00:00'
+    //   },
+    //   {
+    //     title: 'Click for Google',
+    //     url: 'http://google.com/',
+    //     start: '2016-09-28'
+    //   }
+    // ]
+  };
 
 
   constructor(
@@ -183,54 +184,51 @@ export class UserCalendarsComponent implements OnInit {
     private location: Location,
     private _fb: FormBuilder,
     private authService: AuthService,
-  ) {}
+  ) { }
   onCalendarInit() {
-    this.getUserCalendarsInit()
+    // this.getUserCalendarsInit()
     // console.log('Calendar initialized');
   }
 
   getUserCalendarsInit() {
-    this.getUserCalendars(1, this.search)
+    // this.getUserCalendars(1, this.search)
   }
   ngOnInit() {
 
   }
 
-    getUserCalendars(page: number, search: any) {
-      this.userCalendarService.getUserCalendars(page, search)
-        .subscribe(
-          res => {
-            this.events = []
-            this.events = res.data
-            this.events.forEach((event, i) => {
-              event.users.forEach((user, j) => {
-                this.events[i].color = user.profile.colorCalendar
-                console.log(user.profile.colorCalendar)
-              });
-            })
-            this.updateCalendar()
+  getUserCalendars(page: number, search: any) {
+    this.userCalendarService.getUserCalendars(page, search)
+      .subscribe(
+      res => {
+        this.events = []
+        this.events = res.data
+        this.events.forEach((event, i) => {
+          event.users.forEach((user, j) => {
+            this.events[i].color = user.profile.colorCalendar
+            console.log(user.profile.colorCalendar)
+          });
+        })
+        this.updateCalendar()
 
-          },
-          error => {
-            console.log(error);
-          }
-        );
-    }
-
-
-    updateCalendar() {
-
-      let dataSource = {
-        id:1,
-        events: this.events
+      },
+      error => {
+        console.log(error);
       }
+      );
+  }
 
-      console.log(this.events)
-      // $(this.myCal.nativeElement).fullCalendar('refetchEvents')
-      this.myCalendar.fullCalendar('removeEventSources');
-      this.myCalendar.fullCalendar('addEventSource', dataSource);
 
+  updateCalendar() {
+    let dataSource = {
+      id: 1,
+      events: this.events
     }
+    // $(this.myCal.nativeElement).fullCalendar('refetchEvents')
+    this.myCalendar.fullCalendar('removeEventSources');
+    this.myCalendar.fullCalendar('addEventSource', dataSource);
+
+  }
 
 
   openDialog(userCalendar: UserCalendar) {
@@ -241,7 +239,7 @@ export class UserCalendarsComponent implements OnInit {
     });
     // dialogRef.componentInstance.fetchedUserCalendar = userCalendar;
     dialogRef.afterClosed().subscribe(result => {
-      this.getUserCalendarsInit()
+      this.getUserCalendars(1, this.search)
       // if(result) {
       //   this.fetchedCompanie.forms.push(result)
       // }
@@ -250,42 +248,42 @@ export class UserCalendarsComponent implements OnInit {
 
   saveSingleEvent(userCalendar: UserCalendar) {
     console.log(userCalendar)
-    if(userCalendar._id) {
+    if (userCalendar._id) {
       this.userCalendarService.updateUserCalendar(userCalendar)
         .subscribe(
-          res => {
-            this.toastr.success('Great!', res.message)
-          },
-          error => {
-            this.toastr.error('error!', error)
-          }
+        res => {
+          this.toastr.success('Great!', res.message)
+        },
+        error => {
+          this.toastr.error('error!', error)
+        }
         )
     } else {
       this.userCalendarService.saveUserCalendar(userCalendar)
         .subscribe(
-          res => {
-            this.toastr.success('Great!', res.message)
-          },
-          error => {console.log(error)}
+        res => {
+          this.toastr.success('Great!', res.message)
+        },
+        error => { console.log(error) }
         )
     }
   }
 
 
-  dayClick(event, jsEvent, view ){
+  dayClick(event, jsEvent, view) {
     console.log('dayClick')
     // console.log(event, jsEvent, view )
   }
-  eventClick(event, jsEvent, view ){
+  eventClick(event, jsEvent, view) {
     this.openDialog(event)
     console.log(event)
     // console.log(event, jsEvent, view )
   }
-  eventMouseover(event, jsEvent, view ){
+  eventMouseover(event, jsEvent, view) {
     // console.log('eventMouseover')
     // console.log(event, jsEvent, view )
   }
-  eventMouseout(event, jsEvent, view ){
+  eventMouseout(event, jsEvent, view) {
     // console.log('eventMouseout')
     // console.log(event, jsEvent, view )
   }
@@ -296,19 +294,19 @@ export class UserCalendarsComponent implements OnInit {
     this.openDialog(newUserCalendar)
 
   }
-  unselect(event, jsEvent, view ){
+  unselect(event, jsEvent, view) {
     // console.log('unselect')
     // console.log(event, jsEvent, view )
   }
-  eventDragStart(event, jsEvent, view ){
+  eventDragStart(event, jsEvent, view) {
     // console.log('unselect')
     // console.log(event, jsEvent, view )
   }
-  eventDragStop(event, jsEvent, view ){
+  eventDragStop(event, jsEvent, view) {
     // console.log('unselect')
     // console.log(event, jsEvent, view )
   }
-  eventDrop(event, delta, revertFunc, jsEvent, ui, view){
+  eventDrop(event, delta, revertFunc, jsEvent, ui, view) {
 
     let extraMS: number = delta._milliseconds * 1 + delta._days * 24 * 60 * 60 * 1000
     let newUserCalendar: UserCalendar = this.events.find(x => x._id === event._id)
@@ -317,15 +315,21 @@ export class UserCalendarsComponent implements OnInit {
     this.saveSingleEvent(newUserCalendar)
 
   }
-  eventResizeStart(event, jsEvent, view ){
+  viewRender(view, element) {
+    this.search.startDate = view.activeRange.start
+    this.search.endDate = view.activeRange.end
+    this.getUserCalendars(1, this.search)
+    console.log(view)
+  }
+  eventResizeStart(event, jsEvent, view) {
     // console.log('unselect')
     // console.log(event, jsEvent, view )
   }
-  eventResizeStop(event, jsEvent, view ){
+  eventResizeStop(event, jsEvent, view) {
     // console.log(event)
     // console.log(event, jsEvent, view )
   }
-  eventResize(event, delta, revertFunc, jsEvent, ui, view ){
+  eventResize(event, delta, revertFunc, jsEvent, ui, view) {
     let extraMS: number = delta._milliseconds * 1 + delta._days * 24 * 60 * 60 * 1000
     let newUserCalendar: UserCalendar = this.events.find(x => x._id === event._id)
     // newUserCalendar.start = new Date(new Date(newUserCalendar.start).getTime() + extraMS)
