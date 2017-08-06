@@ -276,10 +276,11 @@ export class ExpensesComponent implements OnInit {
     // console.log('eventMouseout')
     // console.log(event, jsEvent, view )
   }
-  select(start, end, jsEvent, view){
-    console.log(start._d)
-    console.log(end._d)
-    // console.log(event, jsEvent, view )
+  select(start, end, jsEvent, view) {
+    let newUserCalendar = new UserCalendar()
+    newUserCalendar.start = start._d
+    newUserCalendar.end = end._d
+    this.openDialog(newUserCalendar)
   }
   unselect(event, jsEvent, view ){
     // console.log('unselect')
@@ -293,22 +294,26 @@ export class ExpensesComponent implements OnInit {
     // console.log('unselect')
     // console.log(event, jsEvent, view )
   }
-  eventDrop(event, jsEvent, view ){
-    console.log('unselect')
+  eventDrop(event, delta, revertFunc, jsEvent, ui, view){
+    console.log(event)
+    console.log(delta)
+    let newUserCalendar:UserCalendar = this.events.find(x=> x._id === event._id)
+
     // console.log(event, jsEvent, view )
   }
   eventResizeStart(event, jsEvent, view ){
-    console.log('unselect')
+    // console.log('unselect')
     // console.log(event, jsEvent, view )
   }
   eventResizeStop(event, jsEvent, view ){
-    console.log('unselect')
+    // console.log(event)
     // console.log(event, jsEvent, view )
   }
   eventResize(event, jsEvent, view ){
     console.log('unselect')
     // console.log(event, jsEvent, view )
   }
+
 
 
 
