@@ -81,6 +81,19 @@ export class ExpensesComponent implements OnInit {
     calendarOptions:Object = {
       height: '600px',
       selectable: true,
+      firstDay: 1,
+      minTime: "06:00:00",
+      maxTime: "22:00:00",
+      locale: 'fr',
+      slotLabelFormat: "HH:mm",
+      allDaySlot: false,
+      businessHours: {
+          // days of week. an array of zero-based day of week integers (0=Sunday)
+          dow: [ 1, 2, 3, 4, 5 ], // Monday - Thursday
+
+          start: '10:00', // a start time (10am in this example)
+          end: '18:00', // an end time (6pm in this example)
+      },
       dayClick: this.dayClick.bind(this),
       eventClick: this.eventClick.bind(this),
       eventMouseover: this.eventMouseover.bind(this),
