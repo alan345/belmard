@@ -2,16 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RouterModule} from '@angular/router';
-import { ExpenseDialogComponent } from './single/dialog/expenseDialog.component'
+import { UserCalendarDialogComponent } from './single/dialog/userCalendarDialog.component'
 
 // import { ProjectModule} from '../project/project.module';
 
-import { ExpensesComponent} from './expenses/expenses.component';
-import { ExpenseComponent} from './single/expense.component';
+import { UserCalendarsComponent} from './userCalendars/userCalendars.component';
+import { UserCalendarComponent} from './single/userCalendar.component';
 
 
-import { ExpenseService} from './expense.service';
-import { ExpenseRouting} from './expenseRouting.module';
+import { UserCalendarService} from './userCalendar.service';
+import { UserCalendarRouting} from './userCalendarRouting.module';
 import { MaterialModule } from '@angular/material';
 import { Ng2PaginationModule} from 'ng2-pagination';
 import { ProductModule } from '../product/product.module';
@@ -21,7 +21,6 @@ import {SharedModule } from '../shared/shared.module';
 import { SignaturePadModule } from 'angular2-signaturepad';
 // import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {CalendarModule} from 'ap-angular2-fullcalendar';
-import { UserCalendarService} from './userCalendar.service';
 
 
 
@@ -30,7 +29,7 @@ import { UserCalendarService} from './userCalendar.service';
   imports:      [
     // ProjectModule,
     // NgbModule,
-    ExpenseRouting,
+    UserCalendarRouting,
     CommonModule,
     FormsModule,
     MaterialModule,
@@ -44,20 +43,20 @@ import { UserCalendarService} from './userCalendar.service';
     // AutocompleteComponent,
   ],
   declarations: [
-    ExpensesComponent,
-    ExpenseComponent,
-    ExpenseDialogComponent,
+    UserCalendarsComponent,
+    UserCalendarComponent,
+    UserCalendarDialogComponent,
 
     // AutocompleteComponent
   ],
   exports:      [
-    ExpensesComponent,
-    ExpenseComponent,
+    UserCalendarsComponent,
+    UserCalendarComponent,
     // AutocompleteComponent,
   ],
-  providers:    [ UserCalendarService, ExpenseService ],
+  providers:    [ UserCalendarService ],
   entryComponents: [
-    ExpenseDialogComponent,
+    UserCalendarDialogComponent,
   ]
 })
-export class ExpenseModule { }
+export class UserCalendarModule { }

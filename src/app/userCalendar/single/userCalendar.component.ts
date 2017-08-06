@@ -1,10 +1,10 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {AuthService} from '../../auth/auth.service';
-import {ExpenseService} from '../expense.service';
+import {UserCalendarService} from '../userCalendar.service';
 import {ProductService} from '../../product/product.service';
-import { ProjectService} from '../../project/project.service';
+// import { ProjectService} from '../../project/project.service';
 
-import {Expense} from '../expense.model';
+import {UserCalendar} from '../userCalendar.model';
 
 import {ToastsManager} from 'ng2-toastr';
 
@@ -20,22 +20,21 @@ import { Quote } from '../../quote/quote.model';
 import { Product } from '../../product/product.model';
 import { Project } from '../../project/project.model';
 
-import { UserCalendarService} from '../userCalendar.service';
-import { UserCalendar } from '../userCalendar.model';
+
 
 
 @Component({
-  selector: 'app-expense',
-  templateUrl: './expense.component.html',
-  styleUrls: ['../expense.component.css'],
+  selector: 'app-userCalendar',
+  templateUrl: './userCalendar.component.html',
+  styleUrls: ['../userCalendar.component.css'],
 })
-export class ExpenseComponent implements OnInit {
+export class UserCalendarComponent implements OnInit {
   @Input() fetchedUserCalendar:UserCalendar = new UserCalendar()
   // fetchedUserCalendar: UserCalendar = new UserCalendar()
   myForm: FormGroup;
   constructor(
-    private expenseService: ExpenseService,
-    private projectService: ProjectService,
+    private userCalendarService: UserCalendarService,
+    // private projectService: ProjectService,
     private toastr: ToastsManager,
     public dialog: MdDialog,
     private activatedRoute: ActivatedRoute,
@@ -43,7 +42,7 @@ export class ExpenseComponent implements OnInit {
     private location: Location,
     private _fb: FormBuilder,
     private authService: AuthService,
-    private userCalendarService: UserCalendarService,
+
   ) {}
 
   ngOnInit() {
@@ -53,8 +52,8 @@ export class ExpenseComponent implements OnInit {
     })
 
     this.activatedRoute.params.subscribe((params: Params) => {
-      if(params['idExpense'])
-        this.getUserCalenddar(params['idExpense'])
+      if(params['idUserCalendar'])
+        this.getUserCalenddar(params['idUserCalendar'])
     })
   }
   selectUser(user: User) {

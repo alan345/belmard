@@ -1,11 +1,8 @@
 import {Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, Injectable, NgModule} from '@angular/core';
 import {AuthService} from '../../auth/auth.service';
-import {ExpenseService} from '../expense.service';
-import {ProductService} from '../../product/product.service';
-import { ProjectService} from '../../project/project.service';
+import {UserCalendarService} from '../userCalendar.service';
 
-import {Expense} from '../expense.model';
-import { UserCalendar } from '../userCalendar.model';
+import {UserCalendar} from '../userCalendar.model';
 import {ToastsManager} from 'ng2-toastr';
 
 import {MdDialog } from '@angular/material';
@@ -20,20 +17,20 @@ import { Quote } from '../../quote/quote.model';
 import { Product } from '../../product/product.model';
 import { Project } from '../../project/project.model';
 
-import { UserCalendarService} from '../userCalendar.service';
+
 import {CalendarComponent} from 'ap-angular2-fullcalendar';
 
-import { ExpenseDialogComponent } from '../single/dialog/expenseDialog.component';
+import { UserCalendarDialogComponent } from '../single/dialog/userCalendarDialog.component';
 
 // import * as $ from 'jquery';
 
 @Component({
-  selector: 'app-expenses',
-  templateUrl: './expenses.component.html',
-  styleUrls: ['../expense.component.css'],
+  selector: 'app-userCalendars',
+  templateUrl: './userCalendars.component.html',
+  styleUrls: ['../userCalendar.component.css'],
 })
-export class ExpensesComponent implements OnInit {
-  // @Output() newExpenseSaved: EventEmitter<any> = new EventEmitter();
+export class UserCalendarsComponent implements OnInit {
+  // @Output() newUserCalendarSaved: EventEmitter<any> = new EventEmitter();
   // @Input() showHeader = true;
   @Input() fetchedQuote:Quote = new Quote()
 
@@ -42,7 +39,7 @@ export class ExpensesComponent implements OnInit {
 
 
   showPaiements: boolean = false
-  fetchedExpense : Expense = new Expense()
+  fetchedUserCalendar : UserCalendar = new UserCalendar()
   autocompleteUser: string = '';
   autocompleteProject: string = '';
   fetchedProducts: Product[] = []
@@ -179,8 +176,6 @@ export class ExpensesComponent implements OnInit {
 
   constructor(
     private userCalendarService: UserCalendarService,
-    private expenseService: ExpenseService,
-    private projectService: ProjectService,
     private toastr: ToastsManager,
     public dialog: MdDialog,
     private activatedRoute: ActivatedRoute,
@@ -239,7 +234,7 @@ export class ExpensesComponent implements OnInit {
 
 
   openDialog(userCalendar: UserCalendar) {
-    let dialogRef = this.dialog.open(ExpenseDialogComponent, {
+    let dialogRef = this.dialog.open(UserCalendarDialogComponent, {
       data: {
         fetchedUserCalendar: userCalendar
       }

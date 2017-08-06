@@ -1,24 +1,24 @@
 import { Component, ViewChild , Inject} from '@angular/core';
 import { MdDialogRef, MdDialogConfig, MD_DIALOG_DATA} from '@angular/material';
-import { ExpenseComponent }  from '../expense.component';
+import { UserCalendarComponent }  from '../userCalendar.component';
 import { Quote } from '../../../quote/quote.model'
 import { UserCalendar } from '../../userCalendar.model';
 
 
 @Component({
   selector: 'edit-options-dialog',
-  templateUrl: './expenseDialog.component.html',
+  templateUrl: './userCalendarDialog.component.html',
 })
 
-export class ExpenseDialogComponent {
+export class UserCalendarDialogComponent {
   // fetchedQuote: Quote
   fetchedUserCalendar: UserCalendar = new UserCalendar()
   //
-  // @ViewChild(EditExpenseComponent)
-  // private editExpenseComponent: EditExpenseComponent;
+  // @ViewChild(EditUserCalendarComponent)
+  // private editUserCalendarComponent: EditUserCalendarComponent;
 
   constructor(
-    public dialogRef: MdDialogRef<ExpenseComponent>,
+    public dialogRef: MdDialogRef<UserCalendarComponent>,
     @Inject(MD_DIALOG_DATA) public data: any
   ) {
      this.fetchedUserCalendar._id = data.fetchedUserCalendar._id
@@ -32,7 +32,7 @@ export class ExpenseDialogComponent {
   }
 
 
-  newExpenseSaved() {
+  newUserCalendarSaved() {
     this.dialogRef.close()
     // this.userFormsComponent.onUploadFinisedParentToChild();
   }
