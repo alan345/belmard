@@ -12,7 +12,6 @@ import { PaiementGuardService} from '../user/paiement/paiementGuard.service';
 import { AuthGuardService} from '../auth/authguard.service';
 
 
-
 export const routes: Routes = [
   {path: '', component: ExpensesComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
   {path: 'new', component: ExpenseComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},

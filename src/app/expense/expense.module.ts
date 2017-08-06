@@ -20,6 +20,10 @@ import { ProductModule } from '../product/product.module';
 import {SharedModule } from '../shared/shared.module';
 import { SignaturePadModule } from 'angular2-signaturepad';
 // import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {CalendarModule} from "ap-angular2-fullcalendar";
+import { UserCalendarService} from './userCalendar.service';
+
+
 
 @NgModule({
   imports:      [
@@ -35,6 +39,7 @@ import { SignaturePadModule } from 'angular2-signaturepad';
     ProductModule,
     SharedModule,
     SignaturePadModule,
+    CalendarModule,
     // AutocompleteComponent,
   ],
   declarations: [
@@ -49,7 +54,7 @@ import { SignaturePadModule } from 'angular2-signaturepad';
     ExpenseComponent,
     // AutocompleteComponent,
   ],
-  providers:    [ ExpenseService ],
+  providers:    [ UserCalendarService, ExpenseService ],
   entryComponents: [
     ExpenseDialogComponent,
   ]
