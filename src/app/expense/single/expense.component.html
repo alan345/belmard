@@ -23,7 +23,7 @@
               </div>
             </div>
             <div class="col-md-12">
-              <input type="text" class="form-control" formControlName="title" [(ngModel)]="fetchedUserCalendar.title" placeholder="Name" (keyup)="refresh.next()">
+              <input type="text" class="form-control" formControlName="title" [(ngModel)]="fetchedUserCalendar.title" placeholder="Name">
             </div>
 
             <div class="col-md-12">
@@ -46,10 +46,10 @@
               <mwl-demo-utils-date-time-picker [(date)]="fetchedUserCalendar.end" (dateChange)="refresh.next()" placeholder="Not set">
               </mwl-demo-utils-date-time-picker>
             </div> -->
-            <div class="col-md-12">
+            <!-- <div class="col-md-12">
               <button class="btn btn-danger" (click)="deleteEvent(event, index)">Delete</button>
-              <button class="btn btn-succes" (click)="saveEvent(event)">Update</button>
-            </div>
+              <button class="btn btn-succes" (click)="save()">Update</button>
+            </div> -->
           <!-- </div> -->
 
         </div>

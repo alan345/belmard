@@ -22,6 +22,9 @@ import { Project } from '../../project/project.model';
 
 import { UserCalendarService} from '../userCalendar.service';
 import {CalendarComponent} from 'ap-angular2-fullcalendar';
+
+import { ExpenseDialogComponent } from '../single/dialog/expenseDialog.component';
+
 // import * as $ from 'jquery';
 
 @Component({
@@ -174,40 +177,44 @@ export class ExpensesComponent implements OnInit {
     private authService: AuthService,
   ) {}
   onCalendarInit() {
-    this.getUserCalendars(1, this.search)
+    this.getUserCalendarsInit()
     // console.log('Calendar initialized');
+  }
+
+  getUserCalendarsInit() {
+    this.getUserCalendars(1, this.search)
   }
   ngOnInit() {
 
   }
 
-      getUserCalendars(page: number, search: any) {
-        this.userCalendarService.getUserCalendars(page, search)
-          .subscribe(
-            res => {
-              this.events = []
-              this.events = res.data
+    getUserCalendars(page: number, search: any) {
+      this.userCalendarService.getUserCalendars(page, search)
+        .subscribe(
+          res => {
+            this.events = []
+            this.events = res.data
 
-              this.updateCalendar()
-              // res.data.forEach(event => {
-              //   let newEvent: UserCalendar = new UserCalendar();
-              //   newEvent = event
-              //   newEvent.start = new Date(event.start)
-              //   newEvent.end = new Date(event.end)
-              //   event.users.forEach(user => {
-              //     newEvent.color.primary = user.profile.colorCalendar
-              //   });
-              //
-              //   newEvent.isActiveEvent = false
-              //   this.events.push(newEvent)
-              //
-              // });
-            },
-            error => {
-              console.log(error);
-            }
-          );
-      }
+            this.updateCalendar()
+            // res.data.forEach(event => {
+            //   let newEvent: UserCalendar = new UserCalendar();
+            //   newEvent = event
+            //   newEvent.start = new Date(event.start)
+            //   newEvent.end = new Date(event.end)
+            //   event.users.forEach(user => {
+            //     newEvent.color.primary = user.profile.colorCalendar
+            //   });
+            //
+            //   newEvent.isActiveEvent = false
+            //   this.events.push(newEvent)
+            //
+            // });
+          },
+          error => {
+            console.log(error);
+          }
+        );
+    }
 
 
     updateCalendar() {
@@ -235,12 +242,30 @@ export class ExpensesComponent implements OnInit {
 
     }
 
+
+  openDialog(userCalendar: UserCalendar) {
+    let dialogRef = this.dialog.open(ExpenseDialogComponent, {
+      data: {
+        fetchedUserCalendar: userCalendar
+      }
+    });
+    // dialogRef.componentInstance.fetchedUserCalendar = userCalendar;
+    dialogRef.afterClosed().subscribe(result => {
+      this.getUserCalendarsInit()
+      // if(result) {
+      //   this.fetchedCompanie.forms.push(result)
+      // }
+    })
+  }
+
+
   dayClick(event, jsEvent, view ){
     console.log('dayClick')
     // console.log(event, jsEvent, view )
   }
   eventClick(event, jsEvent, view ){
-    // console.log('eventClick')
+    this.openDialog(event)
+    console.log(event)
     // console.log(event, jsEvent, view )
   }
   eventMouseover(event, jsEvent, view ){

@@ -8,7 +8,7 @@ export class UserCalendar {
     title: string = '';
     start: Date = new Date();
     end: Date = new Date();
-    clients: User[] = [];
+    // clients: User[] = [];
     users: User[] = [];
     projects: Project[] = [];
     isActiveEvent: boolean = false;

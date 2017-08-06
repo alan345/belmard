@@ -30,8 +30,8 @@ import { UserCalendar } from '../userCalendar.model';
   styleUrls: ['../expense.component.css'],
 })
 export class ExpenseComponent implements OnInit {
-  @Input() fetchedQuote:Quote = new Quote()
-  fetchedUserCalendar: UserCalendar = new UserCalendar()
+  @Input() fetchedUserCalendar:UserCalendar = new UserCalendar()
+  // fetchedUserCalendar: UserCalendar = new UserCalendar()
   myForm: FormGroup;
   constructor(
     private expenseService: ExpenseService,
@@ -47,7 +47,6 @@ export class ExpenseComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-
     this.myForm = this._fb.group({
       title: [''],
       description: [''],
@@ -56,20 +55,25 @@ export class ExpenseComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: Params) => {
       if(params['idExpense'])
         this.getUserCalenddar(params['idExpense'])
-
     })
   }
-
+  selectUser(user: User) {
+    this.fetchedUserCalendar.users = [user]
+  }
+  selectProject(project: Project) {
+    this.fetchedUserCalendar.projects = [project]
+  }
+  removeProject(i: number) {
+    this.fetchedUserCalendar.projects.splice(i, 1);
+  }
+  removeUser(i: number) {
+    this.fetchedUserCalendar.users.splice(i, 1);
+  }
   getUserCalenddar(id: string) {
     this.userCalendarService.getUserCalendar(id)
       .subscribe(
         res => {
           this.fetchedUserCalendar = res
-
-          // this.fetchedExpense
-          // .datePaiementString =
-          // this.authService
-          // .isoDateToHtmlDate(this.fetchedExpense.datePaiement)
         },
         error => {
           console.log(error);
@@ -77,6 +81,56 @@ export class ExpenseComponent implements OnInit {
       )
   }
 
+  openDialogDelete() {
+    let dialogRefDelete = this.dialog.open(DeleteDialog)
+    dialogRefDelete.afterClosed().subscribe(result => {
+      if (result) {
+        this.onDelete(this.fetchedUserCalendar._id).then(function(){
+          // this2.router.navigate(['paiementQuote']);
+        })
 
+      }
+    })
+  }
+
+  onDelete(id: string) {
+    let this2 = this
+    return new Promise(function(resolve, reject) {
+      this2.userCalendarService.deleteUserCalendar(id)
+        .subscribe(
+          res => {
+            this2.toastr.success('Great!', res.message);
+            resolve(res)
+          },
+          error => {
+            console.log(error);
+            reject(error)
+          }
+        )
+      })
+  }
+
+
+    save() {
+      if(this.fetchedUserCalendar._id) {
+        this.userCalendarService.updateUserCalendar(this.fetchedUserCalendar)
+          .subscribe(
+            res => {
+              this.toastr.success('Great!', res.message)
+            },
+            error => {
+              this.toastr.error('error!', error)
+            }
+          )
+      } else {
+        this.userCalendarService.saveUserCalendar(this.fetchedUserCalendar)
+          .subscribe(
+            res => {
+              this.toastr.success('Great!', res.message)
+            },
+            error => {console.log(error)}
+          )
+      }
+    }
 
 }
