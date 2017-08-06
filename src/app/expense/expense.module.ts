@@ -20,8 +20,9 @@ import { ProductModule } from '../product/product.module';
 import {SharedModule } from '../shared/shared.module';
 import { SignaturePadModule } from 'angular2-signaturepad';
 // import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {CalendarModule} from "ap-angular2-fullcalendar";
+import {CalendarModule} from 'ap-angular2-fullcalendar';
 import { UserCalendarService} from './userCalendar.service';
+
 
 
 

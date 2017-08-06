@@ -1,122 +1,291 @@
-import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
-import { AuthService} from '../../auth/auth.service';
-import { ExpenseService} from '../../expense/expense.service';
-import { Expense} from '../../expense/expense.model';
-import { ToastsManager} from 'ng2-toastr';
-import { MdDialog} from '@angular/material';
-import { Router} from '@angular/router';
-import { Location} from '@angular/common';
+import {Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, Injectable, NgModule} from '@angular/core';
+import {AuthService} from '../../auth/auth.service';
+import {ExpenseService} from '../expense.service';
+import {ProductService} from '../../product/product.service';
+import { ProjectService} from '../../project/project.service';
 
+import {Expense} from '../expense.model';
+import { UserCalendar } from '../userCalendar.model';
+import {ToastsManager} from 'ng2-toastr';
 
+import {MdDialog } from '@angular/material';
+import {Router, ActivatedRoute, Params } from '@angular/router';
+import { Location } from '@angular/common';
+import { FormBuilder, FormGroup} from '@angular/forms';
+import { UserService} from '../../user/user.service';
+
+import { DeleteDialog } from '../../deleteDialog/deleteDialog.component';
+import { User } from '../../user/user.model';
+import { Quote } from '../../quote/quote.model';
+import { Product } from '../../product/product.model';
+import { Project } from '../../project/project.model';
+
+import { UserCalendarService} from '../userCalendar.service';
+import {CalendarComponent} from 'ap-angular2-fullcalendar';
+// import * as $ from 'jquery';
 
 @Component({
   selector: 'app-expenses',
   templateUrl: './expenses.component.html',
-  styleUrls: ['../../admin/admin.component.css'],
+  styleUrls: ['../expense.component.css'],
 })
 export class ExpensesComponent implements OnInit {
-  // @Input() userId = '';
-  @Input() idQuote = '';
-  @Input() showHeader: boolean = true;
-  @Output() getExpensesCross: EventEmitter<any> = new EventEmitter();
-  @Input() showCreate: boolean = true;
+  // @Output() newExpenseSaved: EventEmitter<any> = new EventEmitter();
+  // @Input() showHeader = true;
+  @Input() fetchedQuote:Quote = new Quote()
 
-  fetchedExpenses: Expense[] = [];
-  loading: boolean;
-  paginationData = {
-    currentPage: 1,
-    itemsPerPage: 0,
-    totalItems: 0
-  };
+  // @ViewChild('myCal', { read: ElementRef }) myCal: ElementRef;
+  @ViewChild(CalendarComponent) myCalendar: CalendarComponent;
 
-  search = {
-    orderBy : '',
-    search: '',
-    idQuote:'',
-  };
+
+  showPaiements: boolean = false
+  fetchedExpense : Expense = new Expense()
+  autocompleteUser: string = '';
+  autocompleteProject: string = '';
+  fetchedProducts: Product[] = []
+  fetchedProjects: Project[] = []
+  // currentUser: User = new User()
+  imgLogoUrl: string = './assets/images/profile-placeholder.jpg'
+  imgSignatureBase64Temp = ''
+  // userAdmins : User[] = []
+  // userManagers : User[] = []
+  // userClients : User[] = []
+  // usersSalesRep : User[] = []
+  // userStylists : User[] = []
+  search= {
+    typeUser:[],
+    clientSearch:'',
+    userSearch:'',
+    projectSearch:'',
+    endDate: '2017/09/01',
+    startDate: '2007/09/01',
+  }
+  // events: UserCalendar[] = []
+  events = []
+  myForm: FormGroup;
+  autocompleteProduct: String = ''
+  fetchedUsers: User[] = [];
+  arrayContentToSearch =[]
+
+  paiementsTypes = [
+    { label: 'cheque', value: 'check' },
+    { label: 'Espece', value: 'cash' }
+]
+
+
+
+
+    calendarOptions:Object = {
+      height: '600px',
+      selectable: true,
+      dayClick: this.dayClick.bind(this),
+      eventClick: this.eventClick.bind(this),
+      eventMouseover: this.eventMouseover.bind(this),
+      eventMouseout: this.eventMouseout.bind(this),
+      select: this.select.bind(this),
+      unselect: this.unselect.bind(this),
+      eventDragStart: this.eventDragStart.bind(this),
+      eventDragStop: this.eventDragStop.bind(this),
+      eventDrop: this.eventDrop.bind(this),
+      eventResizeStart: this.eventResizeStart.bind(this),
+      eventResizeStop: this.eventResizeStop.bind(this),
+      eventResize: this.eventResize.bind(this),
+      header: {
+          left:   'title',
+          center: '',
+          right:  'today prev,next agendaWeek,month'
+      },
+      fixedWeekCount : false,
+      defaultDate: '2016-09-12',
+      defaultView: 'agendaWeek',
+      editable: true,
+      eventLimit: true, // allow "more" link when too many events
+      // events: this.events,
+
+      // events: [
+      //   {
+      //     title: 'All Day Event',
+      //     start: '2016-09-01'
+      //   },
+      //   {
+      //     title: 'Long Event',
+      //     start: '2016-09-07',
+      //     end: '2016-09-10'
+      //   },
+      //   {
+      //     id: 999,
+      //     title: 'Repeating Event',
+      //     start: '2016-09-09T16:00:00'
+      //   },
+      //   {
+      //     id: 999,
+      //     title: 'Repeating Event',
+      //     start: '2016-09-16T16:00:00'
+      //   },
+      //   {
+      //     title: 'Conference',
+      //     start: '2016-09-11',
+      //     end: '2016-09-13'
+      //   },
+      //   {
+      //     title: 'Meeting',
+      //     start: '2016-09-12T10:30:00',
+      //     end: '2016-09-12T12:30:00'
+      //   },
+      //   {
+      //     title: 'Lunch',
+      //     start: '2016-09-12T12:00:00'
+      //   },
+      //   {
+      //     title: 'Meeting',
+      //     start: '2016-09-12T14:30:00'
+      //   },
+      //   {
+      //     title: 'Happy Hour',
+      //     start: '2016-09-12T17:30:00'
+      //   },
+      //   {
+      //     title: 'Dinner',
+      //     start: '2016-09-12T20:00:00'
+      //   },
+      //   {
+      //     title: 'Birthday Party',
+      //     start: '2016-09-13T07:00:00'
+      //   },
+      //   {
+      //     title: 'Click for Google',
+      //     url: 'http://google.com/',
+      //     start: '2016-09-28'
+      //   }
+      // ]
+    };
+
 
   constructor(
+    private userCalendarService: UserCalendarService,
     private expenseService: ExpenseService,
-    private authService: AuthService,
-  //  private modalService: NgbModal,
+    private projectService: ProjectService,
     private toastr: ToastsManager,
     public dialog: MdDialog,
+    private activatedRoute: ActivatedRoute,
     private router: Router,
     private location: Location,
+    private _fb: FormBuilder,
+    private authService: AuthService,
   ) {}
-
-
-
+  onCalendarInit() {
+    this.getUserCalendars(1, this.search)
+    // console.log('Calendar initialized');
+  }
   ngOnInit() {
-    this.getExpensesInit()
+
+  }
+
+      getUserCalendars(page: number, search: any) {
+        this.userCalendarService.getUserCalendars(page, search)
+          .subscribe(
+            res => {
+              this.events = []
+              this.events = res.data
+
+              this.updateCalendar()
+              // res.data.forEach(event => {
+              //   let newEvent: UserCalendar = new UserCalendar();
+              //   newEvent = event
+              //   newEvent.start = new Date(event.start)
+              //   newEvent.end = new Date(event.end)
+              //   event.users.forEach(user => {
+              //     newEvent.color.primary = user.profile.colorCalendar
+              //   });
+              //
+              //   newEvent.isActiveEvent = false
+              //   this.events.push(newEvent)
+              //
+              // });
+            },
+            error => {
+              console.log(error);
+            }
+          );
+      }
+
+
+    updateCalendar() {
+
+      // this.events = [
+      //   {
+      //     title: 'All Day Event',
+      //     start: '2016-09-01'
+      //   },
+      //   {
+      //     title: 'Long Event',
+      //     start: '2016-09-07',
+      //     end: '2016-09-10'
+      //   }]
+
+      let dataSource = {
+        id:1,
+        events: this.events
+      }
+
+      console.log(this.events)
+      // $(this.myCal.nativeElement).fullCalendar('refetchEvents')
+      this.myCalendar.fullCalendar('removeEventSources');
+      this.myCalendar.fullCalendar('addEventSource', dataSource);
+
+    }
+
+  dayClick(event, jsEvent, view ){
+    console.log('dayClick')
+    // console.log(event, jsEvent, view )
+  }
+  eventClick(event, jsEvent, view ){
+    // console.log('eventClick')
+    // console.log(event, jsEvent, view )
+  }
+  eventMouseover(event, jsEvent, view ){
+    // console.log('eventMouseover')
+    // console.log(event, jsEvent, view )
+  }
+  eventMouseout(event, jsEvent, view ){
+    // console.log('eventMouseout')
+    // console.log(event, jsEvent, view )
+  }
+  select(start, end, jsEvent, view){
+    console.log(start._d)
+    console.log(end._d)
+    // console.log(event, jsEvent, view )
+  }
+  unselect(event, jsEvent, view ){
+    // console.log('unselect')
+    // console.log(event, jsEvent, view )
+  }
+  eventDragStart(event, jsEvent, view ){
+    // console.log('unselect')
+    // console.log(event, jsEvent, view )
+  }
+  eventDragStop(event, jsEvent, view ){
+    // console.log('unselect')
+    // console.log(event, jsEvent, view )
+  }
+  eventDrop(event, jsEvent, view ){
+    console.log('unselect')
+    // console.log(event, jsEvent, view )
+  }
+  eventResizeStart(event, jsEvent, view ){
+    console.log('unselect')
+    // console.log(event, jsEvent, view )
+  }
+  eventResizeStop(event, jsEvent, view ){
+    console.log('unselect')
+    // console.log(event, jsEvent, view )
+  }
+  eventResize(event, jsEvent, view ){
+    console.log('unselect')
+    // console.log(event, jsEvent, view )
   }
 
 
-  getExpensesInit(){
-    let this2 = this
-    setTimeout(function(){
-      this2.search.idQuote = this2.idQuote
-      this2.search.orderBy = 'name'
-      this2.getExpenses(1, this2.search)
-    }, 200);
-  }
-  searchExpenses(){}
-
-
-  goBack() {
-    this.location.back();
-  }
-
-  searchInput() {
-    this.getExpenses(this.paginationData.currentPage, this.search)
-  }
-
-  orderBy(orderBy: string) {
-    this.search.orderBy = orderBy
-    this.getExpenses(this.paginationData.currentPage, this.search)
-  }
-
-  onDelete(id: string) {
-    this.expenseService.deleteExpense(id)
-      .subscribe(
-        res => {
-          this.getExpensesInit()
-          this.toastr.success('Great!', res.message);
-          this.getExpensesCross.emit(this.fetchedExpenses)
-          // console.log(res);
-        },
-        error => {
-          console.log(error);
-        }
-      );
-  }
-
-
-  getPage(page: number) {
-    this.loading = true;
-    this.getExpenses(page, this.search);
-  }
-
-
-  getExpenses(page: number, search: any) {
-    this.expenseService.getExpenses(page, search)
-      .subscribe(
-        res => {
-          this.paginationData = res.paginationData;
-          this.fetchedExpenses =  res.data
-          this.loading = false;
-          this.getExpensesCross.emit(this.fetchedExpenses)
-        },
-        error => {
-          console.log(error);
-        }
-      );
-  }
-
-
-  isAdmin() {
-    return this.authService.isAdmin();
-  }
 
 
 }
