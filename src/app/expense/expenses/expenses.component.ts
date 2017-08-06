@@ -64,7 +64,7 @@ export class ExpensesComponent implements OnInit {
     startDate: '2007/09/01',
   }
   // events: UserCalendar[] = []
-  events = []
+  events: UserCalendar[] = []
   myForm: FormGroup;
   autocompleteProduct: String = ''
   fetchedUsers: User[] = [];
@@ -194,21 +194,14 @@ export class ExpensesComponent implements OnInit {
           res => {
             this.events = []
             this.events = res.data
-
+            this.events.forEach((event, i) => {
+              event.users.forEach((user, j) => {
+                this.events[i].color = user.profile.colorCalendar
+                console.log(user.profile.colorCalendar)
+              });
+            })
             this.updateCalendar()
-            // res.data.forEach(event => {
-            //   let newEvent: UserCalendar = new UserCalendar();
-            //   newEvent = event
-            //   newEvent.start = new Date(event.start)
-            //   newEvent.end = new Date(event.end)
-            //   event.users.forEach(user => {
-            //     newEvent.color.primary = user.profile.colorCalendar
-            //   });
-            //
-            //   newEvent.isActiveEvent = false
-            //   this.events.push(newEvent)
-            //
-            // });
+
           },
           error => {
             console.log(error);
@@ -218,17 +211,6 @@ export class ExpensesComponent implements OnInit {
 
 
     updateCalendar() {
-
-      // this.events = [
-      //   {
-      //     title: 'All Day Event',
-      //     start: '2016-09-01'
-      //   },
-      //   {
-      //     title: 'Long Event',
-      //     start: '2016-09-07',
-      //     end: '2016-09-10'
-      //   }]
 
       let dataSource = {
         id:1,
@@ -258,6 +240,29 @@ export class ExpensesComponent implements OnInit {
     })
   }
 
+  saveSingleEvent(userCalendar: UserCalendar) {
+    console.log(userCalendar)
+    if(userCalendar._id) {
+      this.userCalendarService.updateUserCalendar(userCalendar)
+        .subscribe(
+          res => {
+            this.toastr.success('Great!', res.message)
+          },
+          error => {
+            this.toastr.error('error!', error)
+          }
+        )
+    } else {
+      this.userCalendarService.saveUserCalendar(userCalendar)
+        .subscribe(
+          res => {
+            this.toastr.success('Great!', res.message)
+          },
+          error => {console.log(error)}
+        )
+    }
+  }
+
 
   dayClick(event, jsEvent, view ){
     console.log('dayClick')
@@ -281,6 +286,7 @@ export class ExpensesComponent implements OnInit {
     newUserCalendar.start = start._d
     newUserCalendar.end = end._d
     this.openDialog(newUserCalendar)
+
   }
   unselect(event, jsEvent, view ){
     // console.log('unselect')
@@ -295,11 +301,13 @@ export class ExpensesComponent implements OnInit {
     // console.log(event, jsEvent, view )
   }
   eventDrop(event, delta, revertFunc, jsEvent, ui, view){
-    console.log(event)
-    console.log(delta)
-    let newUserCalendar:UserCalendar = this.events.find(x=> x._id === event._id)
 
-    // console.log(event, jsEvent, view )
+    let extraMS: number = delta._milliseconds * 1 + delta._days * 24 * 60 * 60 * 1000
+    let newUserCalendar: UserCalendar = this.events.find(x => x._id === event._id)
+    newUserCalendar.start = new Date(new Date(newUserCalendar.start).getTime() + extraMS)
+    newUserCalendar.end = new Date(new Date(newUserCalendar.end).getTime() + extraMS)
+    this.saveSingleEvent(newUserCalendar)
+
   }
   eventResizeStart(event, jsEvent, view ){
     // console.log('unselect')
@@ -309,9 +317,12 @@ export class ExpensesComponent implements OnInit {
     // console.log(event)
     // console.log(event, jsEvent, view )
   }
-  eventResize(event, jsEvent, view ){
-    console.log('unselect')
-    // console.log(event, jsEvent, view )
+  eventResize(event, delta, revertFunc, jsEvent, ui, view ){
+    let extraMS: number = delta._milliseconds * 1 + delta._days * 24 * 60 * 60 * 1000
+    let newUserCalendar: UserCalendar = this.events.find(x => x._id === event._id)
+    // newUserCalendar.start = new Date(new Date(newUserCalendar.start).getTime() + extraMS)
+    newUserCalendar.end = new Date(new Date(newUserCalendar.end).getTime() + extraMS)
+    this.saveSingleEvent(newUserCalendar)
   }
 
 

@@ -8,11 +8,12 @@ export class UserCalendar {
     title: string = '';
     start: Date = new Date();
     end: Date = new Date();
+    color: string = '';
     // clients: User[] = [];
     users: User[] = [];
     projects: Project[] = [];
     isActiveEvent: boolean = false;
-    color: Color = new Color();
+    // color: Color = new Color();
     draggable: boolean = true;
     resizable: Resizable = new Resizable();
     details: Details = new Details();

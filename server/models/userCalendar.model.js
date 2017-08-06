@@ -18,10 +18,10 @@ var userCalendar = new Schema({
       details:{
         description:{type: String, default: ['']},
       },
-      color: {
-        primary: {type: String, default: ['#ad2121']},
-        secondary: {type: String, default: ['#FAE3E3']},
-      },
+      // color: {
+      //   primary: {type: String, default: ['#ad2121']},
+      //   secondary: {type: String, default: ['#FAE3E3']},
+      // },
       resizable:{
         beforeStart:  {type: Boolean, default: [true] },
         afterEnd:  {type: Boolean, default: [true] },
