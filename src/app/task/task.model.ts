@@ -7,16 +7,21 @@ import { Project } from '../project/project.model';
 export class Task {
     _id: string = '';
     projects: Project[] = []
-    name: string = '';
+    title: string = '';
     editMode: boolean = false;
     description: string = '';
     status: string = '';
     assignedTos: User[] = [];
-    dateTask: DateTask = new DateTask()
+    start: Date = new Date()
+    startString: string = '';
+    end: Date = new Date()
+    endString: string = '';
+        
+    // dateTask: DateTask = new DateTask()
 }
-export class DateTask {
-  creationDate: Date = new Date()
-  creationDateString: string = '';
-  endDate: Date = new Date()
-  endDateString: string = '';
-}
+// export class DateTask {
+//   start: Date = new Date()
+//   startString: string = '';
+//   end: Date = new Date()
+//   endString: string = '';
+// }

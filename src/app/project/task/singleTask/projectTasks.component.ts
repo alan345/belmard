@@ -135,11 +135,11 @@ export class ProjectTasksComponent implements OnInit {
     console.log(content, bucketTaskIndex)
     this.fetchedProject.bucketTasks[bucketTaskIndex].openNewTask = false
     let newTask = new Task()
-    // newTask.dateTask.creationDateString = this.authService.isoDateToHtmlDate(newTask.dateTask.creationDate)
-    // newTask.dateTask.endDateString = this.authService.isoDateToHtmlDate(newTask.dateTask.endDate)
+    // newTask.dateTask.startString = this.authService.isoDateToHtmlDate(newTask.dateTask.start)
+    // newTask.dateTask.endString = this.authService.isoDateToHtmlDate(newTask.dateTask.end)
     newTask.projects = [this.fetchedProject]
 
-    newTask.name = content
+    newTask.title = content
     // this.fetchedProject.bucketTasks[bucketTaskIndex].tasks.push(newTask)
     // let taskIndex =  this.fetchedProject.bucketTasks[bucketTaskIndex].tasks.length-1
     this.saveTask(newTask, bucketTaskIndex)
@@ -227,14 +227,14 @@ export class ProjectTasksComponent implements OnInit {
 
 
         this.fetchedProject.bucketTasks[bucketTaskIndex]
-          .tasks[taskIndex].dateTask
-          .creationDateString = this.authService
-            .isoDateToHtmlDate(this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].dateTask.creationDate)
+          .tasks[taskIndex]
+          .startString = this.authService
+            .isoDateToHtmlDate(this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].start)
 
         this.fetchedProject.bucketTasks[bucketTaskIndex]
-          .tasks[taskIndex].dateTask
-          .endDateString = this.authService
-            .isoDateToHtmlDate(this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].dateTask.endDate)
+          .tasks[taskIndex]
+          .endString = this.authService
+            .isoDateToHtmlDate(this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].end)
 
       })
     });
@@ -249,10 +249,10 @@ export class ProjectTasksComponent implements OnInit {
         // this.fetchedQuote.detail.dateQuote.expiryDateString = this.authService.isoDateToHtmlDate(this.fetchedQuote.detail.dateQuote.expiryDate)
 
 
-        // creationDate: Date = new Date()
-        // creationDateString: string = '';
-        // endDate: Date = new Date()
-        // endDateString: string = '';
+        // start: Date = new Date()
+        // startString: string = '';
+        // end: Date = new Date()
+        // endString: string = '';
 
       },
       error => {
@@ -314,13 +314,13 @@ export class ProjectTasksComponent implements OnInit {
     //     //
     //     // this.fetchedProject.bucketTasks[bucketTaskIndex]
     //     // .tasks[taskIndex].dateTask
-    //     // .creationDate = this.authService
-    //     // .HTMLDatetoIsoDate(this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].dateTask.creationDateString)
+    //     // .start = this.authService
+    //     // .HTMLDatetoIsoDate(this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].dateTask.startString)
     //     //
     //     // this.fetchedProject.bucketTasks[bucketTaskIndex]
     //     // .tasks[taskIndex].dateTask
-    //     // .endDate = this.authService
-    //     // .HTMLDatetoIsoDate(this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].dateTask.endDateString)
+    //     // .end = this.authService
+    //     // .HTMLDatetoIsoDate(this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].dateTask.endString)
     //
     //   })
     // });

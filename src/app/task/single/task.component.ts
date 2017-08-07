@@ -83,12 +83,10 @@ export class TaskComponent implements OnInit {
   ngOnInit() {
     this.myForm = this._fb.group({
       description: [''],
-      name: [''],
+      title: [''],
       status: [''],
-      creationDateString: [''],
-      endDateString: [''],
-
-
+      startString: [''],
+      endString: [''],
     })
 
 
@@ -119,13 +117,13 @@ export class TaskComponent implements OnInit {
 
   save() {
 
-      this.fetchedTask.dateTask
-      .creationDate = this.authService
-      .HTMLDatetoIsoDate(this.fetchedTask.dateTask.creationDateString)
+      this.fetchedTask
+      .start = this.authService
+      .HTMLDatetoIsoDate(this.fetchedTask.startString)
 
-      this.fetchedTask.dateTask
-      .endDate = this.authService
-      .HTMLDatetoIsoDate(this.fetchedTask.dateTask.endDateString)
+      this.fetchedTask
+      .end = this.authService
+      .HTMLDatetoIsoDate(this.fetchedTask.endString)
 
 
     // this.fetchedTask.datePaiement = this.authService.HTMLDatetoIsoDate(this.fetchedTask.datePaiementString)
@@ -212,13 +210,13 @@ export class TaskComponent implements OnInit {
           this.fetchedTask = res
 
 
-          this.fetchedTask.dateTask
-            .creationDateString = this.authService
-              .isoDateToHtmlDate(this.fetchedTask.dateTask.creationDate)
+          this.fetchedTask
+            .startString = this.authService
+              .isoDateToHtmlDate(this.fetchedTask.start)
 
-          this.fetchedTask.dateTask
-            .endDateString = this.authService
-              .isoDateToHtmlDate(this.fetchedTask.dateTask.endDate)
+          this.fetchedTask
+            .endString = this.authService
+              .isoDateToHtmlDate(this.fetchedTask.end)
 
 
 

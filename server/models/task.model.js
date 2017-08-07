@@ -7,14 +7,14 @@ var task = new Schema({
     ownerCompanies: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
     projects: [{type: Schema.Types.ObjectId, ref: 'Project'}],
 
-    name: {type: String},
+    title: {type: String},
     status: {type: String},
     description: {type: String},
     assignedTos: [{type: Schema.Types.ObjectId, ref: 'User'}],
-    dateTask:{
-      creationDate: {type: Date, default: [Date()]},
-      endDate: {type: Date, default: [Date()]},
-    }
+    // dateTask:{
+      start: {type: Date, default: [Date()]},
+      end: {type: Date, default: [Date()]},
+    // }
 
   },
   {

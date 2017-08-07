@@ -19,7 +19,7 @@
         </app-autocomplete>
 
 
-        <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedTask.name" placeholder="name">
+        <input type="text" class="form-control" formControlName="title" [(ngModel)]="fetchedTask.title" placeholder="title">
 
 
         <select class="form-control" formControlName="status" [(ngModel)]="fetchedTask.status">
@@ -30,8 +30,8 @@
         </textarea>
         <app-autocomplete [typeAutocomplete]="'user'" [singleChoice]="'true'" [arrayContent]="fetchedTask.assignedTos" (getResultAutocomplete)="selectAssignedTo($event[0])">
         </app-autocomplete>
-        <input type="date" class="form-control" formControlName="creationDateString" [(ngModel)]="fetchedTask.dateTask.creationDateString">
-        <input type="date" class="form-control" formControlName="endDateString" [(ngModel)]="fetchedTask.dateTask.endDateString">
+        <input type="date" class="form-control" formControlName="startString" [(ngModel)]="fetchedTask.startString">
+        <input type="date" class="form-control" formControlName="endString" [(ngModel)]="fetchedTask.endString">
 
 
 <!--
