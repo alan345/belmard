@@ -80,7 +80,7 @@ export class UserCalendarsComponent implements OnInit {
 
   calendarOptions: Object = {
     timezone:'local',
-    height: '600px',
+    height: 500,
     selectable: true,
     firstDay: 1,
     minTime: "06:00:00",
