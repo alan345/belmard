@@ -54,6 +54,7 @@ export class Categorie {
 
 export class Categorie0 {
   categ: string= '';
+  isFlagged: boolean = false;
   subCateg: Categorie1[] = []
 }
 

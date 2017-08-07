@@ -60,6 +60,7 @@
         <button type="button" (click)="addCateg('project', 0, 0, 0, 0)">Add Categ Project</button>
         <div class="categ0" *ngFor="let categorie0 of fetchedCompanie.categories.categProject; let i = index;">
           <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.categories.categProject[i].categ">
+          <input type="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.categories.categProject[i].isFlagged">isFlagged
           <button type="button" (click)="removeCateg('categProject', 1,i,0,0)">X</button>
           <button type="button" (click)="addCateg('categProject', 1,i,0,0)">+</button>
           <div class="categ1" *ngFor="let categorie1 of categorie0.subCateg; let j = index;">

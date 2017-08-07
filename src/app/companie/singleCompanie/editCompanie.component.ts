@@ -202,10 +202,10 @@ export class EditCompanieComponent implements OnInit {
   }
 
   initDataToRemove(){
-
         this.fetchedCompanie.categories.categProduct = [
           {
             "categ":"Serrurerie",
+            "isFlagged" : false,
             "subCateg": [
               {
                 "categ":"Serrurerie de bâtiment",
@@ -249,6 +249,7 @@ export class EditCompanieComponent implements OnInit {
 
           {
             "categ":"Menuiserie",
+            "isFlagged" : false,
             "subCateg": [
 
               {
@@ -282,6 +283,7 @@ export class EditCompanieComponent implements OnInit {
 
           {
             "categ":"Fenêtres",
+            "isFlagged" : false,
             "subCateg": [
 
               {
@@ -331,6 +333,7 @@ export class EditCompanieComponent implements OnInit {
 
           {
             "categ":"Plomberie",
+            "isFlagged" : false,
             "subCateg": [
 
               {
@@ -389,6 +392,7 @@ export class EditCompanieComponent implements OnInit {
 
           {
             "categ":"Électricité",
+            "isFlagged" : false,
             "subCateg": [
 
               {
@@ -439,6 +443,7 @@ export class EditCompanieComponent implements OnInit {
 
           {
             "categ": "Chauffage",
+            "isFlagged" : false,
             "subCateg": [
 
               {
@@ -469,6 +474,7 @@ export class EditCompanieComponent implements OnInit {
          this.fetchedCompanie.categories.categProject = [
       {
         "categ":"Devis Rénovation",
+        "isFlagged" : true,
         "subCateg": [
 
           {
@@ -509,6 +515,7 @@ export class EditCompanieComponent implements OnInit {
 
       {
         "categ":"Intervention Immédiate",
+        "isFlagged" : true,
         "subCateg": [
 
           {
@@ -561,6 +568,7 @@ export class EditCompanieComponent implements OnInit {
 
       {
         "categ":"Devis Installation",
+        "isFlagged" : true,
         "subCateg": [
 
           {
@@ -620,6 +628,7 @@ export class EditCompanieComponent implements OnInit {
 
       {
         "categ":"Électricité",
+        "isFlagged" : false,
         "subCateg": [
 
           {
@@ -670,6 +679,7 @@ export class EditCompanieComponent implements OnInit {
 
       {
         "categ": "Chauffage",
+        "isFlagged" : false,
         "subCateg": [
 
           {

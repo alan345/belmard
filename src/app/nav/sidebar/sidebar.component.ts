@@ -36,7 +36,8 @@ export class SidebarComponent implements OnInit {
   ngOnInit() {
     if (this.authService.isLoggedIn()) {
       //let userId = localStorage.getItem('userId');
-      this.getUser('')
+      this.fetchedUser = this.authService.getCurrentUser()
+      console.log(this.fetchedUser)
     }
   }
   redirect(typeObj) {

@@ -102,16 +102,21 @@ export class ProjectSingleComponent implements OnInit {
 
       if(params['idClient'])
        this.getUser(params['idClient'])
+
+
+     if(params['categ'])
+      this.selectedIndex0= params['categ']
+      // console.log(params['categProject'])
+
+
     })
 
     this.getItemSteps()
   }
 
   getItemSteps() {
-
-
     let currentUser = this.authService.getCurrentUser()
-    currentUser.ownerCompanies.forEach((companie,index) => {
+    currentUser.ownerCompanies.forEach((companie, index) => {
       // console.log(companie)
       // console.log(JSON.parse(currentUser.companies[index].categJson.categProject))
       if(currentUser.ownerCompanies[index].categories.categProject)
