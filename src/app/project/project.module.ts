@@ -21,6 +21,8 @@ import { DragulaModule } from 'ng2-dragula';
 // import { AutocompleteModule } from '../autocomplete/autocomplete.module'
 import {SharedModule } from '../shared/shared.module';
 // import {UserModule} from '../user/user.module';
+import { TaskDialogComponent } from '../task/single/dialog/taskDialog.component'
+
 
 @NgModule({
   imports:     [
@@ -43,6 +45,7 @@ import {SharedModule } from '../shared/shared.module';
     ProjectSingleComponent,
     TasksComponent,
     ProjectDialogComponent,
+    TaskDialogComponent,
     // AutocompleteComponent,
   ],
   exports:      [
@@ -53,7 +56,8 @@ import {SharedModule } from '../shared/shared.module';
     ProjectService,
     TaskService],
   entryComponents: [
-    ProjectDialogComponent
+    ProjectDialogComponent,
+    TaskDialogComponent,
   ]
 })
 export class ProjectModule { }

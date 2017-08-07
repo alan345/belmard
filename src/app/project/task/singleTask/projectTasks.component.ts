@@ -19,6 +19,8 @@ import { DragulaService } from 'ng2-dragula';
 import { User } from '../../../user/user.model';
 import { AuthService} from '../../../auth/auth.service';
 import { TaskService } from '../../../task/task.service'
+import {MdDialog } from '@angular/material';
+import { TaskDialogComponent } from '../../../task/single/dialog/taskDialog.component';
 
 
 @Component({
@@ -74,7 +76,7 @@ export class ProjectTasksComponent implements OnInit {
     //  private sanitizer: DomSanitizer,
     private projectService: ProjectService,
     private toastr: ToastsManager,
-    //    public dialog: MdDialog,
+    public dialog: MdDialog,
     private router: Router,
     private location: Location,
     private activatedRoute: ActivatedRoute,
@@ -201,15 +203,33 @@ export class ProjectTasksComponent implements OnInit {
     this.save()
   }
 
+  openDialog(task: Task) {
+    let dialogRef = this.dialog.open(TaskDialogComponent, {
+      data: {
+        fetchedUserCalendar: task
+      }
+    });
+    // dialogRef.componentInstance.fetchedUserCalendar = userCalendar;
+    dialogRef.afterClosed().subscribe(result => {
+      // this.resetSearchGetUserCalendars()
+      // this.getUserCalendars(1, this.search)
+      // if(result) {
+      //   this.fetchedCompanie.forms.push(result)
+      // }
+    })
+  }
 
   onClick(bucketTaskIndex, taskIndex) {
+    console.log('onclick')
+
     this.fetchedProject.bucketTasks.forEach((bucketTask, i) => {
       bucketTask.tasks.forEach((task, j) => {
-        this.fetchedProject.bucketTasks[i].tasks[j].editMode = false
+        this.openDialog(this.fetchedProject.bucketTasks[i].tasks[j])
+        // this.fetchedProject.bucketTasks[i].tasks[j].editMode = false
       })
     }
     )
-    this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].editMode = true
+    // this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].editMode = true
 
   }
 

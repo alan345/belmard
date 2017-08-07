@@ -16,7 +16,7 @@ import { TasksComponent} from './tasks/tasks.component';
 import { QuoteModule} from '../quote/quote.module';
 
 import { DragulaModule } from 'ng2-dragula';
-// import { AutocompleteComponent } from '../autocomplete/autocomplete.component'
+import { TaskDialogComponent } from './single/dialog/taskDialog.component'
 // import { AutocompleteModule } from '../autocomplete/autocomplete.module'
 import {SharedModule } from '../shared/shared.module';
 // import {UserModule} from '../user/user.module';
@@ -40,6 +40,7 @@ import {SharedModule } from '../shared/shared.module';
 
     TaskComponent,
     TasksComponent,
+    // TaskDialogComponent,
     // TaskSingleComponent,
     // AutocompleteComponent,
   ],
@@ -49,7 +50,7 @@ import {SharedModule } from '../shared/shared.module';
   ],
   providers:    [ TaskService ],
   entryComponents: [
-
+    // TaskDialogComponent,
   ]
 })
 export class TaskModule { }
