@@ -97,16 +97,15 @@ export class ProjectSingleComponent implements OnInit {
 
 
     this.activatedRoute.params.subscribe((params: Params) => {
-      if(params['id'])
-       this.getProject(params['id'])
+      if(params['id']) {
+        this.getProject(params['id'])
+      } else {
+        if(params['idClient'])
+           this.getUser(params['idClient'])
+        if(params['categ'])
+          this.selectedIndex0= params['categ']
+      }
 
-      if(params['idClient'])
-       this.getUser(params['idClient'])
-
-
-     if(params['categ'])
-      this.selectedIndex0= params['categ']
-      // console.log(params['categProject'])
 
 
     })
