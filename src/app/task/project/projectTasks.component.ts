@@ -1,11 +1,11 @@
 import { Component, OnInit} from '@angular/core';
-import { ProjectService} from '../../project.service';
+import { ProjectService} from '../../project/project.service';
 import { ToastsManager} from 'ng2-toastr';
 //import { MdDialog } from '@angular/material';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
-import { Project, BucketTasks } from '../../project.model';
-import { Task } from '../../../task/task.model';
+import { Project, BucketTasks } from '../../project/project.model';
+import { Task } from '../../task/task.model';
 // import { EditOptionsComponentDialog } from '../form/modalLibrary/modalLibrary.component';
 //import { FormGroup} from '@angular/forms';
 // import { DomSanitizer } from '@angular/platform-browser';
@@ -16,11 +16,11 @@ import { Task } from '../../../task/task.model';
 // import { User } from '../user/user.model';
 // import { Quote } from '../quote/quote.model';
 import { DragulaService } from 'ng2-dragula';
-import { User } from '../../../user/user.model';
-import { AuthService} from '../../../auth/auth.service';
-import { TaskService } from '../../../task/task.service'
+import { User } from '../../user/user.model';
+import { AuthService} from '../../auth/auth.service';
+import { TaskService } from '../../task/task.service'
 import {MdDialog } from '@angular/material';
-import { TaskDialogComponent } from '../../../task/single/dialog/taskDialog.component';
+import { TaskDialogComponent } from '../../task/single/dialog/taskDialog.component';
 
 
 @Component({
@@ -206,7 +206,7 @@ export class ProjectTasksComponent implements OnInit {
   openDialog(task: Task) {
     let dialogRef = this.dialog.open(TaskDialogComponent, {
       data: {
-        fetchedUserCalendar: task
+        fetchedTask: task
       }
     });
     // dialogRef.componentInstance.fetchedUserCalendar = userCalendar;
@@ -283,8 +283,8 @@ export class ProjectTasksComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
-      if (params['id'])
-        this.getProjectById(params['id'])
+      if (params['idProject'])
+        this.getProjectById(params['idProject'])
 
     })
   }

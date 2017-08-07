@@ -21,6 +21,7 @@ export class TaskDialogComponent {
     public dialogRef: MdDialogRef<TaskComponent>,
     @Inject(MD_DIALOG_DATA) public data: any
   ) {
+    console.log(data)
      this.fetchedTask = data.fetchedTask
     //  this.fetchedTask.title = data.fetchedTask.title
     //  this.fetchedTask.start = data.fetchedTask.start

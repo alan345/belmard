@@ -294,6 +294,10 @@ router.get('/:id', function(req, res, next) {
       populate: {
         path: 'assignedTos',
         model: 'User'
+      },
+      populate: {
+        path: 'projects',
+        model: 'Project'
       }
     })
     .exec(function(err, item) {

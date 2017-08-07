@@ -5,13 +5,13 @@ import { MaterialModule } from '@angular/material';
 import { Ng2PaginationModule} from 'ng2-pagination';
 import { ProjectDialogComponent } from './projectSingle/dialog/projectDialog.component';
 
-import { ProjectTasksComponent} from './task/singleTask/projectTasks.component';
+// import { ProjectTasksComponent} from './task/singleTask/projectTasks.component';
 import { ProjectsComponent} from './projects/projects.component';
 import { ProjectSingleComponent} from './projectSingle/projectSingle.component';
 import { ProjectService} from './project.service';
 import { ProjectRouting} from './projectRouting.module';
 
-import { TasksComponent} from './task/tasks/tasks.component';
+// import { TasksComponent} from './task/tasks/tasks.component';
 
 import { TaskService} from '../task/task.service';
 import { QuoteModule} from '../quote/quote.module';
@@ -21,7 +21,7 @@ import { DragulaModule } from 'ng2-dragula';
 // import { AutocompleteModule } from '../autocomplete/autocomplete.module'
 import {SharedModule } from '../shared/shared.module';
 // import {UserModule} from '../user/user.module';
-import { TaskDialogComponent } from '../task/single/dialog/taskDialog.component'
+// import { TaskDialogComponent } from '../task/single/dialog/taskDialog.component'
 
 
 @NgModule({
@@ -40,12 +40,12 @@ import { TaskDialogComponent } from '../task/single/dialog/taskDialog.component'
     // AutocompleteModule,
   ],
   declarations: [
-    ProjectTasksComponent,
+    // ProjectTasksComponent,
     ProjectsComponent,
     ProjectSingleComponent,
-    TasksComponent,
+    // TasksComponent,
     ProjectDialogComponent,
-    TaskDialogComponent,
+    // TaskDialogComponent,
     // AutocompleteComponent,
   ],
   exports:      [
@@ -57,7 +57,7 @@ import { TaskDialogComponent } from '../task/single/dialog/taskDialog.component'
     TaskService],
   entryComponents: [
     ProjectDialogComponent,
-    TaskDialogComponent,
+    // TaskDialogComponent,
   ]
 })
 export class ProjectModule { }

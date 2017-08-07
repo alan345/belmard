@@ -12,7 +12,7 @@ import { TaskService} from './task.service';
 import { TaskRouting} from './taskRouting.module';
 import { TasksComponent} from './tasks/tasks.component';
 
-
+import { ProjectTasksComponent} from './project/projectTasks.component';
 import { QuoteModule} from '../quote/quote.module';
 
 import { DragulaModule } from 'ng2-dragula';
@@ -40,7 +40,8 @@ import {SharedModule } from '../shared/shared.module';
 
     TaskComponent,
     TasksComponent,
-    // TaskDialogComponent,
+    ProjectTasksComponent,
+    TaskDialogComponent,
     // TaskSingleComponent,
     // AutocompleteComponent,
   ],
@@ -50,7 +51,7 @@ import {SharedModule } from '../shared/shared.module';
   ],
   providers:    [ TaskService ],
   entryComponents: [
-    // TaskDialogComponent,
+    TaskDialogComponent,
   ]
 })
 export class TaskModule { }

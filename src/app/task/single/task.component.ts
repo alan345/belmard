@@ -32,7 +32,7 @@ import { Project } from '../../project/project.model';
 export class TaskComponent implements OnInit {
   @Output() newTaskSaved: EventEmitter<any> = new EventEmitter();
   @Input() showHeader = true;
-
+  @Input() fetchedTask: Task = new Task()
 
   statusTypes = [
     { label: 'Not Started', value: '' },
@@ -41,7 +41,7 @@ export class TaskComponent implements OnInit {
   ]
 
   showPaiements: boolean = false
-  fetchedTask : Task = new Task()
+
   // autocompleteUser: string = '';
   // autocompleteProject: string = '';
   // fetchedProducts: Product[] = []
