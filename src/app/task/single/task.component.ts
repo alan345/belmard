@@ -111,7 +111,7 @@ export class TaskComponent implements OnInit {
 
 
   selectAssignedTo(event) {
-    this.fetchedTask.assignedTos = [event]
+    this.fetchedTask.users = [event]
   }
 
 

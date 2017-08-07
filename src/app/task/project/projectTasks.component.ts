@@ -199,7 +199,7 @@ export class ProjectTasksComponent implements OnInit {
 
 
   selectAssignedTo(event, bucketTaskIndex, taskIndex) {
-    this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].assignedTos = event
+    this.fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].users = event
     this.save()
   }
 

@@ -76,7 +76,7 @@ router.put('/:id', function (req, res, next) {
       })
     } else {
       //console.log(req.body)
-        item.assignedTos = req.body.assignedTos
+        item.users = req.body.users
         item.dateTask = req.body.dateTask
         item.description = req.body.description
         item.name = req.body.name

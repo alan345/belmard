@@ -37,7 +37,7 @@
             <table>
               <tr>
                 <td class="tdbtn3">
-                  <div *ngFor='let user of task.assignedTos' class="round" [style.background-color]="user.profile.colorCalendar">
+                  <div *ngFor='let user of task.users' class="round" [style.background-color]="user.profile.colorCalendar">
                   </div>
                 </td>
                 <td class="tdbtn4">{{task.title}}</td>
@@ -97,7 +97,7 @@
 
           <textarea class="form-control" (focusout)="saveTask(task, taskIndex)" [(ngModel)]="fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].description" placeholder="Description">
           </textarea>
-          <app-autocomplete [typeAutocomplete]="'user'" [singleChoice]="'true'" [arrayContent]="fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].assignedTos" (getResultAutocomplete)="selectAssignedTo($event, bucketTaskIndex, taskIndex)">
+          <app-autocomplete [typeAutocomplete]="'user'" [singleChoice]="'true'" [arrayContent]="fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].users" (getResultAutocomplete)="selectAssignedTo($event, bucketTaskIndex, taskIndex)">
           </app-autocomplete>
           <input type="date" class="form-control" (focusout)="saveTask(task, taskIndex)" [(ngModel)]="fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].startString">
           <input type="date" class="form-control" (focusout)="saveTask(task, taskIndex)" [(ngModel)]="fetchedProject.bucketTasks[bucketTaskIndex].tasks[taskIndex].endString">

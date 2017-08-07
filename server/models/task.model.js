@@ -10,10 +10,10 @@ var task = new Schema({
     title: {type: String},
     status: {type: String},
     description: {type: String},
-    assignedTos: [{type: Schema.Types.ObjectId, ref: 'User'}],
+    users: [{type: Schema.Types.ObjectId, ref: 'User'}],
     // dateTask:{
-      start: {type: Date, default: [Date()]},
-      end: {type: Date, default: [Date()]},
+    start: {type: Date, default: [Date()]},
+    end: {type: Date, default: [Date()]},
     // }
 
   },

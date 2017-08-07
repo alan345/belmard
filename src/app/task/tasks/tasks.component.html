@@ -55,7 +55,7 @@
               <td class="centre"></td>
               <td class="centre">{{task.title}}</td>
               <td class="centre">
-                <!-- <div *ngFor="let assignedTo of project.bucketTasks.tasks.assignedTos">
+                <!-- <div *ngFor="let assignedTo of project.bucketTasks.tasks.users">
                   {{assignedTo.profile.name}} {{assignedTo.profile.lastName}}
                 </div> -->
               </td>
@@ -63,7 +63,7 @@
               <td class="centre">{{project.details.name}}</td>
               <td class="centre">{{project.details.date}}</td>
               <td class="centre">
-                <div *ngFor="let assignedTo of project.assignedTos">
+                <div *ngFor="let assignedTo of project.users">
                   {{assignedTo.profile.name}} {{assignedTo.profile.lastName}}
                 </div>
 

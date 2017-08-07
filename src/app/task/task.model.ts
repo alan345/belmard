@@ -11,12 +11,12 @@ export class Task {
     editMode: boolean = false;
     description: string = '';
     status: string = '';
-    assignedTos: User[] = [];
+    users: User[] = [];
     start: Date = new Date()
     startString: string = '';
     end: Date = new Date()
     endString: string = '';
-        
+
     // dateTask: DateTask = new DateTask()
 }
 // export class DateTask {

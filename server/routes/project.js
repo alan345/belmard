@@ -287,14 +287,18 @@ router.get('/:id', function(req, res, next) {
     Project.findById({_id: req.params.id})
     .populate({path: 'clients', model: 'User'})
     .populate({path: 'forms', model: 'Form'})
-    .populate({path: 'assignedTos', model: 'User'})
+    // .populate({path: 'users', model: 'User'})
     .populate({
       path: 'bucketTasks.tasks',
       model: 'Task',
       populate: {
-        path: 'assignedTos',
+        path: 'users',
         model: 'User'
       },
+    })
+    .populate({
+      path: 'bucketTasks.tasks',
+      model: 'Task',
       populate: {
         path: 'projects',
         model: 'Project'
