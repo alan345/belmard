@@ -2,7 +2,7 @@ import {Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, I
 import {AuthService} from '../../auth/auth.service';
 import {UserCalendarService} from '../userCalendar.service';
 
-import {UserCalendar} from '../userCalendar.model';
+import {UserCalendar, SearchData} from '../userCalendar.model';
 import {ToastsManager} from 'ng2-toastr';
 
 import {MdDialog } from '@angular/material';
@@ -42,18 +42,19 @@ export class UserCalendarsComponent implements OnInit {
 
   isSearchInitReady: boolean = false
   fetchedUserCalendar: UserCalendar = new UserCalendar()
-  autocompleteUser: string = '';
-  autocompleteProject: string = '';
-  fetchedProducts: Product[] = []
-  fetchedProjects: Project[] = []
+  // autocompleteUser: string = '';
+  // autocompleteProject: string = '';
+  // fetchedProducts: Product[] = []
+  // fetchedProjects: Project[] = []
   // currentUser: User = new User()
-  imgLogoUrl: string = './assets/images/profile-placeholder.jpg'
-  imgSignatureBase64Temp = ''
+  // imgLogoUrl: string = './assets/images/profile-placeholder.jpg'
+  // imgSignatureBase64Temp = ''
   // userAdmins : User[] = []
   // userManagers : User[] = []
   // userClients : User[] = []
   // usersSalesRep : User[] = []
   // userStylists : User[] = []
+  searchData: SearchData = new SearchData()
   search = {
     typeUser: [],
     // clientSearch: '',
@@ -65,16 +66,16 @@ export class UserCalendarsComponent implements OnInit {
   // events: UserCalendar[] = []
   events: UserCalendar[] = []
   myForm: FormGroup;
-  autocompleteProduct: String = ''
-  fetchedUsers: User[] = [];
-  arrayContentToSearch = []
+  // autocompleteProduct: String = ''
+  // fetchedUsers: User[] = [];
+  // arrayContentToSearch = []
 
-  paiementsTypes = [
-    { label: 'cheque', value: 'check' },
-    { label: 'Espece', value: 'cash' }
-  ]
+  // paiementsTypes = [
+  //   { label: 'cheque', value: 'check' },
+  //   { label: 'Espece', value: 'cash' }
+  // ]
 
-  fetchedUserSearchs: User[] = [];
+  // fetchedUserSearchs: User[] = [];
 
 
   calendarOptions: Object = {
@@ -219,14 +220,18 @@ export class UserCalendarsComponent implements OnInit {
 // }
 
   getUserCalendarBySearch(searchData) {
+    this.searchData = searchData
     this.isSearchInitReady = true
+
+    this.resetSearchGetUserCalendars()
+  }
+  resetSearchGetUserCalendars() {
     this.search.userSearch = ''
     this.search.projectSearch = ''
-
-    searchData.fetchedUserSearchs.forEach(fetchedUserSearch => {
+    this.searchData.fetchedUserSearchs.forEach(fetchedUserSearch => {
         this.search.userSearch = fetchedUserSearch._id
     });
-    searchData.fetchedProjectSearchs.forEach(fetchedProjectSearch => {
+    this.searchData.fetchedProjectSearchs.forEach(fetchedProjectSearch => {
         this.search.projectSearch = fetchedProjectSearch._id
     });
     // this.search.typeUser = searchData.search.typeUser
@@ -279,7 +284,8 @@ export class UserCalendarsComponent implements OnInit {
     });
     // dialogRef.componentInstance.fetchedUserCalendar = userCalendar;
     dialogRef.afterClosed().subscribe(result => {
-      this.getUserCalendars(1, this.search)
+      this.resetSearchGetUserCalendars()
+      // this.getUserCalendars(1, this.search)
       // if(result) {
       //   this.fetchedCompanie.forms.push(result)
       // }
@@ -332,8 +338,10 @@ export class UserCalendarsComponent implements OnInit {
     // console.log(new Date(start._d))
     // console.log(new Date(start._d).toISOString())
     let newUserCalendar = new UserCalendar()
+    newUserCalendar.users = this.searchData.fetchedUserSearchs
+    newUserCalendar.projects = this.searchData.fetchedProjectSearchs
 
-
+    console.log(this.searchData.fetchedProjectSearchs)
     newUserCalendar.start = start._d
     newUserCalendar.end = end._d
     this.openDialog(newUserCalendar)
@@ -364,7 +372,8 @@ export class UserCalendarsComponent implements OnInit {
     this.search.startDate = view.activeRange.start
     this.search.endDate = view.activeRange.end
     if(this.isSearchInitReady)
-      this.getUserCalendars(1, this.search)
+      this.resetSearchGetUserCalendars()
+      // this.getUserCalendars(1, this.search)
     // console.log(view)
   }
   eventResizeStart(event, jsEvent, view) {

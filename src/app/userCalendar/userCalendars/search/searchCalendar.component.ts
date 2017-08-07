@@ -1,33 +1,33 @@
 import {Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, Injectable, NgModule} from '@angular/core';
-import {AuthService} from '../../auth/auth.service';
-import {UserCalendarService} from '../userCalendar.service';
+import {AuthService} from '../../../auth/auth.service';
+import {UserCalendarService} from '../../userCalendar.service';
 
-import {UserCalendar, SearchData} from '../userCalendar.model';
+import {UserCalendar, SearchData} from '../../userCalendar.model';
 import {ToastsManager} from 'ng2-toastr';
 
 import {MdDialog } from '@angular/material';
 import {Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
-import { FormBuilder, FormGroup} from '@angular/forms';
-import { UserService} from '../../user/user.service';
-
-import { DeleteDialog } from '../../deleteDialog/deleteDialog.component';
-import { User } from '../../user/user.model';
-import { Quote } from '../../quote/quote.model';
-import { Product } from '../../product/product.model';
-import { Project } from '../../project/project.model';
-import { ProjectService} from '../../project/project.service';
+// import { FormBuilder, FormGroup} from '@angular/forms';
+import { UserService} from '../../../user/user.service';
+//
+// import { DeleteDialog } from '../../../deleteDialog/deleteDialog.component';
+// import { User } from '../../user/user.model';
+// import { Quote } from '../../quote/quote.model';
+// import { Product } from '../../product/product.model';
+// import { Project } from '../../project/project.model';
+import { ProjectService} from '../../../project/project.service';
 
 import {CalendarComponent} from 'ap-angular2-fullcalendar';
 
-import { UserCalendarDialogComponent } from '../single/dialog/userCalendarDialog.component';
+// import { UserCalendarDialogComponent } from '../single/dialog/userCalendarDialog.component';
 
 // import * as $ from 'jquery';
 
 @Component({
   selector: 'app-userCalendarSearch',
   templateUrl: './searchCalendar.component.html',
-  styleUrls: ['../userCalendar.component.css'],
+  styleUrls: ['../../userCalendar.component.css'],
 })
 export class SearchCalendarComponent implements OnInit {
   @Output() getUserCalendarBySearch: EventEmitter<any> = new EventEmitter();
@@ -83,7 +83,7 @@ export class SearchCalendarComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private location: Location,
-    private _fb: FormBuilder,
+    // private _fb: FormBuilder,
     private projectService: ProjectService,
     // private authService: AuthService,
   ) { }
