@@ -7,21 +7,24 @@ import { User} from '../../user/user.model';
 import { CompanieGuardService} from '../../companie/companieGuard.service'
 import { PaiementGuardService} from '../../user/paiement/paiementGuard.service'
 import { ChangeDetectionStrategy} from '@angular/core';
+import {GlobalEventsManager} from '../../globalEventsManager';
 
 
 @Component({
   selector: 'app-sidebar',
-  changeDetection: ChangeDetectionStrategy.OnPush,
+  // changeDetection: ChangeDetectionStrategy.OnPush,
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
   @Input() sidenav: any;
+  showNavBar: boolean = false;
  // private userId: string = localStorage.getItem('userId');
   // private userId: string;
   fetchedUser: User = new User();
 
   constructor(
+    private globalEventsManager: GlobalEventsManager,
     private authService: AuthService,
     private adminService: AdminService,
     private userService: UserService,
@@ -29,6 +32,12 @@ export class SidebarComponent implements OnInit {
     // private companieGuardService: CompanieGuardService,
     // private paiementGuardService: PaiementGuardService,
   ) {
+    this.globalEventsManager.showNavBarEmitter.subscribe((mode)=>{
+        // mode will be null the first time it is created, so you need to igonore it when null
+        if (mode !== null) {
+          this.showNavBar = mode;
+        }
+    });
   }
   ngAfterViewInit() {
 

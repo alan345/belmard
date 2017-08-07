@@ -1,7 +1,6 @@
-
-        <h4>Search</h4>
-                <div>
-                  <!-- <div *ngIf="!search.typeUser.length">
+<h4>Search</h4>
+<div>
+  <!-- <div *ngIf="!search.typeUser.length">
                     <input class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="autocompleteTypeUser" placeholder="Select type User" (ngModelChange)="searchTypeUser()" mdInput>
                   </div>
                   <div class="form-control" *ngFor="let fetchedTypeUser of fetchedTypeUsers; let i=index">
@@ -20,12 +19,19 @@
                       </tr>
                     </table>
                   </div> -->
-                  <!-- <app-autocomplete [typeAutocomplete]="'typeUser'" [title]="''" [singleChoice]="'true'" [arrayContent]="[]" (getResultAutocomplete)="selectTypeUser($event[0])" (clearAutocomplete)="removeTypeUser()">
+  <!-- <app-autocomplete [typeAutocomplete]="'typeUser'" [title]="''" [singleChoice]="'true'" [arrayContent]="[]" (getResultAutocomplete)="selectTypeUser($event[0])" (clearAutocomplete)="removeTypeUser()">
                   </app-autocomplete> -->
+  <div class="row">
+    <div class="col-md-3">
 
-                  <app-autocomplete [typeAutocomplete]="'user'" [title]="''" [singleChoice]="'true'" [arrayContent]="searchData.fetchedUserSearchs" (getResultAutocomplete)="selectUserSearch()" (clearAutocomplete)="removeUserSearch()">
-                  </app-autocomplete>
-                  <app-autocomplete [typeAutocomplete]="'project'" [title]="''" [singleChoice]="'true'" [arrayContent]="searchData.fetchedProjectSearchs" (getResultAutocomplete)="selectProjectSearch()" (clearAutocomplete)="removeUserSearch()">
-                  </app-autocomplete>
-                </div>
-<br><br><br><br><br><br>
+      <app-autocomplete [typeAutocomplete]="'user'" [title]="''" [singleChoice]="'true'" [arrayContent]="searchData.fetchedUserSearchs" (getResultAutocomplete)="selectUserSearch()" (clearAutocomplete)="removeUserSearch()">
+      </app-autocomplete>
+    </div>
+    <div class="col-md-3">
+      <app-autocomplete [typeAutocomplete]="'project'" [title]="''" [singleChoice]="'true'" [arrayContent]="searchData.fetchedProjectSearchs" (getResultAutocomplete)="selectProjectSearch()" (clearAutocomplete)="removeUserSearch()">
+      </app-autocomplete>
+    </div>
+    <div class="col-md-3"></div>
+    <div class="col-md-3"></div>
+  </div>
+</div>

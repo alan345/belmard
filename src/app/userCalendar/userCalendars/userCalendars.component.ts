@@ -80,7 +80,7 @@ export class UserCalendarsComponent implements OnInit {
 
   calendarOptions: Object = {
     timezone:'local',
-    height: 500,
+    height: 550,
     selectable: true,
     firstDay: 1,
     minTime: "06:00:00",
@@ -88,6 +88,7 @@ export class UserCalendarsComponent implements OnInit {
     locale: 'fr',
     slotLabelFormat: "HH:mm",
     allDaySlot: false,
+    nowIndicator: true,
     businessHours: {
       // days of week. an array of zero-based day of week integers (0=Sunday)
       dow: [1, 2, 3, 4, 5], // Monday - Thursday
