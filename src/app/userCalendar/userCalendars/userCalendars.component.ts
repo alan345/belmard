@@ -78,6 +78,7 @@ export class UserCalendarsComponent implements OnInit {
 
 
   calendarOptions: Object = {
+    timezone:'local',
     height: '600px',
     selectable: true,
     firstDay: 1,
@@ -309,7 +310,7 @@ export class UserCalendarsComponent implements OnInit {
   }
   eventClick(event, jsEvent, view) {
     this.openDialog(event)
-    console.log(event)
+
     // console.log(event, jsEvent, view )
   }
   eventMouseover(event, jsEvent, view) {
@@ -321,6 +322,9 @@ export class UserCalendarsComponent implements OnInit {
     // console.log(event, jsEvent, view )
   }
   select(start, end, jsEvent, view) {
+    // console.log(start._d)
+    // console.log(new Date(start._d))
+    // console.log(new Date(start._d).toISOString())
     let newUserCalendar = new UserCalendar()
     newUserCalendar.start = start._d
     newUserCalendar.end = end._d

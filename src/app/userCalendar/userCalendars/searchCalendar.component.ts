@@ -97,7 +97,7 @@ export class SearchCalendarComponent implements OnInit {
   calendarInitialized() {
     this.activatedRoute.params.subscribe((params: Params) => {
       if(Object.keys(params).length === 0 && params.constructor === Object) {
-          this.getUserCalendarBySearch.emit(this.search)
+          this.getUserCalendarBySearch.emit(this.search, this.fetchedUserSearchs, this.fetchedProjectSearchs)
       } else {
         if (params['idUserSearch']) { this.getUserSearch(params['idUserSearch']) }
         if (params['idProjectSearch']) { this.getProjectSearch(params['idProjectSearch']) }
@@ -114,7 +114,7 @@ export class SearchCalendarComponent implements OnInit {
       res => {
         this.search.projectSearch = id
         this.fetchedProjectSearchs = [res]
-        this.getUserCalendarBySearch.emit(this.search)
+        this.getUserCalendarBySearch.emit(this.search, this.fetchedUserSearchs, this.fetchedProjectSearchs)
         // this.selectProjectSearch(res)
       },
       error => { console.log(error) }
@@ -127,7 +127,7 @@ export class SearchCalendarComponent implements OnInit {
       res => {
         this.search.userSearch = id
         this.fetchedUserSearchs = [res]
-        this.getUserCalendarBySearch.emit(this.search)
+        this.getUserCalendarBySearch.emit(this.search, this.fetchedUserSearchs, this.fetchedProjectSearchs)
       },
       error => { console.log(error) }
       )
@@ -137,14 +137,14 @@ export class SearchCalendarComponent implements OnInit {
     // this.fetchedUserSearchs = []
     this.search.userSearch = userSearch._id
     console.log(this.search)
-    this.getUserCalendarBySearch.emit(this.search)
+    this.getUserCalendarBySearch.emit(this.search, this.fetchedUserSearchs, this.fetchedProjectSearchs)
 
   }
 
 
   removeUserSearch() {
     this.search.userSearch = ''
-    this.getUserCalendarBySearch.emit(this.search)
+    this.getUserCalendarBySearch.emit(this.search, this.fetchedUserSearchs, this.fetchedProjectSearchs)
   }
   // autocolplete typeUser
   //  fetchedTypeUsers = []

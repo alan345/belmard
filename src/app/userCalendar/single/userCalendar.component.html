@@ -8,51 +8,57 @@
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
 
 
-        <div class="row">
-          <h4>Event</h4>
-          <!-- <div class="col-md-12">
+      <div class="row">
+
+        <div class="col-md-12">
+          {{'Start:' | translate}} {{fetchedUserCalendar.start | date:'yMMMdjms'  }}
+        </div>
+        <div class="col-md-12">
+          {{'End:' | translate}} {{fetchedUserCalendar.end | date:'yMMMdjms'}}
+        </div>
+        <!-- <div class="col-md-12">
             <button class="btn btn-primary pull-right" (click)="addEvent()">
             <i class="fa fa-calendar-plus-o" aria-hidden="true"></i>
           </button>
           </div> -->
-          <!-- <div *ngFor="let event of events; let index = index" [hidden]="!fetchedUserCalendar.isActiveEvent"> -->
-            <div class="col-md-12">
-              <div *ngFor="let user of fetchedUserCalendar.users">
-                <div class="round" [style.background-color]="user.profile.colorCalendar">
-                </div>
-              </div>
+        <!-- <div *ngFor="let event of events; let index = index" [hidden]="!fetchedUserCalendar.isActiveEvent"> -->
+        <div class="col-md-12">
+          <div *ngFor="let user of fetchedUserCalendar.users">
+            <div class="round" [style.background-color]="user.profile.colorCalendar">
             </div>
-            <div class="col-md-12">
-              <input type="text" class="form-control" formControlName="title" [(ngModel)]="fetchedUserCalendar.title" placeholder="Name">
-            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <input type="text" class="form-control" formControlName="title" [(ngModel)]="fetchedUserCalendar.title" placeholder="Name">
+        </div>
 
-            <div class="col-md-12">
-              <app-autocomplete [typeAutocomplete]="'user'" [title]="''" [singleChoice]="'true'" [arrayContent]="fetchedUserCalendar.users" (getResultAutocomplete)="selectUser($event[0])" (clearAutocomplete)="removeUser(i)">
-              </app-autocomplete>
-            </div>
-            <div class="col-md-12">
-              <app-autocomplete [typeAutocomplete]="'project'" [title]="''" [singleChoice]="'true'" [arrayContent]="fetchedUserCalendar.projects" (getResultAutocomplete)="selectProject($event[0])" (clearAutocomplete)="removeProject(i)">
-              </app-autocomplete>
-            </div>
-            <div class="col-md-12">
-              <textarea class="form-control" formControlName="description" [(ngModel)]="fetchedUserCalendar.details.description" required placeholder="Description">
+        <div class="col-md-12">
+          <app-autocomplete [typeAutocomplete]="'user'" [title]="''" [singleChoice]="'true'" [arrayContent]="fetchedUserCalendar.users" (getResultAutocomplete)="selectUser($event[0])" (clearAutocomplete)="removeUser(i)">
+          </app-autocomplete>
+        </div>
+        <div class="col-md-12">
+          <app-autocomplete [typeAutocomplete]="'project'" [title]="''" [singleChoice]="'true'" [arrayContent]="fetchedUserCalendar.projects" (getResultAutocomplete)="selectProject($event[0])" (clearAutocomplete)="removeProject(i)">
+          </app-autocomplete>
+        </div>
+        <div class="col-md-12">
+          <textarea class="form-control" formControlName="description" [(ngModel)]="fetchedUserCalendar.details.description" required placeholder="Description">
               </textarea>
-            </div>
-            <!-- <div class="col-md-12">
+        </div>
+        <!-- <div class="col-md-12">
               <mwl-demo-utils-date-time-picker [(date)]="fetchedUserCalendar.start" (dateChange)="refresh.next()" placeholder="Not set">
               </mwl-demo-utils-date-time-picker>
             </div> -->
-            <!-- <div class="col-md-12">
+        <!-- <div class="col-md-12">
               <mwl-demo-utils-date-time-picker [(date)]="fetchedUserCalendar.end" (dateChange)="refresh.next()" placeholder="Not set">
               </mwl-demo-utils-date-time-picker>
             </div> -->
-            <!-- <div class="col-md-12">
+        <!-- <div class="col-md-12">
               <button class="btn btn-danger" (click)="deleteEvent(event, index)">Delete</button>
               <button class="btn btn-succes" (click)="save()">Update</button>
             </div> -->
-          <!-- </div> -->
+        <!-- </div> -->
 
-        </div>
+      </div>
 
 
       <div class="valid-edit">
