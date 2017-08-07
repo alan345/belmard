@@ -23,9 +23,9 @@
                   <!-- <app-autocomplete [typeAutocomplete]="'typeUser'" [title]="''" [singleChoice]="'true'" [arrayContent]="[]" (getResultAutocomplete)="selectTypeUser($event[0])" (clearAutocomplete)="removeTypeUser()">
                   </app-autocomplete> -->
 
-                  <app-autocomplete [typeAutocomplete]="'user'" [title]="''" [singleChoice]="'true'" [arrayContent]="fetchedUserSearchs" (getResultAutocomplete)="selectUserSearch($event[0])" (clearAutocomplete)="removeUserSearch()">
+                  <app-autocomplete [typeAutocomplete]="'user'" [title]="''" [singleChoice]="'true'" [arrayContent]="searchData.fetchedUserSearchs" (getResultAutocomplete)="selectUserSearch()" (clearAutocomplete)="removeUserSearch()">
                   </app-autocomplete>
-                  <app-autocomplete [typeAutocomplete]="'project'" [title]="''" [singleChoice]="'true'" [arrayContent]="fetchedProjectSearchs" (getResultAutocomplete)="selectUserSearch($event[0])" (clearAutocomplete)="removeUserSearch()">
+                  <app-autocomplete [typeAutocomplete]="'project'" [title]="''" [singleChoice]="'true'" [arrayContent]="searchData.fetchedProjectSearchs" (getResultAutocomplete)="selectProjectSearch()" (clearAutocomplete)="removeUserSearch()">
                   </app-autocomplete>
                 </div>
 <br><br><br><br><br><br>

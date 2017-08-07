@@ -24,6 +24,12 @@ export class UserCalendar {
     // quotes: Quote[] = [];
 }
 
+
+export class SearchData {
+  fetchedUserSearchs: User[] = [];
+  fetchedProjectSearchs: Project[] = [];
+}
+
 export class Details {
   description: string = '';
 }

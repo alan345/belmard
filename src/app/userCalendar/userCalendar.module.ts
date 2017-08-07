@@ -7,7 +7,7 @@ import { UserCalendarDialogComponent } from './single/dialog/userCalendarDialog.
 // import { ProjectModule} from '../project/project.module';
 
 import { UserCalendarsComponent} from './userCalendars/userCalendars.component';
-import { SearchCalendarComponent} from './userCalendars/searchCalendar.component';
+import { SearchCalendarComponent} from './userCalendars/search/searchCalendar.component';
 
 
 import { UserCalendarComponent} from './single/userCalendar.component';

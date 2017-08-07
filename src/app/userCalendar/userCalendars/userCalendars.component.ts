@@ -21,7 +21,7 @@ import { Project } from '../../project/project.model';
 import {CalendarComponent} from 'ap-angular2-fullcalendar';
 
 import { UserCalendarDialogComponent } from '../single/dialog/userCalendarDialog.component';
-import { SearchCalendarComponent } from './searchCalendar.component';
+import { SearchCalendarComponent } from './search/searchCalendar.component';
 
 // import * as $ from 'jquery';
 
@@ -218,14 +218,20 @@ export class UserCalendarsComponent implements OnInit {
 //     )
 // }
 
-  getUserCalendarBySearch(search) {
-    console.log(search)
+  getUserCalendarBySearch(searchData) {
     this.isSearchInitReady = true
+    this.search.userSearch = ''
+    this.search.projectSearch = ''
 
-
-    this.search.typeUser = search.typeUser
-    this.search.userSearch = search.userSearch
-    this.search.projectSearch = search.projectSearch
+    searchData.fetchedUserSearchs.forEach(fetchedUserSearch => {
+        this.search.userSearch = fetchedUserSearch._id
+    });
+    searchData.fetchedProjectSearchs.forEach(fetchedProjectSearch => {
+        this.search.projectSearch = fetchedProjectSearch._id
+    });
+    // this.search.typeUser = searchData.search.typeUser
+    // this.search.userSearch = searchData.search.userSearch
+    // this.search.projectSearch = searchData.search.projectSearch
 
     this.getUserCalendars(1, this.search)
   }
@@ -326,6 +332,8 @@ export class UserCalendarsComponent implements OnInit {
     // console.log(new Date(start._d))
     // console.log(new Date(start._d).toISOString())
     let newUserCalendar = new UserCalendar()
+
+
     newUserCalendar.start = start._d
     newUserCalendar.end = end._d
     this.openDialog(newUserCalendar)

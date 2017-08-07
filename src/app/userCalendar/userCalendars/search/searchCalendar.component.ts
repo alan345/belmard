@@ -2,7 +2,7 @@ import {Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, I
 import {AuthService} from '../../auth/auth.service';
 import {UserCalendarService} from '../userCalendar.service';
 
-import {UserCalendar} from '../userCalendar.model';
+import {UserCalendar, SearchData} from '../userCalendar.model';
 import {ToastsManager} from 'ng2-toastr';
 
 import {MdDialog } from '@angular/material';
@@ -53,14 +53,14 @@ export class SearchCalendarComponent implements OnInit {
   // userClients : User[] = []
   // usersSalesRep : User[] = []
   // userStylists : User[] = []
-  search = {
-    typeUser: [],
-    // clientSearch: '',
-    userSearch: '',
-    projectSearch: '',
-    // endDate: new Date(),
-    // startDate: new Date(),
-  }
+  // search = {
+  //   typeUser: [],
+  //   // clientSearch: '',
+  //   userSearch: '',
+  //   projectSearch: '',
+  //   // endDate: new Date(),
+  //   // startDate: new Date(),
+  // }
   // events: UserCalendar[] = []
   // events: UserCalendar[] = []
   // myForm: FormGroup;
@@ -70,10 +70,9 @@ export class SearchCalendarComponent implements OnInit {
   //
   //
   //
-  fetchedUserSearchs: User[] = [];
-  fetchedProjectSearchs: Project[] = [];
-
-
+  // fetchedUserSearchs: User[] = [];
+  // fetchedProjectSearchs: Project[] = [];
+  searchData: SearchData = new SearchData()
 
 
   constructor(
@@ -97,7 +96,8 @@ export class SearchCalendarComponent implements OnInit {
   calendarInitialized() {
     this.activatedRoute.params.subscribe((params: Params) => {
       if(Object.keys(params).length === 0 && params.constructor === Object) {
-          this.getUserCalendarBySearch.emit(this.search, this.fetchedUserSearchs, this.fetchedProjectSearchs)
+        // let searchData = { fetchedUserSearchs: this.fetchedUserSearchs, fetchedProjectSearchs: this.fetchedProjectSearchs}
+        this.getUserCalendarBySearch.emit(this.searchData)
       } else {
         if (params['idUserSearch']) { this.getUserSearch(params['idUserSearch']) }
         if (params['idProjectSearch']) { this.getProjectSearch(params['idProjectSearch']) }
@@ -112,9 +112,10 @@ export class SearchCalendarComponent implements OnInit {
     this.projectService.getProject(id)
       .subscribe(
       res => {
-        this.search.projectSearch = id
-        this.fetchedProjectSearchs = [res]
-        this.getUserCalendarBySearch.emit(this.search, this.fetchedUserSearchs, this.fetchedProjectSearchs)
+        // this.search.projectSearch = id
+        this.searchData.fetchedProjectSearchs = [res]
+        // let searchData = { fetchedUserSearchs: this.fetchedUserSearchs, fetchedProjectSearchs: this.fetchedProjectSearchs}
+        this.getUserCalendarBySearch.emit(this.searchData)
         // this.selectProjectSearch(res)
       },
       error => { console.log(error) }
@@ -125,26 +126,35 @@ export class SearchCalendarComponent implements OnInit {
     this.userService.getUser(id)
       .subscribe(
       res => {
-        this.search.userSearch = id
-        this.fetchedUserSearchs = [res]
-        this.getUserCalendarBySearch.emit(this.search, this.fetchedUserSearchs, this.fetchedProjectSearchs)
+        // this.search.userSearch = id
+        this.searchData.fetchedUserSearchs = [res]
+        // let searchData = { fetchedUserSearchs: this.fetchedUserSearchs, fetchedProjectSearchs: this.fetchedProjectSearchs}
+        this.getUserCalendarBySearch.emit(this.searchData)
       },
       error => { console.log(error) }
       )
   }
-  selectUserSearch(userSearch: User) {
+  // selectUserSearch(userSearch: User) {
+  selectUserSearch() {
     // this.autocompleteUserSearch = '';
     // this.fetchedUserSearchs = []
-    this.search.userSearch = userSearch._id
-    console.log(this.search)
-    this.getUserCalendarBySearch.emit(this.search, this.fetchedUserSearchs, this.fetchedProjectSearchs)
+    // this.search.userSearch = userSearch._id
+    // console.log(this.search)
+    // let searchData = { fetchedUserSearchs: this.fetchedUserSearchs, fetchedProjectSearchs: this.fetchedProjectSearchs}
+    this.getUserCalendarBySearch.emit(this.searchData)
+
+  }
+  selectProjectSearch() {
+    // let searchData = { fetchedUserSearchs: this.fetchedUserSearchs, fetchedProjectSearchs: this.fetchedProjectSearchs}
+    this.getUserCalendarBySearch.emit(this.searchData)
 
   }
 
 
   removeUserSearch() {
-    this.search.userSearch = ''
-    this.getUserCalendarBySearch.emit(this.search, this.fetchedUserSearchs, this.fetchedProjectSearchs)
+    // this.search.userSearch = ''
+    // let searchData = { fetchedUserSearchs: this.fetchedUserSearchs, fetchedProjectSearchs: this.fetchedProjectSearchs}
+    this.getUserCalendarBySearch.emit(this.searchData)
   }
   // autocolplete typeUser
   //  fetchedTypeUsers = []
