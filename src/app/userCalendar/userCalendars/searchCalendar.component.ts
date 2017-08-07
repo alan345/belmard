@@ -16,7 +16,7 @@ import { User } from '../../user/user.model';
 import { Quote } from '../../quote/quote.model';
 import { Product } from '../../product/product.model';
 import { Project } from '../../project/project.model';
-
+import { ProjectService} from '../../project/project.service';
 
 import {CalendarComponent} from 'ap-angular2-fullcalendar';
 
@@ -30,6 +30,8 @@ import { UserCalendarDialogComponent } from '../single/dialog/userCalendarDialog
   styleUrls: ['../userCalendar.component.css'],
 })
 export class SearchCalendarComponent implements OnInit {
+  @Output() getUserCalendarBySearch: EventEmitter<any> = new EventEmitter();
+
   // @Output() newUserCalendarSaved: EventEmitter<any> = new EventEmitter();
   // @Input() showHeader = true;
   // @Input() fetchedQuote: Quote = new Quote()
@@ -51,14 +53,14 @@ export class SearchCalendarComponent implements OnInit {
   // userClients : User[] = []
   // usersSalesRep : User[] = []
   // userStylists : User[] = []
-  // search = {
-  //   typeUser: [],
-  //   clientSearch: '',
-  //   userSearch: '',
-  //   projectSearch: '',
-  //   endDate: new Date(),
-  //   startDate: new Date(),
-  // }
+  search = {
+    typeUser: [],
+    // clientSearch: '',
+    userSearch: '',
+    projectSearch: '',
+    // endDate: new Date(),
+    // startDate: new Date(),
+  }
   // events: UserCalendar[] = []
   // events: UserCalendar[] = []
   // myForm: FormGroup;
@@ -68,7 +70,8 @@ export class SearchCalendarComponent implements OnInit {
   //
   //
   //
-  // fetchedUserSearchs: User[] = [];
+  fetchedUserSearchs: User[] = [];
+  fetchedProjectSearchs: Project[] = [];
 
 
 
@@ -82,37 +85,90 @@ export class SearchCalendarComponent implements OnInit {
     private router: Router,
     private location: Location,
     private _fb: FormBuilder,
+    private projectService: ProjectService,
     // private authService: AuthService,
   ) { }
-  onCalendarInit() {
-    // this.getUserCalendarsInit()
-    // console.log('Calendar initialized');
+
+  ngOnInit(){}
+
+  ngAfterViewInit() {
+
+  }
+  calendarInitialized() {
+    this.activatedRoute.params.subscribe((params: Params) => {
+      if(Object.keys(params).length === 0 && params.constructor === Object) {
+          this.getUserCalendarBySearch.emit(this.search)
+      } else {
+        if (params['idUserSearch']) { this.getUserSearch(params['idUserSearch']) }
+        if (params['idProjectSearch']) { this.getProjectSearch(params['idProjectSearch']) }
+      }
+
+
+      // if(params['typeUserSearch']) {this.selectTypeUser(params['typeUserSearch'])}
+    })
   }
 
-  getUserCalendarsInit() {
-    // this.getUserCalendars(1, this.search)
-  }
-  ngOnInit() {
-  //   this.activatedRoute.params.subscribe((params: Params) => {
-  //     // if(params['idUserSearch']) {this.getUserSearch(params['idUserSearch'])}
-  //   // if(params['idProjectSearch']) {this.getProjectSearch(params['idProjectSearch'])}
-  //   // if(params['idClientSearch']) {this.getClientSearch(params['idClientSearch'])}
-  //   // if(params['typeUserSearch']) {this.selectTypeUser(params['typeUserSearch'])}
-  // })
+  getProjectSearch(id: string) {
+    this.projectService.getProject(id)
+      .subscribe(
+      res => {
+        this.search.projectSearch = id
+        this.fetchedProjectSearchs = [res]
+        this.getUserCalendarBySearch.emit(this.search)
+        // this.selectProjectSearch(res)
+      },
+      error => { console.log(error) }
+      )
   }
 
   getUserSearch(id: string) {
-  // this.userService.getUser(id)
-  //   .subscribe(
-  //     res => {
-  //       this.fetchedUserSearchs = [res]
-  //     },
-  //     error => { console.log(error) }
-  //   )
-}
+    this.userService.getUser(id)
+      .subscribe(
+      res => {
+        this.search.userSearch = id
+        this.fetchedUserSearchs = [res]
+        this.getUserCalendarBySearch.emit(this.search)
+      },
+      error => { console.log(error) }
+      )
+  }
+  selectUserSearch(userSearch: User) {
+    // this.autocompleteUserSearch = '';
+    // this.fetchedUserSearchs = []
+    this.search.userSearch = userSearch._id
+    console.log(this.search)
+    this.getUserCalendarBySearch.emit(this.search)
+
+  }
 
 
-
+  removeUserSearch() {
+    this.search.userSearch = ''
+    this.getUserCalendarBySearch.emit(this.search)
+  }
+  // autocolplete typeUser
+  //  fetchedTypeUsers = []
+  //  autocompleteTypeUser: string = '';
+  //  searchTypeUser() {
+  //    if(!this.autocompleteTypeUser) {
+  //      this.fetchedTypeUsers = []
+  //    } else {
+  //      this.fetchedTypeUsers = this.typeUser.filter((el) =>
+  //        el.toLowerCase().indexOf(this.autocompleteTypeUser.toLowerCase()) > -1
+  //      );
+  //    }
+  //  }
+  //  selectTypeUser(typeUser) {
+  //    this.autocompleteTypeUser = '';
+  //    this.fetchedTypeUsers = [];
+  //    this.search.typeUser.push(typeUser);
+  //    this.fetchEvents();
+  //  }
+  //  removeTypeUser(i: number) {
+  //    this.search.typeUser.splice(i, 1);
+  //    this.fetchEvents();
+  //  }
+  // autocolplete typeUser
 
 
 }

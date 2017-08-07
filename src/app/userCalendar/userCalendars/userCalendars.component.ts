@@ -21,6 +21,7 @@ import { Project } from '../../project/project.model';
 import {CalendarComponent} from 'ap-angular2-fullcalendar';
 
 import { UserCalendarDialogComponent } from '../single/dialog/userCalendarDialog.component';
+import { SearchCalendarComponent } from './searchCalendar.component';
 
 // import * as $ from 'jquery';
 
@@ -36,9 +37,10 @@ export class UserCalendarsComponent implements OnInit {
 
   // @ViewChild('myCal', { read: ElementRef }) myCal: ElementRef;
   @ViewChild(CalendarComponent) myCalendar: CalendarComponent;
+  @ViewChild(SearchCalendarComponent) private searchCalendarComponent: SearchCalendarComponent;
 
 
-  showPaiements: boolean = false
+  isSearchInitReady: boolean = false
   fetchedUserCalendar: UserCalendar = new UserCalendar()
   autocompleteUser: string = '';
   autocompleteProject: string = '';
@@ -54,7 +56,7 @@ export class UserCalendarsComponent implements OnInit {
   // userStylists : User[] = []
   search = {
     typeUser: [],
-    clientSearch: '',
+    // clientSearch: '',
     userSearch: '',
     projectSearch: '',
     endDate: new Date(),
@@ -187,6 +189,8 @@ export class UserCalendarsComponent implements OnInit {
     private authService: AuthService,
   ) { }
   onCalendarInit() {
+    this.searchCalendarComponent.calendarInitialized()
+
     // this.getUserCalendarsInit()
     // console.log('Calendar initialized');
   }
@@ -195,23 +199,35 @@ export class UserCalendarsComponent implements OnInit {
     // this.getUserCalendars(1, this.search)
   }
   ngOnInit() {
-    this.activatedRoute.params.subscribe((params: Params) => {
-      if(params['idUserSearch']) {this.getUserSearch(params['idUserSearch'])}
-    // if(params['idProjectSearch']) {this.getProjectSearch(params['idProjectSearch'])}
-    // if(params['idClientSearch']) {this.getClientSearch(params['idClientSearch'])}
-    // if(params['typeUserSearch']) {this.selectTypeUser(params['typeUserSearch'])}
-  })
+  //   this.activatedRoute.params.subscribe((params: Params) => {
+  //     // if(params['idUserSearch']) {this.getUserSearch(params['idUserSearch'])}
+  //   // if(params['idProjectSearch']) {this.getProjectSearch(params['idProjectSearch'])}
+  //   // if(params['idClientSearch']) {this.getClientSearch(params['idClientSearch'])}
+  //   // if(params['typeUserSearch']) {this.selectTypeUser(params['typeUserSearch'])}
+  // })
   }
 
-  getUserSearch(id: string) {
-  this.userService.getUser(id)
-    .subscribe(
-      res => {
-        this.fetchedUserSearchs = [res]
-      },
-      error => { console.log(error) }
-    )
-}
+//   getUserSearch(id: string) {
+//   this.userService.getUser(id)
+//     .subscribe(
+//       res => {
+//         this.fetchedUserSearchs = [res]
+//       },
+//       error => { console.log(error) }
+//     )
+// }
+
+  getUserCalendarBySearch(search) {
+    console.log(search)
+    this.isSearchInitReady = true
+
+
+    this.search.typeUser = search.typeUser
+    this.search.userSearch = search.userSearch
+    this.search.projectSearch = search.projectSearch
+
+    this.getUserCalendars(1, this.search)
+  }
 
 
   getUserCalendars(page: number, search: any) {
@@ -335,8 +351,9 @@ export class UserCalendarsComponent implements OnInit {
   viewRender(view, element) {
     this.search.startDate = view.activeRange.start
     this.search.endDate = view.activeRange.end
-    this.getUserCalendars(1, this.search)
-    console.log(view)
+    if(this.isSearchInitReady)
+      this.getUserCalendars(1, this.search)
+    // console.log(view)
   }
   eventResizeStart(event, jsEvent, view) {
     // console.log('unselect')

@@ -16,9 +16,8 @@ import { ProjectDialogComponent } from '../project/projectSingle/dialog/projectD
 import {Router} from '@angular/router';
 
 
-
 import { User } from '../user/user.model';
-import { Quote } from '../quote/quote.model';
+// import { Quote } from '../quote/quote.model';
 
 
 @Component({
