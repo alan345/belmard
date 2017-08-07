@@ -3,11 +3,11 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MaterialModule } from '@angular/material';
 import { Ng2PaginationModule} from 'ng2-pagination';
-import { ProjectDialogComponent } from './projectSingle/dialog/projectDialog.component';
+import { ProjectDialogComponent } from './single/dialog/projectDialog.component';
 
 // import { ProjectTasksComponent} from './task/singleTask/projectTasks.component';
 import { ProjectsComponent} from './projects/projects.component';
-import { ProjectSingleComponent} from './projectSingle/projectSingle.component';
+import { ProjectSingleComponent} from './single/projectSingle.component';
 import { ProjectService} from './project.service';
 import { ProjectRouting} from './projectRouting.module';
 
