@@ -72,7 +72,7 @@ export class UserCalendarsComponent implements OnInit {
     { label: 'Espece', value: 'cash' }
   ]
 
-
+  fetchedUserSearchs: User[] = [];
 
 
   calendarOptions: Object = {
@@ -176,6 +176,7 @@ export class UserCalendarsComponent implements OnInit {
 
 
   constructor(
+    private userService: UserService,
     private userCalendarService: UserCalendarService,
     private toastr: ToastsManager,
     public dialog: MdDialog,
@@ -194,8 +195,24 @@ export class UserCalendarsComponent implements OnInit {
     // this.getUserCalendars(1, this.search)
   }
   ngOnInit() {
-
+    this.activatedRoute.params.subscribe((params: Params) => {
+      if(params['idUserSearch']) {this.getUserSearch(params['idUserSearch'])}
+    // if(params['idProjectSearch']) {this.getProjectSearch(params['idProjectSearch'])}
+    // if(params['idClientSearch']) {this.getClientSearch(params['idClientSearch'])}
+    // if(params['typeUserSearch']) {this.selectTypeUser(params['typeUserSearch'])}
+  })
   }
+
+  getUserSearch(id: string) {
+  this.userService.getUser(id)
+    .subscribe(
+      res => {
+        this.fetchedUserSearchs = [res]
+      },
+      error => { console.log(error) }
+    )
+}
+
 
   getUserCalendars(page: number, search: any) {
     this.userCalendarService.getUserCalendars(page, search)

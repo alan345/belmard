@@ -7,6 +7,9 @@ import { UserCalendarDialogComponent } from './single/dialog/userCalendarDialog.
 // import { ProjectModule} from '../project/project.module';
 
 import { UserCalendarsComponent} from './userCalendars/userCalendars.component';
+import { SearchCalendarComponent} from './userCalendars/searchCalendar.component';
+
+
 import { UserCalendarComponent} from './single/userCalendar.component';
 
 
@@ -46,12 +49,14 @@ import {CalendarModule} from 'ap-angular2-fullcalendar';
     UserCalendarsComponent,
     UserCalendarComponent,
     UserCalendarDialogComponent,
+    SearchCalendarComponent,
 
     // AutocompleteComponent
   ],
   exports:      [
     UserCalendarsComponent,
     UserCalendarComponent,
+    SearchCalendarComponent,
     // AutocompleteComponent,
   ],
   providers:    [ UserCalendarService ],
