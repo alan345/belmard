@@ -54,8 +54,21 @@
     </div>
 
     <div *ngIf="isMyCompanie()">
+      <h4>type Users</h4>
+
+      <div (click)="seeTypeUser=!seeTypeUser">See Categs Project</div>
+        <div *ngIf="seeTypeUser">
+        <!-- {{fetchedCompanie.typeUsers|json}} -->
+        <button type="button" (click)="addTypeUser()">addTypeUser</button>
+        <div *ngFor="let typeUser of fetchedCompanie.typeUsers; let i=index;">
+          <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.typeUsers[i].value">
+          <button type="button" (click)="removeTypeUser(i)">X</button>
+        </div>
+      </div>
+
+
       <h4>Categories</h4>
-      <div (click)="openSection('seeCategProject')">See Categs Project</div>
+      <div (click)="seeCategProject=!seeCategProject">See Categs Project</div>
       <div *ngIf="seeCategProject">
         <button type="button" (click)="addCateg('project', 0, 0, 0, 0)">Add Categ Project</button>
         <div class="categ0" *ngFor="let categorie0 of fetchedCompanie.categories.categProject; let i = index;">
@@ -76,7 +89,7 @@
       </div>
 
 
-      <div (click)="openSection('seeCategProduct')">See Categs Products</div>
+      <div (click)="seeCategProduct=!seeCategProduct">See Categs Products</div>
       <div *ngIf="seeCategProduct">
         <button type="button" (click)="addCateg('categProduct', 0, 0, 0, 0)">Add Categ Project</button>
         <div class="categ0" *ngFor="let categorie0 of fetchedCompanie.categories.categProduct; let i = index;">

@@ -101,7 +101,9 @@ export class EditCompanieComponent implements OnInit {
       }
     })
   }
-
+  addTypeUser() {
+    this.fetchedCompanie.typeUsers.push({value: ''})
+  }
   getStripeAccountDetails() {
     this.paiementService.getStripeCust()
       .subscribe(
@@ -137,9 +139,9 @@ export class EditCompanieComponent implements OnInit {
   //     }
   // }
 
-  openSection(nameSection){
-    this[nameSection] = !this[nameSection]
-  }
+  // openSection(nameSection) {
+  //   this[nameSection] = !this[nameSection]
+  // }
   // removeRight(level, index1, index2, index3) {
   //     if(level === 0)
   //       this.fetchedCompanie.rights.splice(level, 1)
@@ -164,6 +166,9 @@ export class EditCompanieComponent implements OnInit {
       if(level === 2)
         this.fetchedCompanie.categories[typeCateg][index1].subCateg[index2].subCateg.unshift(newCategorie)
 
+  }
+  removeTypeUser(i) {
+    this.fetchedCompanie.typeUsers.splice(i, 1)
   }
 
   removeCateg(typeCateg, level, index1, index2, index3) {

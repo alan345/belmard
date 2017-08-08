@@ -72,6 +72,8 @@ export class SearchCalendarComponent implements OnInit {
   //
   // fetchedUserSearchs: User[] = [];
   // fetchedProjectSearchs: Project[] = [];
+  typeUsers = ['plombier','electricien']
+
   searchData: SearchData = new SearchData()
 
 
@@ -147,9 +149,10 @@ export class SearchCalendarComponent implements OnInit {
   selectProjectSearch() {
     // let searchData = { fetchedUserSearchs: this.fetchedUserSearchs, fetchedProjectSearchs: this.fetchedProjectSearchs}
     this.getUserCalendarBySearch.emit(this.searchData)
-
   }
-
+  TypeUsers() {
+    this.getUserCalendarBySearch.emit(this.searchData)
+  }
 
   removeUserSearch() {
     // this.search.userSearch = ''

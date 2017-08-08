@@ -28,6 +28,7 @@ export class UserCalendar {
 export class SearchData {
   fetchedUserSearchs: User[] = [];
   fetchedProjectSearchs: Project[] = [];
+  typeUser = ''
 }
 
 export class Details {

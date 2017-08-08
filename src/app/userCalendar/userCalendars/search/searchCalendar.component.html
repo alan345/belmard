@@ -31,7 +31,16 @@
       <app-autocomplete [typeAutocomplete]="'project'" [title]="''" [singleChoice]="'true'" [arrayContent]="searchData.fetchedProjectSearchs" (getResultAutocomplete)="selectProjectSearch()" (clearAutocomplete)="removeUserSearch()">
       </app-autocomplete>
     </div>
-    <div class="col-md-3"></div>
+    <div class="col-md-3">
+      <md-select (change)="change=TypeUsers()" placeholder="typeUser" [(ngModel)]="searchData.typeUser" name="typeUsers">
+        <md-option [value]="''">
+
+        </md-option>
+        <md-option *ngFor="let typeUser of typeUsers" [value]="typeUser">
+          {{typeUser}}
+        </md-option>
+      </md-select>
+    </div>
     <div class="col-md-3"></div>
   </div>
 </div>

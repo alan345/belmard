@@ -56,7 +56,7 @@ export class UserCalendarsComponent implements OnInit {
   // userStylists : User[] = []
   searchData: SearchData = new SearchData()
   search = {
-    typeUser: [],
+    typeUser: '',
     // clientSearch: '',
     userSearch: '',
     projectSearch: '',
@@ -220,13 +220,13 @@ export class UserCalendarsComponent implements OnInit {
 //     )
 // }
 
-  getUserCalendarBySearch(searchData) {
+  getUserCalendarBySearch(searchData: SearchData) {
     this.searchData = searchData
     this.isSearchInitReady = true
-
     this.resetSearchGetUserCalendars()
   }
   resetSearchGetUserCalendars() {
+    this.search.typeUser = this.searchData.typeUser
     this.search.userSearch = ''
     this.search.projectSearch = ''
     this.searchData.fetchedUserSearchs.forEach(fetchedUserSearch => {

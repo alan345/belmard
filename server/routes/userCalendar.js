@@ -143,7 +143,8 @@ router.get('/page/:page', function(req, res, next) {
   }
   searchQuery['ownerCompanies'] = req.user.ownerCompanies
 
-
+  // if (req.query.typeUser)
+  //   searchQuery['users.type'] = req.query.typeUser
 
   if (req.query.userSearch)
     searchQuery['users'] = mongoose.Types.ObjectId(req.query.userSearch)
@@ -164,6 +165,7 @@ router.get('/page/:page', function(req, res, next) {
   .sort('-createdAt')
   .populate({path: 'clients', model: 'User'})
   .populate({path: 'users', model: 'User'})
+  // .where('users.type').in(req.query.userSearch)
   .populate({path: 'projects', model: 'Project'})
   .limit(itemsPerPage).skip(skip)
   .exec(function(err, item) {
@@ -173,11 +175,18 @@ router.get('/page/:page', function(req, res, next) {
       UserCalendar.find(searchQuery).count().exec(function(err, count) {
 
         if (req.query.typeUser) {
+          // let itsmObj = JSON.parse(JSON.stringify(item))
+          // console.log(item[0])
+          // item.forEach(vara=> {
+          //   console.log(vara)
+          // })
+          // console.log(item.filter(singleItem => singleItem.type ))
           var itemFiltered = []
           item.forEach(event => {
-            event.clients.forEach(client => {
-              if (client.type.length) {
-                if (client.type[0] === req.query.typeUser) {
+            event.users.forEach(user => {
+              console.log(user)
+              if (user.type.length) {
+                if (user.type[0] === req.query.typeUser) {
                   itemFiltered.push(event)
                 }
               }

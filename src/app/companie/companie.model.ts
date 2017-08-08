@@ -10,11 +10,15 @@ export class Companie {
   option: Option = new Option();
   users: User[] = [];
   forms: Form[] = [];
-  categJson: CategJson = new CategJson();
+  // categJson: CategJson = new CategJson();
   categories = new Categorie()
+  typeUsers: TypeUsers[] = []
   planDetail = new PlanDetail()
   rights: Rigth[] = [];
   banck: Banck = new Banck()
+}
+export class TypeUsers {
+  value: string = '';
 }
 
 export class Banck {
@@ -68,10 +72,10 @@ export class Categorie2 {
 
 }
 
-export class CategJson {
-  categProduct: string= '';
-  categProject: string= '';
-}
+// export class CategJson {
+//   categProduct: string= '';
+//   categProject: string= '';
+// }
 export class Option {
   calendar: Calendar = new Calendar();
 }

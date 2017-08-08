@@ -36,10 +36,11 @@ var companie = new Schema({
     typeCompanie: {type: String, default: ['salon']},
     //users : [{type: Schema.Types.ObjectId, ref: 'User'}],
     forms: [{type: Schema.Types.ObjectId, ref: 'Form'}],
-    categJson: {
-      categProduct:{type: String, default: ['']},
-      categProject:{type: String, default: ['']}
-    },
+    // categJson: {
+    //   categProduct:{type: String, default: ['']},
+    //   categProject:{type: String, default: ['']}
+    // },
+    typeUsers:[{value:{type: String}}],
     categories: {
       categProduct:[{
         categ: {type: String, default: ['']},
