@@ -47,7 +47,7 @@
           <tbody class="">
             <tr *ngFor="let notification of fetchedNotifications | paginate: { id: 'server', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }" [routerLink]="['/notification/' + notification._id]" routerLinkActive="active">
 
-              <td class="centre">{{notification.detailNotification.nameNotification}}</td>
+              <td class="centre">{{notification._id}}</td>
 
 
               <!-- <td class="centre">{{notification.details.referenceName}}</td>

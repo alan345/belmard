@@ -5,16 +5,14 @@ var mongoose                = require('mongoose'),
 var notification = new Schema({
   //  _id: String,
     ownerCompanies: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
+    projects: [{type: Schema.Types.ObjectId, ref: 'Project'}],
+    quotes: [{type: Schema.Types.ObjectId, ref: 'Quote'}],
+    tasks: [{type: Schema.Types.ObjectId, ref: 'Task'}],
+    userCalendars: [{type: Schema.Types.ObjectId, ref: 'UserCalendar'}],
+    users : [{type: Schema.Types.ObjectId, ref: 'User'}],
+    isRead: {type: Boolean, default: [false]},
+    nameNotification: {type: String, default: ['']},
 
-    detailNotification: {
-        nameNotification: {type: String, default: ['']},
-        permissions:[{
-          namePermission: {type: String, default: ['']},
-          access:[{
-              typeAccess: {type: String, default: ['']},
-            }]
-          }]
-      }
 
   },
   {

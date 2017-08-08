@@ -5,7 +5,7 @@ import {UserService} from '../../user/user.service';
 
 
 
-import {Notification, Permission, Access} from '../notification.model';
+import {Notification} from '../notification.model';
 
 import {ToastsManager} from 'ng2-toastr';
 
@@ -66,107 +66,16 @@ export class NotificationComponent implements OnInit {
 
   ngOnInit() {
     this.myForm = this._fb.group({
-      name: ['', [Validators.required, Validators.minLength(2)]],
-      phoneNumber: ['', [Validators.required, Validators.minLength(2)]],
-      categJson: this._fb.group({
-        categProduct: [''],
-        categProject: ['']
-      }),
-      option: this._fb.group({
-        calendar: this._fb.group({
-          timeBegin: ['', [Validators.required, Validators.minLength(1)]],
-          timeEnd: ['', [Validators.required, Validators.minLength(1)]],
-        }),
-      }),
-      address: this._fb.group({
-        address: [''],
-        city: [''],
-        state: [''],
-        zip: [''],
-      }),
-      _users: this._fb.array([])
+      nameNotification: ['', [Validators.minLength(1)]],
+
     })
 
-    this.getCurrentUser()
     this.activatedRoute.params.subscribe((params: Params) => {
       if(params['id']) {
-        if(params['id'] === 'mine') {
-          this.getNotification('')
-        } else {
-          this.getNotification(params['id'])
-        }
+        this.getNotification(params['id'])
       }
     })
   }
-  setAllNotifications(){
-    this.fetchedNotification.detailNotification.permissions = []
-    this.typesNotifications.forEach(typesNotification => {
-      let newPermission = new Permission()
-      let newAccess1 = new Access()
-      newAccess1.typeAccess = 'read'
-      let newAccess2 = new Access()
-      newAccess2.typeAccess = 'write'
-      newPermission.namePermission = typesNotification.value
-      newPermission.access.push(newAccess1)
-      newPermission.access.push(newAccess2)
-      this.fetchedNotification.detailNotification.permissions.push(newPermission)
-    })
-  }
-  removeNotification(level, index1, index2, index3) {
-    console.log(level)
-      if(level === 2)
-        this.fetchedNotification.detailNotification.permissions.splice(index2, 1)
-      if(level === 3)
-        this.fetchedNotification.detailNotification.permissions[index2].access.splice(index3, 1)
-      // if(level === 3)
-        // this.fetchedNotification.detailNotification[index1].permissions[index1].access.splice(index2, 1)
-      // if(level === 3)
-      //   this.fetchedCompanie.notifications[index1].permissions[index1].access[index2].subCateg.splice(index3, 1)
-  }
-  addNotification(level, index1, index2, index3) {
-
-      if(level === 1){
-        let newNotification = new Permission()
-        this.fetchedNotification.detailNotification.permissions.unshift(newNotification)
-      }
-      if(level === 2){
-
-        let newNotification = new Access()
-        this.fetchedNotification.detailNotification.permissions[index2].access.unshift(newNotification)
-      }
-  }
-
-  openSection(nameSection){
-    this[nameSection] = !this[nameSection]
-  }
-
-  // removeNotification(level, index1, index2, index3) {
-  //     if(level === 0)
-  //       this.fetchedNotification.notifications.splice(level, 1)
-  //     if(level === 1)
-  //       this.fetchedNotification.notifications.splice(index1, 1)
-  //     if(level === 2)
-  //       this.fetchedNotification.notifications[index1].permissions.splice(index1, 1)
-  //     if(level === 3)
-  //       this.fetchedNotification.notifications[index1].permissions[index1].access.splice(index2, 1)
-  //     // if(level === 3)
-  //     //   this.fetchedNotification.notifications[index1].permissions[index1].access[index2].subCateg.splice(index3, 1)
-  // }
-
-
-
-  fetchedCurrentUser: User = new User()
-  getCurrentUser() {
-    this.userService.getUser('')
-      .subscribe(
-        res => { this.fetchedCurrentUser = res },
-        error => { console.log(error) }
-      )
-  }
-
-
-
-
 
 
 
@@ -197,7 +106,12 @@ export class NotificationComponent implements OnInit {
         )
     }
   }
-
+  selectUser() {
+  }
+  selectProject() {
+  }
+  selectQuote() {
+  }
 //
 // saveToMyNotification(){
 //   this.notificationService.saveNotification(this.fetchedNotification)

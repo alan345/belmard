@@ -63,7 +63,13 @@ router.put('/:id', function (req, res, next) {
       })
     } else {
 
-        item.detailNotification = req.body.detailNotification
+        item.projects = req.body.projects
+        item.quotes = req.body.quotes
+        item.tasks = req.body.tasks
+        item.userCalendars = req.body.userCalendars
+        item.users = req.body.users
+        item.isRead = req.body.isRead
+        item.nameNotification = req.body.nameNotification
 
 
         item.save(function (err, result) {
@@ -136,7 +142,6 @@ router.get('/page/:page', function (req, res, next) {
   Notification
   .find(searchQuery)
   .sort('-createdAt')
-  .populate({path: 'forms', model: 'Form'})
   .limit(itemsPerPage)
   .skip(skip)
   .exec(function (err, item) {
@@ -170,8 +175,11 @@ router.get('/page/:page', function (req, res, next) {
 router.get('/:id', function (req, res, next) {
   Notification
   .findById({_id: req.params.id})
-  .populate('vendors')
-  .populate('forms')
+  .populate({path: 'projects', model: 'Project'})
+  .populate({path: 'quotes', model: 'Quote'})
+  .populate({path: 'tasks', model: 'Task'})
+  .populate({path: 'users', model: 'User'})
+  .populate({path: 'userCalendars', model: 'UserCalendar'})
   .exec(function (err, item) {
     if (err) {
       return res.status(404).json({

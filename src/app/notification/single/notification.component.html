@@ -1,65 +1,18 @@
-<!-- <div class="row">
-  <div class="col-md-1"></div>
-  <div class="col-md-2"><button type="button" class="btn btn-warning" (click)="goBack()"><i class="fa fa-chevron-left"><a> Retour</a></i></button></div>
-  <div class="col-md-6">
-    <h3 class="title">Ajouter / Editer Fournisseur</h3></div>
-  <div class="col-md-3"></div>
-</div> -->
 <div class="container">
   <app-header [showBackButton]="true" [nameObject]="'notification'" [showCreateButton]="false"></app-header>
 
 
-  <h4 class="dspl-nn">id: {{fetchedNotification._id}}</h4>
-  <button type="button" class="btn btn-outline-primary" (click)="setAllNotifications()">setAllNotifications</button>
   <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
 
+    <app-autocomplete [typeAutocomplete]="'user'" [title]="'Customer'" [singleChoice]="'true'" [arrayContent]="fetchedNotification.users" (getResultAutocomplete)="selectUser()">
+    </app-autocomplete>
+    <app-autocomplete [typeAutocomplete]="'project'" [canDelete]="true" [title]="'Project'" [singleChoice]="true" [arrayContent]="fetchedNotification.projects" (getResultAutocomplete)="selectProject()">
+    </app-autocomplete>
 
-    <!-- <div class="categ0" *ngFor="let notification of fetchedNotification.notifications; let i = index;"> -->
-    <input type="text" class="form-control col-md-3" placeholder="Name Notification Profile" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedNotification.detailNotification.nameNotification">
-
-    <button type="button" class="btn btn-success" (click)="addNotification(1,0,0,0)"><i class="fa fa-plus"></i> Add Type</button>
-    <div class="categ1" *ngFor="let permission of fetchedNotification.detailNotification.permissions; let j = index;">
-          <table class="col-md-3">
-            <tr>
-              <td class="tdbtn1">
-            <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedNotification.detailNotification.permissions[j].namePermission">
-            <option *ngFor="let n of typesNotifications" [attr.value]="n.value">{{n.name}}</option>
-          </select>
-              </td>
-              <td class="tdbtn7">
-      <button type="button" class="btn btn-danger btn-sm" (click)="removeNotification( 2,i,j,0)"><i class="fa fa-times"></i></button>
-              </td>
-              <td class="tdbtn7">
-      <button type="button" class="btn btn-success btn-sm" (click)="addNotification(2,i,j,0)"><i class="fa fa-plus"></i></button>
-              </td>
-            </tr>
-           </table>
-      <div class="form-control" class="categ2" *ngFor="let singleAccess of permission.access; let k = index;">            
-         
-          <table class="col-md-2">
-            <tr>
-              <td class="tdbtn1">
-
-        <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedNotification.detailNotification.permissions[j].access[k].typeAccess">
-              
-                
-              <option [attr.value]="'read'">Read</option>
-              <option [attr.value]="'write'">write</option>
-               
-            </select>
-                
-             </td>   
-             <td class="tdbtn7">
-            
-        <button class="btn btn-danger btn-sm" type="button" (click)="removeNotification( 3,i,j,k)"><i class="fa fa-times"></i></button>
-             </td>
-            </tr> 
-           </table> 
-        </div>
-           
-     </div>
-       
-    <!-- </div> -->
+    <app-autocomplete [typeAutocomplete]="'quote'" [canDelete]="true" [title]="'Quote'" [singleChoice]="true" [arrayContent]="fetchedNotification.quotes" (getResultAutocomplete)="selectQuote()">
+    </app-autocomplete>
+    Read: {{fetchedNotification.isRead}}
+    <input type="text" class="form-control" formControlName="nameNotification" [(ngModel)]="fetchedNotification.nameNotification" placeholder="nameNotification">
 
 
     <div class="valid-edit">
@@ -75,4 +28,3 @@
     <div class="clearfix"></div>
   </form>
 </div>
-
