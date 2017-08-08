@@ -7,7 +7,7 @@ var task = new Schema({
     ownerCompanies: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
     projects: [{type: Schema.Types.ObjectId, ref: 'Project'}],
 
-    title: {type: String},
+    title: {type: String, default: ['']},
     status: {type: String},
     description: {type: String},
     users: [{type: Schema.Types.ObjectId, ref: 'User'}],
