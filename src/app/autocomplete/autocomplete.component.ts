@@ -11,7 +11,7 @@ import { MdDialog } from '@angular/material';
 
 import { UserDialogComponent } from '../user/singleUser/dialog/userDialog.component';
 import { CompanieDialogComponent } from '../companie/singleCompanie/dialog/companieDialog.component';
-import { ProjectDialogComponent } from '../project/projectSingle/dialog/projectDialog.component';
+import { ProjectDialogComponent } from '../project/single/dialog/projectDialog.component';
 
 import {Router} from '@angular/router';
 
