@@ -46,6 +46,9 @@ export class NewUserComponent implements OnInit {
   typeUser = TypeUser
 
   fetchedUser: User = new User();
+  currentUser: User = new User();
+
+
 
   public myForm: FormGroup;
 
@@ -64,9 +67,10 @@ export class NewUserComponent implements OnInit {
 
 
     ngOnInit() {
+      this.currentUser = this.authService.getCurrentUser()
       this.myForm = this._fb.group({
           email: [this.emailValidator],
-          type: [''],
+          typeUsers: [''],
           language: [''],
           colorCalendar: [''],
           otherData: [''],
@@ -169,10 +173,10 @@ export class NewUserComponent implements OnInit {
   selectTypeUser(typeUser) {
     this.autocompleteTypeUser = '';
     this.fetchedTypeUsers = [];
-    this.fetchedUser.type.push(typeUser);
+    this.fetchedUser.typeUsers.push(typeUser);
   }
   removeTypeUser(i: number) {
-    this.fetchedUser.type.splice(i, 1);
+    this.fetchedUser.typeUsers.splice(i, 1);
   }
   // autocolplete typeUser
 
@@ -259,7 +263,7 @@ export class NewUserComponent implements OnInit {
   }
 
 isUserIsMyself() {
-  if(this.authService.getCurrentUser()._id === this.fetchedUser._id)
+  if(this.currentUser._id === this.fetchedUser._id)
     return true
   return false
 }
@@ -270,7 +274,7 @@ isUserIsMyself() {
       .subscribe(
         res => {
           this.fetchedUser = res
-          this.fetchedUser.type.forEach(type => {
+          this.fetchedUser.typeUsers.forEach(type => {
             this.typeUserDropDown = type
           });
         },

@@ -165,15 +165,6 @@ router.put('/:id', function(req, res, next) {
       return res.status(404).json({message: '', err: err})
     }
 
-    // for (var prop in req.body) {
-    //   if (prop !== '__v' && prop !== 'updatedAt' && prop !== 'createdAt')
-    //     item[prop] = req.body[prop]
-    // }
-
-
-
-
-
     item.clients = req.body.clients
     item.name = req.body.name
     item.typeQuote = req.body.typeQuote
@@ -185,6 +176,7 @@ router.put('/:id', function(req, res, next) {
     item.priceQuote = req.body.priceQuote
     item.signature = req.body.signature
     item.detail = req.body.detail
+    item.statusQuote = req.body.statusQuote
 
 
     item.save(function(err, result) {

@@ -17,10 +17,22 @@
 
 
       <div *ngIf="!fetchedUser.isExternalUser" class="form-group col-sm-12">
-        <label>Type User</label>
-        <select class="form-control" formControlName="type" [(ngModel)]="fetchedUser.type">
+
+        <div *ngFor="let ownerCompanie of currentUser.ownerCompanies">
+          <label>Type User</label>
+          <md-select  formControlName="typeUsers" placeholder="typeUser" [(ngModel)]="fetchedUser.typeUsers" name="typeUsers">
+            <md-option [value]="''"></md-option>
+            <md-option *ngFor="let typeUser of ownerCompanie.typeUsers" [value]="typeUser.value">
+              {{typeUser.value}}
+            </md-option>
+          </md-select>
+        </div>
+
+
+
+        <!-- <select class="form-control" formControlName="type" [(ngModel)]="fetchedUser.type">
         <option *ngFor="let n of typeUser" [attr.value]="n">{{n}}</option>
-      </select>
+      </select> -->
         <div *ngIf="!fetchedUser.isAdminOfHisCompanie">
           <label>Rights</label>
           <app-autocomplete [typeAutocomplete]="'right'" [canDelete]="true" [title]="" [singleChoice]="true" [arrayContent]="fetchedUser.rights" (getResultAutocomplete)="selectRight($event[0])">

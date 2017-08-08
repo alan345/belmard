@@ -11,6 +11,7 @@ var quote = new Schema({
     clients: [{type: Schema.Types.ObjectId, ref: 'User'}],
     // phoneNumber: {type: String, default: ['']},
     name: {type: String, default: ['']},
+    statusQuote: {type: Number, default: [0]},
     detail: {
       currency: {type: String, default: ['']},
       quoteRef: {type: String, default: ['']},

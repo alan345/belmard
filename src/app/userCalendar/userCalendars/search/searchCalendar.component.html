@@ -32,14 +32,24 @@
       </app-autocomplete>
     </div>
     <div class="col-md-3">
-      <md-select (change)="change=TypeUsers()" placeholder="typeUser" [(ngModel)]="searchData.typeUser" name="typeUsers">
-        <md-option [value]="''">
 
-        </md-option>
+      <div *ngFor="let ownerCompanie of currentUser.ownerCompanies">
+        <label>Type User</label>
+        <md-select (change)="changeTypeUsers()" placeholder="typeUser" [(ngModel)]="searchData.typeUser" name="typeUsers">
+          <md-option [value]="''"></md-option>
+          <md-option *ngFor="let typeUser of ownerCompanie.typeUsers" [value]="typeUser.value">
+            {{typeUser.value}}
+          </md-option>
+        </md-select>
+      </div>
+
+
+      <!-- <md-select (change)="changeTypeUsers()" placeholder="typeUser" [(ngModel)]="searchData.typeUser" name="typeUsers">
+        <md-option [value]="''"></md-option>
         <md-option *ngFor="let typeUser of typeUsers" [value]="typeUser">
           {{typeUser}}
         </md-option>
-      </md-select>
+      </md-select> -->
     </div>
     <div class="col-md-3"></div>
   </div>

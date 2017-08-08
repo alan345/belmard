@@ -175,18 +175,11 @@ router.get('/page/:page', function(req, res, next) {
       UserCalendar.find(searchQuery).count().exec(function(err, count) {
 
         if (req.query.typeUser) {
-          // let itsmObj = JSON.parse(JSON.stringify(item))
-          // console.log(item[0])
-          // item.forEach(vara=> {
-          //   console.log(vara)
-          // })
-          // console.log(item.filter(singleItem => singleItem.type ))
           var itemFiltered = []
           item.forEach(event => {
             event.users.forEach(user => {
-              console.log(user)
-              if (user.type.length) {
-                if (user.type[0] === req.query.typeUser) {
+              if (user.typeUsers.length) {
+                if (user.typeUsers[0] === req.query.typeUser) {
                   itemFiltered.push(event)
                 }
               }

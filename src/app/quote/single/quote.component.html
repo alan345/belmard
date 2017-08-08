@@ -17,6 +17,15 @@
       Devis acces public
     </button>
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
+
+
+      <div class="form-group">
+        <select class="form-control col-md-3" formControlName="statusQuote" [(ngModel)]="fetchedQuote.statusQuote">
+          <option *ngFor="let n of statusQuote" [ngValue]="n.index">{{n.label}}</option>
+        </select>
+      </div>
+
+
       <div class="col-sm-6">
         <div>
           <app-autocomplete [typeAutocomplete]="'user'" [title]="'Customer'" [singleChoice]="'true'" [arrayContent]="fetchedQuote.clients" (getResultAutocomplete)="selectUser($event[0])">

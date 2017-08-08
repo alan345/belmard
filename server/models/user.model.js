@@ -15,7 +15,6 @@ var user = new Schema({
     password: {type: String, required: true},
     forms: [{type: Schema.Types.ObjectId, ref: 'Form'}],
     paiement: {
-
       stripe:[{
         companies:[{type: Schema.Types.ObjectId, ref: 'Companie'}],
         cusId:{type: String, default: ['']},
@@ -23,16 +22,15 @@ var user = new Schema({
           plan:{type: String, default: ['']},
           current_period_end:{type: Date}
         }
-
       }]
     },
-    salesMan: [{type: Schema.Types.ObjectId, ref: 'User'}],
+    // salesMan: [{type: Schema.Types.ObjectId, ref: 'User'}],
     resetPasswordToken: String,
     resetPasswordExpires: String,
     role: {type: Array, default: ['client']},
 
     rights: [{type: Schema.Types.ObjectId, ref: 'Right'}],
-    type: {type: Array},
+    typeUsers: {type: Array},
     profile : {
       profilePicture : [{type: Schema.Types.ObjectId, ref: 'Form'}],
       language: {type: String, default: ['en']},

@@ -337,9 +337,9 @@ router.put('/:id', function (req, res, next) {
       item.ownerCompanies = req.body.ownerCompanies
       item.email = req.body.email
       item.forms = req.body.forms
-      item.salesMan = req.body.salesMan
+      // item.salesMan = req.body.salesMan
       item.profile = req.body.profile
-      item.type = req.body.type
+      item.typeUsers = req.body.typeUsers
       item.rights = req.body.rights
 
 

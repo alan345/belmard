@@ -13,7 +13,7 @@ export class User {
   isExternalUser: Boolean = true;
   email: string = '';
   role: string[] = [];
-  type: string[] = [];
+  typeUsers: string[] = [];
   forms: Form[] = [];
   rights: Right[] = []
   profile: Profile = new Profile();

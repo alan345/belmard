@@ -7,7 +7,7 @@ import { DragulaService } from 'ng2-dragula';
 import {ProductService} from '../../product/product.service';
 import { ProjectService} from '../../project/project.service';
 
-import {Quote, DevisDetail, BucketProduct } from '../quote.model';
+import {Quote, DevisDetail, BucketProduct, StatusQuote } from '../quote.model';
 import {TemplateQuote } from '../templateQuote.model';
 
 import {ToastsManager} from 'ng2-toastr';
@@ -53,7 +53,7 @@ export class QuoteComponent implements OnInit {
   imgLogoUrl: string = './assets/images/profile-placeholder.jpg'
   imgSignatureBase64Temp = ''
   fetchedPaiementQuotes: PaiementQuote[] = []
-
+  statusQuote = StatusQuote
   totalPaiementAmount: number = 0
   myForm: FormGroup;
   // autocompleteProduct: String = ''
@@ -121,6 +121,7 @@ export class QuoteComponent implements OnInit {
 
     this.myForm = this._fb.group({
       name: [''],
+      statusQuote: [''],
       currency: ['', [Validators.required, Validators.minLength(1)]],
       quoteRef: ['', [Validators.required, Validators.minLength(1)]],
 

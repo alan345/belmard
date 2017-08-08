@@ -12,7 +12,7 @@ import { Location } from '@angular/common';
 import { UserService} from '../../../user/user.service';
 //
 // import { DeleteDialog } from '../../../deleteDialog/deleteDialog.component';
-// import { User } from '../../user/user.model';
+import { User } from '../../../user/user.model';
 // import { Quote } from '../../quote/quote.model';
 // import { Product } from '../../product/product.model';
 // import { Project } from '../../project/project.model';
@@ -45,7 +45,7 @@ export class SearchCalendarComponent implements OnInit {
   // autocompleteProject: string = '';
   // fetchedProducts: Product[] = []
   // fetchedProjects: Project[] = []
-  // // currentUser: User = new User()
+  currentUser: User = new User()
   // imgLogoUrl: string = './assets/images/profile-placeholder.jpg'
   // imgSignatureBase64Temp = ''
   // userAdmins : User[] = []
@@ -87,10 +87,12 @@ export class SearchCalendarComponent implements OnInit {
     private location: Location,
     // private _fb: FormBuilder,
     private projectService: ProjectService,
-    // private authService: AuthService,
+    private authService: AuthService,
   ) { }
 
-  ngOnInit(){}
+  ngOnInit() {
+    this.currentUser = this.authService.getCurrentUser()
+  }
 
   ngAfterViewInit() {
 
@@ -150,7 +152,7 @@ export class SearchCalendarComponent implements OnInit {
     // let searchData = { fetchedUserSearchs: this.fetchedUserSearchs, fetchedProjectSearchs: this.fetchedProjectSearchs}
     this.getUserCalendarBySearch.emit(this.searchData)
   }
-  TypeUsers() {
+  changeTypeUsers() {
     this.getUserCalendarBySearch.emit(this.searchData)
   }
 
