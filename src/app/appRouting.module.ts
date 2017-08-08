@@ -50,6 +50,7 @@ export const routes: Routes = [
   {path: 'product', loadChildren: 'app/product/product.module#ProductModule', canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
   {path: 'project', loadChildren: 'app/project/project.module#ProjectModule', canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
   {path: 'task', loadChildren: 'app/task/task.module#TaskModule', canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
+  {path: 'notification', loadChildren: 'app/notification/notification.module#NotificationModule', canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
   {path: 'user', loadChildren: 'app/user/user.module#UserModule'},
   // {path: 'option', loadChildren: 'app/option/option.module#OptionModule'},
 
