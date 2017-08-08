@@ -1,7 +1,7 @@
 import { Component, OnInit, Input} from '@angular/core';
 import { AuthService} from '../../auth/auth.service';
 import { QuoteService} from '../../quote/quote.service';
-import { Quote} from '../../quote/quote.model';
+import { Quote, StatusQuote} from '../../quote/quote.model';
 import { ToastsManager} from 'ng2-toastr';
 import { MdDialog} from '@angular/material';
 import { Router} from '@angular/router';
@@ -29,6 +29,7 @@ export class QuotesComponent implements OnInit {
     itemsPerPage: 0,
     totalItems: 0
   };
+  statusQuote = StatusQuote
 
   search = {
     isQuoteAssignedToMe: false,

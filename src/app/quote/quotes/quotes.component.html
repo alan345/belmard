@@ -64,7 +64,13 @@
               <td class="centre">{{quote.name}}</td>
               <td class="centre">{{quote.detail.dateQuote.issueDate | date:'yyyy-MM-dd' }}</td>
               <td class="centre"></td>
-              <td class="centre btn btn-outline-info"></td>
+              <td class="centre">
+
+                <select [(ngModel)]="quote.statusQuote" disabled>
+                  <option *ngFor="let n of statusQuote" [ngValue]="n.index">{{n.label}}</option>
+                </select>
+
+              </td>
             </tr>
           </tbody>
         </table>
