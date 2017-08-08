@@ -112,7 +112,7 @@ export class UserCalendarsComponent implements OnInit {
     header: {
       left: 'title',
       center: '',
-      right: 'today prev,next month,agendaWeek'
+      right: 'today prev,next month,agendaWeek,listWeek'
     },
     // fixedWeekCount : false,
     // defaultDate: '2016-09-12',
