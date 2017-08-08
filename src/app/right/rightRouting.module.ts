@@ -1,6 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { RightComponent} from './singleRight/right.component';
+import { RightComponent} from './single/right.component';
 
 // import { EditAddUserToRightComponent} from './addUser/editAddUserToRight.component';
 import { AdminGuardService} from '../admin/services/adminGuard';

@@ -6,7 +6,7 @@ import { RouterModule} from '@angular/router';
 // import { RightDetailUsersComponent} from './rightDetailUsers.component';
 // import { AddUserByRightComponent} from './addUser/addUserByRight.component';
 import { RightsComponent} from './rights/rights.component';
-import { RightComponent} from './singleRight/right.component';
+import { RightComponent} from './single/right.component';
 // import { EditAddUserToRightComponent} from './addUser/editAddUserToRight.component';
 
 import { RightService} from './right.service';
