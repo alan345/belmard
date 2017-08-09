@@ -10,7 +10,8 @@ export class Quote {
   name: string = '';
   status: number = 0;
   typeQuote: string = '';
-  _users: User[] = [];
+  // _users: User[] = [];
+  ownerQuotes: User[] = [];
   forms: Form[] = [];
   products: Product[] = [];
   projects: Project[] = [];

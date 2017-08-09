@@ -4,7 +4,7 @@ import { ToastsManager} from 'ng2-toastr';
 import { MdDialog } from '@angular/material';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
-import { Project, ItemSteps, StatusProject } from '../project.model';
+import { Project, ItemSteps, StatusProject, Log} from '../project.model';
 import { EditOptionsComponentDialog } from '../../form/modalLibrary/modalLibrary.component';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -134,7 +134,7 @@ export class ProjectSingleComponent implements OnInit {
     queryParams['showSearchEvent'] = false
 
 
-    if(this.fetchedProject.assignedTos.length) {queryParams['idUserNew'] = this.fetchedProject.assignedTos[0]._id}
+    // if(this.fetchedProject.assignedTos.length) {queryParams['idUserNew'] = this.fetchedProject.assignedTos[0]._id}
     if(this.fetchedProject._id) {queryParams['idProjectNew'] = this.fetchedProject._id}
     if(this.fetchedProject.clients.length) {queryParams['idClientNew'] = this.fetchedProject.clients[0]._id }
     // if(this.fetchedProject.assignedTos.length)  {queryParams['idUserSearch'] = this.fetchedProject.assignedTos[0]._id }
@@ -147,12 +147,17 @@ export class ProjectSingleComponent implements OnInit {
     // queryParams['showCreateEvent'] = true
     queryParams['showSearchEvent'] = false
 
-    if(this.fetchedProject.assignedTos.length)  {queryParams['idUserSearch'] = this.fetchedProject.assignedTos[0]._id }
+    // if(this.fetchedProject.assignedTos.length)  {queryParams['idUserSearch'] = this.fetchedProject.assignedTos[0]._id }
     if(this.fetchedProject._id)                 {queryParams['idProjectSearch'] = this.fetchedProject._id}
     // if(this.fetchedProject.clients.length)      {queryParams['idClientSearch'] = this.fetchedProject.clients[0]._id}
     this.router.navigate(['userCalendar/', queryParams])
   }
 
+  newComment(comment: string) {
+    // let newLog = new Log()
+    // newLog.comment = comment
+    // this.fetchedProject.logs.push(newLog)
+  }
   getUser(id: string) {
     this.userService.getUser(id)
       .subscribe(
@@ -204,14 +209,10 @@ export class ProjectSingleComponent implements OnInit {
         }
       );
   }
-  // removeUser(i: number) {
-  //   this.fetchedProject.clients.splice(i, 1);
-  // }
-  // autocomplete user
 
 
   removePic(i) {
-    this.fetchedProject.forms.splice(i, 1);
+    // this.fetchedProject.forms.splice(i, 1);
   }
 
 
@@ -222,41 +223,16 @@ export class ProjectSingleComponent implements OnInit {
     selectAssignedTo(user: User) {
       // this.autocompleteAssignedTo=''
       // this.fetchedAssignedTos = []
-      this.fetchedProject.assignedTos = [user]
+      // this.fetchedProject.assignedTos = [user]
     }
-    // searchAssignedTos() {
-    //   if(!this.autocompleteAssignedTo) {
-    //      this.fetchedAssignedTos = []
-    //   } else {
-    //     let search = {
-    //         search: this.autocompleteAssignedTo,
-    //       };
-    //     this.getAssignedTos(1, search)
-    //   }
-    // }
-    // getAssignedTos(page: number, search: any) {
-    //   this.userService.getUsers(page, search)
-    //     .subscribe(
-    //       res => {
-    //         this.fetchedAssignedTos = res.data
-    //       },
-    //       error => {
-    //         console.log(error);
-    //       }
-    //     );
-    // }
-    // removeAssignedTo(i: number) {
-    //   this.fetchedProject.assignedTos.splice(i, 1);
-    // }
-    // autocomplete user
 
 
 
 
-
-  goBack() {
-    this.location.back();
-  }
+  //
+  // goBack() {
+  //   this.location.back();
+  // }
 
 
   openDialog(positionImage: string) {
@@ -264,7 +240,7 @@ export class ProjectSingleComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if(result) {
         console.log(result)
-        this.fetchedProject.forms.push( result)
+        // this.fetchedProject.forms.push( result)
       }
     })
   }
@@ -327,7 +303,7 @@ export class ProjectSingleComponent implements OnInit {
       if(result) {
         this.onDelete(this.fetchedProject._id).then(function(){
           // this2.router.navigate(['user']);
-          this2.goBack();
+          // this2.goBack();
         })
 
       }

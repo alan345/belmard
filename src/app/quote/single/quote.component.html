@@ -28,12 +28,15 @@
 
       <div class="col-sm-6">
         <div>
+          <app-autocomplete [typeAutocomplete]="'user'" [title]="'Owner Quote'" [singleChoice]="'true'" [arrayContent]="fetchedQuote.ownerQuotes" (getResultAutocomplete)="selectUser($event[0])">
+          </app-autocomplete>
+
           <app-autocomplete [typeAutocomplete]="'user'" [title]="'Customer'" [singleChoice]="'true'" [arrayContent]="fetchedQuote.clients" (getResultAutocomplete)="selectUser($event[0])">
           </app-autocomplete>
           <app-autocomplete [typeAutocomplete]="'project'" [canDelete]="true" [title]="'Project'" [singleChoice]="true" [arrayContent]="fetchedQuote.projects" (getResultAutocomplete)="selectProject($event[0])">
           </app-autocomplete>
-          <label>Nom du Devis</label>
-          <input type="text" class="form-control col-md-4" formControlName="name" [(ngModel)]="fetchedQuote.name" required minlength="5" placeholder="Nom du quote">
+          <label>{{'Name Quote' | translate}}</label>
+          <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedQuote.name" required minlength="5" placeholder="Nom du quote">
           <br>
           <div *ngFor="let client of fetchedQuote.clients">
             <div>name:{{client.profile.name}}</div>

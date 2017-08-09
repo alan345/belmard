@@ -1,0 +1,9 @@
+<input
+    type="text"
+    class="form-control"
+    #newCommentString
+    placeholder="New Comment"
+    (keyup.enter)="newComment(newCommentString.value)">
+    <div *ngFor="let log of logs">
+      {{log.comment}}
+    </div>

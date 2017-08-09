@@ -1,5 +1,7 @@
 {{title}}
-<input class="form-control" *ngIf="!arrayContent.length" autofocus autocapitalize="none" autocomplete="off" spellcheck="false" autocorrect="none" type="text" name="Search" placeholder="🔎 {{typeAutocomplete}}" [(ngModel)]="autocompleteSearch" (ngModelChange)="searchData()">
+<div *ngIf="!arrayContent.length || !singleChoice">
+  <input class="form-control"  autofocus autocapitalize="none" autocomplete="off" spellcheck="false" autocorrect="none" type="text" name="Search" placeholder="🔎 {{typeAutocomplete}}" [(ngModel)]="autocompleteSearch" (ngModelChange)="searchData()">
+</div>
 <div class="form-control" *ngFor="let data of fetchedData; let i=index">
   <table>
     <tr>

@@ -23,6 +23,7 @@ import {SharedModule } from '../shared/shared.module';
 // import {UserModule} from '../user/user.module';
 // import { TaskDialogComponent } from '../task/single/dialog/taskDialog.component'
 
+import { CommentComponent } from './single/comment/comment.component'
 
 @NgModule({
   imports:     [
@@ -35,7 +36,8 @@ import {SharedModule } from '../shared/shared.module';
     Ng2PaginationModule,
     ReactiveFormsModule,
     QuoteModule,
-    SharedModule
+    SharedModule,
+
 
     // AutocompleteModule,
   ],
@@ -45,6 +47,7 @@ import {SharedModule } from '../shared/shared.module';
     ProjectSingleComponent,
     // TasksComponent,
     ProjectDialogComponent,
+    CommentComponent,
     // TaskDialogComponent,
     // AutocompleteComponent,
   ],

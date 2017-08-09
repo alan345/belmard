@@ -10,15 +10,20 @@ export class Project {
     status: number = 0;
     clients: User[] = [];
     assignedTos: User[] = [];
-    forms: Form[] = [];
+    // forms: Form[] = [];
+    logs: Log[] = [];
     categorie: Categorie = new Categorie();
     bucketTasks: BucketTasks[] = []
     progressTasks: number = 0;
     dateProject: DateProject = new DateProject()
-
 }
 
-
+export class Log {
+  comment: string = '';
+  by: User[] = [];
+  forms: Form[] = [];
+  date: Date = new Date()
+}
 export class DateProject {
   creationDate: Date = new Date()
   creationDateString: string = '';

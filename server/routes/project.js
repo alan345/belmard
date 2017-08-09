@@ -114,7 +114,7 @@ router.put('/:id', function(req, res, next) {
       item.details = req.body.details
       item.forms = req.body.forms
       item.status = req.body.status
-      item.embed = req.body.embed
+      // item.embed = req.body.embed
       item.categories = req.body.categories
       item.clients = req.body.clients
       item.quotes = req.body.quotes
@@ -123,6 +123,7 @@ router.put('/:id', function(req, res, next) {
       item.bucketTasks = req.body.bucketTasks
       item.progressTasks = req.body.progressTasks
       item.dateProject = req.body.dateProject
+      item.logs = req.body.logs
 
       item.save(function(err, result) {
         if (err) {
@@ -287,7 +288,7 @@ router.get('/:id', function(req, res, next) {
     Project.findById({_id: req.params.id})
     .populate({path: 'clients', model: 'User'})
     .populate({path: 'forms', model: 'Form'})
-    // .populate({path: 'users', model: 'User'})
+    .populate({path: 'assignedTos', model: 'User'})
     .populate({
       path: 'bucketTasks.tasks',
       model: 'Task',
