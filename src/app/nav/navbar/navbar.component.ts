@@ -44,12 +44,13 @@ export class NavbarComponent implements OnInit {
 
 
   ngOnInit() {
-    // if (this.authService.isLoggedIn()) {
-    //   //let userId = localStorage.getItem('userId');
-    //
-    //   this.globalEventsManager.showNavBar(true);
-    //   this.getUser('')
-    // }
+    if (this.authService.isLoggedIn()) {
+      //let userId = localStorage.getItem('userId');
+
+      this.globalEventsManager.showNavBar(true);
+      this.showNavBar = true;
+      this.fetchedUser = this.authService.getCurrentUser()
+    }
   }
 
   // isCurrentUserIsInSubPeriod(){
