@@ -24,6 +24,8 @@ import {SharedModule } from '../shared/shared.module';
 // import { TaskDialogComponent } from '../task/single/dialog/taskDialog.component'
 
 import { CommentComponent } from './single/comment/comment.component'
+import { PictureComponent } from './single/picture/picture.component'
+
 
 @NgModule({
   imports:     [
@@ -48,6 +50,7 @@ import { CommentComponent } from './single/comment/comment.component'
     // TasksComponent,
     ProjectDialogComponent,
     CommentComponent,
+    PictureComponent,
     // TaskDialogComponent,
     // AutocompleteComponent,
   ],

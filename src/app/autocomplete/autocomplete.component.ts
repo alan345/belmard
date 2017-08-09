@@ -40,7 +40,6 @@ export class AutocompleteComponent {
   @Output() clearAutocomplete: EventEmitter<any> = new EventEmitter();
 
 
-
   constructor(
     public dialog: MdDialog,
     private userService: UserService,

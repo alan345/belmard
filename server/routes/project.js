@@ -287,7 +287,8 @@ router.get('/:id', function(req, res, next) {
 
     Project.findById({_id: req.params.id})
     .populate({path: 'clients', model: 'User'})
-    .populate({path: 'forms', model: 'Form'})
+    .populate({path: 'logs.forms', model: 'Form'})
+    .populate({path: 'logs.by', model: 'User'})
     .populate({path: 'assignedTos', model: 'User'})
     .populate({
       path: 'bucketTasks.tasks',
@@ -305,6 +306,7 @@ router.get('/:id', function(req, res, next) {
         model: 'Project'
       }
     })
+
     .exec(function(err, item) {
       if (err) {
         return res.status(404).json({message: '', err: err})
