@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
 
           //gooplus
           this._router.navigate(['/']);
-          location.reload();
+          // location.reload();
 
 
           // display toastr success message pop up to inform the user that he logged in successfully

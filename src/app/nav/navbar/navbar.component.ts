@@ -36,6 +36,7 @@ export class NavbarComponent implements OnInit {
         // mode will be null the first time it is created, so you need to igonore it when null
         if (mode !== null) {
           this.showNavBar = mode;
+          this.fetchedUser = this.authService.getCurrentUser()
         }
     });
   }
@@ -43,12 +44,12 @@ export class NavbarComponent implements OnInit {
 
 
   ngOnInit() {
-    if (this.authService.isLoggedIn()) {
-      //let userId = localStorage.getItem('userId');
-
-      this.globalEventsManager.showNavBar(true);
-      this.getUser('')
-    }
+    // if (this.authService.isLoggedIn()) {
+    //   //let userId = localStorage.getItem('userId');
+    //
+    //   this.globalEventsManager.showNavBar(true);
+    //   this.getUser('')
+    // }
   }
 
   // isCurrentUserIsInSubPeriod(){
