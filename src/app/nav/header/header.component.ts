@@ -24,7 +24,6 @@ export class HeaderComponent implements OnInit {
 
 
 
-
   nameObjectPlur: String= ''
   nameObjectSing: String= ''
 

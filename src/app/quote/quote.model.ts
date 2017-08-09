@@ -8,10 +8,10 @@ export class Quote {
   _id: string = '';
   clients: User[] = [];
   name: string = '';
-  status: number = 0;
+  statusQuote: number = 0;
   typeQuote: string = '';
   // _users: User[] = [];
-  ownerQuotes: User[] = [];
+  // ownerQuotes: User[] = [];
   forms: Form[] = [];
   products: Product[] = [];
   projects: Project[] = [];
@@ -45,6 +45,7 @@ export class DateQuote {
 export class Signature {
   base64: string = '';
   dateSignature: Date;
+  users: User[] = [];
 }
 export class PriceQuote {
   priceQuoteWithoutTaxes: number = 0;
@@ -73,19 +74,17 @@ export class DevisDetail {
   bucketProducts: BucketProduct[] = []
 }
 
-export const StatusQuote =
+export const StatusQuotes =
 [
-  {index: 0, label: 'RDV planifié'},
-  {index: 1, label: 'Rappeler'},
-  {index: 2, label: 'Stand-By'},
-  {index: 3, label: 'Devis à faire'},
-  {index: 4, label: 'Attente Validation'},
-  {index: 5, label: 'Devis validée, A envoyer'},
-  {index: 6, label: 'Attente approbation'},
-  {index: 7, label: 'Devis refusé'},
-  {index: 8, label: 'Devis accepté – Attente acompte'},
-  {index: 9, label: 'En cours de réalisation'},
-  {index: 10, label: 'Terminé'},
+  // {index: 0, label: 'RDV planifié'},
+  // {index: 1, label: 'Rappeler'},
+  // {index: 2, label: 'Stand-By'},
+  // {index: 3, label: 'Devis à faire'},
+  {index: 0, label: 'Pending Approval'},
+  {index: 1, label: 'Signed'},
+  {index: 2, label: 'Rejected'},
+  {index: 3, label: 'Signed, pending paiement'},
+  {index: 4, label: 'Done'},
 ]
 
 // export class Address {

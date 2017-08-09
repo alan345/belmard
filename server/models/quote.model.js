@@ -8,7 +8,7 @@ var mongoose                = require('mongoose'),
 var quote = new Schema({
     ownerCompanies: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
     projects: [{type: Schema.Types.ObjectId, ref: 'Project'}],
-    ownerQuotes: [{type: Schema.Types.ObjectId, ref: 'User'}],
+    // ownerQuotes: [{type: Schema.Types.ObjectId, ref: 'User'}],
     clients: [{type: Schema.Types.ObjectId, ref: 'User'}],
     // phoneNumber: {type: String, default: ['']},
     name: {type: String, default: ['']},
@@ -56,6 +56,7 @@ var quote = new Schema({
     signature:{
       base64:{type: String, default: ['']},
       dateSignature:{type: Date},
+      users:[{type: Schema.Types.ObjectId, ref: 'User'}],
     }
     // ,
     // paiements:[

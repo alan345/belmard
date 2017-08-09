@@ -21,20 +21,26 @@
 
       <div class="form-group">
         <select class="form-control col-md-3" formControlName="statusQuote" [(ngModel)]="fetchedQuote.statusQuote">
-          <option *ngFor="let n of statusQuote" [ngValue]="n.index">{{n.label}}</option>
+          <option *ngFor="let n of statusQuotes" [ngValue]="n.index">{{n.label}}</option>
         </select>
       </div>
 
 
       <div class="col-sm-6">
         <div>
-          <app-autocomplete [typeAutocomplete]="'user'" [title]="'Owner Quote'" [singleChoice]="'true'" [arrayContent]="fetchedQuote.ownerQuotes" (getResultAutocomplete)="selectUser($event[0])">
-          </app-autocomplete>
+          <!-- <app-autocomplete [typeAutocomplete]="'user'" [title]="'Owner Quote'" [singleChoice]="'true'" [arrayContent]="fetchedQuote.ownerQuotes" (getResultAutocomplete)="selectUser($event[0])">
+          </app-autocomplete> -->
 
           <app-autocomplete [typeAutocomplete]="'user'" [title]="'Customer'" [singleChoice]="'true'" [arrayContent]="fetchedQuote.clients" (getResultAutocomplete)="selectUser($event[0])">
           </app-autocomplete>
           <app-autocomplete [typeAutocomplete]="'project'" [canDelete]="true" [title]="'Project'" [singleChoice]="true" [arrayContent]="fetchedQuote.projects" (getResultAutocomplete)="selectProject($event[0])">
           </app-autocomplete>
+
+          <div *ngFor="let project of fetchedQuote.projects">
+            <div *ngFor="let user of project.assignedTos">
+              Owner Project: {{user.profile.name}}
+            </div>
+          </div>
           <label>{{'Name Quote' | translate}}</label>
           <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedQuote.name" required minlength="5" placeholder="Nom du quote">
           <br>
@@ -282,9 +288,6 @@
 
 
 
-
-
-
       <div class="row">
         <div class="col-md-6">
         </div>
@@ -292,15 +295,23 @@
           <div class="card" style="width:250px;">
             <div *ngIf="!fetchedQuote.signature.base64">
               <button type="button" class="delete" md-button (click)="resetSignature()">
-                  Reset
-                </button>
+                  {{'Reset' | translate}}
+              </button>
               <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()">
               </signature-pad>
               <button type="button" class="delete" md-button (click)="validateSignature()">
                   ok
               </button>
             </div>
-            <img *ngIf="fetchedQuote.signature.base64" [src]="fetchedQuote.signature.base64" /> {{fetchedQuote.signature.dateSignature | date:'yMdjm'}}
+            <div *ngIf="fetchedQuote.signature.base64">
+              <img [src]="fetchedQuote.signature.base64" />
+              <div *ngFor="let user of fetchedQuote.signature.users">
+                {{fetchedQuote.signature.dateSignature | date:'yMdjm'}} - {{user.profile.name }}
+              </div>
+              <button type="button" class="delete" md-button (click)="removeSignature()">
+                  {{'Unsign' | translate}}
+              </button>
+            </div>
           </div>
         </div>
       </div>

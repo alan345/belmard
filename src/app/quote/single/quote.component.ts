@@ -7,7 +7,7 @@ import { DragulaService } from 'ng2-dragula';
 import {ProductService} from '../../product/product.service';
 import { ProjectService} from '../../project/project.service';
 
-import {Quote, DevisDetail, BucketProduct, StatusQuote } from '../quote.model';
+import {Quote, DevisDetail, BucketProduct, StatusQuotes, Signature } from '../quote.model';
 import {TemplateQuote } from '../templateQuote.model';
 
 import {ToastsManager} from 'ng2-toastr';
@@ -25,14 +25,10 @@ import { PaiementQuote } from '../../paiementQuote/paiementQuote.model';
 // import { PaiementQuoteDialogComponent } from '../paiementQuote/single/dialog/paiementQuoteDialog.component';
 import { PaiementQuoteDialogComponent } from '../../paiementQuote/single/dialog/paiementQuoteDialog.component'
 
-
+import { TranslateService } from '../../translate/translate.service';
 declare let jsPDF;
-
-
 import { SignaturePad } from 'angular2-signaturepad/signature-pad';
 import { PaiementQuotesComponent } from '../../paiementQuote/paiementQuotes/paiementQuotes.component';
-
-
 
 
 @Component({
@@ -53,7 +49,7 @@ export class QuoteComponent implements OnInit {
   imgLogoUrl: string = './assets/images/profile-placeholder.jpg'
   imgSignatureBase64Temp = ''
   fetchedPaiementQuotes: PaiementQuote[] = []
-  statusQuote = StatusQuote
+  statusQuotes = StatusQuotes
   totalPaiementAmount: number = 0
   myForm: FormGroup;
   // autocompleteProduct: String = ''
@@ -62,9 +58,9 @@ export class QuoteComponent implements OnInit {
   // ckeditorContent=''
   ckeConfig: any;
   rowTypes = [
-      { label: 'Category', value: 'category' },
-      { label: 'Product', value: 'product' },
-      { label: 'Text', value: 'text' },
+    { label: 'Category', value: 'category' },
+    { label: 'Product', value: 'product' },
+    { label: 'Text', value: 'text' },
 
   ]
   constructor(
@@ -82,41 +78,53 @@ export class QuoteComponent implements OnInit {
     private _fb: FormBuilder,
     private authService: AuthService,
     private dragulaService: DragulaService,
+    private translateService: TranslateService,
   ) {
     // dragulaService.setOptions('third-bag', {
     //   removeOnSpill: true
     // });
+
+
+    // const bag: any = this.dragulaService.find('third-bag');
+    // if (bag !== undefined ) this.dragulaService.destroy('third-bag');
+    // // this.dragulaService.setOptions('third-bag', { revertOnSpill: true });
+    //
+
     dragulaService.setOptions('third-bag', {
-      moves: function (el, container, handle) {
+      moves: function(el, container, handle) {
         console.log(handle.className)
         return (handle.className === 'fa fa-arrows handle' || handle.className === 'btn btn-sm handle');
       }
     });
   }
+  ngOnDestroy() {
+    this.dragulaService.destroy('third-bag');
+  }
+
 
   ngOnInit() {
+    this.statusQuotes.forEach((statusQuote,i)=>{this.statusQuotes[i].label=this.translateService.instant(statusQuote.label)})
+
+    this.ckeConfig = {
+      // height: 500,
+      language: "en",
+      height: 50,
 
 
-          this.ckeConfig = {
-              // height: 500,
-              language: "en",
-              height: 50,
-
-
-              toolbar: [
-                  // { name: "editing", items: ["Scayt", "Find", "Replace", "SelectAll"] },
-                  // { name: "clipboard", items: ["Cut", "Copy", "Paste", "PasteText", "PasteFromWord", "-", "Undo", "Redo"] },
-                  // { name: "links", items: ["Link", "Unlink", "Anchor"] },
-                  // { name: "tools", items: ["Maximize", "ShowBlocks", "Preview", "Print", "Templates"] },
-                  // { name: "document", items: ["Source"] },
-                  // { name: "insert", items: ["Image", "Table", "HorizontalRule", "SpecialChar", "Iframe", "imageExplorer"] },
-                  // "/",
-                  { name: "basicstyles", items: ["Bold", "Italic", "Underline"] },
-                  { name: "paragraph", items: ["NumberedList", "BulletedList", "-", "Blockquote"] },
-                  // { name: "justify", items: ["JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock"] },
-                  // { name: "styles", items: ["Styles", "Format", "FontSize", "-", "TextColor", "BGColor"] }
-              ]
-          };
+      toolbar: [
+        // { name: "editing", items: ["Scayt", "Find", "Replace", "SelectAll"] },
+        // { name: "clipboard", items: ["Cut", "Copy", "Paste", "PasteText", "PasteFromWord", "-", "Undo", "Redo"] },
+        // { name: "links", items: ["Link", "Unlink", "Anchor"] },
+        // { name: "tools", items: ["Maximize", "ShowBlocks", "Preview", "Print", "Templates"] },
+        // { name: "document", items: ["Source"] },
+        // { name: "insert", items: ["Image", "Table", "HorizontalRule", "SpecialChar", "Iframe", "imageExplorer"] },
+        // "/",
+        { name: "basicstyles", items: ["Bold", "Italic", "Underline"] },
+        { name: "paragraph", items: ["NumberedList", "BulletedList", "-", "Blockquote"] },
+        // { name: "justify", items: ["JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock"] },
+        // { name: "styles", items: ["Styles", "Format", "FontSize", "-", "TextColor", "BGColor"] }
+      ]
+    };
 
 
     this.myForm = this._fb.group({
@@ -142,16 +150,16 @@ export class QuoteComponent implements OnInit {
         this.getProject(params['idProject'])
     })
   }
-  onChange(event){
+  onChange(event) {
     console.log(event)
   }
-  onReady(event){
+  onReady(event) {
     console.log(event)
   }
-  onFocus(event){
+  onFocus(event) {
     console.log(event)
   }
-  onBlur(event){
+  onBlur(event) {
     console.log(event)
   }
 
@@ -176,9 +184,16 @@ export class QuoteComponent implements OnInit {
   resetSignature() {
     this.signaturePad.clear();
   }
+  removeSignature() {
+    this.fetchedQuote.signature = new Signature()
+    this.fetchedQuote.statusQuote = 0
+    this.save()
+  }
   validateSignature() {
     this.fetchedQuote.signature.base64 = this.imgSignatureBase64Temp
     this.fetchedQuote.signature.dateSignature = new Date()
+    this.fetchedQuote.signature.users = [this.authService.getCurrentUser()]
+    this.fetchedQuote.statusQuote = 1
     this.save()
   }
   drawComplete() {
@@ -195,62 +210,45 @@ export class QuoteComponent implements OnInit {
 
   addRow(typeRow) {
 
-    if(typeRow) {
-      if(typeRow === 'category')
+    if (typeRow) {
+      if (typeRow === 'category')
         this.addBucketProducts()
 
-      if(!this.fetchedQuote.devisDetails.length)
+      if (!this.fetchedQuote.devisDetails.length)
         this.addBucketProducts()
 
-      if(typeRow === 'product' || typeRow === 'text') {
+      if (typeRow === 'product' || typeRow === 'text') {
         let bucketProduct: BucketProduct = new BucketProduct()
         bucketProduct.typeRow = typeRow
-        this.fetchedQuote.devisDetails[this.fetchedQuote.devisDetails.length-1].bucketProducts.push(bucketProduct)
+        this.fetchedQuote.devisDetails[this.fetchedQuote.devisDetails.length - 1].bucketProducts.push(bucketProduct)
         this.calculateQuote()
       }
     }
   }
 
-  // getCurrentUser() {
-  //   this.userService.getUser('')
-  //     .subscribe(
-  //       res => {
-  //         this.currentUser = res
-  //         // this.currentUser.companies.forEach(companie => {
-  //         //   companie.forms.forEach(form => {
-  //         //     this.imgLogoUrl = "./uploads/forms/" + form.owner + "/" + form.imagePath
-  //         //   });
-  //         //
-  //         // });
-  //       },
-  //       error => {
-  //         console.log(error);
-  //       }
-  //     )
-  // }
 
 
 
-    openDialog() {
+  openDialog() {
 
-      // dialogComp = PaiementQuoteDialogComponent
-      //
+    // dialogComp = PaiementQuoteDialogComponent
+    //
 
-      let dialogRef = this.dialog.open(PaiementQuoteDialogComponent, {
-        height: '500px',
-        data:this.fetchedQuote
-      });
-      // dialogRef.componentInstance.fetchedQuote = this.fetchedQuote;
-      dialogRef.afterClosed().subscribe(result => {
-        this.paiementQuotesComponent.getPaiementQuotesInit()
-        // console.log(result)
-        // this.autocompleteSearch = ''
-        // if(result) {
-        //   console.log(result)
-        //   this.fetchedProject.forms.push( result)
-        // }
-      })
-    }
+    let dialogRef = this.dialog.open(PaiementQuoteDialogComponent, {
+      height: '500px',
+      data: this.fetchedQuote
+    });
+    // dialogRef.componentInstance.fetchedQuote = this.fetchedQuote;
+    dialogRef.afterClosed().subscribe(result => {
+      this.paiementQuotesComponent.getPaiementQuotesInit()
+      // console.log(result)
+      // this.autocompleteSearch = ''
+      // if(result) {
+      //   console.log(result)
+      //   this.fetchedProject.forms.push( result)
+      // }
+    })
+  }
 
 
   getBase64Image(imgUrl) {
@@ -454,18 +452,18 @@ export class QuoteComponent implements OnInit {
     // let bucketProduct: BucketProduct = new BucketProduct()
 
     this.fetchedQuote.devisDetails[i].bucketProducts[j].productInit = [product],
-    this.fetchedQuote.devisDetails[i].bucketProducts[j].vat= 20,
-    this.fetchedQuote.devisDetails[i].bucketProducts[j].priceWithoutTaxes= product.details.price.sellingPrice,
-    this.fetchedQuote.devisDetails[i].bucketProducts[j].priceWithTaxes= 0,
-    this.fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithTaxes= 0,
-    this.fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithoutTaxes= 0,
-    this.fetchedQuote.devisDetails[i].bucketProducts[j].quantity= 1,
-    this.fetchedQuote.devisDetails[i].bucketProducts[j].discount= 0,
+      this.fetchedQuote.devisDetails[i].bucketProducts[j].vat = 20,
+      this.fetchedQuote.devisDetails[i].bucketProducts[j].priceWithoutTaxes = product.details.price.sellingPrice,
+      this.fetchedQuote.devisDetails[i].bucketProducts[j].priceWithTaxes = 0,
+      this.fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithTaxes = 0,
+      this.fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithoutTaxes = 0,
+      this.fetchedQuote.devisDetails[i].bucketProducts[j].quantity = 1,
+      this.fetchedQuote.devisDetails[i].bucketProducts[j].discount = 0,
 
-    // this.autocompleteProduct = ''
+      // this.autocompleteProduct = ''
 
-    // this.fetchedQuote.devisDetails[i].bucketProducts.push(bucketProduct)
-    this.calculateQuote()
+      // this.fetchedQuote.devisDetails[i].bucketProducts.push(bucketProduct)
+      this.calculateQuote()
   }
   calculateQuote() {
     let this2 = this;

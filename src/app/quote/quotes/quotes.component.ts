@@ -1,10 +1,10 @@
 import { Component, OnInit, Input} from '@angular/core';
 import { AuthService} from '../../auth/auth.service';
 import { QuoteService} from '../../quote/quote.service';
-import { Quote, StatusQuote} from '../../quote/quote.model';
+import { Quote, StatusQuotes} from '../../quote/quote.model';
 import { ToastsManager} from 'ng2-toastr';
 import { MdDialog} from '@angular/material';
-import { Router} from '@angular/router';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location} from '@angular/common';
 
 
@@ -29,7 +29,7 @@ export class QuotesComponent implements OnInit {
     itemsPerPage: 0,
     totalItems: 0
   };
-  statusQuote = StatusQuote
+  statusQuotes = StatusQuotes
 
   search = {
     isQuoteAssignedToMe: false,
@@ -48,18 +48,26 @@ export class QuotesComponent implements OnInit {
     public dialog: MdDialog,
     private router: Router,
     private location: Location,
+    private activatedRoute: ActivatedRoute,
   ) {}
 
 
 
   ngOnInit() {
-    let this2 = this
-    setTimeout(function(){
-      this2.search.userId = this2.userId
-      this2.search.projectId = this2.projectId
-      this2.search.orderBy = 'name'
-      this2.getQuotes(1, this2.search)
-    }, 200);
+    this.activatedRoute.params.subscribe((params: Params) => {
+      if(params['isQuoteAssignedToMe']) {
+        this.search.isQuoteAssignedToMe = params['isQuoteAssignedToMe']
+        this.getQuotes(this.paginationData.currentPage, this.search);
+      }
+    })
+
+    // let this2 = this
+    // setTimeout(function(){
+    //   this2.search.userId = this2.userId
+    //   this2.search.projectId = this2.projectId
+    //   this2.search.orderBy = 'name'
+    //   this2.getQuotes(1, this2.search)
+    // }, 200);
 
   }
 

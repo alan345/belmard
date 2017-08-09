@@ -31,10 +31,16 @@ router.get('/:id', function(req, res, next) {
     }
     let findQuery = {}
     findQuery['_id'] = req.params.id
-
     Quote.findOne(findQuery)
-    .populate({path: 'projects', model: 'Project'})
-    .populate({path: 'ownerQuotes', model: 'User'})
+    .populate({
+      path: 'projects',
+      model: 'Project',
+      populate: {
+        path: 'assignedTos',
+        model: 'User',
+      }
+    })
+    .populate({path: 'signature.users', model: 'User'})
     .populate({path: 'clients', model: 'User'})
     .populate({path: 'devisDetails.bucketProducts.productInit', model: 'Product'})
     .exec(function(err, item) {
@@ -169,7 +175,7 @@ router.put('/:id', function(req, res, next) {
     item.clients = req.body.clients
     item.name = req.body.name
     item.typeQuote = req.body.typeQuote
-    item.ownerQuotes = req.body.ownerQuotes
+    // item.ownerQuotes = req.body.ownerQuotes
     item.forms = req.body.forms
     item.products = req.body.products
     item.projects = req.body.projects
