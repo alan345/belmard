@@ -17,6 +17,7 @@ process.on('uncaughtException', function(err) {
 });
 
 router.get('/:id', function(req, res, next) {
+
   Quote.findById((req.params.id), function(err, obj) {
     if (err) {
       return res.status(500).json({message: 'An error occured', err: err})
@@ -29,9 +30,11 @@ router.get('/:id', function(req, res, next) {
         }
       })
     }
-    let findQuery = {}
-    findQuery['_id'] = req.params.id
-    Quote.findOne(findQuery)
+
+    // let findQuery = {}
+    // findQuery['_id'] = req.params.id
+    Quote
+    .findById({_id: req.params.id})
     .populate({
       path: 'projects',
       model: 'Project',

@@ -7,7 +7,7 @@
 </div> -->
 
 <div class="container">
-  <app-header [showBackButton]="true" [nameObject]="'project'" [showCreateButton]="false"></app-header>
+  <app-header [showBackButton]="true" [nameObject]="'project'" [showCreateButton]=false [openInDialog]=true></app-header>
   <div>
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()" (keydown.enter)="$event.preventDefault()">
       <div>

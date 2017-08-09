@@ -16,6 +16,7 @@ export class HeaderComponent implements OnInit {
   @Input() nameButton: String = '';
   @Input() option: String = '';
   @Input() showBackButton: Boolean = true;
+  @Input() openInDialog: Boolean = false;
   @Input() showHeader: Boolean = true;
   @Input() showCreateButton: Boolean = true;
   @Input() idProject: string= '';
@@ -71,37 +72,43 @@ export class HeaderComponent implements OnInit {
 
   }
   redirectCreateObj() {
-    let queryParams = {}
-    if(this.nameObject === 'product')
-      this.router.navigate(['product/productSingle/']);
-    if(this.nameObject === 'quote') {
 
-      if(this.idProject) {queryParams['idProject'] = this.idProject}
-      if(this.idClient) {queryParams['idClient'] = this.idClient}
-      this.router.navigate(['/quote/new/' , queryParams]);
+    if(this.openInDialog) {
 
-    }
+    } else {
+      let queryParams = {}
+      if(this.nameObject === 'product')
+        this.router.navigate(['product/productSingle/']);
+      if(this.nameObject === 'quote') {
 
-    if(this.nameObject === 'paiementQuote')
-      this.router.navigate(['/paiementQuote/new/']);
-    if(this.nameObject === 'companie')
-      this.router.navigate(['/companie/new/']);
-    if(this.nameObject === 'right')
-      this.router.navigate(['/right/new/']);
-    if(this.nameObject === 'project')
-      this.router.navigate(['/project/new/']);
-    if(this.nameObject === 'task')
-      this.router.navigate(['/project/tasks/new/']);
+        if(this.idProject) {queryParams['idProject'] = this.idProject}
+        if(this.idClient) {queryParams['idClient'] = this.idClient}
+        this.router.navigate(['/quote/new/' , queryParams]);
 
-    if(this.nameObject === 'expense')
-      this.router.navigate(['/expense/new/']);
+      }
+
+      if(this.nameObject === 'paiementQuote')
+        this.router.navigate(['/paiementQuote/new/']);
+      if(this.nameObject === 'companie')
+        this.router.navigate(['/companie/new/']);
+      if(this.nameObject === 'right')
+        this.router.navigate(['/right/new/']);
+      if(this.nameObject === 'project')
+        this.router.navigate(['/project/new/']);
+      if(this.nameObject === 'task')
+        this.router.navigate(['/project/tasks/new/']);
+
+      if(this.nameObject === 'expense')
+        this.router.navigate(['/expense/new/']);
 
 
-    if(this.nameObject === 'user') {
-      if(this.option === 'internal')
-        this.router.navigate(['/user/new/']);
-      if(this.option === 'external')
-        this.router.navigate(['/user/new/']);
+      if(this.nameObject === 'user') {
+        if(this.option === 'internal')
+          this.router.navigate(['/user/new/']);
+        if(this.option === 'external')
+          this.router.navigate(['/user/new/']);
+      }
+
     }
 
 

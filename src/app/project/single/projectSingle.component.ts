@@ -1,4 +1,4 @@
-import { Component, OnInit, Input} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { ProjectService} from '../project.service';
 import { ToastsManager} from 'ng2-toastr';
 import { MdDialog } from '@angular/material';
@@ -28,6 +28,7 @@ import { AuthService} from '../../auth/auth.service';
 export class ProjectSingleComponent implements OnInit {
 
   @Input() showBackButton: Boolean = true;
+  @Output() saved: EventEmitter<any> = new EventEmitter();
 
   // listBoxers: Array<string> = ['Sugar Ray Robinson', 'Muhammad Ali', 'George Foreman', 'Joe Frazier', 'Jake LaMotta', 'Joe Louis', 'Jack Dempsey', 'Rocky Marciano', 'Mike Tyson', 'Oscar De La Hoya'];
   // listTeamOne: Array<string> = ['aaa'];
@@ -266,11 +267,10 @@ export class ProjectSingleComponent implements OnInit {
 
 
     if(this.fetchedProject._id) {
-
-
       this.projectService.updateProject(this.fetchedProject)
         .subscribe(
           res => {
+
             this.toastr.success('Great!', res.message)
             // this.fetchedProject = res.obj
             this.getProject(res.obj._id)
@@ -279,13 +279,13 @@ export class ProjectSingleComponent implements OnInit {
           error => {console.log(error)}
         );
     } else {
-
       this.projectService.saveProject(this.fetchedProject)
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
             // this.fetchedProject = res.obj
             this.getProject(res.obj._id)
+            this.saved.emit(res.obj)
             // this.router.navigate(['project/' + res.obj._id]);
           },
           error => {

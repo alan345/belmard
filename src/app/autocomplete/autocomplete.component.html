@@ -1,6 +1,33 @@
 {{title}}
+
+
+
 <div *ngIf="!arrayContent.length || !singleChoice">
-  <input class="form-control"  autofocus autocapitalize="none" autocomplete="off" spellcheck="false" autocorrect="none" type="text" name="Search" placeholder="🔎 {{typeAutocomplete}}" [(ngModel)]="autocompleteSearch" (ngModelChange)="searchData()">
+
+  <div class="input-group">
+    <input class="form-control"  autofocus autocapitalize="none" autocomplete="off" spellcheck="false" autocorrect="none" type="text" name="Search" placeholder="🔎 {{typeAutocomplete}}" [(ngModel)]="autocompleteSearch" (ngModelChange)="searchData()">
+      <app-newObjDialog
+        *ngIf="typeAutocomplete=='user' || typeAutocomplete=='companie' || typeAutocomplete=='project'"
+        (saved)="saved($event)"
+        class="input-group-addon" [typeObj]="typeAutocomplete"></app-newObjDialog>
+
+    <!-- <span
+      *ngIf="typeAutocomplete=='user' || typeAutocomplete=='companie' || typeAutocomplete=='project'"
+      class="input-group-addon"
+      (click)="openDialog(typeAutocomplete)"
+      id="basic-addon2">
+      <i class="fa fa-plus"></i>
+    </span> -->
+  </div>
+
+  <!-- <button
+    class="btn btn-success"
+    *ngIf="typeAutocomplete=='user' || typeAutocomplete=='companie' || typeAutocomplete=='project'"
+    type="button" md-button
+    (click)="openDialog(typeAutocomplete)">
+    <i class="fa fa-plus"></i> Add new one
+  </button> -->
+
 </div>
 <div class="form-control" *ngFor="let data of fetchedData; let i=index">
   <table>
@@ -25,13 +52,15 @@
 
 <div *ngIf="fetchedData.length == 0 && autocompleteSearch !=''">
   No results.
-  <button
+  <!-- <button
     class="btn btn-success"
     *ngIf="typeAutocomplete=='user' || typeAutocomplete=='companie' || typeAutocomplete=='project'"
     type="button" md-button
     (click)="openDialog(typeAutocomplete)">
     <i class="fa fa-plus"></i> Add new one
-  </button>
+  </button> -->
+
+  <app-newObjDialog class="btn btn-success" [icone]="'fa fa-plus'" [title]="'Add new one'" [typeObj]="typeAutocomplete"></app-newObjDialog>
 
 
 

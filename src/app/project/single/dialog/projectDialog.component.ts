@@ -15,8 +15,11 @@ export class ProjectDialogComponent {
 
   constructor(public dialogRef: MdDialogRef<ProjectSingleComponent>) {}
 
-
-  onUploadFinisedChildToParent() {
-    // this.userFormsComponent.onUploadFinisedParentToChild();
+  saved(data) {
+    this.dialogRef.close(data)
   }
+
+  // onUploadFinisedChildToParent() {
+  //   // this.userFormsComponent.onUploadFinisedParentToChild();
+  // }
 }

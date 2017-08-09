@@ -123,7 +123,10 @@ export class AutocompleteComponent {
     })
   }
 
-
+  saved(result) {
+    console.log(result)
+    this.arrayContent = [result]
+  }
 
   selectData(data) {
     this.autocompleteSearch = ''
