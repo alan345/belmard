@@ -71,19 +71,19 @@ export class QuotesComponent implements OnInit {
 
   }
 
-  onSelectChange = ($event: any): void => {
-    this.search.isQuoteAssignedToMe = $event.tab.content.viewContainerRef.element.nativeElement.getAttribute('data-isQuoteAssignedToMe')
-    this.getQuotes(this.paginationData.currentPage, this.search);
-
-  }
-
-
-  searchQuotes(){}
+  // onSelectChange = ($event: any): void => {
+  //   this.search.isQuoteAssignedToMe = $event.tab.content.viewContainerRef.element.nativeElement.getAttribute('data-isQuoteAssignedToMe')
+  //   this.getQuotes(this.paginationData.currentPage, this.search);
+  //
+  // }
 
 
-  goBack() {
-    this.location.back();
-  }
+  // searchQuotes(){}
+
+  // 
+  // goBack() {
+  //   this.location.back();
+  // }
 
   searchInput() {
     this.getQuotes(this.paginationData.currentPage, this.search)

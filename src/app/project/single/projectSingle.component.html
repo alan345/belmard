@@ -69,63 +69,50 @@
 
 
 
-      <div class="form-group prmimg-cnt">
 
-        <!-- <div *ngFor="let singleForm of fetchedProject.forms; let i=index;">
-          <img class="promo-img" src="./uploads/forms/{{singleForm.owner}}/{{singleForm.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
-          <button type="button" md-button (click)="removePic(i)">
-            <i class="fa fa-times"></i>
-          </button>
-        </div> -->
-
-        <h4 (click)="showLogs = !showLogs">Show Logs</h4>
-
-        <div *ngIf="showLogs">
-          <app-comment [logs]="fetchedProject.logs"></app-comment>
-
-        </div>
-
-
-      </div>
 
 
 
 
       <div class="form-group">
+        {{'Status' | translate}}
         <select class="form-control col-md-3" formControlName="status" [(ngModel)]="fetchedProject.status">
           <option *ngFor="let n of status" [ngValue]="n.index">{{n.label}}</option>
         </select>
       </div>
 
-
-      <div *ngIf="fetchedProject._id" class="FormGroup whtxt">
-        <a class="btn btn-warning" [routerLink]="['/task/project/' + fetchedProject._id]">
-         <i class="fa fa-calendar" aria-hidden="true"></i>
-         <span>{{'Tasks' | translate}}</span>
-        </a>
-      </div>
-
-
-      <div *ngIf="fetchedProject._id" class="FormGroup whtxt">
-        <button type="button" class="btn btn-warning" (click)="seeCalendar()">
-        <!-- <a class="btn btn-warning" (click)="seeCalendar()"> -->
-         <i class="fa fa-calendar" aria-hidden="true"></i>
-         <span>{{'See calendar' | translate}}</span>
-       </button>
-        <!-- </a> -->
-      </div>
-
-      <!-- <div *ngIf="fetchedProject._id" class="FormGroup whtxt">
-        <a class="btn btn-warning" (click)="addCalendar()">
-         <i class="fa fa-calendar" aria-hidden="true"></i>
-         <span>{{'Add event for this project' | translate}}</span>
-        </a>
-      </div> -->
-
       <div class="form-group">
         <app-autocomplete [typeAutocomplete]="'user'" [title]="'Assigned To'" [singleChoice]=true [arrayContent]="fetchedProject.assignedTos" (getResultAutocomplete)="selectAssignedTo($event[0])">
         </app-autocomplete>
       </div>
+
+      <div *ngIf="fetchedProject._id">
+        <div class="FormGroup whtxt">
+          <button type="button" class="btn btn-warning" (click)="showLogs = !showLogs">
+           <i class="fa fa-calendar" aria-hidden="true"></i>
+           <span>{{'Show Logs' | translate}}</span>
+          </button>
+          <div *ngIf="showLogs">
+            <app-comment [logs]="fetchedProject.logs"></app-comment>
+          </div>
+        </div>
+
+        <div class="FormGroup whtxt">
+          <a class="btn btn-warning" [routerLink]="['/task/project/' + fetchedProject._id]">
+         <i class="fa fa-calendar" aria-hidden="true"></i>
+         <span>{{'Tasks' | translate}}</span>
+        </a>
+        </div>
+        <div class="FormGroup whtxt">
+          <button type="button" class="btn btn-warning" (click)="seeCalendar()">
+         <i class="fa fa-calendar" aria-hidden="true"></i>
+         <span>{{'See calendar' | translate}}</span>
+       </button>
+        </div>
+      </div>
+
+
+
 
       <div class="valid-edit">
         <button type="submit" class="done btn btn-success" [disabled]="!myForm.valid">{{'Save' | translate}}</button>

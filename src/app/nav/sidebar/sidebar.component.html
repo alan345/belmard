@@ -1,8 +1,4 @@
-<div class="page1" *ngIf="showNavBar">
-
-
-
-
+<div *ngIf="showNavBar">
 
   <div id="accordion" role="tablist" aria-multiselectable="true">
 
@@ -130,15 +126,44 @@
 
 
 
+        <div class="card">
+          <div class="" role="tab" id="headingTen">
+            <a class="nav-link" data-toggle="collapse" data-parent="#accordion" href="#collapseTen" aria-expanded="true" aria-controls="collapseTen">
+              <span class="fa fa-university" aria-hidden="true"></span>{{'Quotes'|translate}}
+            </a>
+          </div>
+          <div id="collapseTen" class="collapse" role="tabpanel" aria-labelledby="headingTen">
+            <div class="card-block">
+              <div class="panel-body">
+                <table class="table">
+                  <tr>
+                    <td class="nav-item subItem">
+                      <a class="nav-link" [routerLink]="['/quote/false']" routerLinkActive="active">{{'Quotes'|translate}}</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="nav-item subItem">
+                      <a class="nav-link" [routerLink]="['/quote/true']" routerLinkActive="active">{{'Assigned to me'|translate}}</a>
+                    </td>
+                  </tr>
 
-    <div class="card">
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+
+    <!-- <div class="card">
       <div class="">
         <a class="nav-link" [routerLink]="['/quote']" data-toggle="collapse" data-parent="#accordion" routerLinkActive="active">
           <span class="fa fa-calculator" aria-hidden="true"></span>
           {{'Quotes'|translate}}
         </a>
       </div>
-    </div>
+    </div> -->
 
 
     <div class="card">

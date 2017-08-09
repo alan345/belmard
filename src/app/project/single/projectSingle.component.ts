@@ -4,7 +4,7 @@ import { ToastsManager} from 'ng2-toastr';
 import { MdDialog } from '@angular/material';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
-import { Project, ItemSteps, StatusProject, Log} from '../project.model';
+import { Project, StatusProject, Log} from '../project.model';
 import { EditOptionsComponentDialog } from '../../form/modalLibrary/modalLibrary.component';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -45,7 +45,7 @@ export class ProjectSingleComponent implements OnInit {
   // categ1: string = '';
   // categ2: string = '';
 
-  itemSteps = ItemSteps;
+  itemSteps:any =[];
 
 
   status = StatusProject

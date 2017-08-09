@@ -40,22 +40,22 @@ export class ProjectsComponent implements OnInit {
 
 
   constructor(
-    private sanitizer: DomSanitizer,
+    // private sanitizer: DomSanitizer,
     private projectService: ProjectService,
     private toastr: ToastsManager,
-    public dialog: MdDialog,
-    private router: Router,
-    private location: Location,
-    private authService: AuthService,
-    private userService: UserService,
+    // public dialog: MdDialog,
+    // private router: Router,
+    // private location: Location,
+    // private authService: AuthService,
+    // private userService: UserService,
 
   ) {
   }
 
 
-  goBack() {
-    this.location.back();
-  }
+  // goBack() {
+  //   this.location.back();
+  // }
 
   searchProjects() {
     this.getProjects(1, this.search)
@@ -111,7 +111,7 @@ export class ProjectsComponent implements OnInit {
     }, 200);
   }
 
-  isAdmin() {
-    return this.authService.isAdmin();
-  }
+  // isAdmin() {
+  //   return this.authService.isAdmin();
+  // }
 }
