@@ -10,13 +10,13 @@ import { NewUserComponent }  from '../newUser.component';
 })
 
 export class UserDialogComponent{
-  @ViewChild(NewUserComponent)
-  private newUserComponent: NewUserComponent;
+  // @ViewChild(NewUserComponent)
+  // private newUserComponent: NewUserComponent;
 
   constructor(public dialogRef: MdDialogRef<UserDialogComponent>) {}
 
-
-  onUploadFinisedChildToParent() {
-    // this.userFormsComponent.onUploadFinisedParentToChild();
+  saved(data) {
+    this.dialogRef.close(data)
   }
+
 }

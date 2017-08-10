@@ -73,9 +73,6 @@ export class HeaderComponent implements OnInit {
   }
   redirectCreateObj() {
 
-    if(this.openInDialog) {
-
-    } else {
       let queryParams = {}
       if(this.nameObject === 'product')
         this.router.navigate(['product/productSingle/']);
@@ -108,11 +105,6 @@ export class HeaderComponent implements OnInit {
         if(this.option === 'external')
           this.router.navigate(['/user/new/']);
       }
-
-    }
-
-
-
 
   }
   goBack() {

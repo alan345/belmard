@@ -10,8 +10,8 @@ import { ProjectSingleComponent }  from '../projectSingle.component';
 })
 
 export class ProjectDialogComponent {
-  @ViewChild(ProjectSingleComponent)
-  private projectSingleComponent: ProjectSingleComponent;
+  // @ViewChild(ProjectSingleComponent)
+  // private projectSingleComponent: ProjectSingleComponent;
 
   constructor(public dialogRef: MdDialogRef<ProjectSingleComponent>) {}
 
@@ -19,7 +19,4 @@ export class ProjectDialogComponent {
     this.dialogRef.close(data)
   }
 
-  // onUploadFinisedChildToParent() {
-  //   // this.userFormsComponent.onUploadFinisedParentToChild();
-  // }
 }

@@ -124,8 +124,8 @@ export class AutocompleteComponent {
   }
 
   saved(result) {
-    console.log(result)
-    this.arrayContent = [result]
+    if(result)
+      this.arrayContent = [result]
   }
 
   selectData(data) {

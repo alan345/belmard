@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 import { AuthService} from '../../auth/auth.service';
 import { UserService} from '../user.service';
 import { Right} from '../../right/right.model';
@@ -26,8 +26,8 @@ import { DeleteDialog } from '../../deleteDialog/deleteDialog.component'
 })
 
 export class NewUserComponent implements OnInit {
-  //fetchedUser = new User()
-  //fetchedUser : User;
+  @Output() saved: EventEmitter<any> = new EventEmitter();
+
   fetchedCompanies: Companie[] = []
   autocompleteCompanie: string = '';
 
@@ -241,6 +241,7 @@ export class NewUserComponent implements OnInit {
           res => {
             this.toastr.success('Great!', res.message)
             this.fetchedUser = res.obj
+            this.saved.emit(res.obj)
             // if(redirect == 'profile')
             // this.router.navigate(['user/newuser/' + res.obj._id])
             // location.reload();
