@@ -13,6 +13,6 @@ export class Notification {
   tasks: Task[] = []
   userCalendars: UserCalendar[] = []
   users: User[] = []
-  isRead: boolean = false
+  typeObject: string = '';
   nameNotification: string = '';
 }

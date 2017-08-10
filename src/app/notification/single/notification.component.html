@@ -4,14 +4,14 @@
 
   <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
 
-    <app-autocomplete [typeAutocomplete]="'user'" [title]="'Customer'" [singleChoice]="'true'" [arrayContent]="fetchedNotification.users" (getResultAutocomplete)="selectUser()">
+    <app-autocomplete [typeAutocomplete]="'user'" [title]="'User'" [singleChoice]="'true'" [arrayContent]="fetchedNotification.users" (getResultAutocomplete)="selectUser()">
     </app-autocomplete>
     <app-autocomplete [typeAutocomplete]="'project'" [canDelete]="true" [title]="'Project'" [singleChoice]="true" [arrayContent]="fetchedNotification.projects" (getResultAutocomplete)="selectProject()">
     </app-autocomplete>
 
     <app-autocomplete [typeAutocomplete]="'quote'" [canDelete]="true" [title]="'Quote'" [singleChoice]="true" [arrayContent]="fetchedNotification.quotes" (getResultAutocomplete)="selectQuote()">
     </app-autocomplete>
-    Read: {{fetchedNotification.isRead}}
+    TypeObject: {{fetchedNotification.typeObject}}
     <input type="text" class="form-control" formControlName="nameNotification" [(ngModel)]="fetchedNotification.nameNotification" placeholder="nameNotification">
 
 
