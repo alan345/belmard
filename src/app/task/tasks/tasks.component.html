@@ -48,7 +48,7 @@
               </tr>
             </thead>
             <tbody class="clienttbl">
-              <tr *ngFor="let task of fetchedTasks | paginate: { id: 'taskPagination', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }" [routerLink]="['/task/' + task._id]" routerLinkActive="active">
+              <tr *ngFor="let task of fetchedTasks" [routerLink]="['/task/' + task._id]" routerLinkActive="active">
 
 
 
@@ -74,8 +74,13 @@
           </table>
 
           <div class="has-text-centered">
-            <div [hidden]="!loading">Loading...</div>
-            <pagination-controls (pageChange)="getPage($event)" id="taskPagination" class="change-page"></pagination-controls>
+            <md-paginator
+              [length]="paginationData.totalItems"
+              [pageSize]="paginationData.itemsPerPage"
+              (page)="getPage($event.pageIndex*1+1)">
+            </md-paginator>  
+            <!-- <div [hidden]="!loading">Loading...</div>
+            <pagination-controls (pageChange)="getPage($event)" id="taskPagination" class="change-page"></pagination-controls> -->
           </div>
         </div>
 

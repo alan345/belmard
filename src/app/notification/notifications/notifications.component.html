@@ -42,7 +42,7 @@
               </tr>
             </thead>
             <tbody class="">
-              <tr *ngFor="let notification of fetchedNotifications | paginate: { id: 'server', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }" [routerLink]="['/notification/' + notification._id]"
+              <tr *ngFor="let notification of fetchedNotifications" [routerLink]="['/notification/' + notification._id]"
                 routerLinkActive="active">
 
                 <td class="centre">{{notification.nameNotification}}</td>
@@ -59,8 +59,13 @@
           </table>
 
           <div class="has-text-centered">
-            <div [hidden]="!loading">Loading...</div>
-            <pagination-controls (pageChange)="getPage($event)" id="server" class="change-page"></pagination-controls>
+            <md-paginator
+              [length]="paginationData.totalItems"
+              [pageSize]="paginationData.itemsPerPage"
+              (page)="getPage($event.pageIndex*1+1)">
+            </md-paginator>            
+            <!-- <div [hidden]="!loading">Loading...</div>
+            <pagination-controls (pageChange)="getPage($event)" id="server" class="change-page"></pagination-controls> -->
           </div>
         </div>
 

@@ -55,7 +55,7 @@
               </tr>
             </thead>
             <tbody class="clienttbl">
-              <tr *ngFor="let user of fetchedUsers | paginate: { id: 'server', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }" [routerLink]="['/user/' + user._id]" routerLinkActive="active">
+              <tr *ngFor="let user of fetchedUsers" [routerLink]="['/user/' + user._id]" routerLinkActive="active">
                 <td class="centre">
                   <div *ngFor="let singleType of user.type">
                     {{singleType}}
@@ -74,8 +74,13 @@
             </tbody>
           </table>
           <div class="has-text-centered">
-            <div [hidden]="!loading">Loading...</div>
-            <pagination-controls (pageChange)="getPage($event)" id="server" class="change-page"></pagination-controls>
+            <md-paginator
+              [length]="paginationData.totalItems"
+              [pageSize]="paginationData.itemsPerPage"
+              (page)="getPage($event.pageIndex*1+1)">
+            </md-paginator>            
+            <!-- <div [hidden]="!loading">Loading...</div>
+            <pagination-controls (pageChange)="getPage($event)" id="server" class="change-page"></pagination-controls> -->
           </div>
         </div>
       </div>

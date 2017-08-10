@@ -52,7 +52,7 @@
             </tr>
           </thead>
           <tbody class="">
-            <tr *ngFor="let quote of fetchedQuotes | paginate: { id: 'quotePagination', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }" [routerLink]="['/quote/' + quote._id]" routerLinkActive="active">
+            <tr *ngFor="let quote of fetchedQuotes" [routerLink]="['/quote/' + quote._id]" routerLinkActive="active">
               <td class="centre"></td>
               <td class="centre">
 
@@ -79,10 +79,10 @@
           <pagination-controls (pageChange)="getPage($event)" id="quotePagination" class="change-page"></pagination-controls>
         </div> -->
 
-        <md-paginator [length]="paginationData.totalItems"
-                      [pageSize]="paginationData.itemsPerPage"
-                      (page)="getPage($event.pageIndex*1+1)">
-                  >
+        <md-paginator
+          [length]="paginationData.totalItems"
+          [pageSize]="paginationData.itemsPerPage"
+          (page)="getPage($event.pageIndex*1+1)">
         </md-paginator>
       </div>
     </div>

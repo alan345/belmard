@@ -45,7 +45,7 @@
             </tr>
           </thead>
           <tbody class="">
-            <tr *ngFor="let right of fetchedRights | paginate: { id: 'server', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }" [routerLink]="['/right/' + right._id]" routerLinkActive="active">
+            <tr *ngFor="let right of fetchedRights" [routerLink]="['/right/' + right._id]" routerLinkActive="active">
 
               <td class="centre">{{right.detailRight.nameRight}}</td>
 
@@ -61,8 +61,13 @@
         </table>
 
         <div class="has-text-centered">
-          <div [hidden]="!loading">Loading...</div>
-          <pagination-controls (pageChange)="getPage($event)" id="server" class="change-page"></pagination-controls>
+          <md-paginator
+            [length]="paginationData.totalItems"
+            [pageSize]="paginationData.itemsPerPage"
+            (page)="getPage($event.pageIndex*1+1)">
+          </md-paginator>          
+          <!-- <div [hidden]="!loading">Loading...</div>
+          <pagination-controls (pageChange)="getPage($event)" id="server" class="change-page"></pagination-controls> -->
         </div>
       </div>
 

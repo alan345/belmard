@@ -42,7 +42,7 @@
             </tr>
           </thead>
           <tbody class="clienttbl">
-            <tr *ngFor="let project of fetchedProjects | paginate: { id: 'projectPagination', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }"
+            <tr *ngFor="let project of fetchedProjects"
             [routerLink]="['/project/' + project._id]"
             routerLinkActive="active">
               <td class="centre">{{project.details.categ}}</td>
@@ -60,85 +60,16 @@
           </tbody>
         </table>
 
-<div class="has-text-centered">
-          <div [hidden]="!loading">Loading...</div>
-          <pagination-controls (pageChange)="getPage($event)" id="projectPagination" class="change-page"></pagination-controls>
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-
-</div>
-
-
-
-<!--
-
-<div class="row">
-  <div class="col-md-4">
-    <div [ngClass]="{'card': showHeader, '': !showHeader}">
-      <div *ngIf="showHeader" class="card-header">
-        <h4 class="card-title">{{ 'Add a project' | translate }}</h4>
-      </div>
-      <div class="card-block">
-       <button class="btn btn-primary" [routerLink]="['/project/new/' + userId]" routerLinkActive="active"><i class=""></i>Créer un nouveau Projet</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="col-md-4">
-    <div [ngClass]="{'card': showHeader, '': !showHeader}">
-      <div *ngIf="showHeader" class="card-header">
-        <h4 class="card-title">Consultation / Édition</h4>
-      </div>
-      <div class="card-block">
-        <div class="subsubnav-clients">
-          <input class="form-control"
-            celass="champ"
-            type="text"
-            name="Search"
-            placeholder="&#xf002; {{ ' Search' | translate }}"
-            [(ngModel)]="search.search"
-            (ngModelChange)="searchProjects()">
-        </div>
-
-        <div class="row">
-          <div
-            class="col-md-6"
-            *ngFor="let project of fetchedProjects | paginate: { id: 'projectPagination', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }"
-            [routerLink]="['/project/' + project._id]"
-            routerLinkActive="active"
-          >
-          {{project.details.name }}
-          </div>
-        </div>
-
-
-        <!-- <table class="table table-hover table-responsive table-condensed">
-          <thead>
-            <tr>
-              <th class="tbl-left">
-
-              </th>
-            </tr>
-          </thead>
-          <tbody class="clienttbl">
-            <tr *ngFor="let project of fetchedProjects | paginate: { id: 'projectPagination', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }"
-              [routerLink]="['/project/' + project._id]" routerLinkActive="active">
-              <td>{{project.details.name }}</td>
-            </tr>
-          </tbody>
-        </table> -->
-<!--        <div class="row">
-          <div class="col-md-12">
-            <div [hidden]="!loading">Loading...</div>
-            <pagination-controls (pageChange)="getPage($event)" id="projectPagination" class="change-page"></pagination-controls>
-          </div>
+          <div class="has-text-centered">
+          <!-- <div [hidden]="!loading">Loading...</div> -->
+          <!-- <pagination-controls (pageChange)="getPage($event)" id="projectPagination" class="change-page"></pagination-controls> -->
+          <md-paginator
+            [length]="paginationData.totalItems"
+            [pageSize]="paginationData.itemsPerPage"
+            (page)="getPage($event.pageIndex*1+1)">
+          </md-paginator>
         </div>
       </div>
     </div>
   </div>
 </div>
--->

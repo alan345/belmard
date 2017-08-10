@@ -33,7 +33,7 @@
               </tr>
             </thead>
             <tbody class="clienttbl">
-              <tr *ngFor="let product of fetchedProducts | paginate: { id: 'server', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }" [routerLink]="['/product/' + product._id]" routerLinkActive="active">
+              <tr *ngFor="let product of fetchedProducts" [routerLink]="['/product/' + product._id]" routerLinkActive="active">
                 <td class="centre">
                   <div *ngFor="let singleForm of product.forms; let i = index;">
                     <img *ngIf="i<=0" height="50px" class="img" src="./uploads/forms/{{singleForm.owner}}/{{singleForm.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
@@ -51,8 +51,13 @@
           </table>
 
           <div class="has-text-centered">
-            <div [hidden]="!loading">Loading...</div>
-            <pagination-controls (pageChange)="getPage($event)" id="server" class="change-page"></pagination-controls>
+            <md-paginator
+              [length]="paginationData.totalItems"
+              [pageSize]="paginationData.itemsPerPage"
+              (page)="getPage($event.pageIndex*1+1)">
+            </md-paginator>
+            <!-- <div [hidden]="!loading">Loading...</div>
+            <pagination-controls (pageChange)="getPage($event)" id="server" class="change-page"></pagination-controls> -->
           </div>
         </div>
 
