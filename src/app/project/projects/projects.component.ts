@@ -20,7 +20,7 @@ import { UserService} from '../../user/user.service';
 export class ProjectsComponent implements OnInit {
   @Input() userId = '';
   @Input() showHeader = true;
-  token: string = localStorage.getItem('id_token');
+  // token: string = localStorage.getItem('id_token');
   fetchedProjects: Project[] = [];
   search: any = {
     categories : [],
@@ -52,7 +52,14 @@ export class ProjectsComponent implements OnInit {
   ) {
   }
 
-
+  ngOnInit() {
+    let this2 = this
+    setTimeout(function(){
+      this2.search.userId = this2.userId
+      this2.search.orderBy = 'name'
+      this2.getProjects(1, this2.search)
+    }, 200);
+  }
   // goBack() {
   //   this.location.back();
   // }
@@ -102,14 +109,7 @@ export class ProjectsComponent implements OnInit {
       );
   }
 
-  ngOnInit() {
-    let this2 = this
-    setTimeout(function(){
-      this2.search.userId = this2.userId
-      this2.search.orderBy = 'name'
-      this2.getProjects(1, this2.search)
-    }, 200);
-  }
+
 
   // isAdmin() {
   //   return this.authService.isAdmin();

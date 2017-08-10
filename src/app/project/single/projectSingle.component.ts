@@ -103,21 +103,30 @@ export class ProjectSingleComponent implements OnInit {
       } else {
         if(params['idClient'])
            this.getUser(params['idClient'])
-        if(params['categ'])
-          this.selectedIndex0= params['categ']
+        if(params['selectedIndex'])
+          this.selectedIndex0 = params['selectedIndex']
+
+          this.getItemSteps()
+          console.log('toto')
       }
 
 
 
     })
+    console.log('init')
 
-    this.getItemSteps()
   }
 
   getItemSteps() {
     let currentUser = this.authService.getCurrentUser()
+
     currentUser.ownerCompanies.forEach((companie, index) => {
-      // console.log(companie)
+      console.log(companie.categories.categProject.length)
+      console.log(this.selectedIndex0)
+      if(this.selectedIndex0 >= companie.categories.categProject.length)
+        this.selectedIndex0 = -1
+
+        console.log(this.selectedIndex0 )
       // console.log(JSON.parse(currentUser.companies[index].categJson.categProject))
       if(currentUser.ownerCompanies[index].categories.categProject)
         this.itemSteps = currentUser.ownerCompanies[index].categories.categProject
@@ -176,11 +185,9 @@ export class ProjectSingleComponent implements OnInit {
     this.selectedIndex0 = selectedIndex0
     this.selectedIndex1 = selectedIndex1
     this.selectedIndex2 = selectedIndex2
-
   }
-  addQuote(){
-
-  }
+  // addQuote(){
+  // }
 
 
   // autocomplete user
