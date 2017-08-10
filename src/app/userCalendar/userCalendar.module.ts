@@ -36,7 +36,6 @@ import {CalendarModule} from 'ap-angular2-fullcalendar';
     CommonModule,
     FormsModule,
     MaterialModule,
-    ,
     ReactiveFormsModule,
     RouterModule,
     ProductModule,
