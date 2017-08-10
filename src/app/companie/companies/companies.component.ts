@@ -43,7 +43,7 @@ export class CompaniesComponent implements OnInit {
     this.search.orderBy = 'name'
     this.getCompanies(this.paginationData.currentPage, this.search)
   }
-  saved() {
+  saved(result) {
     this.getCompanies(this.paginationData.currentPage, this.search)
   }
   // openDialog() {

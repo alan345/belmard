@@ -191,7 +191,7 @@ export class UserCalendarsComponent implements OnInit {
     private _fb: FormBuilder,
     private authService: AuthService,
   ) { }
-  onCalendarInit() {
+  onCalendarInit(result) {
     this.searchCalendarComponent.calendarInitialized()
 
     // this.getUserCalendarsInit()

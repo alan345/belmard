@@ -64,11 +64,11 @@ export class UserCalendarComponent implements OnInit {
   selectProject(project: Project) {
     this.fetchedUserCalendar.projects = [project]
   }
-  removeProject(i: number) {
-    this.fetchedUserCalendar.projects.splice(i, 1);
+  removeProject() {
+    // this.fetchedUserCalendar.projects.splice(i, 1);
   }
-  removeUser(i: number) {
-    this.fetchedUserCalendar.users.splice(i, 1);
+  removeUser() {
+    // this.fetchedUserCalendar.users.splice(i, 1);
   }
   getUserCalenddar(id: string) {
     this.userCalendarService.getUserCalendar(id)

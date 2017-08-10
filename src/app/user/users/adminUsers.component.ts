@@ -58,7 +58,7 @@ export class AdminUsersComponent implements OnInit {
   //   this.location.back();
   // }
 
-  saved() {
+  saved(result) {
     this.getUsers(this.paginationData.currentPage, this.search);
   }
 

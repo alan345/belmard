@@ -23,9 +23,9 @@ import { MdDialog } from '@angular/material';
 export class newObjDialogComponent implements OnInit {
 
   @Input() search: any;
-  @Input() typeObj: String = '';
-  @Input() title: String = '';
-  @Input() icone: String = 'fa fa-plus';
+  @Input() typeObj: string = '';
+  @Input() title: string = '';
+  @Input() icone: string = 'fa fa-plus';
   @Output() saved: EventEmitter<any> = new EventEmitter();
   // @Input() option: String = '';
   // @Input() showBackButton: Boolean = true;

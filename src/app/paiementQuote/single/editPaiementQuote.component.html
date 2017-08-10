@@ -20,13 +20,13 @@
       <app-autocomplete [typeAutocomplete]="'user'" [canDelete]="true" [title]="" [singleChoice]="true" [arrayContent]="fetchedPaiementQuote.userDebiteds" (getResultAutocomplete)="selectUserDebited($event[0])">
       </app-autocomplete>
 
-      <div *ngIf="fetchedPaiementQuote.amount =='0' || fetchedPaiementQuote.type != 'stripe'">
+      <div *ngIf="fetchedPaiementQuote.amount == 0 || fetchedPaiementQuote.type != 'stripe'">
         <select class="form-control" formControlName="type" [(ngModel)]="fetchedPaiementQuote.type">
             <option [attr.value]="''">Please Select</option>
             <option *ngFor="let n of paiementsTypes" [attr.value]="n.value">{{n.label}}</option>
         </select>
       </div>
-      <div class="form-control" *ngIf="fetchedPaiementQuote.amount !='0' && fetchedPaiementQuote.type == 'stripe'">
+      <div class="form-control" *ngIf="fetchedPaiementQuote.amount !=0 && fetchedPaiementQuote.type == 'stripe'">
         {{fetchedPaiementQuote.type}}
       </div>
 
