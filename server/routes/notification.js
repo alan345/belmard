@@ -96,11 +96,9 @@ router.post('/', function (req, res, next) {
       err: ''
     })
   }
-   console.log(req.user.companies)
-  //var Notification = new Notification(req.body)
+
   var notification = new Notification(req.body)
   notification.ownerCompanies = req.user.ownerCompanies
-  notification.owner = req.user._id
   notification.save(function (err, result) {
     if (err) {
       console.log(err)
@@ -115,6 +113,8 @@ router.post('/', function (req, res, next) {
     })
   })
 })
+
+
 
 
 

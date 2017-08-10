@@ -2,9 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../auth/auth.service';
 import {NotificationService} from '../notification.service';
 import {UserService} from '../../user/user.service';
-
-
-
 import {Notification} from '../notification.model';
 
 import {ToastsManager} from 'ng2-toastr';
@@ -14,10 +11,10 @@ import {Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 
-import { DeleteDialog } from '../../deleteDialog/deleteDialog.component';
-import { User } from '../../user/user.model';
+// import { DeleteDialog } from '../../deleteDialog/deleteDialog.component';
+// import { User } from '../../user/user.model';
 
-import { EditOptionsComponentDialog } from '../../form/modalLibrary/modalLibrary.component';
+// import { EditOptionsComponentDialog } from '../../form/modalLibrary/modalLibrary.component';
 
 @Component({
   selector: 'app-editNotification',
@@ -81,7 +78,6 @@ export class NotificationComponent implements OnInit {
 
 
   save() {
-
     //this.fetchedNotification.categJson.categProduct = JSON.stringify(JSON.parse(this.fetchedNotification.categJson.categProduct))
     if(this.fetchedNotification._id) {
       this.notificationService.updateNotification(this.fetchedNotification)

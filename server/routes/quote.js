@@ -3,7 +3,7 @@ var express = require('express'),
   config = require('../config/config'),
   User = require('../models/user.model'),
   Quote = require('../models/quote.model'),
-  Form = require('../models/form.model'),
+  Notification = require('../models/notification.model'),
   fs = require('fs'),
   jwt = require('jsonwebtoken'),
   mongoose = require('mongoose'),
@@ -195,9 +195,43 @@ router.put('/:id', function(req, res, next) {
       }
       res.status(201).json({message: '', obj: result});
     });
-
   })
 });
+
+
+
+//update
+router.put('/:id/signature', function(req, res, next) {
+  if (!shared.isCurentUserHasAccess(req.user, nameObject, 'write'))
+    return res.status(404).json({ title: 'No rights', error: { message: 'No rights' }})
+
+  Quote.findById(({_id: req.params.id}), function(err, item) {
+    if (err) { return res.status(404).json({message: '', err: err}) }
+    item.signature = req.body.signature
+    item.save(function(err, result) {
+      if (err) { return res.status(404).json({message: 'There was an error, please try again', err: err}) }
+      console.log(req.body)
+      var notification = new Notification()
+      notification.ownerCompanies = req.user.ownerCompanies
+      notification.nameNotification = 'Update With a signature'
+      notification.save(function (err, result2) {
+        if (err) {
+          console.log(err)
+          return res.status(403).json({
+            title: 'There was an issue',
+            error: {message: 'Error'}
+          })
+        }
+        res.status(200).json({
+          message: 'Ok',
+          obj: result
+        })
+      })
+      // res.status(201).json({message: '', obj: result});
+    });
+  })
+});
+
 
 router.post('/', function(req, res, next) {
   if (!shared.isCurentUserHasAccess(req.user, nameObject, 'write')) {

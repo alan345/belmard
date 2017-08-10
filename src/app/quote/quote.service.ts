@@ -162,4 +162,16 @@ export class QuoteService {
       });
   }
 
+  updateSignature(quote: Quote) {
+    const body = JSON.stringify(quote);
+    const headers = new Headers({'Content-Type': 'application/json'});
+    headers.append('Authorization', '' + this.authService.currentUser.token);
+    return this.http.put(this.url + 'quote/' + quote._id + '/signature', body, {headers: headers})
+      .map(response => response.json())
+      .catch((error: Response) => {
+        this.errorService.handleError(error.json());
+        return Observable.throw(error.json());
+      });
+  }
+
 }

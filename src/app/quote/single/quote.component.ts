@@ -187,14 +187,14 @@ export class QuoteComponent implements OnInit {
   removeSignature() {
     this.fetchedQuote.signature = new Signature()
     this.fetchedQuote.statusQuote = 0
-    this.save()
+    this.updateSignature()
   }
   validateSignature() {
     this.fetchedQuote.signature.base64 = this.imgSignatureBase64Temp
     this.fetchedQuote.signature.dateSignature = new Date()
     this.fetchedQuote.signature.users = [this.authService.getCurrentUser()]
     this.fetchedQuote.statusQuote = 1
-    this.save()
+    this.updateSignature()
   }
   drawComplete() {
     // will be notified of szimek/signature_pad's onEnd event
@@ -399,6 +399,19 @@ export class QuoteComponent implements OnInit {
   selectProject(project: Project) {
     this.fetchedQuote.projects = [project]
   }
+
+
+
+  updateSignature() {
+    this.quoteService.updateSignature(this.fetchedQuote)
+      .subscribe(
+      res => {
+        this.toastr.success('Great!', res.message)
+      },
+      error => { console.log(error) }
+      )
+  }
+
 
   save() {
     this.fetchedQuote.detail.dateQuote.issueDate = this.authService.HTMLDatetoIsoDate(this.fetchedQuote.detail.dateQuote.issueDateString)
