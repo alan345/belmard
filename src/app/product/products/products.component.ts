@@ -78,7 +78,10 @@ export class ProductsComponent implements OnInit {
   getPage(page: number) {
     this.getProducts(page, this.search);
   }
-
+  saved(result) {
+    if(result)
+      this.getProducts(1, this.search)
+  }
 
   // loadMore(){
   //   this.paginationData.currentPage = this.paginationData.currentPage+1

@@ -142,7 +142,7 @@ export class ProjectSingleComponent implements OnInit {
     if(this.fetchedProject._id) {queryParams['idProjectNew'] = this.fetchedProject._id}
     if(this.fetchedProject.clients.length) {queryParams['idClientNew'] = this.fetchedProject.clients[0]._id }
     // if(this.fetchedProject.assignedTos.length)  {queryParams['idUserSearch'] = this.fetchedProject.assignedTos[0]._id }
-    if(this.fetchedProject._id)                 {queryParams['idProjectSearch'] = this.fetchedProject._id}
+    if(this.fetchedProject._id) {queryParams['idProjectSearch'] = this.fetchedProject._id}
 
     this.router.navigate(['userCalendar/', queryParams])
   }
@@ -152,7 +152,7 @@ export class ProjectSingleComponent implements OnInit {
     queryParams['showSearchEvent'] = false
 
     // if(this.fetchedProject.assignedTos.length)  {queryParams['idUserSearch'] = this.fetchedProject.assignedTos[0]._id }
-    if(this.fetchedProject._id)                 {queryParams['idProjectSearch'] = this.fetchedProject._id}
+    if(this.fetchedProject._id) {queryParams['idProjectSearch'] = this.fetchedProject._id}
     // if(this.fetchedProject.clients.length)      {queryParams['idClientSearch'] = this.fetchedProject.clients[0]._id}
     this.router.navigate(['userCalendar/', queryParams])
   }
@@ -275,6 +275,7 @@ export class ProjectSingleComponent implements OnInit {
             this.toastr.success('Great!', res.message)
             // this.fetchedProject = res.obj
             this.getProject(res.obj._id)
+            this.saved.emit(res.obj)
             // this.router.navigate(['project/' + res.obj._id]);
           },
           error => {console.log(error)}

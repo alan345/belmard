@@ -1,4 +1,4 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 import { ProductService} from '../product.service';
 import { CompanieService} from '../../companie/companie.service';
 
@@ -19,14 +19,14 @@ import { AuthService} from '../../auth/auth.service';
 
 
 @Component({
-  selector: 'app-products',
+  selector: 'app-productSingle',
   templateUrl: './productSingle.component.html',
   styleUrls: ['../product.component.css'],
 
 })
 
 export class ProductSingleComponent implements OnInit {
-
+  @Output() saved: EventEmitter<any> = new EventEmitter();
   selectedIndex0: number = -1
   selectedIndex1: number = -1
   selectedIndex2: number = -1
@@ -212,7 +212,9 @@ export class ProductSingleComponent implements OnInit {
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
-            this.router.navigate(['product']);
+            // this.router.navigate(['product']);
+            this.getProduct(res.obj._id)
+            this.saved.emit(res.obj)
           },
           error => {console.log(error)}
         );
@@ -221,7 +223,9 @@ export class ProductSingleComponent implements OnInit {
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
-            this.router.navigate(['product']);
+            this.getProduct(res.obj._id)
+            // this.router.navigate(['product']);
+            this.saved.emit(res.obj)
           },
           error => {
             this.toastr.error('Error!', error.message)

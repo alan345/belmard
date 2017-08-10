@@ -6,21 +6,21 @@
   <div class="col-md-3"></div>
 </div> -->
 
-<app-header [showHeader]="showHeader" [nameObject]="'task'"></app-header>
+<!-- <app-header [showHeader]="showHeader" [nameObject]="'task'"></app-header> -->
 
 <!--
 <div class="clearfix col-md-10">
   <button class="btn btn-success float-right" [routerLink]="['/project/new/' + userId]" routerLinkActive="active"><i class=""></i>Créer un nouveau Projet</button>
 </div> -->
-
-<div class="row">
-  <div class="col-md-10">
-    <div class="card">
-      <div class="card-header">
-        <h4 class="card-title">{{ 'List' | translate }}</h4>
-      </div>
-      <div class="card-block clearfix">
-        <!-- <app-autocomplete
+<div class="container">
+  <div class="row">
+    <div class="col-md-10">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">{{ 'List' | translate }}</h4>
+        </div>
+        <div class="card-block clearfix">
+          <!-- <app-autocomplete
           [typeAutocomplete]="'project'"
           [canDelete]="true"
           [title]="'Project'"
@@ -31,35 +31,35 @@
         </app-autocomplete> -->
 
 
-        <md-checkbox class="example-margin" [(ngModel)]="search.myTasks" (change)="searchTasks()">My tasks</md-checkbox>
+          <md-checkbox class="example-margin" [(ngModel)]="search.myTasks" (change)="searchTasks()">My tasks</md-checkbox>
 
 
-        <!-- <div id="wrapper" class="subsubnav-clients float-left">
+          <!-- <div id="wrapper" class="subsubnav-clients float-left">
           <input class="form-control margebasse col-md-12" type="text" name="Search" placeholder="Rechercher" [(ngModel)]="search.search" (ngModelChange)="searchProjects()">
         </div> -->
-        <table class="table table-hover">
-          <thead>
-            <tr>
+          <table class="table table-hover">
+            <thead>
+              <tr>
 
-              <th class="centre">Project</th>
-              <th class="centre">Name Task</th>
-              <th class="centre">Assigned to</th>
+                <th class="centre">Project</th>
+                <th class="centre">Name Task</th>
+                <th class="centre">Assigned to</th>
 
-            </tr>
-          </thead>
-          <tbody class="clienttbl">
-            <tr *ngFor="let task of fetchedTasks | paginate: { id: 'taskPagination', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }" [routerLink]="['/task/' + task._id]" routerLinkActive="active">
+              </tr>
+            </thead>
+            <tbody class="clienttbl">
+              <tr *ngFor="let task of fetchedTasks | paginate: { id: 'taskPagination', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }" [routerLink]="['/task/' + task._id]" routerLinkActive="active">
 
 
 
-              <td class="centre"></td>
-              <td class="centre">{{task.title}}</td>
-              <td class="centre">
-                <!-- <div *ngFor="let assignedTo of project.bucketTasks.tasks.users">
+                <td class="centre"></td>
+                <td class="centre">{{task.title}}</td>
+                <td class="centre">
+                  <!-- <div *ngFor="let assignedTo of project.bucketTasks.tasks.users">
                   {{assignedTo.profile.name}} {{assignedTo.profile.lastName}}
                 </div> -->
-              </td>
-              <!-- <td class="centre">{{project.details.customer}}</td>
+                </td>
+                <!-- <td class="centre">{{project.details.customer}}</td>
               <td class="centre">{{project.details.name}}</td>
               <td class="centre">{{project.details.date}}</td>
               <td class="centre">
@@ -68,19 +68,19 @@
                 </div>
 
               </td> -->
-              <!-- <td class="centre btn btn-outline-info">{{project.StatusProject}}</td> -->
-            </tr>
-          </tbody>
-        </table>
+                <!-- <td class="centre btn btn-outline-info">{{project.StatusProject}}</td> -->
+              </tr>
+            </tbody>
+          </table>
 
-        <div class="has-text-centered">
-          <div [hidden]="!loading">Loading...</div>
-          <pagination-controls (pageChange)="getPage($event)" id="taskPagination" class="change-page"></pagination-controls>
+          <div class="has-text-centered">
+            <div [hidden]="!loading">Loading...</div>
+            <pagination-controls (pageChange)="getPage($event)" id="taskPagination" class="change-page"></pagination-controls>
+          </div>
         </div>
+
       </div>
 
     </div>
-
   </div>
-
 </div>

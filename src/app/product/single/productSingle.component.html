@@ -6,7 +6,7 @@
   <div class="col-md-3"></div>
 </div> -->
 <div>
-  <app-header [showBackButton]="true" [nameObject]="'product'" [showCreateButton]="false"></app-header>
+  <app-header [nameObject]="'product'" [showCreateButton]="false"></app-header>
   <div>
     <div class="container">
       <button (click)="changeCascade(i, -1, -1)" *ngFor="let itemStep of itemSteps;let i=index;" type="button" class="btn" [ngClass]="{'btn-success': i==selectedIndex0, '': i!=selectedIndex0}">

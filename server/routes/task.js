@@ -169,7 +169,7 @@ router.get('/page/:page', function (req, res, next) {
   .find(searchQuery)
   .sort('-createdAt')
   .populate({path: 'projects', model: 'Project'})
-  .populate({ path: 'assignedTos', model: 'User'})
+  .populate({ path: 'users', model: 'User'})
 
   // .populate({path: 'quotes', model: 'Quote'})
   // .populate(
@@ -228,7 +228,7 @@ router.get('/:id', function (req, res, next) {
     Task
     .findById({_id: req.params.id})
     .populate({path: 'projects', model: 'Project'})
-    .populate({ path: 'assignedTos', model: 'User'})
+    .populate({ path: 'users', model: 'User'})
     // .populate({path: 'forms', model: 'Form'})
     // .populate({path: 'assignedTos', model: 'User'})
     // .populate(

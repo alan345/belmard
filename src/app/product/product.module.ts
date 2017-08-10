@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
+import { ProductDialogComponent } from './single/dialog/productDialog.component';
 
 import { ProductsComponent} from './products/products.component';
 import { ProductSingleComponent} from './single/productSingle.component';
@@ -30,12 +31,15 @@ import {SharedModule } from '../shared/shared.module';
 
     ProductsComponent,
     ProductSingleComponent,
+    ProductDialogComponent,
 
   ],
   exports:      [ ProductsComponent ],
   providers:    [
-
-    ProductService ],
-  entryComponents: [ ]
+    ProductService,
+  ],
+  entryComponents: [
+    ProductDialogComponent,
+  ]
 })
 export class ProductModule { }
