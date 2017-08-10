@@ -3,7 +3,7 @@
     NAV
   </button> -->
 
-  <div id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="sideBar" id="accordion" role="tablist" aria-multiselectable="true">
 
     <i (click)="sidenav.toggle()" class="fa fa-bars" aria-hidden="true"></i>
 
@@ -136,32 +136,32 @@
 
 
 
-        <div class="card">
-          <div class="" role="tab" id="headingTen">
-            <a class="nav-link" data-toggle="collapse" data-parent="#accordion" href="#collapseTen" aria-expanded="true" aria-controls="collapseTen">
+    <div class="card">
+      <div class="" role="tab" id="headingTen">
+        <a class="nav-link" data-toggle="collapse" data-parent="#accordion" href="#collapseTen" aria-expanded="true" aria-controls="collapseTen">
               <span class="fa fa-university" aria-hidden="true"></span> {{'Quotes'|translate}}
             </a>
-          </div>
-          <div id="collapseTen" class="collapse" role="tabpanel" aria-labelledby="headingTen">
-            <div class="card-block">
-              <div class="panel-body">
-                <table class="table">
-                  <tr>
-                    <td class="nav-item subItem">
-                      <a class="nav-link" [routerLink]="['/quote/false']" routerLinkActive="active">{{'Quotes'|translate}}</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="nav-item subItem">
-                      <a class="nav-link" [routerLink]="['/quote/true']" routerLinkActive="active">{{'Assigned to me'|translate}}</a>
-                    </td>
-                  </tr>
+      </div>
+      <div id="collapseTen" class="collapse" role="tabpanel" aria-labelledby="headingTen">
+        <div class="card-block">
+          <div class="panel-body">
+            <table class="table">
+              <tr>
+                <td class="nav-item subItem">
+                  <a class="nav-link" [routerLink]="['/quote/false']" routerLinkActive="active">{{'Quotes'|translate}}</a>
+                </td>
+              </tr>
+              <tr>
+                <td class="nav-item subItem">
+                  <a class="nav-link" [routerLink]="['/quote/true']" routerLinkActive="active">{{'Assigned to me'|translate}}</a>
+                </td>
+              </tr>
 
-                </table>
-              </div>
-            </div>
+            </table>
           </div>
         </div>
+      </div>
+    </div>
 
 
 
