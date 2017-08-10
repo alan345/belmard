@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {AuthService} from '../../auth/auth.service';
 import { Location } from '@angular/common';
 import {Router} from '@angular/router';
@@ -21,6 +21,7 @@ export class HeaderComponent implements OnInit {
   @Input() showCreateButton: Boolean = true;
   @Input() idProject: string= '';
   @Input() idClient: string= '';
+  @Output() saved: EventEmitter<any> = new EventEmitter();
 
 
 
@@ -110,5 +111,7 @@ export class HeaderComponent implements OnInit {
   goBack() {
     this.location.back();
   }
-
+  savedF(result) {
+    this.saved.emit(result)
+  }
 }

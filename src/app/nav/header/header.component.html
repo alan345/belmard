@@ -15,14 +15,16 @@
 <!-- <div class="clearfix col-md-10">
   <button class="btn btn-success float-right" [routerLink]="['/product/productSingle/']" routerLinkActive="active"><i class=""></i>{{ 'Create a new product' | translate }}</button>
 </div> -->
-<div *ngIf="openInDialog">
-  <div *ngIf="showCreateButton" class="clearfix col-md-10">
-    <div class="float-right">
-      <app-newObjDialog [typeObj]="nameObject"></app-newObjDialog>
-    </div>
+<div *ngIf="showCreateButton">
+  <div *ngIf="openInDialog">
+    <!-- <div class="clearfix col-md-10"> -->
+      <div class="float-right">
+        <app-newObjDialog (saved)="savedF($event)" [typeObj]="nameObject"></app-newObjDialog>
+      </div>
+    <!-- </div> -->
   </div>
-</div>
-<div *ngIf="!openInDialog">
-  <button class="btn btn-success float-right" (click)="redirectCreateObj()" routerLinkActive="active">
-      <i class=""></i>{{nameButton}}</button>
+  <div *ngIf="!openInDialog">
+    <button class="btn btn-success float-right" (click)="redirectCreateObj()" routerLinkActive="active">
+        <i class=""></i>{{nameButton}}</button>
+  </div>
 </div>

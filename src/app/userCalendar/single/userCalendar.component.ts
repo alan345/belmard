@@ -30,6 +30,8 @@ import { Project } from '../../project/project.model';
 })
 export class UserCalendarComponent implements OnInit {
   @Input() fetchedUserCalendar:UserCalendar = new UserCalendar()
+  @Output() saved: EventEmitter<any> = new EventEmitter();
+
   // fetchedUserCalendar: UserCalendar = new UserCalendar()
   myForm: FormGroup;
   constructor(
@@ -116,6 +118,7 @@ export class UserCalendarComponent implements OnInit {
           .subscribe(
             res => {
               this.toastr.success('Great!', res.message)
+              this.saved.emit(res)
             },
             error => {
               this.toastr.error('error!', error)
@@ -126,6 +129,7 @@ export class UserCalendarComponent implements OnInit {
           .subscribe(
             res => {
               this.toastr.success('Great!', res.message)
+              this.saved.emit(res)
             },
             error => {console.log(error)}
           )

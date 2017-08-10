@@ -24,7 +24,7 @@ export class PaiementQuoteDialogComponent {
   }
 
 
-  newPaiementQuoteSaved() {
+  saved() {
     this.dialogRef.close()
     // this.userFormsComponent.onUploadFinisedParentToChild();
   }

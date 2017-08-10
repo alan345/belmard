@@ -31,9 +31,11 @@ export class UserCalendarDialogComponent {
      this.fetchedUserCalendar.details = data.fetchedUserCalendar.details
   }
 
-
-  newUserCalendarSaved() {
+  saved() {
     this.dialogRef.close()
-    // this.userFormsComponent.onUploadFinisedParentToChild();
   }
+  // newUserCalendarSaved() {
+  //   this.dialogRef.close()
+  //   // this.userFormsComponent.onUploadFinisedParentToChild();
+  // }
 }

@@ -33,7 +33,7 @@ import { Project } from '../../project/project.model';
   styleUrls: ['../paiementQuote.component.css'],
 })
 export class EditPaiementQuoteComponent implements OnInit {
-  @Output() newPaiementQuoteSaved: EventEmitter<any> = new EventEmitter();
+  @Output() saved: EventEmitter<any> = new EventEmitter();
   @Input() showHeader = true;
   @Input() fetchedQuotes: Quote[] = []
 
@@ -85,8 +85,8 @@ export class EditPaiementQuoteComponent implements OnInit {
 
   ngOnInit() {
 
-    // console.log(this.fetchedQuotes)
-    this.fetchedPaiementQuote.quotes = this.fetchedQuotes
+    console.log(this.fetchedPaiementQuote)
+    // this.fetchedPaiementQuote.quotes = this.fetchedQuotes
     this.myForm = this._fb.group({
       amount: [''],
       type: [''],
@@ -139,7 +139,7 @@ export class EditPaiementQuoteComponent implements OnInit {
           .subscribe(
             res => {
               this2.toastr.success('Great!', res.message)
-              this2.newPaiementQuoteSaved.emit()
+              this2.saved.emit()
               this2.getPaiementQuote(res.obj._id)
               resolve(true)
               //this.router.navigate(['paiementQuote/edit/' + this.fetchedPaiementQuote._id])
@@ -154,7 +154,7 @@ export class EditPaiementQuoteComponent implements OnInit {
           .subscribe(
             res => {
               this2.toastr.success('Great!', res.message)
-              this2.newPaiementQuoteSaved.emit()
+              this2.saved.emit()
               this2.getPaiementQuote(res.obj._id)
               // if(this.showHeader)
               //   this.router.navigate(['paiementQuote/edit/' + res.obj._id])

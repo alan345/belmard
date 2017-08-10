@@ -59,7 +59,7 @@ export class PaiementQuotesComponent implements OnInit {
   }
 
 
-  getPaiementQuotesInit(){
+  getPaiementQuotesInit() {
     let this2 = this
     setTimeout(function(){
       this2.search.idQuote = this2.idQuote
@@ -119,7 +119,9 @@ export class PaiementQuotesComponent implements OnInit {
         }
       );
   }
-
+  saved(result){
+    this.getPaiementQuotesInit()
+  }
 
   isAdmin() {
     return this.authService.isAdmin();

@@ -6,6 +6,9 @@ import { TranslateService } from '../../translate/translate.service';
 import { UserDialogComponent } from '../../user/singleUser/dialog/userDialog.component';
 import { CompanieDialogComponent } from '../../companie/singleCompanie/dialog/companieDialog.component';
 import { ProjectDialogComponent } from '../../project/single/dialog/projectDialog.component';
+import { PaiementQuoteDialogComponent } from '../../paiementQuote/single/dialog/paiementQuoteDialog.component';
+
+
 import { MdDialog } from '@angular/material';
 
 
@@ -55,6 +58,8 @@ export class newObjDialogComponent implements OnInit {
     if(typeObj == 'project')
       dialogComp = ProjectDialogComponent
 
+    if(typeObj == 'paiementQuote')
+      dialogComp = PaiementQuoteDialogComponent
 
     let dialogRef = this.mdDialog.open(dialogComp, {
       height: '500px'
