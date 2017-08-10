@@ -22,7 +22,6 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     FormsModule,
     MaterialModule,
-    ,
     ReactiveFormsModule,
     RouterModule,
     SharedModule,
