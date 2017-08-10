@@ -18,6 +18,8 @@ import { MdDialog } from '@angular/material';
   styleUrls: ['./newObjDialog.component.css']
 })
 export class newObjDialogComponent implements OnInit {
+
+  @Input() search: any;
   @Input() typeObj: String = '';
   @Input() title: String = '';
   @Input() icone: String = 'fa fa-plus';
@@ -61,8 +63,13 @@ export class newObjDialogComponent implements OnInit {
     if(typeObj == 'paiementQuote')
       dialogComp = PaiementQuoteDialogComponent
 
+
+
     let dialogRef = this.mdDialog.open(dialogComp, {
-      height: '500px'
+      height: '500px',
+      data: {
+        search: this.search
+      }
     });
     dialogRef.afterClosed().subscribe(result => {
       // console.log(result)

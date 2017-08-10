@@ -119,7 +119,7 @@ export class PaiementQuotesComponent implements OnInit {
         }
       );
   }
-  saved(result){
+  saved(result) {
     this.getPaiementQuotesInit()
   }
 

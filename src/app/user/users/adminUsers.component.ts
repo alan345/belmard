@@ -22,7 +22,7 @@ export class AdminUsersComponent implements OnInit {
   search = {
     orderBy : '',
     search: '',
-    isExternalUser: 'false',
+    isExternalUser: false,
     role: ''
   };
   paginationData = {

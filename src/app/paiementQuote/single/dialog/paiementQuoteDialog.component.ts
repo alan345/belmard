@@ -11,7 +11,7 @@ import { Quote } from '../../../quote/quote.model'
 
 export class PaiementQuoteDialogComponent {
   fetchedQuote: Quote
-
+  isExpense:boolean = false
   //
   // @ViewChild(EditPaiementQuoteComponent)
   // private editPaiementQuoteComponent: EditPaiementQuoteComponent;
@@ -20,7 +20,9 @@ export class PaiementQuoteDialogComponent {
     public dialogRef: MdDialogRef<EditPaiementQuoteComponent>,
     @Inject(MD_DIALOG_DATA) public data: any
   ) {
-     this.fetchedQuote = this.data
+    console.log(data)
+    this.isExpense = data.search.isExpense
+    //  this.fetchedQuote = this.data
   }
 
 

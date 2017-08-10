@@ -19,7 +19,7 @@
   <div *ngIf="openInDialog">
     <!-- <div class="clearfix col-md-10"> -->
       <div class="float-right">
-        <app-newObjDialog (saved)="savedF($event)" [typeObj]="nameObject"></app-newObjDialog>
+        <app-newObjDialog [search]="search" (saved)="savedF($event)" [typeObj]="nameObject"></app-newObjDialog>
       </div>
     <!-- </div> -->
   </div>

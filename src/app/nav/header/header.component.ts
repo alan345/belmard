@@ -11,6 +11,8 @@ import { TranslateService } from '../../translate/translate.service';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent implements OnInit {
+
+  @Input() search: any;
   @Input() nameObject: String = '';
   @Input() title: String = '';
   @Input() nameButton: String = '';

@@ -1,8 +1,10 @@
 <div class="container">
   <app-header
     [showHeader]="showHeader"
+    [search]="search"
     (saved)="saved($event)"
-    [nameButton]="'Create a new Paiement'" [nameObject]="'paiementQuote'"
+    [nameButton]="'Create a new Paiement'"
+    [nameObject]="'paiementQuote'"
     [openInDialog]=true>
   </app-header>
   <div class="row">
