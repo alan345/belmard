@@ -36,8 +36,8 @@ export class EditPaiementQuoteComponent implements OnInit {
   @Output() saved: EventEmitter<any> = new EventEmitter();
   @Input() showHeader = true;
   @Input() fetchedQuotes: Quote[] = []
-  @Input() isExpense: boolean = false;
-  
+  @Input() search: any;
+
   showPaiements: boolean = false
   fetchedPaiementQuote: PaiementQuote = new PaiementQuote()
   autocompleteUser: string = '';
@@ -99,7 +99,7 @@ export class EditPaiementQuoteComponent implements OnInit {
     this.authService
     .isoDateToHtmlDate(this.fetchedPaiementQuote.datePaiement)
 
-    this.fetchedPaiementQuote.isExpense = this.isExpense
+    this.fetchedPaiementQuote.isExpense = this.search.isExpense
     this.activatedRoute.params.subscribe((params: Params) => {
       if(params['isExpense']) {this.fetchedPaiementQuote.isExpense = true}
       if(params['idPaiementQuote']) {this.getPaiementQuote(params['idPaiementQuote'])}

@@ -48,7 +48,9 @@ export class newObjDialogComponent implements OnInit {
 
 
   ngOnInit() {
+
   }
+
   openDialog(typeObj: string) {
     let dialogComp: any
     if(typeObj == 'user')

@@ -1,5 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
-import { MdDialogRef} from '@angular/material';
+import { Component, ViewChild, Inject } from '@angular/core';
+import { MdDialogRef, MdDialogConfig, MD_DIALOG_DATA} from '@angular/material';
 import { NewUserComponent }  from '../newUser.component';
 
 
@@ -12,9 +12,15 @@ import { NewUserComponent }  from '../newUser.component';
 export class UserDialogComponent{
   // @ViewChild(NewUserComponent)
   // private newUserComponent: NewUserComponent;
+  search: any;
 
-  constructor(public dialogRef: MdDialogRef<UserDialogComponent>) {}
-
+  constructor(
+    public dialogRef: MdDialogRef<NewUserComponent>,
+    @Inject(MD_DIALOG_DATA) public data: any
+  ) {
+    console.log(data.search)
+    this.search = data.search
+  }
   saved(data) {
     this.dialogRef.close(data)
   }

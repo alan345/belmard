@@ -107,13 +107,8 @@ export class ProjectSingleComponent implements OnInit {
           this.selectedIndex0 = params['selectedIndex']
 
           this.getItemSteps()
-          console.log('toto')
       }
-
-
-
     })
-    console.log('init')
 
   }
 
@@ -121,12 +116,11 @@ export class ProjectSingleComponent implements OnInit {
     let currentUser = this.authService.getCurrentUser()
 
     currentUser.ownerCompanies.forEach((companie, index) => {
-      console.log(companie.categories.categProject.length)
-      console.log(this.selectedIndex0)
+
       if(this.selectedIndex0 >= companie.categories.categProject.length)
         this.selectedIndex0 = -1
 
-        console.log(this.selectedIndex0 )
+
       // console.log(JSON.parse(currentUser.companies[index].categJson.categProject))
       if(currentUser.ownerCompanies[index].categories.categProject)
         this.itemSteps = currentUser.ownerCompanies[index].categories.categProject

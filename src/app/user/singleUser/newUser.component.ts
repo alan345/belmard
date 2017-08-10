@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { AuthService} from '../../auth/auth.service';
 import { UserService} from '../user.service';
 import { Right} from '../../right/right.model';
@@ -27,7 +27,7 @@ import { DeleteDialog } from '../../deleteDialog/deleteDialog.component'
 
 export class NewUserComponent implements OnInit {
   @Output() saved: EventEmitter<any> = new EventEmitter();
-
+  @Input() search: any;
   fetchedCompanies: Companie[] = []
   autocompleteCompanie: string = '';
 
@@ -96,7 +96,7 @@ export class NewUserComponent implements OnInit {
           })
 
       })
-
+      this.fetchedUser.isExternalUser = this.search.isExternalUser
       this.activatedRoute.params.subscribe((params: Params) => {
         if(params['id']) {
           this.getUser(params['id'])

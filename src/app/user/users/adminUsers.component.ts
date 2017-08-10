@@ -54,8 +54,12 @@ export class AdminUsersComponent implements OnInit {
 
 
   }
-  goBack() {
-    this.location.back();
+  // goBack() {
+  //   this.location.back();
+  // }
+
+  saved() {
+    this.getUsers(this.paginationData.currentPage, this.search);
   }
 
   // onSelectChange = ($event: any): void => {

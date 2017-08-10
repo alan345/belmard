@@ -11,6 +11,8 @@
 
   <div class="single-wrpr beigeback">
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
+
+      isExternalUser: {{fetchedUser.isExternalUser}}
       <div class="form-group col-sm-12">
         <label>Code Client:</label> {{fetchedUser._id}}
       </div>

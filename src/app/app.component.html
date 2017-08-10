@@ -8,18 +8,19 @@
 
 <md-sidenav-container class="example-container">
   <md-sidenav #sidenav mode="side" opened="true" class="example-sidenav">
-    <button md-mini-fab class="example-fab" (click)="sidenav.toggle()">
+    <!-- <button md-mini-fab class="example-fab" (click)="sidenav.toggle()">
       <md-icon>Nav</md-icon>
-    </button>
-    <app-sidebar></app-sidebar>
+    </button> -->
+    <app-sidebar [sidenav]="sidenav"></app-sidebar>
   </md-sidenav>
 
 
   <div class="example-sidenav-content">
 
-    <button *ngIf="!sidenav.opened" type="button" (click)="sidenav.toggle()">
+    <!-- <button *ngIf="!sidenav.opened" type="button" (click)="sidenav.toggle()">
       Nav
-    </button>
+    </button> -->
+    <i *ngIf="!sidenav.opened" (click)="sidenav.toggle()" class="fa fa-bars" aria-hidden="true"></i>
 
     <router-outlet></router-outlet>
 

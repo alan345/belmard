@@ -1,20 +1,24 @@
-
-
 <div class="container">
-  <app-header [nameObject]="'product'"></app-header>
-<div class="row">
-  <div id="wrapper" class="subsubnav-clients float-left">
-            <input class="form-control margebasse col-md-12" type="text" name="Search" placeholder="Rechercher" [(ngModel)]="search.search" (ngModelChange)="searchProducts()">
-  <i class="fa fa-plus-square fa-2x ml" aria-hidden="true" (click)="redirectCreateObj()" routerLinkActive="active"></i>
-          </div>
+  <app-header
+    [search]="search"
+    (saved)="saved($event)"
+    [nameButton]="'Create a new Paiement'"
+    [nameObject]="'product'"
+    [openInDialog]=true>
+  </app-header>
+  <div class="row">
+    <div id="wrapper" class="subsubnav-clients float-left">
+      <input class="form-control margebasse col-md-12" type="text" name="Search" placeholder="Rechercher" [(ngModel)]="search.search" (ngModelChange)="searchProducts()">
+      <i class="fa fa-plus-square fa-2x ml" aria-hidden="true" (click)="redirectCreateObj()" routerLinkActive="active"></i>
+    </div>
 
     <div class="col-md-12">
-      
+
       <div class="card">
-        
+
 
         <div class="card-block clearfix">
-          
+
           <table class="table table-hover table-striped table-responsive">
             <thead class="thead-inverse">
               <tr>
