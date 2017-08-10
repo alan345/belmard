@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {AuthService} from '../../auth/auth.service';
 import {CompanieService} from '../companie.service';
 import {UserService} from '../../user/user.service';
@@ -26,7 +26,7 @@ import { PaiementService} from '../../user/paiement/paiement.service';
   styleUrls: ['../companie.component.css'],
 })
 export class EditCompanieComponent implements OnInit {
-
+  @Output() saved: EventEmitter<any> = new EventEmitter();
   @Input() showBackButton: Boolean = true;
   fetchedCompanie: Companie = new Companie()
 
@@ -723,6 +723,7 @@ export class EditCompanieComponent implements OnInit {
           res => {
             this.toastr.success('Great!', res.message)
             this.fetchedCompanie = res.obj
+            this.saved.emit(res.obj)
           //  this.router.navigate(['companie/' + this.fetchedCompanie._id])
           },
           error => {
@@ -735,6 +736,7 @@ export class EditCompanieComponent implements OnInit {
           res => {
             this.toastr.success('Great!', res.message)
             this.fetchedCompanie = res.obj
+            this.saved.emit(res.obj)
             //  this.router.navigate(['companie/' + res.obj._id])
           },
           error => {console.log(error)}

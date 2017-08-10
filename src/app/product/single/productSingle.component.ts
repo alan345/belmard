@@ -2,7 +2,6 @@ import { Component, OnInit, Output, EventEmitter} from '@angular/core';
 import { ProductService} from '../product.service';
 import { CompanieService} from '../../companie/companie.service';
 
-
 import { ToastsManager} from 'ng2-toastr';
 import { MdDialog } from '@angular/material';
 import { Router, ActivatedRoute, Params } from '@angular/router';

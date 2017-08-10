@@ -10,13 +10,12 @@ import { EditCompanieComponent }  from '../editCompanie.component';
 })
 
 export class CompanieDialogComponent {
-  @ViewChild(EditCompanieComponent)
-  private editCompanieComponent: EditCompanieComponent;
+  // @ViewChild(EditCompanieComponent)
+  // private editCompanieComponent: EditCompanieComponent;
 
   constructor(public dialogRef: MdDialogRef<CompanieDialogComponent>) {}
 
-
-  onUploadFinisedChildToParent() {
-    // this.userFormsComponent.onUploadFinisedParentToChild();
+  saved(data) {
+    this.dialogRef.close(data)
   }
 }

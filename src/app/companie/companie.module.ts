@@ -6,14 +6,14 @@ import { RouterModule} from '@angular/router';
 // import { CompanieDetailUsersComponent} from './companieDetailUsers.component';
 // import { AddUserByCompanieComponent} from './addUser/addUserByCompanie.component';
 import { CompaniesComponent} from './companies/companies.component';
-import { EditCompanieComponent} from './singleCompanie/editCompanie.component';
+import { EditCompanieComponent} from './single/editCompanie.component';
 // import { EditAddUserToCompanieComponent} from './addUser/editAddUserToCompanie.component';
-import { CompanieDetailComponent} from './singleCompanie/companieDetail.component';
+import { CompanieDetailComponent} from './single/companieDetail.component';
 import { CompanieService} from './companie.service';
 import { CompanieRouting} from './companieRouting.module';
 import { MaterialModule } from '@angular/material';
 import { Ng2PaginationModule} from 'ng2-pagination';
-import { CompanieDialogComponent } from './singleCompanie/dialog/companieDialog.component';
+import { CompanieDialogComponent } from './single/dialog/companieDialog.component';
 import {SharedModule } from '../shared/shared.module';
 
 
