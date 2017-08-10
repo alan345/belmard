@@ -28,7 +28,7 @@ import{ AdminUsersComponent } from './users/adminUsers.component';
 export const routes: Routes = [
 
   {path: 'newuser', component: NewUserComponent, canActivate: [AuthGuardService]},
-  {path: 'newuser/:id', component: NewUserComponent, canActivate: [AuthGuardService]},
+
   // {path: ':id', component: NewUserComponent, canActivate: [AuthGuardService]},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
@@ -39,7 +39,8 @@ export const routes: Routes = [
   {path: 'profile', component: UserProfileComponent, canActivate: [AuthGuardService]},
   {path: 'paiement', component: PaiementComponent, canActivate: [AuthGuardService]},
   {path: 'profile/:id', component: UserProfileComponent, canActivate: [AuthGuardService]},
-  {path: ':isExternalUser', component: AdminUsersComponent, canActivate: [AuthGuardService]},
+  {path: ':id', component: NewUserComponent, canActivate: [AuthGuardService]},
+  {path: 'list/:isExternalUser', component: AdminUsersComponent, canActivate: [AuthGuardService]},
 
 //  {path: 'profile/:id/userProfileSettings', component: UserProfileSettingsComponent, canActivate: [AuthGuardService]},
   // {path: 'profile/:id/userProfilePictures', component: UserProfilePicturesComponent, canActivate: [AuthGuardService]},

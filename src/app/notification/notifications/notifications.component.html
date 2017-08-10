@@ -16,58 +16,56 @@
 </div> -->
 
 
-<app-header [nameObject]="'notification'"></app-header>
-
-
-
-<div class="row">
-  <div class="col-md-10">
-    <div class="card">
-      <div class="card-header">
-        <h4 class="card-title">Liste</h4>
-      </div>
-      <div class="card-block clearfix">
-        <div id="wrapper" class="subsubnav-clients float-left">
-          <input class="form-control margebasse col-md-12" type="text" name="Search" placeholder="Rechercher" [(ngModel)]="search.search" (ngModelChange)="searchNotifications()">
+<div class="container">
+  <div class="row">
+    <div class="col-md-10">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Liste</h4>
         </div>
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <!--
+        <div class="card-block clearfix">
+          <div id="wrapper" class="subsubnav-clients float-left">
+            <input class="form-control margebasse col-md-12" type="text" name="Search" placeholder="Rechercher" [(ngModel)]="search.search" (ngModelChange)="searchNotifications()">
+          </div>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <!--
               <th class="tbl-left">
                 <!-- <button class="updownbtn" (click)="orderBy('profile.name')"><i class="fa fa-chevron-down"></i></button>
                     <button class="updownbtn" (click)="orderBy('-profile.name')"><i class="fa fa-chevron-up"></i></button>
               </th>
                -->
-              <th class="centre">Name</th>
+                <th class="centre">Name</th>
 
 
-            </tr>
-          </thead>
-          <tbody class="">
-            <tr *ngFor="let notification of fetchedNotifications | paginate: { id: 'server', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }" [routerLink]="['/notification/' + notification._id]" routerLinkActive="active">
+              </tr>
+            </thead>
+            <tbody class="">
+              <tr *ngFor="let notification of fetchedNotifications | paginate: { id: 'server', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }" [routerLink]="['/notification/' + notification._id]"
+                routerLinkActive="active">
 
-              <td class="centre">{{notification.nameNotification}}</td>
+                <td class="centre">{{notification.nameNotification}}</td>
 
 
-              <!-- <td class="centre">{{notification.details.referenceName}}</td>
+                <!-- <td class="centre">{{notification.details.referenceName}}</td>
               <td class="centre">{{notification.name}}</td>
               <td class="centre">{{notification.details.price.costPrice}}</td>
               <td class="centre">{{notification.details.referenceName}}</td>
               <td class="centre">{{notification.details.price.costPrice}}</td>
               <td class="centre">{{notification.details.price.costPrice}}</td> -->
-            </tr>
-          </tbody>
-        </table>
+              </tr>
+            </tbody>
+          </table>
 
-        <div class="has-text-centered">
-          <div [hidden]="!loading">Loading...</div>
-          <pagination-controls (pageChange)="getPage($event)" id="server" class="change-page"></pagination-controls>
+          <div class="has-text-centered">
+            <div [hidden]="!loading">Loading...</div>
+            <pagination-controls (pageChange)="getPage($event)" id="server" class="change-page"></pagination-controls>
+          </div>
         </div>
+
       </div>
 
     </div>
-
   </div>
-
 </div>

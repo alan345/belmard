@@ -18,10 +18,11 @@ export const routes: Routes = [
   {path: 'new', component: QuoteComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
   {path: 'new/:idClient', component: QuoteComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
   {path: 'new/:idClient/:idProject', component: QuoteComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
-  {path: 'edit/:idQuote', component: QuoteComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
+
   // {path: ':id', component: QuoteDetailComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
   {path: 'public/:idQuote', component: QuoteComponent},
-  {path: ':isQuoteAssignedToMe', component: QuotesComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
+  {path: ':idQuote', component: QuoteComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
+  {path: 'list/:isQuoteAssignedToMe', component: QuotesComponent, canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
 
 ];
 

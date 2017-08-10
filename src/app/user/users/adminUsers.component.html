@@ -55,7 +55,7 @@
               </tr>
             </thead>
             <tbody class="clienttbl">
-              <tr *ngFor="let user of fetchedUsers | paginate: { id: 'server', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }" [routerLink]="['/user/profile/' + user._id]" routerLinkActive="active">
+              <tr *ngFor="let user of fetchedUsers | paginate: { id: 'server', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }" [routerLink]="['/user/' + user._id]" routerLinkActive="active">
                 <td class="centre">
                   <div *ngFor="let singleType of user.type">
                     {{singleType}}
