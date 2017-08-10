@@ -16,7 +16,7 @@ import { UserCalendarComponent} from './single/userCalendar.component';
 import { UserCalendarService} from './userCalendar.service';
 import { UserCalendarRouting} from './userCalendarRouting.module';
 import { MaterialModule } from '@angular/material';
-import { Ng2PaginationModule} from 'ng2-pagination';
+
 import { ProductModule } from '../product/product.module';
 // import { AutocompleteComponent } from '../autocomplete/autocomplete.component'
 
@@ -36,7 +36,7 @@ import {CalendarModule} from 'ap-angular2-fullcalendar';
     CommonModule,
     FormsModule,
     MaterialModule,
-    Ng2PaginationModule,
+    ,
     ReactiveFormsModule,
     RouterModule,
     ProductModule,

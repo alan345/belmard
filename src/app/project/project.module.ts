@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MaterialModule } from '@angular/material';
-import { Ng2PaginationModule} from 'ng2-pagination';
+
 import { ProjectDialogComponent } from './single/dialog/projectDialog.component';
 
 // import { ProjectTasksComponent} from './task/singleTask/projectTasks.component';
@@ -35,7 +35,6 @@ import { PictureComponent } from './single/picture/picture.component'
     CommonModule,
     FormsModule,
     MaterialModule,
-    Ng2PaginationModule,
     ReactiveFormsModule,
     QuoteModule,
     SharedModule,

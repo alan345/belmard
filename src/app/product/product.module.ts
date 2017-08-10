@@ -11,7 +11,7 @@ import { ProductService} from './product.service';
 import { CompanieModule } from '../companie/companie.module';
 import { ProductRouting} from './productRouting.module';
 import { MaterialModule } from '@angular/material';
-import { Ng2PaginationModule} from 'ng2-pagination';
+
 
 import {SharedModule } from '../shared/shared.module';
 
@@ -22,7 +22,6 @@ import {SharedModule } from '../shared/shared.module';
     CommonModule,
     FormsModule,
     MaterialModule,
-    Ng2PaginationModule,
     ReactiveFormsModule,
     CompanieModule,
     SharedModule,

@@ -2,7 +2,7 @@
   <table class="table table-hover table-responsive table-condensed">
     <tbody class="upld-modbdy">
       <md-checkbox *ngIf="isAdmin()" class="example-margin" [(ngModel)]="search.seeAll" (click)="refresh()" class="seeallcheck">See all</md-checkbox>
-      <tr *ngFor="let form of fetchedForms| paginate: { id: 'server', itemsPerPage: paginationData.itemsPerPage, currentPage: paginationData.currentPage, totalItems: paginationData.totalItems }" class="imgrw">
+      <tr *ngFor="let form of fetchedForms" class="imgrw">
         <td>
           <div class="imgrw-cnt">
             <img *ngIf="isFormPdf(form)" (click)="onSelectRow(form)" src="./assets/images/pdf_icon.png">
@@ -15,7 +15,12 @@
     </tbody>
   </table>
   <div class="has-text-centered">
-    <div [hidden]="!loading">Loading...</div>
-    <pagination-controls (pageChange)="getPage($event)" id="server" class="change-page"></pagination-controls>
+    <!-- <md-paginator
+      [length]="paginationData.totalItems"
+      [pageSize]="paginationData.itemsPerPage"
+      (page)="getPage($event.pageIndex*1+1)">
+    </md-paginator>     -->
+    <!-- <div [hidden]="!loading">Loading...</div>
+    <pagination-controls (pageChange)="getPage($event)" id="server" class="change-page"></pagination-controls> -->
   </div>
 </div>

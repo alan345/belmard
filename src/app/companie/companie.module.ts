@@ -12,7 +12,6 @@ import { CompanieDetailComponent} from './single/companieDetail.component';
 import { CompanieService} from './companie.service';
 import { CompanieRouting} from './companieRouting.module';
 import { MaterialModule } from '@angular/material';
-import { Ng2PaginationModule} from 'ng2-pagination';
 import { CompanieDialogComponent } from './single/dialog/companieDialog.component';
 import {SharedModule } from '../shared/shared.module';
 
@@ -23,7 +22,6 @@ import {SharedModule } from '../shared/shared.module';
     CommonModule,
     FormsModule,
     MaterialModule,
-    Ng2PaginationModule,
     ReactiveFormsModule,
     RouterModule,
     SharedModule,

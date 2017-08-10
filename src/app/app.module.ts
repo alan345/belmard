@@ -10,7 +10,7 @@ import {MdSidenavModule} from '@angular/material';
 
 import { GlobalEventsManager } from './globalEventsManager';
 
-import { Ng2PaginationModule} from 'ng2-pagination';
+//
 import { ProgressBarModule} from 'ng2-progress-bar';
 import { RouterModule} from '@angular/router';
 import { CommonModule, HashLocationStrategy, LocationStrategy} from '@angular/common';
@@ -217,7 +217,6 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     ToastModule.forRoot(),
     ProgressBarModule,
     FormsModule,
-    Ng2PaginationModule,
     // MaterialModule,
     NavbarModule,
     SidebarModule,

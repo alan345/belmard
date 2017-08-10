@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { MaterialModule } from '@angular/material';
-import { Ng2PaginationModule} from 'ng2-pagination';
+
 
 
 
@@ -29,7 +29,6 @@ import {SharedModule } from '../shared/shared.module';
     CommonModule,
     FormsModule,
     MaterialModule,
-    Ng2PaginationModule,
     ReactiveFormsModule,
     QuoteModule,
     SharedModule

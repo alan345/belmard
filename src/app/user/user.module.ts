@@ -4,7 +4,7 @@ import { ReactiveFormsModule} from '@angular/forms';
 
 import { UserRouting } from './userRouting.module';
 import { MaterialModule } from '@angular/material';
-import { Ng2PaginationModule} from 'ng2-pagination';
+
 
 //import { UserDeleteDialog} from './userDeleteDialog.component';
 //import { UserWhereDialogComponent} from './userWhereDialog.component';
@@ -64,7 +64,6 @@ import {SharedModule } from '../shared/shared.module';
     // CommonModule,
     // FormsModule,
     MaterialModule,
-    Ng2PaginationModule,
     ReactiveFormsModule,
     QuoteModule,
     ProjectModule,

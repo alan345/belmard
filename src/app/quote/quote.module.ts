@@ -14,7 +14,7 @@ import { QuoteService} from './quote.service';
 import { TemplateQuoteService} from './templateQuote.service';
 import { QuoteRouting} from './quoteRouting.module';
 import { MaterialModule } from '@angular/material';
-import { Ng2PaginationModule} from 'ng2-pagination';
+
 import { ProductModule } from '../product/product.module';
 // import { AutocompleteComponent } from '../autocomplete/autocomplete.component'
 
@@ -36,7 +36,6 @@ import { QuillModule } from 'ngx-quill'
     CommonModule,
     FormsModule,
     MaterialModule,
-    Ng2PaginationModule,
     ReactiveFormsModule,
     RouterModule,
     ProductModule,
