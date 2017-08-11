@@ -28,7 +28,7 @@ import { DeleteDialog } from '../../deleteDialog/deleteDialog.component'
 export class NewUserComponent implements OnInit {
   @Output() saved: EventEmitter<any> = new EventEmitter();
   @Input() search: any = {
-    isExternalUser: false
+    isExternalUser: true
   };
   fetchedCompanies: Companie[] = []
   autocompleteCompanie: string = '';

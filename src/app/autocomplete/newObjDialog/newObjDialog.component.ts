@@ -22,7 +22,9 @@ import { MdDialog } from '@angular/material';
 })
 export class newObjDialogComponent implements OnInit {
 
-  @Input() search: any;
+  @Input() search: any = {
+    isExternalUser: true
+  };
   @Input() typeObj: string = '';
   @Input() title: string = '';
   @Input() icone: string = 'fa fa-plus';
