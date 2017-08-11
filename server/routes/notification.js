@@ -155,7 +155,15 @@ router.get('/page/:page', function (req, res, next) {
       .find(searchQuery)
       .count()
       .exec(function (err, count) {
-      res.status(200).json({
+
+
+        item.forEach((notif, i) => {
+          console.log(req.user.dateSeeLatestNotif, notif.createdAt)
+          if(req.user.dateSeeLatestNotif > notif.createdAt) {
+            item[i].isRead = true
+          }
+        })
+        res.status(200).json({
           paginationData : {
             totalItems: count,
             currentPage : currentPage,

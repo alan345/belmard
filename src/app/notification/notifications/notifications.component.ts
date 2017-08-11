@@ -6,7 +6,7 @@ import { ToastsManager} from 'ng2-toastr';
 import { MdDialog} from '@angular/material';
 import { Router} from '@angular/router';
 import { Location} from '@angular/common';
-
+import { UserService} from '../../user/user.service';
 
 
 @Component({
@@ -32,7 +32,7 @@ export class NotificationsComponent implements OnInit {
   constructor(
     private notificationService: NotificationService,
     private authService: AuthService,
-  //  private modalService: NgbModal,
+    private userService: UserService,
     private toastr: ToastsManager,
     public dialog: MdDialog,
     private router: Router,
@@ -94,6 +94,7 @@ export class NotificationsComponent implements OnInit {
           this.paginationData = res.paginationData;
           this.fetchedNotifications =  res.data
           this.loading = false;
+          this.updateDateSeeLatestNotif()
         },
         error => {
           console.log(error);
@@ -101,10 +102,21 @@ export class NotificationsComponent implements OnInit {
       );
   }
 
-
-  isAdmin() {
-    return this.authService.isAdmin();
+  updateDateSeeLatestNotif() {
+    this.userService.updateDateSeeLatestNotif(this.authService.getCurrentUser())
+      .subscribe(
+        res => {
+          console.log(res)
+        },
+        error => {
+          console.log(error)
+        }
+      );
   }
+  //
+  // isAdmin() {
+  //   return this.authService.isAdmin();
+  // }
 
 
 }

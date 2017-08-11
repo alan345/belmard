@@ -37,6 +37,7 @@
               </th>
                -->
                 <th class="centre">Name</th>
+                <th class="centre">isRead</th>
 
 
               </tr>
@@ -47,6 +48,7 @@
 
                 <td class="centre">{{notification.nameNotification}}</td>
 
+                <td class="centre">{{notification.isRead}}</td>
 
                 <!-- <td class="centre">{{notification.details.referenceName}}</td>
               <td class="centre">{{notification.name}}</td>
@@ -64,7 +66,7 @@
               [pageSize]="paginationData.itemsPerPage"
               (page)="getPage($event.pageIndex*1+1)">
             </md-paginator>
-<app-loadingInApp *ngIf="loading"></app-loadingInApp>            
+<app-loadingInApp *ngIf="loading"></app-loadingInApp>
             <!-- <div [hidden]="!loading">Loading...</div>
             <pagination-controls (pageChange)="getPage($event)" id="server" class="change-page"></pagination-controls> -->
           </div>

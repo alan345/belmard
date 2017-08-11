@@ -27,7 +27,7 @@ export class NavbarComponent implements OnInit {
     private globalEventsManager: GlobalEventsManager,
     private authService: AuthService,
     private adminService: AdminService,
-    private userService: UserService,
+    // private userService: UserService,
     private router: Router,
     // private companieGuardService: CompanieGuardService,
     // private paiementGuardService: PaiementGuardService,

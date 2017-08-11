@@ -9,6 +9,7 @@ export class User {
   _id: string = '';
   canBeSeenByCompanies: Companie[] = [];
   ownerCompanies: Companie[] = [];
+  dateSeeLatestNotif: Date= new Date()
   // isAdminOfHisCompanie: Boolean = false;
   isExternalUser: Boolean = true;
   email: string = '';

@@ -10,7 +10,7 @@ var user = new Schema({
 
     // isAdminOfHisCompanie:{type: Boolean, default: [false]},
     isExternalUser:{type: Boolean, default: [false]},
-
+    dateSeeLatestNotif: {type: Date, default: [Date()]},
     email: {type: String, unique: true, required: true, lowercase: true},
     password: {type: String, required: true},
     forms: [{type: Schema.Types.ObjectId, ref: 'Form'}],
@@ -20,7 +20,7 @@ var user = new Schema({
         cusId:{type: String, default: ['']},
         planDetail:{
           plan:{type: String, default: ['']},
-          current_period_end:{type: Date}
+          current_period_end: {type: Date, default: [Date()]},
         }
       }]
     },
@@ -28,7 +28,6 @@ var user = new Schema({
     resetPasswordToken: String,
     resetPasswordExpires: String,
     role: {type: Array, default: ['client']},
-
     rights: [{type: Schema.Types.ObjectId, ref: 'Right'}],
     typeUsers: {type: Array},
     profile : {

@@ -310,7 +310,33 @@ router.post('/password', function (req, res, next) {
 
 
 
-//update profile @alan
+
+
+router.put('/:id/dateSeeLatestNotif', function (req, res, next) {
+  User.findById(({_id: req.params.id}), function (err, item) {
+    if (err) {
+      return res.status(404).json({
+        message: '',
+        err: err
+      })
+    } else {
+      item.dateSeeLatestNotif = new Date()
+      item.save(function (err, result) {
+        if (err) {
+          return res.status(404).json({
+            message: 'There was an error, please try again',
+            err: err
+          });
+        }
+        res.status(201).json({
+          message: '',
+          obj: result
+        });
+      });
+    }
+  })
+});
+
 router.put('/:id', function (req, res, next) {
   User.findById(({_id: req.params.id}), function (err, item) {
     if (err) {
@@ -319,20 +345,7 @@ router.put('/:id', function (req, res, next) {
         err: err
       })
     } else {
-
-
-      // if(!req.body.companies.length)
-      //   req.body.companies = req.body.ownerCompanies
-      //
-      // req.body.isInOwnerCompanie = false
-      // if(req.body.companies._id == req.body.ownerCompanies._id)
-      //   req.body.isInOwnerCompanie = true
-
-
-
-      // item.isInOwnerCompanie = isInOwnerCompanie
-
-      req.body.ownerCompanies = req.user.ownerCompanies
+      // req.body.ownerCompanies = req.user.ownerCompanies
       item.companies = req.body.companies
       item.ownerCompanies = req.body.ownerCompanies
       item.email = req.body.email
@@ -341,10 +354,6 @@ router.put('/:id', function (req, res, next) {
       item.profile = req.body.profile
       item.typeUsers = req.body.typeUsers
       item.rights = req.body.rights
-
-
-
-
 
       item.save(function (err, result) {
         if (err) {
@@ -358,7 +367,6 @@ router.put('/:id', function (req, res, next) {
           obj: result
         });
       });
-
     }
   })
 });

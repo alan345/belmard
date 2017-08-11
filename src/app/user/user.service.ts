@@ -149,6 +149,20 @@ export class UserService {
       });
   }
 
+  updateDateSeeLatestNotif(user: User) {
+    const body = JSON.stringify(user);
+    const headers = new Headers({'Content-Type': 'application/json'});
+    headers.append('Authorization', '' + this.authService.currentUser.token);
+    return this.http.put(this.url + 'profile/' + user._id + '/dateSeeLatestNotif', body, {headers: headers})
+      .map(response => response.json())
+      .catch((error: Response) => {
+        this.errorService.handleError(error.json());
+        return Observable.throw(error.json());
+      });
+  }
+
+
+
 
   // addCompanieToMyself(companie: Companie) {
   //   const body = JSON.stringify(companie);
@@ -163,20 +177,20 @@ export class UserService {
   // }
 
 
-  getUserDetails(userId: string) {
-    if (this.authService.isLoggedIn()) {
-      let token = this.authService.currentUser.token
-      let userId = this.authService.currentUser.userId
-      let headers = new Headers({'Content-Type': 'application/json'});
-      headers.append('Authorization', '' + token);
-      return this.http.get(this.url + userId, {headers: headers})
-        .map((response: Response) => response.json())
-        .catch((error: Response) => {
-          this.errorService.handleError(error.json());
-          return Observable.throw(error.json());
-        });
-    }
-  }
+  // getUserDetails(userId: string) {
+  //   if (this.authService.isLoggedIn()) {
+  //     let token = this.authService.currentUser.token
+  //     let userId = this.authService.currentUser.userId
+  //     let headers = new Headers({'Content-Type': 'application/json'});
+  //     headers.append('Authorization', '' + token);
+  //     return this.http.get(this.url + userId, {headers: headers})
+  //       .map((response: Response) => response.json())
+  //       .catch((error: Response) => {
+  //         this.errorService.handleError(error.json());
+  //         return Observable.throw(error.json());
+  //       });
+  //   }
+  // }
 
 
   // updateUser(user: User) {

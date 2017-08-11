@@ -8,6 +8,7 @@ import { UserCalendar } from '../userCalendar/userCalendar.model';
 
 export class Notification {
   _id: string = '';
+  isRead: boolean = false;
   projects: Project[] = []
   quotes: Quote[] = []
   tasks: Task[] = []

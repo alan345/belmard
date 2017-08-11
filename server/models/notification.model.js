@@ -10,7 +10,7 @@ var notification = new Schema({
     tasks: [{type: Schema.Types.ObjectId, ref: 'Task'}],
     userCalendars: [{type: Schema.Types.ObjectId, ref: 'UserCalendar'}],
     users : [{type: Schema.Types.ObjectId, ref: 'User'}],
-    // isRead: {type: Boolean, default: [false]},
+    isRead: {type: Boolean, default: [false]},
     nameNotification: {type: String, default: ['']},
     typeObject: {type: String, default: ['']},
 
