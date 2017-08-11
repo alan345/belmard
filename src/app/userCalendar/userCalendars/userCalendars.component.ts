@@ -77,7 +77,7 @@ export class UserCalendarsComponent implements OnInit {
 
   // fetchedUserSearchs: User[] = [];
 
-
+  loading: boolean = false;
   calendarOptions: Object = {
     timezone:'local',
     height: 550,
@@ -244,9 +244,11 @@ export class UserCalendarsComponent implements OnInit {
 
 
   getUserCalendars(page: number, search: any) {
+    this.loading = true;
     this.userCalendarService.getUserCalendars(page, search)
       .subscribe(
       res => {
+        this.loading = false;
         this.events = []
         this.events = res.data
         this.events.forEach((event, i) => {

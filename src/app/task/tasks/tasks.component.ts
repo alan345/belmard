@@ -85,8 +85,7 @@ export class TasksComponent implements OnInit {
   }
 
 
-  getTasks(page : number, search: any) {
-    //this.fetchedTasks =[]
+  getTasks(page: number, search: any) {
     this.loading = true;
     this.taskService.getTasks(page, search)
       .subscribe(

@@ -88,8 +88,7 @@ export class ProductsComponent implements OnInit {
   //   this.getProducts(this.paginationData.currentPage, this.search)
   // }
 
-
-  getProducts(page : number, search: any) {
+  getProducts(page: number, search: any) {
     this.loading = true;
     this.productService.getProducts(page, search)
       .subscribe(
