@@ -7,7 +7,6 @@ import { FormsModule }         from '@angular/forms';
 // import {SharedModule } from '../shared/shared.module';
 import { newObjDialogComponent } from './newObjDialog/newObjDialog.component';
 
-
 @NgModule({
   imports: [
     CommonModule,
