@@ -8,6 +8,8 @@ import { MaterialModule } from '@angular/material';
 
 import { NavbarComponent} from './navbar.component';
 import {SharedModule } from '../../shared/shared.module';
+import { NotificationService} from '../../notification/notification.service';
+
 
 @NgModule({
   imports:      [
@@ -33,6 +35,7 @@ import {SharedModule } from '../../shared/shared.module';
     // ProductsComponent
   ],
   providers:    [
+    NotificationService,
     // ProductService
   ],
   entryComponents: [ ]

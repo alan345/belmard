@@ -8,6 +8,9 @@ import { CompanieGuardService} from '../../companie/companieGuard.service'
 import { PaiementGuardService} from '../../user/paiement/paiementGuard.service'
 import { ChangeDetectionStrategy} from '@angular/core';
 import { GlobalEventsManager} from '../../globalEventsManager';
+import { NotificationService} from '../../notification/notification.service';
+import { Notification} from '../../notification/notification.model';
+import {Observable} from 'rxjs/Rx';
 
 
 @Component({
@@ -22,11 +25,14 @@ export class NavbarComponent implements OnInit {
  // private userId: string = localStorage.getItem('userId');
   // private userId: string;
   fetchedUser: User = new User();
+  fetchedNotifications: Notification[] = [];
+  notificationsNotRead: number=0;
 
   constructor(
     private globalEventsManager: GlobalEventsManager,
     private authService: AuthService,
     private adminService: AdminService,
+    private notificationService: NotificationService,
     // private userService: UserService,
     private router: Router,
     // private companieGuardService: CompanieGuardService,
@@ -47,11 +53,35 @@ export class NavbarComponent implements OnInit {
     if (this.authService.isLoggedIn()) {
       //let userId = localStorage.getItem('userId');
 
+
+      Observable.interval(1000 * 30).subscribe(x => {
+        this.getNotifications(1, {})
+      });
+
       this.globalEventsManager.showNavBar(true);
       this.showNavBar = true;
       this.fetchedUser = this.authService.getCurrentUser()
     }
   }
+
+  getNotifications(page: number, search: any) {
+    this.notificationService.getNotifications(page, search)
+      .subscribe(
+        res => {
+          this.fetchedNotifications =  res.data
+          this.notificationsNotRead = 0
+          this.fetchedNotifications.forEach(notif=> {
+            if(notif.isRead === false) {
+              this.notificationsNotRead++
+            }
+          })
+        },
+        error => {
+          console.log(error);
+        }
+      );
+  }
+
 
   // isCurrentUserIsInSubPeriod(){
   //   return this.userService.isCurrentUserIsInSubPeriod()
