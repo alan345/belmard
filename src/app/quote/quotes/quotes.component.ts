@@ -80,7 +80,7 @@ export class QuotesComponent implements OnInit {
 
   // searchQuotes(){}
 
-  // 
+  //
   // goBack() {
   //   this.location.back();
   // }
@@ -108,13 +108,12 @@ export class QuotesComponent implements OnInit {
   }
 
   getPage(page: number) {
-    console.log(page)
-    this.loading = true;
     this.getQuotes(page, this.search);
   }
 
 
   getQuotes(page: number, search: any) {
+    this.loading = true;
     this.quoteService.getQuotes(page, search)
       .subscribe(
         res => {

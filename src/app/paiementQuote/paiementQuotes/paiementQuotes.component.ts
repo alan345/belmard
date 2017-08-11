@@ -100,12 +100,12 @@ export class PaiementQuotesComponent implements OnInit {
 
 
   getPage(page: number) {
-    this.loading = true;
     this.getPaiementQuotes(page, this.search);
   }
 
 
   getPaiementQuotes(page: number, search: any) {
+    this.loading = true;    
     this.paiementQuoteService.getPaiementQuotes(page, search)
       .subscribe(
         res => {
