@@ -84,6 +84,7 @@
           [pageSize]="paginationData.itemsPerPage"
           (page)="getPage($event.pageIndex*1+1)">
         </md-paginator>
+<app-loadingInApp *ngIf="loading"></app-loadingInApp>
       </div>
     </div>
   </div>
