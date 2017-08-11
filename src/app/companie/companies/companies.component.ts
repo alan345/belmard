@@ -16,7 +16,7 @@ import { Location} from '@angular/common';
 })
 export class CompaniesComponent implements OnInit {
   fetchedCompanies: Companie[] = [];
-  loading: boolean;
+  loading: boolean=false;
   paginationData = {
     currentPage: 1,
     itemsPerPage: 0,
@@ -41,7 +41,11 @@ export class CompaniesComponent implements OnInit {
 
   ngOnInit() {
     this.search.orderBy = 'name'
-    this.getCompanies(this.paginationData.currentPage, this.search)
+    this.getPage(1)
+  }
+  getPage(page: number) {
+
+    this.getCompanies(page, this.search);
   }
   saved(result) {
     this.getCompanies(this.paginationData.currentPage, this.search)
@@ -81,14 +85,11 @@ export class CompaniesComponent implements OnInit {
   }
 
 
-  getPage(page: number) {
 
-    this.loading = true;
-    this.getCompanies(page, this.search);
-  }
 
 
   getCompanies(page: number, search: any) {
+    this.loading = true;
     this.companieService.getCompanies(page, search)
       .subscribe(
         res => {
