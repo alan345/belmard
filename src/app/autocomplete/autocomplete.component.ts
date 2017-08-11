@@ -30,6 +30,10 @@ export class AutocompleteComponent {
   @Input() arrayContent = [];
   @Input() singleChoice: boolean = true;
   @Input() title: string = '';
+  @Input() search: any = {
+    isExternalUser: true,
+    search: ''
+  };
   @Input() canDelete: boolean = true;
   @Input() enableLink: boolean = true;
   // createNewItem: boolean = false;
@@ -138,10 +142,9 @@ export class AutocompleteComponent {
     if (!this.autocompleteSearch) {
       this.fetchedData = []
     } else {
-      let search = {
-        search: this.autocompleteSearch,
-      };
-      this.getData(1, search)
+      this.search.search = this.autocompleteSearch,
+
+      this.getData(1, this.search)
     }
   }
   removeData(i: number) {
