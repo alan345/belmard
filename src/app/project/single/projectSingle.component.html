@@ -92,8 +92,10 @@
            <i class="fa fa-calendar" aria-hidden="true"></i>
            <span>{{'Show Logs' | translate}}</span>
           </button>
+          <app-comments></app-comments>
           <div *ngIf="showLogs">
-            <app-comment [logs]="fetchedProject.logs"></app-comment>
+
+            <!-- <app-comment [logs]="fetchedProject.logs"></app-comment> -->
           </div>
         </div>
 

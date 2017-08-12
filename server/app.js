@@ -26,6 +26,8 @@ var expense    = require('./routes/expense')
 var templateQuotes    = require('./routes/templateQuote')
 var right    = require('./routes/right')
 var notification    = require('./routes/notification')
+var comment    = require('./routes/comment')
+
 
 
 
@@ -75,6 +77,7 @@ app.use('/expense', expense)
 app.use('/templateQuote', templateQuotes)
 app.use('/right', right)
 app.use('/notification', notification)
+app.use('/comment', comment)
 
 
 

@@ -1,0 +1,211 @@
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {AuthService} from '../../auth/auth.service';
+import {CommentService} from '../comment.service';
+import {ProductService} from '../../product/product.service';
+import { ProjectService} from '../../project/project.service';
+
+import {Comment} from '../comment.model';
+
+import {ToastsManager} from 'ng2-toastr';
+
+import {MdDialog } from '@angular/material';
+import {Router, ActivatedRoute, Params } from '@angular/router';
+import { Location } from '@angular/common';
+import { FormBuilder, FormGroup} from '@angular/forms';
+import { UserService} from '../../user/user.service';
+import { QuoteService } from '../../quote/quote.service';
+import { DeleteDialog } from '../../deleteDialog/deleteDialog.component';
+import { User } from '../../user/user.model';
+import { Quote } from '../../quote/quote.model';
+import { Product } from '../../product/product.model';
+import { Project } from '../../project/project.model';
+
+
+
+
+
+@Component({
+  selector: 'app-comment',
+  templateUrl: './comment.component.html',
+  styleUrls: ['../comment.component.css'],
+})
+export class CommentComponent implements OnInit {
+  @Output() newCommentSaved: EventEmitter<any> = new EventEmitter();
+  @Input() showHeader = true;
+  @Input() fetchedComment: Comment = new Comment()
+
+  statusTypes = [
+    { label: 'Not Started', value: '' },
+    { label: 'Pending', value: 'pending' },
+    { label: 'Done', value: 'done' }
+  ]
+
+  showPaiements: boolean = false
+
+  // autocompleteUser: string = '';
+  // autocompleteProject: string = '';
+  // fetchedProducts: Product[] = []
+  // fetchedProjects: Project[] = []
+  // currentUser: User = new User()
+  // imgLogoUrl: string = './assets/images/profile-placeholder.jpg'
+  // imgSignatureBase64Temp = ''
+  // userAdmins : User[] = []
+  // userManagers : User[] = []
+  // userClients : User[] = []
+  // usersSalesRep : User[] = []
+  // userStylists : User[] = []
+
+  myForm: FormGroup;
+  autocompleteProduct: String = ''
+  fetchedUsers: User[] = [];
+  arrayContentToSearch =[]
+
+  paiementsTypes = [
+    { label: 'cheque', value: 'check' },
+    { label: 'Espece', value: 'cash' }
+]
+  constructor(
+    private commentService: CommentService,
+    private quoteService: QuoteService,
+    // private projectService: ProjectService,
+    // private userService: UserService,
+    // private productService: ProductService,
+//    private modalService: NgbModal,
+    private toastr: ToastsManager,
+    public dialog: MdDialog,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
+    private location: Location,
+    private _fb: FormBuilder,
+    private authService: AuthService,
+  ) {}
+
+  ngOnInit() {
+    this.myForm = this._fb.group({
+      commentName: [''],
+    })
+
+
+
+    // this.fetchedComment
+    // .datePaiementString =
+    // this.authService
+    // .isoDateToHtmlDate(this.fetchedComment.datePaiement)
+
+
+    this.activatedRoute.params.subscribe((params: Params) => {
+      // console.log(params)
+      if(params['id'])
+        this.getComment(params['id'])
+
+    //  if(params['idProject'])
+    //   this.getProject(params['idProject'])
+    })
+  }
+
+  getPicture(picture) {
+    this.fetchedComment.forms.push(picture)
+  }
+
+
+
+
+
+  save() {
+
+
+
+    // this.fetchedComment.datePaiement = this.authService.HTMLDatetoIsoDate(this.fetchedComment.datePaiementString)
+    if(this.fetchedComment._id) {
+      this.commentService.updateComment(this.fetchedComment)
+        .subscribe(
+          res => {
+            this.toastr.success('Great!', res.message)
+            // this.fetchedComment = res.obj
+            //this.router.navigate(['comment/edit/' + this.fetchedComment._id])
+          },
+          error => {
+            this.toastr.error('error!', error)
+          }
+        )
+    } else {
+      this.commentService.saveComment(this.fetchedComment)
+        .subscribe(
+          res => {
+            this.toastr.success('Great!', res.message)
+            // this.fetchedComment = res.obj
+            // this.newCommentSaved.emit()
+            // if(this.showHeader)
+            //   this.router.navigate(['comment/edit/' + res.obj._id])
+          },
+          error => {console.log(error)}
+        )
+    }
+
+  }
+
+
+
+
+
+
+
+  goBack() {
+    this.location.back();
+  }
+
+
+
+
+
+  onDelete(id: string) {
+    let this2 = this
+    return new Promise(function(resolve, reject) {
+      this2.commentService.deleteComment(id)
+        .subscribe(
+          res => {
+            this2.toastr.success('Great!', res.message);
+            resolve(res)
+          },
+          error => {
+            console.log(error);
+            reject(error)
+          }
+        )
+      })
+  }
+
+
+  openDialogDelete(){
+    let this2 = this
+    let dialogRefDelete = this.dialog.open(DeleteDialog)
+    dialogRefDelete.afterClosed().subscribe(result => {
+      if(result) {
+        this.onDelete(this.fetchedComment._id).then(function(){
+          this2.router.navigate(['comment']);
+        })
+
+      }
+    })
+  }
+
+
+
+
+  getComment(id: string) {
+    this.commentService.getComment(id)
+      .subscribe(
+        res => {
+          this.fetchedComment = res
+
+        },
+        error => {
+          console.log(error);
+        }
+      )
+  }
+
+
+
+
+}

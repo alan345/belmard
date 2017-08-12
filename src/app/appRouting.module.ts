@@ -14,26 +14,11 @@ import { AuthGuardService} from './auth/authguard.service';
 
 import { MainPageHomeComponent} from './mainPageHome/mainPageHome.component';
 
-
-//import {USER_COMPANIES} from './companie/companie.routes';
-//import {CompanieComponent} from './companie/companie.component';
-
-
-
-//
-//
-// import {USER_PROMOTIONS} from './promotion/promotion.routes';
-// import {PromotionComponent} from './promotion/promotion.component';
-//
-// import {USER_PRESSES} from './press/press.routes';
-// import {PressComponent} from './press/press.component';
-
-
 import {AdminComponent} from './admin/admin.component';
 import {ErrorPageComponent} from './errorPage/errorPage.component';
 import {AdminGuardService} from './admin/services/adminGuard';
 
-import { NgModule }             from '@angular/core';
+import { NgModule } from '@angular/core';
 
 
 
@@ -52,7 +37,7 @@ export const routes: Routes = [
   {path: 'task', loadChildren: 'app/task/task.module#TaskModule', canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
   {path: 'notification', loadChildren: 'app/notification/notification.module#NotificationModule', canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
   {path: 'user', loadChildren: 'app/user/user.module#UserModule'},
-  // {path: 'option', loadChildren: 'app/option/option.module#OptionModule'},
+  {path: 'comment', loadChildren: 'app/comment/comment.module#CommentModule', canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
 
   {path: 'form', component: FormComponent, canActivate: [AuthGuardService]},
   {path: 'userForms', component: UserFormsUploadAndList, canActivate: [AuthGuardService]},

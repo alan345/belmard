@@ -20,11 +20,11 @@ import { DragulaModule } from 'ng2-dragula';
 // import { AutocompleteComponent } from '../autocomplete/autocomplete.component'
 // import { AutocompleteModule } from '../autocomplete/autocomplete.module'
 import {SharedModule } from '../shared/shared.module';
-// import {UserModule} from '../user/user.module';
+import {CommentModule} from '../comment/comment.module';
 // import { TaskDialogComponent } from '../task/single/dialog/taskDialog.component'
 
-import { CommentComponent } from './single/comment/comment.component'
-import { PictureComponent } from './single/picture/picture.component'
+// import { CommentComponent } from './single/comment/comment.component'
+// import { PictureComponent } from './single/picture/picture.component'
 
 
 @NgModule({
@@ -38,6 +38,7 @@ import { PictureComponent } from './single/picture/picture.component'
     ReactiveFormsModule,
     QuoteModule,
     SharedModule,
+    CommentModule,
 
 
     // AutocompleteModule,
@@ -48,8 +49,8 @@ import { PictureComponent } from './single/picture/picture.component'
     ProjectSingleComponent,
     // TasksComponent,
     ProjectDialogComponent,
-    CommentComponent,
-    PictureComponent,
+    // CommentComponent,
+    // PictureComponent,
     // TaskDialogComponent,
     // AutocompleteComponent,
   ],

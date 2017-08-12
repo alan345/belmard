@@ -4,6 +4,9 @@ import { FormsModule }         from '@angular/forms';
 
 // import { AutocompleteComponent } from '../autocomplete/autocomplete.component'
 import { AutocompleteModule } from '../autocomplete/autocomplete.module'
+import {PictureModule} from '../picture/picture.module';
+
+import {CommentModule} from '../comment/comment.module';
 
 
 import { TRANSLATION_PROVIDERS, TranslatePipe, TranslateService }   from '../translate';
@@ -23,6 +26,8 @@ import { LoginInAppComponent } from '../nav/loginInApp/loginInApp.component';
     CommonModule,
     FormsModule,
     AutocompleteModule,
+    PictureModule,
+    // CommentModule,
 
 
   ],
@@ -48,6 +53,8 @@ import { LoginInAppComponent } from '../nav/loginInApp/loginInApp.component';
     // LoadingComponent,
     LoadingInAppComponent,
     LoginInAppComponent,
+    PictureModule,
+    // CommentModule,
     // AutocompleteComponent,
   ],
   providers: [
