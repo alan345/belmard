@@ -12,6 +12,8 @@
 <div class="clearfix col-md-10">
   <button class="btn btn-success float-right" [routerLink]="['/project/new/' + userId]" routerLinkActive="active"><i class=""></i>Créer un nouveau Projet</button>
 </div> -->
+
+
 <div class="container">
   <div class="row">
     <div class="col-md-10">
@@ -51,24 +53,26 @@
               </tr>
             </thead> -->
             <tbody class="clienttbl">
-              <tr *ngFor="let comment of fetchedComments" [routerLink]="['/comment/' + comment._id]" routerLinkActive="active">
+              <tr *ngFor="let comment of fetchedComments">
 
 
 
-                <td class="centre">
-                  <app-picture [addPicture]=false [deletePicture]=false [forms]="comment.forms"></app-picture>
-                  <!-- <div *ngFor="let singleForm of comment.forms; let i=index;">
-                    <img class="imgList" src="./uploads/forms/{{singleForm.owner}}/{{singleForm.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
-                  </div> -->
 
-                </td>
                 <td class="centre">{{comment.commentName}}</td>
                 <td class="centre">{{comment.createdAt| date:'yMdjm'}}
-
-                  <!-- <div *ngFor="let assignedTo of project.bucketComments.comments.users">
-                  {{assignedTo.profile.name}} {{assignedTo.profile.lastName}}
-                </div> -->
                 </td>
+                <td class="centre">
+                  <div *ngFor="let user of comment.writtenBy">
+                    By {{user.profile.name}}
+                  </div>
+                </td>
+                <td class="centre">
+                  <app-picture [addPicture]=false [deletePicture]=false [forms]="comment.forms"></app-picture>
+                </td>
+                <td class="centre">
+                  <button type="button" (click)="openDialogDelete(comment._id)">X</button>
+                </td>
+
                 <!-- <td class="centre">{{project.details.customer}}</td>
               <td class="centre">{{project.details.name}}</td>
               <td class="centre">{{project.details.date}}</td>

@@ -111,7 +111,7 @@ router.post('/', function (req, res, next) {
   var comment = new Comment(req.body)
 
   comment.ownerCompanies = req.user.ownerCompanies
-
+  comment.writtenBy = req.user._id
   comment.save(function (err, result) {
     if (err) {
 
@@ -156,15 +156,15 @@ router.get('/page/:page', function (req, res, next) {
     searchQuery['details.name'] = new RegExp(req.query.search, 'i')
 
 
-  if(req.query.userId)
-    searchQuery['clients'] = mongoose.Types.ObjectId(req.query.userId)
+  if(req.query.projectId)
+    searchQuery['projects'] = mongoose.Types.ObjectId(req.query.projectId)
 
 
   Comment
   .find(searchQuery)
   .sort('-createdAt')
-  // .populate({path: 'projects', model: 'Project'})
-  .populate({ path: 'users', model: 'User'})
+  .populate({path: 'writtenBy', model: 'User'})
+  // .populate({ path: 'users', model: 'User'})
   .populate({ path: 'forms', model: 'Form'})
 
   // .populate({path: 'quotes', model: 'Quote'})

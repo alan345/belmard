@@ -74,7 +74,7 @@ export class CommentComponent implements OnInit {
 
   ngOnInit() {
     this.myForm = this._fb.group({
-      commentName: ['', [Validators.required, Validators.minLength(2)]],
+      commentName: ['', [Validators.required, Validators.minLength(1)]],
     })
 
     this.activatedRoute.params.subscribe((params: Params) => {
@@ -97,6 +97,7 @@ export class CommentComponent implements OnInit {
 
 
   save() {
+    this.fetchedComment.projects = this.search.projectId
     // this.fetchedComment.datePaiement = this.authService.HTMLDatetoIsoDate(this.fetchedComment.datePaiementString)
     if(this.fetchedComment._id) {
       this.commentService.updateComment(this.fetchedComment)

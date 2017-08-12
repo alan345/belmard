@@ -9,6 +9,8 @@ import { Location } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ViewEncapsulation} from '@angular/core';
 import { UserService} from '../../user/user.service';
+import { DeleteDialog } from '../../deleteDialog/deleteDialog.component';
+
 
 @Component({
   selector: 'app-comments',
@@ -63,11 +65,22 @@ export class CommentsComponent implements OnInit {
   //   this.getComments(1, this.search)
   // }
 
+  openDialogDelete(id: string){
+    let this2 = this
+    let dialogRefDelete = this.dialog.open(DeleteDialog)
+    dialogRefDelete.afterClosed().subscribe(result => {
+      if(result) {
+        this.onDelete(id)
+      }
+    })
+  }
+
   onDelete(id: string) {
     this.commentService.deleteComment(id)
       .subscribe(
         res => {
           this.toastr.success('Great!', res.message);
+          this.getComments(this.paginationData.currentPage, this.search)
           console.log(res);
         },
         error => {
@@ -112,7 +125,7 @@ export class CommentsComponent implements OnInit {
     }, 200);
   }
 
-  isAdmin() {
-    return this.authService.isAdmin();
-  }
+  // isAdmin() {
+  //   return this.authService.isAdmin();
+  // }
 }

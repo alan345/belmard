@@ -44,7 +44,7 @@
 
 
       <div class="valid-edit">
-        <button type="submit" class="sln-edt done">{{'Save' | translate}}</button>
+        <button type="submit" [disabled]="!myForm.valid" class="sln-edt done">{{'Save' | translate}}</button>
         <button *ngIf="fetchedComment._id" type="button" class="delete" md-button (click)="openDialogDelete()">
           Delete
         </button>
