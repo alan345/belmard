@@ -163,8 +163,9 @@ router.get('/page/:page', function (req, res, next) {
   Comment
   .find(searchQuery)
   .sort('-createdAt')
-  .populate({path: 'projects', model: 'Project'})
+  // .populate({path: 'projects', model: 'Project'})
   .populate({ path: 'users', model: 'User'})
+  .populate({ path: 'forms', model: 'Form'})
 
   // .populate({path: 'quotes', model: 'Quote'})
   // .populate(

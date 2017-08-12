@@ -14,7 +14,7 @@ export class Comment {
     forms: Form[] = [];
     projects: Companie[] = [];
     quotes: Quote[] = [];
-
+    createdAt: Date = new Date()
 
     // dateComment: DateComment = new DateComment()
 }

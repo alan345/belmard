@@ -11,7 +11,7 @@ import {ToastsManager} from 'ng2-toastr';
 import {MdDialog } from '@angular/material';
 import {Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
-import { FormBuilder, FormGroup} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { UserService} from '../../user/user.service';
 import { QuoteService } from '../../quote/quote.service';
 import { DeleteDialog } from '../../deleteDialog/deleteDialog.component';
@@ -30,7 +30,7 @@ import { Project } from '../../project/project.model';
   styleUrls: ['../comment.component.css'],
 })
 export class CommentComponent implements OnInit {
-  @Output() newCommentSaved: EventEmitter<any> = new EventEmitter();
+  @Output() saved: EventEmitter<any> = new EventEmitter();
   @Input() showHeader = true;
   @Input() fetchedComment: Comment = new Comment()
   @Input() search: any = {
@@ -74,7 +74,7 @@ export class CommentComponent implements OnInit {
 
   ngOnInit() {
     this.myForm = this._fb.group({
-      commentName: [''],
+      commentName: ['', [Validators.required, Validators.minLength(2)]],
     })
 
     this.activatedRoute.params.subscribe((params: Params) => {
@@ -88,7 +88,8 @@ export class CommentComponent implements OnInit {
   }
 
   getPicture(picture) {
-    this.fetchedComment.forms.push(picture)
+    console.log(picture)
+    // this.fetchedComment.forms.push(picture)
   }
 
 
@@ -96,9 +97,6 @@ export class CommentComponent implements OnInit {
 
 
   save() {
-
-
-
     // this.fetchedComment.datePaiement = this.authService.HTMLDatetoIsoDate(this.fetchedComment.datePaiementString)
     if(this.fetchedComment._id) {
       this.commentService.updateComment(this.fetchedComment)
@@ -117,6 +115,8 @@ export class CommentComponent implements OnInit {
         .subscribe(
           res => {
             this.toastr.success('Great!', res.message)
+            this.saved.emit(res.obj)
+            this.fetchedComment = new Comment()
             // this.fetchedComment = res.obj
             // this.newCommentSaved.emit()
             // if(this.showHeader)

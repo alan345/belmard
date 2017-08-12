@@ -13,6 +13,9 @@ import { MdDialog } from '@angular/material';
 
 export class PictureComponent {
   @Input() forms: Form[] = [];
+  @Input() addPicture: boolean = true
+  @Input() deletePicture: boolean = true
+
   @Output() getPicture: EventEmitter<any> = new EventEmitter();
 
   constructor(

@@ -53,13 +53,15 @@ export class CommentsComponent implements OnInit {
   }
 
 
-  goBack() {
-    this.location.back();
-  }
-
-  searchComments() {
+  // goBack() {
+  //   this.location.back();
+  // }
+  saved() {
     this.getComments(1, this.search)
   }
+  // searchComments() {
+  //   this.getComments(1, this.search)
+  // }
 
   onDelete(id: string) {
     this.commentService.deleteComment(id)

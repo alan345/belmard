@@ -15,13 +15,13 @@
 <div class="container">
   <div class="row">
     <div class="col-md-10">
-      <app-comment "search"="search"></app-comment>
+      <app-comment (saved)="saved()" [search]="search"></app-comment>
     </div>
     <div class="col-md-10">
       <div class="card">
-        <div class="card-header">
+        <!-- <div class="card-header">
           <h4 class="card-title">{{ 'List' | translate }}</h4>
-        </div>
+        </div> -->
         <div class="card-block clearfix">
           <!-- <app-autocomplete
           [typeAutocomplete]="'project'"
@@ -34,14 +34,14 @@
         </app-autocomplete> -->
 
 
-          <md-checkbox class="example-margin" [(ngModel)]="search.myComments" (change)="searchComments()">My comments</md-checkbox>
+          <!-- <md-checkbox class="example-margin" [(ngModel)]="search.myComments" (change)="searchComments()">My comments</md-checkbox> -->
 
 
           <!-- <div id="wrapper" class="subsubnav-clients float-left">
           <input class="form-control margebasse col-md-12" type="text" name="Search" placeholder="Rechercher" [(ngModel)]="search.search" (ngModelChange)="searchProjects()">
         </div> -->
           <table class="table table-hover">
-            <thead>
+            <!-- <thead>
               <tr>
 
                 <th class="centre">Project</th>
@@ -49,15 +49,22 @@
                 <th class="centre">Assigned to</th>
 
               </tr>
-            </thead>
+            </thead> -->
             <tbody class="clienttbl">
               <tr *ngFor="let comment of fetchedComments" [routerLink]="['/comment/' + comment._id]" routerLinkActive="active">
 
 
 
-                <td class="centre"></td>
-                <td class="centre">{{comment.commentName}}</td>
                 <td class="centre">
+                  <app-picture [addPicture]=false [deletePicture]=false [forms]="comment.forms"></app-picture>
+                  <!-- <div *ngFor="let singleForm of comment.forms; let i=index;">
+                    <img class="imgList" src="./uploads/forms/{{singleForm.owner}}/{{singleForm.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
+                  </div> -->
+
+                </td>
+                <td class="centre">{{comment.commentName}}</td>
+                <td class="centre">{{comment.createdAt| date:'yMdjm'}}
+
                   <!-- <div *ngFor="let assignedTo of project.bucketComments.comments.users">
                   {{assignedTo.profile.name}} {{assignedTo.profile.lastName}}
                 </div> -->
