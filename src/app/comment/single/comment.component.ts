@@ -33,7 +33,11 @@ export class CommentComponent implements OnInit {
   @Output() newCommentSaved: EventEmitter<any> = new EventEmitter();
   @Input() showHeader = true;
   @Input() fetchedComment: Comment = new Comment()
-
+  @Input() search: any = {
+    search: '',
+    companieId: '',
+    projectId: '',
+  };
   statusTypes = [
     { label: 'Not Started', value: '' },
     { label: 'Pending', value: 'pending' },
@@ -42,18 +46,6 @@ export class CommentComponent implements OnInit {
 
   showPaiements: boolean = false
 
-  // autocompleteUser: string = '';
-  // autocompleteProject: string = '';
-  // fetchedProducts: Product[] = []
-  // fetchedProjects: Project[] = []
-  // currentUser: User = new User()
-  // imgLogoUrl: string = './assets/images/profile-placeholder.jpg'
-  // imgSignatureBase64Temp = ''
-  // userAdmins : User[] = []
-  // userManagers : User[] = []
-  // userClients : User[] = []
-  // usersSalesRep : User[] = []
-  // userStylists : User[] = []
 
   myForm: FormGroup;
   autocompleteProduct: String = ''
@@ -85,18 +77,10 @@ export class CommentComponent implements OnInit {
       commentName: [''],
     })
 
-
-
-    // this.fetchedComment
-    // .datePaiementString =
-    // this.authService
-    // .isoDateToHtmlDate(this.fetchedComment.datePaiement)
-
-
     this.activatedRoute.params.subscribe((params: Params) => {
       // console.log(params)
-      if(params['id'])
-        this.getComment(params['id'])
+      if(params['idComment'])
+        this.getComment(params['idComment'])
 
     //  if(params['idProject'])
     //   this.getProject(params['idProject'])

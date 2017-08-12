@@ -4,6 +4,8 @@ import { CommentComponent} from './single/comment.component';
 import { CommentsComponent} from './list/comments.component';
 
 
+
+
 export const routes: Routes = [
   {path: '', component: CommentsComponent},
 
@@ -11,7 +13,7 @@ export const routes: Routes = [
   // {path: 'commentSingle/:id', component: CommentSingleComponent},
   {path: 'new', component: CommentComponent},
   // {path: 'new/:idClient', component: CommentSingleComponent},
-  {path: ':id', component: CommentComponent},
+  {path: ':idComment', component: CommentComponent},
 
 
 

@@ -87,13 +87,14 @@
       </div>
 
       <div *ngIf="fetchedProject._id">
-        <div class="FormGroup whtxt">
+        <div class="FormGroup">
           <button type="button" class="btn btn-warning" (click)="showLogs = !showLogs">
            <i class="fa fa-calendar" aria-hidden="true"></i>
            <span>{{'Show Logs' | translate}}</span>
           </button>
-          <app-comments></app-comments>
+
           <div *ngIf="showLogs">
+            <app-comments [search]="search"></app-comments>
 
             <!-- <app-comment [logs]="fetchedProject.logs"></app-comment> -->
           </div>

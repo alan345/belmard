@@ -22,7 +22,6 @@ export class CommentsComponent implements OnInit {
   @Input() showHeader = true;
   fetchedComments: Comment[] = [];
   @Input() search: any = {
-    categories : [],
     search: '',
     companieId: '',
     projectId: '',

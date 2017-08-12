@@ -30,11 +30,6 @@ export class ProjectSingleComponent implements OnInit {
   @Input() showBackButton: Boolean = true;
   @Output() saved: EventEmitter<any> = new EventEmitter();
 
-  // listBoxers: Array<string> = ['Sugar Ray Robinson', 'Muhammad Ali', 'George Foreman', 'Joe Frazier', 'Jake LaMotta', 'Joe Louis', 'Jack Dempsey', 'Rocky Marciano', 'Mike Tyson', 'Oscar De La Hoya'];
-  // listTeamOne: Array<string> = ['aaa'];
-  // listTeamTwo: Array<string> = [];
-  //
-
 
 
   selectedIndex0: number = -1
@@ -48,7 +43,9 @@ export class ProjectSingleComponent implements OnInit {
 
   itemSteps:any =[];
 
-
+  search: any = {
+    projectId: ''
+  }
   status = StatusProject
   categ: string = 'Electricité';
   subCateg: string = 'file';
@@ -99,6 +96,7 @@ export class ProjectSingleComponent implements OnInit {
 
     this.activatedRoute.params.subscribe((params: Params) => {
       if(params['id']) {
+        this.search.projectId = params['id']
         this.getProject(params['id'])
       } else {
         if(params['idClient'])
