@@ -37,18 +37,18 @@
               </th>
                -->
                 <th class="centre">Name</th>
-                <th class="centre">isRead</th>
-
-
+            
               </tr>
             </thead>
             <tbody class="">
-              <tr *ngFor="let notification of fetchedNotifications" [routerLink]="['/notification/' + notification._id]"
+              <tr
+                *ngFor="let notification of fetchedNotifications"
+                [routerLink]="['/notification/' + notification._id]"
+                [ngClass]="{'isRead':!notification.isRead, '': notification.isRead}"
                 routerLinkActive="active">
 
                 <td class="centre">{{notification.nameNotification}}</td>
 
-                <td class="centre">{{notification.isRead}}</td>
 
                 <!-- <td class="centre">{{notification.details.referenceName}}</td>
               <td class="centre">{{notification.name}}</td>

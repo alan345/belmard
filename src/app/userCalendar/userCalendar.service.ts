@@ -114,7 +114,7 @@ export class UserCalendarService {
   }
 
   updateUserCalendar(userCalendar : UserCalendar) {
-    console.log(userCalendar)
+    // console.log(userCalendar)
     const body = JSON.stringify(userCalendar);
     const headers = new Headers({'Content-Type': 'application/json'});
     headers.append('Authorization', '' + this.authService.currentUser.token);

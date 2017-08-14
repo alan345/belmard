@@ -12,7 +12,7 @@ import { UserService} from '../../user/user.service';
 @Component({
   selector: 'app-notification',
   templateUrl: './notifications.component.html',
-  styleUrls: ['../../admin/admin.component.css'],
+  styleUrls: ['../notification.component.css'],
 })
 export class NotificationsComponent implements OnInit {
   fetchedNotifications: Notification[] = [];

@@ -295,7 +295,7 @@ export class UserCalendarsComponent implements OnInit {
   }
 
   saveSingleEvent(userCalendar: UserCalendar) {
-    console.log(userCalendar)
+    // console.log(userCalendar)
     if (userCalendar._id) {
       this.userCalendarService.updateUserCalendar(userCalendar)
         .subscribe(

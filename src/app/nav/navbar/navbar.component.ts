@@ -53,7 +53,7 @@ export class NavbarComponent implements OnInit {
     if (this.authService.isLoggedIn()) {
       //let userId = localStorage.getItem('userId');
 
-
+      this.getNotifications(1, {})
       Observable.interval(1000 * 30).subscribe(x => {
         this.getNotifications(1, {})
       });
@@ -63,7 +63,9 @@ export class NavbarComponent implements OnInit {
       this.fetchedUser = this.authService.getCurrentUser()
     }
   }
-
+  cleanNotifications() {
+    this.notificationsNotRead = 0
+  }
   getNotifications(page: number, search: any) {
     this.notificationService.getNotifications(page, search)
       .subscribe(
