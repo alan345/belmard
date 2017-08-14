@@ -18,7 +18,7 @@ import {SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports:      [
-    // CompanieRouting,
+    CompanieRouting,
     CommonModule,
     FormsModule,
     MaterialModule,
