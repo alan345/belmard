@@ -184,6 +184,9 @@ export class SearchCalendarComponent implements OnInit {
   //    this.fetchEvents();
   //  }
   // autocolplete typeUser
-
+  clearTypeUser(){
+   this.searchData.typeUser = undefined;
+   this.changeTypeUsers()
+  }
 
 }
