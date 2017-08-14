@@ -8,34 +8,28 @@
   <div class="col-md-3"></div>
 </div> -->
 
-<app-header [nameObject]="'reporting'"></app-header>
+<!-- <app-header [nameObject]="'reporting'"></app-header> -->
 
 
-
-
-<div class="row">
-  <div *ngFor="let d of lineChartData; let i= index;">
-    <div *ngIf="i==0">
-      {{d.year}}
-    </div>
-  </div>
-
+<div class="container">
 
   <div class="row">
-    <div class="col-md-5">
-      <div style="display: block;">
-      <canvas baseChart width="400" height="300"
-                  [datasets]="lineChartData"
-                  [labels]="lineChartLabels"
-                  [options]="lineChartOptions"
-                  [colors]="lineChartColors"
-                  [legend]="lineChartLegend"
-                  [chartType]="lineChartType"
-                  (chartHover)="chartHovered($event)"
-                  (chartClick)="chartClicked($event)"></canvas>
+    <div class="col-md-12">
+      <div *ngFor="let d of lineChartData; let i= index;">
+        <div *ngIf="i==0">
+          {{d.year}}
+        </div>
       </div>
     </div>
-    <div class="col-md-7" style="margin-bottom: 10px">
+
+
+
+    <div class="col-md-12">
+
+      <canvas baseChart width="400" height="300" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+    </div>
+
+    <div class="col-md-12" style="margin-bottom: 10px">
       <table class="table table-responsive table-condensed">
         <tr>
           <th></th>
@@ -49,5 +43,4 @@
 
     </div>
   </div>
-
 </div>
