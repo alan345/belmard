@@ -1,6 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
-import { CompanieDetailComponent} from './single/companieDetail.component';
+// import { CompanieDetailComponent} from './single/companieDetail.component';
 import { EditCompanieComponent} from './single/editCompanie.component';
 // import { EditAddUserToCompanieComponent} from './addUser/editAddUserToCompanie.component';
 import { AdminGuardService} from '../admin/services/adminGuard';

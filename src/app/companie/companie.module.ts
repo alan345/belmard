@@ -8,7 +8,7 @@ import { RouterModule} from '@angular/router';
 import { CompaniesComponent} from './companies/companies.component';
 import { EditCompanieComponent} from './single/editCompanie.component';
 // import { EditAddUserToCompanieComponent} from './addUser/editAddUserToCompanie.component';
-import { CompanieDetailComponent} from './single/companieDetail.component';
+// import { CompanieDetailComponent} from './single/companieDetail.component';
 import { CompanieService} from './companie.service';
 import { CompanieRouting} from './companieRouting.module';
 import { MaterialModule } from '@angular/material';
@@ -31,7 +31,7 @@ import {SharedModule } from '../shared/shared.module';
     CompaniesComponent,
     EditCompanieComponent,
     // EditAddUserToCompanieComponent,
-    CompanieDetailComponent,
+    // CompanieDetailComponent,
     CompanieDialogComponent,
     // AddUserByCompanieComponent,
   ],

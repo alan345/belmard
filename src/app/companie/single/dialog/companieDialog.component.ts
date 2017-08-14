@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { MdDialogRef} from '@angular/material';
-import { EditCompanieComponent }  from '../editCompanie.component';
+// import { EditCompanieComponent }  from '../editCompanie.component';
 
 
 
