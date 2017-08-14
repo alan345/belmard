@@ -106,7 +106,7 @@ export class NotificationsComponent implements OnInit {
     this.userService.updateDateSeeLatestNotif(this.authService.getCurrentUser())
       .subscribe(
         res => {
-          console.log(res)
+          // console.log(res)
         },
         error => {
           console.log(error)

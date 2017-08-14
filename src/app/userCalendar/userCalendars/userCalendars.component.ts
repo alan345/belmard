@@ -254,7 +254,6 @@ export class UserCalendarsComponent implements OnInit {
         this.events.forEach((event, i) => {
           event.users.forEach((user, j) => {
             this.events[i].color = user.profile.colorCalendar
-            console.log(user.profile.colorCalendar)
           });
         })
         this.updateCalendar()

@@ -5,6 +5,7 @@ var express = require('express'),
   UserCalendar = require('../models/userCalendar.model'),
   fs = require('fs'),
   jwt = require('jsonwebtoken'),
+  shared = require('./shared.js'),
   nameObject = 'userCalendar'
 
 // this process does not hang the nodejs server on error
@@ -87,7 +88,12 @@ router.put('/:id', function(req, res, next) {
         if (err) {
           return res.status(404).json({message: 'There was an error, please try again', err: err})
         }
-        res.status(201).json({message: 'Updated successfully', obj: result})
+        shared.postNotification(req, 'userCalendar')
+        .then(notification => {
+          res.status(201).json({message: 'Updated successfully', obj: result})
+        })
+        .catch(error=>{return res.status(404).json({message: 'There was an error, please try again', err: err})})
+
       })
 
     }
@@ -122,7 +128,10 @@ router.post('/', function(req, res, next) {
         }
       })
     }
-    res.status(200).json({message: 'Registration Successfull', obj: result})
+    shared.postNotification(req, 'userCalendar').then(notification => {
+      res.status(200).json({message: 'Registration Successfull', obj: result})
+    })
+    .catch(error=>{return res.status(404).json({message: 'There was an error, please try again', err: err})})
   })
 })
 

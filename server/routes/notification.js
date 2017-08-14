@@ -158,7 +158,7 @@ router.get('/page/:page', function (req, res, next) {
 
 
         item.forEach((notif, i) => {
-          console.log(req.user.dateSeeLatestNotif, notif.createdAt)
+          // console.log(req.user.dateSeeLatestNotif, notif.createdAt)
           if(req.user.dateSeeLatestNotif > notif.createdAt) {
             item[i].isRead = true
           }

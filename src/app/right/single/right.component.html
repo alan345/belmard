@@ -19,46 +19,44 @@
 
     <button type="button" class="btn btn-success" (click)="addRight(1,0,0,0)"><i class="fa fa-plus"></i> Add Type</button>
     <div class="categ1" *ngFor="let permission of fetchedRight.detailRight.permissions; let j = index;">
-          <table class="col-md-3">
-            <tr>
-              <td class="tdbtn1">
+      <table class="col-md-3">
+        <tr>
+          <td class="tdbtn1">
             <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].namePermission">
             <option *ngFor="let n of typesRights" [attr.value]="n.value">{{n.name}}</option>
           </select>
-              </td>
-              <td class="tdbtn7">
-      <button type="button" class="btn btn-danger btn-sm" (click)="removeRight( 2,i,j,0)"><i class="fa fa-times"></i></button>
-              </td>
-              <td class="tdbtn7">
-      <button type="button" class="btn btn-success btn-sm" (click)="addRight(2,i,j,0)"><i class="fa fa-plus"></i></button>
-              </td>
-            </tr>
-           </table>
-      <div class="form-control" class="categ2" *ngFor="let singleAccess of permission.access; let k = index;">            
-         
-          <table class="col-md-2">
-            <tr>
-              <td class="tdbtn1">
+          </td>
+          <td class="tdbtn7">
+            <button type="button" class="btn btn-danger btn-sm" (click)="removeRight( 2,i,j,0)"><i class="fa fa-times"></i></button>
+          </td>
+          <td class="tdbtn7">
+            <button type="button" class="btn btn-success btn-sm" (click)="addRight(2,i,j,0)"><i class="fa fa-plus"></i></button>
+          </td>
+        </tr>
+      </table>
+      <div class="form-control" class="categ2" *ngFor="let singleAccess of permission.access; let k = index;">
 
-        <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].access[k].typeAccess">
-              
-                
-              <option [attr.value]="'read'">Read</option>
-              <option [attr.value]="'write'">write</option>
-               
-            </select>
-                
-             </td>   
-             <td class="tdbtn7">
-            
-        <button class="btn btn-danger btn-sm" type="button" (click)="removeRight( 3,i,j,k)"><i class="fa fa-times"></i></button>
-             </td>
-            </tr> 
-           </table> 
-        </div>
-           
-     </div>
-       
+        <table class="col-md-2">
+          <tr>
+            <td class="tdbtn1">
+
+              <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].access[k].typeAccess">
+                <option [attr.value]="'read'">{{'Read' | translate}}</option>
+                <option [attr.value]="'write'">{{'write' | translate}}</option>
+                <option [attr.value]="'notification'">{{'Get Notifications' | translate}}</option>
+              </select>
+
+            </td>
+            <td class="tdbtn7">
+
+              <button class="btn btn-danger btn-sm" type="button" (click)="removeRight( 3,i,j,k)"><i class="fa fa-times"></i></button>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+    </div>
+
     <!-- </div> -->
 
 
@@ -75,4 +73,3 @@
     <div class="clearfix"></div>
   </form>
 </div>
-
