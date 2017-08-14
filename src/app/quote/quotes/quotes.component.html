@@ -11,6 +11,8 @@
   <button class="btn btn-success float-right" [routerLink]="['/quote/new/' + userId]" routerLinkActive="active"><i class="">
   </i>{{'Create a new quote' | translate}}</button>
 </div> -->
+<div class="container">
+  <div class="row">
 <app-header
   [showHeader]="showHeader"
   showBackButton="showBackButton"
@@ -18,10 +20,11 @@
   [idProject]="idProject"
   [idClient]="idClient">
 </app-header>
+</div>
 
 
 <div class="row">
-  <div class="col-md-10">
+  <div class="col-md-12">
     <div class="card">
       <div class="card-header">
         <h4 class="card-title">{{ 'List' | translate }}</h4>
@@ -88,4 +91,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>

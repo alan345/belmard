@@ -24,13 +24,13 @@
       [nameObject]="'user'"
       [openInDialog]=true>
     </app-header>
-
+  </div>
 
     <!-- <app-header [nameObject]="'user'" [option]="'internal'"></app-header> -->
 
 
-
-    <div class="col-md-10">
+<div class="row">
+    <div class="col-md-12">
       <div class="card">
         <div class="card-header">
           <h4 class="card-title">{{ 'List' | translate }}</h4>
@@ -79,7 +79,7 @@
               [pageSize]="paginationData.itemsPerPage"
               (page)="getPage($event.pageIndex*1+1)">
             </md-paginator>
-<app-loadingInApp *ngIf="loading"></app-loadingInApp>            
+<app-loadingInApp *ngIf="loading"></app-loadingInApp>
             <!-- <div [hidden]="!loading">Loading...</div>
             <pagination-controls (pageChange)="getPage($event)" id="server" class="change-page"></pagination-controls> -->
           </div>
