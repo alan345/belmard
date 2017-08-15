@@ -18,6 +18,7 @@ export class PictureComponent {
   @Input() useDialog: boolean = true
   @Output() getPicture: EventEmitter<any> = new EventEmitter();
 
+
   constructor(
     public dialog: MdDialog,
   ) {}
