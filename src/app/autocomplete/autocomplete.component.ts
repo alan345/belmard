@@ -9,13 +9,11 @@ import { RightService} from '../right/right.service';
 import { ProjectService} from '../project/project.service';
 import { MdDialog } from '@angular/material';
 
-import { UserDialogComponent } from '../user/singleUser/dialog/userDialog.component';
-import { CompanieDialogComponent } from '../companie/single/dialog/companieDialog.component';
-import { ProjectDialogComponent } from '../project/single/dialog/projectDialog.component';
+// import { UserDialogComponent } from '../user/singleUser/dialog/userDialog.component';
+// import { CompanieDialogComponent } from '../companie/single/dialog/companieDialog.component';
+// import { ProjectDialogComponent } from '../project/single/dialog/projectDialog.component';
 
 import {Router} from '@angular/router';
-
-
 import { User } from '../user/user.model';
 // import { Quote } from '../quote/quote.model';
 
@@ -92,40 +90,40 @@ export class AutocompleteComponent {
 
 
 
-  removeDataFromDb(id: string) {
-    if(this.typeAutocomplete ==='templateQuote')
-      this.templateQuoteService.deleteTemplateQuote(id)
-      .subscribe( res => {
-        console.log(res);
-        this.searchData()
-      }, error => { console.log(error); });
-
-  }
-
-  openDialog(typeObj: string) {
-    let dialogComp: any
-    if(typeObj == 'user')
-      dialogComp = UserDialogComponent
-
-    if(typeObj == 'companie')
-      dialogComp = CompanieDialogComponent
-
-    if(typeObj == 'project')
-      dialogComp = ProjectDialogComponent
-
-
-    let dialogRef = this.dialog.open(dialogComp, {
-      height: '500px'
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(result)
-      this.autocompleteSearch = ''
-      // if(result) {
-      //   console.log(result)
-      //   this.fetchedProject.forms.push( result)
-      // }
-    })
-  }
+  // removeDataFromDb(id: string) {
+  //   if(this.typeAutocomplete ==='templateQuote')
+  //     this.templateQuoteService.deleteTemplateQuote(id)
+  //     .subscribe( res => {
+  //       console.log(res);
+  //       this.searchData()
+  //     }, error => { console.log(error); });
+  //
+  // }
+  //
+  // openDialog(typeObj: string) {
+  //   let dialogComp: any
+  //   if(typeObj == 'user')
+  //     dialogComp = UserDialogComponent
+  //
+  //   if(typeObj == 'companie')
+  //     dialogComp = CompanieDialogComponent
+  //
+  //   if(typeObj == 'project')
+  //     dialogComp = ProjectDialogComponent
+  //
+  //
+  //   let dialogRef = this.dialog.open(dialogComp, {
+  //     height: '500px'
+  //   });
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log(result)
+  //     this.autocompleteSearch = ''
+  //     // if(result) {
+  //     //   console.log(result)
+  //     //   this.fetchedProject.forms.push( result)
+  //     // }
+  //   })
+  // }
 
   saved(result) {
     if(result)

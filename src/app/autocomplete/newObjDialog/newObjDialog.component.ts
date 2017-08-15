@@ -29,19 +29,7 @@ export class newObjDialogComponent implements OnInit {
   @Input() title: string = '';
   @Input() icone: string = 'fa fa-plus';
   @Output() saved: EventEmitter<any> = new EventEmitter();
-  // @Input() option: String = '';
-  // @Input() showBackButton: Boolean = true;
-  // @Input() openInDialog: Boolean = false;
-  //
-  // @Input() showCreateButton: Boolean = true;
-  // @Input() idProject: string= '';
-  // @Input() idClient: string= '';
 
-
-  //
-  //
-  // nameObjectPlur: String= ''
-  // nameObjectSing: String= ''
 
   constructor(
     private authService: AuthService,
@@ -52,9 +40,7 @@ export class newObjDialogComponent implements OnInit {
   ) {}
 
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 
   openDialog(typeObj: string) {
     let dialogComp: any
@@ -73,8 +59,6 @@ export class newObjDialogComponent implements OnInit {
     if(typeObj == 'product')
       dialogComp = ProductDialogComponent
 
-
-
     let dialogRef = this.mdDialog.open(dialogComp, {
       height: '500px',
       data: {
@@ -82,14 +66,7 @@ export class newObjDialogComponent implements OnInit {
       }
     });
     dialogRef.afterClosed().subscribe(result => {
-      // console.log(result)
       this.saved.emit(result)
-
-
-      // if(result) {
-      //   console.log(result)
-      //   this.fetchedProject.forms.push( result)
-      // }
     })
   }
 
