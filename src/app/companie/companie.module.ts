@@ -18,13 +18,14 @@ import {SharedModule } from '../shared/shared.module';
 
 @NgModule({
   imports:      [
+    SharedModule,
     CompanieRouting,
-    CommonModule,
-    FormsModule,
-    MaterialModule,
+    // CommonModule,
+    // FormsModule,
+    // MaterialModule,
     ReactiveFormsModule,
     RouterModule,
-    SharedModule,
+
   ],
   declarations: [
     // CompanieDetailUsersComponent,

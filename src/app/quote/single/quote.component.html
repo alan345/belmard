@@ -26,6 +26,20 @@
       </div>
 
 
+      <div *ngIf="fetchedQuote._id">
+        <div class="FormGroup">
+          <button type="button" class="btn btn-warning" (click)="showLogs = !showLogs">
+           <i class="fa fa-calendar" aria-hidden="true"></i>
+           <span>{{'Show Comments' | translate}}</span>
+          </button>
+
+          <div *ngIf="showLogs">
+            <app-comments [search]="search"></app-comments>
+          </div>
+        </div>
+
+      </div>
+
       <div class="col-sm-6">
         <div>
           <!-- <app-autocomplete [typeAutocomplete]="'user'" [title]="'Owner Quote'" [singleChoice]="'true'" [arrayContent]="fetchedQuote.ownerQuotes" (getResultAutocomplete)="selectUser($event[0])">

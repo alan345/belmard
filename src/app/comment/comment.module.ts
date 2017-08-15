@@ -12,13 +12,15 @@ import { CommentService} from './comment.service';
 import { CommentRouting} from './commentRouting.module';
 import { CommentsComponent} from './list/comments.component';
 
+import {PictureModule} from '../picture/picture.module';
 
-import { QuoteModule} from '../quote/quote.module';
+// import { QuoteModule} from '../quote/quote.module';
 
-import { DragulaModule } from 'ng2-dragula';
+// import { DragulaModule } from 'ng2-dragula';
 import { CommentDialogComponent } from './single/dialog/commentDialog.component'
 // import { AutocompleteModule } from '../autocomplete/autocomplete.module'
-import {SharedModule } from '../shared/shared.module';
+// import {SharedModule } from '../shared/shared.module';
+import {SharedSmallModule } from '../shared/sharedSmall.module';
 // import {UserModule} from '../user/user.module';
 // import { PictureComponent } from './picture/picture.component'
 
@@ -28,14 +30,16 @@ import {SharedModule } from '../shared/shared.module';
 @NgModule({
   imports:     [
     // UserModule,
-    DragulaModule,
+    // DragulaModule,
+    SharedSmallModule,
     CommentRouting,
-    CommonModule,
-    FormsModule,
-    MaterialModule,
+    // CommonModule,
+    // FormsModule,
+    // MaterialModule,
     ReactiveFormsModule,
-    QuoteModule,
-    SharedModule
+    // PictureModule,
+    // QuoteModule,
+    // SharedModule
 
     // AutocompleteModule,
   ],

@@ -15,51 +15,50 @@ import { RoundPipe} from './round.pipe';
 import { HeaderComponent } from '../nav/header/header.component';
 // import { newObjDialogComponent } from '../nav/newObjDialog/newObjDialog.component';
 
+import { MaterialModule } from '@angular/material';
 
 import { LoadingInAppComponent } from '../nav/loadingInApp/loadingInApp.component';
 import { LoginInAppComponent } from '../nav/loginInApp/loginInApp.component';
 
 import {CommentModule} from '../comment/comment.module';
 
-import {SharedSmallModule} from './sharedSmall.module'
 @NgModule({
   imports:      [
-    SharedSmallModule,
     CommonModule,
     FormsModule,
-    AutocompleteModule,
+    // AutocompleteModule,
     PictureModule,
-    CommentModule,
-
     // CommentModule,
+    MaterialModule,
+
 
 
   ],
   declarations: [
-    // RoundPipe,
+    RoundPipe,
     // AutocompleteComponent,
-    // TranslatePipe,
-    HeaderComponent,
+    TranslatePipe,
+    // HeaderComponent,
     // newObjDialogComponent,
-    // LoadingInAppComponent,
-    // LoginInAppComponent,
+    LoadingInAppComponent,
+    LoginInAppComponent,
 
 
   ],
   exports: [
-    // TranslatePipe,
-    SharedSmallModule,
-    AutocompleteModule,
+    TranslatePipe,
+    // AutocompleteModule,
     CommonModule,
     FormsModule,
-    // RoundPipe,
-    HeaderComponent,
+    RoundPipe,
+    // HeaderComponent,
     // newObjDialogComponent,
     // LoadingComponent,
-    // LoadingInAppComponent,
-    // LoginInAppComponent,
-    // PictureModule,
-    CommentModule,
+    LoadingInAppComponent,
+    LoginInAppComponent,
+    PictureModule,
+    MaterialModule,
+    // CommentModule,
     // CommentModule,
     // AutocompleteComponent,
   ],
@@ -68,4 +67,4 @@ import {SharedSmallModule} from './sharedSmall.module'
     TranslateService,
   ]
 })
-export class SharedModule { }
+export class SharedSmallModule { }

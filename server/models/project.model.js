@@ -15,12 +15,12 @@ var project = new Schema({
     clients: [{type: Schema.Types.ObjectId, ref: 'User'}],
     assignedTos: [{type: Schema.Types.ObjectId, ref: 'User'}],
     status: {type: String, default: [0]},
-    logs:[{
-      comment: {type: String, default: ['']},
-      by: [{type: Schema.Types.ObjectId, ref: 'User'}],
-      forms: [{type: Schema.Types.ObjectId, ref: 'Form'}],
-      date: {type: Date, default: [Date()]},
-    }],
+    // logs:[{
+    //   comment: {type: String, default: ['']},
+    //   by: [{type: Schema.Types.ObjectId, ref: 'User'}],
+    //   forms: [{type: Schema.Types.ObjectId, ref: 'Form'}],
+    //   date: {type: Date, default: [Date()]},
+    // }],
     status: {type: Number},
     dateProject:{
       creationDate: {type: Date, default: [Date()]},
