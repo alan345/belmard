@@ -32,14 +32,12 @@
 
 
 
-        <!-- <select class="form-control" formControlName="type" [(ngModel)]="fetchedUser.type">
-        <option *ngFor="let n of typeUser" [attr.value]="n">{{n}}</option>
-      </select> -->
-        <div *ngIf="!fetchedUser.isAdminOfHisCompanie">
+
+        <!-- <div *ngIf="!fetchedUser.isAdminOfHisCompanie"> -->
           <label>Rights</label>
           <app-autocomplete [typeAutocomplete]="'right'" [canDelete]="true" [title]="" [singleChoice]="true" [arrayContent]="fetchedUser.rights" (getResultAutocomplete)="selectRight($event[0])">
           </app-autocomplete>
-        </div>
+        <!-- </div> -->
 
         <div>
           <label>Couleur Calendrier</label>
