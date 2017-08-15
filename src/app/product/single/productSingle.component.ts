@@ -112,9 +112,9 @@ export class ProductSingleComponent implements OnInit {
 
   }
 
-  removePic(i) {
-    this.fetchedProduct.forms.splice(i, 1);
-  }
+  // removePic(i) {
+  //   this.fetchedProduct.forms.splice(i, 1);
+  // }
   // changeCascade(selectedIndex1, selectedIndex2) {
   //   this.selectedIndex1 = selectedIndex1
   //   this.selectedIndex2 = selectedIndex2
@@ -176,16 +176,18 @@ export class ProductSingleComponent implements OnInit {
   //   this.location.back();
   // }
 
-  openDialog(positionImage: string) {
-    // let dialogRef = this.dialog.open(EditOptionsComponentDialog);
-    // dialogRef.afterClosed().subscribe(result => {
-    //   if(result) {
-    //     this.fetchedProduct.forms.push( result)
-    //   }
-    // })
+  // openDialog(positionImage: string) {
+  //   // let dialogRef = this.dialog.open(EditOptionsComponentDialog);
+  //   // dialogRef.afterClosed().subscribe(result => {
+  //   //   if(result) {
+  //   //     this.fetchedProduct.forms.push( result)
+  //   //   }
+  //   // })
+  // }
+
+  getPicture(result){
+    
   }
-
-
   save() {
     // this.fetchedProduct.categorie.categ1 = [{name: this.categ1}]
     // this.fetchedProduct.categorie.categ2 = [{name: this.categ2}]
