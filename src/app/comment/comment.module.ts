@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+// import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { MaterialModule } from '@angular/material';
+// import { MaterialModule } from '@angular/material';
 
 
 
@@ -12,7 +12,7 @@ import { CommentService} from './comment.service';
 import { CommentRouting} from './commentRouting.module';
 import { CommentsComponent} from './list/comments.component';
 
-import {PictureModule} from '../picture/picture.module';
+// import {PictureModule} from '../picture/picture.module';
 
 // import { QuoteModule} from '../quote/quote.module';
 

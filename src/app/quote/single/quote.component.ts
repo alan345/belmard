@@ -40,6 +40,12 @@ export class QuoteComponent implements OnInit {
   @ViewChild(SignaturePad) signaturePad: SignaturePad;
   @ViewChild(PaiementQuotesComponent) paiementQuotesComponent: PaiementQuotesComponent;
 
+
+  search: any = {
+    projectId: '',
+    quoteId:'',
+  }
+
   showPaiements: boolean = false
   fetchedQuote: Quote = new Quote()
   autocompleteUser: string = '';
@@ -142,8 +148,13 @@ export class QuoteComponent implements OnInit {
 
     this.activatedRoute.params.subscribe((params: Params) => {
 
-      if (params['idQuote'])
+
+
+      if (params['idQuote']) {
+        this.search.quoteId = params['idQuote']
         this.getQuote(params['idQuote'])
+      }
+
       if (params['idClient'])
         this.getUser(params['idClient'])
       if (params['idProject'])

@@ -159,6 +159,8 @@ router.get('/page/:page', function (req, res, next) {
   if(req.query.projectId)
     searchQuery['projects'] = mongoose.Types.ObjectId(req.query.projectId)
 
+  if (req.query.quoteId)
+    searchQuery['quotes'] = mongoose.Types.ObjectId(req.query.quoteId)
 
   Comment
   .find(searchQuery)

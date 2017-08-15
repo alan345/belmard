@@ -20,7 +20,7 @@ import { DeleteDialog } from '../../deleteDialog/deleteDialog.component';
 
 })
 export class CommentsComponent implements OnInit {
-  @Input() userId = '';
+  @Input() userId: string = '';
   @Input() showHeader = true;
   fetchedComments: Comment[] = [];
   @Input() search: any = {

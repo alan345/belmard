@@ -1,8 +1,8 @@
 import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {AuthService} from '../../auth/auth.service';
 import {CommentService} from '../comment.service';
-import {ProductService} from '../../product/product.service';
-import { ProjectService} from '../../project/project.service';
+// import {ProductService} from '../../product/product.service';
+// import { ProjectService} from '../../project/project.service';
 
 import {Comment} from '../comment.model';
 
@@ -12,13 +12,13 @@ import {MdDialog } from '@angular/material';
 import {Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
-import { UserService} from '../../user/user.service';
+// import { UserService} from '../../user/user.service';
 import { QuoteService } from '../../quote/quote.service';
 import { DeleteDialog } from '../../deleteDialog/deleteDialog.component';
 import { User } from '../../user/user.model';
-import { Quote } from '../../quote/quote.model';
-import { Product } from '../../product/product.model';
-import { Project } from '../../project/project.model';
+// import { Quote } from '../../quote/quote.model';
+// import { Product } from '../../product/product.model';
+// import { Project } from '../../project/project.model';
 
 
 
@@ -97,21 +97,23 @@ export class CommentComponent implements OnInit {
 
 
   save() {
-    this.fetchedComment.projects = this.search.projectId
+    if(!this.fetchedComment.commentName)
+      return
+    this.fetchedComment.quotes = this.search.quoteId
     // this.fetchedComment.datePaiement = this.authService.HTMLDatetoIsoDate(this.fetchedComment.datePaiementString)
-    if(this.fetchedComment._id) {
-      this.commentService.updateComment(this.fetchedComment)
-        .subscribe(
-          res => {
-            this.toastr.success('Great!', res.message)
-            // this.fetchedComment = res.obj
-            //this.router.navigate(['comment/edit/' + this.fetchedComment._id])
-          },
-          error => {
-            this.toastr.error('error!', error)
-          }
-        )
-    } else {
+    // if(this.fetchedComment._id) {
+    //   this.commentService.updateComment(this.fetchedComment)
+    //     .subscribe(
+    //       res => {
+    //         this.toastr.success('Great!', res.message)
+    //         // this.fetchedComment = res.obj
+    //         //this.router.navigate(['comment/edit/' + this.fetchedComment._id])
+    //       },
+    //       error => {
+    //         this.toastr.error('error!', error)
+    //       }
+    //     )
+    // } else {
       this.commentService.saveComment(this.fetchedComment)
         .subscribe(
           res => {
@@ -125,7 +127,7 @@ export class CommentComponent implements OnInit {
           },
           error => {console.log(error)}
         )
-    }
+    // }
 
   }
 

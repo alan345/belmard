@@ -60,7 +60,8 @@ import {SharedModule } from '../shared/shared.module';
   ],
   providers:    [
     ProjectService,
-    TaskService],
+    TaskService
+  ],
   entryComponents: [
     ProjectDialogComponent,
     // TaskDialogComponent,
