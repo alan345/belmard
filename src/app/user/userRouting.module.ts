@@ -9,7 +9,7 @@ import {ForgetPasswordComponent} from './accountRecover/forgetPassword.component
 //import {UserFormsComponent} from '../form/userForms.component';
 import {AuthGuardService} from '../auth/authguard.service';
 // import {AppComponent} from '../app.component';
-import {UserProfileComponent} from './singleUser/userProfile.component';
+// import {UserProfileComponent} from './singleUser/userProfile.component';
 //import {UserProfilePicturesComponent} from './singleUser/userProfilePictures.component';
 //import {UserProfileSettingsComponent} from './singleUser/userProfileSettings.component';
 
@@ -36,9 +36,9 @@ export const routes: Routes = [
   {path: 'reset/:token', component: ResetPasswordComponent},
   //{path: 'forms', component: UserFormsComponent, canActivate: [AuthGuardService]},
   {path: 'profile/password', component: ChangePasswordComponent, canActivate: [AuthGuardService]},
-  {path: 'profile', component: UserProfileComponent, canActivate: [AuthGuardService]},
+  // {path: 'profile', component: UserProfileComponent, canActivate: [AuthGuardService]},
   {path: 'paiement', component: PaiementComponent, canActivate: [AuthGuardService]},
-  {path: 'profile/:id', component: UserProfileComponent, canActivate: [AuthGuardService]},
+  // {path: 'profile/:id', component: UserProfileComponent, canActivate: [AuthGuardService]},
   {path: ':id', component: NewUserComponent, canActivate: [AuthGuardService]},
   {path: 'list/:isExternalUser', component: AdminUsersComponent, canActivate: [AuthGuardService]},
 

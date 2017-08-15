@@ -33,7 +33,7 @@ import { NewUserComponent} from './singleUser/newUser.component';
 //
 // import { UserProfileSettingsComponent } from './profile/userProfileSettings.component';
 // import { UserProfilePicturesComponent } from './profile/userProfilePictures.component';
-import { UserProfileComponent } from './singleUser/userProfile.component';
+// import { UserProfileComponent } from './singleUser/userProfile.component';
 
 import { PaiementComponent } from './paiement/paiement.component';
 
@@ -90,7 +90,7 @@ import {SharedModule } from '../shared/shared.module';
     ResetPasswordComponent,
     ForgetPasswordComponent,
 
-    UserProfileComponent,
+    // UserProfileComponent,
     PaiementComponent,
     // UserProfilePicturesComponent,
     // UserProfileSettingsComponent,
