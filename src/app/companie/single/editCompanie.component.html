@@ -28,7 +28,7 @@
         <input type="text" class="form-control" formControlName="city" [(ngModel)]="fetchedCompanie.address.city" required minlength="2" placeholder="Ville">
 
         <input type="text" class="form-control" formControlName="zip" [(ngModel)]="fetchedCompanie.address.zip" required minlength="5" placeholder="Code postal">
-        <div class="form-group prmimg-cnt">
+        <!-- <div class="form-group prmimg-cnt">
           <div *ngFor="let singleForm of fetchedCompanie.forms; let i=index">
             <img class="promo-img" height="50px" src="./uploads/forms/{{singleForm.owner}}/{{singleForm.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
             <button type="button" class="dlt-btn" (click)="removeForm(i)">
@@ -38,7 +38,8 @@
           <div>
             <button type="button" md-button (click)="openDialog('img')" class="addpic-squr">{{'Add a picture' | translate}}<br><i class="fa fa-plus"></i></button>
           </div>
-        </div>
+        </div> -->
+        <app-picture [forms]="fetchedCompanie.forms" (getPicture)="getPicture($event)"></app-picture>
       </div>
 
 

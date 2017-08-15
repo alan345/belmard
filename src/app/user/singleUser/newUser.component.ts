@@ -149,19 +149,21 @@ export class NewUserComponent implements OnInit {
   selectSalesMan(users) {
     this.fetchedUser.salesMan = users
   }
-
-
-  openDialog(positionImage: string) {
-    // let dialogRef = this.dialog.open(EditOptionsComponentDialog);
-    // dialogRef.afterClosed().subscribe(result => {
-    //   if(result) {
-    //     this.fetchedUser.profile.profilePicture.push(result)
-    //   }
-    // })
+  getPicture(result){
+    console.log(result)
   }
-  removePic(i) {
-    this.fetchedUser.profile.profilePicture.splice(i, 1);
-  }
+
+  // openDialog(positionImage: string) {
+  //   // let dialogRef = this.dialog.open(EditOptionsComponentDialog);
+  //   // dialogRef.afterClosed().subscribe(result => {
+  //   //   if(result) {
+  //   //     this.fetchedUser.profile.profilePicture.push(result)
+  //   //   }
+  //   // })
+  // }
+  // removePic(i) {
+  //   this.fetchedUser.profile.profilePicture.splice(i, 1);
+  // }
 
   // autocolplete typeUser
   searchTypeUser() {

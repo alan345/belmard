@@ -141,7 +141,8 @@
             </button>
         </div>
         <div>
-          <button type="button" md-button (click)="openDialog('img')" class="addpic-squr">Ajouter une image<br><i class="fa fa-plus"></i></button>
+          <app-picture [forms]="fetchedUser.forms" (getPicture)="getPicture($event)"></app-picture>
+          <!-- <button type="button" md-button (click)="openDialog('img')" class="addpic-squr">Ajouter une image<br><i class="fa fa-plus"></i></button> -->
         </div>
       </div>
 

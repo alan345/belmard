@@ -191,20 +191,22 @@ export class EditCompanieComponent implements OnInit {
         error => { console.log(error) }
       )
   }
-
-  openDialog(positionImage: string) {
-    // let dialogRef = this.dialog.open(EditOptionsComponentDialog);
-    // dialogRef.afterClosed().subscribe(result => {
-    //   if(result) {
-    //     this.fetchedCompanie.forms.push(result)
-    //   }
-    // })
+  getPicture(result){
+    
   }
+  // openDialog(positionImage: string) {
+  //   // let dialogRef = this.dialog.open(EditOptionsComponentDialog);
+  //   // dialogRef.afterClosed().subscribe(result => {
+  //   //   if(result) {
+  //   //     this.fetchedCompanie.forms.push(result)
+  //   //   }
+  //   // })
+  // }
 
-  removeForm(i: number) {
-      this.fetchedCompanie.forms.splice(i, 1)
-      this.save();
-  }
+  // removeForm(i: number) {
+  //     this.fetchedCompanie.forms.splice(i, 1)
+  //     this.save();
+  // }
 
   initDataToRemove(){
         this.fetchedCompanie.categories.categProduct = [
