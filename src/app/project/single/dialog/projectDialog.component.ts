@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { MdDialogRef} from '@angular/material';
 import { ProjectSingleComponent }  from '../projectSingle.component';
 

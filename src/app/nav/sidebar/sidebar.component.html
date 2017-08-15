@@ -80,21 +80,11 @@
                 <table class="table">
                   <tr *ngFor="let categProjectSingle of ownerCompanie.categories.categProject; let i=index;">
                     <td *ngIf="categProjectSingle.isFlagged" class="nav-item subItem">
-                      <a class="nav-link" [routerLink]="['/project/new/' + i]" routerLinkActive="active">
-                        {{categProjectSingle.categ}}
+                      <a class="nav-link" [routerLink]="['/project/new/' + i]" routerLinkActive="active"> {{categProjectSingle.categ}}
                       </a>
                     </td>
                   </tr>
-                  <!-- <tr>
-                <td class="nav-item subItem">
-                  <a class="nav-link" [routerLink]="['/companie']" routerLinkActive="active">{{'service2'|translate}}</a>
-                </td>
-              </tr>
-              <tr>
-                <td class="nav-item subItem">
-                  <a class="nav-link" [routerLink]="['/user/false']" routerLinkActive="active">{{'service3'|translate}}</a>
-                </td>
-              </tr> -->
+                
 
                 </table>
               </div>
