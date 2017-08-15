@@ -157,7 +157,7 @@ export class EditCompanieComponent implements OnInit {
 
 
   addCateg(typeCateg, level, index1, index2, index3) {
-
+      console.log(typeCateg)
       let newCategorie = new Categorie0()
       if(level === 0)
         this.fetchedCompanie.categories[typeCateg].unshift(newCategorie)
@@ -192,7 +192,7 @@ export class EditCompanieComponent implements OnInit {
       )
   }
   getPicture(result){
-    
+
   }
   // openDialog(positionImage: string) {
   //   // let dialogRef = this.dialog.open(EditOptionsComponentDialog);

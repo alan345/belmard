@@ -71,7 +71,7 @@
       <h4>Categories</h4>
       <div (click)="seeCategProject=!seeCategProject">See Categs Project</div>
       <div *ngIf="seeCategProject">
-        <button type="button" (click)="addCateg('project', 0, 0, 0, 0)">Add Categ Project</button>
+        <button type="button" (click)="addCateg('categProject', 0, 0, 0, 0)">Add Categ Project</button>
         <div class="categ0" *ngFor="let categorie0 of fetchedCompanie.categories.categProject; let i = index;">
           <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.categories.categProject[i].categ">
           <input type="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.categories.categProject[i].isFlagged">isFlagged
