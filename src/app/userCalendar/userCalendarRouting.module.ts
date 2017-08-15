@@ -5,7 +5,7 @@ import { UserCalendarComponent} from './single/userCalendar.component';
 
 import { AdminGuardService} from '../admin/services/adminGuard';
 
-import { UserCalendarsComponent} from './userCalendars/userCalendars.component';
+import { UserCalendarsComponent} from './list/userCalendars.component';
 
 import { CompanieGuardService} from '../companie/companieGuard.service';
 import { PaiementGuardService} from '../user/paiement/paiementGuard.service';
