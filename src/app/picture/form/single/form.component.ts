@@ -18,7 +18,6 @@ export class FormComponent implements OnInit {
     @ViewChild('appendToChildEl') appendToChildEl: ElementRef;
 
 
-
   @Output() onPassForm = new EventEmitter<any>();
   // setting up the form
   myForm: FormGroup;
@@ -39,7 +38,7 @@ export class FormComponent implements OnInit {
   @ViewChild('fileInput') fileInput: ElementRef;
 
 
-  @Output() onUploadFinisedChildToParent = new EventEmitter<any>();
+
 
 
   name: string;
@@ -214,9 +213,9 @@ export class FormComponent implements OnInit {
           //this.router.navigateByUrl('/user/forms');
         //  location.reload();
           let form = JSON.parse(xhr.response).obj
-          console.log(form)
+          // console.log(form)
           this.onPassForm.emit(form);
-          this.onUploadFinisedChildToParent.emit()
+
 
           this.toastr.success('Form submitted successfully');
         } else if (xhr.status !== 201) {

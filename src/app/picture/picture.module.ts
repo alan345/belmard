@@ -11,7 +11,7 @@ import { FormsModule }         from '@angular/forms';
 import { FormService} from './form/form.service';
 import { UserFormsComponent} from './form/list/userForms.component';
 import { UserFormsUploadAndList} from './form/both/userFormsUploadAndList.component';
-import { SeePictureDialogComponent} from './form/seePictureDialog/seePictureDialog.component';
+// import { SeePictureDialogComponent} from './form/seePictureDialog/seePictureDialog.component';
 
 import { EditOptionsComponentDialog} from './form/single/modalLibrary/modalLibrary.component';
 
@@ -33,7 +33,7 @@ import { ProgressBarModule} from 'ng2-progress-bar';
     PictureComponent,
     UserFormsComponent,
     UserFormsUploadAndList,
-    SeePictureDialogComponent,
+    // SeePictureDialogComponent,
     EditOptionsComponentDialog,
     FormComponent,
     // NewUserComponent
@@ -46,7 +46,7 @@ import { ProgressBarModule} from 'ng2-progress-bar';
     FormService,
   ],
   entryComponents: [
-    SeePictureDialogComponent,
+    // SeePictureDialogComponent,
     EditOptionsComponentDialog,
   ]
 })

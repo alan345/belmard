@@ -2,7 +2,7 @@ import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
 import { FormService} from '../form.service';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../auth/auth.service';
-import { SeePictureDialogComponent } from '../seePictureDialog/seePictureDialog.component';
+// import { SeePictureDialogComponent } from '../seePictureDialog/seePictureDialog.component';
 import { MdDialog} from '@angular/material';
 import { Form } from '../form.model';
 
@@ -85,8 +85,8 @@ export class UserFormsComponent implements OnInit {
         let url = './uploads/forms/' + form.owner + '/' + form.imagePath
         window.open(url);
       } else {
-        let dialogRef = this.dialog.open(SeePictureDialogComponent)
-        dialogRef.componentInstance.form = form;
+        // let dialogRef = this.dialog.open(SeePictureDialogComponent)
+        // dialogRef.componentInstance.form = form;
         // dialogRef.afterClosed().subscribe(result => {
         // })
       }

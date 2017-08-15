@@ -31,6 +31,13 @@ export class PictureComponent {
       }
     })
   }
+  onPassForm(result) {
+    this.forms.push(result)
+    this.getPicture.emit(result)
+  }
+  removePic(i) {
+    this.forms.splice(i, 1);
+  }
 
 
 }
