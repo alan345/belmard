@@ -5,7 +5,7 @@ import { MdDialog } from '@angular/material';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { Project, StatusProject, Log} from '../project.model';
-import { EditOptionsComponentDialog } from '../../form/modalLibrary/modalLibrary.component';
+// import { EditOptionsComponentDialog } from '../../form/modalLibrary/modalLibrary.component';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { DeleteDialog } from '../../deleteDialog/deleteDialog.component'
@@ -236,13 +236,13 @@ export class ProjectSingleComponent implements OnInit {
 
 
   openDialog(positionImage: string) {
-    let dialogRef = this.dialog.open(EditOptionsComponentDialog);
-    dialogRef.afterClosed().subscribe(result => {
-      if(result) {
-        console.log(result)
-        // this.fetchedProject.forms.push( result)
-      }
-    })
+    // let dialogRef = this.dialog.open(EditOptionsComponentDialog);
+    // dialogRef.afterClosed().subscribe(result => {
+    //   if(result) {
+    //     console.log(result)
+    //     // this.fetchedProject.forms.push( result)
+    //   }
+    // })
   }
 
 

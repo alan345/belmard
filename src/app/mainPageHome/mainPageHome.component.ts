@@ -3,11 +3,11 @@ import { MainPageHomeService} from './mainPageHome.service';
 import { FormGroup } from '@angular/forms';
 import { ToastsManager} from 'ng2-toastr';
 import { MdDialog} from '@angular/material';
-import { EditOptionsComponentDialog }  from '../form/modalLibrary/modalLibrary.component';
+// import { EditOptionsComponentDialog }  from '../form/modalLibrary/modalLibrary.component';
 import { AdminService} from '../admin/services/admin.service';
 
 
-import { Options } from './options.model';
+// import { Options } from './options.model';
 import { Router} from '@angular/router';
 import { AuthService} from '../auth/auth.service';
 // import { Companie} from '../companie/companie.model';

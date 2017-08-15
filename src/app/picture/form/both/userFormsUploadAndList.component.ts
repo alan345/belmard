@@ -1,5 +1,5 @@
 import {Component, ViewChild } from '@angular/core';
-import { UserFormsComponent }  from './userForms.component';
+import { UserFormsComponent }  from '../list/userForms.component';
 
 
 @Component({

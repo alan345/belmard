@@ -1,21 +1,20 @@
 import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
-import { FormService} from './form.service';
+import { FormService} from '../form.service';
 import { ActivatedRoute } from '@angular/router';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '../../../auth/auth.service';
 import { SeePictureDialogComponent } from '../seePictureDialog/seePictureDialog.component';
 import { MdDialog} from '@angular/material';
-import { Form } from './form.model';
+import { Form } from '../form.model';
 
 
 @Component({
   selector: 'app-user-form',
   templateUrl: './userForms.component.html',
-  styleUrls: ['./form.component.css']
+  styleUrls: ['../form.component.css']
 })
 export class UserFormsComponent implements OnInit {
   @Input() itemsPerPage: number;
   @Input() isDialog: boolean;
-
 
 
   @Output() onPassForm = new EventEmitter<any>();

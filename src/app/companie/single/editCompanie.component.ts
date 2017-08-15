@@ -16,7 +16,7 @@ import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { DeleteDialog } from '../../deleteDialog/deleteDialog.component';
 import { User } from '../../user/user.model';
 
-import { EditOptionsComponentDialog } from '../../form/modalLibrary/modalLibrary.component';
+// import { EditOptionsComponentDialog } from '../../form/modalLibrary/modalLibrary.component';
 import { PaiementService} from '../../user/paiement/paiement.service';
 
 
@@ -193,12 +193,12 @@ export class EditCompanieComponent implements OnInit {
   }
 
   openDialog(positionImage: string) {
-    let dialogRef = this.dialog.open(EditOptionsComponentDialog);
-    dialogRef.afterClosed().subscribe(result => {
-      if(result) {
-        this.fetchedCompanie.forms.push(result)
-      }
-    })
+    // let dialogRef = this.dialog.open(EditOptionsComponentDialog);
+    // dialogRef.afterClosed().subscribe(result => {
+    //   if(result) {
+    //     this.fetchedCompanie.forms.push(result)
+    //   }
+    // })
   }
 
   removeForm(i: number) {

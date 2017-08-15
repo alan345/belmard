@@ -5,7 +5,7 @@ import { Right} from '../../right/right.model';
 
 import { Companie } from '../../companie/companie.model';
 import { CompanieService } from '../../companie/companie.service';
-import { EditOptionsComponentDialog } from '../../form/modalLibrary/modalLibrary.component';
+// import { EditOptionsComponentDialog } from '../../form/modalLibrary/modalLibrary.component';
 import { ToastsManager} from 'ng2-toastr';
 
 import { MdDialog} from '@angular/material';
@@ -152,12 +152,12 @@ export class NewUserComponent implements OnInit {
 
 
   openDialog(positionImage: string) {
-    let dialogRef = this.dialog.open(EditOptionsComponentDialog);
-    dialogRef.afterClosed().subscribe(result => {
-      if(result) {
-        this.fetchedUser.profile.profilePicture.push(result)
-      }
-    })
+    // let dialogRef = this.dialog.open(EditOptionsComponentDialog);
+    // dialogRef.afterClosed().subscribe(result => {
+    //   if(result) {
+    //     this.fetchedUser.profile.profilePicture.push(result)
+    //   }
+    // })
   }
   removePic(i) {
     this.fetchedUser.profile.profilePicture.splice(i, 1);

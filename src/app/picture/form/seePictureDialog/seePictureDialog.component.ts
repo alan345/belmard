@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MdDialogRef} from '@angular/material';
-import { Form } from '../form/form.model';
+import { Form } from '../../form/form.model';
 
 
 @Component({

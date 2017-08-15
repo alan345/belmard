@@ -1,4 +1,4 @@
-import { Form } from '../form/form.model';
+import { Form } from '../picture/form/form.model';
 import { Companie } from '../companie/companie.model';
 import { User } from '../user/user.model';
 

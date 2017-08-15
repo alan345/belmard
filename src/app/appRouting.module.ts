@@ -3,9 +3,9 @@ import {ModuleWithProviders} from '@angular/core';
 //import {USER_ROUTES} from './user/user.routes';
 
 import {ADMIN_ROUTES} from './admin/admin.routes';
-import {FormComponent} from './form/form.component';
+// import {FormComponent} from './form/form.component';
 // import {UserFormsComponent} from './form/userForms.component';
-import { UserFormsUploadAndList} from './form/userFormsUploadAndList.component';
+// import { UserFormsUploadAndList} from './form/userFormsUploadAndList.component';
 
 
 import { CompanieGuardService} from './companie/companieGuard.service';
@@ -39,8 +39,8 @@ export const routes: Routes = [
   {path: 'user', loadChildren: 'app/user/user.module#UserModule'},
   {path: 'comment', loadChildren: 'app/comment/comment.module#CommentModule', canActivate: [AuthGuardService, CompanieGuardService, PaiementGuardService]},
 
-  {path: 'form', component: FormComponent, canActivate: [AuthGuardService]},
-  {path: 'userForms', component: UserFormsUploadAndList, canActivate: [AuthGuardService]},
+  // {path: 'form', component: FormComponent, canActivate: [AuthGuardService]},
+  // {path: 'userForms', component: UserFormsUploadAndList, canActivate: [AuthGuardService]},
 
   {path: 'admin', component: AdminComponent, children: ADMIN_ROUTES},
   {path: '404', component: ErrorPageComponent},

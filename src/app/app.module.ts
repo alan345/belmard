@@ -11,7 +11,7 @@ import {MdSidenavModule} from '@angular/material';
 import { GlobalEventsManager } from './globalEventsManager';
 
 //
-import { ProgressBarModule} from 'ng2-progress-bar';
+// import { ProgressBarModule} from 'ng2-progress-bar';
 import { RouterModule} from '@angular/router';
 import { CommonModule, HashLocationStrategy, LocationStrategy} from '@angular/common';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
@@ -37,10 +37,10 @@ import { LoadingComponent} from './nav/loading/loading.component';
 
 
 
-import { FormService} from './form/form.service';
-import { UserFormsComponent} from './form/userForms.component';
-import { UserFormsUploadAndList} from './form/userFormsUploadAndList.component';
-import { FormComponent} from './form/form.component';
+// import { FormService} from './form/form.service';
+// import { UserFormsComponent} from './form/userForms.component';
+// import { UserFormsUploadAndList} from './form/userFormsUploadAndList.component';
+// import { FormComponent} from './form/form.component';
 
 
 // import { RegisterComponent} from './user/register/register.component';
@@ -57,7 +57,7 @@ import { FormComponent} from './form/form.component';
 
 
 import { DeleteDialog} from './deleteDialog/deleteDialog.component';
-import { SeePictureDialogComponent} from './seePictureDialog/seePictureDialog.component';
+// import { SeePictureDialogComponent} from './seePictureDialog/seePictureDialog.component';
 
 
 //
@@ -110,8 +110,8 @@ import { ErrorPageComponent} from './errorPage/errorPage.component';
 import { AdminService} from './admin/services/admin.service';
 
 
-import { EditOptionsComponentDialog} from './form/modalLibrary/modalLibrary.component';
-
+// import { EditOptionsComponentDialog} from './form/modalLibrary/modalLibrary.component';
+//
 
 
 import { AdminGuardService} from './admin/services/adminGuard';
@@ -148,7 +148,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     // SingleProductComponent,
 
     DeleteDialog,
-    SeePictureDialogComponent,
+    // SeePictureDialogComponent,
 
 
     // PressComponent,
@@ -193,15 +193,14 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
 
 
 
-    UserFormsComponent,
-    UserFormsUploadAndList,
-    FormComponent,
+
+    // FormComponent,
 
     ErrorPageComponent,
 
   //  AdminUsersComponent,
 
-    EditOptionsComponentDialog,
+    // EditOptionsComponentDialog,
     AdminComponent,
 
 
@@ -215,7 +214,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     AppRoutingModule,
     BrowserAnimationsModule,
     ToastModule.forRoot(),
-    ProgressBarModule,
+    // ProgressBarModule,
     FormsModule,
     // MaterialModule,
     NavbarModule,
@@ -248,7 +247,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     //ProductService,
     MainPageHomeService,
   //  PressService,
-    FormService,
+    // FormService,
     AdminService,
   //  UserService,
   //  ProductService,
@@ -272,10 +271,10 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     DeleteDialog,
 
   //  PromotionDeleteDialog,
-    EditOptionsComponentDialog,
+    // EditOptionsComponentDialog,
     // ProductDeleteDialog,
     // ProductWhereDialogComponent,
-    SeePictureDialogComponent,
+
   ],
 
 

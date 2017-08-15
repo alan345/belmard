@@ -8,7 +8,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { Product, ItemSteps } from '../product.model';
 import { Companie } from '../../companie/companie.model';
-import { EditOptionsComponentDialog } from '../../form/modalLibrary/modalLibrary.component';
+// import { EditOptionsComponentDialog } from '../../form/modalLibrary/modalLibrary.component';
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { DeleteDialog } from '../../deleteDialog/deleteDialog.component'
@@ -172,17 +172,17 @@ export class ProductSingleComponent implements OnInit {
   }
 
 
-  goBack() {
-    this.location.back();
-  }
+  // goBack() {
+  //   this.location.back();
+  // }
 
   openDialog(positionImage: string) {
-    let dialogRef = this.dialog.open(EditOptionsComponentDialog);
-    dialogRef.afterClosed().subscribe(result => {
-      if(result) {
-        this.fetchedProduct.forms.push( result)
-      }
-    })
+    // let dialogRef = this.dialog.open(EditOptionsComponentDialog);
+    // dialogRef.afterClosed().subscribe(result => {
+    //   if(result) {
+    //     this.fetchedProduct.forms.push( result)
+    //   }
+    // })
   }
 
 

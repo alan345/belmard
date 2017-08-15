@@ -3,15 +3,15 @@ import {FormBuilder, FormGroup, FormControl, Validators} from '@angular/forms';
 import {ToastsManager} from 'ng2-toastr';
 import {Router} from '@angular/router';
 import {DomSanitizer} from '@angular/platform-browser';
-import {AuthService} from '../auth/auth.service';
+import {AuthService} from '../../../auth/auth.service';
 
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
-  styleUrls: ['./form.component.css']
+  styleUrls: ['../form.component.css']
 })
-export class FormComponent implements OnInit, AfterViewInit {
+export class FormComponent implements OnInit {
 
 
     @ViewChild('item') item: ElementRef;
@@ -22,8 +22,8 @@ export class FormComponent implements OnInit, AfterViewInit {
   @Output() onPassForm = new EventEmitter<any>();
   // setting up the form
   myForm: FormGroup;
-  textInput1: FormControl;
-  textInput2: FormControl;
+  // textInput1: FormControl;
+  // textInput2: FormControl;
 
   // get the Auth Token from localStorage in order to Authenticate to back end while submitting the form
   token: string = localStorage.getItem('id_token');
@@ -58,51 +58,51 @@ export class FormComponent implements OnInit, AfterViewInit {
 
 
 
-
-    drawRotated(degrees: number, file: any){
-        var canvas;
-
-        var angleInDegrees=0;
-
-        var image=document.createElement("img");
-        if(canvas) document.body.removeChild(canvas);
-
-        image.src=file.notSafeURL;
-
-
-        canvas = document.createElement("canvas");
-        var ctx=canvas.getContext("2d");
-        canvas.style.width="20%";
-
-        if(degrees == 90 || degrees == 270) {
-    		canvas.width = image.height;
-    		canvas.height = image.width;
-        } else {
-    		canvas.width = image.width;
-    		canvas.height = image.height;
-        }
-
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        if(degrees == 90 || degrees == 270) {
-    		ctx.translate(image.height/2,image.width/2);
-        } else {
-    	    ctx.translate(image.width/2,image.height/2);
-       }
-        ctx.rotate(degrees*Math.PI/180);
-        ctx.drawImage(image,-image.width/2,-image.height/2);
-        this.appendToChildEl.nativeElement.appendChild(canvas);
-
-    }
-
-
+    //
+    // drawRotated(degrees: number, file: any){
+    //     var canvas;
+    //
+    //     var angleInDegrees=0;
+    //
+    //     var image=document.createElement("img");
+    //     if(canvas) document.body.removeChild(canvas);
+    //
+    //     image.src=file.notSafeURL;
+    //
+    //
+    //     canvas = document.createElement("canvas");
+    //     var ctx=canvas.getContext("2d");
+    //     canvas.style.width="20%";
+    //
+    //     if(degrees == 90 || degrees == 270) {
+    // 		canvas.width = image.height;
+    // 		canvas.height = image.width;
+    //     } else {
+    // 		canvas.width = image.width;
+    // 		canvas.height = image.height;
+    //     }
+    //
+    //     ctx.clearRect(0,0,canvas.width,canvas.height);
+    //     if(degrees == 90 || degrees == 270) {
+    // 		ctx.translate(image.height/2,image.width/2);
+    //     } else {
+    // 	    ctx.translate(image.width/2,image.height/2);
+    //    }
+    //     ctx.rotate(degrees*Math.PI/180);
+    //     ctx.drawImage(image,-image.width/2,-image.height/2);
+    //     this.appendToChildEl.nativeElement.appendChild(canvas);
+    //
+    // }
 
 
-    rotate() {
-      this.angleInDegrees= (this.angleInDegrees + 90) % 360;
-      this.drawRotated(this.angleInDegrees, this.files[0])
-    //  this.resizeImage(this.files[0])
-    //  console.log(this.files)
-    }
+
+
+    // rotate() {
+    //   this.angleInDegrees= (this.angleInDegrees + 90) % 360;
+    //   this.drawRotated(this.angleInDegrees, this.files[0])
+    // //  this.resizeImage(this.files[0])
+    // //  console.log(this.files)
+    // }
   // event fired when the user selects an image
   onFileSelect(event: any) {
     this.clear();
@@ -113,35 +113,9 @@ export class FormComponent implements OnInit, AfterViewInit {
       let file = files[i];
       if (this.validate(file)) {
         if (this.isImage(file)) {
-
-
           file.objectURL = this.sanitizer.bypassSecurityTrustUrl((window.URL.createObjectURL(files[i])));
           file.notSafeURL = window.URL.createObjectURL(files[i])
           this.files.push(files[i]);
-          // console.log(this.files)
-          //
-          //
-          //
-          // let canvas = document.createElement('canvas');
-          // let ctx = canvas.getContext('2d');
-          // var j = 0;
-          // var shipImg = new Image();
-          // shipImg.src = 'http://localhost/assets/images/my_chair_logo.png';
-          // ctx.fillStyle = '#000';
-          // ctx.fillRect(0,0,100,100);
-          //
-          // ctx.save();
-          // ctx.translate(50, 50);
-          // ctx.rotate(i / 180 / Math.PI);
-          // ctx.drawImage(file.objectURLshipImg, -16, -16);
-          // ctx.restore();
-          // i += 10;
-
-
-
-
-
-
 
         }
       } else if (!this.isImage(file)) {
@@ -151,7 +125,6 @@ export class FormComponent implements OnInit, AfterViewInit {
   }
   isImagePure(file: File): boolean {
     if (!file.type.match('image/*')) {
-      //this.toastr.error('Only images are allowed');
       return false;
     }
     return true;
@@ -203,24 +176,24 @@ export class FormComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.files = [];
-    this.textInput1 = new FormControl('');
-    this.textInput2 = new FormControl('');
-
+    // this.textInput1 = new FormControl('');
+    // this.textInput2 = new FormControl('');
+    //
     this.myForm = this._fb.group({
-      textInput1: this.textInput1,
-      textInput2: this.textInput2
+      // textInput1: this.textInput1,
+      // textInput2: this.textInput2
     });
   }
   // focus on first input box after the view is initialized
-  ngAfterViewInit() {
-    // setTimeout(() => {
-    //   this.renderer.invokeElementMethod(this.textOne.nativeElement, 'focus', []);
-    // }, 50);
-  }
+  // ngAfterViewInit() {
+  //   // setTimeout(() => {
+  //   //   this.renderer.invokeElementMethod(this.textOne.nativeElement, 'focus', []);
+  //   // }, 50);
+  // }
 
-  isLoggedIn() {
-    return this.authService.isLoggedIn();
-  }
+  // isLoggedIn() {
+  //   return this.authService.isLoggedIn();
+  // }
   // submit the form to back end
   onSubmit() {
     this.submitStarted = true;
@@ -253,57 +226,17 @@ export class FormComponent implements OnInit, AfterViewInit {
       }
     };
     xhr.open('POST', this.url, true);
-    formData.append('textInput1', this.myForm.value.textInput1);
-    formData.append('textInput2', this.myForm.value.textInput2);
+    // formData.append('textInput1', this.myForm.value.textInput1);
+    // formData.append('textInput2', this.myForm.value.textInput2);
     xhr.withCredentials = true;
     xhr.setRequestHeader('Authorization', this.token);
     xhr.send(formData);
-    console.log(xhr);
+    // console.log(xhr);
   }
-  isAdmin() {
-    return this.authService.isAdmin();
-  }
+  // isAdmin() {
+  //   return this.authService.isAdmin();
+  // }
 
 
 
 }
-
-
-//http://stackoverflow.com/questions/18033812/how-to-rotate-image-using-native-javascript
-
-// TODO  sample code to resize image before uploading to reduce bandwidth from server
-// resizeImage(file) {
-//  let  reader = new FileReader();
-//   reader.onloadend = function() {
-//     let tempImg = new Image();
-//     tempImg.src = reader.result;
-//     console.log(tempImg.src)
-//     tempImg.onload = function() {
-//
-//       let MAX_WIDTH = 400;
-//       let MAX_HEIGHT = 300;
-//       let tempW = tempImg.width;
-//       let tempH = tempImg.height;
-//       if (tempW > tempH) {
-//         if (tempW > MAX_WIDTH) {
-//           tempH *= MAX_WIDTH / tempW;
-//           tempW = MAX_WIDTH;
-//         }
-//       } else {
-//         if (tempH > MAX_HEIGHT) {
-//           tempW *= MAX_HEIGHT / tempH;
-//           tempH = MAX_HEIGHT;
-//         }
-//       }
-//
-//       let canvas = document.createElement('canvas');
-//       canvas.width = tempW;
-//       canvas.height = tempH;
-//       let ctx = canvas.getContext('2d');
-//       ctx.drawImage(this, 0, 0, tempW, tempH);
-//       let dataURL = canvas.toDataURL('image/jpeg');
-//     }
-//
-//   };
-//   reader.readAsArrayBuffer(file);
-// }

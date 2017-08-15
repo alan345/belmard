@@ -8,12 +8,12 @@ import { MdDialog } from '@angular/material';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { User } from '../user.model';
-import { Form } from '../../form/form.model';
+// import { Form } from '../../form/form.model';
 import { Companie } from '../../companie/companie.model';
-import { EditOptionsComponentDialog } from '../../form/modalLibrary/modalLibrary.component';
+// import { EditOptionsComponentDialog } from '../../form/modalLibrary/modalLibrary.component';
 import { FormBuilder, FormGroup, FormArray, Validators} from '@angular/forms';
 import { CompanieService} from '../../companie/companie.service';
-import { SeePictureDialogComponent } from '../../seePictureDialog/seePictureDialog.component';
+// import { SeePictureDialogComponent } from '../../seePictureDialog/seePictureDialog.component';
 
 
 
@@ -112,15 +112,15 @@ export class UserProfileComponent implements OnInit {
   //     control.removeAt(i)
   //     this.save()
   // }
-  addForm(form: Form) {
-    const control = <FormArray>this.myForm.controls['forms'];
-    const addrCtrl = this._fb.group({
-        // _id: ['', Validators.required],
-        // owner: ['', Validators.required],
-        // imagePath: ['', Validators.required],
-    });
-    control.push(addrCtrl);
-  }
+  // addForm(form: Form) {
+  //   // const control = <FormArray>this.myForm.controls['forms'];
+  //   // const addrCtrl = this._fb.group({
+  //   //     // _id: ['', Validators.required],
+  //   //     // owner: ['', Validators.required],
+  //   //     // imagePath: ['', Validators.required],
+  //   // });
+  //   // control.push(addrCtrl);
+  // }
 
 
   goBack() {
@@ -131,14 +131,14 @@ export class UserProfileComponent implements OnInit {
   }
 
 
-  openPictureDialog(form : Form){
-    let dialogRef = this.dialog.open(SeePictureDialogComponent)
-    dialogRef.componentInstance.form = form;
-    dialogRef.afterClosed().subscribe(result => {
-    })
-  }
+  // openPictureDialog(form : Form){
+  //   let dialogRef = this.dialog.open(SeePictureDialogComponent)
+  //   dialogRef.componentInstance.form = form;
+  //   dialogRef.afterClosed().subscribe(result => {
+  //   })
+  // }
 
-  // 
+  //
   // openDialog(positionImage: string) {
   //   if(positionImage == '_profilePicture') {
   //     let dialogRef = this.dialog.open(EditOptionsComponentDialog);
