@@ -58,6 +58,7 @@
     "password-hash": "^1.2.2",
     "rxjs": "5.0.1",
     "serve-favicon": "^2.3.0",
+    "socket.io": "^2.0.3",
     "stripe": "^4.23.1",
     "ts-helpers": "^1.1.1",
     "tslint": "4.1.1",

@@ -27,6 +27,39 @@ var templateQuotes    = require('./routes/templateQuote')
 var right    = require('./routes/right')
 var notification    = require('./routes/notification')
 var comment    = require('./routes/comment')
+var chat    = require('./routes/chat')
+
+
+
+
+
+
+// // SOCKET.io
+// const http = require('http').Server(app);
+// const io = require('socket.io')(http);
+// io.on('connection', (socket) => {
+//
+//     console.log('user connected');
+//
+//     socket.on('disconnect', function() {
+//         console.log('user disconnected');
+//     });
+//
+//     socket.on('add-message', (message) => {
+//         io.emit('message', { type: 'new-message', text: message });
+//         // Function above that stores the message in the database
+//         // databaseStore(message)
+//         console.log('here you must save' + message)
+//     });
+// });
+// http.listen(5000, () => {
+//     console.log('Server SOCKET.io started on port 5000');
+// });
+// // SOCKET.io
+
+
+
+
 
 
 
@@ -78,6 +111,7 @@ app.use('/templateQuote', templateQuotes)
 app.use('/right', right)
 app.use('/notification', notification)
 app.use('/comment', comment)
+app.use('/chat', chat)
 
 
 
