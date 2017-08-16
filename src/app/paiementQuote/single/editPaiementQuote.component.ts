@@ -104,8 +104,10 @@ export class EditPaiementQuoteComponent implements OnInit {
     this.fetchedPaiementQuote.isExpense = this.search.isExpense
     this.activatedRoute.params.subscribe((params: Params) => {
       if(params['isExpense']) {this.fetchedPaiementQuote.isExpense = true}
+      if(params['isGooplusPaiement']) {this.fetchedPaiementQuote.isGooplusPaiement = true}
       if(params['idPaiementQuote']) {this.getPaiementQuote(params['idPaiementQuote'])}
       if(params['idQuote']) {this.getQuote(params['idQuote'])}
+
     })
   }
 

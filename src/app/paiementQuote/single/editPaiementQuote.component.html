@@ -1,9 +1,10 @@
 <div class="container">
-  <app-header [showBackButton]="true" [nameObject]="'paiementQuote'" [showCreateButton]=false></app-header>
+  <app-header [nameObject]="'paiementQuote'" [showCreateButton]=false></app-header>
 
   <div>
     <h4 class="dspl-nn">id: {{fetchedPaiementQuote._id}}</h4>
-    IsExpense: {{fetchedPaiementQuote.isExpense}}
+    IsExpense: {{fetchedPaiementQuote.isExpense}}<br>
+    isGooplusPaiement: {{fetchedPaiementQuote.isGooplusPaiement}}
 
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
 

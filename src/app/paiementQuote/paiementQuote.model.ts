@@ -17,6 +17,7 @@ export class PaiementQuote {
   datePaiementString: string = '';
   amount: number = 0;
   type: string = '';
+  isGooplusPaiement: boolean = false;
   isExpense: boolean = false;
   editModeDate: boolean = false;
   stripe: Stripe = new Stripe()

@@ -14,6 +14,7 @@ var paiementQuote = new Schema({
     projects: [{type: Schema.Types.ObjectId, ref: 'Project'}],
     datePaiement: {type: Date},
     amount: {type: Number},
+    isGooplusPaiement: {type: Boolean, default: [false]},
     type: {type: String, default: ['']},
     isExpense: {type: Boolean, default: [false]},
     stripe: {
