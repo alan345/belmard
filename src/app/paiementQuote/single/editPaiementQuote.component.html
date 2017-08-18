@@ -102,13 +102,16 @@
             <input type="number" class="form-control" #amountStripe placeholder="Amount">
             <button type="button" class="done" (click)="payInStripe(amountStripe.value)">Pay!</button>
           </div>
+          <div *ngIf="!stripeCust.subscriptions.data.length">
+            <button type="button" class="done" (click)="saveSubscriptionInStripe('gold')">Plan Gold!</button>
+            <button type="button" class="done" (click)="saveSubscriptionInStripe('daily')">Plan daily!</button>
+          </div>
+
         </div>
 
 
         <div *ngIf="stripeCust.sources.data.length">
-          <div *ngIf="!stripeCust.subscriptions.data.length">
-            <button type="button" class="done" (click)="saveSubscriptionInStripe('gold')">Plan Gold!</button>
-          </div>
+
           <div *ngFor="let sub of stripeCust.subscriptions.data">
             <div class="form-control">{{sub.id}}</div>
             <div class="form-control">{{sub.created | timestampToDate}}</div>

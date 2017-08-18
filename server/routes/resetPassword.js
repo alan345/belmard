@@ -58,9 +58,21 @@ router.post('/:token', function(req, res) {
         user.resetPasswordToken = undefined;
         user.resetPasswordExpires = undefined;
 
-        user.save(function(err) {
-          done(err, user);
-        });
+        // user.save(function(err) {
+        //   done(err, user);
+        // });
+        user.save(function (err, result) {
+          if (err) {
+            return res.status(403).json({
+              title: 'There was an issue',
+              error: {message: 'The email you entered already exists'}
+            });
+          }
+          res.status(200).json({
+            message: 'Password updated',
+            obj: result
+          })
+        })        
       });
     },
 

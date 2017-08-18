@@ -278,7 +278,7 @@ router.post('/saveSubscriptionInStripe/:paiementQuoteId', function (req, res, ne
 
     createSubInStripe(req, obj)
     .then(function(subscription){
-      console.log('ssssss')
+      // console.log('ssssss')
       updateCurrent_period_endInDb(req, subscription.current_period_end, subscription.plan.id)
       .then(item => { console.log(item) })
       .catch(err => {

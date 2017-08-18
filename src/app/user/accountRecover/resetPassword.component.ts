@@ -43,17 +43,39 @@ export class ResetPasswordComponent implements OnInit, AfterViewInit {
     }, 50);
   }
 
+  // submit the login form with the user credentials and navigate the user to the index page of our app
+  login(email) {
+    const user = {
+      email: email,
+      password:  this.myForm.value.password,
+    }
+    this._authService.signin(user)
+      .subscribe(
+        data => {
+          localStorage.setItem('id_token', data.token);
+          localStorage.setItem('token', data.token);
+          this._router.navigate(['/']);
+          //location.reload();
+
+          this.toastr.success('You have been logged in!');
+        },
+        error => console.log(error)
+      );
+
+  }
+
   onSubmit() {
     const password = new Reset(null, this.token, this.myForm.value.password);
-    console.log(password);
+    // console.log(password);
     this._authService.reset(password)
       .subscribe(
         data => {
-          this._router.navigate(['/user/login']);
+          // console.log(data)
+          this.login(data.obj.email)
+          // this._router.navigate(['/user/login']);
           this.toastr.success('Your password has been changed succesfully');
         },
         error => console.log(error)
       );
   }
 }
-

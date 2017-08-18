@@ -8,11 +8,11 @@
 <div class="container">
   <app-header [showHeader]="true" [showCreateButton]="false" [showBackButton]="true" [nameObject]="'user'"></app-header>
 
-
   <div class="single-wrpr beigeback">
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
-
-      isExternalUser: {{fetchedUser.isExternalUser}}
+      <div class="form-group col-sm-12">
+        isExternalUser: {{fetchedUser.isExternalUser}}
+      </div>
       <div class="form-group col-sm-12">
         <label>Code Client:</label> {{fetchedUser._id}}
       </div>
@@ -22,8 +22,7 @@
 
         <div *ngFor="let ownerCompanie of currentUser.ownerCompanies">
           <label>Type User</label>
-          {{fetchedUser.typeUsers|json}}
-          <md-select  formControlName="typeUsers" placeholder="typeUser" [(ngModel)]="fetchedUser.typeUsers" name="typeUsers">
+          <md-select formControlName="typeUsers" placeholder="typeUser" [(ngModel)]="fetchedUser.typeUsers" name="typeUsers">
             <md-option *ngFor="let typeUser of ownerCompanie.typeUsers" [value]="typeUser.value">
               {{typeUser.value}}
             </md-option>
@@ -35,9 +34,9 @@
 
 
         <!-- <div *ngIf="!fetchedUser.isAdminOfHisCompanie"> -->
-          <label>Rights</label>
-          <app-autocomplete [typeAutocomplete]="'right'" [canDelete]="true" [title]="" [singleChoice]="true" [arrayContent]="fetchedUser.rights" (getResultAutocomplete)="selectRight($event[0])">
-          </app-autocomplete>
+        <label>Rights</label>
+        <app-autocomplete [typeAutocomplete]="'right'" [canDelete]="true" [title]="" [singleChoice]="true" [arrayContent]="fetchedUser.rights" (getResultAutocomplete)="selectRight($event[0])">
+        </app-autocomplete>
         <!-- </div> -->
 
         <div>
@@ -144,7 +143,7 @@
         <div>
 
           <!-- <button type="button" md-button (click)="openDialog('img')" class="addpic-squr">Ajouter une image<br><i class="fa fa-plus"></i></button> -->
-        <!-- </div>
+      <!-- </div>
       </div> -->
 
       <div class="form-group col-sm-12">
