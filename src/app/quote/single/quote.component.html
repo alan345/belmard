@@ -20,9 +20,14 @@
 
 
       <div class="form-group">
-        <select class="form-control col-md-3" formControlName="statusQuote" [(ngModel)]="fetchedQuote.statusQuote">
+        <md-select  formControlName="statusQuote" placeholder="statusQuote" [(ngModel)]="fetchedQuote.statusQuote" name="statusQuote">
+          <md-option *ngFor="let n of statusQuotes" [value]="n.indexStatus">
+            {{n.label}}
+          </md-option>
+        </md-select>
+        <!-- <select class="form-control col-md-3" #statusQuoteSelect (change)="changeStatutsQuote(statusQuoteSelect.value)" formControlName="statusQuote" [(ngModel)]="fetchedQuote.statusQuote">
           <option *ngFor="let n of statusQuotes" [ngValue]="n.index">{{n.label}}</option>
-        </select>
+        </select> -->
       </div>
 
       <div *ngIf="fetchedQuote._id">

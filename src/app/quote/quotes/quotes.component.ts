@@ -122,6 +122,21 @@ export class QuotesComponent implements OnInit {
         //  console.log(res);
           this.paginationData = res.paginationData;
           this.fetchedQuotes =  res.data
+          this.fetchedQuotes.forEach((quote, i) => {
+            // console.log(quote)
+            this.statusQuotes.forEach(status => {
+
+                if(status.indexStatus === quote.statusQuote) {
+                  console.log(status.label)
+                  this.fetchedQuotes[i].statusQuoteString = status.label
+                }
+
+            });
+          })
+
+
+
+
           this.loading = false;
         },
         error => {

@@ -68,10 +68,10 @@
               <td class="centre">{{quote.detail.dateQuote.issueDate | date:'yyyy-MM-dd' }}</td>
               <td class="centre"></td>
               <td class="centre">
-
-                <select [(ngModel)]="quote.statusQuote" disabled>
+                {{quote.statusQuoteString}}
+                <!-- <select [(ngModel)]="quote.statusQuote" disabled>
                   <option *ngFor="let n of statusQuotes" [ngValue]="n.index">{{n.label}}</option>
-                </select>
+                </select> -->
 
               </td>
             </tr>

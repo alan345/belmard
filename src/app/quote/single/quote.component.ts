@@ -106,10 +106,12 @@ export class QuoteComponent implements OnInit {
   ngOnDestroy() {
     this.dragulaService.destroy('third-bag');
   }
-
+  changeStatutsQuote(statusQuoteSelect){
+    console.log(statusQuoteSelect)
+  }
 
   ngOnInit() {
-    this.statusQuotes.forEach((statusQuote,i)=>{this.statusQuotes[i].label=this.translateService.instant(statusQuote.label)})
+    // this.statusQuotes.forEach((statusQuote,i)=>{this.statusQuotes[i].label=this.translateService.instant(statusQuote.label)})
 
     this.ckeConfig = {
       // height: 500,

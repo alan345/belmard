@@ -9,6 +9,7 @@ export class Quote {
   clients: User[] = [];
   name: string = '';
   statusQuote: number = 0;
+  statusQuoteString: string = '';
   typeQuote: string = '';
   // _users: User[] = [];
   // ownerQuotes: User[] = [];
@@ -80,11 +81,11 @@ export const StatusQuotes =
   // {index: 1, label: 'Rappeler'},
   // {index: 2, label: 'Stand-By'},
   // {index: 3, label: 'Devis à faire'},
-  {index: 0, label: 'Pending Approval'},
-  {index: 1, label: 'Signed'},
-  {index: 2, label: 'Rejected'},
-  {index: 3, label: 'Signed, pending paiement'},
-  {index: 4, label: 'Done'},
+  {indexStatus: 0, label: 'Pending Approval'},
+  {indexStatus: 1, label: 'Signed'},
+  {indexStatus: 2, label: 'Rejected'},
+  {indexStatus: 3, label: 'Signed, pending paiement'},
+  {indexStatus: 4, label: 'Done'},
 ]
 
 // export class Address {

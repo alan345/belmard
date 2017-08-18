@@ -22,6 +22,7 @@
 
         <div *ngFor="let ownerCompanie of currentUser.ownerCompanies">
           <label>Type User</label>
+          {{fetchedUser.typeUsers|json}}
           <md-select  formControlName="typeUsers" placeholder="typeUser" [(ngModel)]="fetchedUser.typeUsers" name="typeUsers">
             <md-option *ngFor="let typeUser of ownerCompanie.typeUsers" [value]="typeUser.value">
               {{typeUser.value}}
