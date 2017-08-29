@@ -9,7 +9,8 @@ import {PictureModule} from '../picture/picture.module';
 // import {CommentModule} from '../comment/comment.module';
 
 
-import { TRANSLATION_PROVIDERS, TranslatePipe, TranslateService }   from '../translate';
+// import { TRANSLATION_PROVIDERS, TranslatePipe, TranslateService }   from '../translate';
+import { TranslateModule}   from '../translate/translate.module';
 
 import { RoundPipe} from './round.pipe';
 import { HeaderComponent } from '../nav/header/header.component';
@@ -30,6 +31,7 @@ import {SharedSmallModule} from './sharedSmall.module'
     AutocompleteModule,
     PictureModule,
     CommentModule,
+    TranslateModule,
 
     // CommentModule,
 
@@ -64,8 +66,8 @@ import {SharedSmallModule} from './sharedSmall.module'
     // AutocompleteComponent,
   ],
   providers: [
-    TRANSLATION_PROVIDERS,
-    TranslateService,
+    // TRANSLATION_PROVIDERS,
+    // TranslateService,
   ]
 })
 export class SharedModule { }

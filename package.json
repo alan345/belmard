@@ -85,6 +85,7 @@
     "rollup-plugin-uglify": "^2.0.1",
     "ts-node": "1.2.1",
     "tslint": "^4.3.0",
-    "typescript": "2.3.2"
+    "typescript": "2.3.2",
+    "uglify-js": "^2.8.29"
   }
 }
