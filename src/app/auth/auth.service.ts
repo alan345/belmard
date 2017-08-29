@@ -184,14 +184,15 @@ export class AuthService {
   }
   isCurrentUserIsInSubPeriod() {
     // console.log(this.user)
+    return true
 
-    let itemFounded = false
-    this.user.ownerCompanies.forEach(companie => {
-      if (new Date(companie.planDetail.current_period_end) > new Date())
-        itemFounded = true
-    });
-    // let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
-    return itemFounded
+    // let itemFounded = false
+    // this.user.ownerCompanies.forEach(companie => {
+    //   if (new Date(companie.planDetail.current_period_end) > new Date())
+    //     itemFounded = true
+    // });
+    //
+    // return itemFounded
   }
   isCurrentUserHasCompanie(){
     // console.log(this.user)
