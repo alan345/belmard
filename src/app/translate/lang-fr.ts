@@ -34,7 +34,7 @@ export const LANG_FR_TRANS = {
     'Create a new external member': 'Créer un nouveau contact externe',
     'Type User': 'Fonction',
     'Phone Number': 'Téléphone',
-    'address': 'Adresse',
+    'Address': 'Adresse',
     'city': 'Ville',
     'state': 'Pays',
     'zip': 'Code Postal',
