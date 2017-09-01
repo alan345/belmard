@@ -54,6 +54,7 @@ margin-bottom: 3px;
 
 .form-control {
 margin-bottom: 3px;
+border-radius: 0px!important;
 }
 
 .container {
