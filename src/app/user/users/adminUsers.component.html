@@ -1,18 +1,22 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-3">
+    <div class="col-md-2">
       <h4>Utilisateurs</h4>
     </div>
-    <div class="col-md-2">
+    <div class="col-md-1">
       <app-header [showHeader]=false [search]="search" (saved)="saved($event)" [nameObject]="'user'" [openInDialog]=true>
       </app-header>
     </div>
-    <div class="col-md-7">
+    <div class="col-md-9">
     </div>
   </div>
   <div class="row">
-    <input class="form-control margebasse col-md-12" type="text" name="Search" placeholder="Rechercher" [(ngModel)]="search.search" (ngModelChange)="searchUsers()">
+  <div class="col-md-2">  
+    <input class="form-control margebasse" type="text" name="Search" placeholder="Rechercher" [(ngModel)]="search.search" (ngModelChange)="searchUsers()">
+  </div>
+  <div class="col-md-10">
+  </div>  
   </div>
 
 
