@@ -18,6 +18,8 @@
 </div> -->
 <div class="container">
   <div class="row">
+    <div class="col-md-12"><h4>Utilisateurs</h4>
+      
     <app-header
       [showHeader]=false
       [search]="search"
@@ -25,6 +27,10 @@
       [nameObject]="'user'"
       [openInDialog]=true>
     </app-header>
+   </div>
+   <div class="row">
+     <input class="form-control margebasse col-md-12" type="text" name="Search" placeholder="Rechercher" [(ngModel)]="search.search" (ngModelChange)="searchUsers()">
+    </div>  
   </div>
 
     <!-- <app-header [nameObject]="'user'" [option]="'internal'"></app-header> -->
