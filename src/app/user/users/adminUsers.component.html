@@ -1,46 +1,23 @@
-<!-- <div class="row">
-  <div class="col-md-1"></div>
-  <div class="col-md-2"><button type="button" class="btn btn-warning" (click)="goBack()"><i class="fa fa-chevron-left"><a> Retour</a></i></button></div>
-  <div class="col-md-6">
-    <h3 class="title">Utilisateurs</h3></div>
-  <div class="col-md-3"></div>
-</div>
 
-<div class="clearfix col-md-10">
-
-
-  <button *ngIf="search.isExternalUser == 'false'" class="btn btn-success float-right" [routerLink]="['/user/newuser', {isExternalUser: false}]" routerLinkActive="active"><i class="">
-  </i>{{ 'Create a new team member' | translate }}
-  </button>
-  <button *ngIf="search.isExternalUser== 'true'" class="btn btn-success float-right" [routerLink]="['/user/newuser', {isExternalUser: true}]" routerLinkActive="active"><i class="">
-  </i>{{ 'Create a new external member' | translate }}
-  </button>
-</div> -->
 <div class="container">
   <div class="row">
-    <div class="col-md-3"><h4>Utilisateurs</h4>
+    <div class="col-md-3">
+      <h4>Utilisateurs</h4>
     </div>
     <div class="col-md-2">
-      <app-header
-      [showHeader]=false
-      [search]="search"
-      (saved)="saved($event)"
-      [nameObject]="'user'"
-      [openInDialog]=true>
+      <app-header [showHeader]=false [search]="search" (saved)="saved($event)" [nameObject]="'user'" [openInDialog]=true>
       </app-header>
     </div>
     <div class="col-md-7">
     </div>
-   </div>
-   <div class="row">
-     <input class="form-control margebasse col-md-12" type="text" name="Search" placeholder="Rechercher" [(ngModel)]="search.search" (ngModelChange)="searchUsers()">
-    </div>  
+  </div>
+  <div class="row">
+    <input class="form-control margebasse col-md-12" type="text" name="Search" placeholder="Rechercher" [(ngModel)]="search.search" (ngModelChange)="searchUsers()">
   </div>
 
-    <!-- <app-header [nameObject]="'user'" [option]="'internal'"></app-header> -->
 
 
-<div class="row">
+  <div class="row">
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
@@ -85,12 +62,9 @@
             </tbody>
           </table>
           <div class="has-text-centered">
-            <md-paginator
-              [length]="paginationData.totalItems"
-              [pageSize]="paginationData.itemsPerPage"
-              (page)="getPage($event.pageIndex*1+1)">
+            <md-paginator [length]="paginationData.totalItems" [pageSize]="paginationData.itemsPerPage" (page)="getPage($event.pageIndex*1+1)">
             </md-paginator>
-<app-loadingInApp *ngIf="loading"></app-loadingInApp>
+            <app-loadingInApp *ngIf="loading"></app-loadingInApp>
             <!-- <div [hidden]="!loading">Loading...</div>
             <pagination-controls (pageChange)="getPage($event)" id="server" class="change-page"></pagination-controls> -->
           </div>
