@@ -18,15 +18,19 @@
 </div> -->
 <div class="container">
   <div class="row">
-    <div class="col-md-12"><h4>Utilisateurs</h4>
-      
-    <app-header
+    <div class="col-md-3"><h4>Utilisateurs</h4>
+    </div>
+    <div class="col-md-2">
+      <app-header
       [showHeader]=false
       [search]="search"
       (saved)="saved($event)"
       [nameObject]="'user'"
       [openInDialog]=true>
-    </app-header>
+      </app-header>
+    </div>
+    <div class="col-md-7">
+    </div>
    </div>
    <div class="row">
      <input class="form-control margebasse col-md-12" type="text" name="Search" placeholder="Rechercher" [(ngModel)]="search.search" (ngModelChange)="searchUsers()">
