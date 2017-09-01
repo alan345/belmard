@@ -3,6 +3,12 @@
 /*@import "~angular-calendar/dist/css/angular-calendar.css";*/
 /*@import "~@ng-bootstrap/ng-bootstrap/dist/css/bootstrap.min.css";*/
 
+
+.card{ 
+  margin: 0px!important;
+  border-radius: 0px!important;
+}
+
 .ml {
   margin-left: 10px;
 
@@ -64,7 +70,7 @@ body {
 }
 
 H1, H2, H3, H4, H5 {
-  text-Align: Center; padding: 5px;
+ 
 }
 a {
 font-family: sans-serif;
