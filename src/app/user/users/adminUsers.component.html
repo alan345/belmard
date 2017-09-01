@@ -19,6 +19,7 @@
 <div class="container">
   <div class="row">
     <app-header
+      [showHeader]=false
       [search]="search"
       (saved)="saved($event)"
       [nameObject]="'user'"
