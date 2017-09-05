@@ -2,7 +2,8 @@
 <div class="container">
   <div class="row">
     <div class="col-md-1">
-      <h4>Utilisateurs</h4>
+      <h4>Utilisateurs</h4><a>   </a><app-header [showHeader]=false [search]="search" (saved)="saved($event)" [nameObject]="'user'" [openInDialog]=true>
+      </app-header>
     </div>
     <div class="col-md-1">
       <app-header [showHeader]=false [search]="search" (saved)="saved($event)" [nameObject]="'user'" [openInDialog]=true>
