@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit, AfterViewInit {
           // navigate user to index page of our app
 
           //gooplus
-          this._router.navigate(['/']);
+          this._router.navigate(['/home']);
           // location.reload();
 
 
