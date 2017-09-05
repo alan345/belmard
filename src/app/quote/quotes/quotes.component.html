@@ -1,95 +1,53 @@
-<!-- <div *ngIf="showHeader" class="row">
-  <div class="col-md-1"></div>
-  <div class="col-md-2"><button type="button" class="btn btn-warning" (click)="goBack()"><i class="fa fa-chevron-left"><a> Retour</a></i></button></div>
-  <div class="col-md-6">
-    <h3 class="title">Devis</h3></div>
-  <div class="col-md-3"></div>
-</div>
-
-
-<div class="clearfix col-md-10">
-  <button class="btn btn-success float-right" [routerLink]="['/quote/new/' + userId]" routerLinkActive="active"><i class="">
-  </i>{{'Create a new quote' | translate}}</button>
-</div> -->
 <div class="container">
+  <div class="d-flex flex-row">
+    <div class="p-2">
+      <h4{{ 'Quotes' | translate}}</h4>
+    </div>
+    <div class="p-2">
+      <app-header [showHeader]="showHeader" showBackButton="showBackButton" [nameObject]="'quote'" [idProject]="idProject" [idClient]="idClient"></app-header>
+    </div>
+  </div>
+  <div class="d-flex flex-row">
+    <div class="p-2">
+      <input class="form-control margebasse" type="text" name="Search" placeholder="Rechercher" [(ngModel)]="search.search" (ngModelChange)="searchUsers()">
+    </div>
+  </div>
+
   <div class="row">
-<app-header
-  [showHeader]="showHeader"
-  showBackButton="showBackButton"
-  [nameObject]="'quote'"
-  [idProject]="idProject"
-  [idClient]="idClient">
-</app-header>
-</div>
+    <div class="col-md-12">
+      <table class="table table-hover">
+        <thead>
+          <tr>
+            <th class="centre tdunder">{{'Type' | translate}}</th>
+            <th class="centre tdunder">{{'Client' | translate}}</th>
+            <th class="centre tdunder">{{'Name' | translate}}</th>
+            <th class="centre tdunder">{{'Date' | translate}}</th>
+            <th class="centre tdunder">{{'Owner' | translate}}</th>
+            <th class="centre tdunder">{{'Status' | translate}}</th>
+          </tr>
+        </thead>
+        <tbody class="">
+          <tr *ngFor="let quote of fetchedQuotes" [routerLink]="['/quote/' + quote._id]" routerLinkActive="active">
+            <td class="centre"></td>
+            <td class="centre">
 
+              <div *ngFor="let client of quote.clients">
+                {{client.profile.name}} {{client.profile.lastName}}
+              </div>
 
-<div class="row">
-  <div class="col-md-12">
-    <div class="card">
-      <div class="card-header">
-        <h4 class="card-title">{{ 'List' | translate }}</h4>
-      </div>
-      <div class="card-block clearfix">
-        <div id="wrapper" class="subsubnav-clients float-left">
-          <!-- <input class="form-control margebasse col-md-12" type="text" name="Search" placeholder="Rechercher" [(ngModel)]="search.search" (ngModelChange)="searchQuotes()"> -->
-        </div>
-        <!-- <md-tab-group (selectChange)="onSelectChange($event)" class="beigeback admin-users">
-          <md-tab label="Quotes" data-isQuoteAssignedToMe="false"></md-tab>
-          <md-tab label="Assigned to me" data-isQuoteAssignedToMe="true"></md-tab>
-        </md-tab-group> -->
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <!--
-              <th class="tbl-left">
-                <!-- <button class="updownbtn" (click)="orderBy('profile.name')"><i class="fa fa-chevron-down"></i></button>
-                    <button class="updownbtn" (click)="orderBy('-profile.name')"><i class="fa fa-chevron-up"></i></button>
-              </th>
-               -->
-              <th class="centre">{{'Type' | translate}}</th>
-              <th class="centre">{{'Client' | translate}}</th>
-              <th class="centre">{{'Name' | translate}}</th>
-              <th class="centre">{{'Date' | translate}}</th>
-              <th class="centre">{{'Owner' | translate}}</th>
-              <th class="centre">{{'Status' | translate}}</th>
-            </tr>
-          </thead>
-          <tbody class="">
-            <tr *ngFor="let quote of fetchedQuotes" [routerLink]="['/quote/' + quote._id]" routerLinkActive="active">
-              <td class="centre"></td>
-              <td class="centre">
-
-                <div *ngFor="let client of quote.clients">
-                  {{client.profile.name}} {{client.profile.lastName}}
-                </div>
-
-              </td>
-              <td class="centre">{{quote.name}}</td>
-              <td class="centre">{{quote.detail.dateQuote.issueDate | date:'yyyy-MM-dd' }}</td>
-              <td class="centre"></td>
-              <td class="centre">
-                {{quote.statusQuoteString}}
-                <!-- <select [(ngModel)]="quote.statusQuote" disabled>
-                  <option *ngFor="let n of statusQuotes" [ngValue]="n.index">{{n.label}}</option>
-                </select> -->
-
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <!-- <div class="has-text-centered">
-          <div [hidden]="!loading">Loading...</div>
-          <pagination-controls (pageChange)="getPage($event)" id="quotePagination" class="change-page"></pagination-controls>
-        </div> -->
-
-        <md-paginator
-          [length]="paginationData.totalItems"
-          [pageSize]="paginationData.itemsPerPage"
-          (page)="getPage($event.pageIndex*1+1)">
+            </td>
+            <td class="centre tdunder">{{quote.name}}</td>
+            <td class="centre tdunder">{{quote.detail.dateQuote.issueDate | date:'yyyy-MM-dd' }}</td>
+            <td class="centre tdunder"></td>
+            <td class="centre tdunder">{{quote.statusQuoteString}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+        <md-paginator [length]="paginationData.totalItems" [pageSize]="paginationData.itemsPerPage" (page)="getPage($event.pageIndex*1+1)">
         </md-paginator>
-<app-loadingInApp *ngIf="loading"></app-loadingInApp>
+        <app-loadingInApp *ngIf="loading"></app-loadingInApp>
       </div>
     </div>
   </div>
-</div>
 </div>
