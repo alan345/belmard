@@ -370,11 +370,11 @@
 .arrowNotif {
   position: absolute;
   top: 50px;
-  right: 200px;
+  right: 210px;
   width: 0;
   height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
 
-  border-bottom: 20px solid white;
+  border-bottom: 10px solid white;
 }
