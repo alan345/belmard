@@ -206,9 +206,11 @@ width: 10%;
 
 table {
 width: 100%;
-  line-height: 2;
-}
 
+}
+.clienttbl {
+    line-height: 2.5;
+}
 .table td{
     padding: 0rem;
     vertical-align: bottom;
