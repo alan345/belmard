@@ -29,7 +29,7 @@
         <tbody class="clienttbl">
           <tr *ngFor="let user of fetchedUsers" [routerLink]="['/user/' + user._id]" routerLinkActive="active">
             <td class="centre tdunder">
-              <div *ngFor="let singleType of user.type">
+              <div *ngFor="let singleType of user.typeUsers">
                 {{singleType}}
               </div>
             </td>
