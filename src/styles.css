@@ -210,12 +210,20 @@ width: 100%;
 }
 .clienttbl {
     line-height: 2.5;
+  
 }
 .table td{
     padding: 0rem;
     vertical-align: bottom;
     border-top: 0px;
 }
+
+.tdunder {
+ 
+   border-bottom: 1px;
+    border-bottom-color: #ddd;
+    border-bottom-style: solid;
+} 
 
 .ferme {
 border-radius: 8px;
@@ -259,3 +267,4 @@ height: 50px;
 .margebasse {
 margin-bottom: 5px;
 }
+
