@@ -30,6 +30,7 @@ export class Stripe {
   current_period_end: Date= new Date()
 }
 
+
 export class Profile {
   name: string = '';
   lastName: string = '';
