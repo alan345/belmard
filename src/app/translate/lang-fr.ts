@@ -29,7 +29,7 @@ export const LANG_FR_TRANS = {
     'Name': 'Nom',
     'Price without taxes': 'Prix HT',
     'Product Name': 'Nom du Produit',
-    'Companie': 'Entreprise',
+    'companie': 'Entreprise', 
     'Height': 'Hauteur',
     'Width': 'Largeur',
     'Depth': 'Profondeur',
