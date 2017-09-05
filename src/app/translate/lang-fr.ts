@@ -59,7 +59,7 @@ export const LANG_FR_TRANS = {
     'Download PDF': 'Télécharger PDF',
     'Customer': 'Client',
     'Customers': 'Clients',
-    'Supplier': 'Fournisseur'
+    'Supplier': 'Fournisseur',
     'Suppliers': 'Fournisseurs',
     'Estimate Number': 'Numéro du devis',
     'Issue Date': 'Date',
