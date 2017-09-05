@@ -50,7 +50,7 @@
       <div class="form-group col-sm-6">
         <input type="text" class="form-control" formControlName="email" [(ngModel)]="fetchedUser.email" placeholder="Email">
       </div>
-
+    <div class="row">
       <div class="form-group col-sm-3">
         <select [(ngModel)]="fetchedUser.profile.language" class="form-control" formControlName="language">
             <option *ngFor="let n of languageArray" [attr.value]="n">{{n}}</option>
@@ -61,6 +61,7 @@
             <option *ngFor="let n of titleArray" [attr.value]="n">{{n}}</option>
           </select>
       </div>
+    </div>  
 
       <div class="form-group col-sm-6">
         <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedUser.profile.name" placeholder="Client's Name">
