@@ -91,7 +91,7 @@ export class NavbarComponent implements OnInit {
   openNotifDialog() {
 
     let dialogRef = this.mdDialog.open(NotificationDialogComponent, {
-      height: '300px',
+      height: '200px',
       width: '300px',
       position : {
               top: "70px",
