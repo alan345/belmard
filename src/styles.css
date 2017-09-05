@@ -3,11 +3,11 @@
 /*@import "~angular-calendar/dist/css/angular-calendar.css";*/
 /*@import "~@ng-bootstrap/ng-bootstrap/dist/css/bootstrap.min.css";*/
 
-.fa { 
+.fa {
   margin-right: 10px;
 }
-  
-.card{ 
+
+.card{
   margin: 0px!important;
   border-radius: 0px!important;
 }
@@ -81,7 +81,7 @@ body {
 }
 
 H1, H2, H3, H4, H5 {
- 
+
 }
 a {
 font-family: sans-serif;
@@ -213,7 +213,7 @@ width: 100%;
 }
 .clienttbl {
     line-height: 2.5;
-  
+
 }
 .table td{
     padding: 0rem;
@@ -222,11 +222,11 @@ width: 100%;
 }
 
 .tdunder {
- 
+
    border-bottom: 1px;
     border-bottom-color: #ddd;
     border-bottom-style: solid;
-} 
+}
 
 .ferme {
 border-radius: 8px;
@@ -283,11 +283,8 @@ margin-bottom: 5px;
   background-color: #000;
 }
 
-.tdpop {
-      padding: 1rem!important;
-  justify-content: center!important;
-}
 
-.table-hover2 tbody tr:hover td, .table-hover2 tbody tr:hover th {
+
+/*.table-hover2 tbody tr:hover td, .table-hover2 tbody tr:hover th {
   background-color: rgba(148, 17, 17, 1);
-}
+}*/

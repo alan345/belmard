@@ -357,6 +357,15 @@
 }*/
 
 
+.tdpop {
+  padding: 1rem!important;
+  justify-content: center!important;
+}
+
+
+.table-hover2 td:hover {
+   background-color: #ccc;
+}
 
 .arrowNotif {
   position: absolute;
