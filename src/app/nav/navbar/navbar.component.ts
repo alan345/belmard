@@ -91,10 +91,11 @@ export class NavbarComponent implements OnInit {
   openNotifDialog() {
 
     let dialogRef = this.mdDialog.open(NotificationDialogComponent, {
-      height: '500px',
+      height: '300px',
+      width: '300px',
       position : {
-              top: "50",
-              right:"50",
+              top: "70px",
+              right:"20px",
           },
       data: {
         // search: this.search
