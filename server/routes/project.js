@@ -125,6 +125,7 @@ router.put('/:id', function(req, res, next) {
       item.dateProject = req.body.dateProject
       item.logs = req.body.logs
 
+
       item.save(function(err, result) {
         if (err) {
           return res.status(404).json({message: 'There was an error, please try again', err: err})

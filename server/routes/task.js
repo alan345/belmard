@@ -82,7 +82,7 @@ router.put('/:id', function (req, res, next) {
         item.name = req.body.name
         item.dateTask = req.body.dateTask
         item.status = req.body.status
-
+        item.title = req.body.title
 
         item.save(function (err, result) {
           if (err) {
