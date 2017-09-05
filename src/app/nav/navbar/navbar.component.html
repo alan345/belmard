@@ -109,7 +109,7 @@
           </li>
 
           <li>
-            <a [routerLink]="['/notification']" (click)="cleanNotifications()" routerLinkActive="active2">
+            <a (click)="openNotifDialog()" routerLinkActive="active2">
                 <i class="fa fa-bell icomarg fa-lg" aria-hidden="true">
                   {{notificationsNotRead}}
                 </i>
@@ -132,14 +132,7 @@
 
               </a>
           </li>
-          <li>
 
-            <i (click)="openNotifDialog()" class="fa fa-user icomarg fa-lg" aria-hidden="true">
-                    Open Popover
-                  </i>
-
-
-          </li>
 
 
         </ul>
