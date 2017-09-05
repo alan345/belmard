@@ -1,22 +1,21 @@
-
 <div class="container">
   <div class="row">
-    <div class="col-md-1">
+    <div class="col-lg-2 col-md-3 col-sm-3 col-xs-4">
       <h4>Utilisateurs</h4>
     </div>
-    <div class="col-md-1">
+    <div class="col-lg-1 col-md-3 col-sm-3 col-xs-4 pull-left">
       <app-header [showHeader]=false [search]="search" (saved)="saved($event)" [nameObject]="'user'" [openInDialog]=true>
       </app-header>
     </div>
-    <div class="col-md-10">
+    <div class="col-lg-9 col-md-6 col-sm-6 col-xs-4">
     </div>
   </div>
   <div class="row">
-  <div class="col-md-2">  
-    <input class="form-control margebasse" type="text" name="Search" placeholder="Rechercher" [(ngModel)]="search.search" (ngModelChange)="searchUsers()">
-  </div>
-  <div class="col-md-10">
-  </div>  
+    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-8">
+      <input class="form-control margebasse" type="text" name="Search" placeholder="Rechercher" [(ngModel)]="search.search" (ngModelChange)="searchUsers()">
+    </div>
+    <div class="col-lg-9 col-md-6 col-sm-6 col-xs-4">
+    </div>
   </div>
 
 
@@ -25,7 +24,7 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-block clearfix">
-          
+
           <!-- <md-tab-group (selectChange)="onSelectChange($event)" class="beigeback admin-users">
           <md-tab label="Team" data-isExternalUser="false"></md-tab>
           <md-tab label="External Contacts" data-isExternalUser="true"></md-tab>
@@ -38,6 +37,7 @@
                 <th class="centre tdunder">Nom</th>
                 <th class="centre tdunder">Date</th>
                 <th class="centre tdunder">Company</th>
+                <th class="centre tdunder">Statut</th>
               </tr>
             </thead>
             <tbody class="clienttbl">
