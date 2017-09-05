@@ -62,6 +62,7 @@
   </button> -->
 
   <app-newObjDialog
+    *ngIf="typeAutocomplete=='user' || typeAutocomplete=='companie' || typeAutocomplete=='project'"
     class="btn btn-success"
     [search]="search"
     [icone]="'fa fa-plus'" [title]="'Add new one'" [typeObj]="typeAutocomplete"></app-newObjDialog>

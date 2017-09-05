@@ -28,9 +28,6 @@
             </thead>
             <tbody class="clienttbl">
               <tr *ngFor="let task of fetchedTasks" [routerLink]="['/task/' + task._id]" routerLinkActive="active">
-
-
-
                 <td class="centre tdunder">
                   <div *ngFor="let project of task.projects">
                     {{project.details.name}}
