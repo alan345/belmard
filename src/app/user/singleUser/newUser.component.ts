@@ -83,19 +83,19 @@ export class NewUserComponent implements OnInit {
           title: [''],
           typeClient: [''],
           statusHouse: [''],
-          detailHouse: this._fb.group({
-            typeHouse: [''],
-            surface: [''],
-            accesCode: [''],
-            floor: [''],
-            accessType: [''],
-          }),
-          address: this._fb.group({
-            address: [''],
-            city: [''],
-            state: [''],
-            zip: [''],
-          })
+
+          typeHouse: [''],
+          surface: [''],
+          accesCode: [''],
+          floor: [''],
+          accessType: [''],
+
+
+          address: [''],
+          city: [''],
+          state: [''],
+          zip: [''],
+
 
       })
 
