@@ -279,7 +279,7 @@ margin-bottom: 5px;
   background-color: #fff;
 }
 
-.table-hover-cells > tr > td:hover {
+.table-hover-cells > body > tr > td:hover {
   background-color: #000;
 }
 
@@ -287,3 +287,4 @@ margin-bottom: 5px;
       padding: 1rem!important;
   justify-content: center!important;
 }
+
