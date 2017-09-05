@@ -10,7 +10,7 @@ import { UserService} from '../../user/user.service';
 
 
 @Component({
-  selector: 'app-notification',
+  selector: 'app-notifications',
   templateUrl: './notifications.component.html',
   styleUrls: ['../notification.component.css'],
 })

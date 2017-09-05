@@ -11,6 +11,9 @@ import { GlobalEventsManager} from '../../globalEventsManager';
 import { NotificationService} from '../../notification/notification.service';
 import { Notification} from '../../notification/notification.model';
 import {Observable} from 'rxjs/Rx';
+import { NotificationDialogComponent } from '../../notification/single/dialog/notificationDialog.component';
+import { MdDialog } from '@angular/material';
+
 
 
 @Component({
@@ -33,6 +36,7 @@ export class NavbarComponent implements OnInit {
     private authService: AuthService,
     private adminService: AdminService,
     private notificationService: NotificationService,
+    public mdDialog: MdDialog,
     // private userService: UserService,
     private router: Router,
     // private companieGuardService: CompanieGuardService,
@@ -85,23 +89,24 @@ export class NavbarComponent implements OnInit {
   }
 
   openNotifDialog() {
-    let dialogComp: any
 
-      dialogComp = ProductDialogComponent
-
-    let dialogRef = this.mdDialog.open(dialogComp, {
+    let dialogRef = this.mdDialog.open(NotificationDialogComponent, {
       height: '500px',
+      position : {
+              top: "50",
+              right:"50",
+          },
       data: {
-        search: this.search
+        // search: this.search
       }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      this.saved.emit(result)
+      // this.saved.emit(result)
     })
   }
 
-  }
+
 
   // isCurrentUserIsInSubPeriod(){
   //   return this.userService.isCurrentUserIsInSubPeriod()

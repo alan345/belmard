@@ -9,7 +9,7 @@ import { MaterialModule } from '@angular/material';
 import { NavbarComponent} from './navbar.component';
 import {SharedModule } from '../../shared/shared.module';
 import { NotificationService} from '../../notification/notification.service';
-
+import {NotificationModule} from '../../notification/notification.module';
 
 @NgModule({
   imports:      [
@@ -19,6 +19,7 @@ import { NotificationService} from '../../notification/notification.service';
     FormsModule,
     ReactiveFormsModule,
     SharedModule,
+    NotificationModule,
     //  FormsModule,
     // MaterialModule,
     // ReactiveFormsModule,
