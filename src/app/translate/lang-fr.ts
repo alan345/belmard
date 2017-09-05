@@ -29,7 +29,7 @@ export const LANG_FR_TRANS = {
     'Selling Price': 'Prix de vente',
     'Save': 'Sauvegarder',
 
-    'Team': 'Equipe',
+    'Team': 'Équipe',
     'External Contact': 'Contact Externe',
     'Create a new team member': 'Créer un nouveau membre interne',
     'Create a new external member': 'Créer un nouveau contact externe',
@@ -50,6 +50,9 @@ export const LANG_FR_TRANS = {
     'Owner': 'Propriétaire',
     'Download PDF': 'Télécharger PDF',
     'Customer': 'Client',
+    'Customers': 'Clients',
+    'Supplier': 'Fournisseur'
+    'Suppliers': 'Fournisseurs',
     'Estimate Number': 'Numéro du devis',
     'Issue Date': 'Date',
     'Expiry Date': 'Date de Validité',
@@ -69,6 +72,7 @@ export const LANG_FR_TRANS = {
     'Please Select': 'Mode de Paiement',
     'Amount': 'Montant',
 
+    'Today': 'Aujourd´hui',
 
 
     'project': 'Projet',
