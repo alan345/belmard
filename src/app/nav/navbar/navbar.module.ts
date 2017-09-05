@@ -7,7 +7,7 @@ import { Routes, RouterModule} from '@angular/router';
 import { MaterialModule } from '@angular/material';
 
 import { NavbarComponent} from './navbar.component';
-import { ListNewObjComponent} from './newObj/listNewObj.component';
+// import { ListNewObjComponent} from './newObj/listNewObj.component';
 import {SharedModule } from '../../shared/shared.module';
 import { NotificationService} from '../../notification/notification.service';
 import {NotificationModule} from '../../notification/notification.module';
@@ -31,14 +31,14 @@ import {ListNewObjDialogComponent} from './newObj/dialog/listNewObjDialog.compon
   declarations: [
 
     NavbarComponent,
-    ListNewObjComponent,
+    // ListNewObjComponent,
     ListNewObjDialogComponent,
     // ProductsComponent,
     // ProductSingleComponent,
   ],
   exports:      [
     NavbarComponent,
-    ListNewObjComponent,
+    // ListNewObjComponent,
     // ProductsComponent
   ],
   providers:    [

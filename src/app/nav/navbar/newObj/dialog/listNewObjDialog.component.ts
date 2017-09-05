@@ -1,6 +1,6 @@
 import { Component, ViewChild } from '@angular/core';
 import { MdDialogRef} from '@angular/material';
-import { ListNewObjComponent }  from '../listNewObj.component';
+// import { ListNewObjComponent }  from '../listNewObj.component';
 
 
 
@@ -13,10 +13,10 @@ export class ListNewObjDialogComponent {
   // @ViewChild(ProductSingleComponent)
   // private productSingleComponent: ProductSingleComponent;
 
-  constructor(public dialogRef: MdDialogRef<ListNewObjComponent>) {}
+  constructor() {}
 
-  saved(data) {
-    this.dialogRef.close(data)
-  }
+  // saved(data) {
+  //   this.dialogRef.close(data)
+  // }
 
 }
