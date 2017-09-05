@@ -7,6 +7,7 @@ import { MdDialogRef} from '@angular/material';
 @Component({
   selector: 'edit-options-dialog',
   templateUrl: './listNewObjDialog.component.html',
+  styleUrls: ['../../navbar.component.css']
 })
 
 export class ListNewObjDialogComponent {

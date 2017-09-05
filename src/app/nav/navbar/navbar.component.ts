@@ -94,14 +94,14 @@ export class NavbarComponent implements OnInit {
 
   openNotifDialog() {
     if(this.dialogRef)
-      this.dialogRef.close();    
+      this.dialogRef.close();
     this.cleanNotifications();
     this.dialogRef = this.mdDialog.open(NotificationDialogComponent, {
       height: '200px',
       width: '300px',
       position : {
-        top: "70px",
-        right:"70px",
+        top: "60px",
+        right:"80px",
       },
       data: {
         // search: this.search
@@ -121,8 +121,8 @@ export class NavbarComponent implements OnInit {
       height: '200px',
       width: '300px',
       position : {
-        top: "70px",
-        right:"70px",
+        top: "60px",
+        right:"60px",
       },
       data: {
         // search: this.search

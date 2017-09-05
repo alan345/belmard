@@ -354,3 +354,17 @@
     color:#fff;
   }
 }
+
+
+
+
+.arrowNotif {
+  position: absolute;
+  top: 50px;
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+
+  border-bottom: 20px solid white;
+}
