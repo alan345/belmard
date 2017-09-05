@@ -1,81 +1,74 @@
 <div class="container">
-  <div class="row">
-  <app-header
+  <div class="d-flex flex-row">
+    <div class="p-2">
+      <h4 *ngIf="search.isExternalUser == 'true'"> {{'Payments' | translate}}</h4>
+      <h4 *ngIf="search.isExternalUser == 'false'"> {{'Expenses' | translate}}</h4>
+    </div>
+    <div class="p-2">
+      <app-header
     [search]="search"
     (saved)="saved($event)"
     [nameButton]="'Create a new Paiement'"
     [nameObject]="'paiementQuote'"
     [openInDialog]=true>
   </app-header>
-</div>
+    </div>
+  </div>
+  <div class="d-flex flex-row">
+    <div class="p-2">
+      <input class="form-control margebasse col-md-12" type="text" name="Search" placeholder="Rechercher" [(ngModel)]="search.search" (ngModelChange)="searchPaiementQuotes()">
+    </div>
+  </div>
+    
   <div class="row">
     <div class="col-md-12">
-      <div class="card">
-        <div class="card-header">
-          <h4 class="card-title">{{ 'List' | translate }}</h4>
-        </div>
-        <div class="card-block clearfix">
-          <div id="wrapper" class="subsubnav-clients float-left">
-            <input class="form-control margebasse col-md-12" type="text" name="Search" placeholder="Rechercher" [(ngModel)]="search.search" (ngModelChange)="searchPaiementQuotes()">
-          </div>
+     
           <table class="table table-hover">
             <thead>
               <tr>
 
-                <!--
-              <th class="tbl-left">
-                <!-- <button class="updownbtn" (click)="orderBy('profile.name')"><i class="fa fa-chevron-down"></i></button>
-                    <button class="updownbtn" (click)="orderBy('-profile.name')"><i class="fa fa-chevron-up"></i></button>
-              </th>
-               -->
-                <th class="centre">Type</th>
-                <th class="centre">Client</th>
-                <th class="centre">Nom</th>
-                <th class="centre">Date</th>
-                <th class="centre">Montant</th>
+                <th class="centre tdunder">Type</th>
+                <th class="centre tdunder">Client</th>
+                <th class="centre tdunder">Nom</th>
+                <th class="centre tdunder">Date</th>
+                <th class="centre tdunder">Montant</th>
 
               </tr>
             </thead>
-            <tbody class="">
+            <tbody class="clienttbl">
               <tr *ngFor="let paiementQuote of fetchedPaiementQuotes" [routerLink]="['/paiementQuote/edit/' + paiementQuote._id]"
                 routerLinkActive="active">
-                <td class="centre">{{paiementQuote.type}}</td>
-                <td class="centre">
+                <td class="centre tdunder">{{paiementQuote.type}}</td>
+                <td class="centre tdunder">
                   <div *ngFor="let quote of paiementQuote.quotes">
                     <div *ngFor="let client of quote.clients">
                       {{client.profile.name}}
                     </div>
                   </div>
                 </td>
-                <td class="centre">
+                <td class="centre tdunder">
                   <div *ngFor="let quote of paiementQuote.quotes">
                     <div *ngFor="let client of quote.clients">
                       {{client.profile.lastName}}
                     </div>
                   </div>
                 </td>
-                <td class="centre">{{paiementQuote.datePaiement | date:'yyyy-MM-dd' }}</td>
-                <td class="centre">{{paiementQuote.amount}}</td>
+                <td class="centre tdunder">{{paiementQuote.datePaiement | date:'yyyy-MM-dd' }}</td>
+                <td class="centre tdunder">{{paiementQuote.amount}}</td>
 
               </tr>
             </tbody>
           </table>
 
-          <div class="has-text-centered">
+          <div>
             <md-paginator
               [length]="paginationData.totalItems"
               [pageSize]="paginationData.itemsPerPage"
               (page)="getPage($event.pageIndex*1+1)">
             </md-paginator>
 <app-loadingInApp *ngIf="loading"></app-loadingInApp>
-            <!-- <div [hidden]="!loading">Loading...</div>
-            <pagination-controls (pageChange)="getPage($event)" id="paiementQuotePagination" class="change-page"></pagination-controls> -->
+           
           </div>
         </div>
-
-      </div>
-
-    </div>
-
   </div>
 </div>
