@@ -33,7 +33,7 @@ export class AutocompleteComponent {
     search: ''
   };
   @Input() canDelete: boolean = true;
-  @Input() enableLink: boolean = true;
+  @Input() enableLink: boolean = false;
   // createNewItem: boolean = false;
   autocompleteSearch = ''
   fetchedData: User[] = [];
