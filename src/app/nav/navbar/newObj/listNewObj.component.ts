@@ -1,31 +1,28 @@
 import {Component, OnInit, Input} from '@angular/core';
-import {AuthService} from '../../auth/auth.service';
-import {AdminService} from '../../admin/services/admin.service';
+import {AuthService} from '../../../auth/auth.service';
+import {AdminService} from '../../../admin/services/admin.service';
 import {Router} from '@angular/router';
-import { UserService} from '../../user/user.service';
-import { User} from '../../user/user.model';
-import { CompanieGuardService} from '../../companie/companieGuard.service'
-import { PaiementGuardService} from '../../user/paiement/paiementGuard.service'
+import { UserService} from '../../../user/user.service';
+import { User} from '../../../user/user.model';
+import { CompanieGuardService} from '../../../companie/companieGuard.service'
+import { PaiementGuardService} from '../../../user/paiement/paiementGuard.service'
 import { ChangeDetectionStrategy} from '@angular/core';
-import { GlobalEventsManager} from '../../globalEventsManager';
-import { NotificationService} from '../../notification/notification.service';
-import { Notification} from '../../notification/notification.model';
+import { GlobalEventsManager} from '../../../globalEventsManager';
+import { NotificationService} from '../../../notification/notification.service';
+import { Notification} from '../../../notification/notification.model';
 import {Observable} from 'rxjs/Rx';
-import { NotificationDialogComponent } from '../../notification/single/dialog/notificationDialog.component';
-import {ListNewObjDialogComponent} from './newObj/dialog/listNewObjDialog.component'
-
-
+import { NotificationDialogComponent } from '../../../notification/single/dialog/notificationDialog.component';
 import { MdDialog } from '@angular/material';
 
 
 
 @Component({
-  selector: 'app-navbar',
+  selector: 'app-listNewObj',
   // changeDetection: ChangeDetectionStrategy.OnPush,
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  templateUrl: './listNewObj.component.html',
+  styleUrls: ['../navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class ListNewObjComponent implements OnInit {
   @Input() sidenav: any;
   showNavBar: boolean = false;
  // private userId: string = localStorage.getItem('userId');
@@ -111,8 +108,8 @@ export class NavbarComponent implements OnInit {
   }
 
   openNewObejcts() {
-
-    let dialogRef = this.mdDialog.open(ListNewObjDialogComponent, {
+    this.cleanNotifications();
+    let dialogRef = this.mdDialog.open(NotificationDialogComponent, {
       height: '200px',
       width: '300px',
       position : {
