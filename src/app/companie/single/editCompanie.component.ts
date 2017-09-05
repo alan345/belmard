@@ -715,7 +715,6 @@ export class EditCompanieComponent implements OnInit {
     this.save()
   }
 
-
   save() {
 
     //this.fetchedCompanie.categJson.categProduct = JSON.stringify(JSON.parse(this.fetchedCompanie.categJson.categProduct))
