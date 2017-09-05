@@ -33,6 +33,7 @@ export class NavbarComponent implements OnInit {
   fetchedUser: User = new User();
   fetchedNotifications: Notification[] = [];
   notificationsNotRead: number=0;
+  dialogRef:any
 
   constructor(
     private globalEventsManager: GlobalEventsManager,
@@ -92,8 +93,10 @@ export class NavbarComponent implements OnInit {
   }
 
   openNotifDialog() {
+    if(this.dialogRef)
+      this.dialogRef.close();    
     this.cleanNotifications();
-    let dialogRef = this.mdDialog.open(NotificationDialogComponent, {
+    this.dialogRef = this.mdDialog.open(NotificationDialogComponent, {
       height: '200px',
       width: '300px',
       position : {
@@ -105,14 +108,16 @@ export class NavbarComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    this.dialogRef.afterClosed().subscribe(result => {
       // this.saved.emit(result)
     })
   }
 
   openNewObejcts() {
+    if(this.dialogRef)
+      this.dialogRef.close();
 
-    let dialogRef = this.mdDialog.open(ListNewObjDialogComponent, {
+    this.dialogRef  = this.mdDialog.open(ListNewObjDialogComponent, {
       height: '200px',
       width: '300px',
       position : {
@@ -124,7 +129,7 @@ export class NavbarComponent implements OnInit {
       }
     });
 
-    dialogRef.afterClosed().subscribe(result => {
+    this.dialogRef.afterClosed().subscribe(result => {
       // this.saved.emit(result)
     })
   }
