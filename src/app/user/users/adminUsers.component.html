@@ -22,48 +22,40 @@
 
   <div class="row">
     <div class="col-md-12">
-
-          <!-- <md-tab-group (selectChange)="onSelectChange($event)" class="beigeback admin-users">
-          <md-tab label="Team" data-isExternalUser="false"></md-tab>
-          <md-tab label="External Contacts" data-isExternalUser="true"></md-tab>
-        </md-tab-group> -->
-          <table class="table table-hover table-responsive">
-            <thead>
-              <tr>
-                <th class="centre tdunder">Type</th>
-                <th class="centre tdunder">Client</th>
-                <th class="centre tdunder">Nom</th>
-                <th class="centre tdunder">Date</th>
-                <th class="centre tdunder">Company</th>
-              </tr>
-            </thead>
-            <tbody class="clienttbl">
-              <tr *ngFor="let user of fetchedUsers" [routerLink]="['/user/' + user._id]" routerLinkActive="active">
-                <td class="centre tdunder">
-                  <div *ngFor="let singleType of user.type">
-                    {{singleType}}
-                  </div>
-                </td>
-                <td class="centre tdunder">{{user.profile.name}}</td>
-                <td class="centre tdunder">{{user.profile.lastName}}</td>
-                <td class="centre tdunder">{{user.createdAt | date:'yyyy-MM-dd' }}</td>
-                <td class="centre tdunder">
-                  <div *ngFor="let companie of user.companies">
-                    {{companie.nameCompanie}}
-                  </div>
-                </td>
-                <td class="centre tdunder"></td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="has-text-centered">
-            <md-paginator [length]="paginationData.totalItems" [pageSize]="paginationData.itemsPerPage" (page)="getPage($event.pageIndex*1+1)">
-            </md-paginator>
-            <app-loadingInApp *ngIf="loading"></app-loadingInApp>
-            <!-- <div [hidden]="!loading">Loading...</div>
-            <pagination-controls (pageChange)="getPage($event)" id="server" class="change-page"></pagination-controls> -->
-          </div>
-
+      <table class="table table-hover table-responsive">
+        <thead>
+          <tr>
+            <th class="centre tdunder">Type</th>
+            <th class="centre tdunder">Client</th>
+            <th class="centre tdunder">Nom</th>
+            <th class="centre tdunder">Date</th>
+            <th class="centre tdunder">Company</th>
+          </tr>
+        </thead>
+        <tbody class="clienttbl">
+          <tr *ngFor="let user of fetchedUsers" [routerLink]="['/user/' + user._id]" routerLinkActive="active">
+            <td class="centre tdunder">
+              <div *ngFor="let singleType of user.type">
+                {{singleType}}
+              </div>
+            </td>
+            <td class="centre tdunder">{{user.profile.name}}</td>
+            <td class="centre tdunder">{{user.profile.lastName}}</td>
+            <td class="centre tdunder">{{user.createdAt | date:'yyyy-MM-dd' }}</td>
+            <td class="centre tdunder">
+              <div *ngFor="let companie of user.companies">
+                {{companie.nameCompanie}}
+              </div>
+            </td>
+            <td class="centre tdunder"></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="has-text-centered">
+        <md-paginator [length]="paginationData.totalItems" [pageSize]="paginationData.itemsPerPage" (page)="getPage($event.pageIndex*1+1)">
+        </md-paginator>
+        <app-loadingInApp *ngIf="loading"></app-loadingInApp>
+      </div>
     </div>
   </div>
 </div>
