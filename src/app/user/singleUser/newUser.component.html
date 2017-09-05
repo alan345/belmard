@@ -4,10 +4,10 @@
 
   <div class="single-wrpr beigeback">
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
-      <div class="form-group col-sm-12">
+      <div class="form-group col-sm-6">
         {{'Is External User' | translate}} {{fetchedUser.isExternalUser}}
       </div>
-      <div class="form-group col-sm-12">
+      <div class="form-group col-sm-6">
         <label>{{'Code Client' | translate}}</label> {{fetchedUser._id}}
       </div>
 
@@ -110,6 +110,7 @@
               <option *ngFor="let n of typeHouseArray" [attr.value]="n">{{n}}</option>
             </select>
         </div>
+       <div class="row col-sm-6"> 
         <div class="form-group col-sm-3">
           <input type="text" class="form-control" formControlName="surface" [(ngModel)]="fetchedUser.profile.detailHouse.surface" placeholder="{{'Surface' | translate}}">
         </div>
@@ -122,6 +123,7 @@
         <div class="form-group col-sm-3">
           <input type="text" class="form-control" formControlName="accessType" [(ngModel)]="fetchedUser.profile.detailHouse.accessType" placeholder="{{'Acces Type' | translate}}">
         </div>
+       </div>  
       </div>
       <div class="form-group col-sm-6">
         <textarea class="form-control" formControlName="otherData" [(ngModel)]="fetchedUser.profile.otherData" placeholder="{{'Other' | translate}}">
@@ -144,7 +146,7 @@
       <!-- </div>
       </div> -->
 
-      <div class="form-group col-sm-12">
+      <div class="form-group col-sm-6">
       </div>
       <div class="valid-edit">
         <button type="submit" [disabled]="!myForm.valid" [ngClass]="{'done':myForm.valid,'pas-done':!myForm.valid}">Done</button>
