@@ -84,6 +84,24 @@ export class NavbarComponent implements OnInit {
       );
   }
 
+  openNotifDialog() {
+    let dialogComp: any
+
+      dialogComp = ProductDialogComponent
+
+    let dialogRef = this.mdDialog.open(dialogComp, {
+      height: '500px',
+      data: {
+        search: this.search
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.saved.emit(result)
+    })
+  }
+
+  }
 
   // isCurrentUserIsInSubPeriod(){
   //   return this.userService.isCurrentUserIsInSubPeriod()

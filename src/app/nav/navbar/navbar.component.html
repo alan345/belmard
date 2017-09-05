@@ -59,7 +59,7 @@
       </div> -->
 
       <ul class="navbar-nav mr-auto">
-<!--
+        <!--
         <li *ngIf="showObjHTML('project')" class="nav-item">
           <a class="nav-link" routerLinkActive="active" [routerLink]="['/project']">{{'Projects' | translate}} </a>
         </li>
@@ -101,47 +101,57 @@
             </a>
           </li>
           <li>
-              <a routerLinkActive="active2" [routerLink]="['/task']">
+            <a routerLinkActive="active2" [routerLink]="['/task']">
                 <i class="fa fa-tasks icomarg fa-lg" aria-hidden="true">
                 </i>
 
               </a>
-            </li>
+          </li>
 
-            <li>
-              <a [routerLink]="['/notification']" (click)="cleanNotifications()" routerLinkActive="active2">
+          <li>
+            <a [routerLink]="['/notification']" (click)="cleanNotifications()" routerLinkActive="active2">
                 <i class="fa fa-bell icomarg fa-lg" aria-hidden="true">
                   {{notificationsNotRead}}
                 </i>
 
               </a>
-            </li>
+          </li>
           <li>
-              <a [routerLink]="" routerLinkActive="active2">
+            <a [routerLink]="" routerLinkActive="active2">
                 <i class="fa fa-plus icomarg fa-lg" aria-hidden="true">
 
                 </i>
 
               </a>
-            </li>
+          </li>
           <li>
-              <a [routerLink]="['/user/' + fetchedUser._id]" routerLinkActive="active2">
+            <a [routerLink]="['/user/' + fetchedUser._id]" routerLinkActive="active2">
                   <i class="fa fa-user icomarg fa-lg" aria-hidden="true">
 
                   </i>
 
               </a>
           </li>
-         </ul>
+          <li>
 
-        </div>
+            <i (click)="openNotifDialog()" class="fa fa-user icomarg fa-lg" aria-hidden="true">
+                    Open Popover
+                  </i>
+
+
+          </li>
+
+
+        </ul>
+
+      </div>
 
 
 
-        <button type="button" class="spcright btn btn-secondary" (click)="logout()">
+      <button type="button" class="spcright btn btn-secondary" (click)="logout()">
           {{'Logout' | translate}}
         </button>
-        <!--
+      <!--
         <button type="button" class="spcright btn btn-primary" [routerLink]="['/user/newuser/' + fetchedUser._id]" routerLinkActive="active">
           {{'My Profile' | translate}}
         </button>

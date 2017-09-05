@@ -7,6 +7,7 @@ import { RouterModule} from '@angular/router';
 // import { AddUserByNotificationComponent} from './addUser/addUserByNotification.component';
 import { NotificationsComponent} from './notifications/notifications.component';
 import { NotificationComponent} from './single/notification.component';
+import { NotificationDialogComponent} from './single/dialog/notificationDialog.component';
 // import { EditAddUserToNotificationComponent} from './addUser/editAddUserToNotification.component';
 
 import { NotificationService} from './notification.service';
@@ -32,12 +33,14 @@ import { SharedModule } from '../shared/shared.module';
     NotificationComponent,
     // EditAddUserToNotificationComponent,
     NotificationComponent,
+    NotificationDialogComponent,
 
     // AddUserByNotificationComponent,
   ],
   exports:      [ ],
   providers:    [ NotificationService ],
   entryComponents: [
+    NotificationDialogComponent,
 
   ]
 })
