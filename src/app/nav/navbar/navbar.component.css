@@ -7,7 +7,7 @@
   background-size:cover;
   padding-bottom:120px;
 }
-
+/*
 @media (max-width:767px) {
   .header-dark {
     padding-bottom:80px;
@@ -353,7 +353,7 @@
   .navigation-clean.navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
     color:#fff;
   }
-}
+}*/
 
 
 
