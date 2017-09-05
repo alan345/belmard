@@ -288,6 +288,6 @@ margin-bottom: 5px;
   justify-content: center!important;
 }
 
-.table-hover2 tbody td:hover td {
+.table-hover2 tbody tr:hover td {
   background-color: rgba(148, 17, 17, 1);
 }
