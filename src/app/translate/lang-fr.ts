@@ -5,6 +5,7 @@ export const LANG_FR_NAME = 'fr';
 export const LANG_FR_TRANS = {
 
     'Back': 'Retour',
+    'Dashboard': 'Tableau de Bord',
     'My Planning': 'Mon Planning',
     'My profile': 'Mon profil',
     'My company': 'Mon Entreprise',
