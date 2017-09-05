@@ -11,6 +11,14 @@ export const LANG_FR_TRANS = {
     'My company': 'Mon Entreprise',
     'Logout': 'Déconnexion',
     'Items per page': 'Eléments par page',
+    'Accountancy': 'Comptabilité',
+    'Payments': 'Encaissements',
+    'Payment': 'Encaissement',
+    'Expenses': 'Dépenses',
+    'Expense': 'Dépense',
+    'Reporting': 'Statistiques',
+    'Settings': 'Paramètres',
+  
 
     'Add a product': 'Ajouter un produit',
     'Create a new': 'Créer un nouveau',
@@ -46,7 +54,7 @@ export const LANG_FR_TRANS = {
     'Quotes': 'Devis',
     'quote': 'devis',
     'Create a new quote': 'Créer un nouveau Devis',
-    'Assigned to me': 'Assignée à Moi',
+    'Assigned to me': 'Assigné à Moi',
     'Owner': 'Propriétaire',
     'Download PDF': 'Télécharger PDF',
     'Customer': 'Client',
