@@ -1,5 +1,5 @@
 <div class="container">
-  
+  <div class="row">
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
       <!-- <div class="form-group col-sm-6">
         {{'Is External User' | translate}} {{fetchedUser.isExternalUser}}
@@ -7,7 +7,7 @@
       <!-- <div class="form-group col-sm-6">
         <label>{{'Code Client' | translate}}</label> {{fetchedUser._id}}
       </div> -->
-    <div class="row">
+    
 
       <div *ngIf="!fetchedUser.isExternalUser" class="form-group col-sm-6">
 
