@@ -1,15 +1,12 @@
-
 <div class="container">
-  <app-header [showHeader]="true" [showCreateButton]="false" [showBackButton]="true" [nameObject]="'user'"></app-header>
-
-  <div class="single-wrpr beigeback">
+  <div class="row">
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
-      <div class="form-group col-sm-6">
+      <!-- <div class="form-group col-sm-6">
         {{'Is External User' | translate}} {{fetchedUser.isExternalUser}}
-      </div>
-      <div class="form-group col-sm-6">
+      </div> -->
+      <!-- <div class="form-group col-sm-6">
         <label>{{'Code Client' | translate}}</label> {{fetchedUser._id}}
-      </div>
+      </div> -->
 
 
       <div *ngIf="!fetchedUser.isExternalUser" class="form-group col-sm-6">
@@ -23,16 +20,15 @@
           </md-select>
           <button type="button" (click)="fetchedUser.typeUsers = undefined;"><i class="fa fa-times" aria-hidden="true"></i></button>
         </div>
-
-
-
-
+      </div>
+      <div class="form-group col-sm-6">
         <!-- <div *ngIf="!fetchedUser.isAdminOfHisCompanie"> -->
         <label>{{'Rights' | translate}}</label>
         <app-autocomplete [typeAutocomplete]="'right'" [canDelete]="true" [title]="" [singleChoice]="true" [arrayContent]="fetchedUser.rights" (getResultAutocomplete)="selectRight($event[0])">
         </app-autocomplete>
         <!-- </div> -->
-
+      </div>
+      <div class="form-group col-sm-6">
         <div>
           <label>{{'Calendar Color' | translate}}</label>
           <div class="round" [style.background-color]="fetchedUser.profile.colorCalendar"></div>
@@ -50,7 +46,7 @@
       <div class="form-group col-sm-6">
         <input type="text" class="form-control" formControlName="email" [(ngModel)]="fetchedUser.email" placeholder="Email">
       </div>
-    <div class="row col-sm-6">
+
       <div class="form-group col-sm-6">
         <select [(ngModel)]="fetchedUser.profile.language" class="form-control" formControlName="language">
             <option *ngFor="let n of languageArray" [attr.value]="n">{{n}}</option>
@@ -61,7 +57,7 @@
             <option *ngFor="let n of titleArray" [attr.value]="n">{{n}}</option>
           </select>
       </div>
-    </div>  
+
 
       <div class="form-group col-sm-6">
         <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedUser.profile.name" placeholder="Client's Name">
@@ -70,7 +66,7 @@
       <div class="form-group col-sm-6">
         <input type="text" class="form-control" formControlName="lastName" [(ngModel)]="fetchedUser.profile.lastName" placeholder="Client's lastName">
       </div>
-     <div class="row col-sm-6"> 
+
       <div class="form-group col-sm-6">
         <select [(ngModel)]="fetchedUser.profile.typeClient" class="form-control" formControlName="typeClient">
             <option *ngFor="let n of typeClientArray" [attr.value]="n">{{n}}</option>
@@ -81,49 +77,51 @@
             <option *ngFor="let n of statusHouseArray" [attr.value]="n">{{n}}</option>
           </select>
       </div>
-     </div>
+
       <div class="form-group col-sm-6">
         <input type="text" class="form-control" formControlName="phoneNumber" [(ngModel)]="fetchedUser.profile.phoneNumber" placeholder="Phone Number">
       </div>
 
       <div formGroupName="address">
-        <h5>{{'Address' | translate}}</h5>
+
         <div class="form-group col-sm-6">
+          <h5>{{'Address' | translate}}</h5>
           <input type="text" class="form-control" formControlName="address" [(ngModel)]="fetchedUser.profile.address.address" placeholder="{{'Address' | translate}}">
         </div>
-       <div class="row col-sm-6"> 
-        <div class="form-group col-sm-4">
+
+        <div class="form-group col-sm-6">
           <input type="text" class="form-control" formControlName="city" [(ngModel)]="fetchedUser.profile.address.city" placeholder="{{'City' | translate}}">
         </div>
-        <div class="form-group col-sm-4">
+        <div class="form-group col-sm-6">
           <input type="text" class="form-control" formControlName="state" [(ngModel)]="fetchedUser.profile.address.state" placeholder="{{'State' | translate}}">
         </div>
-        <div class="form-group col-sm-4">
+        <div class="form-group col-sm-6">
           <input type="text" class="form-control" formControlName="zip" [(ngModel)]="fetchedUser.profile.address.zip" placeholder="{{'Zip' | translate}}">
         </div>
-       </div>  
+
       </div>
       <div *ngIf="this.fetchedUser.isExternalUser" formGroupName="detailHouse">
-        <h5>{{'Details House' | translate}}</h5>
+
         <div class="form-group col-sm-6">
+          <h5>{{'Details House' | translate}}</h5>
           <select [(ngModel)]="fetchedUser.profile.detailHouse.typeHouse" class="form-control" formControlName="typeHouse">
               <option *ngFor="let n of typeHouseArray" [attr.value]="n">{{n}}</option>
             </select>
         </div>
-       <div class="row col-sm-6"> 
-        <div class="form-group col-sm-3">
+
+        <div class="form-group col-sm-6">
           <input type="text" class="form-control" formControlName="surface" [(ngModel)]="fetchedUser.profile.detailHouse.surface" placeholder="{{'Surface' | translate}}">
         </div>
-        <div class="form-group col-sm-3">
+        <div class="form-group col-sm-6">
           <input type="text" class="form-control" formControlName="accesCode" [(ngModel)]="fetchedUser.profile.detailHouse.accesCode" placeholder="{{'Acces Code' | translate}}">
         </div>
-        <div class="form-group col-sm-3">
+        <div class="form-group col-sm-6">
           <input type="text" class="form-control" formControlName="floor" [(ngModel)]="fetchedUser.profile.detailHouse.floor" placeholder="{{'Floor' | translate}}">
         </div>
-        <div class="form-group col-sm-3">
+        <div class="form-group col-sm-6">
           <input type="text" class="form-control" formControlName="accessType" [(ngModel)]="fetchedUser.profile.detailHouse.accessType" placeholder="{{'Acces Type' | translate}}">
         </div>
-       </div>  
+
       </div>
       <div class="form-group col-sm-6">
         <textarea class="form-control" formControlName="otherData" [(ngModel)]="fetchedUser.profile.otherData" placeholder="{{'Other' | translate}}">
@@ -133,21 +131,7 @@
 
       <app-picture [forms]="fetchedUser.forms" (getPicture)="getPicture($event)"></app-picture>
 
-      <!-- <div class="form-group prmimg-cnt">
-        <div *ngFor="let singleForm of fetchedUser.profile.profilePicture">
-          <img style="height:120px" class="promo-img" src="./uploads/forms/{{singleForm.owner}}/{{singleForm.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
-          <button type="button" md-button (click)="removePic(i)">
-              <i class="fa fa-times"></i>
-            </button>
-        </div>
-        <div>
 
-          <!-- <button type="button" md-button (click)="openDialog('img')" class="addpic-squr">Ajouter une image<br><i class="fa fa-plus"></i></button> -->
-      <!-- </div>
-      </div> -->
-
-      <div class="form-group col-sm-6">
-      </div>
       <div class="valid-edit">
         <button type="submit" [disabled]="!myForm.valid" [ngClass]="{'done':myForm.valid,'pas-done':!myForm.valid}">Done</button>
         <button *ngIf="fetchedUser._id" type="button" (click)="saveAndCreateProject()" [disabled]="!myForm.valid">
