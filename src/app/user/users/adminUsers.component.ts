@@ -45,7 +45,7 @@ export class AdminUsersComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
       if(params['isExternalUser']) {
-        this.search.isExternalUser = params['isExternalUser']
+        this.search.isExternalUser = (params['isExternalUser'] === 'true')
         this.search.orderBy = 'profile.name';
         this.search.role = 'client';
         this.getUsers(this.paginationData.currentPage, this.search);

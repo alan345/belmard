@@ -1,8 +1,8 @@
 <div class="container">
   <div class="d-flex flex-row">
     <div class="p-2">
-      <h4 *ngIf="search.isExternalUser == 'true'"> {{'Customers' | translate}}</h4>
-      <h4 *ngIf="search.isExternalUser == 'false'"> {{'Team' | translate}}</h4>
+      <h4 *ngIf="search.isExternalUser"> {{'Customers' | translate}}</h4>
+      <h4 *ngIf="!search.isExternalUser"> {{'Team' | translate}}</h4>
     </div>
     <div class="p-2">
       <app-newObjDialog icone="fa fa-plus-square fa-2x ml" [search]="search" (saved)="saved($event)" [typeObj]="'user'"></app-newObjDialog>

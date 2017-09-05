@@ -58,13 +58,14 @@ export class newObjDialogComponent implements OnInit {
 
     if(typeObj == 'product')
       dialogComp = ProductDialogComponent
-
+console.log(this.search)
     let dialogRef = this.mdDialog.open(dialogComp, {
       height: '500px',
       data: {
         search: this.search
       }
     });
+
     dialogRef.afterClosed().subscribe(result => {
       this.saved.emit(result)
     })
