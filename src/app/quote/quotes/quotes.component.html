@@ -26,10 +26,10 @@
             <th class="centre tdunder">{{'Status' | translate}}</th>
           </tr>
         </thead>
-        <tbody class="">
+        <tbody class="clienttbl">
           <tr *ngFor="let quote of fetchedQuotes" [routerLink]="['/quote/' + quote._id]" routerLinkActive="active">
-            <td class="centre"></td>
-            <td class="centre">
+            <td class="centre tdunder"></td>
+            <td class="centre tdunder">
 
               <div *ngFor="let client of quote.clients">
                 {{client.profile.name}} {{client.profile.lastName}}
