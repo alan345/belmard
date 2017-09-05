@@ -3,7 +3,10 @@
 /*@import "~angular-calendar/dist/css/angular-calendar.css";*/
 /*@import "~@ng-bootstrap/ng-bootstrap/dist/css/bootstrap.min.css";*/
 
-
+.fa { 
+  margin-right: 10px;
+}
+  
 .card{ 
   margin: 0px!important;
   border-radius: 0px!important;
