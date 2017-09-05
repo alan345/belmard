@@ -395,3 +395,12 @@ li {
     border: 1px solid rgba(255,255,255,.87);
     background-color: #fff;
   }
+<<<<<<< HEAD
+=======
+
+.mat-dialog-container {    
+    display: unset!important;
+    padding: 0px!important;
+    text-align: center;
+}
+>>>>>>> 37df080cfed3a436d57f7efd6308b21b48a46fdf

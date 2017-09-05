@@ -128,6 +128,7 @@ export class NavbarComponent implements OnInit {
         // search: this.search
       }
     });
+    
 
     this.dialogRef.afterClosed().subscribe(result => {
       // this.saved.emit(result)
