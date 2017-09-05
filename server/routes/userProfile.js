@@ -95,7 +95,8 @@ if(req.query.isExternalUser === 'false') {
 
   User
   .find(searchQuery)
-  .populate({ path: 'companies', model: 'Companie'})
+  // .populate({ path: 'companies', model: 'Companie'})
+  .populate({ path: 'ownerCompanies', model: 'Companie'})
   .limit(itemsPerPage)
   .skip(skip)
   .sort(req.query.orderBy)

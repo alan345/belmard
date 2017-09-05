@@ -37,7 +37,7 @@
             <td class="centre tdunder">{{user.profile.lastName}}</td>
             <td class="centre tdunder">{{user.createdAt | date:'yyyy-MM-dd' }}</td>
             <td class="centre tdunder">
-              <div *ngFor="let companie of user.companies">
+              <div *ngFor="let companie of user.ownerCompanies">
                 {{companie.nameCompanie}}
               </div>
             </td>
