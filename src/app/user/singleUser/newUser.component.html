@@ -33,13 +33,9 @@
       </div>
 
       <div class="form-group col-sm-4">
-        <md-select placeholder="typeUser" formControlName="language" [(ngModel)]="fetchedUser.profile.language" name="language">
-          <md-option *ngFor="let n of languageArray" [value]="n">
-            {{n}}
-          </md-option>
-        </md-select>
-        <button type="button" (click)="fetchedUser.profile.language = undefined;"><i class="fa fa-times" aria-hidden="true"></i></button>
-
+        <select [(ngModel)]="fetchedUser.profile.language" class="form-control" formControlName="language">
+            <option *ngFor="let n of languageArray" [attr.value]="n">{{n}}</option>
+          </select>
       </div>
       <div class="form-group col-sm-4">
         <select [(ngModel)]="fetchedUser.profile.title" class="form-control" formControlName="title">
@@ -48,14 +44,16 @@
       </div>
 
 
-      <div class="form-group col-sm-4">
+      <div class="form-group col-sm-6">
         <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedUser.profile.name" placeholder="Client's Name">
       </div>
 
-      <div class="form-group col-sm-4">
+      <div class="form-group col-sm-6">
         <input type="text" class="form-control" formControlName="lastName" [(ngModel)]="fetchedUser.profile.lastName" placeholder="Client's lastName">
       </div>
-
+      <div class="form-group col-sm-4">
+        <input type="text" class="form-control" formControlName="phoneNumber" [(ngModel)]="fetchedUser.profile.phoneNumber" placeholder="Phone Number">
+      </div>
       <div class="form-group col-sm-4">
         <select [(ngModel)]="fetchedUser.profile.typeClient" class="form-control" formControlName="typeClient">
             <option *ngFor="let n of typeClientArray" [attr.value]="n">{{n}}</option>
@@ -67,9 +65,7 @@
           </select>
       </div>
 
-      <div class="form-group col-sm-4">
-        <input type="text" class="form-control" formControlName="phoneNumber" [(ngModel)]="fetchedUser.profile.phoneNumber" placeholder="Phone Number">
-      </div>
+
     </div>
     <h5>{{'Address' | translate}}</h5>
     <div class="row">
