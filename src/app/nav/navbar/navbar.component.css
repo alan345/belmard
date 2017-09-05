@@ -376,16 +376,35 @@ li {
 
 
 .table-hover2 td:hover {
-   background-color: #ccc;
+   background-color: rgba(148, 17, 17, 1);
 }
 
 .arrowNotif {
   position: absolute;
   top: 50px;
+  right: 210px;
   width: 0;
   height: 0;
-  border-left: 20px solid transparent;
-  border-right: 20px solid transparent;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
 
-  border-bottom: 20px solid white;
+  border-bottom: 10px solid white;
+}
+
+.table-bordered {
+    border: 1px solid rgba(255,255,255,.87);
+    background-color: #fff;
+  }
+
+.mat-dialog-container {
+    box-shadow: 0 11px 15px -7px rgba(0,0,0,.2), 0 24px 38px 3px rgba(0,0,0,.14), 0 9px 46px 8px rgba(0,0,0,.12);
+    display: unset;
+    padding: 0px;
+    border-radius: 2px;
+    box-sizing: border-box;
+    overflow: auto;
+    max-width: 80vw;
+    outline: 0;
+    width: 100%;
+    height: 100%;
 }
