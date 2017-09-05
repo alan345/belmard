@@ -22,14 +22,12 @@
 
   <div class="row">
     <div class="col-md-12">
-      <div class="card">
-        <div class="card-block clearfix">
 
           <!-- <md-tab-group (selectChange)="onSelectChange($event)" class="beigeback admin-users">
           <md-tab label="Team" data-isExternalUser="false"></md-tab>
           <md-tab label="External Contacts" data-isExternalUser="true"></md-tab>
         </md-tab-group> -->
-          <table class="table table-hover">
+          <table class="table table-hover table-responsive">
             <thead>
               <tr>
                 <th class="centre tdunder">Type</th>
@@ -54,7 +52,7 @@
                     {{companie.nameCompanie}}
                   </div>
                 </td>
-                <td class="centre tdunder btn btn-outline-info"></td>
+                <td class="centre tdunder"></td>
               </tr>
             </tbody>
           </table>
@@ -65,8 +63,7 @@
             <!-- <div [hidden]="!loading">Loading...</div>
             <pagination-controls (pageChange)="getPage($event)" id="server" class="change-page"></pagination-controls> -->
           </div>
-        </div>
-      </div>
+
     </div>
   </div>
 </div>
