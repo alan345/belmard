@@ -14,12 +14,12 @@ export class TranslateService {
 
 
 
-	public get currentLang() {
-    return this._currentLang
-    // return 'fr'
-    // return this.authService.getLanguage()
-    // return this._currentLang || this._defaultLang;
-  }
+	// public get currentLang() {
+  //   return this._currentLang
+  //   // return 'fr'
+  //   // return this.authService.getLanguage()
+  //   // return this._currentLang || this._defaultLang;
+  // }
 
   // public setDefaultLang(lang: string) {
   //   this._defaultLang = lang;
@@ -30,22 +30,25 @@ export class TranslateService {
   }
 
   // inject our translations
-	constructor(@Inject(TRANSLATIONS) private _translations: any, private authService: AuthService) {
-    this._currentLang = this.authService.getLanguage()
+	constructor(
+		@Inject(TRANSLATIONS) private _translations: any,
+		private authService: AuthService
+	) {
+    	// this._currentLang = this.authService.getLanguage()
 	}
 
-	public use(lang: string): void {
-		// set current language
-		this._currentLang = lang;
-		this.onLangChanged.emit(lang);
-	}
+	// public use(lang: string): void {
+	// 	// set current language
+	// 	this._currentLang = lang;
+	// 	this.onLangChanged.emit(lang);
+	// }
 
 	private translate(key: string): string {
     let translation = key;
-
+		let langAuth = this.authService.getLanguage()
     // found in current language
-    if (this._translations[this.currentLang] && this._translations[this.currentLang][key]) {
-      return this._translations[this.currentLang][key];
+    if (this._translations[langAuth] && this._translations[langAuth][key]) {
+      return this._translations[langAuth][key];
       }
 
     // fallback disabled
@@ -54,9 +57,9 @@ export class TranslateService {
     }
 
     // found in default language
-    if (this._translations[this._defaultLang] && this._translations[this._defaultLang][key]) {
-      return this._translations[this._defaultLang][key];
-    }
+    // if (this._translations[this._defaultLang] && this._translations[this._defaultLang][key]) {
+    //   return this._translations[this._defaultLang][key];
+    // }
 
     // not found
     return translation;

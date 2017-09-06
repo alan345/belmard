@@ -41,7 +41,7 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
 
-    this.translateService.use(this.authService.getLanguage());
+    // this.translateService.use(this.authService.getLanguage());
     this.nameObjectSing = this.translateService.instant(<string>this.nameObject)
     this.nameObjectPlur = this.translateService.instant(<string>this.nameObject)
 
