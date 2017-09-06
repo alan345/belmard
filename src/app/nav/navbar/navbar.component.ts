@@ -118,8 +118,9 @@ export class NavbarComponent implements OnInit {
       this.dialogRef.close();
 
     this.dialogRef  = this.mdDialog.open(ListNewObjDialogComponent, {
-      height: '149px',
+      height: '165px',
       width: '300px',
+
       position : {
         top: "60px",
         right:"60px",
