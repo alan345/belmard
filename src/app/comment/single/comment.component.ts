@@ -99,7 +99,8 @@ export class CommentComponent implements OnInit {
   save() {
     if(!this.fetchedComment.commentName)
       return
-    this.fetchedComment.quotes = this.search.quoteId
+    if(this.search.quoteId) this.fetchedComment.quotes = this.search.quoteId
+    if(this.search.projectId) this.fetchedComment.projects = this.search.projectId
     // this.fetchedComment.datePaiement = this.authService.HTMLDatetoIsoDate(this.fetchedComment.datePaiementString)
     // if(this.fetchedComment._id) {
     //   this.commentService.updateComment(this.fetchedComment)
