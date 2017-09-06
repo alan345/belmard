@@ -1,20 +1,11 @@
-<!-- <div class="row">
-  <div class="col-md-1"></div>
-  <div class="col-md-2"><button type="button" class="btn btn-warning" (click)="goBack()"><i class="fa fa-chevron-left"><a> Retour</a></i></button></div>
-  <div class="col-md-6">
-    <h3 class="title">Ajouter / Editer Fournisseur</h3></div>
-  <div class="col-md-3"></div>
-</div> -->
+
 <div class="container">
-  <app-header [showBackButton]="true" [nameObject]="'right'" [showCreateButton]="false"></app-header>
-
-
-  <h4 class="dspl-nn">id: {{fetchedRight._id}}</h4>
-  <button type="button" class="btn btn-outline-primary" (click)="setAllRights()">setAllRights</button>
+  <h3>{{'Right'| translate}}</h3>
+  <h4>id: {{fetchedRight._id}}</h4>
+  <button type="button" class="btn btn-outline-primary" (click)="setAllRights()">{{'Set all Rights' | translate}}</button>
   <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
 
 
-    <!-- <div class="categ0" *ngFor="let right of fetchedRight.rights; let i = index;"> -->
     <input type="text" class="form-control col-md-3" placeholder="Name Right Profile" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.nameRight">
 
     <button type="button" class="btn btn-success" (click)="addRight(1,0,0,0)"><i class="fa fa-plus"></i> Add Type</button>
@@ -41,6 +32,7 @@
             <td class="tdbtn1">
 
               <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].access[k].typeAccess">
+                <option *ngIf="fetchedRight.detailRight.permissions[j].namePermission == 'companie'" [attr.value]="'readMyProfile'">{{'Read My Profile' | translate}}</option>
                 <option [attr.value]="'read'">{{'Read' | translate}}</option>
                 <option [attr.value]="'write'">{{'write' | translate}}</option>
                 <option [attr.value]="'notification'">{{'Get Notifications' | translate}}</option>

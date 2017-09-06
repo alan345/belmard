@@ -13,33 +13,26 @@
     </div>
   </div>
 
-<div class="row">
-  <div class="col-md-4">
+  <div class="row">
+    <div class="col-md-4">
       <table class="table table-hover">
-          <thead>
-            <tr>
-              <th class="centre tdunder">Name</th>
+        <thead>
+          <tr>
+            <th class="centre tdunder">Name</th>
+          </tr>
+        </thead>
+        <tbody class="clienttbl">
+          <tr *ngFor="let right of fetchedRights" [routerLink]="['/right/' + right._id]" routerLinkActive="active">
+            <td class="centre tdunder">{{right.detailRight.nameRight}}</td>
+          </tr>
+        </tbody>
+      </table>
 
-
-            </tr>
-          </thead>
-          <tbody class="clienttbl">
-            <tr *ngFor="let right of fetchedRights" [routerLink]="['/right/' + right._id]" routerLinkActive="active">
-
-              <td class="centre tdunder">{{right.detailRight.nameRight}}</td>
-
-            </tr>
-          </tbody>
-        </table>
-
-        <div>
-          <md-paginator
-            [length]="paginationData.totalItems"
-            [pageSize]="paginationData.itemsPerPage"
-            (page)="getPage($event.pageIndex*1+1)">
-          </md-paginator>
-<app-loadingInApp *ngIf="loading"></app-loadingInApp>
-        </div>
-     </div>
+      <div>
+        <md-paginator [length]="paginationData.totalItems" [pageSize]="paginationData.itemsPerPage" (page)="getPage($event.pageIndex*1+1)">
+        </md-paginator>
+        <app-loadingInApp *ngIf="loading"></app-loadingInApp>
+      </div>
     </div>
+  </div>
 </div>
