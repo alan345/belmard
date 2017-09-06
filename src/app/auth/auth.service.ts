@@ -221,8 +221,8 @@ export class AuthService {
     })
   }
 
-  showObjHTML(nameObject) {
-    let typeAccess = 'read'
+  showObjHTML(nameObject, typeAccess) {
+    // let typeAccess = 'read'
     // console.log(this.isCurentUserHasAccess(nameObject, typeAccess))
     // console.log(this.isCurrentUserIsInSubPeriod())
     // console.log(this.isCurrentUserHasCompanie())

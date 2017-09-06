@@ -181,8 +181,8 @@ export class NavbarComponent implements OnInit {
   isCurrentUserIsInSubPeriod() {
     return this.authService.isCurrentUserIsInSubPeriod()
   }
-  showObjHTML(nameObject) {
-    return this.authService.showObjHTML(nameObject)
+  showObjHTML(nameObject, typeAccess) {
+    return this.authService.showObjHTML(nameObject, typeAccess)
   }
   // isCurentUserHasAccess(nameObject, typeAccess) {
   //   return this.authService.isCurentUserHasAccess(nameObject, typeAccess);

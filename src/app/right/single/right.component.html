@@ -31,12 +31,27 @@
           <tr>
             <td class="tdbtn1">
 
-              <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].access[k].typeAccess">
+              <div *ngFor="let typesRight of typesRights">
+                <div *ngIf="typesRight.value === fetchedRight.detailRight.permissions[j].namePermission">
+                  <!-- {{typesRight.typeAccess|json}} -->
+
+
+                  <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].access[k].typeAccess">
+                    <option *ngFor="let n of typesRight.typeAccess" [attr.value]="n.value">{{n.name}}</option>
+
+                    <!-- <option [attr.value]="'read'">{{'Read' | translate}}</option>
+                    <option [attr.value]="'write'">{{'write' | translate}}</option>
+                    <option [attr.value]="'notification'">{{'Get Notifications' | translate}}</option> -->
+                  </select>
+                </div>
+              </div>
+
+              <!-- <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].access[k].typeAccess">
                 <option *ngIf="fetchedRight.detailRight.permissions[j].namePermission == 'companie'" [attr.value]="'readMyProfile'">{{'Read My Profile' | translate}}</option>
                 <option [attr.value]="'read'">{{'Read' | translate}}</option>
                 <option [attr.value]="'write'">{{'write' | translate}}</option>
                 <option [attr.value]="'notification'">{{'Get Notifications' | translate}}</option>
-              </select>
+              </select> -->
 
             </td>
             <td class="tdbtn7">
