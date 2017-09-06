@@ -6,10 +6,8 @@
     <table class="table table-bordered table-hover2">
       <tr>
         <td class="tdpop">
-          <a [routerLink]="['/user/list/false']" routerLinkActive="active2">
-            <i class="fa fa-users fa-2x" aria-hidden="true">
-            </i>Client
-          </a>
+          <app-newObjDialog icone="fa fa-users fa-2x" (saved)="saved($event)" [typeObj]="'user'"></app-newObjDialog>
+          Client
         </td>
         <td class="tdpop"><a [routerLink]="['/user/list/false']" routerLinkActive="active2"><i class="fa fa-users fa-2x" aria-hidden="true"></i>Produit</a></td>
         <td class="tdpop"><a [routerLink]="['/user/list/false']" routerLinkActive="active2"><i class="fa fa-users fa-2x" aria-hidden="true"></i>RDV</a></td>

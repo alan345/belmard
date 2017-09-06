@@ -16,8 +16,8 @@ export class ListNewObjDialogComponent {
 
   constructor() {}
 
-  // saved(data) {
-  //   this.dialogRef.close(data)
-  // }
+  saved(data) {
+    // this.dialogRef.close(data)
+  }
 
 }
