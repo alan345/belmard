@@ -104,9 +104,9 @@ export class MainPageHomeComponent implements OnInit {
     //   this.router.navigate([path]);
     // }
   }
-  showObjHTML(nameObject, typeAccess) {
-    return this.authService.showObjHTML(nameObject, typeAccess)
-  }
+  // showObjHTML(nameObject, typeAccess) {
+  //   return this.authService.showObjHTML(nameObject, typeAccess)
+  // }
 
   ngOnInit() {
     //this.companieService.getCompanieByUserId(this.authService.currentUser.userId)

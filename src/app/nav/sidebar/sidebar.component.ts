@@ -91,10 +91,10 @@ export class SidebarComponent implements OnInit {
   isCurrentUserIsInSubPeriod() {
     return this.authService.isCurrentUserIsInSubPeriod()
   }
-  showObjHTML(nameObject, typeAccess) {
-    return this.authService.showObjHTML(nameObject, typeAccess)
-  }
-  
+  // showObjHTML(nameObject, typeAccess) {
+  //   return this.authService.showObjHTML(nameObject, typeAccess)
+  // }
+
   // isCurentUserHasAccess(nameObject, typeAccess) {
   //   return this.authService.isCurentUserHasAccess(nameObject, typeAccess);
   // }
