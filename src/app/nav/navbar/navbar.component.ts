@@ -1,18 +1,18 @@
-import {Component, OnInit, Input} from '@angular/core';
-import {AuthService} from '../../auth/auth.service';
-import {AdminService} from '../../admin/services/admin.service';
-import {Router} from '@angular/router';
-import { UserService} from '../../user/user.service';
-import { User} from '../../user/user.model';
-import { CompanieGuardService} from '../../companie/companieGuard.service'
-import { PaiementGuardService} from '../../user/paiement/paiementGuard.service'
-import { ChangeDetectionStrategy} from '@angular/core';
-import { GlobalEventsManager} from '../../globalEventsManager';
-import { NotificationService} from '../../notification/notification.service';
-import { Notification} from '../../notification/notification.model';
-import {Observable} from 'rxjs/Rx';
+import { Component, OnInit, Input } from '@angular/core';
+import { AuthService } from '../../auth/auth.service';
+import { AdminService } from '../../admin/services/admin.service';
+import { Router } from '@angular/router';
+import { UserService } from '../../user/user.service';
+import { User } from '../../user/user.model';
+import { CompanieGuardService } from '../../companie/companieGuard.service'
+import { PaiementGuardService } from '../../user/paiement/paiementGuard.service'
+import { ChangeDetectionStrategy } from '@angular/core';
+import { GlobalEventsManager } from '../../globalEventsManager';
+import { NotificationService } from '../../notification/notification.service';
+import { Notification } from '../../notification/notification.model';
+import { Observable } from 'rxjs/Rx';
 import { NotificationDialogComponent } from '../../notification/single/dialog/notificationDialog.component';
-import {ListNewObjDialogComponent} from './newObj/dialog/listNewObjDialog.component'
+import { ListNewObjDialogComponent } from './newObj/dialog/listNewObjDialog.component'
 
 
 import { MdDialog } from '@angular/material';
@@ -28,12 +28,12 @@ import { MdDialog } from '@angular/material';
 export class NavbarComponent implements OnInit {
   @Input() sidenav: any;
   showNavBar: boolean = false;
- // private userId: string = localStorage.getItem('userId');
+  // private userId: string = localStorage.getItem('userId');
   // private userId: string;
   fetchedUser: User = new User();
   fetchedNotifications: Notification[] = [];
-  notificationsNotRead: number=0;
-  dialogRef:any
+  notificationsNotRead: number = 0;
+  dialogRef: any
 
   constructor(
     private globalEventsManager: GlobalEventsManager,
@@ -46,12 +46,12 @@ export class NavbarComponent implements OnInit {
     // private companieGuardService: CompanieGuardService,
     // private paiementGuardService: PaiementGuardService,
   ) {
-    this.globalEventsManager.showNavBarEmitter.subscribe((mode)=>{
-        // mode will be null the first time it is created, so you need to igonore it when null
-        if (mode !== null) {
-          this.showNavBar = mode;
-          this.fetchedUser = this.authService.getCurrentUser()
-        }
+    this.globalEventsManager.showNavBarEmitter.subscribe((mode) => {
+      // mode will be null the first time it is created, so you need to igonore it when null
+      if (mode !== null) {
+        this.showNavBar = mode;
+        this.fetchedUser = this.authService.getCurrentUser()
+      }
     });
   }
 
@@ -77,63 +77,71 @@ export class NavbarComponent implements OnInit {
   getNotifications(page: number, search: any) {
     this.notificationService.getNotifications(page, search)
       .subscribe(
-        res => {
-          this.fetchedNotifications =  res.data
-          this.notificationsNotRead = 0
-          this.fetchedNotifications.forEach(notif=> {
-            if(notif.isRead === false) {
-              this.notificationsNotRead++
-            }
-          })
-        },
-        error => {
-          console.log(error);
-        }
+      res => {
+        this.fetchedNotifications = res.data
+        this.notificationsNotRead = 0
+        this.fetchedNotifications.forEach(notif => {
+          if (notif.isRead === false) {
+            this.notificationsNotRead++
+          }
+        })
+      },
+      error => {
+        console.log(error);
+      }
       );
   }
 
   openNotifDialog() {
-    if(this.dialogRef)
+    if (this.dialogRef) {
       this.dialogRef.close();
-    this.cleanNotifications();
-    this.dialogRef = this.mdDialog.open(NotificationDialogComponent, {
-      height: '200px',
-      width: '300px',
-      position : {
-        top: "60px",
-        right:"80px",
-      },
-      data: {
-        // search: this.search
-      }
-    });
+      this.dialogRef = undefined
+    } else {
+      this.cleanNotifications();
+      this.dialogRef = this.mdDialog.open(NotificationDialogComponent, {
+        height: '200px',
+        width: '300px',
+        position: {
+          top: "60px",
+          right: "80px",
+        },
+        data: {
+          // search: this.search
+        }
+      });
 
-    this.dialogRef.afterClosed().subscribe(result => {
-      // this.saved.emit(result)
-    })
+      this.dialogRef.afterClosed().subscribe(result => {
+        // this.saved.emit(result)
+      })
+    }
   }
 
   openNewObejcts() {
-    if(this.dialogRef)
+    if (this.dialogRef) {
       this.dialogRef.close();
+      this.dialogRef = undefined
+    } else {
+      this.dialogRef = this.mdDialog.open(ListNewObjDialogComponent, {
+        height: '165px',
+        width: '300px',
+        id: 'ListNewObjDialogComponent',
+        position: {
+          top: "60px",
+          right: "60px",
+        },
+        data: {
+          // search: this.search
+        }
+      });
 
-    this.dialogRef  = this.mdDialog.open(ListNewObjDialogComponent, {
-      height: '165px',
-      width: '300px',
 
-      position : {
-        top: "60px",
-        right:"60px",
-      },
-      data: {
-        // search: this.search
-      }
-    });
+      this.dialogRef.afterClosed().subscribe(result => {
+        // this.saved.emit(result)
+      })
+    }
 
 
-    this.dialogRef.afterClosed().subscribe(result => {
-      // this.saved.emit(result)
-    })
+
   }
 
 
@@ -192,8 +200,8 @@ export class NavbarComponent implements OnInit {
     this.globalEventsManager.showNavBar(false);
     this.authService.logout();
     let this2 = this
-    setTimeout(function(){
-        this2.router.navigate(['/user/login']);
+    setTimeout(function() {
+      this2.router.navigate(['/user/login']);
     }, 150);
 
   }

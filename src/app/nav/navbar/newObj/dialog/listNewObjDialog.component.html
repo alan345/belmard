@@ -7,15 +7,33 @@
       <tr>
         <td class="tdpop">
           <app-newObjDialog icone="fa fa-users fa-2x" (saved)="saved($event)" [typeObj]="'user'"></app-newObjDialog>
-          Client
+          {{'Client' | translate}}
         </td>
-        <td class="tdpop"><a [routerLink]="['/user/list/false']" routerLinkActive="active2"><i class="fa fa-users fa-2x" aria-hidden="true"></i>Produit</a></td>
-        <td class="tdpop"><a [routerLink]="['/user/list/false']" routerLinkActive="active2"><i class="fa fa-users fa-2x" aria-hidden="true"></i>RDV</a></td>
+        <td class="tdpop">
+          <app-newObjDialog icone="fa fa-users fa-2x" (saved)="saved($event)" [typeObj]="'product'"></app-newObjDialog>
+          {{'Product' | translate}}
+        </td>
+        <td class="tdpop">
+          <a [routerLink]="['/userCalendar']">
+            <i class="fa fa-users fa-2x" aria-hidden="true"></i>
+            {{'Calendar' | translate}}
+          </a>
+        </td>
       </tr>
       <tr>
-        <td class="tdpop"><a [routerLink]="['/user/list/false']" routerLinkActive="active2"><i class="fa fa-users fa-2x" aria-hidden="true"></i>Devis</a></td>
-        <td class="tdpop"><a [routerLink]="['/user/list/false']" routerLinkActive="active2"><i class="fa fa-users fa-2x" aria-hidden="true"></i>Projet</a></td>
-        <td class="tdpop"><a [routerLink]="['/user/list/false']" routerLinkActive="active2"><i class="fa fa-users fa-2x" aria-hidden="true"></i>Facture</a></td>
+        <td class="tdpop">
+          <a [routerLink]="['/quote/']">
+            <i class="fa fa-users fa-2x" aria-hidden="true"></i>
+            {{'Quote' | translate}}</a>
+          </td>
+        <td class="tdpop">
+          <app-newObjDialog icone="fa fa-users fa-2x" (saved)="saved($event)" [typeObj]="'project'"></app-newObjDialog>
+          {{'Project' | translate}}
+        </td>
+        <td class="tdpop">
+          <app-newObjDialog icone="fa fa-users fa-2x" (saved)="saved($event)" [typeObj]="'paiementQuote'"></app-newObjDialog>
+          {{'Paiement' | translate}}
+        </td>
       </tr>
     </table>
   </div>
