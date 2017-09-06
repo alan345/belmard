@@ -7,37 +7,37 @@ var express = require('express'),
     fs      = require('fs'),
     jwt     = require('jsonwebtoken')
 
-
-
-      // SOCKET.io
-      var app = express()
-      const http = require('http').Server(app);
-      const io = require('socket.io')(http);
-      io.on('connection', (socket) => {
-
-          console.log('user connected');
-          io.emit('message', { type: 'new-message', text: 'alan' });
-          io.emit('message', { type: 'new-message', text: 'alan' });
-          io.emit('message', { type: 'new-message', text: 'alan' });
-          io.emit('message', { type: 'new-message', text: 'alan' });
-          io.emit('message', { type: 'new-message', text: 'alan' });
-
-          
-          socket.on('disconnect', function() {
-              console.log('user disconnected');
-          });
-
-          socket.on('add-message', (message) => {
-              io.emit('message', { type: 'new-message', text: message });
-              // Function above that stores the message in the database
-              // databaseStore(message)
-              console.log('here you must save' + message)
-          });
-      });
-      http.listen(5000, () => {
-          console.log('Server SOCKET.io started on port 5000');
-      });
-      // SOCKET.io
+      // 
+      //
+      // // SOCKET.io
+      // var app = express()
+      // const http = require('http').Server(app);
+      // const io = require('socket.io')(http);
+      // io.on('connection', (socket) => {
+      //
+      //     console.log('user connected');
+      //     io.emit('message', { type: 'new-message', text: 'alan' });
+      //     io.emit('message', { type: 'new-message', text: 'alan' });
+      //     io.emit('message', { type: 'new-message', text: 'alan' });
+      //     io.emit('message', { type: 'new-message', text: 'alan' });
+      //     io.emit('message', { type: 'new-message', text: 'alan' });
+      //
+      //
+      //     socket.on('disconnect', function() {
+      //         console.log('user disconnected');
+      //     });
+      //
+      //     socket.on('add-message', (message) => {
+      //         io.emit('message', { type: 'new-message', text: message });
+      //         // Function above that stores the message in the database
+      //         // databaseStore(message)
+      //         console.log('here you must save' + message)
+      //     });
+      // });
+      // http.listen(5000, () => {
+      //     console.log('Server SOCKET.io started on port 5000');
+      // });
+      // // SOCKET.io
 
 
 

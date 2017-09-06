@@ -46,7 +46,7 @@ router.use('/', function (req, res, next) {
             error: {message: 'The user was not found'}
           })
         }
-        if(!shared.isCurentUserHasAccess(doc.rights, 'companie', 'comment')) {
+        if(!shared.isCurentUserHasAccess(doc, 'companie', 'comment')) {
           return res.status(404).json({
             title: 'No rights',
             error: {message: 'No rights'}
@@ -65,7 +65,7 @@ router.use('/', function (req, res, next) {
 
 //update
 router.put('/:id', function (req, res, next) {
-  if(!shared.isCurentUserHasAccess(req.user.rights, nameObject, 'write')) {
+  if(!shared.isCurentUserHasAccess(req.user, nameObject, 'write')) {
     return res.status(404).json({ title: 'No rights', error: {message: 'No rights'} })
   }
   Comment.findById(({_id: req.params.id}), function (err, item) {
@@ -97,7 +97,7 @@ router.put('/:id', function (req, res, next) {
 })
 
 router.post('/', function (req, res, next) {
-  if(!shared.isCurentUserHasAccess(req.user.rights, nameObject, 'write')) {
+  if(!shared.isCurentUserHasAccess(req.user, nameObject, 'write')) {
     return res.status(404).json({ title: 'No rights', error: {message: 'No rights'} })
   }
   if(!req.user.ownerCompanies.length) {
@@ -256,7 +256,7 @@ router.get('/:id', function (req, res, next) {
 
 
 router.delete('/:id', function (req, res, next) {
-  if(!shared.isCurentUserHasAccess(req.user.rights, nameObject, 'write')) {
+  if(!shared.isCurentUserHasAccess(req.user, nameObject, 'write')) {
     return res.status(404).json({ title: 'No rights', error: {message: 'No rights'} })
   }
   Comment.findById((req.params.id), function (err, item) {

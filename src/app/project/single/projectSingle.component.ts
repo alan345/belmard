@@ -103,9 +103,8 @@ export class ProjectSingleComponent implements OnInit {
            this.getUser(params['idClient'])
         if(params['selectedIndex'])
           this.selectedIndex0 = params['selectedIndex']
-
-          this.getItemSteps()
       }
+      this.getItemSteps()
     })
 
   }
