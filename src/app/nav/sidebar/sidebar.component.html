@@ -29,7 +29,7 @@
                     {{'Customers'|translate}}</a>
                 </td>
               </tr>
-              <tr *ngIf="showObjHTML('companie', 'read')"">
+              <tr *ngIf="showObjHTML('companie', 'read')">
                 <td class="nav-item subItem">
                   <a class="nav-link" [routerLink]="['/companie']" routerLinkActive="active">{{'Suppliers'|translate}}</a>
                 </td>
@@ -106,7 +106,7 @@
                   <a class="nav-link" [routerLink]="['/project']" routerLinkActive="active"> {{'Projects'|translate}}</a>
                 </td>
               </tr>
-              <tr *ngIf="showObjHTML('task', 'read')"">
+              <tr *ngIf="showObjHTML('task', 'read')">
                 <td class="nav-item subItem">
                   <a class="nav-link" [routerLink]="['/task']" routerLinkActive="active">{{'Tasks'|translate}}</a>
                 </td>
@@ -197,11 +197,11 @@
           <div class="panel-body">
             <table class="table">
               <tr>
-                <td *ngIf="showObjHTML('companie', 'read')"" class="nav-item subItem">
+                <td *ngIf="showObjHTML('companie', 'read')" class="nav-item subItem">
                   <a class="nav-link" [routerLink]="['/companie/mine']" routerLinkActive="active">{{'My company'|translate}}</a>
                 </td>
               </tr>
-              <tr *ngIf="showObjHTML('right', 'read')"">
+              <tr *ngIf="showObjHTML('right', 'read')">
                 <td class="nav-item subItem">
                   <a class="nav-link" [routerLink]="['/right']" routerLinkActive="active">{{'Rights'|translate}}</a>
                 </td>
