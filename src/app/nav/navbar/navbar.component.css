@@ -53,17 +53,7 @@
   background-color: rgba(148, 17, 17, 1);
 }
 
-.arrowNotif {
 
-  position: absolute;
-  top: 50px;
-  right: 210px;
-  width: 0;
-  height: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-bottom: 10px solid white;
-}
 
 .table-bordered {
   border: 1px solid rgba(255, 255, 255, .87);

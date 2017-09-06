@@ -303,3 +303,22 @@ margin-bottom: 5px;
     text-align: center;
     /*overflow:hidden!important;*/
 }
+
+
+.arrowNotifNewDialog {
+  position: absolute;
+  top: 50px;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid white;
+}
+
+
+.positionNotifArrow {
+  right: 230px;
+}
+.positionNewObjArrow {
+  right: 180px;
+}

@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { MdDialogRef} from '@angular/material';
 // import { ListNewObjComponent }  from '../listNewObj.component';
-
+import { AuthService} from '../../../../auth/auth.service';
 
 
 @Component({
@@ -14,7 +14,9 @@ export class ListNewObjDialogComponent {
   // @ViewChild(ProductSingleComponent)
   // private productSingleComponent: ProductSingleComponent;
 
-  constructor() {}
+  constructor(
+    private authService: AuthService,
+  ) {}
 
   saved(data) {
     // this.dialogRef.close(data)
