@@ -4,7 +4,7 @@
       <h4> {{'Rights' | translate}}</h4>
     </div>
     <div class="p-2">
-      <app-header [nameObject]="'right'"></app-header>
+      <app-newObjDialog icone="fa fa-plus-square fa-2x ml" [search]="search" (saved)="saved($event)" [typeObj]="'right'"></app-newObjDialog>
     </div>
   </div>
   <div class="d-flex flex-row">
@@ -38,8 +38,8 @@
             [pageSize]="paginationData.itemsPerPage"
             (page)="getPage($event.pageIndex*1+1)">
           </md-paginator>
-<app-loadingInApp *ngIf="loading"></app-loadingInApp>          
+<app-loadingInApp *ngIf="loading"></app-loadingInApp>
         </div>
-     </div> 
+     </div>
     </div>
 </div>

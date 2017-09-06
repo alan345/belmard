@@ -4,7 +4,7 @@
       <h4> {{'Projects' | translate}}</h4>
     </div>
     <div class="p-2">
-      <app-header [showHeader]="showHeader" [openInDialog]=true [nameObject]="'project'"></app-header>
+      <app-newObjDialog icone="fa fa-plus-square fa-2x ml" [search]="search" (saved)="saved($event)" [typeObj]="'project'"></app-newObjDialog>
     </div>
   </div>
   <div class="d-flex flex-row">

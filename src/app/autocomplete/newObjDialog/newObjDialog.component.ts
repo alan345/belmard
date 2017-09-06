@@ -1,7 +1,7 @@
-import {Component, OnInit, Input, EventEmitter, Output} from '@angular/core';
-import {AuthService} from '../../auth/auth.service';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { AuthService } from '../../auth/auth.service';
 import { Location } from '@angular/common';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { TranslateService } from '../../translate/translate.service';
 import { UserDialogComponent } from '../../user/singleUser/dialog/userDialog.component';
 import { CompanieDialogComponent } from '../../companie/single/dialog/companieDialog.component';
@@ -38,38 +38,48 @@ export class newObjDialogComponent implements OnInit {
     private location: Location,
     private translateService: TranslateService,
     public mdDialog: MdDialog,
-  ) {}
+  ) { }
 
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   openDialog(typeObj: string) {
-    let dialogComp: any
-    if(typeObj == 'user')
-      dialogComp = UserDialogComponent
+    if (typeObj === 'quote') {
+      this.router.navigate(['/quote/new']);
+    } else if (typeObj === 'right') {
+      this.router.navigate(['/right/new']);
+    } else {
 
-    if(typeObj == 'companie')
-      dialogComp = CompanieDialogComponent
+      let dialogComp: any
+      if (typeObj == 'user')
+        dialogComp = UserDialogComponent
 
-    if(typeObj == 'project')
-      dialogComp = ProjectDialogComponent
+      if (typeObj == 'companie')
+        dialogComp = CompanieDialogComponent
 
-    if(typeObj == 'paiementQuote')
-      dialogComp = PaiementQuoteDialogComponent
+      if (typeObj == 'project')
+        dialogComp = ProjectDialogComponent
 
-    if(typeObj == 'product')
-      dialogComp = ProductDialogComponent
+      if (typeObj == 'paiementQuote')
+        dialogComp = PaiementQuoteDialogComponent
 
-    let dialogRef = this.mdDialog.open(dialogComp, {
-      height: '500px',
-      data: {
-        search: this.search
-      }
-    });
+      if (typeObj == 'product')
+        dialogComp = ProductDialogComponent
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.saved.emit(result)
-    })
+      let dialogRef = this.mdDialog.open(dialogComp, {
+        height: '500px',
+        data: {
+          search: this.search
+        }
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+        this.saved.emit(result)
+      })
+    }
+
+
+
   }
 
 }
