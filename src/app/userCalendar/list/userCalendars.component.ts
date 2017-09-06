@@ -1,15 +1,15 @@
-import {Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, Injectable, NgModule} from '@angular/core';
-import {AuthService} from '../../auth/auth.service';
-import {UserCalendarService} from '../userCalendar.service';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, Injectable, NgModule } from '@angular/core';
+import { AuthService } from '../../auth/auth.service';
+import { UserCalendarService } from '../userCalendar.service';
 
-import {UserCalendar, SearchData} from '../userCalendar.model';
-import {ToastsManager} from 'ng2-toastr';
+import { UserCalendar, SearchData } from '../userCalendar.model';
+import { ToastsManager } from 'ng2-toastr';
 
-import {MdDialog } from '@angular/material';
-import {Router, ActivatedRoute, Params } from '@angular/router';
+import { MdDialog } from '@angular/material';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
-import { FormBuilder, FormGroup} from '@angular/forms';
-import { UserService} from '../../user/user.service';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { UserService } from '../../user/user.service';
 
 import { DeleteDialog } from '../../deleteDialog/deleteDialog.component';
 import { User } from '../../user/user.model';
@@ -18,7 +18,7 @@ import { Product } from '../../product/product.model';
 import { Project } from '../../project/project.model';
 
 
-import {CalendarComponent} from 'ap-angular2-fullcalendar';
+import { CalendarComponent } from 'ap-angular2-fullcalendar';
 
 import { UserCalendarDialogComponent } from '../single/dialog/userCalendarDialog.component';
 import { SearchCalendarComponent } from './search/searchCalendar.component';
@@ -79,7 +79,7 @@ export class UserCalendarsComponent implements OnInit {
 
   loading: boolean = false;
   calendarOptions: Object = {
-    timezone:'local',
+    timezone: 'local',
     height: 550,
     selectable: true,
     firstDay: 1,
@@ -90,12 +90,20 @@ export class UserCalendarsComponent implements OnInit {
     allDaySlot: false,
     nowIndicator: true,
     businessHours: {
-      // days of week. an array of zero-based day of week integers (0=Sunday)
-      dow: [1, 2, 3, 4, 5], // Monday - Thursday
+      dow: [1, 2, 3, 4, 5],
 
-      start: '10:00', // a start time (10am in this example)
-      end: '18:00', // an end time (6pm in this example)
+      start: '10:00',
+      end: '18:00',
     },
+    header: {
+      left: 'title',
+      center: '',
+      right: 'today prev,next month,agendaWeek,listWeek'
+    },
+
+    defaultView: 'agendaWeek',
+    editable: true,
+    eventLimit: true, // allow "more" link when too many events
     dayClick: this.dayClick.bind(this),
     eventClick: this.eventClick.bind(this),
     eventMouseover: this.eventMouseover.bind(this),
@@ -109,74 +117,6 @@ export class UserCalendarsComponent implements OnInit {
     eventResizeStop: this.eventResizeStop.bind(this),
     eventResize: this.eventResize.bind(this),
     viewRender: this.viewRender.bind(this),
-    header: {
-      left: 'title',
-      center: '',
-      right: 'today prev,next month,agendaWeek,listWeek'
-    },
-    // fixedWeekCount : false,
-    // defaultDate: '2016-09-12',
-    defaultView: 'agendaWeek',
-    editable: true,
-    eventLimit: true, // allow "more" link when too many events
-    // events: this.events,
-
-    // events: [
-    //   {
-    //     title: 'All Day Event',
-    //     start: '2016-09-01'
-    //   },
-    //   {
-    //     title: 'Long Event',
-    //     start: '2016-09-07',
-    //     end: '2016-09-10'
-    //   },
-    //   {
-    //     id: 999,
-    //     title: 'Repeating Event',
-    //     start: '2016-09-09T16:00:00'
-    //   },
-    //   {
-    //     id: 999,
-    //     title: 'Repeating Event',
-    //     start: '2016-09-16T16:00:00'
-    //   },
-    //   {
-    //     title: 'Conference',
-    //     start: '2016-09-11',
-    //     end: '2016-09-13'
-    //   },
-    //   {
-    //     title: 'Meeting',
-    //     start: '2016-09-12T10:30:00',
-    //     end: '2016-09-12T12:30:00'
-    //   },
-    //   {
-    //     title: 'Lunch',
-    //     start: '2016-09-12T12:00:00'
-    //   },
-    //   {
-    //     title: 'Meeting',
-    //     start: '2016-09-12T14:30:00'
-    //   },
-    //   {
-    //     title: 'Happy Hour',
-    //     start: '2016-09-12T17:30:00'
-    //   },
-    //   {
-    //     title: 'Dinner',
-    //     start: '2016-09-12T20:00:00'
-    //   },
-    //   {
-    //     title: 'Birthday Party',
-    //     start: '2016-09-13T07:00:00'
-    //   },
-    //   {
-    //     title: 'Click for Google',
-    //     url: 'http://google.com/',
-    //     start: '2016-09-28'
-    //   }
-    // ]
   };
 
 
@@ -202,23 +142,23 @@ export class UserCalendarsComponent implements OnInit {
     // this.getUserCalendars(1, this.search)
   }
   ngOnInit() {
-  //   this.activatedRoute.params.subscribe((params: Params) => {
-  //     // if(params['idUserSearch']) {this.getUserSearch(params['idUserSearch'])}
-  //   // if(params['idProjectSearch']) {this.getProjectSearch(params['idProjectSearch'])}
-  //   // if(params['idClientSearch']) {this.getClientSearch(params['idClientSearch'])}
-  //   // if(params['typeUserSearch']) {this.selectTypeUser(params['typeUserSearch'])}
-  // })
+    //   this.activatedRoute.params.subscribe((params: Params) => {
+    //     // if(params['idUserSearch']) {this.getUserSearch(params['idUserSearch'])}
+    //   // if(params['idProjectSearch']) {this.getProjectSearch(params['idProjectSearch'])}
+    //   // if(params['idClientSearch']) {this.getClientSearch(params['idClientSearch'])}
+    //   // if(params['typeUserSearch']) {this.selectTypeUser(params['typeUserSearch'])}
+    // })
   }
 
-//   getUserSearch(id: string) {
-//   this.userService.getUser(id)
-//     .subscribe(
-//       res => {
-//         this.fetchedUserSearchs = [res]
-//       },
-//       error => { console.log(error) }
-//     )
-// }
+  //   getUserSearch(id: string) {
+  //   this.userService.getUser(id)
+  //     .subscribe(
+  //       res => {
+  //         this.fetchedUserSearchs = [res]
+  //       },
+  //       error => { console.log(error) }
+  //     )
+  // }
 
   getUserCalendarBySearch(searchData: SearchData) {
     this.searchData = searchData
@@ -230,10 +170,10 @@ export class UserCalendarsComponent implements OnInit {
     this.search.userSearch = ''
     this.search.projectSearch = ''
     this.searchData.fetchedUserSearchs.forEach(fetchedUserSearch => {
-        this.search.userSearch = fetchedUserSearch._id
+      this.search.userSearch = fetchedUserSearch._id
     });
     this.searchData.fetchedProjectSearchs.forEach(fetchedProjectSearch => {
-        this.search.projectSearch = fetchedProjectSearch._id
+      this.search.projectSearch = fetchedProjectSearch._id
     });
     // this.search.typeUser = searchData.search.typeUser
     // this.search.userSearch = searchData.search.userSearch
@@ -373,9 +313,9 @@ export class UserCalendarsComponent implements OnInit {
   viewRender(view, element) {
     this.search.startDate = view.activeRange.start
     this.search.endDate = view.activeRange.end
-    if(this.isSearchInitReady)
+    if (this.isSearchInitReady)
       this.resetSearchGetUserCalendars()
-      // this.getUserCalendars(1, this.search)
+    // this.getUserCalendars(1, this.search)
     // console.log(view)
   }
   eventResizeStart(event, jsEvent, view) {

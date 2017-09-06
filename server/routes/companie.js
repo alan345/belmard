@@ -195,9 +195,8 @@ router.post('/saveMyCompanie/', function (req, res, next) {
 
 
 
-
 router.get('/page/:page', function (req, res, next) {
-  var itemsPerPage = 5
+  var itemsPerPage = 15
   var currentPage = Number(req.params.page)
   var pageNumber = currentPage - 1
   var skip = (itemsPerPage * pageNumber)
