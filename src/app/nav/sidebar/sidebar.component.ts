@@ -94,6 +94,7 @@ export class SidebarComponent implements OnInit {
   showObjHTML(nameObject, typeAccess) {
     return this.authService.showObjHTML(nameObject, typeAccess)
   }
+  
   // isCurentUserHasAccess(nameObject, typeAccess) {
   //   return this.authService.isCurentUserHasAccess(nameObject, typeAccess);
   // }

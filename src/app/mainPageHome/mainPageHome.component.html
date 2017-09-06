@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div *ngIf="showObjHTML('userCalendar', 'read')" class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+    <div *ngIf="authService.showObjHTML('userCalendar', 'read')" class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="card">
         <div class="card-header">
           <i class="fa fa-calendar fa-4x" aria-hidden="true" data-bs-hover-animate="bounce" [routerLink]="['/calendar']"></i>
@@ -12,7 +12,7 @@
         </div>
       </div>
     </div>
-    <div *ngIf="showObjHTML('project', 'read')" class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+    <div *ngIf="authService.showObjHTML('project', 'read')" class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="card">
         <div class="card-header">
           <i class="fa fa-suitcase fa-4x" aria-hidden="true" data-bs-hover-animate="bounce" [routerLink]="['/project']"></i>
@@ -25,7 +25,7 @@
       </div>
     </div>
 
-    <div *ngIf="showObjHTML('product')" class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+    <div *ngIf="authService.showObjHTML('product')" class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="card">
         <div class="card-header">
           <i class="fa fa-server fa-4x" aria-hidden="true" data-bs-hover-animate="bounce" [routerLink]="['/product']"></i>
@@ -38,7 +38,7 @@
       </div>
     </div>
 
-    <div *ngIf="showObjHTML('user', 'read')" class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+    <div *ngIf="authService.showObjHTML('user', 'read')" class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="card">
         <div class="card-header">
           <i class="fa fa-user fa-4x" aria-hidden="true" data-bs-hover-animate="bounce" [routerLink]="['/user']"></i>
@@ -51,7 +51,7 @@
       </div>
     </div>
 
-    <div *ngIf="showObjHTML('quote', 'read')" class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+    <div *ngIf="authService.showObjHTML('quote', 'read')" class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="card">
         <div class="card-header">
           <i class="fa fa-calendar fa-4x" aria-hidden="true" data-bs-hover-animate="bounce" [routerLink]="['/quote']"></i>
@@ -64,7 +64,7 @@
       </div>
     </div>
 
-    <div *ngIf="showObjHTML('user', 'read')" class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
+    <div *ngIf="authService.showObjHTML('user', 'read')" class="col-xs-6 col-sm-6 col-md-4 col-lg-4">
       <div class="card">
         <div class="card-header">
           <i class="fa fa-user fa-4x" aria-hidden="true" data-bs-hover-animate="bounce" [routerLink]="['/user']"></i>
