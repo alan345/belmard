@@ -36,7 +36,7 @@ export class ListNewObjDialogComponent implements AfterViewInit  {
   }
 
   ngAfterViewInit() {
-    console.log('tata')
+
     // let this2 = this
     setTimeout(()=> this.shouldToggle = true, 410);
     // this.shouldToggle = !this.shouldToggle

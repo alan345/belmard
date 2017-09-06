@@ -4,10 +4,8 @@
   <app-header [showBackButton]="true" [nameObject]="'project'" [showCreateButton]=false [openInDialog]=true></app-header>
   <div>
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()" (keydown.enter)="$event.preventDefault()">
-      <div>
-        <div>
+      <div *ngIf="fetchedProject._id">
           <label>Id</label> {{fetchedProject._id}}
-        </div>
       </div>
 
       <div>
