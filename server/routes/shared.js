@@ -5,9 +5,8 @@ module.exports = {
 
   isCurentUserHasAccess(user, nameObject, typeAccess) {
     // console.log(user, nameObject, typeAccess)
-    if (!user.rights) {
-      return true;
-    }
+    if (!user.rights.length)
+      return true
 
     let rights = JSON.parse(JSON.stringify(user.rights))
     let permissionBool = false
@@ -19,7 +18,7 @@ module.exports = {
             if (singleAccess.typeAccess === typeAccess)
               permissionBool = true
           })
-          })
+        })
     })
     return permissionBool
   },

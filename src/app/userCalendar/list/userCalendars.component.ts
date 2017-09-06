@@ -199,6 +199,7 @@ export class UserCalendarsComponent implements OnInit {
 
       },
       error => {
+        this.loading = false;
         console.log(error);
       }
       );
