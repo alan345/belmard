@@ -1,9 +1,7 @@
 <div class="container">
-
   <div class="d-flex flex-row">
     <div class="p-2">
       <h4> {{'Products' | translate}}</h4>
-      
     </div>
     <div class="p-2">
       <app-newObjDialog icone="fa fa-plus-square fa-2x ml" [search]="search" (saved)="saved($event)" [typeObj]="'product'"></app-newObjDialog>
@@ -14,12 +12,8 @@
       <input class="form-control margebasse col-md-12" type="text" name="Search" placeholder="Rechercher" [(ngModel)]="search.search" (ngModelChange)="searchProducts()">
     </div>
   </div>
-
   <div class="row">
     <div class="col-md-12">
-
-
-
       <table class="table table-hover">
         <thead>
           <tr>
@@ -27,8 +21,9 @@
             <th class="centre tdunder">{{'Image' | translate}}</th>
             <th class="centre tdunder">{{'Name' | translate}}</th>
             <th class="centre tdunder">{{'Description' | translate}}</th>
-            <th class="centre tdunder">{{'Companie' | translate}}</th>
-            <th class="centre tdunder">{{'# Stock' | translate}}</th>
+            <th class="centre tdunder">{{'Description' | translate}}</th>
+
+
             <th class="centre tdunder">{{'Price without taxes' | translate}}</th>
           </tr>
         </thead>
@@ -39,11 +34,10 @@
                 <img *ngIf="i<=0" height="50px" class="img" src="./uploads/forms/{{singleForm.owner}}/{{singleForm.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
               </div>
             </td>
-            <td class="centre tdunder">
-              {{product.details.referenceName}}</td>
-            <td class="centre tdunder">{{product.details.description}}</td>
-            <td class="centre tdunder">{{product.details.price.costPrice}}</td>
             <td class="centre tdunder">{{product.details.referenceName}}</td>
+            <td class="centre tdunder">{{product.details.description}}</td>
+            <td class="centre tdunder">{{product.details.referenceName}}</td>
+            <td class="centre tdunder">{{product.details.price.costPrice}}</td>
             <td class="centre tdunder">{{product.details.price.costPrice}}</td>
 
           </tr>

@@ -1,6 +1,7 @@
 <div class="container">
-  {{'Product' | translate}}
-
+  <div class="row">
+    {{'Product' | translate}}
+  </div>
   <div class="row">
     <button (click)="changeCascade(i, -1, -1)" *ngFor="let itemStep of itemSteps;let i=index;" type="button" class="btn" [ngClass]="{'btn-success': i==selectedIndex0, '': i!=selectedIndex0}">
         {{itemStep.categ}}
@@ -37,8 +38,8 @@
           <label>{{'description' | translate}}</label>
           <input type="text" class="form-control col-md-10" formControlName="description" placeholder="description" [(ngModel)]="fetchedProduct.details.description">
         </div>
-        <app-autocomplete [typeAutocomplete]="'companie'" [title]="'Companie'" [singleChoice]="'true'" [arrayContent]="fetchedProduct.vendors" (getResultAutocomplete)="selectCompanie($event[0])">
-        </app-autocomplete>
+        <!-- <app-autocomplete [typeAutocomplete]="'companie'" [title]="'Companie'" [singleChoice]="'true'" [arrayContent]="fetchedProduct.vendors" (getResultAutocomplete)="selectCompanie($event[0])">
+        </app-autocomplete> -->
         <!-- <div class="form-group prmimg-cnt">
               <div *ngFor="let singleForm of fetchedProduct.forms">
                 <img height="100px" class="promo-img" src="./uploads/forms/{{singleForm.owner}}/{{singleForm.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
