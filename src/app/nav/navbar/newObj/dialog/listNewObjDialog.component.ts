@@ -1,22 +1,50 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, AfterViewInit} from '@angular/core';
 import { MdDialogRef} from '@angular/material';
 // import { ListNewObjComponent }  from '../listNewObj.component';
 import { AuthService} from '../../../../auth/auth.service';
-
+import {
+    trigger,
+    state,
+    style,
+    transition,
+    animate,
+    keyframes
+ } from '@angular/core';
 
 @Component({
   selector: 'edit-options-dialog',
   templateUrl: './listNewObjDialog.component.html',
-  styleUrls: ['../../navbar.component.css']
+  styleUrls: ['../../navbar.component.css'],
+  animations: [
+    trigger('toggleState', [
+      state('true' , style({  })),
+      state('false', style({ top: '55px', display: 'none' })),
+      // transition
+      transition('* => *', animate('100ms')),
+    ])
+  ],
 })
 
-export class ListNewObjDialogComponent {
+export class ListNewObjDialogComponent implements AfterViewInit  {
   // @ViewChild(ProductSingleComponent)
   // private productSingleComponent: ProductSingleComponent;
-
+  shouldToggle = false;
   constructor(
     private authService: AuthService,
-  ) {}
+  ) {
+
+  }
+
+  ngAfterViewInit() {
+    console.log('tata')
+    // let this2 = this
+    setTimeout(()=> this.shouldToggle = true, 410);
+    // this.shouldToggle = !this.shouldToggle
+  }
+
+  toggleMove() {
+      this.shouldToggle = !this.shouldToggle
+  }
 
   saved(data) {
     // this.dialogRef.close(data)

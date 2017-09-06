@@ -36,7 +36,8 @@
         </td>
       </tr>
     </table>
+    <button (click)="toggleMove()">Press me for animation</button>
   </div>
 </div>
 
-<div class="arrowNotifNewDialog positionNewObjArrow"></div>
+<div [@toggleState]="shouldToggle" class="arrowNotifNewDialog positionNewObjArrow"></div>
