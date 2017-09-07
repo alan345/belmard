@@ -20,6 +20,7 @@ var companie = new Schema({
     },
     rights: [{type: Schema.Types.ObjectId, ref: 'Right'}],
     address: {
+      country : {type: String, default: ['']},
       address : {type: String, default: ['']},
       city : {type: String, default: ['']},
       state : {type: String, default: ['']},
@@ -31,6 +32,7 @@ var companie = new Schema({
         timeEnd: {type: Number, default: [19]},
       }
     },
+    faxNumber: {type: String, default: ['']},
     phoneNumber: {type: String, default: ['']},
     nameCompanie: {type: String, default: ['']},
     typeCompanie: {type: String, default: ['salon']},

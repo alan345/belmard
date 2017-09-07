@@ -1,108 +1,107 @@
-
-  <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
-    <div class="container-fluid">
-      <div class="hdform">
-         <h3><i class="fa fa-user" aria-hidden="true"></i>{{'User' | translate}}</h3>
-      </div>
+<form [formGroup]="myForm" novalidate (ngSubmit)="save()">
+  <div class="container-fluid">
+    <div class="hdform">
+      <h3><i class="fa fa-user" aria-hidden="true"></i>{{'User' | translate}}</h3>
+    </div>
     <div class="row">
-      
-        <div class="row">
-          <div class="col">
 
-            <h5>{{'Identity' | translate}}</h5>
+      <div class="row">
+        <div class="col">
 
-           <div class="form-group">
+          <h5>{{'Identity' | translate}}</h5>
+
+          <div class="form-group">
             <select [(ngModel)]="fetchedUser.profile.title" class="form-control" formControlName="title">
             <option *ngFor="let n of titleArray" [value]="n">{{n}}</option>
             </select>
-           </div>
+          </div>
 
-           <div class="form-group">
+          <div class="form-group">
             <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedUser.profile.name" placeholder="Client's Name">
-           </div>
+          </div>
 
-           <div class="form-group">
+          <div class="form-group">
             <input type="text" class="form-control" formControlName="lastName" [(ngModel)]="fetchedUser.profile.lastName" placeholder="Client's lastName">
-           </div>
+          </div>
 
-           <div class="form-group">
+          <div class="form-group">
             <input type="text" class="form-control" formControlName="email" [(ngModel)]="fetchedUser.email" placeholder="Email">
-           </div>
+          </div>
 
-           <div class="form-group">
+          <div class="form-group">
             <input type="text" class="form-control" formControlName="phoneNumber" [(ngModel)]="fetchedUser.profile.phoneNumber" placeholder="Phone Number">
-           </div>
+          </div>
 
-           <div class="form-group">
+          <div class="form-group">
             <select [(ngModel)]="fetchedUser.profile.typeClient" class="form-control" formControlName="typeClient">
             <option *ngFor="let n of typeClientArray" [attr.value]="n">{{n}}</option>
             </select>
-           </div>
+          </div>
 
-           <div class="form-group">
+          <div class="form-group">
             <select [(ngModel)]="fetchedUser.profile.statusHouse" class="form-control" formControlName="statusHouse">
             <option *ngFor="let n of statusHouseArray" [attr.value]="n">{{n}}</option>
             </select>
-           </div>
+          </div>
 
-           <div class="form-group" *ngIf="fetchedUser.isExternalUser">
+          <div class="form-group" *ngIf="fetchedUser.isExternalUser">
             <app-autocomplete [title]="''" [singleChoice]="'true'" [typeAutocomplete]="'companie'" [arrayContent]="fetchedUser.ownerCompanies" (getResultAutocomplete)="selectCompanie($event[0])">
             </app-autocomplete>
-           </div>
+          </div>
 
-           <div class="form-group">
+          <div class="form-group">
             <select [(ngModel)]="fetchedUser.profile.language" name="language" class="form-control" formControlName="language">
               <option *ngFor="let n of languageArray" [value]="n">{{n}}</option>
             </select>
-           </div>
+          </div>
 
-           <div *ngIf="!fetchedUser.isExternalUser" class="form-group">
+          <div *ngIf="!fetchedUser.isExternalUser" class="form-group">
             <div *ngFor="let ownerCompanie of currentUser.ownerCompanies">
               <select [(ngModel)]="fetchedUser.typeUsers" name="language" class="form-control" formControlName="typeUsers">
                 <option *ngFor="let typeUser of ownerCompanie.typeUsers" [value]="typeUser.value">{{typeUser.value}}</option>
               </select>
             </div>
-           </div>
-
           </div>
 
-          <div class="col">
+        </div>
 
-            <h5>{{'Details' | translate}}</h5>
+        <div class="col">
 
-            <div class="form-group">
-              <input type="text" class="form-control" formControlName="address" [(ngModel)]="fetchedUser.profile.address.address" placeholder="{{'Address' | translate}}">
-            </div>
+          <h5>{{'Details' | translate}}</h5>
 
-            <div class="form-group">
-              <input type="text" class="form-control" formControlName="address" [(ngModel)]="fetchedUser.profile.address.address" placeholder="{{'Number' | translate}}">
-            </div>
+          <div class="form-group">
+            <input type="text" class="form-control" formControlName="address" [(ngModel)]="fetchedUser.profile.address.address" placeholder="{{'Address' | translate}}">
+          </div>
 
-            <div class="form-group">
-              <input type="text" class="form-control" formControlName="city" [(ngModel)]="fetchedUser.profile.address.city" placeholder="{{'City' | translate}}">
-            </div>
+          <div class="form-group">
+            <input type="text" class="form-control" formControlName="address" [(ngModel)]="fetchedUser.profile.address.address" placeholder="{{'Number' | translate}}">
+          </div>
 
-            <div class="form-group">
-              <input type="text" class="form-control" formControlName="state" [(ngModel)]="fetchedUser.profile.address.state" placeholder="{{'State' | translate}}">
-            </div>
+          <div class="form-group">
+            <input type="text" class="form-control" formControlName="city" [(ngModel)]="fetchedUser.profile.address.city" placeholder="{{'City' | translate}}">
+          </div>
 
-            <div class="form-group">
-              <input type="text" class="form-control" formControlName="zip" [(ngModel)]="fetchedUser.profile.address.zip" placeholder="{{'Zip' | translate}}">
-            </div>
+          <div class="form-group">
+            <input type="text" class="form-control" formControlName="state" [(ngModel)]="fetchedUser.profile.address.state" placeholder="{{'State' | translate}}">
+          </div>
 
-            <div class="form-group">
-              <input type="text" class="form-control" formControlName="zip" [(ngModel)]="fetchedUser.profile.address.zip" placeholder="{{'Country' | translate}}">
-            </div>
+          <div class="form-group">
+            <input type="text" class="form-control" formControlName="zip" [(ngModel)]="fetchedUser.profile.address.zip" placeholder="{{'Zip' | translate}}">
+          </div>
 
-
+          <div class="form-group">
+            <input type="text" class="form-control" formControlName="zip" [(ngModel)]="fetchedUser.profile.address.zip" placeholder="{{'Country' | translate}}">
           </div>
 
 
+        </div>
 
-          <div class="col">
 
-            <h5>{{'Divers' | translate}}</h5>
 
+        <div class="col">
+
+          <h5>{{'Divers' | translate}}</h5>
+          <div class="form-group" *ngIf="fetchedUser.isExternalUser">
             <div class="form-group">
               <select [(ngModel)]="fetchedUser.profile.detailHouse.typeHouse" class="form-control" formControlName="typeHouse">
                <option *ngFor="let n of typeHouseArray" [attr.value]="n">{{n}}</option>
@@ -124,28 +123,29 @@
             <div class="form-group">
               <input type="text" class="form-control" formControlName="accessType" [(ngModel)]="fetchedUser.profile.detailHouse.accessType" placeholder="{{'Acces Type' | translate}}">
             </div>
-
-            <div class="form-group">
-              <textarea class="form-control" formControlName="otherData" [(ngModel)]="fetchedUser.profile.otherData" placeholder="{{'Other' | translate}}">
-              </textarea>
-            </div>
-
-            <div class="form-group">
-              <app-autocomplete [typeAutocomplete]="'right'" [canDelete]="true" [title]="" [singleChoice]="true" [arrayContent]="fetchedUser.rights" (getResultAutocomplete)="selectRight($event[0])">
-              </app-autocomplete>
-            </div>
-            <div class="form-group">
-              <div>
-                <label>{{'Calendar Color' | translate}}</label>
-                <div class="round" [style.background-color]="fetchedUser.profile.colorCalendar"></div>
-                <input type="color" formControlName="colorCalendar" [(ngModel)]="fetchedUser.profile.colorCalendar">
-              </div>
-            </div>
-
-            <app-picture [forms]="fetchedUser.forms" (getPicture)="getPicture($event)"></app-picture>
           </div>
 
+          <div class="form-group">
+            <textarea class="form-control" formControlName="otherData" [(ngModel)]="fetchedUser.profile.otherData" placeholder="{{'Other' | translate}}">
+              </textarea>
+          </div>
+
+          <div *ngIf="!fetchedUser.isExternalUser" class="form-group">
+            <app-autocomplete [typeAutocomplete]="'right'" [canDelete]="true" [title]="" [singleChoice]="true" [arrayContent]="fetchedUser.rights" (getResultAutocomplete)="selectRight($event[0])">
+            </app-autocomplete>
+          </div>
+          <div class="form-group">
+            <div>
+              <label>{{'Calendar Color' | translate}}</label>
+              <div class="round" [style.background-color]="fetchedUser.profile.colorCalendar"></div>
+              <input type="color" formControlName="colorCalendar" [(ngModel)]="fetchedUser.profile.colorCalendar">
+            </div>
+          </div>
+
+          <app-picture [forms]="fetchedUser.forms" (getPicture)="getPicture($event)"></app-picture>
         </div>
+
+      </div>
 
 
 
@@ -169,5 +169,5 @@
       </div>
     </div>
     <div class="clearfix"></div>
-    </div>
-  </form>
+  </div>
+</form>

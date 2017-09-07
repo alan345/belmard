@@ -1,6 +1,7 @@
 import { Form } from '../picture/form/form.model';
 import { User } from '../user/user.model';
 
+
 export class Companie {
   _id: string = '';
   nameCompanie: string = '';
