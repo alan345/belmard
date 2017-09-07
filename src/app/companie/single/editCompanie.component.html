@@ -14,10 +14,11 @@
 <!-- <app-header [showBackButton]="showBackButton" [nameObject]="'companie'" [showCreateButton]="false"></app-header> -->
 <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
       <div class="row">
+        <h4 class="dspl-nn">id: {{fetchedCompanie._id}}</h4>
           <div class="col">
             <h5>{{'Identity' | translate}}</h5>
             
-            <h4 class="dspl-nn">id: {{fetchedCompanie._id}}</h4>
+            
             <div class="form-group">
               <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedCompanie.nameCompanie" required minlength="5" placeholder="Nom de la Société">
             </div>
