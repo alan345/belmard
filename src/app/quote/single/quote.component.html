@@ -9,24 +9,24 @@
   </div>
 
   <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
-<div class="row">
-          <h4 class="dspl-nn">id: {{fetchedQuote._id}}</h4>
-        </div>  
+    <div class="row">
+      <h4 class="dspl-nn">id: {{fetchedQuote._id}}</h4>
+    </div>
 
     <div class="row">
       <div class="col-1">
-      </div>  
+      </div>
       <div class="col-3">
-        
-        <div class="row">  
+
+        <div class="row">
           <button class="btn btn-primary" (click)="downloadPDF()">
           download PDF
         </button>
           <button class="btn btn-outline-primary" [routerLink]="['/quote/public/' + fetchedQuote._id]">
           Devis acces public
         </button>
-        </div>  
-        <div class="row">   
+        </div>
+        <div class="row">
           <md-select formControlName="statusQuote" placeholder="" [(ngModel)]="fetchedQuote.statusQuote" name="statusQuote">
             <md-option *ngFor="let n of statusQuotes" [value]="n.indexStatus">
               {{n.label}}
@@ -49,75 +49,75 @@
         <div class="form-group">
           <app-autocomplete [typeAutocomplete]="'user'" [title]="" [singleChoice]="'true'" [arrayContent]="fetchedQuote.clients" (getResultAutocomplete)="selectUser($event[0])">
           </app-autocomplete>
-        </div> 
-         <div class="form-group"> 
-            <app-autocomplete [typeAutocomplete]="" [canDelete]="true" [title]="'Project'" [singleChoice]="true" [arrayContent]="fetchedQuote.projects" (getResultAutocomplete)="selectProject($event[0])">
-            </app-autocomplete>
-         </div>
-        <div class="form-group">
-            <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedQuote.name" required minlength="5" placeholder="Nom du quote">
         </div>
-        
-        
+        <div class="form-group">
+          <app-autocomplete [typeAutocomplete]="" [canDelete]="true" [title]="'Project'" [singleChoice]="true" [arrayContent]="fetchedQuote.projects" (getResultAutocomplete)="selectProject($event[0])">
+          </app-autocomplete>
+        </div>
+        <div class="form-group">
+          <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedQuote.name" required minlength="5" placeholder="Nom du quote">
+        </div>
+
+
       </div>
 
 
       <div class="col-2">
-        
+
         <div class="input-group">
-                <span class="input-group-addon">DEV</span>
-                <input class="form-control" id="EstimateCode" name="EstimateCode" type="text" value="28" />
-              </div>
+          <span class="input-group-addon">DEV</span>
+          <input class="form-control" id="EstimateCode" name="EstimateCode" type="text" value="28" />
+        </div>
         <br>
         <div class="form-group">
-                <input type="date" class="form-control" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedQuote.detail.dateQuote.issueDateString">
-              </div>
-        
+          <input type="date" class="form-control" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedQuote.detail.dateQuote.issueDateString">
+        </div>
+
         <div class="form-group">
 
-              <input type="date" class="form-control" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedQuote.detail.dateQuote.expiryDateString">
+          <input type="date" class="form-control" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedQuote.detail.dateQuote.expiryDateString">
 
-            </div>
-        
+        </div>
+
         <div class="form-group">
-              <select class="form-control" name="currency" formControlName="currency" [(ngModel)]="fetchedQuote.detail.currency">
+          <select class="form-control" name="currency" formControlName="currency" [(ngModel)]="fetchedQuote.detail.currency">
                 <option value="">Select..</option>
                 <option selected="selected" value="EUR">EUR - Euro</option>
                 <option value="USD">USD - United States Dollar</option>
               </select>
-            </div>
-        
-        
-        
-      </div>  
-      
+        </div>
+
+
+
+      </div>
+
       <div class="col-3">
-        
+
         <div class="form-group">
-              <select class="form-control" data-val="true" data-val-number="The field Estimate Template must be a number." id="InvoiceTemplateIDFK" name="InvoiceTemplateIDFK"><option value="30390">Mod&#232;le Facture</option>
+          <select class="form-control" data-val="true" data-val-number="The field Estimate Template must be a number." id="InvoiceTemplateIDFK" name="InvoiceTemplateIDFK"><option value="30390">Mod&#232;le Facture</option>
                 <option selected="selected" value="30391">Mod&#232;le Devis</option>
               </select>
-            </div>
-        
+        </div>
+
         <div class="form-group">
-              <select name="EstimateTaxConfigCode" class="form-control" id="EstimateTaxConfigCode" data-bind='options: EstimateTaxConfigCodes, optionsText: "Text", optionsValue:"Value", value: EstimateTaxConfigCode'></select>
-            </div>
-        
+          <select name="EstimateTaxConfigCode" class="form-control" id="EstimateTaxConfigCode" data-bind='options: EstimateTaxConfigCodes, optionsText: "Text", optionsValue:"Value", value: EstimateTaxConfigCode'></select>
+        </div>
+
         <div class="input-group">
-                <input id="DiscountPercent" name="DiscountPercent" class="form-control" data-bind='value: formattedDefaultDiscount' />
-                <span class="input-group-addon" style="color: #999;">%</span>
-              </div>
+          <input id="DiscountPercent" name="DiscountPercent" class="form-control" data-bind='value: formattedDefaultDiscount' />
+          <span class="input-group-addon" style="color: #999;">%</span>
+        </div>
         <br>
         <div class="form-group">
-              <textarea class="form-control" cols="10" id="Subject" maxlength="255" name="Subject" rows="4"></textarea>
-            </div>
-        
+          <textarea class="form-control" cols="10" id="Subject" maxlength="255" name="Subject" rows="4"></textarea>
+        </div>
 
-        
-      </div>  
+
+
+      </div>
 
       <div class="col-1">
-      </div> 
+      </div>
 
 
 
@@ -125,18 +125,18 @@
 
       <div class="row">
         <div>
-         
 
-          
+
+
 
           <div *ngFor="let project of fetchedQuote.projects">
             <div *ngFor="let user of project.assignedTos">
               Owner Project: {{user.profile.name}}
             </div>
           </div>
-          
-          
-   
+
+
+
           <div *ngFor="let client of fetchedQuote.clients">
             <div>name:{{client.profile.name}}</div>
             <div>lastName:{{client.profile.lastName}}</div>
@@ -148,8 +148,8 @@
           </div>
         </div>
       </div>
-      
-  
+
+
 
 
 

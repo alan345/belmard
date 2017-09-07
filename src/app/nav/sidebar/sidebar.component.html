@@ -53,7 +53,7 @@
       </div>
     </div>
 
-    <div *ngIf="authService.showObjHTML('product')" class="card noborder">
+    <div *ngIf="authService.showObjHTML('product', 'read')" class="card noborder">
       <div class="">
         <a class="nav-link" [routerLink]="['/product']" data-toggle="collapse" data-parent="#accordion" routerLinkActive="active">
           <span class="fa fa-calendar" aria-hidden="true"></span> {{'Products'|translate}}</a>
@@ -148,7 +148,7 @@
 
 
 
-    <div *ngIf="authService.showObjHTML('paiementQuote')" class="card noborder">
+    <div *ngIf="authService.showObjHTML('paiementQuote', 'read')" class="card noborder">
       <div class="" role="tab" id="headingTwo">
         <a class="nav-link" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
           <span class="fa fa-university" aria-hidden="true"></span> {{'Accountancy'|translate}}
@@ -176,7 +176,7 @@
 
 
 
-    <div *ngIf="authService.showObjHTML('reporting')" class="card noborder">
+    <div *ngIf="authService.showObjHTML('reporting', 'read')" class="card noborder">
       <div class="">
         <a [routerLink]="['/reporting']" data-toggle="collapse" routerLinkActive="active" class="nav-link" data-parent="#accordion">
           <span class="fa fa-bar-chart" aria-hidden="true"></span> {{'Reporting'|translate}}
