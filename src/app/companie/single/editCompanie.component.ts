@@ -64,23 +64,27 @@ export class EditCompanieComponent implements OnInit {
     this.getStripeAccountDetails()
     this.myForm = this._fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
-      phoneNumber: ['', [Validators.required, Validators.minLength(2)]],
-      categJson: this._fb.group({
-        categProduct: [''],
-        categProject: ['']
-      }),
-      option: this._fb.group({
-        calendar: this._fb.group({
+      phoneNumber: [''],
+      VAT: [''],
+      faxNumber: [''],
+      email: [''],
+      // categJson: this._fb.group({
+      //   categProduct: [''],
+      //   categProject: ['']
+      // }),
+
+
           timeBegin: ['', [Validators.required, Validators.minLength(1)]],
           timeEnd: ['', [Validators.required, Validators.minLength(1)]],
-        }),
-      }),
-      address: this._fb.group({
+
+
+
         address: [''],
         city: [''],
         state: [''],
         zip: [''],
-      }),
+        country: [''],
+
       _users: this._fb.array([]),
 
       secretKey:[''],
@@ -122,38 +126,6 @@ export class EditCompanieComponent implements OnInit {
     })
 
   }
-  //
-  // addRight(level, index1, index2, index3) {
-  //     if(level === 0){
-  //       let newRight = new Rigth()
-  //       this.fetchedCompanie.rights.unshift(newRight)
-  //     }
-  //     if(level === 1){
-  //       let newRight = new Permission()
-  //       this.fetchedCompanie.rights[index1].permissions.unshift(newRight)
-  //     }
-  //     if(level === 2){
-  //
-  //       let newRight = new Access()
-  //       this.fetchedCompanie.rights[index1].permissions[index2].access.unshift(newRight)
-  //     }
-  // }
-
-  // openSection(nameSection) {
-  //   this[nameSection] = !this[nameSection]
-  // }
-  // removeRight(level, index1, index2, index3) {
-  //     if(level === 0)
-  //       this.fetchedCompanie.rights.splice(level, 1)
-  //     if(level === 1)
-  //       this.fetchedCompanie.rights.splice(index1, 1)
-  //     if(level === 2)
-  //       this.fetchedCompanie.rights[index1].permissions.splice(index1, 1)
-  //     if(level === 3)
-  //       this.fetchedCompanie.rights[index1].permissions[index1].access.splice(index2, 1)
-  //     // if(level === 3)
-  //     //   this.fetchedCompanie.rights[index1].permissions[index1].access[index2].subCateg.splice(index3, 1)
-  // }
 
 
   addCateg(typeCateg, level, index1, index2, index3) {

@@ -6,6 +6,9 @@ export class Companie {
   nameCompanie: string = '';
   typeCompanie: string = '';
   phoneNumber: string= '';
+  faxNumber: string= '';
+  email: string= '';
+  VAT: string= '';
   address: Address = new Address();
   option: Option = new Option();
   users: User[] = [];
@@ -89,4 +92,6 @@ export class Address {
   city: string = '';
   state: string = '';
   zip: string = '';
+  country: string = '';
+
 }
