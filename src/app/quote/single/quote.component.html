@@ -14,7 +14,7 @@
     <div class="row">
       <div class="col-1">
       </div>  
-      <div class="col">
+      <div class="col-4">
         <div class="row">
           <h4 class="dspl-nn">id: {{fetchedQuote._id}}</h4>
         </div>  
@@ -47,11 +47,11 @@
           </div>
         </div>
         <div class="form-group">
-          <app-autocomplete [typeAutocomplete]="'user'" [title]="'Customer'" [singleChoice]="'true'" [arrayContent]="fetchedQuote.clients" (getResultAutocomplete)="selectUser($event[0])">
+          <app-autocomplete [typeAutocomplete]="'user'" [title]="" [singleChoice]="'true'" [arrayContent]="fetchedQuote.clients" (getResultAutocomplete)="selectUser($event[0])">
           </app-autocomplete>
         </div> 
          <div class="form-group"> 
-            <app-autocomplete [typeAutocomplete]="'project'" [canDelete]="true" [title]="'Project'" [singleChoice]="true" [arrayContent]="fetchedQuote.projects" (getResultAutocomplete)="selectProject($event[0])">
+            <app-autocomplete [typeAutocomplete]="" [canDelete]="true" [title]="'Project'" [singleChoice]="true" [arrayContent]="fetchedQuote.projects" (getResultAutocomplete)="selectProject($event[0])">
             </app-autocomplete>
          </div>
         <div class="form-group">
@@ -62,7 +62,7 @@
       </div>
 
 
-      <div class="col">
+      <div class="col-3">
         
         <div class="input-group">
                 <span class="input-group-addon">DEV</span>
@@ -91,7 +91,7 @@
         
       </div>  
       
-      <div class="col">
+      <div class="col-4">
         
         <div class="form-group">
               <select class="form-control" data-val="true" data-val-number="The field Estimate Template must be a number." id="InvoiceTemplateIDFK" name="InvoiceTemplateIDFK"><option value="30390">Mod&#232;le Facture</option>
@@ -116,7 +116,7 @@
         
       </div>  
 
-      <div class="col-1">
+      <div class="col">
       </div> 
 
 
