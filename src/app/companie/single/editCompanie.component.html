@@ -7,27 +7,98 @@
 </div> -->
 
 
-<div class="container">
-<app-header [showBackButton]="showBackButton" [nameObject]="'companie'" [showCreateButton]="false"></app-header>
+<div class="container-fluid">
+  <div class="hdform">
+         <h3><i class="fa fa-user" aria-hidden="true"></i>{{'User' | translate}}</h3>
+      </div>  
+<!-- <app-header [showBackButton]="showBackButton" [nameObject]="'companie'" [showCreateButton]="false"></app-header> -->
+<form [formGroup]="myForm" novalidate (ngSubmit)="save()">
+      <div class="row">
+          <div class="col">
+            <h4 class="dspl-nn">id: {{fetchedCompanie._id}}</h4>
+            <div class="form-group">
+              <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedCompanie.nameCompanie" required minlength="5" placeholder="Nom de la Société">
+            </div>
+            
+            <div class="form-group">
+              <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedCompanie.nameCompanie" required minlength="5" placeholder="Email">
+            </div>
+              
+            <div class="form-group">
+             <input type="text" class="form-control" formControlName="phoneNumber" [(ngModel)]="fetchedCompanie.phoneNumber" required minlength="5" placeholder="Numéro de téléphone"> 
+            </div>
+            
+            <div class="form-group">
+             <input type="text" class="form-control" formControlName="phoneNumber" [(ngModel)]="fetchedCompanie.phoneNumber" required minlength="5" placeholder="Numéro de Fax"> 
+            </div>
+            
+            <div class="form-group">
+              <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedCompanie.nameCompanie" required minlength="5" placeholder="Nom interlocuteur">
+            </div>
+            
+            <div class="form-group">
+              <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedCompanie.nameCompanie" required minlength="5" placeholder="Prénom interlocuteur">
+            </div>
+            
+            <div class="form-group">
+              <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedCompanie.nameCompanie" required minlength="5" placeholder="Téléphone interlocuteur">
+            </div>
+
+          </div>
+          <div class="col">
+            
+            <div class="form-group">
+             <input type="text" class="form-control" formControlName="address" [(ngModel)]="fetchedCompanie.address.address" required minlength="5" placeholder="Numéro de rue">
+            </div>
+            
+            <div class="form-group">
+             <input type="text" class="form-control" formControlName="address" [(ngModel)]="fetchedCompanie.address.address" required minlength="5" placeholder="Rue">
+            </div>
+            
+            <div class="form-group">  
+             <input type="text" class="form-control" formControlName="city" [(ngModel)]="fetchedCompanie.address.city" required minlength="2" placeholder="Ville">
+            </div>
+            
+            <div class="form-group">
+             <input type="text" class="form-control" formControlName="zip" [(ngModel)]="fetchedCompanie.address.zip" required minlength="5" placeholder="Code postal">
+            </div>
+            
+            <div class="form-group">
+             <input type="text" class="form-control" formControlName="zip" [(ngModel)]="fetchedCompanie.address.zip" required minlength="5" placeholder="State">
+            </div>
+            
+            <div class="form-group">
+             <input type="text" class="form-control" formControlName="zip" [(ngModel)]="fetchedCompanie.address.zip" required minlength="5" placeholder="Pays">
+            </div>
+            
+     
+          </div>
+        
+        
+          <div class="col">
+           
+           <div class="form-group">
+             <input type="text" class="form-control" formControlName="zip" [(ngModel)]="fetchedCompanie.address.zip" required minlength="5" placeholder="Numéro de TVA">
+           </div> 
+            
+            
+            
+          </div>
+        </div>
 
 
 
-  <h4 class="dspl-nn">id: {{fetchedCompanie._id}}</h4>
-
-  <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
+ 
     <div *ngIf="isMyCompanie()">
       <button type="button" [routerLink]="['/user/paiement']">{{'Plan' | translate}}</button> {{'Plan' | translate}}: {{fetchedCompanie.planDetail.plan}} ({{fetchedCompanie.planDetail.current_period_end | date:'yyyy-MM-dd'}})
     </div>
     <div class="form-group sln-inffrm">
 
-      <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedCompanie.nameCompanie" required minlength="5" placeholder="Nom du fournisseur">
-      <input type="text" class="form-control" formControlName="phoneNumber" [(ngModel)]="fetchedCompanie.phoneNumber" required minlength="5" placeholder="Numéro de téléphone">
+      <app-picture [forms]="fetchedCompanie.forms" (getPicture)="getPicture($event)"></app-picture>
+      
 
       <div formGroupName="address">
-        <input type="text" class="form-control" formControlName="address" [(ngModel)]="fetchedCompanie.address.address" required minlength="5" placeholder="Adresse">
-        <input type="text" class="form-control" formControlName="city" [(ngModel)]="fetchedCompanie.address.city" required minlength="2" placeholder="Ville">
-
-        <input type="text" class="form-control" formControlName="zip" [(ngModel)]="fetchedCompanie.address.zip" required minlength="5" placeholder="Code postal">
+        
         <!-- <div class="form-group prmimg-cnt">
           <div *ngFor="let singleForm of fetchedCompanie.forms; let i=index">
             <img class="promo-img" height="50px" src="./uploads/forms/{{singleForm.owner}}/{{singleForm.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
@@ -39,7 +110,7 @@
             <button type="button" md-button (click)="openDialog('img')" class="addpic-squr">{{'Add a picture' | translate}}<br><i class="fa fa-plus"></i></button>
           </div>
         </div> -->
-        <app-picture [forms]="fetchedCompanie.forms" (getPicture)="getPicture($event)"></app-picture>
+       
       </div>
 
 
