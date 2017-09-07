@@ -56,7 +56,7 @@
             </select>
            </div>
             
-           <div *ngIf="!fetchedUser.isExternalUser" class="form-group col-sm-4">
+           <div *ngIf="!fetchedUser.isExternalUser" class="form-group">
             <div *ngFor="let ownerCompanie of currentUser.ownerCompanies">
               <select [(ngModel)]="fetchedUser.typeUsers" name="language" class="form-control" formControlName="typeUsers">
                 <option *ngFor="let typeUser of ownerCompanie.typeUsers" [value]="typeUser.value">{{typeUser.value}}</option>
@@ -70,11 +70,11 @@
             
             <h5>{{'Details' | translate}}</h5>
            
-            <div class="form-group col-sm-8">
+            <div class="form-group">
               <input type="text" class="form-control" formControlName="address" [(ngModel)]="fetchedUser.profile.address.address" placeholder="{{'Address' | translate}}">
             </div>
             
-            <div class="form-group col-sm-4">
+            <div class="form-group">
               <input type="text" class="form-control" formControlName="address" [(ngModel)]="fetchedUser.profile.address.address" placeholder="{{'Number' | translate}}">
             </div>
                                   
