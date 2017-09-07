@@ -3,6 +3,12 @@
 /*@import "~angular-calendar/dist/css/angular-calendar.css";*/
 /*@import "~@ng-bootstrap/ng-bootstrap/dist/css/bootstrap.min.css";*/
 
+.container-fluid {
+    padding-right: 0px!important;
+    padding-left: 0px!important;
+}
+
+
 .hdform {
   margin-top: 10px;
   margin-bottom: 10px;
