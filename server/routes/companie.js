@@ -50,12 +50,12 @@ router.use('/', function (req, res, next) {
           })
         }
 
-        // if(!shared.isCurentUserHasAccess(doc, nameObject, 'read')) {
-        //   return res.status(404).json({
-        //     title: 'No rights',
-        //     error: {message: 'No rights'}
-        //   })
-        // }
+        if(!shared.isCurentUserHasAccess(doc, nameObject, 'read')) {
+          return res.status(404).json({
+            title: 'No rights',
+            error: {message: 'No rights'}
+          })
+        }
 
         if (doc) {
           req.user = doc;
@@ -203,10 +203,10 @@ router.get('/page/:page', function (req, res, next) {
   var skip = (itemsPerPage * pageNumber)
 
 
-  let nameQuery = {}
-  let cityQuery = {}
+  // let nameQuery = {}
+  // let cityQuery = {}
   let searchQuery = {}
-  let arrObj = []
+  // let arrObj = []
   searchQuery['canBeSeenByCompanies'] = req.user.ownerCompanies
 
   if(req.query.search)

@@ -39,7 +39,7 @@ export class EditCompanieComponent implements OnInit {
   // seeRights = false;
   seeCategProject = false;
   seeCategProduct = false;
-  isMyCompanyRoute: Boolean = false
+  // isMyCompanyRoute: Boolean = false
   servicesBancks = ['stripe', 'paypal']
   // typesRights = [
   //   {name : 'Project', value: 'project'},
@@ -97,7 +97,7 @@ export class EditCompanieComponent implements OnInit {
       if(params['id']) {
         if(params['id'] === 'mine') {
           this.getCompanie('')
-          this.isMyCompanyRoute = true
+          // this.isMyCompanyRoute = true
 
         } else {
           this.getCompanie(params['id'])
@@ -757,9 +757,6 @@ export class EditCompanieComponent implements OnInit {
           console.log(error);
         }
       )
-  }
-  isAdmin() {
-    return this.authService.isAdmin();
   }
 
 
