@@ -4,59 +4,53 @@
 </div> -->
 <div class="container-fluid">
 
-<div class="hdform">
-         <h3><i class="fa fa-university" aria-hidden="true"></i>{{'Quote' | translate}}</h3>
-      </div>  
+  <div class="hdform">
+    <h3><i class="fa fa-university" aria-hidden="true"></i>{{'Quote' | translate}}</h3>
+  </div>
 
-<form [formGroup]="myForm" novalidate (ngSubmit)="save()">
+  <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
 
 
-  <div class="row">
-    <div class="col">
-      <div class="form-group">
-        <h4 class="dspl-nn">id: {{fetchedQuote._id}}</h4>
-        <button class="btn btn-primary" (click)="downloadPDF()">
+    <div class="row">
+      <div class="col">
+        <div class="form-group">
+          <h4 class="dspl-nn">id: {{fetchedQuote._id}}</h4>
+          <button class="btn btn-primary" (click)="downloadPDF()">
           download PDF
         </button>
-        <button class="btn btn-outline-primary" style="margin-top: 0px;" [routerLink]="['/quote/public/' + fetchedQuote._id]">
+          <button class="btn btn-outline-primary" style="margin-top: 0px;" [routerLink]="['/quote/public/' + fetchedQuote._id]">
           Devis acces public
-        </button> 
-        <md-select  formControlName="statusQuote" placeholder="statusQuote" [(ngModel)]="fetchedQuote.statusQuote" name="statusQuote">
+        </button>
+          <md-select formControlName="statusQuote" placeholder="statusQuote" [(ngModel)]="fetchedQuote.statusQuote" name="statusQuote">
             <md-option *ngFor="let n of statusQuotes" [value]="n.indexStatus">
               {{n.label}}
             </md-option>
-        </md-select>
-        <div *ngIf="fetchedQuote._id">
-        <div class="FormGroup">
-          <button type="button" class="btn btn-warning" (click)="showLogs = !showLogs">
+          </md-select>
+          <div *ngIf="fetchedQuote._id">
+            <div class="FormGroup">
+              <button type="button" class="btn btn-warning" (click)="showLogs = !showLogs">
            <i class="fa fa-calendar" aria-hidden="true"></i>
            <span>{{'Show Comments' | translate}}</span>
           </button>
 
-          <div *ngIf="showLogs">
-            <app-comments [search]="search"></app-comments>
+              <div *ngIf="showLogs">
+                <app-comments [search]="search"></app-comments>
+              </div>
+            </div>
+
           </div>
         </div>
 
       </div>
 
-        
-      </div>
-      
-      
-      
-      
-      
-    </div>  
-    
-    
 
 
-      
-        
-   
 
-      
+
+
+
+
+
       <div class="col-sm-6">
         <div>
           <!-- <app-autocomplete [typeAutocomplete]="'user'" [title]="'Owner Quote'" [singleChoice]="'true'" [arrayContent]="fetchedQuote.ownerQuotes" (getResultAutocomplete)="selectUser($event[0])">
@@ -175,57 +169,46 @@
 
         <!-- <button type="button" class="btn btn-success" (click)="addBucketProducts()">AddBucketProducts</button> -->
         <div *ngFor="let devisDetail of fetchedQuote.devisDetails; let i=index">
-          <input
-            class="form-control col-md-3"
-            type="text"
-            [ngModelOptions]="{standalone: true}"
-            [(ngModel)]="fetchedQuote.devisDetails[i].nameBucketProducts"
-            placeholder="Category">
+          <input class="form-control col-md-3" type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].nameBucketProducts" placeholder="Category">
           <button type="button" class="btn btn-danger btn-sm" (click)="removeBucketProducts(i)"><i class="fa fa-times"></i></button>
           <div [dragulaModel]='fetchedQuote.devisDetails[i].bucketProducts' [dragula]='"third-bag"'>
-          <div *ngFor="let bucketProduct of devisDetail.bucketProducts; let j=index" >
+            <div *ngFor="let bucketProduct of devisDetail.bucketProducts; let j=index">
 
-            <div class="row">
-              <div class="col-md-1"></div>
-              <div class="col-md-1">
-                <button type="button" class="btn btn-danger btn-sm" (click)="removeRow(i, j)"><i class="fa fa-times"></i></button>
+              <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-1">
+                  <button type="button" class="btn btn-danger btn-sm" (click)="removeRow(i, j)"><i class="fa fa-times"></i></button>
 
-                <button type="button" class="btn btn-sm handle"><i class="fa fa-arrows handle"></i></button>
-                <!-- <button type="button" class="btn btn-sm" (click)="editRaw(i, j)"><i class="fa fa-times"></i></button> -->
-              </div>
-
-
-              <div class="col-md-4">
-                <div *ngIf="bucketProduct.typeRow=='product'">
-                  <app-autocomplete
-                    [typeAutocomplete]="'product'"
-                    [title]="" [singleChoice]=true
-                    [arrayContent]="fetchedQuote.devisDetails[i].bucketProducts[j].productInit"
-                    (getResultAutocomplete)="selectProduct($event[0], i, j)">
-                  </app-autocomplete>
+                  <button type="button" class="btn btn-sm handle"><i class="fa fa-arrows handle"></i></button>
+                  <!-- <button type="button" class="btn btn-sm" (click)="editRaw(i, j)"><i class="fa fa-times"></i></button> -->
                 </div>
+
+
+                <div class="col-md-4">
+                  <div *ngIf="bucketProduct.typeRow=='product'">
+                    <app-autocomplete [typeAutocomplete]="'product'" [title]="" [singleChoice]=true [arrayContent]="fetchedQuote.devisDetails[i].bucketProducts[j].productInit" (getResultAutocomplete)="selectProduct($event[0], i, j)">
+                    </app-autocomplete>
+                  </div>
                   <!-- <a [routerLink]="['/product/' + bucketProduct.productInit._id]" class="admn-btn">
                     {{bucketProduct.productInit.details.reference}}
                   </a> -->
-                <div *ngIf="bucketProduct.typeRow=='text'">
-                  <quill-editor
-                    [ngModelOptions]="{standalone: true}"
-                    [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].title">
-                    <div quill-editor-toolbar>
-                      <span class="ql-formats">
+                  <div *ngIf="bucketProduct.typeRow=='text'">
+                    <quill-editor [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].title">
+                      <div quill-editor-toolbar>
+                        <span class="ql-formats">
                         <button class="ql-bold" [title]="'Bold'"></button>
                         <button class="ql-italic" [title]="'Italic'"></button>
                         <button class="ql-underline" [title]="'Underline'"></button>
 
                       </span>
-                      <span class="ql-formats">
+                        <span class="ql-formats">
                         <button class="ql-list" [title]="'list'" value='ordered'></button>
                         <button class="ql-list" [title]="'list'" value='bullet'></button>
                         <!-- <button class="ql-italic" [title]="'Italic'"></button> -->
 
                       </span>
 
-                      <span class="ql-formats">
+                        <span class="ql-formats">
                         <select class="ql-align" [title]="'Aligment'">
                           <option selected></option>
                           <option value="center"></option>
@@ -233,10 +216,10 @@
                           <option value="justify"></option>
                         </select>
                       </span>
-                    </div>
-                  </quill-editor>
+                      </div>
+                    </quill-editor>
 
-                  <!-- <ckeditor
+                    <!-- <ckeditor
                     [ngModelOptions]="{standalone: true}"
                     [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].title"
                     [config]="ckeConfig"
@@ -247,35 +230,32 @@
                     (blur)="onBlur($event)"
                     debounce="500">
                   </ckeditor> -->
+                  </div>
                 </div>
-              </div>
-              <!-- <div class="col-md-2">
+                <!-- <div class="col-md-2">
                 <a [routerLink]="['/product/' + bucketProduct.productInit._id]" class="admn-btn">
                           {{bucketProduct.productInit.details.reference}}
                         </a>
               </div> -->
-              <div class="col-md-2">
-                <input class="gooplusInput form-control" type="number"
-                  (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].quantity" placeholder="quantity">
-              </div>
-              <div class="col-md-2">
-                <input class="gooplusInput form-control" type="number"
-                  (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}"
-                  [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].priceWithoutTaxes" placeholder="priceWithoutTaxes">
-              </div>
+                <div class="col-md-2">
+                  <input class="gooplusInput form-control" type="number" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].quantity" placeholder="quantity">
+                </div>
+                <div class="col-md-2">
+                  <input class="gooplusInput form-control" type="number" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].priceWithoutTaxes" placeholder="priceWithoutTaxes">
+                </div>
 
-              <!-- <div class="col-md-1">
+                <!-- <div class="col-md-1">
                 <input class="gooplusInput form-control" type="text"
                   (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}"
                   [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].vat" placeholder="vat">
               </div> -->
-              <div class="col-md-1">
-                {{fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithoutTaxes | round}}
-              </div>
-              <!-- <div class="col-md-1">
+                <div class="col-md-1">
+                  {{fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithoutTaxes | round}}
+                </div>
+                <!-- <div class="col-md-1">
                 {{fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithTaxes | round}}
               </div> -->
-            </div>
+              </div>
             </div>
           </div>
         </div>
@@ -348,16 +328,11 @@
       </div>
       <div (click)="togglePaiements()">Paiements</div>
       <div *ngIf="showPaiements">
-        <button
-          class="btn btn-success"
-          type="button" md-button
-          (click)="openDialog()">
+        <button class="btn btn-success" type="button" md-button (click)="openDialog()">
           <i class="fa fa-plus"></i> Add new one
         </button>
         <br>
-        <app-paiementQuotes
-          (getPaiementQuotesCross)="getPaiementQuotes($event)"
-          [showHeader]="false" [showCreate]="false" [idQuote]="fetchedQuote._id">
+        <app-paiementQuotes (getPaiementQuotesCross)="getPaiementQuotes($event)" [showHeader]="false" [showCreate]="false" [idQuote]="fetchedQuote._id">
         </app-paiementQuotes>
         {{'Total Paiement' | translate}} = {{totalPaiementAmount}}
         <br> {{'To be paid' | translate}} = {{fetchedQuote.priceQuote.priceQuoteWithoutTaxes*1 - totalPaiementAmount*1| round}}
@@ -373,6 +348,7 @@
           Delete
         </button>
       </div>
-    </form>
-  </div>
 
+    </div>
+  </form>
+</div>
