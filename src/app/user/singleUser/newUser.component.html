@@ -1,7 +1,9 @@
 
   <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
     <div class="container-fluid">
-    <h3>{{'User' | translate}}</h3>
+      <div class="hdform">
+        <h3>{{'User' | translate}}</h3>
+      </div>  
     <div class="row">
       <div *ngIf="!fetchedUser.isExternalUser" class="form-group col-sm-4">
         <div *ngFor="let ownerCompanie of currentUser.ownerCompanies">
