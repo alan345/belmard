@@ -142,12 +142,8 @@ router.get('/page/:page', function (req, res, next) {
   var pageNumber = currentPage - 1
   var skip = (itemsPerPage * pageNumber)
 
-  let searchQuery = {
-  //  createdAt:{"$lt": dateRef}
-//    categories: categoriesArray,
-  //  createdAt:{"$gt": dateRef},
-  }
-
+  let searchQuery = {}
+  searchQuery['ownerCompanies'] = req.user.ownerCompanies
 
   if (req.query.myTasks === 'true')
     searchQuery['assignedTos'] = mongoose.Types.ObjectId(req.user._id)
