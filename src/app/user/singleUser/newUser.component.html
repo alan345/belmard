@@ -5,13 +5,7 @@
          <h3><i class="fa fa-user fa-lg" aria-hidden="true"></i>{{'User' | translate}}</h3>
       </div>  
     <div class="row">
-      <div *ngIf="!fetchedUser.isExternalUser" class="form-group col-sm-4">
-        <div *ngFor="let ownerCompanie of currentUser.ownerCompanies">
-          <select [(ngModel)]="fetchedUser.typeUsers" name="language" class="form-control" formControlName="typeUsers">
-            <option *ngFor="let typeUser of ownerCompanie.typeUsers" [value]="typeUser.value">{{typeUser.value}}</option>
-          </select>
-        </div>
-      </div>
+      
         <div class="row">
           <div class="col">
             
@@ -60,6 +54,14 @@
             <select [(ngModel)]="fetchedUser.profile.language" name="language" class="form-control" formControlName="language">
               <option *ngFor="let n of languageArray" [value]="n">{{n}}</option>
             </select>
+           </div>
+            
+           <div *ngIf="!fetchedUser.isExternalUser" class="form-group col-sm-4">
+            <div *ngFor="let ownerCompanie of currentUser.ownerCompanies">
+              <select [(ngModel)]="fetchedUser.typeUsers" name="language" class="form-control" formControlName="typeUsers">
+                <option *ngFor="let typeUser of ownerCompanie.typeUsers" [value]="typeUser.value">{{typeUser.value}}</option>
+              </select>
+            </div>
            </div> 
             
           </div>
