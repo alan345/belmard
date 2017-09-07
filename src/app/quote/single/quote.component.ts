@@ -248,7 +248,6 @@ export class QuoteComponent implements OnInit {
     //
 
     let dialogRef = this.dialog.open(PaiementQuoteDialogComponent, {
-      height: '500px',
       data: this.fetchedQuote
     });
     // dialogRef.componentInstance.fetchedQuote = this.fetchedQuote;

@@ -67,7 +67,6 @@ export class newObjDialogComponent implements OnInit {
         dialogComp = ProductDialogComponent
 
       let dialogRef = this.mdDialog.open(dialogComp, {
-        height: '500px',
         data: {
           search: this.search
         }
