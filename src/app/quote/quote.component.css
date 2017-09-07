@@ -1,3 +1,7 @@
 .gooplusInput {
   width:100%;
 }
+
+.btn-outline-primary {
+    margin-top: 0px!important;
+}
