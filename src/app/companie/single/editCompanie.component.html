@@ -63,7 +63,7 @@
 
 
 
-    <div class="form-group sln-inffrm">
+    <div *ngIf="isMyCompanie()" class="form-group sln-inffrm">
       <h4>Options Calendar</h4>
       <input type="text" class="form-control" formControlName="timeBegin" [(ngModel)]="fetchedCompanie.option.calendar.timeBegin" required minlength="1" placeholder="timeBegin">
       <input type="text" class="form-control" formControlName="timeEnd" [(ngModel)]="fetchedCompanie.option.calendar.timeEnd" required minlength="1" placeholder="timeEnd">
