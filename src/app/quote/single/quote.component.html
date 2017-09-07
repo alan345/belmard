@@ -23,7 +23,7 @@
           <button class="btn btn-outline-primary" [routerLink]="['/quote/public/' + fetchedQuote._id]">
           Devis acces public
         </button>
-          <md-select formControlName="statusQuote" placeholder="statusQuote" [(ngModel)]="fetchedQuote.statusQuote" name="statusQuote">
+          <md-select formControlName="statusQuote" placeholder="" [(ngModel)]="fetchedQuote.statusQuote" name="statusQuote">
             <md-option *ngFor="let n of statusQuotes" [value]="n.indexStatus">
               {{n.label}}
             </md-option>
