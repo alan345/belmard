@@ -3,6 +3,14 @@
 /*@import "~angular-calendar/dist/css/angular-calendar.css";*/
 /*@import "~@ng-bootstrap/ng-bootstrap/dist/css/bootstrap.min.css";*/
 
+.hdform {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #fff;
+  text-align: center;
+  background-color: rgba(148, 17, 17, 1);
+}
+
 .fa {
   margin-right: 10px;
 }
