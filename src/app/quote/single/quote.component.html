@@ -58,22 +58,22 @@
 
       <div class="col">
         
-        <div class="input-group">
+        <div class="form-group">
                 <span class="input-group-addon">DEV</span>
                 <input class="form-control" id="EstimateCode" name="EstimateCode" type="text" value="28" />
               </div>
         
-        <div>
+        <div class="form-group">
                 <input type="date" class="form-control" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedQuote.detail.dateQuote.issueDateString">
               </div>
         
-        <div>
+        <div class="form-group">
 
               <input type="date" class="form-control" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedQuote.detail.dateQuote.expiryDateString">
 
             </div>
         
-        <div>
+        <div class="form-group">
               <select class="form-control" name="currency" formControlName="currency" [(ngModel)]="fetchedQuote.detail.currency">
                 <option value="">Select..</option>
                 <option selected="selected" value="EUR">EUR - Euro</option>
@@ -86,6 +86,27 @@
       </div>  
       
       <div class="col">
+        
+        <div class="form-group">
+              <select class="form-control" data-val="true" data-val-number="The field Estimate Template must be a number." id="InvoiceTemplateIDFK" name="InvoiceTemplateIDFK"><option value="30390">Mod&#232;le Facture</option>
+                <option selected="selected" value="30391">Mod&#232;le Devis</option>
+              </select>
+            </div>
+        
+        <div class="form-group">
+              <select name="EstimateTaxConfigCode" class="form-control" id="EstimateTaxConfigCode" data-bind='options: EstimateTaxConfigCodes, optionsText: "Text", optionsValue:"Value", value: EstimateTaxConfigCode'></select>
+            </div>
+        
+        <div class="form-group">
+                <input id="DiscountPercent" name="DiscountPercent" class="form-control" data-bind='value: formattedDefaultDiscount' />
+                <span class="input-group-addon" style="color: #999;">%</span>
+              </div>
+        
+        <div class="form-group">
+              <textarea class="form-control" cols="10" id="Subject" maxlength="255" name="Subject" rows="4"></textarea>
+            </div>
+        
+
         
       </div>  
 
@@ -125,32 +146,21 @@
         <div class="col-sm-6 col-sm-offset-1">
           <div class="form-group">
             <label class="col-sm-4 control-label" for="InvoiceTemplateIDFK">Estimate Template</label>
-            <div class="col-sm-6">
-              <select class="form-control" data-val="true" data-val-number="The field Estimate Template must be a number." id="InvoiceTemplateIDFK" name="InvoiceTemplateIDFK"><option value="30390">Mod&#232;le Facture</option>
-                <option selected="selected" value="30391">Mod&#232;le Devis</option>
-              </select>
-            </div>
+            
           </div>
           <div class="form-group">
             <label class="col-sm-4 control-label" for="EstimateTaxConfigCode">Amounts are</label>
-            <div class="col-sm-6">
-              <select name="EstimateTaxConfigCode" class="form-control" id="EstimateTaxConfigCode" data-bind='options: EstimateTaxConfigCodes, optionsText: "Text", optionsValue:"Value", value: EstimateTaxConfigCode'></select>
-            </div>
+            
           </div>
           <div class="form-group">
             <label class="col-sm-4 control-label" for="DiscountPercent">Discount</label>
             <div class="col-sm-6">
-              <div class="input-group">
-                <input id="DiscountPercent" name="DiscountPercent" class="form-control" data-bind='value: formattedDefaultDiscount' />
-                <span class="input-group-addon" style="color: #999;">%</span>
-              </div>
+              
             </div>
           </div>
           <div class="form-group">
             <label class="col-sm-4 control-label" for="Subject">Subject</label>
-            <div class="col-sm-6">
-              <textarea class="form-control" cols="10" id="Subject" maxlength="255" name="Subject" rows="4"></textarea>
-            </div>
+            
           </div>
         </div>
       </div>
