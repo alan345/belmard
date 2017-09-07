@@ -16,3 +16,8 @@
   display: inline-block;
   margin: 2px;
 }
+
+.row {
+    margin-right: 0px!important;
+    margin-left: 0px!important;
+}
