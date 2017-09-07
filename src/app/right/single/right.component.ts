@@ -115,15 +115,11 @@ export class RightComponent implements OnInit {
     this.typesRights.forEach(typesRight => {
       let newPermission = new Permission()
       newPermission.namePermission = typesRight.value
-
       typesRight.typeAccess.forEach(typeAccessSingle => {
         let newAccess = new Access()
         newAccess.typeAccess = typeAccessSingle.value
         newPermission.access.push(newAccess)
-
       })
-
-
       this.fetchedRight.detailRight.permissions.push(newPermission)
     })
   }
