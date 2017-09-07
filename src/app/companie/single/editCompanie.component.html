@@ -1,34 +1,20 @@
-
-
-
 <div class="container-fluid">
   <div class="hdform">
     <h3><i class="fa fa-user" aria-hidden="true"></i>{{'Supplier' | translate}}</h3>
   </div>
-  <!-- <app-header [showBackButton]="showBackButton" [nameObject]="'companie'" [showCreateButton]="false"></app-header> -->
   <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
-    <!-- <div class="row">
-      <h4 class="dspl-nn">id: {{fetchedCompanie._id}}</h4>
-    </div> -->
-
     <div class="row">
-
       <div class="col">
         <h5>{{'Identity' | translate}}</h5>
-
-
         <div class="form-group">
           <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedCompanie.name" required minlength="5" placeholder="Nom de la Société">
         </div>
-
         <div class="form-group">
           <input type="text" class="form-control" formControlName="email" [(ngModel)]="fetchedCompanie.email" required minlength="5" placeholder="Email">
         </div>
-
         <div class="form-group">
           <input type="text" class="form-control" formControlName="phoneNumber" [(ngModel)]="fetchedCompanie.phoneNumber" required minlength="5" placeholder="Numéro de téléphone">
         </div>
-
         <div class="form-group">
           <input type="text" class="form-control" formControlName="faxNumber" [(ngModel)]="fetchedCompanie.faxNumber" required minlength="5" placeholder="Numéro de Fax">
         </div>
@@ -36,37 +22,28 @@
         <!-- <div class="form-group">
           <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedCompanie.nameCompanie" required minlength="5" placeholder="Nom interlocuteur">
         </div>
-
         <div class="form-group">
           <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedCompanie.nameCompanie" required minlength="5" placeholder="Prénom interlocuteur">
         </div>
-
         <div class="form-group">
           <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedCompanie.nameCompanie" required minlength="5" placeholder="Téléphone interlocuteur">
         </div> -->
 
       </div>
       <div class="col">
-
         <h5>{{'Details' | translate}}</h5>
-
         <div class="form-group">
           <input type="text" class="form-control" formControlName="address" [(ngModel)]="fetchedCompanie.address.address" required minlength="5" placeholder="Numéro de rue">
         </div>
-
-
         <div class="form-group">
           <input type="text" class="form-control" formControlName="city" [(ngModel)]="fetchedCompanie.address.city" required minlength="2" placeholder="Ville">
         </div>
-
         <div class="form-group">
           <input type="text" class="form-control" formControlName="zip" [(ngModel)]="fetchedCompanie.address.zip" required minlength="5" placeholder="Code postal">
         </div>
-
         <div class="form-group">
           <input type="text" class="form-control" formControlName="state" [(ngModel)]="fetchedCompanie.address.zip" required minlength="5" placeholder="State">
         </div>
-
         <div class="form-group">
           <input type="text" class="form-control" formControlName="country" [(ngModel)]="fetchedCompanie.address.country" required minlength="5" placeholder="Pays">
         </div>
@@ -85,46 +62,17 @@
 
 
 
-    <div *ngIf="isMyCompanie()">
-      <button type="button" [routerLink]="['/user/paiement']">{{'Plan' | translate}}</button> {{'Plan' | translate}}: {{fetchedCompanie.planDetail.plan}} ({{fetchedCompanie.planDetail.current_period_end | date:'yyyy-MM-dd'}})
-    </div>
+
     <div class="form-group sln-inffrm">
-
-
-
-
-        <!-- <div class="form-group prmimg-cnt">
-          <div *ngFor="let singleForm of fetchedCompanie.forms; let i=index">
-            <img class="promo-img" height="50px" src="./uploads/forms/{{singleForm.owner}}/{{singleForm.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
-            <button type="button" class="dlt-btn" (click)="removeForm(i)">
-                    <i class="fa fa-trash"></i>
-                  </button>
-          </div>
-          <div>
-            <button type="button" md-button (click)="openDialog('img')" class="addpic-squr">{{'Add a picture' | translate}}<br><i class="fa fa-plus"></i></button>
-          </div>
-        </div> -->
-
-
-
-
-
-
-      <!-- <div *ngIf="isMyCompanie()" formGroupName="option"> -->
-
-          <h4>Options Calendar</h4>
-          <input type="text" class="form-control" formControlName="timeBegin" [(ngModel)]="fetchedCompanie.option.calendar.timeBegin" required minlength="1" placeholder="timeBegin">
-          <input type="text" class="form-control" formControlName="timeEnd" [(ngModel)]="fetchedCompanie.option.calendar.timeEnd" required minlength="1" placeholder="timeEnd">
-
-
+      <h4>Options Calendar</h4>
+      <input type="text" class="form-control" formControlName="timeBegin" [(ngModel)]="fetchedCompanie.option.calendar.timeBegin" required minlength="1" placeholder="timeBegin">
+      <input type="text" class="form-control" formControlName="timeEnd" [(ngModel)]="fetchedCompanie.option.calendar.timeEnd" required minlength="1" placeholder="timeEnd">
     </div>
 
     <div *ngIf="isMyCompanie()">
       <h4>type Users</h4>
-
       <div (click)="seeTypeUser=!seeTypeUser">See Categs Project</div>
       <div *ngIf="seeTypeUser">
-        <!-- {{fetchedCompanie.typeUsers|json}} -->
         <button type="button" (click)="addTypeUser()">addTypeUser</button>
         <div *ngFor="let typeUser of fetchedCompanie.typeUsers; let i=index;">
           <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.typeUsers[i].value">
@@ -173,37 +121,33 @@
           </div>
         </div>
       </div>
-      <button type="button" (click)="initDataToRemove()">Init Data</button>
 
+      <div *ngIf="1==2">
+        <div *ngIf="isMyCompanie()">
+          <button type="button" [routerLink]="['/user/paiement']">{{'Plan' | translate}}</button> {{'Plan' | translate}}: {{fetchedCompanie.planDetail.plan}} ({{fetchedCompanie.planDetail.current_period_end | date:'yyyy-MM-dd'}})
+        </div>        
+        <button type="button" (click)="initDataToRemove()">Init Data</button>
+        <h4>{{'banck' | translate}}</h4>
+        <h4>{{'Stripe' | translate}}</h4>
+        <md-radio-group class="example-radio-group" formControlName="serviceSelected" [(ngModel)]="fetchedCompanie.banck.serviceSelected">
+          <md-radio-button class="example-radio-button" *ngFor="let servicesBank of servicesBanks" [value]="servicesBank">
+            {{servicesBank}}
+          </md-radio-button>
+        </md-radio-group>
 
-
-
-      <h4>{{'banck' | translate}}</h4>
-
-      <h4>{{'Stripe' | translate}}</h4>
-
-      <md-radio-group class="example-radio-group" formControlName="serviceSelected" [(ngModel)]="fetchedCompanie.banck.serviceSelected">
-        <md-radio-button class="example-radio-button" *ngFor="let servicesBank of servicesBanks" [value]="servicesBank">
-          {{servicesBank}}
-        </md-radio-button>
-      </md-radio-group>
-
-      <input type="text" class="form-control" formControlName="secretKey" [(ngModel)]="fetchedCompanie.banck.stripe.secretKey" placeholder="secretKey">
-
+        <input type="text" class="form-control" formControlName="secretKey" [(ngModel)]="fetchedCompanie.banck.stripe.secretKey" placeholder="secretKey">
+      </div>
     </div>
 
 
 
     <div class="valid-edit">
       <button type="submit" class="sln-edt done">
-          Enregistrer
+          {{'Save' | translate}}
         </button>
-
-      <button *ngIf="isMyCompanyRoute && fetchedCompanie._id==''" type="button" (click)="saveMyCompanie()" class="sln-edt done">
+      <!-- <button *ngIf="isMyCompanyRoute && fetchedCompanie._id==''" type="button" (click)="saveMyCompanie()" class="sln-edt done">
             Save my companie
-        </button>
-
-
+        </button> -->
       <button *ngIf="fetchedCompanie._id" type="button" class="sln-edt done" (click)="onDelete(fetchedCompanie._id)">
           Delete
       </button>
