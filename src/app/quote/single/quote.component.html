@@ -15,14 +15,18 @@
       <div class="col-1">
       </div>  
       <div class="col">
-        <div class="row form-group">
+        <div class="row">
           <h4 class="dspl-nn">id: {{fetchedQuote._id}}</h4>
+        </div>  
+        <div class="row">  
           <button class="btn btn-primary" (click)="downloadPDF()">
           download PDF
         </button>
           <button class="btn btn-outline-primary" [routerLink]="['/quote/public/' + fetchedQuote._id]">
           Devis acces public
         </button>
+        </div>  
+        <div class="row">   
           <md-select formControlName="statusQuote" placeholder="" [(ngModel)]="fetchedQuote.statusQuote" name="statusQuote">
             <md-option *ngFor="let n of statusQuotes" [value]="n.indexStatus">
               {{n.label}}
