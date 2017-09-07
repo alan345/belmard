@@ -10,8 +10,9 @@
 
 
 .hdform {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  padding-top: 0px;
+  padding-bottom: 0px;
   color: #fff;
   text-align: center;
   background-color: rgba(148, 17, 17, 1);
