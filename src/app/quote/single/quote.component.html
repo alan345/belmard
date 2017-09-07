@@ -40,7 +40,19 @@
 
           </div>
         </div>
-
+        <div class="form-group">
+          <app-autocomplete [typeAutocomplete]="'user'" [title]="'Customer'" [singleChoice]="'true'" [arrayContent]="fetchedQuote.clients" (getResultAutocomplete)="selectUser($event[0])">
+          </app-autocomplete>
+        </div> 
+         <div class="form-group"> 
+            <app-autocomplete [typeAutocomplete]="'project'" [canDelete]="true" [title]="'Project'" [singleChoice]="true" [arrayContent]="fetchedQuote.projects" (getResultAutocomplete)="selectProject($event[0])">
+            </app-autocomplete>
+         </div>
+        <div class="form-group">
+            <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedQuote.name" required minlength="5" placeholder="Nom du quote">
+        </div>
+        
+        
       </div>
 
 
@@ -53,21 +65,17 @@
 
       <div class="col-sm-6">
         <div>
-          <!-- <app-autocomplete [typeAutocomplete]="'user'" [title]="'Owner Quote'" [singleChoice]="'true'" [arrayContent]="fetchedQuote.ownerQuotes" (getResultAutocomplete)="selectUser($event[0])">
-          </app-autocomplete> -->
+         
 
-          <app-autocomplete [typeAutocomplete]="'user'" [title]="'Customer'" [singleChoice]="'true'" [arrayContent]="fetchedQuote.clients" (getResultAutocomplete)="selectUser($event[0])">
-          </app-autocomplete>
-          <app-autocomplete [typeAutocomplete]="'project'" [canDelete]="true" [title]="'Project'" [singleChoice]="true" [arrayContent]="fetchedQuote.projects" (getResultAutocomplete)="selectProject($event[0])">
-          </app-autocomplete>
+          
 
           <div *ngFor="let project of fetchedQuote.projects">
             <div *ngFor="let user of project.assignedTos">
               Owner Project: {{user.profile.name}}
             </div>
           </div>
-          <label>{{'Name Quote' | translate}}</label>
-          <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedQuote.name" required minlength="5" placeholder="Nom du quote">
+          
+          
           <br>
           <div *ngFor="let client of fetchedQuote.clients">
             <div>name:{{client.profile.name}}</div>
