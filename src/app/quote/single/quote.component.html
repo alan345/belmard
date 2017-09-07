@@ -87,27 +87,6 @@
       
       <div class="col">
         
-        <div>
-              <select class="form-control" data-val="true" data-val-number="The field Estimate Template must be a number." id="InvoiceTemplateIDFK" name="InvoiceTemplateIDFK"><option value="30390">Mod&#232;le Facture</option>
-                <option selected="selected" value="30391">Mod&#232;le Devis</option>
-              </select>
-            </div>
-        
-        <div>
-              <select name="EstimateTaxConfigCode" class="form-control" id="EstimateTaxConfigCode" data-bind='options: EstimateTaxConfigCodes, optionsText: "Text", optionsValue:"Value", value: EstimateTaxConfigCode'></select>
-            </div>
-        
-        <div class="input-group">
-                <input id="DiscountPercent" name="DiscountPercent" class="form-control" data-bind='value: formattedDefaultDiscount' />
-                <span class="input-group-addon" style="color: #999;">%</span>
-              </div>
-        
-        <div>
-              <textarea class="form-control" cols="10" id="Subject" maxlength="255" name="Subject" rows="4"></textarea>
-            </div>
-        
-        
-        
       </div>  
 
 
@@ -116,7 +95,7 @@
 
 
 
-      <div>
+      <div class="col-sm-6">
         <div>
          
 
@@ -141,10 +120,41 @@
           </div>
         </div>
       </div>
-    
+      <div class="container row">
+        
+        <div class="col-sm-6 col-sm-offset-1">
+          <div class="form-group">
+            <label class="col-sm-4 control-label" for="InvoiceTemplateIDFK">Estimate Template</label>
+            <div class="col-sm-6">
+              <select class="form-control" data-val="true" data-val-number="The field Estimate Template must be a number." id="InvoiceTemplateIDFK" name="InvoiceTemplateIDFK"><option value="30390">Mod&#232;le Facture</option>
+                <option selected="selected" value="30391">Mod&#232;le Devis</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-4 control-label" for="EstimateTaxConfigCode">Amounts are</label>
+            <div class="col-sm-6">
+              <select name="EstimateTaxConfigCode" class="form-control" id="EstimateTaxConfigCode" data-bind='options: EstimateTaxConfigCodes, optionsText: "Text", optionsValue:"Value", value: EstimateTaxConfigCode'></select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-4 control-label" for="DiscountPercent">Discount</label>
+            <div class="col-sm-6">
+              <div class="input-group">
+                <input id="DiscountPercent" name="DiscountPercent" class="form-control" data-bind='value: formattedDefaultDiscount' />
+                <span class="input-group-addon" style="color: #999;">%</span>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-sm-4 control-label" for="Subject">Subject</label>
+            <div class="col-sm-6">
+              <textarea class="form-control" cols="10" id="Subject" maxlength="255" name="Subject" rows="4"></textarea>
+            </div>
+          </div>
         </div>
       </div>
-
+      <br><br>
 
 
 
