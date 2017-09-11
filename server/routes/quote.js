@@ -171,7 +171,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
         
             table {
                   margin: 10px;
-                  width: 50%;
+                  width: 100%;
                   }
 
               td {
