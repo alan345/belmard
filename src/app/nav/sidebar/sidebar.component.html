@@ -46,19 +46,7 @@
     </div>
 
 
-    <div *ngIf="authService.showObjHTML('userCalendar', 'read')" class="card noborder">
-      <div class="">
-        <a class="nav-link" [routerLink]="['/userCalendar', {idUserSearch: fetchedUser._id}]" data-toggle="collapse" data-parent="#accordion" routerLinkActive="active">
-          <span class="fa fa-calendar" aria-hidden="true"></span> {{'Planning'|translate}}</a>
-      </div>
-    </div>
 
-    <div *ngIf="authService.showObjHTML('product', 'read')" class="card noborder">
-      <div class="">
-        <a class="nav-link" [routerLink]="['/product']" data-toggle="collapse" data-parent="#accordion" routerLinkActive="active">
-          <span class="fa fa-calendar" aria-hidden="true"></span> {{'Products'|translate}}</a>
-      </div>
-    </div>
 
 
 
@@ -117,6 +105,13 @@
       </div>
     </div>
 
+    <div *ngIf="authService.showObjHTML('userCalendar', 'read')" class="card noborder">
+      <div class="">
+        <a class="nav-link" [routerLink]="['/userCalendar', {idUserSearch: fetchedUser._id}]" data-toggle="collapse" data-parent="#accordion" routerLinkActive="active">
+          <span class="fa fa-calendar" aria-hidden="true"></span> {{'Planning'|translate}}</a>
+      </div>
+    </div>
+
 
 
     <div *ngIf="authService.showObjHTML('quote', 'read')" class="card noborder">
@@ -145,7 +140,12 @@
       </div>
     </div>
 
-
+    <div *ngIf="authService.showObjHTML('product', 'read')" class="card noborder">
+      <div class="">
+        <a class="nav-link" [routerLink]="['/product']" data-toggle="collapse" data-parent="#accordion" routerLinkActive="active">
+          <span class="fa fa-calendar" aria-hidden="true"></span> {{'Products'|translate}}</a>
+      </div>
+    </div>
 
 
     <div *ngIf="authService.showObjHTML('paiementQuote', 'read')" class="card noborder">
