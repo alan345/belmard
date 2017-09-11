@@ -287,18 +287,18 @@
       </div>
 
 
-      <div class="row">
-        <div class="col-md-3">
+      <div class="row col-3">
+        <div class="row">
           <select class="form-control" #t (change)="addRow(t.value); t.value = ''">
             <option [attr.value]="''">{{'Add row' | translate}}</option>
             <option *ngFor="let n of rowTypes" [attr.value]="n.value">{{n.label}}</option>
           </select>
         </div>
-        <div class="col-md-3">
+        <div class="crow">
           <input type="text" class="form-control" placeholder="nameTemplate" #nameTemplate>
           <button type="button" class="btn btn-success" (click)="saveTemplateQuote(nameTemplate.value)">saveTemplateQuote</button>
         </div>
-        <div class="col-md-3">
+        <div class="row">
           <app-autocomplete [typeAutocomplete]="'templateQuote'" [title]="" [singleChoice]=true [arrayContent]="arrayContentToSearch" (getResultAutocomplete)="selectTemplateQuote($event[0])">
           </app-autocomplete>
         </div>
