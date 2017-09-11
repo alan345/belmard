@@ -180,7 +180,7 @@
         <!-- <button type="button" class="btn btn-success" (click)="addBucketProducts()">AddBucketProducts</button> -->
         <div *ngFor="let devisDetail of fetchedQuote.devisDetails; let i=index">
           <div class="row">
-          <input class="form-control col-md-3" type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].nameBucketProducts" placeholder="Category">
+          <input class="form-control col-2" type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].nameBucketProducts" placeholder="Category">
           <button type="button" class="btn btn-danger btn-sm" (click)="removeBucketProducts(i)"><i class="fa fa-times"></i></button>
           </div>
           <div [dragulaModel]='fetchedQuote.devisDetails[i].bucketProducts' [dragula]='"third-bag"'>
