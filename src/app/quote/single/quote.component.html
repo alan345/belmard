@@ -58,7 +58,7 @@
           </app-autocomplete>
         </div>
         <div class="form-group">
-          <app-autocomplete [typeAutocomplete]="" [canDelete]="true" [title]="'Project'" [singleChoice]="true" [arrayContent]="fetchedQuote.projects" (getResultAutocomplete)="selectProject($event[0])">
+          <app-autocomplete [typeAutocomplete]="'project'" [title]="'Project'" [singleChoice]="true" [arrayContent]="fetchedQuote.projects">
           </app-autocomplete>
         </div>
         <div class="form-group">
