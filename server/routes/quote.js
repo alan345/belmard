@@ -157,6 +157,11 @@ router.get('/pdf/:quoteId', function(req, res, next) {
 
         var html = ''
 
+
+
+        html += `<div id="pageHeader">Default header</div>`
+
+
         item.clients.forEach(user => {
           html += user.profile.name
           html += user.profile.title
@@ -170,13 +175,13 @@ router.get('/pdf/:quoteId', function(req, res, next) {
             <table>
               <thead>
                 <tr>
-                  <th>Description</th>
-                  <th>Illustration</th>
-                  <th>Unit</th>
-                  <th>Qté</th>
-                  <th>PU</th>
-                <th>Total HT</th>
-                <th>TVA</th>
+                  <th>Categ</th>
+                  <th>Type</th>
+                  <th>title</th>
+                  <th>priceWithoutTaxes</th>
+                  <th>VAT</th>
+                  <th>Product Name</th>
+                  <th>Discount</th>
                 </tr>
               </thead>
               <tbody>`
@@ -192,7 +197,6 @@ router.get('/pdf/:quoteId', function(req, res, next) {
             html += '<td>' + bucketProduct.title + '</td>'
             html += '<td>' + bucketProduct.priceWithoutTaxes + '</td>'
             html += '<td>' + bucketProduct.vat + '</td>'
-
             bucketProduct.productInit.forEach(product => {
               html += '<td>' + product.details.referenceName + '</td>'
             })
@@ -208,6 +212,8 @@ router.get('/pdf/:quoteId', function(req, res, next) {
             </table>
 
             `;
+
+        html += `<div id="pageFooter">Default Footer</div>`
 
         pdf.create(html, options).toFile('./server/uploads/pdf/' + req.params.quoteId + '.pdf', function(err, resPDF) {
           if (err) {
