@@ -302,17 +302,16 @@
           <app-autocomplete [typeAutocomplete]="'templateQuote'" [title]="" [singleChoice]=true [arrayContent]="arrayContentToSearch" (getResultAutocomplete)="selectTemplateQuote($event[0])">
           </app-autocomplete>
         </div>
-        <div class="col-md-3">
+        <div class="col-5">
         </div>
 
-      </div>
+      
 
 
 
-      <div class="row">
-        <div class="col-md-6">
-        </div>
-        <div class="col-md-4">
+      <div class="col-4">
+
+        <div class="">
           <div class="card" style="width:250px;">
             <div *ngIf="!fetchedQuote.signature.base64">
               <button type="button" class="delete" md-button (click)="resetSignature()">
@@ -336,6 +335,8 @@
           </div>
         </div>
       </div>
+     </div>     
+          
       <div (click)="togglePaiements()">Paiements</div>
       <div *ngIf="showPaiements">
         <button class="btn btn-success" type="button" md-button (click)="openDialog()">
