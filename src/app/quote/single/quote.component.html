@@ -251,14 +251,14 @@
                         </a>
               </div> -->
                 <div class="col-1">
-                  <input class="gooplusInput form-control ac fcp" type="number" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].quantity" placeholder="quantity">
+                  <input class="gooplusInput ac" type="number" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].quantity" placeholder="quantity">
                 </div>
                 <div class="col-2 ac">
-                  <input class="gooplusInput form-control ac fcp" type="number" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].priceWithoutTaxes" placeholder="priceWithoutTaxes">
+                  <input class="gooplusInput ac" type="number" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].priceWithoutTaxes" placeholder="priceWithoutTaxes">
                 </div>
 
                <div class="col-md-2 ac">
-                <input class="gooplusInput form-control ac fcp" type="text"
+                <input class="gooplusInput ac" type="text"
                   (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}"
                   [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].vat" placeholder="vat">
               </div>
