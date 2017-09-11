@@ -182,7 +182,9 @@ router.get('/pdf/:quoteId', function (req, res, next) {
           .col-11 {width: 91.66%;}
           .col-12 {width: 100%;}
 
-
+          .img {
+            height: 20px;
+            }
           .desc {
               text-align: left;
 
@@ -270,7 +272,7 @@ router.get('/pdf/:quoteId', function (req, res, next) {
               html += '<td>' + product.details.referenceName + '</td>'
               product.forms.forEach(form => {
                 let img = 'http://localhost/uploads/forms/' + form.owner + '/' + form.imagePath
-                html += '<td>' + '<img src="' + img + '">' + '</td>'
+                html += '<td>' + '<img class="img" src="' + img + '">' + '</td>'
               })
             })
             html += '<td>' + bucketProduct.discount + '</td>'
