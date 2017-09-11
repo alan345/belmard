@@ -143,7 +143,15 @@ router.get('/pdf/:quoteId', function (req, res, next) {
         path: 'assignedTos',
         model: 'User'
       }
-    }).populate({path: 'signature.users', model: 'User'}).populate({path: 'clients', model: 'User'}).populate({path: 'devisDetails.bucketProducts.productInit', model: 'Product'}).exec(function(err, item) {
+    }).populate({path: 'signature.users', model: 'User'}).populate({path: 'clients', model: 'User'})
+    .populate({
+      path: 'devisDetails.bucketProducts.productInit',
+      model: 'Product',
+      populate: {
+        path: 'forms',
+        model: 'Form'
+      }})
+    .exec(function(err, item) {
       if (err) {
         return res.status(404).json({message: '', err: err})
       }
@@ -160,8 +168,7 @@ router.get('/pdf/:quoteId', function (req, res, next) {
         html += `
         <style type="text/css">
 
-<<<<<<< HEAD
-=======
+
           .col-1 {width: 8.33%;}
           .col-2 {width: 16.66%;}
           .col-3 {width: 25%;}
@@ -175,7 +182,7 @@ router.get('/pdf/:quoteId', function (req, res, next) {
           .col-11 {width: 91.66%;}
           .col-12 {width: 100%;}
 
->>>>>>> 03ef290988c50db30d1723f778abf8b403450d1a
+
           .desc {
               text-align: left;
 
@@ -260,8 +267,8 @@ router.get('/pdf/:quoteId', function (req, res, next) {
             bucketProduct.productInit.forEach(product => {
               html += '<td>' + product.details.referenceName + '</td>'
               product.forms.forEach(form => {
-                html += form;
-                html += '<td>' + '<img src="./uploads/forms/{{form.owner}}/{{form.imagePath}}">' + '</td>'
+                let img = 'http://localhost/uploads/forms/' + form.owner + '/' + form.imagePath
+                html += '<td>' + '<img src="' + img + '">' + '</td>'
               })
             })
 
