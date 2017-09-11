@@ -156,7 +156,13 @@ router.get('/pdf/:quoteId', function(req, res, next) {
       } else {
 
         var html = ''
-
+        html += `
+        <style type="text/css">
+          .red {
+            color:red;
+          }
+        </style>
+        `
 
 
         html += `<div id="pageHeader">Default header</div>`
@@ -172,7 +178,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
 
         html += `
             <br><br>
-            <table>
+            <table class="red">
               <thead>
                 <tr>
                   <th>Categ</th>
