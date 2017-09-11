@@ -158,7 +158,20 @@ router.get('/pdf/:quoteId', function(req, res, next) {
         var html = ''
         html += `
         <style type="text/css">
-          
+
+          .col-1 {width: 8.33%;}
+          .col-2 {width: 16.66%;}
+          .col-3 {width: 25%;}
+          .col-4 {width: 33.33%;}
+          .col-5 {width: 41.66%;}
+          .col-6 {width: 50%;}
+          .col-7 {width: 58.33%;}
+          .col-8 {width: 66.66%;}
+          .col-9 {width: 75%;}
+          .col-10 {width: 83.33%;}
+          .col-11 {width: 91.66%;}
+          .col-12 {width: 100%;}
+
           .desc {
               text-align: left;
               
@@ -217,13 +230,13 @@ router.get('/pdf/:quoteId', function(req, res, next) {
             <table>
               <thead>
                 <tr>
-                  <th>Description</th>
-                  <th>Image</th>
-                  <th>Unit</th>
-                  <th>Quantity</th>
-                  <th>Unit Price</th>
-                  <th>Total tax excl</th>
-                  <th>Tax</th>
+                  <th class="col-4">Description</th>
+                  <th class="col-2">Image</th>
+                  <th class="col-1">Unit</th>
+                  <th class="col-1">Quantity</th>
+                  <th class="col-1">Unit Price</th>
+                  <th class="col-1">Total tax excl</th>
+                  <th class="col-2">Tax</th>
                 </tr>
               </thead>
               <tbody>`
