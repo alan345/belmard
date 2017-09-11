@@ -260,6 +260,15 @@ router.get('/pdf/:quoteId', function (req, res, next) {
         item.devisDetails.forEach(devisDetail => {
           html += '<tr>'
           html += '<td class="desc">' + devisDetail.nameBucketProducts + '</td>'
+          html += `
+                    <td class="desc"></td>
+                    <td class="desc"></td>
+                    <td class="desc"></td>
+                    <td class="desc"></td>
+                    <td class="desc"></td>
+                    <td class="desc"></td>
+                    <td class="desc"></td>
+          `
           html += '</tr>'
           devisDetail.bucketProducts.forEach(bucketProduct => {
             html += '<tr>'
@@ -279,7 +288,7 @@ router.get('/pdf/:quoteId', function (req, res, next) {
             html += '</tr>'
           })
         })
-        
+
         html += `
               </tbody>
             </table>
