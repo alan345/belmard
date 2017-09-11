@@ -161,6 +161,37 @@ router.get('/pdf/:quoteId', function(req, res, next) {
           .red {
             color:red;
           }
+          .desc {
+              text-align: left;
+              padding: 2px;
+          }
+          
+          .elem {
+                  text-align: center;
+                  padding: 2px;
+              }
+        
+            table {
+                  margin: 10px;
+                  }
+
+              td {
+                  font-size: 12px;
+                  height: 50px;
+                  vertical-align: center;
+                  border-left: 1px solid #ddd;
+                  border-right: 1px solid #ddd;
+               }
+  
+            th  {
+                font-size: 14px;
+                background-color: #dde;
+                color: white;
+
+                border: 1px solid #ddd;
+                }
+
+
         </style>
         `
 
@@ -178,31 +209,31 @@ router.get('/pdf/:quoteId', function(req, res, next) {
 
         html += `
             <br><br>
-            <table class="red">
+            <table>
               <thead>
                 <tr>
-                  <th>Categ</th>
-                  <th>Type</th>
-                  <th>title</th>
-                  <th>priceWithoutTaxes</th>
-                  <th>VAT</th>
-                  <th>Product Name</th>
-                  <th>Discount</th>
+                  <th>Description</th>
+                  <th>Image</th>
+                  <th>Unit</th>
+                  <th>Quantity</th>
+                  <th>Unit Price</th>
+                  <th>Total tax excl</th>
+                  <th>Tax</th>
                 </tr>
               </thead>
               <tbody>`
 
         item.devisDetails.forEach(devisDetail => {
           html += '<tr>'
-          html += '<td>' + devisDetail.nameBucketProducts + '</td>'
+          html += '<td class="desc">' + devisDetail.nameBucketProducts + '</td>'
           html += '</tr>'
           devisDetail.bucketProducts.forEach(bucketProduct => {
             html += '<tr>'
             html += '<td></td>'
-            html += '<td>' + bucketProduct.typeRow + '</td>'
-            html += '<td>' + bucketProduct.title + '</td>'
-            html += '<td>' + bucketProduct.priceWithoutTaxes + '</td>'
-            html += '<td>' + bucketProduct.vat + '</td>'
+            html += '<td class="elem">' + bucketProduct.typeRow + '</td>'
+            html += '<td class="elem">' + bucketProduct.title + '</td>'
+            html += '<td class="elem">' + bucketProduct.priceWithoutTaxes + '</td>'
+            html += '<td class="elem">' + bucketProduct.vat + '</td>'
             bucketProduct.productInit.forEach(product => {
               html += '<td>' + product.details.referenceName + '</td>'
             })
