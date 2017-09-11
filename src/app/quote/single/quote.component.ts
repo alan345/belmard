@@ -301,6 +301,7 @@ export class QuoteComponent implements OnInit {
       .subscribe(
         res => {
           console.log(res)
+           window.open( '/uploads/pdf/' + res );
 
         },
         error => {
