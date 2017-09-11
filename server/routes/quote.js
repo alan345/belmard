@@ -187,7 +187,7 @@ router.get('/pdf/:quoteId', function (req, res, next) {
               }
 
             table {
-                  empty-cells:show;
+                  empty-cells: show;
                   border-collapse: collapse;
                   margin-left: 10px;
                   margin-right: 10px;
@@ -237,8 +237,8 @@ router.get('/pdf/:quoteId', function (req, res, next) {
             <table>
               <thead>
                 <tr>
-                  <th class="col-4">Description</th>
-                  <th class="col-2">Image</th>
+                  <th class="col-5">Description</th>
+                  <th class="col-1">Image</th>
                   <th class="col-1">Unit</th>
                   <th class="col-1">Quantity</th>
                   <th class="col-1">Unit Price</th>
