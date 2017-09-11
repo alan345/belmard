@@ -43,7 +43,20 @@ router.get('/:id', function(req, res, next) {
         path: 'assignedTos',
         model: 'User'
       }
-    }).populate({path: 'signature.users', model: 'User'}).populate({path: 'clients', model: 'User'}).populate({path: 'devisDetails.bucketProducts.productInit', model: 'Product'}).exec(function(err, item) {
+    })
+    .populate({path: 'signature.users', model: 'User'})
+    .populate({path: 'clients', model: 'User'})
+    .populate({path: 'devisDetails.bucketProducts.productInit', model: 'Product'})
+    .populate({
+      path: 'devisDetails.bucketProducts.productInit',
+      model: 'Product',
+      populate: {
+        path: 'forms',
+        model: 'Form'
+      }
+
+    })
+    .exec(function(err, item) {
       if (err) {
         return res.status(404).json({message: '', err: err})
       }

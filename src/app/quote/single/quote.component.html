@@ -29,9 +29,9 @@
           <button type="button" class="btn btn-primary" (click)="downloadPDF()">
           download PDF
         </button>
-          <button class="btn btn-outline-primary" [routerLink]="['/quote/public/' + fetchedQuote._id]">
+    <!-- <button class="btn btn-outline-primary" [routerLink]="['/quote/public/' + fetchedQuote._id]">
           Devis acces public
-        </button>
+        </button> -->
         </div>
         <div class="row">
           <md-select formControlName="statusQuote" placeholder="" [(ngModel)]="fetchedQuote.statusQuote" name="statusQuote">
@@ -197,7 +197,14 @@
                   </div>
                 </div>
 
-                <div class="col-1">Image</div>
+                <div class="col-1">
+                  <div *ngIf="bucketProduct.typeRow=='product'">
+                    <div *ngFor="let product of fetchedQuote.devisDetails[i].bucketProducts[j].productInit">
+                      <app-picture [addPicture]=false [deletePicture]=false [forms]="product.forms"></app-picture>
+                    </div>
+                  </div>
+
+                </div>
 
                 <div class="col-3">
                   <div *ngIf="bucketProduct.typeRow=='product'">
