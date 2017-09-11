@@ -355,13 +355,14 @@
 
       </div>
       <br><br>
-      <div class="row valid-edit">
-        <button type="submit" class="btn btn-success">{{'Save' | translate}}</button>
-        <button *ngIf="fetchedQuote._id" type="button" class="delete" md-button (click)="openDialogDelete()">
-          Delete
-        </button>
+      <div class="col"
+        <div class="valid-edit">
+          <button type="submit" class="btn btn-success">{{'Save' | translate}}</button>
+          <button *ngIf="fetchedQuote._id" type="button" class="delete" md-button (click)="openDialogDelete()">
+            Delete
+          </button>
+        </div>
       </div>
-
     </div>
   </form>
 </div>
