@@ -302,6 +302,7 @@
           <app-autocomplete [typeAutocomplete]="'templateQuote'" [title]="" [singleChoice]=true [arrayContent]="arrayContentToSearch" (getResultAutocomplete)="selectTemplateQuote($event[0])">
           </app-autocomplete>
         </div>
+        </div>
         <div class="col-5">
         </div>
 
@@ -335,7 +336,7 @@
           </div>
         </div>
       </div>
-     </div>     
+          
           
       <div (click)="togglePaiements()">Paiements</div>
       <div *ngIf="showPaiements">
