@@ -11,6 +11,9 @@ var express = require('express'),
   shared = require('./shared.js'),
   nameObject = 'quote'
 
+var fs = require('fs');
+var pdf = require('html-pdf');
+
 // this process does not hang the nodejs server on error
 process.on('uncaughtException', function(err) {
   console.log(err);
@@ -33,20 +36,14 @@ router.get('/:id', function(req, res, next) {
 
     // let findQuery = {}
     // findQuery['_id'] = req.params.id
-    Quote
-    .findById({_id: req.params.id})
-    .populate({
+    Quote.findById({_id: req.params.id}).populate({
       path: 'projects',
       model: 'Project',
       populate: {
         path: 'assignedTos',
-        model: 'User',
+        model: 'User'
       }
-    })
-    .populate({path: 'signature.users', model: 'User'})
-    .populate({path: 'clients', model: 'User'})
-    .populate({path: 'devisDetails.bucketProducts.productInit', model: 'Product'})
-    .exec(function(err, item) {
+    }).populate({path: 'signature.users', model: 'User'}).populate({path: 'clients', model: 'User'}).populate({path: 'devisDetails.bucketProducts.productInit', model: 'Product'}).exec(function(err, item) {
       if (err) {
         return res.status(404).json({message: '', err: err})
       }
@@ -92,7 +89,7 @@ router.use('/', function(req, res, next) {
             }
           })
         }
-        if(!shared.isCurentUserHasAccess(doc, 'quote', 'read')) {
+        if (!shared.isCurentUserHasAccess(doc, 'quote', 'read')) {
           return res.status(404).json({
             title: 'No rights',
             error: {
@@ -109,13 +106,110 @@ router.use('/', function(req, res, next) {
   })
 });
 
+
+
+router.get('/pdf/:quoteId', function(req, res, next) {
+
+
+  var options = {
+    format: 'Letter'
+  };
+
+
+
+
+
+    Quote.findById((req.params.quoteId), function(err, obj) {
+      if (err) {
+        return res.status(500).json({message: 'An error occured', err: err})
+      }
+      if (!obj) {
+        return res.status(404).json({
+          title: 'No form found',
+          error: {
+            message: 'Form not found!'
+          }
+        })
+      }
+
+      // let findQuery = {}
+      // findQuery['_id'] = req.params.id
+      Quote.findById({_id: req.params.quoteId}).populate({
+        path: 'projects',
+        model: 'Project',
+        populate: {
+          path: 'assignedTos',
+          model: 'User'
+        }
+      }).populate({path: 'signature.users', model: 'User'}).populate({path: 'clients', model: 'User'}).populate({path: 'devisDetails.bucketProducts.productInit', model: 'Product'}).exec(function(err, item) {
+        if (err) {
+          return res.status(404).json({message: '', err: err})
+        }
+        if (!item) {
+          return res.status(404).json({
+            title: 'No obj found',
+            error: {
+              message: 'Obj not found!'
+            }
+          })
+        } else {
+
+
+            var html =  item + `
+            <table>
+               <tr>
+                   <td>Carmen</td>
+                   <td>33 ans</td>
+                   <td>Espagne</td>
+               </tr>
+               <tr>
+                   <td>Michelle</td>
+                   <td>26 ans</td>
+                   <td>États-Unis</td>
+               </tr>
+            </table>
+            `
+
+            pdf.create(html, options).toFile('./server/uploads/pdf/' + req.params.quoteId + '.pdf', function(err, res) {
+              if (err) {
+                //return res.status(404).json({message: '', err: err})
+              } else {
+                //
+              }
+            })
+
+            res.status(200).json({message: 'Success', item: req.params.quoteId + '.pdf' })
+
+
+
+        }
+      })
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+})
+
+
+
+
+
+
 router.get('/graph/:year', function(req, res, next) {
   // let searchQuery = {}
   // searchQuery['ownerCompanies'] = req.user.ownerCompanies
 
   let dateBegin = req.params.year * 1 + '-01-01'
   let dateEnd = req.params.year * 1 + 1 + '-01-01'
-
 
   // if (req.query.search)
   //   searchQuery['details.name'] = new RegExp(req.query.search, 'i')
@@ -131,7 +225,6 @@ router.get('/graph/:year', function(req, res, next) {
   }
 
   aggregate.ownerCompanies = req.user.ownerCompanies
-
 
   Quote.aggregate({
     $match: aggregate
@@ -188,7 +281,6 @@ router.put('/:id', function(req, res, next) {
     item.detail = req.body.detail
     item.statusQuote = req.body.statusQuote
 
-
     item.save(function(err, result) {
       if (err) {
         return res.status(404).json({message: 'There was an error, please try again', err: err});
@@ -198,30 +290,33 @@ router.put('/:id', function(req, res, next) {
   })
 });
 
-
-
 //update
 router.put('/:id/signature', function(req, res, next) {
   if (!shared.isCurentUserHasAccess(req.user, nameObject, 'write'))
-    return res.status(404).json({ title: 'No rights', error: { message: 'No rights' }})
+    return res.status(404).json({
+      title: 'No rights',
+      error: {
+        message: 'No rights'
+      }
+    })
 
   Quote.findById(({_id: req.params.id}), function(err, item) {
-    if (err) { return res.status(404).json({message: '', err: err}) }
+    if (err) {
+      return res.status(404).json({message: '', err: err})
+    }
     item.signature = req.body.signature
     item.save(function(err, result) {
-      if (err) { return res.status(404).json({message: 'There was an error, please try again', err: err}) }
-      shared.postNotification(req, 'quote')
-      .then(()=> {
+      if (err) {
+        return res.status(404).json({message: 'There was an error, please try again', err: err})
+      }
+      shared.postNotification(req, 'quote').then(() => {
         res.status(201).json({message: '', obj: result});
-      })
-      .catch((error) => {
+      }).catch((error) => {
         return res.status(404).json({message: 'There was an error, please try again', err: err})
       })
     });
   })
 });
-
-
 
 router.post('/', function(req, res, next) {
   if (!shared.isCurentUserHasAccess(req.user, nameObject, 'write')) {
@@ -264,15 +359,12 @@ router.get('/page/:page', function(req, res, next) {
 
   let searchQuery = {}
 
-
-  if(req.query.isQuoteAssignedToMe === 'true') {
+  if (req.query.isQuoteAssignedToMe === 'true') {
     searchQuery['clients'] = req.user._id
   } else {
     searchQuery['ownerCompanies'] = req.user.ownerCompanies
 
   }
-
-
 
   if (req.query.search) {
     //  nameQuery['name'] = new RegExp(req.query.search, 'i')
@@ -298,11 +390,9 @@ router.get('/page/:page', function(req, res, next) {
   if (req.query.projectId)
     searchQuery['projects'] = mongoose.Types.ObjectId(req.query.projectId)
 
-  Quote.find(searchQuery)
-  .populate({path: 'clients', model: 'User'})
+  Quote.find(searchQuery).populate({path: 'clients', model: 'User'})
   // .populate({path: 'devisDetails.bucketProducts.productInit', model: 'Product'})
-  .limit(itemsPerPage).skip(skip)
-  .sort(req.query.orderBy).exec(function(err, item) {
+    .limit(itemsPerPage).skip(skip).sort(req.query.orderBy).exec(function(err, item) {
     if (err) {
       return res.status(404).json({message: 'No results', err: err})
     } else {

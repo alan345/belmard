@@ -295,7 +295,20 @@ export class QuoteComponent implements OnInit {
 
   }
 
+
   downloadPDF() {
+    this.quoteService.downloadPDF(this.fetchedQuote._id)
+      .subscribe(
+        res => {
+          console.log(res)
+
+        },
+        error => {
+          console.log(error);
+        }
+      )
+  }
+  downloadPDF2() {
     let this2 = this
     let base64image = this.getBase64Image(this.imgLogoUrl).then(function(dataImg: any) {
 
@@ -347,11 +360,11 @@ export class QuoteComponent implements OnInit {
       doc.text(135, verticalPointer, 'PU');
       doc.text(150, verticalPointer, 'Total HT');
       doc.text(180, verticalPointer, 'TVA');
-      
+
       doc.line(10, 125, 200, 125)
        doc.line(10, 135, 200, 135)
        doc.line(10, 270, 200, 270)
-       
+
       doc.line(10, 125, 10, 270)
       doc.line(70, 125, 70, 270)
       doc.line(100, 125, 100, 270)
@@ -360,8 +373,8 @@ export class QuoteComponent implements OnInit {
       doc.line(145, 125, 145, 270)
       doc.line(175, 125, 175, 270)
       doc.line(200, 125, 200, 270)
-      
-      
+
+
 
 
 

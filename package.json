@@ -39,6 +39,7 @@
     "express": "latest",
     "gm": "latest",
     "hammerjs": "^2.0.8",
+    "html-pdf": "^2.1.0",
     "jsonwebtoken": "^7.1.9",
     "mime": "latest",
     "mongodb": "2.2.25",

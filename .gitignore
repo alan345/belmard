@@ -17,7 +17,7 @@
 
 # media
 /server/uploads/forms
-/server/uploads/profiles
+/server/uploads/pdf
 
 # IDEs and editors
 /.idea

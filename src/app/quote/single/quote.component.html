@@ -11,13 +11,13 @@
   <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
     <div class="row">
       <div class="col-1">
-      </div>  
+      </div>
       <div class="col-3">
       <h4 class="dspl-nn">id: {{fetchedQuote._id}}</h4>
-      </div> 
+      </div>
       <div class="col-8">
-      </div>  
-      
+      </div>
+
     </div>
 
     <div class="row">
@@ -26,7 +26,7 @@
       <div class="col-3">
 
         <div class="row">
-          <button class="btn btn-primary" (click)="downloadPDF()">
+          <button type="button" class="btn btn-primary" (click)="downloadPDF()">
           download PDF
         </button>
           <button class="btn btn-outline-primary" [routerLink]="['/quote/public/' + fetchedQuote._id]">
@@ -130,7 +130,7 @@
 
 
 
-      
+
         <div class="col-1">
       </div>
         <div class="col-10">
@@ -166,7 +166,7 @@
 
       <div class="form-control">
         <div class="row ac">
-          <div class="h6 col-1"></div>          
+          <div class="h6 col-1"></div>
           <div class="h6 col-md-1">{{'Image' | translate}}</div>
           <div class="h6 col-3">{{'Item' | translate}}</div>
           <!-- <div class="h6 col-md-2">{{'Ref' | translate}}</div> -->
@@ -187,16 +187,16 @@
             <div *ngFor="let bucketProduct of devisDetail.bucketProducts; let j=index">
 
               <div class="row ac">
-                
+
                 <div class="col-1">
                   <div class="row">
                   <button type="button" class="btn btn-danger btn-sm" (click)="removeRow(i, j)"><i class="fa fa-times"></i></button>
 
                   <button type="button" class="btn btn-sm handle"><i class="fa fa-arrows handle"></i></button>
                   <!-- <button type="button" class="btn btn-sm" (click)="editRaw(i, j)"><i class="fa fa-times"></i></button> -->
-                  </div>  
+                  </div>
                 </div>
-                
+
                 <div class="col-1">Image</div>
 
                 <div class="col-3">
@@ -312,7 +312,7 @@
       <div class="col-5">
         <textarea class="form-control" rows="10" placeholder="Infos" ></textarea>
       </div>
-      
+
 
 
 
@@ -342,8 +342,8 @@
           </div>
         </div>
       </div>
-     </div>   
-          
+     </div>
+
       <div (click)="togglePaiements()">Paiements</div>
       <div *ngIf="showPaiements">
         <button class="btn btn-success" type="button" md-button (click)="openDialog()">
@@ -356,14 +356,14 @@
         <br> {{'To be paid' | translate}} = {{fetchedQuote.priceQuote.priceQuoteWithoutTaxes*1 - totalPaiementAmount*1| round}}
         <!-- <app-paiementQuote [showHeader]="false" (newPaiementQuoteSaved)="newPaiementQuoteSaved()">
         </app-paiementQuote> -->
-       </div>  
-        
-      
+       </div>
+
+
 
       </div>
       <div class="col-1">
       </div>
-      
+
       <br><br>
       <div class="col-12">
         <div class="valid-edit">

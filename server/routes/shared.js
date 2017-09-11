@@ -5,7 +5,7 @@ module.exports = {
 
   isCurentUserHasAccess(user, nameObject, typeAccess) {
     // console.log(user, nameObject, typeAccess)
-    console.log(user.rights)
+    // console.log(user.rights)
     if (!user.rights.length)
       return true
 
