@@ -250,19 +250,19 @@
                           {{bucketProduct.productInit.details.reference}}
                         </a>
               </div> -->
-                <div class="col-1">
+                <div class="col-1 ac">
                   <input class="gooplusInput form-control" type="number" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].quantity" placeholder="quantity">
                 </div>
-                <div class="col-2">
+                <div class="col-2 ac">
                   <input class="gooplusInput form-control" type="number" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].priceWithoutTaxes" placeholder="priceWithoutTaxes">
                 </div>
 
-               <div class="col-md-2">
+               <div class="col-md-2 ac">
                 <input class="gooplusInput form-control" type="text"
                   (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}"
                   [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].vat" placeholder="vat">
               </div>
-                <div class="col-2">
+                <div class="col-2 ac">
                   {{fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithoutTaxes | round}}
                 </div>
                <!-- <div class="col-2">
