@@ -348,7 +348,18 @@ export class QuoteComponent implements OnInit {
       doc.text(150, verticalPointer, 'Total HT');
       doc.text(180, verticalPointer, 'TVA');
       
-      doc.line(10, 120, 200, 120)
+      doc.line(10, 130, 200, 130)
+       doc.line(10, 140, 200, 140)
+      doc.line(10, 130, 10, 270)
+      doc.line(60, 130, 60, 270)
+      doc.line(100, 130, 100, 270)
+      doc.line(115, 130, 115, 270)
+      doc.line(130, 130, 130, 270)
+      doc.line(145, 130, 145, 270)
+      doc.line(175, 130, 175, 270)
+      doc.line(200, 130, 200, 270)
+      
+      
 
 
 
