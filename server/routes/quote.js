@@ -175,16 +175,19 @@ router.get('/pdf/:quoteId', function(req, res, next) {
             <table>`;
 
             item.devisDetails.forEach(devisDetail => {
-              html += '<tr>'
+              // html += '<tr>'
+              html += devisDetail.nameBucketProducts
+              html += 'ppp'
               devisDetail.bucketProducts.forEach(bucketProduct=> {
-                html += '<td>'
+                html += 'aa'
+                // html += '<td>'
                 html += bucketProduct.title
-                html += '</td>'
-                html += '<td>'
+                // html += '</td>'
+                // html += '<td>'
                 html += bucketProduct.totalPriceWithoutTaxes
-                html += '</td>'
+                // html += '</td>'
               })
-              html += '</tr>'
+              // html += '</tr>'
             })
             html += `
                <tr>
