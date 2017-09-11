@@ -114,7 +114,7 @@ router.use('/', function(req, res, next) {
   })
 });
 
-router.get('/pdf/:quoteId', function(req, res, next) {
+router.get('/pdf/:quoteId', function (req, res, next) {
 
   var options = {
     format: 'Letter'
@@ -158,17 +158,17 @@ router.get('/pdf/:quoteId', function(req, res, next) {
         var html = ''
         html += `
         <style type="text/css">
-          
+
           .desc {
               text-align: left;
-              
+
           }
-          
+
           .elem {
                   text-align: center;
-                  
+
               }
-        
+
             table {
                   margin: 10px;
                   width: 100%;
@@ -181,13 +181,13 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                   border-left: 1px solid #ddd;
                   border-right: 1px solid #ddd;
                }
-      
+
                tr {
                   border-left: 1px solid #ddd;
                   border-right: 1px solid #ddd;
-                  }   
-                
-  
+                  }
+
+
             th  {
                 font-size: 11px;
                 background-color: #dda;
@@ -241,6 +241,10 @@ router.get('/pdf/:quoteId', function(req, res, next) {
             html += '<td class="elem">' + bucketProduct.vat + '</td>'
             bucketProduct.productInit.forEach(product => {
               html += '<td>' + product.details.referenceName + '</td>'
+              product.forms.forEach(form => {
+                html += form;
+                html += '<td>' + '<img src="./uploads/forms/{{form.owner}}/{{form.imagePath}}">' + '</td>'
+              })
             })
 
             html += '<td>' + bucketProduct.discount + '</td>'
