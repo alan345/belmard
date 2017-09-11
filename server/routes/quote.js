@@ -170,6 +170,30 @@ router.get('/pdf/:quoteId', function(req, res, next) {
 
             var html = `
 
+            <table>
+              <thead>
+                <tr>
+                  <th>Description</th>
+                  <th>Illustration</th>
+                  <th>Unit</th>
+                  <th>Qté</th>
+                  <th>PU</th>
+                <th>Total HT</th>
+                <th>TVA</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>2</td>
+                  <td>3</td>
+                  <td>4</td>
+                  <td>5</td>
+                <td>6</td>
+                <td>7</td>	  
+                </tr>
+              </tbody>
+            </table>
 
             <br><br><br><br><br><br><br><br>
             <table>`;
