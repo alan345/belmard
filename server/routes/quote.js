@@ -158,9 +158,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
         var html = ''
         html += `
         <style type="text/css">
-          .red {
-            color:red;
-          }
+          
           .desc {
               text-align: left;
               padding: 2px;
@@ -182,10 +180,16 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                   border-left: 1px solid #ddd;
                   border-right: 1px solid #ddd;
                }
+      
+               tr {
+                  border-left: 1px solid #ddd;
+                  border-right: 1px solid #ddd;
+                  }   
+                
   
             th  {
                 font-size: 14px;
-                background-color: #dde;
+                background-color: #dda;
                 color: white;
 
                 border: 1px solid #ddd;
