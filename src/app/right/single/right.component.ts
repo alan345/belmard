@@ -61,6 +61,8 @@ export class RightComponent implements OnInit {
       [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
     {name : 'Expense', value: 'expense', typeAccess:
       [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
+    {name : 'Comment', value: 'comment', typeAccess:
+      [{value:'read',name:'Read'},{value:'write',name:'Write'}]},
 
   ]
   constructor(
