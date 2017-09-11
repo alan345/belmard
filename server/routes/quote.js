@@ -279,6 +279,7 @@ router.get('/pdf/:quoteId', function (req, res, next) {
             html += '</tr>'
           })
         })
+        
         html += `
               </tbody>
             </table>
