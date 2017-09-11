@@ -187,8 +187,10 @@ router.get('/pdf/:quoteId', function (req, res, next) {
               }
 
             table {
+                  empty-cells:show;
                   border-collapse: collapse;
-                  margin: 10px;
+                  margin-left: 10px;
+                  margin-right: 10px;
                   width: 100%;
                   }
 
