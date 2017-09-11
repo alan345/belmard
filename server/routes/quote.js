@@ -189,8 +189,8 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                   }
 
               td {
-                  font-size: 10px;
-                  height: 50px;
+                  font-size: 9px;
+                  height: 20px;
                   vertical-align: center;
                   border-left: 1px solid #ddd;
                   border-right: 1px solid #ddd;
@@ -203,8 +203,8 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                 
   
             th  {
-                font-size: 11px;
-                background-color: #dda;
+                font-size: 10px;
+                background-color: #595959;
                 color: white;
 
                 border: 1px solid #ddd;
