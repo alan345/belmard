@@ -33,7 +33,7 @@ var quote = new Schema({
             typeRow:{type: String},
             title:{type: String, default: ['']},
             // isProduct: {type: Boolean, default: [true]},
-            title: {type: String},
+            // title: {type: String},
             priceWithoutTaxes: {type: Number},
             priceWithTaxes: {type: Number},
             totalPriceWithoutTaxes: {type: Number},

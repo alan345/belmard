@@ -147,14 +147,17 @@ router.get('/pdf/:quoteId', function(req, res, next) {
 
       // let findQuery = {}
       // findQuery['_id'] = req.params.id
-      Quote.findById({_id: req.params.quoteId}).populate({
+      Quote.findById({_id: req.params.quoteId})
+      .populate({
         path: 'projects',
         model: 'Project',
         populate: {
           path: 'assignedTos',
           model: 'User'
         }
-      }).populate({path: 'signature.users', model: 'User'}).populate({path: 'clients', model: 'User'}).populate({path: 'devisDetails.bucketProducts.productInit', model: 'Product'}).exec(function(err, item) {
+      }).populate({path: 'signature.users', model: 'User'})
+      .populate({path: 'clients', model: 'User'})
+      .populate({path: 'devisDetails.bucketProducts.productInit', model: 'Product'}).exec(function(err, item) {
         if (err) {
           return res.status(404).json({message: '', err: err})
         }
@@ -168,8 +171,19 @@ router.get('/pdf/:quoteId', function(req, res, next) {
         } else {
 
 
-            var html = `
+            var html = ''
 
+            item.clients.forEach(user => {
+              html += user.profile.name
+              html += user.profile.title
+              html += user.profile.lastName
+              html += user.profile.phoneNumber
+              html += user.profile.fax
+            })
+
+
+            html += `
+            <br><br>
             <table>
               <thead>
                 <tr>
@@ -182,50 +196,37 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                 <th>TVA</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>2</td>
-                  <td>3</td>
-                  <td>4</td>
-                  <td>5</td>
-                <td>6</td>
-                <td>7</td>	  
-                </tr>
+              <tbody>`
+
+              item.devisDetails.forEach(devisDetail => {
+                html += '<tr>'
+                  html += '<td>' + devisDetail.nameBucketProducts +'</td>'
+                html += '</tr>'
+                devisDetail.bucketProducts.forEach(bucketProduct=> {
+                  html += '<tr>'
+                  html += '<td></td>'
+                  html += '<td>' + bucketProduct.typeRow +'</td>'
+                  html += '<td>' + bucketProduct.title +'</td>'
+                  html += '<td>' + bucketProduct.priceWithoutTaxes +'</td>'
+                  html += '<td>' + bucketProduct.vat +'</td>'
+
+                  bucketProduct.productInit.forEach(product=> {
+                    html += '<td>' + product.details.referenceName +'</td>'
+                  })
+
+                  html += '<td>' + bucketProduct.discount +'</td>'
+                  html += '</tr>'
+                })
+
+              })
+
+              html += `
               </tbody>
             </table>
 
-            <br><br><br><br><br><br><br><br>
-            <table>`;
+            `;
 
-            item.devisDetails.forEach(devisDetail => {
-              // html += '<tr>'
-              html += devisDetail.nameBucketProducts
-              html += 'ppp'
-              devisDetail.bucketProducts.forEach(bucketProduct=> {
-                html += 'aa'
-                // html += '<td>'
-                html += bucketProduct.title
-                // html += '</td>'
-                // html += '<td>'
-                html += bucketProduct.totalPriceWithoutTaxes
-                // html += '</td>'
-              })
-              // html += '</tr>'
-            })
-            html += `
-               <tr>
-                   <td>Carmen</td>
-                   <td>33 ans</td>
-                   <td>Espagne</td>
-               </tr>
-               <tr>
-                   <td>Michelle</td>
-                   <td>26 ans</td>
-                   <td>États-Unis</td>
-               </tr>
-            </table>
-            `
+
 
             pdf.create(html, options).toFile('./server/uploads/pdf/' + req.params.quoteId + '.pdf', function(err, res) {
               if (err) {
