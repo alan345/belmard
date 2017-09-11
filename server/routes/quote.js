@@ -161,12 +161,12 @@ router.get('/pdf/:quoteId', function(req, res, next) {
           
           .desc {
               text-align: left;
-              padding: 2px;
+              
           }
           
           .elem {
                   text-align: center;
-                  padding: 2px;
+                  
               }
         
             table {
@@ -174,7 +174,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                   }
 
               td {
-                  font-size: 12px;
+                  font-size: 10px;
                   height: 50px;
                   vertical-align: center;
                   border-left: 1px solid #ddd;
@@ -188,7 +188,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                 
   
             th  {
-                font-size: 14px;
+                font-size: 11px;
                 background-color: #dda;
                 color: white;
 
