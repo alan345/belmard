@@ -294,7 +294,7 @@
             <option *ngFor="let n of rowTypes" [attr.value]="n.value">{{n.label}}</option>
           </select>
         </div>
-        <div class="crow">
+        <div class="row">
           <input type="text" class="form-control" placeholder="nameTemplate" #nameTemplate>
           <button type="button" class="btn btn-success" (click)="saveTemplateQuote(nameTemplate.value)">saveTemplateQuote</button>
         </div>
