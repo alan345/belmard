@@ -273,7 +273,6 @@ router.get('/pdf/:quoteId', function (req, res, next) {
                 html += '<td>' + '<img src="' + img + '">' + '</td>'
               })
             })
-
             html += '<td>' + bucketProduct.discount + '</td>'
             html += '</tr>'
           })
