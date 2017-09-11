@@ -168,9 +168,25 @@ router.get('/pdf/:quoteId', function(req, res, next) {
         } else {
 
 
-            var html =  item + `
+            var html = `
+
+
             <br><br><br><br><br><br><br><br>
-            <table>
+            <table>`;
+
+            item.devisDetails.forEach(devisDetail => {
+              html += '<tr>'
+              devisDetail.bucketProducts.forEach(bucketProduct=> {
+                html += '<td>'
+                html += bucketProduct.title
+                html += '</td>'
+                html += '<td>'
+                html += bucketProduct.totalPriceWithoutTaxes
+                html += '</td>'
+              })
+              html += '</tr>'
+            })
+            html += `
                <tr>
                    <td>Carmen</td>
                    <td>33 ans</td>
