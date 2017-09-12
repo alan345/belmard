@@ -205,6 +205,10 @@ router.get('/pdf/:quoteId', function (req, res, next) {
                   font-size: 10px;
 
               }
+            .inf2 {
+                  font-size: 9px;
+
+              }
 
                .nobo {
                   border-top: none!important;
@@ -343,13 +347,13 @@ router.get('/pdf/:quoteId', function (req, res, next) {
               <thead>
                 <tr>
                   <th class="col-3 desc"><p>Entreprise</p>
-                                        <p>Lu et approuvé</p>
-                                        <p>Le</p>
+                                        <p class="inf2">Lu et approuvé</p>
+                                        <p class="inf2">Le</p>
                   </th>
                   <th class="col-6 nobo"></th>
                   <th class="col-3 desc"><p>Client</p>
-                                        <p>Lu et approuvé</p>
-                                        <p>Le</p></th>
+                                        <p class="inf2">Lu et approuvé</p>
+                                        <p class="inf2">Le</p></th>
                  
                 </tr>
               </thead>
