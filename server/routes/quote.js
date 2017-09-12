@@ -325,9 +325,13 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                            <th class="col-4 cobo desc">`
                  item.clients.forEach(user => {
                    html += user.profile.name
+                   html += '<br>'
                    html += user.profile.title
+                   html += '<br>'
                    html += user.profile.lastName
+                   html += '<br>'
                    html += user.profile.phoneNumber
+                   html += '<br>'
                    html += user.profile.fax
                  })
                  html += `</th>
@@ -394,7 +398,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                              <td class="desc"></td>
                              <td class="desc"></td>
                              <td class="desc"></td>
-                             <td class="desc"></td>
+
                    `
                    html += '</tr>'
                    devisDetail.bucketProducts.forEach(bucketProduct => {
