@@ -198,6 +198,14 @@ router.get('/pdf/:quoteId', function (req, res, next) {
 
               }
 
+            .coor  {
+                font-size: 10px;
+                background-color: #fff!imporant;
+                color: black!important;
+                border: 0px!important;
+
+
+                }
             table {
                   empty-cells: show!important;
                   border-collapse: collapse;
@@ -238,10 +246,10 @@ router.get('/pdf/:quoteId', function (req, res, next) {
 
         html += `<div id="pageHeader">Default header</div>`
 
-        html += `<table>
+        html += `<table class="coor">
               <thead>
                 <tr>
-                  <th class="col-4">item.clients.forEach(user => {
+                  <th class="col-4 coor">item.clients.forEach(user => {
                                     html += user.profile.name
                                     html += user.profile.title
                                     html += user.profile.lastName
