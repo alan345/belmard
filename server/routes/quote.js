@@ -339,7 +339,24 @@ router.get('/pdf/:quoteId', function (req, res, next) {
               </tbody>
             </table>
 
-            `;
+            `       
+        ;
+        
+        html += `<table>
+              <thead>
+                <tr>
+                  <th class="col-3desc">Entreprise
+                                        Lu et approuvé
+                                        Le
+                  </th>
+                  <th class="col-6 nobo"></th>
+                  <th class="col-3desc">Client
+                                        Lu et approuvé
+                                        Le</th>
+                 
+                </tr>
+              </thead>
+            </table>`
 
         html += `<div id="pageFooter">Default Footer</div>`
 
