@@ -26,7 +26,7 @@ import { PaiementQuote } from '../../paiementQuote/paiementQuote.model';
 import { PaiementQuoteDialogComponent } from '../../paiementQuote/single/dialog/paiementQuoteDialog.component'
 
 import { TranslateService } from '../../translate/translate.service';
-declare let jsPDF;
+// declare let jsPDF;
 import { SignaturePad } from 'angular2-signaturepad/signature-pad';
 import { PaiementQuotesComponent } from '../../paiementQuote/paiementQuotes/paiementQuotes.component';
 
@@ -40,6 +40,7 @@ export class QuoteComponent implements OnInit {
   @ViewChild(SignaturePad) signaturePad: SignaturePad;
   @ViewChild(PaiementQuotesComponent) paiementQuotesComponent: PaiementQuotesComponent;
 
+  loading: boolean=false;
 
   search: any = {
     projectId: '',
@@ -297,11 +298,13 @@ export class QuoteComponent implements OnInit {
 
 
   downloadPDF() {
+    this.loading = true
     this.quoteService.downloadPDF(this.fetchedQuote._id)
       .subscribe(
         res => {
           console.log(res)
            window.open( '/uploads/pdf/' + res );
+           this.loading = false
 
         },
         error => {
@@ -309,99 +312,99 @@ export class QuoteComponent implements OnInit {
         }
       )
   }
-  downloadPDF2() {
-    let this2 = this
-    let base64image = this.getBase64Image(this.imgLogoUrl).then(function(dataImg: any) {
-
-      let marginLeft = 20
-      let verticalStep = 10
-      let heightLogo = 50
-      var doc = new jsPDF();
-      let verticalPointer = 0;
-      //doc.addPage();
-      doc.addImage(dataImg.dataURL, 'png', 15, 20, heightLogo * dataImg.ratioImg, heightLogo);
-
-      doc.setFontSize(22);
-      verticalPointer += 90
-      doc.text(120, 20, 'Devis');
-      doc.setFontSize(16);
-      if (this2.fetchedQuote.clients.length) {
-        verticalPointer += verticalStep
-        doc.text(marginLeft, verticalPointer, 'Client : ' + this2.fetchedQuote.clients[0].profile.lastName + ' ' + this2.fetchedQuote.clients[0].profile.name);
-      }
-      if (this2.fetchedQuote.projects.length) {
-        verticalPointer += verticalStep
-        doc.text(marginLeft, verticalPointer, 'Projet : ' + this2.fetchedQuote.projects[0].details.name);
-      }
-
-      verticalPointer += verticalStep
-      doc.text(marginLeft, verticalPointer, 'Details');
-
-      doc.setFontSize(10);
-
-      verticalPointer += 6
-      doc.text(marginLeft, verticalPointer, this2.fetchedQuote.name);
-
-      // verticalPointer += 6
-      // doc.text(marginLeft, verticalPointer, this2.fetchedQuote.phoneNumber);
-
-      // verticalPointer += 6
-      // doc.text(marginLeft, verticalPointer, this2.fetchedQuote.address.address);
-
-      // verticalPointer += 6
-      // doc.text(marginLeft, verticalPointer, this2.fetchedQuote.address.city + ' ' + this2.fetchedQuote.address.zip + ' ' + this2.fetchedQuote.address.state + ' ');
-
-
-      doc.setFontSize(12);
-      verticalPointer += 15
-      doc.text(15, verticalPointer, 'Description');
-      doc.text(75, verticalPointer, 'Illustration');
-      doc.text(105, verticalPointer, 'Unit');
-      doc.text(120, verticalPointer, 'Qté');
-      doc.text(135, verticalPointer, 'PU');
-      doc.text(150, verticalPointer, 'Total HT');
-      doc.text(180, verticalPointer, 'TVA');
-
-      doc.line(10, 125, 200, 125)
-       doc.line(10, 135, 200, 135)
-       doc.line(10, 270, 200, 270)
-
-      doc.line(10, 125, 10, 270)
-      doc.line(70, 125, 70, 270)
-      doc.line(100, 125, 100, 270)
-      doc.line(115, 125, 115, 270)
-      doc.line(130, 125, 130, 270)
-      doc.line(145, 125, 145, 270)
-      doc.line(175, 125, 175, 270)
-      doc.line(200, 125, 200, 270)
-
-
-
-
-
-      doc.setFontSize(10);
-      this2.fetchedQuote.devisDetails.forEach(detail => {
-        verticalPointer += 6
-        // doc.text(20, verticalPointer, detail.productInit.details.referenceName );
-        // doc.text(50, verticalPointer, detail.productInit.details.reference );
-        // doc.text(80, verticalPointer, detail.quantity.toString());
-        // doc.text(110, verticalPointer, detail.totalPriceWithoutTaxes.toString() );
-        // doc.text(140, verticalPointer, detail.totalPriceWithTaxes.toString() );
-      });
-
-      doc.setFontSize(12);
-      verticalPointer += 12
-      doc.text(80, verticalPointer, 'Total');
-      doc.text(110, verticalPointer, this2.fetchedQuote.priceQuote.priceQuoteWithoutTaxes.toString());
-      doc.text(140, verticalPointer, this2.fetchedQuote.priceQuote.priceQuoteWithTaxes.toString());
-
-
-      doc.save('Test.pdf');
-
-    }, function(reason) {
-      console.log(reason); // Error!
-    });
-  }
+  // downloadPDF2() {
+  //   let this2 = this
+  //   let base64image = this.getBase64Image(this.imgLogoUrl).then(function(dataImg: any) {
+  //
+  //     let marginLeft = 20
+  //     let verticalStep = 10
+  //     let heightLogo = 50
+  //     var doc = new jsPDF();
+  //     let verticalPointer = 0;
+  //     //doc.addPage();
+  //     doc.addImage(dataImg.dataURL, 'png', 15, 20, heightLogo * dataImg.ratioImg, heightLogo);
+  //
+  //     doc.setFontSize(22);
+  //     verticalPointer += 90
+  //     doc.text(120, 20, 'Devis');
+  //     doc.setFontSize(16);
+  //     if (this2.fetchedQuote.clients.length) {
+  //       verticalPointer += verticalStep
+  //       doc.text(marginLeft, verticalPointer, 'Client : ' + this2.fetchedQuote.clients[0].profile.lastName + ' ' + this2.fetchedQuote.clients[0].profile.name);
+  //     }
+  //     if (this2.fetchedQuote.projects.length) {
+  //       verticalPointer += verticalStep
+  //       doc.text(marginLeft, verticalPointer, 'Projet : ' + this2.fetchedQuote.projects[0].details.name);
+  //     }
+  //
+  //     verticalPointer += verticalStep
+  //     doc.text(marginLeft, verticalPointer, 'Details');
+  //
+  //     doc.setFontSize(10);
+  //
+  //     verticalPointer += 6
+  //     doc.text(marginLeft, verticalPointer, this2.fetchedQuote.name);
+  //
+  //     // verticalPointer += 6
+  //     // doc.text(marginLeft, verticalPointer, this2.fetchedQuote.phoneNumber);
+  //
+  //     // verticalPointer += 6
+  //     // doc.text(marginLeft, verticalPointer, this2.fetchedQuote.address.address);
+  //
+  //     // verticalPointer += 6
+  //     // doc.text(marginLeft, verticalPointer, this2.fetchedQuote.address.city + ' ' + this2.fetchedQuote.address.zip + ' ' + this2.fetchedQuote.address.state + ' ');
+  //
+  //
+  //     doc.setFontSize(12);
+  //     verticalPointer += 15
+  //     doc.text(15, verticalPointer, 'Description');
+  //     doc.text(75, verticalPointer, 'Illustration');
+  //     doc.text(105, verticalPointer, 'Unit');
+  //     doc.text(120, verticalPointer, 'Qté');
+  //     doc.text(135, verticalPointer, 'PU');
+  //     doc.text(150, verticalPointer, 'Total HT');
+  //     doc.text(180, verticalPointer, 'TVA');
+  //
+  //     doc.line(10, 125, 200, 125)
+  //      doc.line(10, 135, 200, 135)
+  //      doc.line(10, 270, 200, 270)
+  //
+  //     doc.line(10, 125, 10, 270)
+  //     doc.line(70, 125, 70, 270)
+  //     doc.line(100, 125, 100, 270)
+  //     doc.line(115, 125, 115, 270)
+  //     doc.line(130, 125, 130, 270)
+  //     doc.line(145, 125, 145, 270)
+  //     doc.line(175, 125, 175, 270)
+  //     doc.line(200, 125, 200, 270)
+  //
+  //
+  //
+  //
+  //
+  //     doc.setFontSize(10);
+  //     this2.fetchedQuote.devisDetails.forEach(detail => {
+  //       verticalPointer += 6
+  //       // doc.text(20, verticalPointer, detail.productInit.details.referenceName );
+  //       // doc.text(50, verticalPointer, detail.productInit.details.reference );
+  //       // doc.text(80, verticalPointer, detail.quantity.toString());
+  //       // doc.text(110, verticalPointer, detail.totalPriceWithoutTaxes.toString() );
+  //       // doc.text(140, verticalPointer, detail.totalPriceWithTaxes.toString() );
+  //     });
+  //
+  //     doc.setFontSize(12);
+  //     verticalPointer += 12
+  //     doc.text(80, verticalPointer, 'Total');
+  //     doc.text(110, verticalPointer, this2.fetchedQuote.priceQuote.priceQuoteWithoutTaxes.toString());
+  //     doc.text(140, verticalPointer, this2.fetchedQuote.priceQuote.priceQuoteWithTaxes.toString());
+  //
+  //
+  //     doc.save('Test.pdf');
+  //
+  //   }, function(reason) {
+  //     console.log(reason); // Error!
+  //   });
+  // }
 
   getUser(id: string) {
     this.userService.getUser(id)

@@ -127,7 +127,7 @@ export class QuotesComponent implements OnInit {
             this.statusQuotes.forEach(status => {
 
                 if(status.indexStatus === quote.statusQuote) {
-                  console.log(status.label)
+                  // console.log(status.label)
                   this.fetchedQuotes[i].statusQuoteString = status.label
                 }
 

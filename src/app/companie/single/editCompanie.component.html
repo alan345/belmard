@@ -7,7 +7,7 @@
       <div class="col">
         <h5>{{'Identity' | translate}}</h5>
         <div class="form-group">
-          <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedCompanie.name" required minlength="5" placeholder="Nom de la Société">
+          <input type="text" class="form-control" formControlName="nameCompanie" [(ngModel)]="fetchedCompanie.nameCompanie" required minlength="5" placeholder="Nom de la Société">
         </div>
         <div class="form-group">
           <input type="text" class="form-control" formControlName="email" [(ngModel)]="fetchedCompanie.email" required minlength="5" placeholder="Email">
@@ -33,7 +33,7 @@
       <div class="col">
         <h5>{{'Details' | translate}}</h5>
         <div class="form-group">
-          <input type="text" class="form-control" formControlName="address" [(ngModel)]="fetchedCompanie.address.address" required minlength="5" placeholder="Numéro de rue">
+          <input type="text" class="form-control" formControlName="address" [(ngModel)]="fetchedCompanie.address.address" required minlength="5" placeholder="Addresse">
         </div>
         <div class="form-group">
           <input type="text" class="form-control" formControlName="city" [(ngModel)]="fetchedCompanie.address.city" required minlength="2" placeholder="Ville">
@@ -42,7 +42,7 @@
           <input type="text" class="form-control" formControlName="zip" [(ngModel)]="fetchedCompanie.address.zip" required minlength="5" placeholder="Code postal">
         </div>
         <div class="form-group">
-          <input type="text" class="form-control" formControlName="state" [(ngModel)]="fetchedCompanie.address.zip" required minlength="5" placeholder="State">
+          <input type="text" class="form-control" formControlName="state" [(ngModel)]="fetchedCompanie.address.state" required minlength="5" placeholder="State">
         </div>
         <div class="form-group">
           <input type="text" class="form-control" formControlName="country" [(ngModel)]="fetchedCompanie.address.country" required minlength="5" placeholder="Pays">

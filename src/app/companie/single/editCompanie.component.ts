@@ -63,7 +63,7 @@ export class EditCompanieComponent implements OnInit {
   ngOnInit() {
     this.getStripeAccountDetails()
     this.myForm = this._fb.group({
-      name: ['', [Validators.required, Validators.minLength(2)]],
+      nameCompanie: ['', [Validators.required, Validators.minLength(2)]],
       phoneNumber: [''],
       VAT: [''],
       faxNumber: [''],

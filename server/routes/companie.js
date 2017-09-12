@@ -92,6 +92,8 @@ router.put('/:id', function (req, res, next) {
     item.faxNumber = req.body.faxNumber
     item.nameCompanie = req.body.nameCompanie
     item.typeUsers = req.body.typeUsers
+    item.email = req.body.email
+    item.VAT = req.body.VAT
 
     item.typeCompanie = req.body.typeCompanie
     item.forms = req.body.forms

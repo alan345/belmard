@@ -3,6 +3,7 @@ var express = require('express'),
   config = require('../config/config'),
   User = require('../models/user.model'),
   Quote = require('../models/quote.model'),
+  Companie = require('../models/companie.model'),
 
   fs = require('fs'),
   jwt = require('jsonwebtoken'),
@@ -114,269 +115,357 @@ router.use('/', function(req, res, next) {
   })
 });
 
-router.get('/pdf/:quoteId', function (req, res, next) {
+router.get('/pdf/:quoteId', function(req, res, next) {
 
   var options = {
     format: 'Letter'
   };
 
-  Quote.findById((req.params.quoteId), function(err, obj) {
+
+  User
+  .findOne({_id: req.user._id})
+  .exec(function (err, user) {
     if (err) {
-      return res.status(500).json({message: 'An error occured', err: err})
+      return res.status(403).json({
+        title: 'There was a problem',
+        error: err
+      });
     }
-    if (!obj) {
+
+    if (!user) {
       return res.status(404).json({
         title: 'No form found',
-        error: {
-          message: 'Form not found!'
-        }
-      })
+        error: {message: 'Item not found!'}
+      });
     }
 
-
-    // let findQuery = {}
-    // findQuery['_id'] = req.params.id
-    Quote.findById({_id: req.params.quoteId}).populate({
-      path: 'projects',
-      model: 'Project',
-      populate: {
-        path: 'assignedTos',
-        model: 'User'
-      }
-    }).populate({path: 'signature.users', model: 'User'}).populate({path: 'clients', model: 'User'})
-    .populate({
-      path: 'devisDetails.bucketProducts.productInit',
-      model: 'Product',
-      populate: {
-        path: 'forms',
-        model: 'Form'
-      }})
-    .exec(function(err, item) {
-      if (err) {
-        return res.status(404).json({message: '', err: err})
-      }
-      if (!item) {
-        return res.status(404).json({
-          title: 'No obj found',
-          error: {
-            message: 'Obj not found!'
-          }
-        })
-      } else {
-
-        var html = ''
-        html += `
-        <style type="text/css">
-
-
-          .col-1 {width: 8.33%;}
-          .col-2 {width: 16.66%;}
-          .col-3 {width: 25%;}
-          .col-4 {width: 33.33%;}
-          .col-5 {width: 41.66%;}
-          .col-6 {width: 50%;}
-          .col-7 {width: 58.33%;}
-          .col-8 {width: 66.66%;}
-          .col-9 {width: 75%;}
-          .col-10 {width: 83.33%;}
-          .col-11 {width: 91.66%;}
-          .col-12 {width: 100%;}
-
-           .img {height: 20px; }
-
-            .tabo {border: 1px solid #ddd; }
-        
-           .bgh  {             
-                background-color: #595959;
-                color: white;
-                border: 1px solid #ddd;
-                }
-
-          .desc {
-              text-align: left;
-
-          }
-
-          .elem {
-                  text-align: center;
-
-              }
-            .inf {
-                  font-size: 10px;
-
-              }
-            .inf2 {
-                  font-size: 9px;
-
-              }
-
-               .nobo {
-                  border-top: none!important;
-                  border-bottom: none!important;
-                  }
-
-            .cobo  {
-                border: 1px solid #ddd;
-                }
+    Companie
+     .findById(user.ownerCompanies[0])
+     .populate({path: 'forms', model: 'Form'})
+     .populate({path: 'rights', model: 'Right'})
+     .exec(function (err, companie) {
+       if (err) {
+         return res.status(404).json({
+           message: '',
+           err: err
+         })
+       } if (!companie) {
+         return res.status(404).json({
+           title: 'No obj found',
+           error: {message: 'Obj not found!'}
+         })
+       } else {
 
 
 
-            table {
-                  
-                  border-collapse: collapse;
-                  
+           Quote.findById((req.params.quoteId), function(err, obj) {
+             if (err) {
+               return res.status(500).json({message: 'An error occured', err: err})
+             }
+             if (!obj) {
+               return res.status(404).json({
+                 title: 'No form found',
+                 error: {
+                   message: 'Form not found!'
+                 }
+               })
+             }
 
-                  width: 100%;
-                  }
-
-              td {
-                  font-size: 9px;
-                  height: 20px;
-                  vertical-align: center;
-                  border-left: 1px solid #ddd;
-                  border-right: 1px solid #ddd;
+             // let findQuery = {}
+             // findQuery['_id'] = req.params.id
+             Quote.findById({_id: req.params.quoteId}).populate({
+               path: 'projects',
+               model: 'Project',
+               populate: {
+                 path: 'assignedTos',
+                 model: 'User'
                }
+             }).populate({path: 'signature.users', model: 'User'}).populate({path: 'clients', model: 'User'}).populate({
+               path: 'devisDetails.bucketProducts.productInit',
+               model: 'Product',
+               populate: {
+                 path: 'forms',
+                 model: 'Form'
+               }
+             }).exec(function(err, item) {
+               if (err) {
+                 return res.status(404).json({message: '', err: err})
+               }
+               if (!item) {
+                 return res.status(404).json({
+                   title: 'No obj found',
+                   error: {
+                     message: 'Obj not found!'
+                   }
+                 })
+               } else {
 
-               
+                 var html = ''
+                 html += `
+                 <style type="text/css">
 
+                 .col-1 {
+                   width: 8.33%;
+                 }
 
-            th  {
-                font-size: 10px;
-                
-                }
+                 .col-2 {
+                   width: 16.66%;
+                 }
 
-             .ts { background-color: #aba4a4;
-                   font-weight: bold;           }
+                 .col-3 {
+                   width: 25%;
+                 }
 
+                 .col-4 {
+                   width: 33.33%;
+                 }
 
-        </style>
-        `
+                 .col-5 {
+                   width: 41.66%;
+                 }
 
+                 .col-6 {
+                   width: 50%;
+                 }
 
-        html += `<div id="pageHeader">Default header</div>`
+                 .col-7 {
+                   width: 58.33%;
+                 }
 
-        html += `<table>
-              <thead>
-                <tr>
-                  <th class="col-4 cobo desc">item.clients.forEach(user => {
-                                    html += user.profile.name
-                                    html += user.profile.title
-                                    html += user.profile.lastName
-                                    html += user.profile.phoneNumber
-                                    html += user.profile.fax })
-                  </th>
-                  <th class="col-4 nobo"></th>
-                  <th class="col-4 cobo desc">de la part de belmard</th>
-                 
-                </tr>
-              </thead>
-            </table>`
-        
-        html += ` <br> <table>
-              <thead>
-                <tr>
-                  <th class="col-12 cobo desc">Objet :
-                  </th>                                 
-                </tr>
-              </thead>
-            </table>`
-        
-        
-        
-        html += `
-            <br>
-            <table class="tabo">
-              <thead>
-                <tr>
-                  <th class="col-5 bgh">Description</th>
-                  <th class="col-1 bgh">Image</th>
-                  <th class="col-1 bgh">Unit</th>
-                  <th class="col-1 bgh">Quantity</th>
-                  <th class="col-1 bgh">Unit Price</th>
-                  <th class="col-1 bgh">Total tax excl</th>
-                  <th class="col-2 bgh">Tax</th>
-                </tr>
-              </thead>
-              <tbody>`
+                 .col-8 {
+                   width: 66.66%;
+                 }
 
+                 .col-9 {
+                   width: 75%;
+                 }
 
-        item.devisDetails.forEach(devisDetail => {
-          html += '<tr class="ts">'
-          html += '<td class="desc">' + devisDetail.nameBucketProducts + '</td>'
-          html += `
-                    <td class="desc"></td>
-                    <td class="desc"></td>
-                    <td class="desc"></td>
-                    <td class="desc"></td>
-                    <td class="desc"></td>
-                    <td class="desc"></td>
-                    <td class="desc"></td>
-          `
-          html += '</tr>'
-          devisDetail.bucketProducts.forEach(bucketProduct => {
-            html += '<tr>'
-            
- 
-            
-            
-            bucketProduct.productInit.forEach(product => {
-              html += '<td class="desc">' + product.details.referenceName + '</td>'
-              product.forms.forEach(form => {
-                let img = 'http://localhost/uploads/forms/' + form.owner + '/' + form.imagePath
-                html += '<td class="elem">' + '<img class="img" src="' + img + '">' + '</td>'
-              })
-            })
-            html += '<td class="desc">' + bucketProduct.typeRow + '</td>'
-            html += '<td class="elem">' + bucketProduct.title + '</td>'
-            html += '<td class="elem">' + bucketProduct.discount + '</td>'
-            html += '<td class="elem">' + bucketProduct.priceWithoutTaxes + '</td>'
-            html += '<td class="elem">' + bucketProduct.vat + '</td>'
-            html += '</tr>'
-            
-          })
-        })
+                 .col-10 {
+                   width: 83.33%;
+                 }
 
-        html += `
-              </tbody>
-            </table>
+                 .col-11 {
+                   width: 91.66%;
+                 }
 
-            `       
-        ;
-        
-        html += `<br><table>
-              <thead>
-                <tr>
-                  <th class="col-3 desc"><p>Entreprise</p>
-                                        <p class="inf2">Lu et approuvé</p>
-                                        <p class="inf2">Le</p>
-                  </th>
-                  <th class="col-6 nobo"></th>
-                  <th class="col-3 desc"><p>Client</p>
-                                        <p class="inf2">Lu et approuvé</p>
-                                        <p class="inf2">Le</p></th>
-                 
-                </tr>
-              </thead>
-            </table>`
+                 .col-12 {
+                   width: 100%;
+                 }
 
-        html += `<div id="pageFooter">Default Footer</div>`
+                 .img {
+                   height: 20px;
+                 }
 
-        pdf.create(html, options).toFile('./server/uploads/pdf/' + req.params.quoteId + '.pdf', function(err, resPDF) {
-          if (err) {
-            //return res.status(404).json({message: '', err: err})
-          } else {
+                 .tabo {
+                   border: 1px solid #ddd;
+                 }
 
-                    res.status(200).json({
-                      message: 'Success',
-                      item: req.params.quoteId + '.pdf'
-                    })
-          }
-        })
+                 .bgh {
+                   background-color: #595959;
+                   color: white;
+                   border: 1px solid #ddd;
+                 }
+
+                 .desc {
+                   text-align: left;
+                 }
+
+                 .elem {
+                   text-align: center;
+                 }
+
+                 .inf {
+                   font-size: 10px;
+                 }
+
+                 .inf2 {
+                   font-size: 9px;
+                 }
+
+                 .nobo {
+                   border-top: none!important;
+                   border-bottom: none!important;
+                 }
+
+                 .cobo {
+                   border: 1px solid #ddd;
+                 }
+
+                 table {
+                   border-collapse: collapse;
+                   width: 100%;
+                 }
+
+                 td {
+                   font-size: 9px;
+                   height: 20px;
+                   vertical-align: center;
+                   border-left: 1px solid #ddd;
+                   border-right: 1px solid #ddd;
+                 }
+
+                 th {
+                   font-size: 10px;
+                 }
+
+                 .ts {
+                   background-color: #aba4a4;
+                   font-weight: bold;
+                 }
 
 
-      }
-    })
+                 </style>
+                 `
+
+                 html += `<div id="pageHeader">Default header</div>`
+
+                 html += `<table>
+                       <thead>
+                         <tr>
+                           <th class="col-4 cobo desc">`
+                 item.clients.forEach(user => {
+                   html += user.profile.name
+                   html += user.profile.title
+                   html += user.profile.lastName
+                   html += user.profile.phoneNumber
+                   html += user.profile.fax
+                 })
+                 html += `</th>
+                           <th class="col-4 nobo"></th>
+                           <th class="col-4 cobo desc">`
+
+
+
+
+                           html += companie.nameCompanie
+                           html += '<br>'
+                           html += companie.email
+                           html += '<br>'
+                           html += companie.address.address
+                           html += '<br>'
+                           html += companie.address.city
+                           html += '<br>'
+                           html += companie.address.state
+                           html += '<br>'
+                           html += companie.address.zip
+                           html += '<br>'
+                           html += companie.address.country
+                           html += '<br>'
+                html += `
+                           </th>
+
+                         </tr>
+                       </thead>
+                     </table>`
+
+                 html += ` <br>
+                     <table>
+                       <thead>
+                         <tr>
+                           <th class="col-12 cobo desc">Objet :
+                           </th>
+                         </tr>
+                       </thead>
+                     </table>`
+
+                 html += `
+                     <br>
+                     <table class="tabo">
+                       <thead>
+                         <tr>
+                           <th class="col-5 bgh">Description</th>
+                           <th class="col-1 bgh">Image</th>
+                           <th class="col-1 bgh">Unit</th>
+                           <th class="col-1 bgh">Quantity</th>
+                           <th class="col-1 bgh">Unit Price</th>
+                           <th class="col-1 bgh">Total tax excl</th>
+                           <th class="col-2 bgh">Tax</th>
+                         </tr>
+                       </thead>
+                       <tbody>`
+
+                 item.devisDetails.forEach(devisDetail => {
+                   html += '<tr class="ts">'
+                   html += '<td class="desc">' + devisDetail.nameBucketProducts + '</td>'
+                   html += `
+                             <td class="desc"></td>
+                             <td class="desc"></td>
+                             <td class="desc"></td>
+                             <td class="desc"></td>
+                             <td class="desc"></td>
+                             <td class="desc"></td>
+                             <td class="desc"></td>
+                   `
+                   html += '</tr>'
+                   devisDetail.bucketProducts.forEach(bucketProduct => {
+                     html += '<tr>'
+
+                     bucketProduct.productInit.forEach(product => {
+                       html += '<td class="desc">' + product.details.referenceName + '</td>'
+                       product.forms.forEach(form => {
+                         let img = 'http://localhost/uploads/forms/' + form.owner + '/' + form.imagePath
+                         html += '<td class="elem">' + '<img class="img" src="' + img + '">' + '</td>'
+                       })
+                     })
+                     html += '<td class="desc">' + bucketProduct.typeRow + '</td>'
+                     html += '<td class="elem">' + bucketProduct.title + '</td>'
+                     html += '<td class="elem">' + bucketProduct.discount + '</td>'
+                     html += '<td class="elem">' + bucketProduct.priceWithoutTaxes + '</td>'
+                     html += '<td class="elem">' + bucketProduct.vat + '</td>'
+                     html += '</tr>'
+
+                   })
+                 })
+
+                 html += `
+                       </tbody>
+                     </table>
+
+                     `;
+
+                 html += `<br><table>
+                       <thead>
+                         <tr>
+                           <th class="col-3 desc"><p>Entreprise</p>
+                                                 <p class="inf2">Lu et approuvé</p>
+                                                 <p class="inf2">Le</p>
+                           </th>
+                           <th class="col-6 nobo"></th>
+                           <th class="col-3 desc"><p>Client</p>
+                                                 <p class="inf2">Lu et approuvé</p>
+                                                 <p class="inf2">Le</p></th>
+
+                         </tr>
+                       </thead>
+                     </table>`
+
+                 html += `<div id="pageFooter">Default Footer</div>`
+
+                 pdf.create(html, options).toFile('./server/uploads/pdf/' + req.params.quoteId + '.pdf', function(err, resPDF) {
+                   if (err) {
+                     //return res.status(404).json({message: '', err: err})
+                   } else {
+
+                     res.status(200).json({
+                       message: 'Success',
+                       item: req.params.quoteId + '.pdf'
+                     })
+                   }
+                 })
+
+               }
+             })
+           })
+
+
+       }
+     })
   })
+
+
+
+
+
 
 })
 

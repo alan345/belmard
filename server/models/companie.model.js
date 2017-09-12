@@ -19,6 +19,8 @@ var companie = new Schema({
       current_period_end:{type: Date}
     },
     rights: [{type: Schema.Types.ObjectId, ref: 'Right'}],
+    VAT : {type: String, default: ['']},
+    email : {type: String, default: ['']},
     address: {
       country : {type: String, default: ['']},
       address : {type: String, default: ['']},
