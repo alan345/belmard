@@ -49,7 +49,7 @@
 
         </div>
         <div class="form-group">
-          <app-autocomplete [typeAutocomplete]="'user'" [title]="" [singleChoice]="'true'" [arrayContent]="fetchedQuote.clients" (getResultAutocomplete)="selectUser($event[0])">
+          <app-autocomplete [typeAutocomplete]="'user'" [search]="{isExternalUser:true}" [title]="" [singleChoice]="'true'" [arrayContent]="fetchedQuote.clients" (getResultAutocomplete)="selectUser($event[0])">
           </app-autocomplete>
         </div>
         <div class="form-group">
