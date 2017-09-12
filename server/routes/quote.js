@@ -277,7 +277,7 @@ router.get('/pdf/:quoteId', function (req, res, next) {
             
             
             bucketProduct.productInit.forEach(product => {
-              html += '<td class="elem">' + product.details.referenceName + '</td>'
+              html += '<td class="desc">' + product.details.referenceName + '</td>'
               product.forms.forEach(form => {
                 let img = 'http://localhost/uploads/forms/' + form.owner + '/' + form.imagePath
                 html += '<td class="elem">' + '<img class="img" src="' + img + '">' + '</td>'
