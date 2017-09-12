@@ -205,8 +205,8 @@ router.get('/pdf/:quoteId', function (req, res, next) {
               }
 
                .nobo {
-                  border-top: 0px!important;
-                  border-bottom: 0px!important;
+                  border-top: none!important;
+                  border-bottom: none!important;
                   }
 
             .cobo  {
@@ -216,7 +216,7 @@ router.get('/pdf/:quoteId', function (req, res, next) {
 
 
             table {
-                  empty-cells: show!important;
+                  
                   border-collapse: collapse;
                   border: 1px solid #ddd;
 
