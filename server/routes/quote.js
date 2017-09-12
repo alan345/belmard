@@ -233,10 +233,7 @@ router.get('/pdf/:quoteId', function (req, res, next) {
                   border-right: 1px solid #ddd;
                }
 
-               tr {
-                  border-left: 1px solid #ddd;
-                  border-right: 1px solid #ddd;
-                  }
+               
 
 
             th  {
@@ -342,7 +339,7 @@ router.get('/pdf/:quoteId', function (req, res, next) {
             `       
         ;
         
-        html += `<table>
+        html += `<br><table>
               <thead>
                 <tr>
                   <th class="col-3desc"><p>Entreprise</p>
