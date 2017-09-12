@@ -257,7 +257,7 @@ router.get('/pdf/:quoteId', function (req, res, next) {
         html += `<table class="coor">
               <thead>
                 <tr>
-                  <th class="col-4 coor">item.clients.forEach(user => {
+                  <th class="col-4 coor cobo">item.clients.forEach(user => {
                                     html += user.profile.name
                                     html += user.profile.title
                                     html += user.profile.lastName
@@ -265,7 +265,7 @@ router.get('/pdf/:quoteId', function (req, res, next) {
                                     html += user.profile.fax })
                   </th>
                   <th class="col-4 coor"></th>
-                  <th class="col-4 coor">de la part de belmard</th>
+                  <th class="col-4 coor cobo">de la part de belmard</th>
                  
                 </tr>
               </thead>
