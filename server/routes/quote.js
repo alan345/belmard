@@ -204,7 +204,10 @@ router.get('/pdf/:quoteId', function (req, res, next) {
 
               }
 
-
+               .nobo {
+                  border-top: 0px!important;
+                  border-bottom: 0px!important;
+                  }
 
             .cobo  {
                 border: 1px solid #ddd;
@@ -259,7 +262,7 @@ router.get('/pdf/:quoteId', function (req, res, next) {
                                     html += user.profile.phoneNumber
                                     html += user.profile.fax })
                   </th>
-                  <th class="col-4"></th>
+                  <th class="col-4 nobo"></th>
                   <th class="col-4 cobo desc">de la part de belmard</th>
                  
                 </tr>
