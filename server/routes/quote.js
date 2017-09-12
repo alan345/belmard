@@ -183,6 +183,10 @@ router.get('/pdf/:quoteId', function (req, res, next) {
           .col-12 {width: 100%;}
 
            .img {height: 20px; }
+        
+           .bgh  {             
+                background-color: #595959;
+                }
 
           .desc {
               text-align: left;
@@ -200,15 +204,12 @@ router.get('/pdf/:quoteId', function (req, res, next) {
 
             .coor  {
                 font-size: 10px;
-                background-color: #ffffff!imporant;
                 color: black!important;
                 border: 0px!important;
 
                 }
 
             .cobo  {
-               
-
                 border: 1px solid #ddd;
                 }
 
@@ -238,7 +239,6 @@ router.get('/pdf/:quoteId', function (req, res, next) {
 
             th  {
                 font-size: 10px;
-                background-color: #595959;
                 color: white;
 
                 border: 1px solid #ddd;
@@ -278,13 +278,13 @@ router.get('/pdf/:quoteId', function (req, res, next) {
             <table>
               <thead>
                 <tr>
-                  <th class="col-5">Description</th>
-                  <th class="col-1">Image</th>
-                  <th class="col-1">Unit</th>
-                  <th class="col-1">Quantity</th>
-                  <th class="col-1">Unit Price</th>
-                  <th class="col-1">Total tax excl</th>
-                  <th class="col-2">Tax</th>
+                  <th class="col-5 bgh">Description</th>
+                  <th class="col-1 bgh">Image</th>
+                  <th class="col-1 bgh">Unit</th>
+                  <th class="col-1 bgh">Quantity</th>
+                  <th class="col-1 bgh">Unit Price</th>
+                  <th class="col-1 bgh">Total tax excl</th>
+                  <th class="col-2 bgh">Tax</th>
                 </tr>
               </thead>
               <tbody>`
