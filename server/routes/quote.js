@@ -274,9 +274,7 @@ router.get('/pdf/:quoteId', function (req, res, next) {
             html += '<tr>'
             
             html += '<td class="elem">' + bucketProduct.typeRow + '</td>'
-            html += '<td class="elem">' + bucketProduct.title + '</td>'
-            html += '<td class="elem">' + bucketProduct.priceWithoutTaxes + '</td>'
-            html += '<td class="elem">' + bucketProduct.vat + '</td>'
+            
             bucketProduct.productInit.forEach(product => {
               html += '<td>' + product.details.referenceName + '</td>'
               product.forms.forEach(form => {
@@ -284,8 +282,12 @@ router.get('/pdf/:quoteId', function (req, res, next) {
                 html += '<td>' + '<img class="img" src="' + img + '">' + '</td>'
               })
             })
+            html += '<td class="elem">' + bucketProduct.title + '</td>'
             html += '<td>' + bucketProduct.discount + '</td>'
+            html += '<td class="elem">' + bucketProduct.priceWithoutTaxes + '</td>'
+            html += '<td class="elem">' + bucketProduct.vat + '</td>'
             html += '</tr>'
+            
           })
         })
 
