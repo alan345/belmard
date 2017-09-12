@@ -238,24 +238,25 @@ router.get('/pdf/:quoteId', function (req, res, next) {
 
         html += `<div id="pageHeader">Default header</div>`
 
-        html += `<div class="container">
-        <div class="row">
-        <div class="col-4 inf">
-        
-        
-        item.clients.forEach(user => {
-          html += user.profile.name
-          html += user.profile.title
-          html += user.profile.lastName
-          html += user.profile.phoneNumber
-          html += user.profile.fax
-        })
-        </div>
-        <div class="col-4 inf"> </div>
-        <div class="col-4 inf"> de la part de Belmard Bât </div>
+        html += `<table>
+              <thead>
+                <tr>
+                  <th class="col-4">item.clients.forEach(user => {
+                                    html += user.profile.name
+                                    html += user.profile.title
+                                    html += user.profile.lastName
+                                    html += user.profile.phoneNumber
+                                    html += user.profile.fax })
+                  </th>
+                  <th class="col-4"></th>
+                  <th class="col-4">de la part de belmard</th>
+                 
+                </tr>
+              </thead>
+            </table>
 
-        </div>
-        </div>`
+
+`
         html += `
             <br><br>
             <table>
