@@ -183,6 +183,8 @@ router.get('/pdf/:quoteId', function (req, res, next) {
           .col-12 {width: 100%;}
 
            .img {height: 20px; }
+
+            .tabo {border: 1px solid #ddd; }
         
            .bgh  {             
                 background-color: #595959;
@@ -273,7 +275,7 @@ router.get('/pdf/:quoteId', function (req, res, next) {
 `
         html += `
             <br><br>
-            <table>
+            <table class="tabo">
               <thead>
                 <tr>
                   <th class="col-5 bgh">Description</th>
