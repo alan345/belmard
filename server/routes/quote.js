@@ -273,7 +273,8 @@ router.get('/pdf/:quoteId', function (req, res, next) {
           devisDetail.bucketProducts.forEach(bucketProduct => {
             html += '<tr>'
             
-            html += '<td class="desc">' + bucketProduct.typeRow + '</td>'
+        //     html += '<td class="desc">' + bucketProduct.typeRow + '</td>'
+            html += '<td class="desc">' + product.details.referenceName + '</td>'
             
             bucketProduct.productInit.forEach(product => {
               html += '<td class="elem">' + product.details.referenceName + '</td>'
