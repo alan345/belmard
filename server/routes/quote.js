@@ -249,7 +249,7 @@ router.get('/pdf/:quoteId', function (req, res, next) {
 
         html += `<div id="pageHeader">Default header</div>`
 
-        html += `<table class="coor">
+        html += `<table>
               <thead>
                 <tr>
                   <th class="col-4 cobo desc">item.clients.forEach(user => {
