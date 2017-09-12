@@ -271,7 +271,7 @@ router.get('/pdf/:quoteId', function (req, res, next) {
               </thead>
             </table>`
         
-        html += `<table>
+        html += ` <br> <table>
               <thead>
                 <tr>
                   <th class="col-12 cobo desc">Objet :
@@ -283,7 +283,7 @@ router.get('/pdf/:quoteId', function (req, res, next) {
         
         
         html += `
-            <br><br>
+            <br>
             <table class="tabo">
               <thead>
                 <tr>
