@@ -200,7 +200,7 @@ router.get('/pdf/:quoteId', function (req, res, next) {
                   border: 1px solid #ddd;
                   margin-left: 10px;
                   margin-right: 10px;
-                  width: 90.47%;
+                  width: 95%;
                   }
 
               td {
