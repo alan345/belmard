@@ -224,6 +224,9 @@ router.get('/pdf/:quoteId', function (req, res, next) {
                 border: 1px solid #ddd;
                 }
 
+             .ts { background-color: #aba4a4;
+                   font-weight: bold;           }
+
 
         </style>
         `
@@ -258,7 +261,7 @@ router.get('/pdf/:quoteId', function (req, res, next) {
 
 
         item.devisDetails.forEach(devisDetail => {
-          html += '<tr>'
+          html += '<tr class="ts">'
           html += '<td class="desc">' + devisDetail.nameBucketProducts + '</td>'
           html += `
                     <td class="desc"></td>
