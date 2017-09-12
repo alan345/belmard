@@ -200,12 +200,20 @@ router.get('/pdf/:quoteId', function (req, res, next) {
 
             .coor  {
                 font-size: 10px;
-                background-color: none!imporant;
+                background-color: #ffffff!imporant;
                 color: black!important;
                 border: 0px!important;
 
-
                 }
+
+            .cobo  {
+               
+
+                border: 1px solid #ddd;
+                }
+
+
+
             table {
                   empty-cells: show!important;
                   border-collapse: collapse;
