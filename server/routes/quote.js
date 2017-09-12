@@ -200,7 +200,7 @@ router.get('/pdf/:quoteId', function (req, res, next) {
 
             .coor  {
                 font-size: 10px;
-                background-color: #fff!imporant;
+                background-color: none!imporant;
                 color: black!important;
                 border: 0px!important;
 
@@ -256,8 +256,8 @@ router.get('/pdf/:quoteId', function (req, res, next) {
                                     html += user.profile.phoneNumber
                                     html += user.profile.fax })
                   </th>
-                  <th class="col-4"></th>
-                  <th class="col-4">de la part de belmard</th>
+                  <th class="col-4 coor"></th>
+                  <th class="col-4 coor">de la part de belmard</th>
                  
                 </tr>
               </thead>
