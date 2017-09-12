@@ -238,7 +238,8 @@ router.get('/pdf/:quoteId', function (req, res, next) {
 
         html += `<div id="pageHeader">Default header</div>`
 
-        html += `<div class="row">
+        html += `<div class="container">
+        <div class="row">
         <div class="col-4 inf">
         
         
@@ -253,7 +254,7 @@ router.get('/pdf/:quoteId', function (req, res, next) {
         <div class="col-4 inf"> </div>
         <div class="col-4 inf"> de la part de Belmard Bât </div>
 
-
+        </div>
         </div>`
         html += `
             <br><br>
