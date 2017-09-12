@@ -186,6 +186,8 @@ router.get('/pdf/:quoteId', function (req, res, next) {
         
            .bgh  {             
                 background-color: #595959;
+                color: white;
+                border: 1px solid #ddd;
                 }
 
           .desc {
@@ -202,12 +204,7 @@ router.get('/pdf/:quoteId', function (req, res, next) {
 
               }
 
-            .coor  {
-                font-size: 10px;
-                color: black!important;
-                border: 0px!important;
 
-                }
 
             .cobo  {
                 border: 1px solid #ddd;
@@ -239,9 +236,7 @@ router.get('/pdf/:quoteId', function (req, res, next) {
 
             th  {
                 font-size: 10px;
-                color: white;
-
-                border: 1px solid #ddd;
+                
                 }
 
              .ts { background-color: #aba4a4;
@@ -257,15 +252,15 @@ router.get('/pdf/:quoteId', function (req, res, next) {
         html += `<table class="coor">
               <thead>
                 <tr>
-                  <th class="col-4 coor cobo">item.clients.forEach(user => {
+                  <th class="col-4 cobo desc">item.clients.forEach(user => {
                                     html += user.profile.name
                                     html += user.profile.title
                                     html += user.profile.lastName
                                     html += user.profile.phoneNumber
                                     html += user.profile.fax })
                   </th>
-                  <th class="col-4 coor"></th>
-                  <th class="col-4 coor cobo">de la part de belmard</th>
+                  <th class="col-4"></th>
+                  <th class="col-4 cobo desc">de la part de belmard</th>
                  
                 </tr>
               </thead>
