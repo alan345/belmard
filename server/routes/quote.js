@@ -269,10 +269,19 @@ router.get('/pdf/:quoteId', function (req, res, next) {
                  
                 </tr>
               </thead>
-            </table>
-
-
-`
+            </table>`
+        
+        html += `<table>
+              <thead>
+                <tr>
+                  <th class="col-12 cobo desc">Objet :
+                  </th>                                 
+                </tr>
+              </thead>
+            </table>`
+        
+        
+        
         html += `
             <br><br>
             <table class="tabo">
