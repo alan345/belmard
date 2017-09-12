@@ -345,14 +345,14 @@ router.get('/pdf/:quoteId', function (req, res, next) {
         html += `<table>
               <thead>
                 <tr>
-                  <th class="col-3desc">Entreprise
-                                        Lu et approuvé
-                                        Le
+                  <th class="col-3desc"><p>Entreprise</p>
+                                        <p>Lu et approuvé</p>
+                                        <p>Le</p>
                   </th>
                   <th class="col-6 nobo"></th>
-                  <th class="col-3desc">Client
-                                        Lu et approuvé
-                                        Le</th>
+                  <th class="col-3desc"><p>Client</p>
+                                        <p>Lu et approuvé</p>
+                                        <p>Le</p></th>
                  
                 </tr>
               </thead>
