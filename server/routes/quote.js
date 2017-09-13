@@ -316,20 +316,14 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                    background-color:silver;
                    width:100px;
                    height: 50px;
-                   margin-bottom: -50px; 
+                   margin-bottom: -150px; 
                 }
                
 
                  </style>
                  `
-                 html += `<div id="pageHeader" class="test">
-                  var myImg = new Image();
-
-                  myImg.src = 'http://belmard-renovation.fr/wp-content/uploads/2016/05/BELMARD.png';
-
-                  myImg.addEventListener('load', function() {
-                      
-                  });
+                 html += `<div id="pageHeader" class="col-12">
+                  
                   <img class="img" src="'http://belmard-renovation.fr/wp-content/uploads/2016/05/BELMARD.png'"></img></div>`
 
                  html += `<table>
