@@ -316,10 +316,14 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                    background-color:silver;
                    width:100px;
                 }
+                 .test  {
+                   background-color:silver;
+                   width:100px;
+                }
 
                  </style>
                  `
-                 html += `<div id="pageHeader">Default header</div>`
+                 html += `<div id="pageHeader" class="test">Default header</div>`
 
                  html += `<table>
                        <thead>
