@@ -316,14 +316,16 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                    background-color:silver;
                    width:100%;
                    height: 50px;
-                   margin-bottom: -150px; 
+                   margin: 0px!important; 
+                  padding: 0px!important; 
+                  border: 0px!important; 
                 }
                .test {margin-top: -50px; }
                .test2 {margin-bottom: -50px; }
 
                  </style>
                  `
-                 html += `<div id="pageHeader" class="test2 col-12">
+                 html += `<div id="pageHeader" class="col-12">
                   
                   </div>`
 
