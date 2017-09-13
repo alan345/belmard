@@ -315,7 +315,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                  #pageHeader {
                    background-color:silver;
                    width:100%;
-                   height: 50px;
+                   height: 10px;
                    margin: 0px!important; 
                   padding: 0px!important; 
                   border: 0px!important; 
