@@ -323,7 +323,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
 
                  </style>
                  `
-                 html += `<div id="pageHeader" class="test">Default header</div>`
+                 html += `<div id="pageHeader" class="test"><img src="assets/images/marker.png"></div>`
 
                  html += `<table>
                        <thead>
