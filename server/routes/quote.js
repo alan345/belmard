@@ -323,7 +323,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
 
                  </style>
                  `
-                 html += `<div id="pageHeader" class="col-12">
+                 html += `<div id="pageHeader" class="test2 col-12">
                   
                   <img class="img" src="'http://belmard-renovation.fr/wp-content/uploads/2016/05/BELMARD.png'"></img></div>`
 
