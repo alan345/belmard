@@ -321,7 +321,15 @@ router.get('/pdf/:quoteId', function(req, res, next) {
 
                  </style>
                  `
-                 html += `<div id="pageHeader" class="test"><img class="img" src="'http://belmard-renovation.fr/wp-content/uploads/2016/05/BELMARD.png'"></img></div>`
+                 html += `<div id="pageHeader" class="test">
+                  var myImg = new Image();
+
+                  myImg.src = 'http://belmard-renovation.fr/wp-content/uploads/2016/05/BELMARD.png';
+
+                  myImg.addEventListener('load', function() {
+                      
+                  });
+                  <img class="img" src="'http://belmard-renovation.fr/wp-content/uploads/2016/05/BELMARD.png'"></img></div>`
 
                  html += `<table>
                        <thead>
