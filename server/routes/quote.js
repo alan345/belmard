@@ -316,9 +316,10 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                    background-color:silver;
                    width:100%;
                    height: 50px;
-                   padding-bottom: -150px; 
+                   margin-bottom: -150px; 
                 }
                .test {margin-top: -50px; }
+               .test2 {margin-bottom: -50px; }
 
                  </style>
                  `
