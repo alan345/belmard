@@ -318,7 +318,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                    height: 50px;
                  
                 }
-               #pageBody {height: 50px;}
+               #pageBody {height: 0px;}
                .test2 {margin-bottom: -50px; }
 
                  </style>
