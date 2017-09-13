@@ -315,12 +315,10 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                  #pageHeader {
                    background-color:silver;
                    width:100%;
-                   height: 10px;
-                   margin: 0px!important; 
-                  padding: 0px!important; 
-                  border: 0px!important; 
+                   height: 50px;
+                 
                 }
-               .test {margin-top: -50px; }
+               #pageBody {height: 50px;}
                .test2 {margin-bottom: -50px; }
 
                  </style>
