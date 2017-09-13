@@ -318,7 +318,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                    height: 50px;
                    padding-bottom: -150px; 
                 }
-               
+               .test {margin-top: -150px; }
 
                  </style>
                  `
@@ -326,7 +326,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                   
                   <img class="img" src="'http://belmard-renovation.fr/wp-content/uploads/2016/05/BELMARD.png'"></img></div>`
 
-                 html += `<table>
+                 html += `<table class="test">
                        <thead>
                          <tr>
                            <th class="col-4 cobo desc">`
