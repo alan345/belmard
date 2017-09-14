@@ -46,6 +46,7 @@ export const LANG_FR_TRANS = {
     'Type User': 'Fonction',
     'Phone Number': 'Téléphone',
     'Address': 'Adresse',
+    'additional address': 'Complément Adresse',
     'city': 'Ville',
     'City': 'Ville',
     'state': 'Pays',
