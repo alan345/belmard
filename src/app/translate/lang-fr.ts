@@ -77,6 +77,7 @@ export const LANG_FR_TRANS = {
     'quote': 'devis',
     'Create a new quote': 'Créer un nouveau Devis',
     'Assigned to me': 'Assigné à Moi',
+    'Assigned to': 'Assigné à',
     'Owner': 'Propriétaire',
     'Download PDF': 'Télécharger PDF',
     'Customer': 'Client',
