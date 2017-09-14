@@ -46,7 +46,7 @@ export class UserCalendarsComponent implements OnInit {
   // autocompleteProject: string = '';
   // fetchedProducts: Product[] = []
   // fetchedProjects: Project[] = []
-  // currentUser: User = new User()
+  currentUser: User = new User()
   // imgLogoUrl: string = './assets/images/profile-placeholder.jpg'
   // imgSignatureBase64Temp = ''
   // userAdmins : User[] = []
@@ -78,45 +78,7 @@ export class UserCalendarsComponent implements OnInit {
   // fetchedUserSearchs: User[] = [];
 
   loading: boolean = false;
-  calendarOptions: Object = {
-    timezone: 'local',
-    height: 550,
-    selectable: true,
-    firstDay: 1,
-    minTime: "06:00:00",
-    maxTime: "22:00:00",
-    locale: 'fr',
-    slotLabelFormat: "HH:mm",
-    allDaySlot: false,
-    nowIndicator: true,
-    businessHours: {
-      dow: [1, 2, 3, 4, 5],
-      start: '10:00',
-      end: '18:00',
-    },
-    header: {
-      left: 'title',
-      center: '',
-      right: 'today prev,next month,agendaWeek,listWeek'
-    },
-
-    defaultView: 'agendaWeek',
-    editable: true,
-    eventLimit: true, // allow "more" link when too many events
-    dayClick: this.dayClick.bind(this),
-    eventClick: this.eventClick.bind(this),
-    eventMouseover: this.eventMouseover.bind(this),
-    eventMouseout: this.eventMouseout.bind(this),
-    select: this.select.bind(this),
-    unselect: this.unselect.bind(this),
-    eventDragStart: this.eventDragStart.bind(this),
-    eventDragStop: this.eventDragStop.bind(this),
-    eventDrop: this.eventDrop.bind(this),
-    eventResizeStart: this.eventResizeStart.bind(this),
-    eventResizeStop: this.eventResizeStop.bind(this),
-    eventResize: this.eventResize.bind(this),
-    viewRender: this.viewRender.bind(this),
-  };
+  calendarOptions: {}
 
 
   constructor(
@@ -141,6 +103,62 @@ export class UserCalendarsComponent implements OnInit {
     // this.getUserCalendars(1, this.search)
   }
   ngOnInit() {
+    let slotDuration = ''
+    let timeBegin= ''
+    let timeEnd = ''
+
+    this.currentUser = this.authService.getCurrentUser()
+    this.currentUser.ownerCompanies.forEach(companie => {
+      timeBegin = companie.option.calendar.timeBegin
+      timeEnd = companie.option.calendar.timeEnd
+      slotDuration = companie.option.calendar.slotDuration
+    })
+    if(!slotDuration) slotDuration = '00:30:00'
+    if(!timeBegin) timeBegin = '06:00:00'
+    if(!timeEnd) timeEnd = '19:00:00'
+
+
+
+    this.calendarOptions = {
+      timezone: 'local',
+      height: 550,
+      selectable: true,
+      firstDay: 1,
+      minTime: timeBegin,
+      maxTime: timeEnd,
+      slotDuration: slotDuration,
+      locale: 'fr',
+      slotLabelFormat: "HH:mm",
+      allDaySlot: false,
+      nowIndicator: true,
+      businessHours: {
+        dow: [1, 2, 3, 4, 5],
+        start: '10:00',
+        end: '18:00',
+      },
+      header: {
+        left: 'title',
+        center: '',
+        right: 'today prev,next month,agendaWeek,listWeek'
+      },
+
+      defaultView: 'agendaWeek',
+      editable: true,
+      eventLimit: true, // allow "more" link when too many events
+      dayClick: this.dayClick.bind(this),
+      eventClick: this.eventClick.bind(this),
+      eventMouseover: this.eventMouseover.bind(this),
+      eventMouseout: this.eventMouseout.bind(this),
+      select: this.select.bind(this),
+      unselect: this.unselect.bind(this),
+      eventDragStart: this.eventDragStart.bind(this),
+      eventDragStop: this.eventDragStop.bind(this),
+      eventDrop: this.eventDrop.bind(this),
+      eventResizeStart: this.eventResizeStart.bind(this),
+      eventResizeStop: this.eventResizeStop.bind(this),
+      eventResize: this.eventResize.bind(this),
+      viewRender: this.viewRender.bind(this),
+    };
     //   this.activatedRoute.params.subscribe((params: Params) => {
     //     // if(params['idUserSearch']) {this.getUserSearch(params['idUserSearch'])}
     //   // if(params['idProjectSearch']) {this.getProjectSearch(params['idProjectSearch'])}

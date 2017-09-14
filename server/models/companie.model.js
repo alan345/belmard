@@ -30,8 +30,9 @@ var companie = new Schema({
     },
     option:{
       calendar: {
-        timeBegin: {type: Number, default: [8]},
-        timeEnd: {type: Number, default: [19]},
+        timeBegin: {type: String, default: ['06:00:00']},
+        timeEnd: {type: String, default: ['19:00:00']},
+        slotDuration: {type: String, default: ['00:30:00']},
       }
     },
     faxNumber: {type: String, default: ['']},

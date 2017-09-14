@@ -84,9 +84,12 @@ export class Categorie2 {
 export class Option {
   calendar: Calendar = new Calendar();
 }
+
 export class Calendar {
-  timeBegin: number = 8;
-  timeEnd: number = 19;
+  timeBegin: string = '06:00:00';
+  timeEnd: string = '19:00:00';
+  slotDuration: string = '00:30:00';
+
 }
 
 export class Address {

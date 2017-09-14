@@ -78,7 +78,7 @@ export class EditCompanieComponent implements OnInit {
           timeBegin: ['', [Validators.required, Validators.minLength(1)]],
           timeEnd: ['', [Validators.required, Validators.minLength(1)]],
 
-
+          slotDuration: [''],
 
         address: [''],
         city: [''],

@@ -49,9 +49,8 @@ export class UserCalendarComponent implements OnInit {
 
   ) {}
   ngOnChanges() {
-    console.log(this.fetchedUserCalendar)
     this.fetchedUserCalendar.users.forEach(client => { this.search.userId = client._id })
-    this.fetchedUserCalendar.assignedTos.forEach(client => { this.search.assignedToId = client._id })    
+    this.fetchedUserCalendar.assignedTos.forEach(client => { this.search.assignedToId = client._id })
   }
   ngOnInit() {
     this.myForm = this._fb.group({
