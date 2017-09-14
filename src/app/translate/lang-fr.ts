@@ -70,6 +70,7 @@ export const LANG_FR_TRANS = {
     'Calendar Color': 'Couleur du calendrier',
     'Surface': 'Surface',
     'Phone': 'Téléphone',
+    'Add Picture': 'Ajouter image',
   
 
     'Quotes': 'Devis',
