@@ -36,6 +36,7 @@ export const LANG_FR_TRANS = {
     'CostPrice': 'Coût',
     'Selling Price': 'Prix de vente',
     'Save': 'Sauvegarder',
+    'Delete': 'Supprimer',
 
     'Users': 'Contacts',
     'User': 'Contact',
@@ -43,20 +44,40 @@ export const LANG_FR_TRANS = {
     'External Contact': 'Contact Externe',
     'Create a new team member': 'Créer un nouveau membre interne',
     'Create a new external member': 'Créer un nouveau contact externe',
+    'Firstname': 'Prénom',
+    'Lastname': 'Nom',
     'Type User': 'Fonction',
     'Phone Number': 'Téléphone',
     'Address': 'Adresse',
+    'additional address': 'Complément Adresse',
     'city': 'Ville',
+    'City': 'Ville',
     'state': 'Pays',
+    'State': 'Etat',
     'zip': 'Code Postal',
+    'Zip': 'Code Postal',
+    'Country': 'Pays',
+    'Acces Code': 'Code Entrée',
     'Done': 'Enregistrer',
     'accessCode': 'Code Immeuble',
+    'Acces type': 'Type d´accès',
     'floor': 'Etage',
+    'Floor': 'Etage',
+    'Number': 'N°',
+    'Other': 'Autre',
+    'Identity': 'Détails',
+    'Details': 'Coordonnées',
+    'Calendar Color': 'Couleur du calendrier',
+    'Surface': 'Surface',
+    'Phone': 'Téléphone',
+    'Add Picture': 'Ajouter image',
+  
 
     'Quotes': 'Devis',
     'quote': 'devis',
     'Create a new quote': 'Créer un nouveau Devis',
     'Assigned to me': 'Assigné à Moi',
+    'Assigned to': 'Assigné à',
     'Owner': 'Propriétaire',
     'Download PDF': 'Télécharger PDF',
     'Customer': 'Client',
@@ -87,6 +108,7 @@ export const LANG_FR_TRANS = {
 
     'project': 'Projet',
     'Projects': 'Projets',
+    'Ref': 'Nom',
 
 
     'task': 'tâche',
@@ -97,5 +119,7 @@ export const LANG_FR_TRANS = {
     'Pending Approval': 'Attente de signature',
     'right': 'droit',
     'Rights': 'Droits',
+  
+    'Search': 'Recherche',
 
 };

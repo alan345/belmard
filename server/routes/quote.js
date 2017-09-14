@@ -118,8 +118,18 @@ router.use('/', function(req, res, next) {
 router.get('/pdf/:quoteId', function(req, res, next) {
 
   var options = {
-    format: 'Letter'
+    format: 'Letter',
+    "header": {
+      "height": "50px",
+      
+    },
+    "footer": {
+    "height": "50px",
+    
+  },
+    "border": "10px",
   };
+  
 
 
   User
@@ -312,14 +322,22 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                    background-color: #aba4a4;
                    font-weight: bold;
                  }
-
+                 #pageHeader {
+                   background-color:silver;
+                   width:100%;
+                   height: 50px;
+                 
+                }
+               #pageBody {height: 0px;}
+               .test2 {margin-bottom: -50px; }
 
                  </style>
                  `
+                 html += `<div id="pageHeader" class="col-12"> <img class="img" src="http://belmard-renovation.fr/wp-content/uploads/2016/05/BELMARD.png">
+                  
+                  </div>`
 
-                 html += `<div id="pageHeader">Default header</div>`
-
-                 html += `<table>
+                 html += `<table class="test">
                        <thead>
                          <tr>
                            <th class="col-4 cobo desc">`
