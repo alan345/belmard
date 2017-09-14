@@ -34,7 +34,6 @@
 
         <br>
         <div class="col-md-12">
-          {{search | json}}
           <app-autocomplete [typeAutocomplete]="'project'" [title]="'Project'" [search]="search" [singleChoice]="'true'" [arrayContent]="fetchedUserCalendar.projects" (getResultAutocomplete)="selectProject($event[0])" (clearAutocomplete)="removeProject()">
           </app-autocomplete>
         </div>

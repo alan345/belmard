@@ -87,6 +87,7 @@ export class UserCalendarComponent implements OnInit {
         }
       )
   }
+  
 
   openDialogDelete() {
     let dialogRefDelete = this.dialog.open(DeleteDialog)
