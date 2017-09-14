@@ -107,6 +107,7 @@ export const LANG_FR_TRANS = {
 
     'project': 'Projet',
     'Projects': 'Projets',
+    'Ref': 'Nom',
 
 
     'task': 'tâche',
