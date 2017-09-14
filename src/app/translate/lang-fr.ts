@@ -57,6 +57,7 @@ export const LANG_FR_TRANS = {
     'Acces Code': 'Code Entrée',
     'Done': 'Enregistrer',
     'accessCode': 'Code Immeuble',
+    'Acces type': 'Type d´accès',
     'floor': 'Etage',
     'Floor': 'Etage',
     'Number': 'N°',
