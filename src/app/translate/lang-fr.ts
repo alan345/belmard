@@ -63,6 +63,7 @@ export const LANG_FR_TRANS = {
     'Identity': 'Détails',
     'Details': 'Coordonnées',
     'Calendar Color': 'Couleur du calendrier',
+    'Surface': 'Surface',
   
 
     'Quotes': 'Devis',
