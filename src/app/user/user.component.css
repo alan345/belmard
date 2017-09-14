@@ -26,3 +26,10 @@ input::placeholder {
   color: silver;
   font-style: italic;
 }
+
+input::textarea {
+  color: silver;
+  font-style: italic;
+}
+
+
