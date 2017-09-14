@@ -118,5 +118,7 @@ export const LANG_FR_TRANS = {
     'Pending Approval': 'Attente de signature',
     'right': 'droit',
     'Rights': 'Droits',
+  
+    'Search': 'Recherche',
 
 };
