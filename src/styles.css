@@ -4,12 +4,12 @@
 /*@import "~@ng-bootstrap/ng-bootstrap/dist/css/bootstrap.min.css";*/
 
 input::placeholder {
-  color: silver;
+  color: silver!important;
   font-style: italic;
 }
 
 textarea::placeholder {
-  color: silver;
+  color: silver!important;
   font-style: italic;
 }
 
