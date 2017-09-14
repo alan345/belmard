@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
-import { MdDialogRef} from '@angular/material';
+import { Component , Inject} from '@angular/core';
+import { MdDialogRef, MD_DIALOG_DATA} from '@angular/material';
 import { ProjectSingleComponent }  from '../projectSingle.component';
+import { Search } from '../../../shared/shared.model';
+
 
 
 
@@ -12,8 +14,14 @@ import { ProjectSingleComponent }  from '../projectSingle.component';
 export class ProjectDialogComponent {
   // @ViewChild(ProjectSingleComponent)
   // private projectSingleComponent: ProjectSingleComponent;
+  search: Search = new Search();
 
-  constructor(public dialogRef: MdDialogRef<ProjectSingleComponent>) {}
+  constructor(
+    public dialogRef: MdDialogRef<ProjectSingleComponent>,
+    @Inject(MD_DIALOG_DATA) public data: any
+  ) {
+    this.search = data.search
+  }
 
   saved(data) {
     this.dialogRef.close(data)

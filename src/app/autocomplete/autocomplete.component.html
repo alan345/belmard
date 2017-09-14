@@ -9,6 +9,7 @@
       <app-newObjDialog
         *ngIf="typeAutocomplete=='user' || typeAutocomplete=='companie' || typeAutocomplete=='project' || typeAutocomplete=='product'"
         (saved)="saved($event)"
+        [search]="search"
         class="input-group-addon"
         [typeObj]="typeAutocomplete"></app-newObjDialog>
 
@@ -51,6 +52,7 @@
 
 </div>
 
+
 <div *ngIf="fetchedData.length == 0 && autocompleteSearch !=''">
   No results.
   <!-- <button
@@ -60,6 +62,7 @@
     (click)="openDialog(typeAutocomplete)">
     <i class="fa fa-plus"></i> Add new one
   </button> -->
+
 
   <app-newObjDialog
     *ngIf="typeAutocomplete=='user' || typeAutocomplete=='companie' || typeAutocomplete=='project'"

@@ -15,6 +15,7 @@ var userCalendar = new Schema({
       draggable: {type: Boolean, default: [true] },
       projects: [{type: Schema.Types.ObjectId, ref: 'Project'}],
       users: [{type: Schema.Types.ObjectId, ref: 'User'}],
+      assignedTos: [{type: Schema.Types.ObjectId, ref: 'User'}],
       details:{
         description:{type: String, default: ['']},
       },

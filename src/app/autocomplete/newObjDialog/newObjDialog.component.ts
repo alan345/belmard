@@ -43,7 +43,7 @@ export class newObjDialogComponent implements OnInit {
   ngOnInit() { }
 
   openDialog(typeObj: string) {
-    console.log(this.search)
+    // console.log(this.search)
     // if (typeObj === 'quote') {
     //   this.router.navigate(['/quote/new']);
     // } else

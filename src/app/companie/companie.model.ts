@@ -5,7 +5,8 @@ import { User } from '../user/user.model';
 export class Companie {
   _id: string = '';
   nameCompanie: string = '';
-  typeCompanie: string = '';
+  // typeCompanie: string = '';
+  isSupplier: boolean = false;
   phoneNumber: string= '';
   faxNumber: string= '';
   email: string= '';

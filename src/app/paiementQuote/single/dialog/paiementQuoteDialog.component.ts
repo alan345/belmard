@@ -10,9 +10,10 @@ import { Search } from '../../../shared/shared.model';
   templateUrl: './paiementQuoteDialog.component.html',
 })
 
+
 export class PaiementQuoteDialogComponent {
-  fetchedQuote: Quote
-  search:Search = new Search();
+  // fetchedQuote: Quote
+  search: Search = new Search();
 
   constructor(
     public dialogRef: MdDialogRef<EditPaiementQuoteComponent>,

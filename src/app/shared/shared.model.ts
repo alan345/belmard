@@ -5,6 +5,7 @@ export class Search {
   quoteType: string = '';
   quoteId: string = '';
   userId: string = '';
+  assignedToId: string = '';
   projectId: string = '';
   isExternalUser: boolean = true;
 };

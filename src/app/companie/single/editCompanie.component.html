@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="hdform">
-    <h3><i class="fa fa-user" aria-hidden="true"></i>{{'Supplier' | translate}}</h3>
+    <h3><i class="fa fa-user" aria-hidden="true"></i>{{'Company' | translate}}</h3>
   </div>
   <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
     <div class="row">
@@ -52,6 +52,11 @@
 
       <div class="col">
         <h5>{{'Divers' | translate}}</h5>
+        <div class="form-group">
+
+
+          <input type="checkBox" formControlName="isSupplier" [(ngModel)]="fetchedCompanie.isSupplier"> {{'Supplier' | translate}}
+        </div>
         <div class="form-group">
           <input type="text" class="form-control" formControlName="VAT" [(ngModel)]="fetchedCompanie.VAT" required minlength="5" placeholder="Numéro de TVA">
         </div>

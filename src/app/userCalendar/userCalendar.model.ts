@@ -11,6 +11,7 @@ export class UserCalendar {
     color: string = '';
     // clients: User[] = [];
     users: User[] = [];
+    assignedTos: User[] = [];
     projects: Project[] = [];
     isActiveEvent: boolean = false;
     // color: Color = new Color();

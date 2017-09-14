@@ -44,7 +44,7 @@ export class ProjectSingleComponent implements OnInit {
 
   itemSteps:any =[];
 
-  search: Search = new Search()
+  @Input() search: Search = new Search()
   status = StatusProject
   categ: string = 'Electricité';
   subCateg: string = 'file';
@@ -189,7 +189,7 @@ export class ProjectSingleComponent implements OnInit {
       console.log('aa')
       this.search.userId = client._id
     })
-        
+
   }
   // searchUsers() {
   //   if(!this.autocompleteUser) {
@@ -378,9 +378,7 @@ export class ProjectSingleComponent implements OnInit {
 
           this.fetchedProject.dateProject.creationDateString = this.authService.isoDateToHtmlDate(this.fetchedProject.dateProject.creationDate)
 
-          this.fetchedProject.clients.forEach(client => {
-            this.search.userId = client._id
-          })
+          this.fetchedProject.clients.forEach(client => { this.search.userId = client._id })
 
 
         },

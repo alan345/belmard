@@ -28,22 +28,28 @@
             </div>
           </div>
         </div>
-        <div class="col-md-12">
+        <!-- <div class="col-md-12">
           <input type="text" class="form-control" formControlName="title" [(ngModel)]="fetchedUserCalendar.title" placeholder="Name">
-        </div>
+        </div> -->
 
+        <br>
         <div class="col-md-12">
-          <app-autocomplete [typeAutocomplete]="'user'" [title]="''" [singleChoice]="'true'" [arrayContent]="fetchedUserCalendar.users" (getResultAutocomplete)="selectUser($event[0])" (clearAutocomplete)="removeUser()">
+          {{search | json}}
+          <app-autocomplete [typeAutocomplete]="'project'" [title]="'Project'" [search]="search" [singleChoice]="'true'" [arrayContent]="fetchedUserCalendar.projects" (getResultAutocomplete)="selectProject($event[0])" (clearAutocomplete)="removeProject()">
           </app-autocomplete>
         </div>
         <div class="col-md-12">
-          <app-autocomplete [typeAutocomplete]="'project'" [title]="''" [singleChoice]="'true'" [arrayContent]="fetchedUserCalendar.projects" (getResultAutocomplete)="selectProject($event[0])" (clearAutocomplete)="removeProject()">
+          <app-autocomplete [typeAutocomplete]="'user'" [title]="'Utilisateur'" [singleChoice]="'true'" [arrayContent]="fetchedUserCalendar.users" (getResultAutocomplete)="selectUser($event[0])" (clearAutocomplete)="removeUser()">
           </app-autocomplete>
         </div>
         <div class="col-md-12">
+          <app-autocomplete [typeAutocomplete]="'user'" [title]="'Réparateur'" [singleChoice]="'true'" [arrayContent]="fetchedUserCalendar.assignedTos" (getResultAutocomplete)="selectUser($event[0])" (clearAutocomplete)="removeUser()">
+          </app-autocomplete>
+        </div>
+        <!-- <div class="col-md-12">
           <textarea class="form-control" formControlName="description" [(ngModel)]="fetchedUserCalendar.details.description" required placeholder="Description">
               </textarea>
-        </div>
+        </div> -->
         <!-- <div class="col-md-12">
               <mwl-demo-utils-date-time-picker [(date)]="fetchedUserCalendar.start" (dateChange)="refresh.next()" placeholder="Not set">
               </mwl-demo-utils-date-time-picker>

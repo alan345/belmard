@@ -7,7 +7,7 @@ var mongoose                = require('mongoose'),
 var user = new Schema({
     ownerCompanies: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
     canBeSeenByCompanies: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
-    companies: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
+    // companies: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
     // isAdminOfHisCompanie:{type: Boolean, default: [false]},
     isExternalUser:{type: Boolean, default: [false]},
     dateSeeLatestNotif: {type: Date, default: [Date()]},

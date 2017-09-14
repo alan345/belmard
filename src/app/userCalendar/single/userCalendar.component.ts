@@ -20,6 +20,8 @@ import { Quote } from '../../quote/quote.model';
 import { Product } from '../../product/product.model';
 import { Project } from '../../project/project.model';
 
+import { Search } from '../../shared/shared.model';
+
 
 
 
@@ -31,7 +33,7 @@ import { Project } from '../../project/project.model';
 export class UserCalendarComponent implements OnInit {
   @Input() fetchedUserCalendar:UserCalendar = new UserCalendar()
   @Output() saved: EventEmitter<any> = new EventEmitter();
-
+  search = new Search()
   // fetchedUserCalendar: UserCalendar = new UserCalendar()
   myForm: FormGroup;
   constructor(
@@ -59,10 +61,12 @@ export class UserCalendarComponent implements OnInit {
     })
   }
   selectUser(user: User) {
-    this.fetchedUserCalendar.users = [user]
+    this.fetchedUserCalendar.users.forEach(client => { this.search.userId = client._id })
+    this.fetchedUserCalendar.assignedTos.forEach(client => { this.search.assignedToId = client._id })
+    // this.fetchedUserCalendar.users = [user]
   }
   selectProject(project: Project) {
-    this.fetchedUserCalendar.projects = [project]
+    // this.fetchedUserCalendar.projects = [project]
   }
   removeProject() {
     // this.fetchedUserCalendar.projects.splice(i, 1);
@@ -75,6 +79,8 @@ export class UserCalendarComponent implements OnInit {
       .subscribe(
         res => {
           this.fetchedUserCalendar = res
+          this.fetchedUserCalendar.users.forEach(client => { this.search.userId = client._id })
+          this.fetchedUserCalendar.assignedTos.forEach(client => { this.search.assignedToId = client._id })
         },
         error => {
           console.log(error);

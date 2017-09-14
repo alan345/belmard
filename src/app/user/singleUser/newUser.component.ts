@@ -40,7 +40,7 @@ export class NewUserComponent implements OnInit {
 
   titleArray=['Mr.', 'Mrs.']
   languageArray=['fr','en']
-  typeClientArray=['Particulier','Societe','Administration']
+  // typeClientArray=['Particulier','Societe','Administration']
   statusHouseArray=['Propriétaire','Locataire']
   typeHouseArray=['Pavillon','Immeuble']
   companieIndexToSelect = ''

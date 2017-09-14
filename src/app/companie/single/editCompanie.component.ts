@@ -66,6 +66,7 @@ export class EditCompanieComponent implements OnInit {
       nameCompanie: ['', [Validators.required, Validators.minLength(2)]],
       phoneNumber: [''],
       VAT: [''],
+      isSupplier: [''],
       faxNumber: [''],
       email: [''],
       // categJson: this._fb.group({
