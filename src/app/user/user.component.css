@@ -23,5 +23,6 @@
 }
 
 input::placeholder {
-  color: red;
+  color: silver;
+  font-style: italic;
 }
