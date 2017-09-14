@@ -133,8 +133,7 @@
           <div class="form-group">
               <input type="text" class="form-control" formControlName="accessType" [(ngModel)]="fetchedUser.profile.detailHouse.accessType" placeholder="{{'Source' | translate}}">
             </div>
-          </div>
-
+   
           <div *ngIf="!fetchedUser.isExternalUser" class="form-group">
             <app-autocomplete [typeAutocomplete]="'right'" [canDelete]="true" [title]="" [singleChoice]="true" [arrayContent]="fetchedUser.rights" (getResultAutocomplete)="selectRight($event[0])">
             </app-autocomplete>
