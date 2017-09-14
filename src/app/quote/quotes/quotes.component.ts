@@ -6,6 +6,7 @@ import { ToastsManager} from 'ng2-toastr';
 import { MdDialog} from '@angular/material';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location} from '@angular/common';
+import { Search, PaginationData } from '../../shared/shared.model';
 
 
 
@@ -24,21 +25,11 @@ export class QuotesComponent implements OnInit {
 
   fetchedQuotes: Quote[] = [];
   loading: boolean;
-  paginationData = {
-    currentPage: 1,
-    itemsPerPage: 0,
-    totalItems: 0
-  };
+  paginationData = new PaginationData()
+
   statusQuotes = StatusQuotes
 
-  search = {
-    isQuoteAssignedToMe: false,
-    orderBy : '',
-    search: '',
-    quoteType: '',
-    userId:'',
-    projectId:'',
-  };
+  @Input() search = new Search()
 
   constructor(
     private quoteService: QuoteService,
@@ -52,7 +43,9 @@ export class QuotesComponent implements OnInit {
   ) {}
 
 
-
+  ngOnChanges() {
+    this.getQuotes(this.paginationData.currentPage, this.search);
+  }
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
       if(params['isQuoteAssignedToMe']) {
@@ -71,6 +64,9 @@ export class QuotesComponent implements OnInit {
 
   }
 
+  saved(result) {
+    console.log(result)
+  }
   // onSelectChange = ($event: any): void => {
   //   this.search.isQuoteAssignedToMe = $event.tab.content.viewContainerRef.element.nativeElement.getAttribute('data-isQuoteAssignedToMe')
   //   this.getQuotes(this.paginationData.currentPage, this.search);

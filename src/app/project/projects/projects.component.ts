@@ -67,7 +67,9 @@ export class ProjectsComponent implements OnInit {
   searchProjects() {
     this.getProjects(1, this.search)
   }
-
+  saved(result) {
+    console.log(result)
+  }
   onDelete(id: string) {
     this.projectService.deleteProject(id)
       .subscribe(

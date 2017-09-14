@@ -16,6 +16,7 @@ import { MdDialog } from '@angular/material';
 import {Router} from '@angular/router';
 import { User } from '../user/user.model';
 // import { Quote } from '../quote/quote.model';
+import {Search} from '../shared/shared.model'
 
 
 @Component({
@@ -28,10 +29,7 @@ export class AutocompleteComponent {
   @Input() arrayContent = [];
   @Input() singleChoice: boolean = true;
   @Input() title: string = '';
-  @Input() search: any = {
-    isExternalUser: true,
-    search: ''
-  };
+  @Input() search: Search = new Search()
   @Input() canDelete: boolean = true;
   @Input() enableLink: boolean = false;
   // createNewItem: boolean = false;
@@ -53,6 +51,21 @@ export class AutocompleteComponent {
     private rightService: RightService,
     private router: Router,
   ) {}
+
+  ngOnChanges() {
+
+    if(this.typeAutocomplete ==='project' && this.search.projectId)
+        this.projectService.getProject(this.search.projectId)
+        .subscribe( res => { if(this.arrayContent.length) this.arrayContent.splice(0, 1);
+          this.arrayContent.push(res) }, error => { console.log(error); });
+    if(this.typeAutocomplete ==='user' && this.search.userId)
+        this.userService.getUser(this.search.userId)
+        .subscribe( res => { if(this.arrayContent.length) this.arrayContent.splice(0, 1);
+          this.arrayContent.push(res) }, error => { console.log(error); });
+
+  }
+
+
 
 
   getData(page: number, search: any) {

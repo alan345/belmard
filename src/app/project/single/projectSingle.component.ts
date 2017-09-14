@@ -15,6 +15,7 @@ import { QuoteService} from '../../quote/quote.service';
 import { User } from '../../user/user.model';
 import { Quote } from '../../quote/quote.model';
 import { AuthService} from '../../auth/auth.service';
+import { Search } from '../../shared/shared.model';
 
 
 
@@ -43,9 +44,7 @@ export class ProjectSingleComponent implements OnInit {
 
   itemSteps:any =[];
 
-  search: any = {
-    projectId: ''
-  }
+  search: Search = new Search()
   status = StatusProject
   categ: string = 'Electricité';
   subCateg: string = 'file';
@@ -186,6 +185,11 @@ export class ProjectSingleComponent implements OnInit {
     // this.autocompleteUser=''
     // this.fetchedUsers = []
     this.fetchedProject.clients = [user]
+    this.fetchedProject.clients.forEach(client => {
+      console.log('aa')
+      this.search.userId = client._id
+    })
+        
   }
   // searchUsers() {
   //   if(!this.autocompleteUser) {
@@ -339,7 +343,6 @@ export class ProjectSingleComponent implements OnInit {
 
 
 
-
   getProject(id : string) {
     this.projectService.getProject(id)
       .subscribe(
@@ -375,6 +378,9 @@ export class ProjectSingleComponent implements OnInit {
 
           this.fetchedProject.dateProject.creationDateString = this.authService.isoDateToHtmlDate(this.fetchedProject.dateProject.creationDate)
 
+          this.fetchedProject.clients.forEach(client => {
+            this.search.userId = client._id
+          })
 
 
         },

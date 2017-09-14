@@ -2,6 +2,7 @@ import { Component, ViewChild , Inject} from '@angular/core';
 import { MdDialogRef, MdDialogConfig, MD_DIALOG_DATA} from '@angular/material';
 import { EditPaiementQuoteComponent }  from '../editPaiementQuote.component';
 import { Quote } from '../../../quote/quote.model'
+import { Search } from '../../../shared/shared.model';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { Quote } from '../../../quote/quote.model'
 
 export class PaiementQuoteDialogComponent {
   fetchedQuote: Quote
-  search: any;
+  search:Search = new Search();
 
   constructor(
     public dialogRef: MdDialogRef<EditPaiementQuoteComponent>,

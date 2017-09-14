@@ -51,12 +51,11 @@
 
       <br>
       <div *ngIf="fetchedProject._id">
-        <div *ngFor="let user of fetchedProject.clients">
+        <!-- <div *ngFor="let user of fetchedProject.clients"> -->
           <label>{{'Quote' | translate}}</label>
-
-          <app-quotes [showHeader]=false [idProject]="fetchedProject._id" [idClient]="fetchedProject.clients[0]._id" [showBackButton]=false [userId]="user._id" [projectId]="fetchedProject._id">
+          <app-quotes [showHeader]=false [search]="search" [showBackButton]=false>
           </app-quotes>
-        </div>
+        <!-- </div> -->
       </div>
 
 
@@ -74,7 +73,7 @@
       </div>
 
       <div class="form-group">
-        <app-autocomplete [typeAutocomplete]="'user'" [title]="'Assigned To'" [singleChoice]=true [search]="{isExternalUser:false}"[arrayContent]="fetchedProject.assignedTos" (getResultAutocomplete)="selectAssignedTo($event[0])">
+        <app-autocomplete [typeAutocomplete]="'user'" [title]="'Assigned To'" [singleChoice]=true [search]="{isExternalUser:false}" [arrayContent]="fetchedProject.assignedTos" (getResultAutocomplete)="selectAssignedTo($event[0])">
         </app-autocomplete>
       </div>
 

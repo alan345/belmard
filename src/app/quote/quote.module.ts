@@ -6,6 +6,10 @@ import { RouterModule} from '@angular/router';
 // import { RoundPipe} from './round.pipe';
 // import { ProjectModule} from '../project/project.module';
 
+import { QuoteDialogComponent } from './single/dialog/quoteDialog.component';
+
+
+
 import { QuotesComponent} from './quotes/quotes.component';
 import { QuoteComponent} from './single/quote.component';
 
@@ -49,6 +53,7 @@ import { QuillModule } from 'ngx-quill'
   declarations: [
     QuotesComponent,
     QuoteComponent,
+    QuoteDialogComponent,
     // QuoteDetailComponent,
     // RoundPipe,
     // AutocompleteComponent
@@ -61,6 +66,8 @@ import { QuillModule } from 'ngx-quill'
     QuoteService,
     TemplateQuoteService
   ],
-  entryComponents: [ ]
+  entryComponents: [
+    QuoteDialogComponent,
+  ]
 })
 export class QuoteModule { }

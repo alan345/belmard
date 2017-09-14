@@ -49,11 +49,11 @@
 
         </div>
         <div class="form-group">
-          <app-autocomplete [typeAutocomplete]="'user'" [search]="{isExternalUser:true}" [title]="" [singleChoice]="'true'" [arrayContent]="fetchedQuote.clients" (getResultAutocomplete)="selectUser($event[0])">
+          <app-autocomplete [search]="search" [typeAutocomplete]="'user'" [search]="{isExternalUser:true}" [title]="" [singleChoice]="'true'" [arrayContent]="fetchedQuote.clients" (getResultAutocomplete)="selectUser($event[0])">
           </app-autocomplete>
         </div>
         <div class="form-group">
-          <app-autocomplete [typeAutocomplete]="'project'" [title]="'Project'" [singleChoice]="true" [arrayContent]="fetchedQuote.projects">
+          <app-autocomplete [search]="search" [typeAutocomplete]="'project'" [title]="'Project'" [singleChoice]="true" [arrayContent]="fetchedQuote.projects">
           </app-autocomplete>
         </div>
         <div class="form-group">

@@ -4,10 +4,11 @@ import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { TranslateService } from '../../translate/translate.service';
 import { UserDialogComponent } from '../../user/singleUser/dialog/userDialog.component';
+import { QuoteDialogComponent } from '../../quote/single/dialog/quoteDialog.component';
 import { CompanieDialogComponent } from '../../companie/single/dialog/companieDialog.component';
 import { ProjectDialogComponent } from '../../project/single/dialog/projectDialog.component';
 import { ProductDialogComponent } from '../../product/single/dialog/productDialog.component';
-
+import {Search} from '../../shared/shared.model'
 
 
 import { PaiementQuoteDialogComponent } from '../../paiementQuote/single/dialog/paiementQuoteDialog.component';
@@ -23,9 +24,7 @@ import { MdDialog } from '@angular/material';
 })
 export class newObjDialogComponent implements OnInit {
 
-  @Input() search: any = {
-    isExternalUser: true
-  };
+  @Input() search = new Search();
   @Input() typeObj: string = '';
   @Input() title: string = '';
   @Input() icone: string = 'fa fa-plus';
@@ -44,15 +43,20 @@ export class newObjDialogComponent implements OnInit {
   ngOnInit() { }
 
   openDialog(typeObj: string) {
-    if (typeObj === 'quote') {
-      this.router.navigate(['/quote/new']);
-    } else if (typeObj === 'right') {
+    console.log(this.search)
+    // if (typeObj === 'quote') {
+    //   this.router.navigate(['/quote/new']);
+    // } else
+    if (typeObj === 'right') {
       this.router.navigate(['/right/new']);
     } else {
 
       let dialogComp: any
       if (typeObj == 'user')
         dialogComp = UserDialogComponent
+
+      if (typeObj == 'quote')
+        dialogComp = QuoteDialogComponent
 
       if (typeObj == 'companie')
         dialogComp = CompanieDialogComponent
@@ -65,6 +69,7 @@ export class newObjDialogComponent implements OnInit {
 
       if (typeObj == 'product')
         dialogComp = ProductDialogComponent
+
 
       let dialogRef = this.mdDialog.open(dialogComp, {
         data: {

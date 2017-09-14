@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild, Input, Output, EventEmitter} from '@angular/core';
 import {AuthService} from '../../auth/auth.service';
 import {QuoteService} from '../quote.service';
 import {TemplateQuoteService} from '../templateQuote.service';
@@ -29,6 +29,8 @@ import { TranslateService } from '../../translate/translate.service';
 // declare let jsPDF;
 import { SignaturePad } from 'angular2-signaturepad/signature-pad';
 import { PaiementQuotesComponent } from '../../paiementQuote/paiementQuotes/paiementQuotes.component';
+import {Search} from '../../shared/shared.model'
+
 
 
 @Component({
@@ -41,11 +43,9 @@ export class QuoteComponent implements OnInit {
   @ViewChild(PaiementQuotesComponent) paiementQuotesComponent: PaiementQuotesComponent;
 
   loading: boolean=false;
+  @Output() saved: EventEmitter<any> = new EventEmitter();
 
-  search: any = {
-    projectId: '',
-    quoteId:'',
-  }
+  @Input() search: Search = new Search()
 
   showPaiements: boolean = false
   fetchedQuote: Quote = new Quote()
@@ -461,7 +461,8 @@ export class QuoteComponent implements OnInit {
         .subscribe(
         res => {
           this.toastr.success('Great!', res.message)
-          this.getQuote(res.obj._id)
+          // this.getQuote(res.obj._id)
+          this.saved.emit(res)
           //this.router.navigate(['quote/edit/' + this.fetchedQuote._id])
         },
         error => {
@@ -473,7 +474,8 @@ export class QuoteComponent implements OnInit {
         .subscribe(
         res => {
           this.toastr.success('Great!', res.message)
-          this.getQuote(res.obj._id)
+          // this.getQuote(res.obj._id)
+          this.saved.emit(res)
           // this.router.navigate(['quote/edit/' + res.obj._id])
         },
         error => { console.log(error) }
