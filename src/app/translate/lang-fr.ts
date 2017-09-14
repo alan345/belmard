@@ -66,6 +66,7 @@ export const LANG_FR_TRANS = {
     'Details': 'Coordonnées',
     'Calendar Color': 'Couleur du calendrier',
     'Surface': 'Surface',
+    'Phone': 'Téléphone',
   
 
     'Quotes': 'Devis',
