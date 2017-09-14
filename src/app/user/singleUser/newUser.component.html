@@ -131,8 +131,8 @@
           </div>
           
           <div class="form-group">
-            <textarea class="form-control" formControlName="otherData" [(ngModel)]="fetchedUser.profile.otherData" placeholder="{{'Source' | translate}}">
-              </textarea>
+              <input type="text" class="form-control" formControlName="accessType" [(ngModel)]="fetchedUser.profile.detailHouse.accessType" placeholder="{{'Source' | translate}}">
+            </div>
           </div>
 
           <div *ngIf="!fetchedUser.isExternalUser" class="form-group">
