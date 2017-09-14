@@ -219,6 +219,7 @@ export class UserCalendarsComponent implements OnInit {
 
 
   openDialog(userCalendar: UserCalendar) {
+    // console.log(userCalendar)
     let dialogRef = this.dialog.open(UserCalendarDialogComponent, {
       data: {
         fetchedUserCalendar: userCalendar

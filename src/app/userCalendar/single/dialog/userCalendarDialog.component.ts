@@ -29,6 +29,7 @@ export class UserCalendarDialogComponent {
      this.fetchedUserCalendar.projects = data.fetchedUserCalendar.projects
      this.fetchedUserCalendar.color = data.fetchedUserCalendar.color
      this.fetchedUserCalendar.details = data.fetchedUserCalendar.details
+     this.fetchedUserCalendar.assignedTos = data.fetchedUserCalendar.assignedTos
   }
 
   saved() {

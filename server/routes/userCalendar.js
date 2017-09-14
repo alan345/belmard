@@ -172,7 +172,7 @@ router.get('/page/:page', function(req, res, next) {
   UserCalendar
   .find(searchQuery)
   .sort('-createdAt')
-  .populate({path: 'clients', model: 'User'})
+  .populate({path: 'assignedTos', model: 'User'})
   .populate({path: 'users', model: 'User'})
   // .where('users.type').in(req.query.userSearch)
   .populate({path: 'projects', model: 'Project'})
