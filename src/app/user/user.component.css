@@ -22,14 +22,5 @@
     margin-left: 0px!important;
 }
 
-input::placeholder {
-  color: silver;
-  font-style: italic;
-}
-
-textarea::placeholder {
-  color: silver;
-  font-style: italic;
-}
 
 
