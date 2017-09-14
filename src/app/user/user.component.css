@@ -27,7 +27,7 @@ input::placeholder {
   font-style: italic;
 }
 
-input::textarea {
+textarea::placeholder {
   color: silver;
   font-style: italic;
 }
