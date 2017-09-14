@@ -36,6 +36,7 @@ export const LANG_FR_TRANS = {
     'CostPrice': 'Coût',
     'Selling Price': 'Prix de vente',
     'Save': 'Sauvegarder',
+    'Delete': 'Supprimer',
 
     'Users': 'Contacts',
     'User': 'Contact',
