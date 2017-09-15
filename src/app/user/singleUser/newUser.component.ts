@@ -11,7 +11,7 @@ import { ToastsManager} from 'ng2-toastr';
 import { MdDialog} from '@angular/material';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location }               from '@angular/common';
-import { User, TypeUser } from '../user.model';
+import { User, TypeUser , Address} from '../user.model';
 //import { Form } from '../../form/form.model';
 
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
@@ -137,7 +137,13 @@ export class NewUserComponent implements OnInit {
   selectCompanie(companie: Companie) {
     this.fetchedUser.ownerCompanies = [companie]
   }
-
+  newAddress() {
+    let newAddress = new Address()
+    this.fetchedUser.profile.address.push(newAddress)
+  }
+  removeAddress(i) {
+    this.fetchedUser.profile.address.splice(i, 1);
+  }
   selectRight(right: Right) {
     this.fetchedUser.rights = [right]
   }

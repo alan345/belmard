@@ -49,12 +49,13 @@ var user = new Schema({
         floor:{type: String, default: ['']},
         accessType:{type: String, default: ['']},
       },
-      address:{
+      address:[{
+        nameAddress:  {type: String, default: ['']},
         address : {type: String, default: ['']},
         city : {type: String, default: ['']},
         state : {type: String, default: ['']},
         zip : {type: String, default: ['']},
-      },
+      }],
     }
   },
   {

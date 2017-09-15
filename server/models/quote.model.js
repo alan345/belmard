@@ -10,6 +10,7 @@ var quote = new Schema({
     projects: [{type: Schema.Types.ObjectId, ref: 'Project'}],
     // ownerQuotes: [{type: Schema.Types.ObjectId, ref: 'User'}],
     clients: [{type: Schema.Types.ObjectId, ref: 'User'}],
+    companieClients: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
     // phoneNumber: {type: String, default: ['']},
     name: {type: String, default: ['']},
     statusQuote: {type: Number, default: [0]},

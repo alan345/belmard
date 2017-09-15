@@ -44,7 +44,7 @@ export class Profile {
   typeClient: string = '';
   statusHouse: string = '';
   detailHouse: DetailHouse = new DetailHouse();
-  address: Address = new Address();
+  address: Address[] = [];
   language: string = 'en';
 }
 
@@ -63,6 +63,7 @@ export class DetailHouse {
 
 
 export class Address {
+    nameAddress: string = ''; 
     address : string = '';
     city : string = '';
     state : string = '';

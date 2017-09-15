@@ -37,14 +37,15 @@ router.get('/:id', function(req, res, next) {
 
     // let findQuery = {}
     // findQuery['_id'] = req.params.id
-    Quote.findById({_id: req.params.id}).populate({
+    Quote.findById({_id: req.params.id})
+    .populate({
       path: 'projects',
       model: 'Project',
       populate: {
         path: 'assignedTos',
         model: 'User'
       }
-    }).populate({path: 'signature.users', model: 'User'}).populate({path: 'clients', model: 'User'}).populate({path: 'devisDetails.bucketProducts.productInit', model: 'Product'}).populate({
+    }).populate({path: 'companieClients', model: 'Companie'}).populate({path: 'signature.users', model: 'User'}).populate({path: 'clients', model: 'User'}).populate({path: 'devisDetails.bucketProducts.productInit', model: 'Product'}).populate({
       path: 'devisDetails.bucketProducts.productInit',
       model: 'Product',
       populate: {
@@ -121,15 +122,15 @@ router.get('/pdf/:quoteId', function(req, res, next) {
     format: 'Letter',
     "header": {
       "height": "50px",
-      
+
     },
     "footer": {
     "height": "50px",
-    
+
   },
     "border": "10px",
   };
-  
+
 
 
   User
@@ -326,7 +327,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                    background-color:silver;
                    width:100%;
                    height: 50px;
-                 
+
                 }
                #pageBody {height: 0px;}
                .test2 {margin-bottom: -50px; }
@@ -334,7 +335,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                  </style>
                  `
                  html += `<div id="pageHeader" class="col-12"> <img class="img" src="http://belmard-renovation.fr/wp-content/uploads/2016/05/BELMARD.png">
-                  
+
                   </div>`
 
                  html += `<table class="test">
@@ -567,6 +568,7 @@ router.put('/:id', function(req, res, next) {
     item.signature = req.body.signature
     item.detail = req.body.detail
     item.statusQuote = req.body.statusQuote
+    item.companieClients = req.body.companieClients
 
     item.save(function(err, result) {
       if (err) {
@@ -677,7 +679,8 @@ router.get('/page/:page', function(req, res, next) {
   if (req.query.projectId)
     searchQuery['projects'] = mongoose.Types.ObjectId(req.query.projectId)
 
-  Quote.find(searchQuery).populate({path: 'clients', model: 'User'})
+  Quote.find(searchQuery)
+  .populate({path: 'clients', model: 'User'})
   // .populate({path: 'devisDetails.bucketProducts.productInit', model: 'Product'})
     .limit(itemsPerPage).skip(skip).sort(req.query.orderBy).exec(function(err, item) {
     if (err) {

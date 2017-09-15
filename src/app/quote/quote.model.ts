@@ -2,6 +2,7 @@ import { Form } from '../picture/form/form.model';
 import { User } from '../user/user.model';
 import { Product } from '../product/product.model';
 import { Project } from '../project/project.model';
+import { Companie } from '../companie/companie.model';
 
 
 export class Quote {
@@ -13,6 +14,7 @@ export class Quote {
   typeQuote: string = '';
   // _users: User[] = [];
   // ownerQuotes: User[] = [];
+  companieClients: Companie[] = []
   forms: Form[] = [];
   products: Product[] = [];
   projects: Project[] = [];
