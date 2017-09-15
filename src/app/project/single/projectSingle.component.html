@@ -102,9 +102,9 @@
 
 
 
-      <div class="valid-edit">
-        <button type="submit" class="done btn btn-success" [disabled]="!myForm.valid">{{'Save' | translate}}</button>
-        <button *ngIf="fetchedProject._id" type="button" class="delete" md-button (click)="openDialogDelete()">
+      <div class="valid-edit row col-12">
+        <button type="submit" class="valid" [disabled]="!myForm.valid">{{'Save' | translate}}</button>
+        <button *ngIf="fetchedProject._id" type="button" class="false" (click)="openDialogDelete()">
         {{'Delete' | translate}}
       </button>
       </div>

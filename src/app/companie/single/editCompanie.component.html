@@ -160,16 +160,16 @@
 
 
 
-    <div class="valid-edit">
-      <button type="submit" class="sln-edt done">
+    <div class="valid-edit row col-12">
+      <button type="submit" class="valid">
           {{'Save' | translate}}
         </button>
       <!-- <button *ngIf="isMyCompanyRoute && fetchedCompanie._id==''" type="button" (click)="saveMyCompanie()" class="sln-edt done">
             Save my companie
         </button> -->
 
-      <button *ngIf="fetchedCompanie._id && !isMyCompanie()" type="button" class="sln-edt done" (click)="onDelete(fetchedCompanie._id)">
-          Delete
+      <button *ngIf="fetchedCompanie._id && !isMyCompanie()" type="button" class="false" (click)="onDelete(fetchedCompanie._id)">
+          {{'Delete' | translate}}
       </button>
     </div>
     <div class="clearfix"></div>

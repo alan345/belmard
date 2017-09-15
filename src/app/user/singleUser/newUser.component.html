@@ -163,13 +163,13 @@
 
 
 
-    <div class="valid-edit">
-      <button type="submit" [disabled]="!myForm.valid" [ngClass]="{'done':myForm.valid,'pas-done':!myForm.valid}">{{'Done' | translate}}</button>
-      <button *ngIf="fetchedUser._id" type="button" (click)="saveAndCreateProject()" [disabled]="!myForm.valid">
+    <div class="valid-edit row col-12">
+      <button type="submit" class="valid" [disabled]="!myForm.valid" [ngClass]="{'done':myForm.valid,'pas-done':!myForm.valid}">{{'Done' | translate}}</button>
+      <button *ngIf="fetchedUser._id" type="button" class="valid" (click)="saveAndCreateProject()" [disabled]="!myForm.valid">
           {{'Save & Create project' | translate}}
         </button>
       <div *ngIf="!isUserIsMyself()">
-        <button type="button" *ngIf="fetchedUser._id" class="delete" md-button (click)="openDialogDelete()">{{'Delete' | translate}}</button>
+        <button type="button" *ngIf="fetchedUser._id" class="false" (click)="openDialogDelete()">{{'Delete' | translate}}</button>
       </div>
     </div>
     <div class="clearfix"></div>

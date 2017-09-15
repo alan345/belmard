@@ -1,7 +1,11 @@
 <div class="container">
-  <div class="row">
-    {{'Product' | translate}}
+      <div class="hdform">
+      <h3><i class="fa fa-user" aria-hidden="true"></i>{{'Product' | translate}}</h3>
+      </div>
+<div class="row">
+  <div class="col-2">
   </div>
+  <div class="col-8">
   <div class="row">
     <button (click)="changeCascade(i, -1, -1)" *ngFor="let itemStep of itemSteps;let i=index;" type="button" class="btn" [ngClass]="{'btn-success': i==selectedIndex0, '': i!=selectedIndex0}">
         {{itemStep.categ}}
@@ -19,7 +23,11 @@
               {{itemStep.categ}}
             </button>
   </div>
-
+  </div> 
+  
+  <div class="col-2">
+  </div>  
+  </div>
   <form [formGroup]="myForm" novalidate (ngSubmit)="save()" (keydown.enter)="$event.preventDefault()">
     <div class="row">
       <div class="col-2">
@@ -83,9 +91,9 @@
     <div class="container">
       <div class="col-2">
       </div>
-      <div class="valid-edit">
-        <button type="submit" class="done btn btn-success" [disabled]="!myForm.valid">{{'Save' | translate}}</button>
-        <button *ngIf="fetchedProduct._id" type="button" class="delete btn btn-danger" md-button (click)="openDialogDelete()">Effacer produit</button>
+      <div class="valid-edit row col-12">
+        <button type="submit" class="valid" [disabled]="!myForm.valid">{{'Save' | translate}}</button>
+        <button *ngIf="fetchedProduct._id" type="button" class="false" (click)="openDialogDelete()">Effacer produit</button>
 
       </div>
     </div>
