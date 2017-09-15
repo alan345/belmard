@@ -11,7 +11,7 @@ export class Companie {
   faxNumber: string= '';
   email: string= '';
   VAT: string= '';
-  address: Address = new Address();
+  address: Address[] = [];
   option: Option = new Option();
   users: User[] = [];
   forms: Form[] = [];
@@ -93,6 +93,7 @@ export class Calendar {
 }
 
 export class Address {
+  nameAddress: string = '';
   address: string = '';
   city: string = '';
   state: string = '';

@@ -21,13 +21,14 @@ var companie = new Schema({
     rights: [{type: Schema.Types.ObjectId, ref: 'Right'}],
     VAT : {type: String, default: ['']},
     email : {type: String, default: ['']},
-    address: {
+    address: [{
+      nameAddress: {type: String, default: ['']},
       country : {type: String, default: ['']},
       address : {type: String, default: ['']},
       city : {type: String, default: ['']},
       state : {type: String, default: ['']},
       zip : {type: String, default: ['']},
-    },
+    }],
     option:{
       calendar: {
         timeBegin: {type: String, default: ['06:00:00']},

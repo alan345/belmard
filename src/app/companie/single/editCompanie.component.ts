@@ -4,7 +4,7 @@ import {CompanieService} from '../companie.service';
 import {UserService} from '../../user/user.service';
 
 
-import {Companie, Categorie0} from '../companie.model';
+import {Companie, Categorie0, Address} from '../companie.model';
 
 import {ToastsManager} from 'ng2-toastr';
 
@@ -75,10 +75,10 @@ export class EditCompanieComponent implements OnInit {
       // }),
 
 
-          timeBegin: ['', [Validators.required, Validators.minLength(1)]],
-          timeEnd: ['', [Validators.required, Validators.minLength(1)]],
+        timeBegin: ['', [Validators.required, Validators.minLength(1)]],
+        timeEnd: ['', [Validators.required, Validators.minLength(1)]],
 
-          slotDuration: [''],
+        slotDuration: [''],
 
         address: [''],
         city: [''],
@@ -91,6 +91,8 @@ export class EditCompanieComponent implements OnInit {
       secretKey:[''],
       serviceSelected:[''],
     })
+
+
 
 
     this.getCurrentUser()
@@ -119,6 +121,14 @@ export class EditCompanieComponent implements OnInit {
       )
   }
 
+
+  newAddress() {
+    let newAddress = new Address()
+    this.fetchedCompanie.address.push(newAddress)
+  }
+  removeAddress(i) {
+    this.fetchedCompanie.address.splice(i, 1);
+  }
   isMyCompanie() {
     let currentUser = this.authService.getCurrentUser()
     // console.log(currentUser)
@@ -130,7 +140,6 @@ export class EditCompanieComponent implements OnInit {
 
 
   addCateg(typeCateg, level, index1, index2, index3) {
-      console.log(typeCateg)
       let newCategorie = new Categorie0()
       if(level === 0)
         this.fetchedCompanie.categories[typeCateg].unshift(newCategorie)
