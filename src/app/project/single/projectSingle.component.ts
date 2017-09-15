@@ -122,7 +122,9 @@ export class ProjectSingleComponent implements OnInit {
         this.itemSteps = currentUser.ownerCompanies[index].categories.categProject
     })
   }
-
+  savedQuote(result) {
+    console.log(result)
+  }
 
 
 

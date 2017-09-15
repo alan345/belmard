@@ -65,7 +65,7 @@ export class QuotesComponent implements OnInit {
   }
 
   saved(result) {
-    console.log(result)
+    this.getQuotes(this.paginationData.currentPage, this.search)
   }
   // onSelectChange = ($event: any): void => {
   //   this.search.isQuoteAssignedToMe = $event.tab.content.viewContainerRef.element.nativeElement.getAttribute('data-isQuoteAssignedToMe')
