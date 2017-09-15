@@ -380,8 +380,8 @@
       <br><br>
       <div class="col-12">
         <div class="valid-edit">
-          <button type="submit" class="btn btn-success">{{'Save' | translate}}</button>
-          <button *ngIf="fetchedQuote._id" type="button" class="delete" md-button (click)="openDialogDelete()">
+          <button type="submit" class="btn valid">{{'Save' | translate}}</button>
+          <button *ngIf="fetchedQuote._id" type="button" class="false" md-button (click)="openDialogDelete()">
             Delete
           </button>
         </div>
