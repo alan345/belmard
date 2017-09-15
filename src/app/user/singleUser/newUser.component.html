@@ -163,7 +163,7 @@
 
 
 
-    <div class="valid-edit">
+    <div class="valid-edit row">
       <button type="submit" class="valid" [disabled]="!myForm.valid" [ngClass]="{'done':myForm.valid,'pas-done':!myForm.valid}">{{'Done' | translate}}</button>
       <button *ngIf="fetchedUser._id" type="button" class="valid" (click)="saveAndCreateProject()" [disabled]="!myForm.valid">
           {{'Save & Create project' | translate}}
