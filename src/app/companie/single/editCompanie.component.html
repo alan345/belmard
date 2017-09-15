@@ -37,7 +37,12 @@
         <div *ngFor="let singleAddresss of fetchedCompanie.address; let i = index;">
           <h3>Address {{fetchedCompanie.address[i].nameAddress}}</h3><button type="button" (click)="removeAddress(i)">X</button>
           <div class="form-group">
-            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].nameAddress" placeholder="nameAddress">
+            <!-- <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].nameAddress" placeholder="nameAddress"> -->
+            <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].nameAddress">
+              <option value="billing">Facturation</option>
+              <option value="shipping">shipping</option>
+            </select>
+
           </div>
           <div class="form-group">
             <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].address" placeholder="Addresse">
