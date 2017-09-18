@@ -20,12 +20,30 @@
         <thead>
           <tr>
             <th class="centre tdunder">Type</th>
-            <th class="centre tdunder">Titre</th>
-            <th class="centre tdunder">Nom</th>
-            <th class="centre tdunder">Société</th>
-            <th class="centre tdunder">Ville</th>
+            <th class="centre tdunder">Titre
+              <i (click)="orderBy('profile.title')" *ngIf="search.orderBy  !== 'profile.title' && search.orderBy  !== '-profile.title'" class="fa fa-arrow-down grey"></i>
+              <i (click)="orderBy('-profile.title')" *ngIf="search.orderBy  === 'profile.title'" class="fa fa-arrow-down"></i>
+              <i (click)="orderBy('profile.title')" *ngIf="search.orderBy  === '-profile.title'" class="fa fa-arrow-up"></i>
+            </th>
+            <th class="centre tdunder">
+              Nom
+              <i (click)="orderBy('profile.lastName')" *ngIf="search.orderBy  !== 'profile.lastName' && search.orderBy  !== '-profile.lastName'" class="fa fa-arrow-down grey"></i>
+              <i (click)="orderBy('-profile.lastName')" *ngIf="search.orderBy  === 'profile.lastName'" class="fa fa-arrow-down"></i>
+              <i (click)="orderBy('profile.lastName')" *ngIf="search.orderBy  === '-profile.lastName'" class="fa fa-arrow-up"></i>
+            </th>
+            <th class="centre tdunder">
+              Société
+
+            </th>
+            <th class="centre tdunder">Ville
+
+            </th>
             <th class="centre tdunder">Téléphone</th>
-            <th class="centre tdunder">Date</th>
+            <th class="centre tdunder">Date
+              <i (click)="orderBy('createdAt')" *ngIf="search.orderBy  !== 'createdAt' && search.orderBy  !== '-createdAt'" class="fa fa-arrow-down grey"></i>
+              <i (click)="orderBy('-createdAt')" *ngIf="search.orderBy  === 'createdAt'" class="fa fa-arrow-down"></i>
+              <i (click)="orderBy('createdAt')" *ngIf="search.orderBy  === '-createdAt'" class="fa fa-arrow-up"></i>
+            </th>
           </tr>
         </thead>
         <tbody class="clienttbl">
@@ -36,20 +54,20 @@
               </div>
             </td>
             <td class="centre tdunder">{{user.profile.title}}</td>
-            <td class="centre tdunder">{{user.profile.lastName}}</td>
-            
-            
-            <td class="centre tdunder"> 
+            <td class="centre tdunder">{{user.profile.lastName}} {{user.profile.name}}</td>
+
+
+            <td class="centre tdunder">
               <div *ngFor="let companie of user.ownerCompanies">
                 {{companie.nameCompanie}}
               </div>
             </td>
             <td class="centre tdunder">
               <div *ngFor="let singleAddress of user.profile.address">
-                
+
                 {{singleAddress.city}}
               </div>
-            
+
             </td>
             <td class="centre tdunder">{{user.profile.phoneNumber}}</td>
             <td class="centre tdunder">{{user.createdAt | date:'dd-MM-yyyy' }}</td>

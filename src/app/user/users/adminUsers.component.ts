@@ -5,6 +5,7 @@ import { User} from '../../user/user.model';
 import { ToastsManager} from 'ng2-toastr';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
+import { Search, PaginationData } from '../../shared/shared.model';
 
 
 
@@ -19,17 +20,19 @@ import { Location } from '@angular/common';
 export class AdminUsersComponent implements OnInit {
   fetchedUsers: User[] = [];
   loading: boolean;
-  search = {
-    orderBy : '',
-    search: '',
-    isExternalUser: true,
-    role: ''
-  };
-  paginationData = {
-    currentPage: 1,
-    itemsPerPage: 0,
-    totalItems: 0
-  };
+  search: Search = new Search()
+  // {
+  //   orderBy : '',
+  //   search: '',
+  //   isExternalUser: true,
+  //   role: ''
+  // };
+  paginationData: PaginationData = new PaginationData()
+  // {
+  //   currentPage: 1,
+  //   itemsPerPage: 0,
+  //   totalItems: 0
+  // };
 
 
   constructor(
@@ -46,8 +49,8 @@ export class AdminUsersComponent implements OnInit {
     this.activatedRoute.params.subscribe((params: Params) => {
       if(params['isExternalUser']) {
         this.search.isExternalUser = (params['isExternalUser'] === 'true')
-        this.search.orderBy = 'profile.name';
-        this.search.role = 'client';
+        this.search.orderBy = 'profile.lastName';
+        // this.search.role = 'client';
         this.getUsers(this.paginationData.currentPage, this.search);
       }
     })
