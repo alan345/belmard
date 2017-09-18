@@ -9,10 +9,11 @@ var product = new Schema({
     ownerCompanies: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
     details: {
       referenceName: {type: String},
-      reference: {type: String},
+      reference: {type: String, default: ['']},
+      unit: {type: String, default: ['']},
       price: {
         costPrice: {type: Number},
-        sellingPrice: { type: Number},
+        sellingPrice: {type: Number},
       },
       description: {type: String},
       dimension: {

@@ -14,6 +14,7 @@ export class Product {
 }
 
 export class Details {
+  unit: string = '';
   referenceName: string = '';
   reference: string = '';
   price: Price = new Price();

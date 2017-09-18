@@ -80,6 +80,7 @@ export class ProductSingleComponent implements OnInit {
         referenceName: ['', [Validators.required, Validators.minLength(2)]],
         reference: ['', [Validators.required, Validators.minLength(2)]],
         description: [''],
+        unit: [''],
 
         costPrice: [''],
         sellingPrice: [''],
@@ -186,7 +187,7 @@ export class ProductSingleComponent implements OnInit {
   // }
 
   getPicture(result){
-    
+
   }
   save() {
     // this.fetchedProduct.categorie.categ1 = [{name: this.categ1}]
