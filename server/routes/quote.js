@@ -37,8 +37,7 @@ router.get('/:id', function(req, res, next) {
 
     // let findQuery = {}
     // findQuery['_id'] = req.params.id
-    Quote.findById({_id: req.params.id})
-    .populate({
+    Quote.findById({_id: req.params.id}).populate({
       path: 'projects',
       model: 'Project',
       populate: {
@@ -121,98 +120,85 @@ router.get('/pdf/:quoteId', function(req, res, next) {
   var options = {
     format: 'Letter',
     "header": {
-      "height": "50px",
-
+      "height": "50px"
     },
     "footer": {
-    "height": "50px",
-
-  },
-    "border": "10px",
+      "height": "50px"
+    },
+    "border": "10px"
   };
 
-
-
-  User
-  .findOne({_id: req.user._id})
-  .exec(function (err, user) {
+  User.findOne({_id: req.user._id}).exec(function(err, user) {
     if (err) {
-      return res.status(403).json({
-        title: 'There was a problem',
-        error: err
-      });
+      return res.status(403).json({title: 'There was a problem', error: err});
     }
 
     if (!user) {
       return res.status(404).json({
         title: 'No form found',
-        error: {message: 'Item not found!'}
+        error: {
+          message: 'Item not found!'
+        }
       });
     }
 
-    Companie
-     .findById(user.ownerCompanies[0])
-     .populate({path: 'forms', model: 'Form'})
-     .populate({path: 'rights', model: 'Right'})
-     .exec(function (err, companie) {
-       if (err) {
-         return res.status(404).json({
-           message: '',
-           err: err
-         })
-       } if (!companie) {
-         return res.status(404).json({
-           title: 'No obj found',
-           error: {message: 'Obj not found!'}
-         })
-       } else {
+    Companie.findById(user.ownerCompanies[0]).populate({path: 'forms', model: 'Form'}).populate({path: 'rights', model: 'Right'}).exec(function(err, companie) {
+      if (err) {
+        return res.status(404).json({message: '', err: err})
+      }
+      if (!companie) {
+        return res.status(404).json({
+          title: 'No obj found',
+          error: {
+            message: 'Obj not found!'
+          }
+        })
+      } else {
 
+        Quote.findById((req.params.quoteId), function(err, obj) {
+          if (err) {
+            return res.status(500).json({message: 'An error occured', err: err})
+          }
+          if (!obj) {
+            return res.status(404).json({
+              title: 'No form found',
+              error: {
+                message: 'Form not found!'
+              }
+            })
+          }
 
+          // let findQuery = {}
+          // findQuery['_id'] = req.params.id
+          Quote.findById({_id: req.params.quoteId}).populate({
+            path: 'projects',
+            model: 'Project',
+            populate: {
+              path: 'assignedTos',
+              model: 'User'
+            }
+          }).populate({path: 'signature.users', model: 'User'}).populate({path: 'clients', model: 'User'}).populate({
+            path: 'devisDetails.bucketProducts.productInit',
+            model: 'Product',
+            populate: {
+              path: 'forms',
+              model: 'Form'
+            }
+          }).exec(function(err, item) {
+            if (err) {
+              return res.status(404).json({message: '', err: err})
+            }
+            if (!item) {
+              return res.status(404).json({
+                title: 'No obj found',
+                error: {
+                  message: 'Obj not found!'
+                }
+              })
+            } else {
 
-           Quote.findById((req.params.quoteId), function(err, obj) {
-             if (err) {
-               return res.status(500).json({message: 'An error occured', err: err})
-             }
-             if (!obj) {
-               return res.status(404).json({
-                 title: 'No form found',
-                 error: {
-                   message: 'Form not found!'
-                 }
-               })
-             }
-
-             // let findQuery = {}
-             // findQuery['_id'] = req.params.id
-             Quote.findById({_id: req.params.quoteId}).populate({
-               path: 'projects',
-               model: 'Project',
-               populate: {
-                 path: 'assignedTos',
-                 model: 'User'
-               }
-             }).populate({path: 'signature.users', model: 'User'}).populate({path: 'clients', model: 'User'}).populate({
-               path: 'devisDetails.bucketProducts.productInit',
-               model: 'Product',
-               populate: {
-                 path: 'forms',
-                 model: 'Form'
-               }
-             }).exec(function(err, item) {
-               if (err) {
-                 return res.status(404).json({message: '', err: err})
-               }
-               if (!item) {
-                 return res.status(404).json({
-                   title: 'No obj found',
-                   error: {
-                     message: 'Obj not found!'
-                   }
-                 })
-               } else {
-
-                 var html = ''
-                 html += `
+              var html = ''
+              html += `
                  <style type="text/css">
 
                  .col-1 {
@@ -334,54 +320,51 @@ router.get('/pdf/:quoteId', function(req, res, next) {
 
                  </style>
                  `
-                 html += `<div id="pageHeader" class="col-12"> <img class="img" src="http://belmard-renovation.fr/wp-content/uploads/2016/05/BELMARD.png">
+              html += `<div id="pageHeader" class="col-12"> <img class="img" src="http://belmard-renovation.fr/wp-content/uploads/2016/05/BELMARD.png">
 
                   </div>`
 
-                 html += `<table class="test">
+              html += `<table class="test">
                        <thead>
                          <tr>
                            <th class="col-4 cobo desc">`
-                 item.clients.forEach(user => {
-                   html += user.profile.name
-                   html += '<br>'
-                   html += user.profile.title
-                   html += '<br>'
-                   html += user.profile.lastName
-                   html += '<br>'
-                   html += user.profile.phoneNumber
-                   html += '<br>'
-                   html += user.profile.fax
-                 })
-                 html += `</th>
+              item.clients.forEach(user => {
+                html += user.profile.name
+                html += '<br>'
+                html += user.profile.title
+                html += '<br>'
+                html += user.profile.lastName
+                html += '<br>'
+                html += user.profile.phoneNumber
+                html += '<br>'
+                html += user.profile.fax
+              })
+              html += `</th>
                            <th class="col-4 nobo"></th>
                            <th class="col-4 cobo desc">`
 
-
-
-
-                           html += companie.nameCompanie
-                           html += '<br>'
-                           html += companie.email
-                           html += '<br>'
-                           html += companie.address.address
-                           html += '<br>'
-                           html += companie.address.city
-                           html += '<br>'
-                           html += companie.address.state
-                           html += '<br>'
-                           html += companie.address.zip
-                           html += '<br>'
-                           html += companie.address.country
-                           html += '<br>'
-                html += `
+              html += companie.nameCompanie
+              html += '<br>'
+              html += companie.email
+              html += '<br>'
+              html += companie.address.address
+              html += '<br>'
+              html += companie.address.city
+              html += '<br>'
+              html += companie.address.state
+              html += '<br>'
+              html += companie.address.zip
+              html += '<br>'
+              html += companie.address.country
+              html += '<br>'
+              html += `
                            </th>
-
                          </tr>
                        </thead>
                      </table>`
 
-                 html += ` <br>
+              html += `
+                     <br>
                      <table>
                        <thead>
                          <tr>
@@ -389,9 +372,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                            </th>
                          </tr>
                        </thead>
-                     </table>`
-
-                 html += `
+                     </table>
                      <br>
                      <table class="tabo">
                        <thead>
@@ -407,46 +388,49 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                        </thead>
                        <tbody>`
 
-                 item.devisDetails.forEach(devisDetail => {
-                   html += '<tr class="ts">'
-                   html += '<td class="desc">' + devisDetail.nameBucketProducts + '</td>'
-                   html += `
-                             <td class="desc"></td>
-                             <td class="desc"></td>
-                             <td class="desc"></td>
-                             <td class="desc"></td>
-                             <td class="desc"></td>
-                             <td class="desc"></td>
+              item.devisDetails.forEach(devisDetail => {
+                html += '<tr class="ts">'
+                html += '<td class="desc">' + devisDetail.nameBucketProducts + '</td>'
+                html += `
+                         <td class="desc"></td>
+                         <td class="desc"></td>
+                         <td class="desc"></td>
+                         <td class="desc"></td>
+                         <td class="desc"></td>
+                         <td class="desc"></td>
 
                    `
-                   html += '</tr>'
-                   devisDetail.bucketProducts.forEach(bucketProduct => {
-                     html += '<tr>'
+                html += '</tr>'
+                devisDetail.bucketProducts.forEach(bucketProduct => {
+                  html += '<tr>'
 
-                     bucketProduct.productInit.forEach(product => {
-                       html += '<td class="desc">' + product.details.referenceName + '</td>'
-                       product.forms.forEach(form => {
-                         let img = 'http://localhost/uploads/forms/' + form.owner + '/' + form.imagePath
-                         html += '<td class="elem">' + '<img class="img" src="' + img + '">' + '</td>'
-                       })
-                     })
-                     html += '<td class="desc">' + bucketProduct.typeRow + '</td>'
-                     html += '<td class="elem">' + bucketProduct.title + '</td>'
-                     html += '<td class="elem">' + bucketProduct.discount + '</td>'
-                     html += '<td class="elem">' + bucketProduct.priceWithoutTaxes + '</td>'
-                     html += '<td class="elem">' + bucketProduct.vat + '</td>'
-                     html += '</tr>'
+                  bucketProduct.productInit.forEach(product => {
+                    html += '<td class="desc">' + product.details.referenceName + '</td>'
+                    product.forms.forEach(form => {
+                      let img = 'http://localhost/uploads/forms/' + form.owner + '/' + form.imagePath
+                      html += '<td class="elem">' + '<img class="img" src="' + img + '">' + '</td>'
+                    })
+                  })
+                  html += '<td class="desc">' + bucketProduct.typeRow + '</td>'
+                  html += '<td class="elem">' + bucketProduct.title + '</td>'
+                  html += '<td class="elem">' + bucketProduct.discount + '</td>'
+                  html += '<td class="elem">' + bucketProduct.priceWithoutTaxes + '</td>'
+                  html += '<td class="elem">' + bucketProduct.vat + '</td>'
+                  html += '</tr>'
 
-                   })
-                 })
+                })
+              })
 
-                 html += `
+              html += `
                        </tbody>
                      </table>
+                     <br>`
 
-                     `;
+              html += 'Total ' + item.priceQuote.priceQuoteWithoutTaxes + ' '
+              html += 'priceQuoteWithTaxes ' + item.priceQuote.priceQuoteWithTaxes + '€ TTC'
 
-                 html += `<br><table>
+              html += `
+                     <table>
                        <thead>
                          <tr>
                            <th class="col-3 desc"><p>Entreprise</p>
@@ -460,35 +444,28 @@ router.get('/pdf/:quoteId', function(req, res, next) {
 
                          </tr>
                        </thead>
-                     </table>`
+                     </table>
+                    <div id="pageFooter">Default Footer</div>`
 
-                 html += `<div id="pageFooter">Default Footer</div>`
+              pdf.create(html, options).toFile('./server/uploads/pdf/' + req.params.quoteId + '.pdf', function(err, resPDF) {
+                if (err) {
+                  //return res.status(404).json({message: '', err: err})
+                } else {
 
-                 pdf.create(html, options).toFile('./server/uploads/pdf/' + req.params.quoteId + '.pdf', function(err, resPDF) {
-                   if (err) {
-                     //return res.status(404).json({message: '', err: err})
-                   } else {
+                  res.status(200).json({
+                    message: 'Success',
+                    item: req.params.quoteId + '.pdf'
+                  })
+                }
+              })
 
-                     res.status(200).json({
-                       message: 'Success',
-                       item: req.params.quoteId + '.pdf'
-                     })
-                   }
-                 })
+            }
+          })
+        })
 
-               }
-             })
-           })
-
-
-       }
-     })
+      }
+    })
   })
-
-
-
-
-
 
 })
 
@@ -679,8 +656,7 @@ router.get('/page/:page', function(req, res, next) {
   if (req.query.projectId)
     searchQuery['projects'] = mongoose.Types.ObjectId(req.query.projectId)
 
-  Quote.find(searchQuery)
-  .populate({path: 'clients', model: 'User'})
+  Quote.find(searchQuery).populate({path: 'clients', model: 'User'})
   // .populate({path: 'devisDetails.bucketProducts.productInit', model: 'Product'})
     .limit(itemsPerPage).skip(skip).sort(req.query.orderBy).exec(function(err, item) {
     if (err) {

@@ -52,9 +52,11 @@ var user = new Schema({
       address:[{
         nameAddress:  {type: String, default: ['']},
         address : {type: String, default: ['']},
+        address2 : {type: String, default: ['']},
         city : {type: String, default: ['']},
         state : {type: String, default: ['']},
         zip : {type: String, default: ['']},
+        country : {type: String, default: ['']},
       }],
     }
   },

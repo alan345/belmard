@@ -63,11 +63,13 @@ export class DetailHouse {
 
 
 export class Address {
-    nameAddress: string = ''; 
-    address : string = '';
-    city : string = '';
+    nameAddress: string = 'shipping';
+    address: string = '';
+    address2: string = '';
+    city: string = '';
     state : string = '';
     zip : string = '';
+    country : string = '';
 }
 
 
