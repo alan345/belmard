@@ -433,7 +433,7 @@
                   <div *ngFor="let user of fetchedQuote.signature.users">
                     {{fetchedQuote.signature.dateSignature | date:'yMdjm'}} - {{user.profile.name }}
                   </div>
-                  <button type="button" class="delete" md-button (click)="removeSignature()">
+                  <button type="button" class="false" (click)="removeSignature()">
                   {{'Unsign' | translate}}
               </button>
                 </div>
