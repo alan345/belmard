@@ -55,8 +55,8 @@ module.exports = {
             })
           }
           if (typeObject === 'userCalendar') {
-            req.body.users.forEach(user => {
-              notification.users.push(user)
+            req.body.clients.forEach(client => {
+              notification.users.push(client)
             })
           }
 

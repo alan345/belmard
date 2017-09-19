@@ -4,10 +4,10 @@
       <h4 *ngIf="search.isExternalUser == 'true'"> {{'Payments' | translate}}</h4>
       <h4 *ngIf="search.isExternalUser == 'false'"> {{'Expenses' | translate}}</h4>
     </div>
-    <div class="p-2">
+    <!-- <div class="p-2">
       <app-header [search]="search" (saved)="saved($event)" [nameButton]="'Create a new Paiement'" [nameObject]="'paiementQuote'" [openInDialog]=true>
       </app-header>
-    </div>
+    </div> -->
   </div>
   <div class="d-flex flex-row">
     <div class="p-2">
@@ -27,7 +27,7 @@
             <th class="centre tdunder">Montant</th>
           </tr>
         </thead>
-        
+
         <tbody class="clienttbl">
           <tr *ngFor="let paiementQuote of fetchedPaiementQuotes" [routerLink]="['/paiementQuote/edit/' + paiementQuote._id]" routerLinkActive="active">
             <td class="centre tdunder">{{paiementQuote.type}}</td>

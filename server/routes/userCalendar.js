@@ -78,10 +78,10 @@ router.put('/:id', function(req, res, next) {
       item.start = req.body.start,
       item.end = req.body.end,
       item.details = req.body.details,
-      item.user = req.body.user,
+      // item.user = req.body.user,
       item.color = req.body.color,
       item.clients = req.body.clients,
-      item.users = req.body.users,
+      item.assignedTos = req.body.assignedTos,
       item.projects = req.body.projects,
 
       item.save(function(err, result) {

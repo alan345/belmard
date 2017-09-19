@@ -10,7 +10,7 @@ export class UserCalendar {
     end: Date = new Date();
     color: string = '';
     // clients: User[] = [];
-    users: User[] = [];
+    clients: User[] = [];
     assignedTos: User[] = [];
     projects: Project[] = [];
     isActiveEvent: boolean = false;

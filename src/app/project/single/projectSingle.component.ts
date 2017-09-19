@@ -290,7 +290,7 @@ export class ProjectSingleComponent implements OnInit {
             this.toastr.success('Great!', res.message)
             // this.fetchedProject = res.obj
             this.getProject(res.obj._id)
-            this.saved.emit(res.obj)
+            this.saved.emit(this.fetchedProject)
             // this.router.navigate(['project/' + res.obj._id]);
           },
           error => {

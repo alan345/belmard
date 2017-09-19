@@ -49,8 +49,8 @@ export class UserCalendarComponent implements OnInit {
 
   ) {}
   ngOnChanges() {
-    this.fetchedUserCalendar.users.forEach(client => { this.search.userId = client._id })
-    this.fetchedUserCalendar.assignedTos.forEach(client => { this.search.assignedToId = client._id })
+    // this.fetchedUserCalendar.users.forEach(client => { this.search.userId = client._id })
+    // this.fetchedUserCalendar.assignedTos.forEach(client => { this.search.assignedToId = client._id })
   }
   ngOnInit() {
     this.myForm = this._fb.group({
@@ -64,14 +64,18 @@ export class UserCalendarComponent implements OnInit {
     })
   }
   selectUser(user: User) {
-    this.fetchedUserCalendar.users.forEach(client => { this.search.userId = client._id })
-    this.fetchedUserCalendar.assignedTos.forEach(client => { this.search.assignedToId = client._id })
+    // this.fetchedUserCalendar.users.forEach(client => { this.search.userId = client._id })
+    // this.fetchedUserCalendar.assignedTos.forEach(client => { this.search.assignedToId = client._id })
     // this.fetchedUserCalendar.users = [user]
   }
   selectProject(project: Project) {
+    console.log(project)
+
+    this.fetchedUserCalendar.clients = project.clients
     // this.fetchedUserCalendar.projects = [project]
   }
   removeProject() {
+    this.fetchedUserCalendar.clients = []
     // this.fetchedUserCalendar.projects.splice(i, 1);
   }
   removeUser() {
@@ -82,8 +86,8 @@ export class UserCalendarComponent implements OnInit {
       .subscribe(
         res => {
           this.fetchedUserCalendar = res
-          this.fetchedUserCalendar.users.forEach(client => { this.search.userId = client._id })
-          this.fetchedUserCalendar.assignedTos.forEach(client => { this.search.assignedToId = client._id })
+          // this.fetchedUserCalendar.users.forEach(client => { this.search.userId = client._id })
+          // this.fetchedUserCalendar.assignedTos.forEach(client => { this.search.assignedToId = client._id })
         },
         error => {
           console.log(error);

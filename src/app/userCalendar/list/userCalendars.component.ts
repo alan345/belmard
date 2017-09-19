@@ -209,7 +209,7 @@ export class UserCalendarsComponent implements OnInit {
         this.events = []
         this.events = res.data
         this.events.forEach((event, i) => {
-          event.users.forEach((user, j) => {
+          event.clients.forEach((user, j) => {
             this.events[i].color = user.profile.colorCalendar
           });
         })
@@ -299,7 +299,7 @@ export class UserCalendarsComponent implements OnInit {
     // console.log(new Date(start._d))
     // console.log(new Date(start._d).toISOString())
     let newUserCalendar = new UserCalendar()
-    newUserCalendar.users = this.searchData.fetchedUserSearchs
+    newUserCalendar.clients = this.searchData.fetchedUserSearchs
     newUserCalendar.projects = this.searchData.fetchedProjectSearchs
 
     console.log(this.searchData.fetchedProjectSearchs)

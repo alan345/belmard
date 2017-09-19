@@ -26,12 +26,12 @@
               <tr *ngIf="authService.showObjHTML('user', 'read')">
                 <td class="nav-item subItem">
                   <a class="nav-link" [routerLink]="['/user/list/true']" routerLinkActive="active">
-                    {{'Customers'|translate}}</a>
+                    {{'Contacts'|translate}}</a>
                 </td>
               </tr>
               <tr *ngIf="authService.showObjHTML('companie', 'read')">
                 <td class="nav-item subItem">
-                  <a class="nav-link" [routerLink]="['/companie']" routerLinkActive="active">{{'Companies'|translate}}</a>
+                  <a class="nav-link" [routerLink]="['/companie']" routerLinkActive="active">{{'Suppliers'|translate}}</a>
                 </td>
               </tr>
               <tr *ngIf="authService.showObjHTML('user', 'read')">

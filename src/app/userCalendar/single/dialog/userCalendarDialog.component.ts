@@ -25,7 +25,7 @@ export class UserCalendarDialogComponent {
      this.fetchedUserCalendar.title = data.fetchedUserCalendar.title
      this.fetchedUserCalendar.start = data.fetchedUserCalendar.start
      this.fetchedUserCalendar.end = data.fetchedUserCalendar.end
-     this.fetchedUserCalendar.users = data.fetchedUserCalendar.users
+     this.fetchedUserCalendar.clients = data.fetchedUserCalendar.clients
      this.fetchedUserCalendar.projects = data.fetchedUserCalendar.projects
      this.fetchedUserCalendar.color = data.fetchedUserCalendar.color
      this.fetchedUserCalendar.details = data.fetchedUserCalendar.details
