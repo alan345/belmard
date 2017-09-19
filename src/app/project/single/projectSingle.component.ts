@@ -290,7 +290,7 @@ export class ProjectSingleComponent implements OnInit {
             this.toastr.success('Great!', res.message)
             // this.fetchedProject = res.obj
             this.getProject(res.obj._id)
-            this.saved.emit(this.fetchedProject)
+            this.saved.emit(res.obj)
             // this.router.navigate(['project/' + res.obj._id]);
           },
           error => {
@@ -301,7 +301,7 @@ export class ProjectSingleComponent implements OnInit {
     }
   }
 
-  openDialogDelete(){
+  openDialogDelete() {
     let this2 = this
     let dialogRefDelete = this.dialog.open(DeleteDialog)
     dialogRefDelete.afterClosed().subscribe(result => {

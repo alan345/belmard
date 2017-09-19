@@ -71,11 +71,11 @@ export class UserCalendarComponent implements OnInit {
   selectProject(project: Project) {
     console.log(project)
 
-    this.fetchedUserCalendar.clients = project.clients
+    // this.fetchedUserCalendar.clients = project.clients
     // this.fetchedUserCalendar.projects = [project]
   }
   removeProject() {
-    this.fetchedUserCalendar.clients = []
+    // this.fetchedUserCalendar.clients = []
     // this.fetchedUserCalendar.projects.splice(i, 1);
   }
   removeUser() {
@@ -127,6 +127,10 @@ export class UserCalendarComponent implements OnInit {
 
 
     save() {
+      this.fetchedUserCalendar.projects.forEach(project=> {
+        this.fetchedUserCalendar.clients = project.clients
+      })
+
       if(this.fetchedUserCalendar._id) {
         this.userCalendarService.updateUserCalendar(this.fetchedUserCalendar)
           .subscribe(

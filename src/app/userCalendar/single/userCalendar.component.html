@@ -34,16 +34,21 @@
 
         <br>
         <div class="col-md-12">
-          <app-autocomplete [typeAutocomplete]="'project'" [title]="'Project'" [search]="search" [singleChoice]="'true'" [arrayContent]="fetchedUserCalendar.projects" >
+          <app-autocomplete [typeAutocomplete]="'project'" [title]="'Project'" [search]="search" [singleChoice]="'true'" [arrayContent]="fetchedUserCalendar.projects" (getResultAutocomplete)="selectProject($event[0])">
           </app-autocomplete>
         </div>
 
-        <div class="col-md-12" *ngFor="let project of fetchedUserCalendar.projects">
+
+        <!-- <div *ngFor="let client of fetchedUserCalendar.clients">
+
+          Client {{client.profile.lastName}} {{client.profile.name}}
+        </div> -->
+        <!-- <div class="col-md-12" *ngFor="let project of fetchedUserCalendar.projects">
           <div *ngFor="let client of project.clients">
-            <!-- Client: {{client.profile | json}} -->
+
             Client {{client.profile.lastName}} {{client.profile.name}}
           </div>
-        </div>
+        </div> -->
         <!-- {{fetchedUserCalendar.clients|json}} -->
         <!-- <div class="col-md-12">
           <app-autocomplete [typeAutocomplete]="'user'" [title]="'Utilisateur'" [singleChoice]="'true'" [arrayContent]="fetchedUserCalendar.users" (getResultAutocomplete)="selectUser($event[0])" (clearAutocomplete)="removeUser()">
@@ -52,6 +57,7 @@
         <div class="col-md-12">
           <app-autocomplete [typeAutocomplete]="'user'" [title]="'Réparateur'" [singleChoice]="'true'" [arrayContent]="fetchedUserCalendar.assignedTos" (getResultAutocomplete)="selectUser($event[0])" (clearAutocomplete)="removeUser()">
           </app-autocomplete>
+
         </div>
         <!-- <div class="col-md-12">
           <textarea class="form-control" formControlName="description" [(ngModel)]="fetchedUserCalendar.details.description" required placeholder="Description">

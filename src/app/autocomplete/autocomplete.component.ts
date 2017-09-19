@@ -53,7 +53,6 @@ export class AutocompleteComponent {
   ) {}
 
   ngOnChanges() {
-
     if(this.typeAutocomplete ==='project' && this.search.projectId)
         this.projectService.getProject(this.search.projectId)
         .subscribe( res => { if(this.arrayContent.length) this.arrayContent.splice(0, 1);
@@ -69,7 +68,6 @@ export class AutocompleteComponent {
 
 
   getData(page: number, search: any) {
-
     if(this.typeAutocomplete ==='user')
       this.userService.getUsers(page, search)
       .subscribe( res => { this.fetchedData = res.data }, error => { console.log(error); });
@@ -140,7 +138,7 @@ export class AutocompleteComponent {
 
   saved(result) {
     if(result)
-      this.arrayContent = [result]
+      this.arrayContent.push(result)
   }
 
   selectData(data) {

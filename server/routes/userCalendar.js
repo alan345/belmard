@@ -173,7 +173,7 @@ router.get('/page/:page', function(req, res, next) {
   .find(searchQuery)
   .sort('-createdAt')
   .populate({path: 'assignedTos', model: 'User'})
-  .populate({path: 'users', model: 'User'})
+  .populate({path: 'clients', model: 'User'})
   // .where('users.type').in(req.query.userSearch)
   .populate({path: 'projects', model: 'Project'})
   .limit(itemsPerPage).skip(skip)

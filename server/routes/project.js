@@ -154,7 +154,7 @@ router.post('/', function(req, res, next) {
 
   // project.ownerCompanies = req.user.companies
   var project = new Project(req.body)
-  project.save(function(err, result) {
+  project.save(function (err, result) {
     if (err) {
       console.log(err)
       return res.status(403).json({
