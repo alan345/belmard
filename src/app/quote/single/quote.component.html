@@ -83,6 +83,14 @@
 
         </div>
 
+        
+
+
+
+      </div>
+
+      <div class="col-3">
+
         <div class="form-group">
           {{'Currency' | translate}}
           <select class="form-control" name="currency" formControlName="currency" [(ngModel)]="fetchedQuote.detail.currency">
@@ -92,14 +100,6 @@
               </select>
         </div>
 
-
-
-      </div>
-
-      <div class="col-3">
-
-        
-
         <div class="form-group">
           {{'Tax Type' | translate}}
           <select name="EstimateTaxConfigCode" class="form-control" id="EstimateTaxConfigCode" data-bind='options: EstimateTaxConfigCodes, optionsText: "Text", optionsValue:"Value", value: EstimateTaxConfigCode'></select>
@@ -107,7 +107,7 @@
 
         <div class="input-group">
           {{'Discount in %' | translate}}
-          <input id="DiscountPercent" name="DiscountPercent" class="form-control" data-bind='value: formattedDefaultDiscount' />
+          <input id="DiscountPercent" name="DiscountPercent" class="form-control row" data-bind='value: formattedDefaultDiscount' />
           <span class="input-group-addon" style="color: #999;">%</span>
         </div>
      
