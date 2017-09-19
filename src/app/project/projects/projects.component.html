@@ -23,23 +23,30 @@
             <th class="centre tdunder">Client</th>
             <th class="centre tdunder">Nom</th>
             <th class="centre tdunder">Date</th>
-            <th class="centre tdunder">Assigned to</th>
             <th class="centre tdunder">Statut</th>
           </tr>
         </thead>
         <tbody class="clienttbl">
           <tr *ngFor="let project of fetchedProjects" [routerLink]="['/project/' + project._id]" routerLinkActive="active">
-            <td class="centre tdunder">{{project.details.categ}}</td>
-            <td class="centre tdunder">{{project.details.customer}}</td>
-            <td class="centre tdunder">{{project.details.name}}</td>
-            <td class="centre tdunder">{{project.details.date}}</td>
             <td class="centre tdunder">
-              <div *ngFor="let assignedTo of project.assignedTos">
-                {{assignedTo.profile.name}} {{assignedTo.profile.lastName}}
+              <div *ngFor="let categ0Single of project.categorie.categ0">
+                {{categ0Single.name}}
               </div>
-
             </td>
-            <td class="centre tdunder">{{project.StatusProject}}</td>
+            <td class="centre tdunder">
+              <div *ngFor="let client of project.clients">
+                {{client.profile.lastName}} {{client.profile.name}}
+              </div>
+            </td>
+            <td class="centre tdunder">
+              {{project.details.name}}
+            </td>
+            <td class="centre tdunder">
+              {{project.createdAt| date:'dd-MM-yyyy' }}
+            </td>
+            <td class="centre tdunder">{{project.details.date}}</td>
+
+            <td class="centre tdunder">{{project.status}}</td>
           </tr>
         </tbody>
       </table>
