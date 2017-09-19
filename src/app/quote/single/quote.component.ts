@@ -180,7 +180,7 @@ export class QuoteComponent implements OnInit {
 
   private signaturePadOptions: Object = { // passed through to szimek/signature_pad constructor
     minWidth: 1,
-    maxWidth: 7,
+    maxWidth: 4,
     canvasWidth: 250,
     canvasHeight: 200,
     penColor: "rgb(36, 41, 46)"
