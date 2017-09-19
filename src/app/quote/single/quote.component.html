@@ -34,13 +34,17 @@
           Devis acces public
         </button> -->
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
           {{'Type' | translate}}
           <select class="form-control" data-val="true" data-val-number="The field Estimate Template must be a number." id="InvoiceTemplateIDFK" name="InvoiceTemplateIDFK"><option value="30390">Mod&#232;le Facture</option>
                 <option selected="selected" value="30391">Mod&#232;le Devis</option>
               </select>
-        </div>
+        </div> -->
         
+        <div class="form-group">
+          {{'Quote number' | translate}}
+          <input class="form-control" id="EstimateCode" name="EstimateCode" type="text" value="28" />
+        </div>
         
         <div class="form-group">
           <app-autocomplete [search]="search" [enableLink]=true [typeAutocomplete]="'user'" [title]="'Customer'" [search]="{isExternalUser:true}" [title]="" [singleChoice]="'true'" [arrayContent]="fetchedQuote.clients" (getResultAutocomplete)="selectUser($event[0])">
@@ -62,10 +66,7 @@
 
       <div class="col-2">
 
-        <div class="form-group">
-          {{'Quote number' | translate}}
-          <input class="form-control" id="EstimateCode" name="EstimateCode" type="text" value="28" />
-        </div>
+        
    
         <div class="form-group">
           {{'Quote edit date' | translate}}
@@ -79,15 +80,7 @@
 
         </div>
 
-        
-
-
-
-      </div>
-
-      <div class="col-3">
-
-        <div class="form-group">
+  <!--      <div class="form-group">
           {{'Currency' | translate}}
           <select class="form-control" name="currency" formControlName="currency" [(ngModel)]="fetchedQuote.detail.currency">
                 <option value="">Select..</option>
@@ -99,7 +92,7 @@
         <div class="form-group">
           {{'Tax Type' | translate}}
           <select name="EstimateTaxConfigCode" class="form-control" id="EstimateTaxConfigCode" data-bind='options: EstimateTaxConfigCodes, optionsText: "Text", optionsValue:"Value", value: EstimateTaxConfigCode'></select>
-        </div>
+        </div> -->
 
         <div class="form-group">
           {{'Discount in %' | translate}}
@@ -125,16 +118,12 @@
 
 
 
+
       </div>
 
-      <div class="col-2">
-      </div>
-      
-      <div class="col-2">
-      </div>
-      <div class="col-8">
+      <div class="col-3">
 
-            <div class="form-control" *ngFor="let client of fetchedQuote.clients">
+      <div class="form-control" *ngFor="let client of fetchedQuote.clients">
               <h4>
               <div>{{client.profile.name}} {{client.profile.lastName}}</div></h4>
               
@@ -166,7 +155,19 @@
         <div class="form-group">
           {{'Quote title' | translate}}
           <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedQuote.name" required minlength="5" placeholder="{{'Quote title' | translate}}">
-        </div>    
+        </div>   
+
+
+      </div>
+
+      <div class="col-2">
+      </div>
+      
+      <div class="col-2">
+      </div>
+      <div class="col-8">
+
+               
         
       </div> 
       <div class="col-2">
