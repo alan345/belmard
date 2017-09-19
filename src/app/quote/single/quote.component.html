@@ -35,20 +35,15 @@
         </button> -->
         </div>
         <div class="form-group">
-          {{'Status' | translate}}
-
-          <select class="form-control" formControlName="statusQuote" placeholder="" [(ngModel)]="fetchedQuote.statusQuote" name="statusQuote">
-                <option *ngFor="let n of statusQuotes" [value]="n.indexStatus">{{n.label}}</option>
-
+          {{'Type' | translate}}
+          <select class="form-control" data-val="true" data-val-number="The field Estimate Template must be a number." id="InvoiceTemplateIDFK" name="InvoiceTemplateIDFK"><option value="30390">Mod&#232;le Facture</option>
+                <option selected="selected" value="30391">Mod&#232;le Devis</option>
               </select>
-
-
-          <!-- <md-select formControlName="statusQuote" placeholder="" [(ngModel)]="fetchedQuote.statusQuote" name="statusQuote">
-            <md-option *ngFor="let n of statusQuotes" [value]="n.indexStatus">
-              {{n.label}}
-            </md-option>
-          </md-select> -->
-
+        </div>
+        
+        <div class="form-group">
+          {{'Quote title' | translate}}
+          <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedQuote.name" required minlength="5" placeholder="{{'Quote title' | translate}}">
         </div>
         <div class="form-group">
           <app-autocomplete [search]="search" [enableLink]=true [typeAutocomplete]="'user'" [title]="'Customer'" [search]="{isExternalUser:true}" [title]="" [singleChoice]="'true'" [arrayContent]="fetchedQuote.clients" (getResultAutocomplete)="selectUser($event[0])">
@@ -62,10 +57,7 @@
           <app-autocomplete [search]="search" [enableLink]=true [typeAutocomplete]="'project'" [title]="'Project'" [singleChoice]="true" [arrayContent]="fetchedQuote.projects">
           </app-autocomplete>
         </div>
-        <div class="form-group">
-          {{'Quote title' | translate}}
-          <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedQuote.name" required minlength="5" placeholder="{{'Quote title' | translate}}">
-        </div>
+        
 
 
       </div>
@@ -106,12 +98,7 @@
 
       <div class="col-3">
 
-        <div class="form-group">
-          {{'Type' | translate}}
-          <select class="form-control" data-val="true" data-val-number="The field Estimate Template must be a number." id="InvoiceTemplateIDFK" name="InvoiceTemplateIDFK"><option value="30390">Mod&#232;le Facture</option>
-                <option selected="selected" value="30391">Mod&#232;le Devis</option>
-              </select>
-        </div>
+        
 
         <div class="form-group">
           {{'Tax Type' | translate}}
@@ -124,7 +111,22 @@
           <span class="input-group-addon" style="color: #999;">%</span>
         </div>
      
-        
+        <div class="form-group">
+          {{'Status' | translate}}
+
+          <select class="form-control" formControlName="statusQuote" placeholder="" [(ngModel)]="fetchedQuote.statusQuote" name="statusQuote">
+                <option *ngFor="let n of statusQuotes" [value]="n.indexStatus">{{n.label}}</option>
+
+              </select>
+
+
+          <!-- <md-select formControlName="statusQuote" placeholder="" [(ngModel)]="fetchedQuote.statusQuote" name="statusQuote">
+            <md-option *ngFor="let n of statusQuotes" [value]="n.indexStatus">
+              {{n.label}}
+            </md-option>
+          </md-select> -->
+
+        </div>
 
 
 
