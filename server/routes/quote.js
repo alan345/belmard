@@ -546,6 +546,7 @@ router.put('/:id', function(req, res, next) {
     item.detail = req.body.detail
     item.statusQuote = req.body.statusQuote
     item.companieClients = req.body.companieClients
+    item.quoteNumber = req.body.quoteNumber
 
     item.save(function(err, result) {
       if (err) {

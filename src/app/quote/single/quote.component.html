@@ -23,18 +23,22 @@
         <div class="row">
         </div>
         <div class="form-group">
+          typeQuote: {{fetchedQuote.typeQuote}}
+        </div>
+        <div class="form-group">
           {{'Quote number' | translate}}
-          <input class="form-control" id="EstimateCode" name="EstimateCode" type="text" value="28" />
+          <!-- <input class="form-control" name="EstimateCode" type="text" value="28" /> -->
+          <input class="gooplusInput ac" formControlName="quoteNumber" type="number" [(ngModel)]="fetchedQuote.quoteNumber" placeholder="quoteNumber">
         </div>
 
         <div class="form-group">
-          <app-autocomplete [search]="search" [enableLink]=true [typeAutocomplete]="'user'" [title]="'Customer'" [search]="{isExternalUser:true}" [title]="" [singleChoice]="'true'" [arrayContent]="fetchedQuote.clients" (getResultAutocomplete)="selectUser($event[0])">
+          <app-autocomplete [search]="search" [enableLink]=true [typeAutocomplete]="'user'" [title]="'Contact'" [search]="{isExternalUser:true}" [title]="" [singleChoice]="'true'" [arrayContent]="fetchedQuote.clients" (getResultAutocomplete)="selectUser($event[0])">
           </app-autocomplete>
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
           <app-autocomplete [search]="search" [enableLink]=true [typeAutocomplete]="'companie'" [title]="'Companie'" [title]="" [singleChoice]="'true'" [arrayContent]="fetchedQuote.companieClients">
           </app-autocomplete>
-        </div>
+        </div> -->
         <div class="form-group">
           <app-autocomplete [search]="search" [enableLink]=true [typeAutocomplete]="'project'" [title]="'Project'" [singleChoice]="true" [arrayContent]="fetchedQuote.projects">
           </app-autocomplete>
@@ -72,18 +76,18 @@
           </div>
         </div>
 
-        <div class="form-control" *ngFor="let companie of fetchedQuote.companieClients">
+        <!-- <div class="form-control" *ngFor="let companie of fetchedQuote.companieClients">
           <h4>
               <div>{{companie.nameCompanie}}</div></h4>
           <div *ngFor="let singleAddress of companie.address">
             <h5>{{singleAddress.nameAddress}}</h5>
             <div>{{singleAddress.address}}</div>
-            <!--    <div>state:{{singleAddress.state}}</div>  -->
+
             <div>{{singleAddress.zip}} {{singleAddress.city}}</div>
             <div>{{companie.phoneNumber}}</div>
             <div>{{companie.email}}</div>
           </div>
-        </div>
+        </div> -->
       </div>
       <div class="col-2">
       </div>

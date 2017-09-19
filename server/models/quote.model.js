@@ -10,9 +10,10 @@ var quote = new Schema({
     projects: [{type: Schema.Types.ObjectId, ref: 'Project'}],
     // ownerQuotes: [{type: Schema.Types.ObjectId, ref: 'User'}],
     clients: [{type: Schema.Types.ObjectId, ref: 'User'}],
-    companieClients: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
+    // companieClients: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
     // phoneNumber: {type: String, default: ['']},
     name: {type: String, default: ['']},
+    quoteNumber: {type: Number, default: [0]},
     statusQuote: {type: Number, default: [0]},
     detail: {
       currency: {type: String, default: ['']},
@@ -23,7 +24,7 @@ var quote = new Schema({
       }
     },
 
-    // typeQuote: {type: String, default: ['salon']},
+    typeQuote: {type: String, default: ['quote']},
     // _users : [{type: Schema.Types.ObjectId, ref: 'User'}],
     forms: [{type: Schema.Types.ObjectId, ref: 'Form'}],
     devisDetails: [

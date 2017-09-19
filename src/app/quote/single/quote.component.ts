@@ -163,6 +163,7 @@ export class QuoteComponent implements OnInit {
 
     this.myForm = this._fb.group({
       name: [''],
+      quoteNumber: [''],
       statusQuote: [''],
       currency: ['', [Validators.required, Validators.minLength(1)]],
       quoteRef: ['', [Validators.required, Validators.minLength(1)]],
