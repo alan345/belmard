@@ -65,7 +65,7 @@
 
       <div class="col-2">
 
-        <div class="input-group">
+        <div class="form-group">
           {{'Quote number' | translate}}
           <span class="input-group-addon">DEV</span>
           <input class="form-control" id="EstimateCode" name="EstimateCode" type="text" value="28" />
@@ -105,9 +105,9 @@
           <select name="EstimateTaxConfigCode" class="form-control" id="EstimateTaxConfigCode" data-bind='options: EstimateTaxConfigCodes, optionsText: "Text", optionsValue:"Value", value: EstimateTaxConfigCode'></select>
         </div>
 
-        <div class="input-group">
+        <div class="form-group">
           {{'Discount in %' | translate}}
-          <input id="DiscountPercent" name="DiscountPercent" class="form-control row" data-bind='value: formattedDefaultDiscount' />
+          <input id="DiscountPercent" name="DiscountPercent" class="form-control" data-bind='value: formattedDefaultDiscount' />
           <span class="input-group-addon" style="color: #999;">%</span>
         </div>
      
