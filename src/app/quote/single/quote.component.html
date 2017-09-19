@@ -419,13 +419,13 @@
             <div class="">
               <div class="card" style="width:100%;">
                 <div *ngIf="!fetchedQuote.signature.base64">
-                  <button type="button" class="delete" md-button (click)="resetSignature()">
+                  <button type="button" class="false" (click)="resetSignature()">
                   {{'Reset' | translate}}
               </button>
                   <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()">
                   </signature-pad>
-                  <button type="button" class="delete" md-button (click)="validateSignature()">
-                  ok
+                  <button type="button" class="valid" (click)="validateSignature()">
+                  {{'Validate' | translate}}
               </button>
                 </div>
                 <div *ngIf="fetchedQuote.signature.base64">
