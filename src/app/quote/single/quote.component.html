@@ -416,9 +416,9 @@
 
           <div class="col-4">
 
-            <div class="">
-              <div class="card" style="width:100%;">
-                <div *ngIf="!fetchedQuote.signature.base64">
+            <div class="ac">
+              <div class="card ac" style="width:100%;">
+                <div class="ac" *ngIf="!fetchedQuote.signature.base64">
                   <button type="button" class="false" (click)="resetSignature()">
                   {{'Reset' | translate}}
               </button>
@@ -428,9 +428,9 @@
                   {{'Validate' | translate}}
               </button>
                 </div>
-                <div *ngIf="fetchedQuote.signature.base64">
-                  <img [src]="fetchedQuote.signature.base64" />
-                  <div *ngFor="let user of fetchedQuote.signature.users">
+                <div class="ac" *ngIf="fetchedQuote.signature.base64">
+                  <img class="img ac" [src]="fetchedQuote.signature.base64" />
+                  <div class="ac" *ngFor="let user of fetchedQuote.signature.users">
                     {{fetchedQuote.signature.dateSignature | date:'yMdjm'}} - {{user.profile.name }}
                   </div>
                   <button type="button" class="false" (click)="removeSignature()">
