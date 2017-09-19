@@ -250,7 +250,6 @@ export class QuoteComponent implements OnInit {
   }
 
   addRow(typeRow) {
-    console.log(typeRow)
     if (typeRow) {
       if (typeRow === 'category')
         this.addBucketProducts()
@@ -260,6 +259,7 @@ export class QuoteComponent implements OnInit {
 
       if (typeRow === 'product' || typeRow === 'text') {
         let bucketProduct: BucketProduct = new BucketProduct()
+        bucketProduct.isEditMode = true
         bucketProduct.typeRow = typeRow
         this.fetchedQuote.devisDetails[this.fetchedQuote.devisDetails.length - 1].bucketProducts.push(bucketProduct)
         this.calculateQuote()

@@ -1,46 +1,27 @@
-<!-- <div class="goldgradient beigeborder subnav">
-  <button class="btn btn-warning" (click)="goBack()"><i class="fa fa-chevron-left"></i><a> Retour</a></button>
-  <h3 style="text-align: center;">Quote</h3>
-</div> -->
-<div class="container-fluid">
 
+<div class="container-fluid">
   <div class="hdform">
     <h3><i class="fa fa-university" aria-hidden="true"></i>{{'Quote' | translate}}</h3>
   </div>
-
   <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
-     <div class="row">
+    <div class="row">
       <div class="col-2">
       </div>
       <div class="col-2">
-         <button type="button" class="btn btn-primary" (click)="downloadPDF()">
+        <button type="button" class="btn btn-primary" (click)="downloadPDF()">
           download PDF
         </button>
-      <!--   <h4 class="dspl-nn">id: {{fetchedQuote._id}}</h4> -->
+        <!--   <h4 class="dspl-nn">id: {{fetchedQuote._id}}</h4> -->
       </div>
       <div class="col-8">
       </div>
-
     </div>
-
     <div class="row">
       <div class="col-2">
       </div>
       <div class="col-3">
-
         <div class="row">
-
-          <!-- <button class="btn btn-outline-primary" [routerLink]="['/quote/public/' + fetchedQuote._id]">
-          Devis acces public
-        </button> -->
         </div>
-        <!-- <div class="form-group">
-          {{'Type' | translate}}
-          <select class="form-control" data-val="true" data-val-number="The field Estimate Template must be a number." id="InvoiceTemplateIDFK" name="InvoiceTemplateIDFK"><option value="30390">Mod&#232;le Facture</option>
-                <option selected="selected" value="30391">Mod&#232;le Devis</option>
-              </select>
-        </div> -->
-
         <div class="form-group">
           {{'Quote number' | translate}}
           <input class="form-control" id="EstimateCode" name="EstimateCode" type="text" value="28" />
@@ -58,108 +39,54 @@
           <app-autocomplete [search]="search" [enableLink]=true [typeAutocomplete]="'project'" [title]="'Project'" [singleChoice]="true" [arrayContent]="fetchedQuote.projects">
           </app-autocomplete>
         </div>
-
-
-
       </div>
-
-
       <div class="col-2">
-
-
-
         <div class="form-group">
           {{'Quote edit date' | translate}}
           <input type="date" class="form-control" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedQuote.detail.dateQuote.issueDateString">
         </div>
-
         <div class="form-group">
           {{'Quote validity date' | translate}}
-
           <input type="date" class="form-control" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedQuote.detail.dateQuote.expiryDateString">
-
         </div>
-
-  <!--      <div class="form-group">
-          {{'Currency' | translate}}
-          <select class="form-control" name="currency" formControlName="currency" [(ngModel)]="fetchedQuote.detail.currency">
-                <option value="">Select..</option>
-                <option selected="selected" value="EUR">EUR - Euro</option>
-                <option value="USD">USD - United States Dollar</option>
-              </select>
-        </div>
-
-        <div class="form-group">
-          {{'Tax Type' | translate}}
-          <select name="EstimateTaxConfigCode" class="form-control" id="EstimateTaxConfigCode" data-bind='options: EstimateTaxConfigCodes, optionsText: "Text", optionsValue:"Value", value: EstimateTaxConfigCode'></select>
-        </div> -->
-
         <div class="form-group">
           {{'Discount in %' | translate}}
           <input id="DiscountPercent" name="DiscountPercent" class="form-control" data-bind='value: formattedDefaultDiscount' />
-         </div>
-
+        </div>
         <div class="form-group">
           {{'Status' | translate}}
-
           <select class="form-control" formControlName="statusQuote" placeholder="" [(ngModel)]="fetchedQuote.statusQuote" name="statusQuote">
-                <option *ngFor="let n of statusQuotes" [value]="n.indexStatus">{{n.label}}</option>
-
-              </select>
-
-
-          <!-- <md-select formControlName="statusQuote" placeholder="" [(ngModel)]="fetchedQuote.statusQuote" name="statusQuote">
-            <md-option *ngFor="let n of statusQuotes" [value]="n.indexStatus">
-              {{n.label}}
-            </md-option>
-          </md-select> -->
-
+            <option *ngFor="let n of statusQuotes" [value]="n.indexStatus">{{n.label}}</option>
+          </select>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="form-control" *ngFor="let client of fetchedQuote.clients">
+          <h4>
+              <div>{{client.profile.name}} {{client.profile.lastName}}</div></h4>
+          <div *ngFor="let singleAddress of client.profile.address">
+            <h5>{{singleAddress.nameAddress}}</h5>
+            <div>{{singleAddress.address}}</div>
+            <div>{{singleAddress.zip}} {{singleAddress.city}}</div>
+            <div>{{client.profile.phoneNumber}}</div>
+          </div>
         </div>
 
-
-
-
-      </div>
-
-      <div class="col-3">
-
-      <div class="form-control" *ngFor="let client of fetchedQuote.clients">
-              <h4>
-              <div>{{client.profile.name}} {{client.profile.lastName}}</div></h4>
-
-              <div *ngFor="let singleAddress of client.profile.address">
-                <h5>{{singleAddress.nameAddress}}</h5>
-                <div>{{singleAddress.address}}</div>
-           <!-- <div>{{singleAddress.state}}</div> -->
-                <div>{{singleAddress.zip}} {{singleAddress.city}}</div>
-                <div>{{client.profile.phoneNumber}}</div>
-              </div>
-            </div>
-
-              <div class="form-control" *ngFor="let companie of fetchedQuote.companieClients">
-              <h4>
+        <div class="form-control" *ngFor="let companie of fetchedQuote.companieClients">
+          <h4>
               <div>{{companie.nameCompanie}}</div></h4>
-
-
-
-              <div *ngFor="let singleAddress of companie.address">
-                <h5>{{singleAddress.nameAddress}}</h5>
-                <div>{{singleAddress.address}}</div>
-        <!--    <div>state:{{singleAddress.state}}</div>  -->
-                <div>{{singleAddress.zip}} {{singleAddress.city}}</div>
-                <div>{{companie.phoneNumber}}</div>
-                <div>{{companie.email}}</div>
-              </div>
-            </div>
-
-
-
-
+          <div *ngFor="let singleAddress of companie.address">
+            <h5>{{singleAddress.nameAddress}}</h5>
+            <div>{{singleAddress.address}}</div>
+            <!--    <div>state:{{singleAddress.state}}</div>  -->
+            <div>{{singleAddress.zip}} {{singleAddress.city}}</div>
+            <div>{{companie.phoneNumber}}</div>
+            <div>{{companie.email}}</div>
+          </div>
+        </div>
       </div>
-
       <div class="col-2">
       </div>
-
       <div class="col-2">
       </div>
       <div class="col-8">
@@ -167,60 +94,12 @@
           {{'Quote title' | translate}}
           <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedQuote.name" required minlength="5" placeholder="{{'Quote title' | translate}}">
         </div>
-
-
-
       </div>
       <div class="col-2">
       </div>
-
-
-
-
       <div class="col-12">
         <div class="row">
           <div>
-
-
-
-
-            <!-- <div *ngFor="let project of fetchedQuote.projects">
-              <div *ngFor="let user of project.assignedTos">
-                Owner Project: {{user.profile.name}}
-              </div>
-            </div> -->
-
-
-   <!--         <div class="form-control" *ngFor="let client of fetchedQuote.clients">
-              <h4>Client</h4>
-              <div>{{client.profile.name}}</div>
-              <div>{{client.profile.lastName}}</div>
-              <div>{{client.profile.phoneNumber}}</div>
-
-              <div *ngFor="let singleAddress of client.profile.address">
-                <h5>Addresse {{singleAddress.nameAddress}}</h5>
-                <div>address:{{singleAddress.address}}</div>
-                <div>city:{{singleAddress.city}}</div>
-                <div>state:{{singleAddress.state}}</div>
-                <div>zip:{{singleAddress.zip}}</div>
-              </div>
-            </div>
-
-            <div *ngFor="let companie of fetchedQuote.companieClients">
-              <h4>Entreprise</h4>
-              <div>{{companie.nameCompanie}}</div>
-              <div>{{companie.phoneNumber}}</div>
-              <div>{{companie.email}}</div>
-
-              <div *ngFor="let singleAddress of companie.address">
-                <h5>Addresse {{singleAddress.nameAddress}}</h5>
-                <div>address:{{singleAddress.address}}</div>
-                <div>city:{{singleAddress.city}}</div>
-                <div>state:{{singleAddress.state}}</div>
-                <div>zip:{{singleAddress.zip}}</div>
-              </div>
-            </div> -->
-
           </div>
         </div>
 
@@ -258,9 +137,8 @@
               <input class="form-control col-2" type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].nameBucketProducts" placeholder="Category">
               <button type="button" class="btn btn-danger btn-sm" (click)="removeBucketProducts(i)"><i class="fa fa-times"></i></button>
             </div>
-            <div [dragulaModel]='fetchedQuote.devisDetails[i].bucketProducts' [dragula]='"third-bag"'>
+            <div style="min-height: 20px" [dragulaModel]='fetchedQuote.devisDetails[i].bucketProducts' [dragula]='"third-bag"'>
               <div *ngFor="let bucketProduct of devisDetail.bucketProducts; let j=index">
-
                 <div class="row ac">
 
                   <div class="col-1">
@@ -291,23 +169,12 @@
                   </a> -->
                     <div *ngIf="bucketProduct.typeRow=='text'">
                       <div *ngIf="fetchedQuote.devisDetails[i].bucketProducts[j].isEditMode">
-                      <quill-editor
-                        [ngModelOptions]="{standalone: true}"
-                        [options]="editorOptions"
-                        (blur)="onEditorBlured($event, i, j)"
-                        (focus)="onEditorFocused($event)"
-                        (ready)="onEditorCreated($event)"
-                        (change)="onContentChanged($event)"
-                        [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].title">
-                      </quill-editor>
-                    </div>
-                    <div
-                      (click)="changeQuillEditMode(i, j)"
-                      *ngIf="!fetchedQuote.devisDetails[i].bucketProducts[j].isEditMode"
-                      [innerHtml]="fetchedQuote.devisDetails[i].bucketProducts[j].title"
-                      >
+                        <quill-editor [ngModelOptions]="{standalone: true}" [options]="editorOptions" (blur)="onEditorBlured($event, i, j)" (focus)="onEditorFocused($event)" (ready)="onEditorCreated($event)" (change)="onContentChanged($event)" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].title">
+                        </quill-editor>
+                      </div>
+                      <div (click)="changeQuillEditMode(i, j)" *ngIf="!fetchedQuote.devisDetails[i].bucketProducts[j].isEditMode" [innerHtml]="fetchedQuote.devisDetails[i].bucketProducts[j].title">
 
-                    </div>
+                      </div>
 
                       <!-- <ckeditor
                     [ngModelOptions]="{standalone: true}"
@@ -345,7 +212,7 @@
                     <input class="gooplusInput ac" type="text" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].vat" placeholder="vat">
                   </div>
                   <div class="col-1">
-                   <a class="form-control"> {{fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithoutTaxes | round}} </a>
+                    <a class="form-control"> {{fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithoutTaxes | round}} </a>
                   </div>
                   <!-- <div class="col-2">
                 {{fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithTaxes | round}}

@@ -1,6 +1,6 @@
 .nav-tabs .nav-link.active {
     background: none!important;
-    
+
 }
 
 .nav-tabs .nav-item {
@@ -17,6 +17,12 @@
 .btn-outline-primary {
     margin-top: 0px!important;
 }
+
+/*------------------------- Alan ---------------------*/
+.movingRow {
+  min-height: 100px!important;
+}
+/*------------------------- Alan ---------------------*/
 
 /*------------------------- Guillaume ---------------------*/
 
