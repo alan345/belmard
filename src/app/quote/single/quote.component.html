@@ -143,7 +143,7 @@
 
 
 
-     >
+    
       <div class="col-12">
         <div class="row">
           <div>
@@ -199,12 +199,12 @@
           <div class="row ac">
             <div class="h6 col-1"></div>
             <div class="h6 col-md-1">{{'Image' | translate}}</div>
-            <div class="h6 col-3">{{'Item' | translate}}</div>
+            <div class="h6 col-6">{{'Item' | translate}}</div>
             <!-- <div class="h6 col-md-2">{{'Ref' | translate}}</div> -->
             <div class="h6 col-1">{{'Quantity' | translate}}</div>
-            <div class="h6 col-2">{{'Price excl tax' | translate}}</div>
-            <div class="h6 col-2">{{'VAT(%)' | translate}}</div>
-            <div class="h6 col-2">{{'Total excl tax' | translate}}</div>
+            <div class="h6 col-1">{{'Price excl tax' | translate}}</div>
+            <div class="h6 col-1">{{'VAT(%)' | translate}}</div>
+            <div class="h6 col-1">{{'Total excl tax' | translate}}</div>
             <!-- <div class="h6 col-2">{{'Total with taxes' | translate}}</div> -->
           </div>
 
@@ -237,7 +237,7 @@
 
                   </div>
 
-                  <div class="col-3">
+                  <div class="col-6">
                     <div *ngIf="bucketProduct.typeRow=='product'">
                       <app-autocomplete [typeAutocomplete]="'product'" [title]="" [singleChoice]=true [arrayContent]="fetchedQuote.devisDetails[i].bucketProducts[j].productInit" (getResultAutocomplete)="selectProduct($event[0], i, j)">
                       </app-autocomplete>
@@ -300,14 +300,14 @@
 
                     </div>
                   </div>
-                  <div class="col-2 ac">
+                  <div class="col-1 ac">
                     <input class="gooplusInput ac" type="number" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].priceWithoutTaxes" placeholder="priceWithoutTaxes">
                   </div>
 
-                  <div class="col-md-2 ac">
+                  <div class="col-md-1 ac">
                     <input class="gooplusInput ac" type="text" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].vat" placeholder="vat">
                   </div>
-                  <div class="col-2">
+                  <div class="col-1">
                     {{fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithoutTaxes | round}}
                   </div>
                   <!-- <div class="col-2">
