@@ -50,19 +50,20 @@
 
         </div>
         <div class="form-group">
-          <app-autocomplete [search]="search" [enableLink]=true [typeAutocomplete]="'user'" [title]="'clients'" [search]="{isExternalUser:true}" [title]="" [singleChoice]="'true'" [arrayContent]="fetchedQuote.clients" (getResultAutocomplete)="selectUser($event[0])">
+          <app-autocomplete [search]="search" [enableLink]=true [typeAutocomplete]="'user'" [title]="{{'Customer' | translate}}" [search]="{isExternalUser:true}" [title]="" [singleChoice]="'true'" [arrayContent]="fetchedQuote.clients" (getResultAutocomplete)="selectUser($event[0])">
           </app-autocomplete>
         </div>
         <div class="form-group">
-          <app-autocomplete [search]="search" [enableLink]=true [typeAutocomplete]="'companie'" [title]="'companieClients'" [title]="" [singleChoice]="'true'" [arrayContent]="fetchedQuote.companieClients">
+          <app-autocomplete [search]="search" [enableLink]=true [typeAutocomplete]="'companie'" [title]="{{'Companie' | translate}}" [title]="" [singleChoice]="'true'" [arrayContent]="fetchedQuote.companieClients">
           </app-autocomplete>
         </div>
         <div class="form-group">
-          <app-autocomplete [search]="search" [enableLink]=true [typeAutocomplete]="'project'" [title]="'Project'" [singleChoice]="true" [arrayContent]="fetchedQuote.projects">
+          <app-autocomplete [search]="search" [enableLink]=true [typeAutocomplete]="'project'" [title]="{{'Project' | translate}}" [singleChoice]="true" [arrayContent]="fetchedQuote.projects">
           </app-autocomplete>
         </div>
         <div class="form-group">
-          <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedQuote.name" required minlength="5" placeholder="Nom du quote">
+          {{'Quote title' | translate}}
+          <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedQuote.name" required minlength="5" placeholder="{{'Quote title' | translate}}">
         </div>
 
 
