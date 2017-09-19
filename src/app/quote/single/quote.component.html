@@ -34,7 +34,8 @@
           Devis acces public
         </button> -->
         </div>
-        <div class="row">
+        <div class="form-group">
+          {{'Status' | translate}}
 
           <select class="form-control" formControlName="statusQuote" placeholder="" [(ngModel)]="fetchedQuote.statusQuote" name="statusQuote">
                 <option *ngFor="let n of statusQuotes" [value]="n.indexStatus">{{n.label}}</option>
