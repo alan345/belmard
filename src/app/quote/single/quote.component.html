@@ -135,16 +135,14 @@
       <div class="col-8">
 
             <div class="form-control" *ngFor="let client of fetchedQuote.clients">
-              <h4>Client</h4>
-              <div>{{client.profile.name}} {{client.profile.lastName}}</div>
-              <div>{{client.profile.phoneNumber}}</div>
-
+              <h4>
+              <div>{{client.profile.name}} {{client.profile.lastName}}</div></h4>
+              
               <div *ngFor="let singleAddress of client.profile.address">
                 <h5>{{singleAddress.nameAddress}}</h5>
                 <div>{{singleAddress.address}}</div>
            <!-- <div>{{singleAddress.state}}</div> -->
-                <div>{{singleAddress.zip}}</div>
-                <div>{{singleAddress.city}}</div>
+                <div>{{singleAddress.zip}} {{singleAddress.city}}</div>
                 <div>{{client.profile.phoneNumber}}</div>
               </div>
             </div>
