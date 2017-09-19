@@ -137,6 +137,35 @@
           {{'Quote title' | translate}}
           <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedQuote.name" required minlength="5" placeholder="{{'Quote title' | translate}}">
         </div>
+            <div class="form-control" *ngFor="let client of fetchedQuote.clients">
+              <h4>Client</h4>
+              <div>{{client.profile.name}}</div>
+              <div>{{client.profile.lastName}}</div>
+              <div>{{client.profile.phoneNumber}}</div>
+
+              <div *ngFor="let singleAddress of client.profile.address">
+                <h5>Addresse {{singleAddress.nameAddress}}</h5>
+                <div>address:{{singleAddress.address}}</div>
+                <div>city:{{singleAddress.city}}</div>
+                <div>state:{{singleAddress.state}}</div>
+                <div>zip:{{singleAddress.zip}}</div>
+              </div>
+            </div>
+        
+              <div *ngFor="let companie of fetchedQuote.companieClients">
+              <h4>Entreprise</h4>
+              <div>{{companie.nameCompanie}}</div>
+              <div>{{companie.phoneNumber}}</div>
+              <div>{{companie.email}}</div>
+
+              <div *ngFor="let singleAddress of companie.address">
+                <h5>Addresse {{singleAddress.nameAddress}}</h5>
+                <div>address:{{singleAddress.address}}</div>
+                <div>city:{{singleAddress.city}}</div>
+                <div>state:{{singleAddress.state}}</div>
+                <div>zip:{{singleAddress.zip}}</div>
+              </div>
+            </div>      
       </div> 
       <div class="col-2">
       </div>
