@@ -223,7 +223,7 @@ export class QuoteComponent implements OnInit {
   }
 
   addRow(typeRow) {
-
+    console.log(typeRow)
     if (typeRow) {
       if (typeRow === 'category')
         this.addBucketProducts()
