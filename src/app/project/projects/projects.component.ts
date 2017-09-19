@@ -9,6 +9,10 @@ import { Location } from '@angular/common';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ViewEncapsulation} from '@angular/core';
 import { UserService} from '../../user/user.service';
+import { Search, PaginationData } from '../../shared/shared.model';
+
+
+
 
 @Component({
   selector: 'app-projects',
@@ -22,17 +26,19 @@ export class ProjectsComponent implements OnInit {
   @Input() showHeader = true;
   // token: string = localStorage.getItem('id_token');
   fetchedProjects: Project[] = [];
-  search: any = {
-    categories : [],
-    search: ''
-  };
+  search:Search = new Search()
+  // {
+  //   categories : [],
+  //   search: ''
+  // };
   loading: boolean;
 
-  paginationData = {
-    currentPage: 1,
-    itemsPerPage: 0,
-    totalItems: 0
-  };
+  paginationData:PaginationData = new PaginationData()
+  //  = {
+  //   currentPage: 1,
+  //   itemsPerPage: 0,
+  //   totalItems: 0
+  // };
 
 
   categories2 = '';
@@ -54,11 +60,12 @@ export class ProjectsComponent implements OnInit {
 
   ngOnInit() {
     let this2 = this
-    setTimeout(function(){
+
+    // setTimeout(function(){
       this2.search.userId = this2.userId
-      this2.search.orderBy = 'name'
+      this2.search.orderBy = 'details.name';
       this2.getProjects(1, this2.search)
-    }, 200);
+    // }, 200);
   }
   // goBack() {
   //   this.location.back();
@@ -67,6 +74,14 @@ export class ProjectsComponent implements OnInit {
   searchProjects() {
     this.getProjects(1, this.search)
   }
+  orderBy(orderBy: string) {
+    this.getProjects(this.paginationData.currentPage, this.search);
+  }
+  // orderBy(orderBy: string) {
+  //   this.search.orderBy = orderBy;
+  //   this.getProjects(this.paginationData.currentPage, this.search);
+  // }
+
   saved(result) {
     console.log(result)
   }

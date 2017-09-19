@@ -20,9 +20,18 @@
           <tr>
 
             <th class="centre tdunder">Type</th>
-            <th class="centre tdunder">Client</th>
-            <th class="centre tdunder">Nom</th>
-            <th class="centre tdunder">Date</th>
+            <th class="centre tdunder">Client
+            </th>
+            <th class="centre tdunder">Nom
+              <!-- <i (click)="orderBy('details.name')" *ngIf="search.orderBy  !== 'details.name' && search.orderBy  !== '-details.name'" class="fa fa-arrow-down grey"></i>
+              <i (click)="orderBy('-details.name')" *ngIf="search.orderBy  === 'details.name'" class="fa fa-arrow-down"></i>
+              <i (click)="orderBy('details.name')" *ngIf="search.orderBy  === '-details.name'" class="fa fa-arrow-up"></i> -->
+
+              <app-sort (orderBy)="orderBy($event)" [search]="search" [filedToOrder]="'details.name'"></app-sort>
+            </th>
+            <th class="centre tdunder">Date
+              <app-sort (orderBy)="orderBy($event)" [search]="search" [filedToOrder]="'createdAt'"></app-sort>
+            </th>
             <th class="centre tdunder">Statut</th>
           </tr>
         </thead>

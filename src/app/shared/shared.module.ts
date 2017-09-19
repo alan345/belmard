@@ -14,6 +14,7 @@ import { TranslateModule}   from '../translate/translate.module';
 
 import { RoundPipe} from './round.pipe';
 import { HeaderComponent } from '../nav/header/header.component';
+import { SortComponent } from './sort/sort.component';
 // import { newObjDialogComponent } from '../nav/newObjDialog/newObjDialog.component';
 
 
@@ -25,6 +26,7 @@ import {CommentModule} from '../comment/comment.module';
 import {SharedSmallModule} from './sharedSmall.module'
 @NgModule({
   imports:      [
+
     SharedSmallModule,
     CommonModule,
     FormsModule,
@@ -38,6 +40,7 @@ import {SharedSmallModule} from './sharedSmall.module'
 
   ],
   declarations: [
+    SortComponent,
     // RoundPipe,
     // AutocompleteComponent,
     // TranslatePipe,
@@ -56,6 +59,7 @@ import {SharedSmallModule} from './sharedSmall.module'
     FormsModule,
     // RoundPipe,
     HeaderComponent,
+    SortComponent,
     // newObjDialogComponent,
     // LoadingComponent,
     // LoadingInAppComponent,

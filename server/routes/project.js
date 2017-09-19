@@ -188,7 +188,6 @@ router.get('/page/:page', function(req, res, next) {
   // console.log(searchQuery)
 
   Project.find(searchQuery)
-  .sort('-createdAt')
   .populate({path: 'clients', model: 'User'})
   .populate({path: 'assignedTos', model: 'User'})
   // .populate({path: 'bucketTasks.tasks', model: 'Task'})
@@ -207,7 +206,9 @@ router.get('/page/:page', function(req, res, next) {
   //     path: 'bucketTasks.tasks.assignedTos',
   //     model: 'User',
   //   })
-    .limit(itemsPerPage).skip(skip).exec(function(err, item) {
+    .limit(itemsPerPage).skip(skip)
+    .sort(req.query.orderBy)
+    .exec(function(err, item) {
     if (err) {
       return res.status(404).json({message: 'No results', err: err})
     } else {
