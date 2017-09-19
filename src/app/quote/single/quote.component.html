@@ -9,16 +9,19 @@
   </div>
 
   <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
-     <!-- <div class="row">
+     <div class="row">
       <div class="col-1">
       </div>
       <div class="col-3">
-        <h4 class="dspl-nn">id: {{fetchedQuote._id}}</h4>
+         <button type="button" class="btn btn-primary" (click)="downloadPDF()">
+          download PDF
+        </button>
+      <!--   <h4 class="dspl-nn">id: {{fetchedQuote._id}}</h4> -->
       </div>
       <div class="col-8">
       </div>
 
-    </div>  -->
+    </div>  
 
     <div class="row">
       <div class="col-2">
@@ -26,9 +29,7 @@
       <div class="col-3">
 
         <div class="row">
-          <button type="button" class="btn btn-primary" (click)="downloadPDF()">
-          download PDF
-        </button>
+         
           <!-- <button class="btn btn-outline-primary" [routerLink]="['/quote/public/' + fetchedQuote._id]">
           Devis acces public
         </button> -->
