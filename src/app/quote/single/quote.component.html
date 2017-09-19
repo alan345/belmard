@@ -148,17 +148,18 @@
             </div>
         
               <div class="form-control" *ngFor="let companie of fetchedQuote.companieClients">
-              <h4>Entreprise</h4>
-              <div>{{companie.nameCompanie}}</div>
-              <div>{{companie.phoneNumber}}</div>
-              <div>{{companie.email}}</div>
+              <h4>
+              <div>{{companie.nameCompanie}}</div></h4>
+              
+              
 
               <div *ngFor="let singleAddress of companie.address">
-                <h5>Addresse {{singleAddress.nameAddress}}</h5>
-                <div>address:{{singleAddress.address}}</div>
-                <div>city:{{singleAddress.city}}</div>
-                <div>state:{{singleAddress.state}}</div>
-                <div>zip:{{singleAddress.zip}}</div>
+                <h5>{{singleAddress.nameAddress}}</h5>
+                <div>{{singleAddress.address}}</div>
+        <!--    <div>state:{{singleAddress.state}}</div>  -->
+                <div>{{singleAddress.zip}} {{singleAddress.city}}</div>
+                <div>{{companie.phoneNumber}}</div>
+                <div>{{companie.email}}</div>
               </div>
             </div>
         
