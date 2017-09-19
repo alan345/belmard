@@ -322,6 +322,13 @@
 
           <div class="row ac font-weight-bold">
             <div class="col-6">
+            <div class="row">
+              <select class="form-control" #t (change)="addRow(t.value); t.value = ''">
+            <option [attr.value]="''">{{'Add row' | translate}}</option>
+            <option *ngFor="let n of rowTypes" [attr.value]="n.value">{{n.label}}</option>
+          </select>
+            </div>              
+              
             </div>
             <div class="col-2 form-control fcp">
               {{'Total' | translate}}
