@@ -34,26 +34,14 @@
 
         <br>
         <div class="col-md-12">
-          <app-autocomplete [typeAutocomplete]="'project'" [title]="'Project'" [search]="search" [singleChoice]="'true'" [arrayContent]="fetchedUserCalendar.projects" (getResultAutocomplete)="selectProject($event[0])">
+          <app-autocomplete [typeAutocomplete]="'project'" [canDelete]=false [title]="'Project'" [search]="search" [singleChoice]="'true'" [arrayContent]="fetchedUserCalendar.projects" (getResultAutocomplete)="selectProject($event[0])">
           </app-autocomplete>
         </div>
 
-
-        <!-- <div *ngFor="let client of fetchedUserCalendar.clients">
-
-          Client {{client.profile.lastName}} {{client.profile.name}}
-        </div> -->
-        <!-- <div class="col-md-12" *ngFor="let project of fetchedUserCalendar.projects">
-          <div *ngFor="let client of project.clients">
-
-            Client {{client.profile.lastName}} {{client.profile.name}}
-          </div>
-        </div> -->
-        <!-- {{fetchedUserCalendar.clients|json}} -->
-        <!-- <div class="col-md-12">
-          <app-autocomplete [typeAutocomplete]="'user'" [title]="'Utilisateur'" [singleChoice]="'true'" [arrayContent]="fetchedUserCalendar.users" (getResultAutocomplete)="selectUser($event[0])" (clearAutocomplete)="removeUser()">
+        <div *ngIf="fetchedUserCalendar.clients.length" class="col-md-12">
+          <app-autocomplete [typeAutocomplete]="'user'" [canDelete]=false [title]="'Utilisateur'" [singleChoice]="'true'" [arrayContent]="fetchedUserCalendar.clients">
           </app-autocomplete>
-        </div> -->
+        </div>
         <div class="col-md-12">
           <app-autocomplete [typeAutocomplete]="'user'" [title]="'Réparateur'" [singleChoice]="'true'" [arrayContent]="fetchedUserCalendar.assignedTos" (getResultAutocomplete)="selectUser($event[0])" (clearAutocomplete)="removeUser()">
           </app-autocomplete>
