@@ -82,6 +82,8 @@ router.put('/:id', function (req, res, next) {
         item.amount = req.body.amount
         item.type = req.body.type
         item.datePaiement = req.body.datePaiement
+        item.userDebiteds = req.body.userDebiteds
+        item.projects = req.body.projects
 
 
 
@@ -163,7 +165,7 @@ router.get('/page/:page', function (req, res, next) {
   PaiementQuote
   .find(searchQuery)
   .sort('-createdAt')
-  .populate({path: 'quotes', model: 'Quote'})
+  .populate({path: 'userDebiteds', model: 'User'})
   .populate({
     path: 'quotes',
     model: 'Quote',

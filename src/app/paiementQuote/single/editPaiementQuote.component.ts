@@ -67,7 +67,7 @@ export class EditPaiementQuoteComponent implements OnInit {
   paiementsTypes = [
     { label: 'cheque', value: 'check' },
     { label: 'Espece', value: 'cash' },
-    { label: 'Stripe', value: 'stripe' },
+    // { label: 'Stripe', value: 'stripe' },
 ]
   constructor(
     private paiementQuoteService: PaiementQuoteService,

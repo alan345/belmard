@@ -16,7 +16,7 @@ export class PaiementQuote {
   datePaiement: Date = new Date();
   datePaiementString: string = '';
   amount: number = 0;
-  type: string = '';
+  type: string = 'cash';
   isGooplusPaiement: boolean = false;
   isExpense: boolean = false;
   editModeDate: boolean = false;
