@@ -227,7 +227,7 @@
 
 
         <ul class="nav nav-tabs justify-content-end">
-          
+
           <li class="nav-item dropdown">
             <a class="nav-link active dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Dropdown</a>
             <div class="dropdown-menu">
@@ -236,7 +236,7 @@
               <a class="dropdown-item" href="#">Save Bucket</a>
             </div>
           </li>
-          
+
         </ul>
 
         <div class="form-control">
@@ -290,31 +290,24 @@
                     {{bucketProduct.productInit.details.reference}}
                   </a> -->
                     <div *ngIf="bucketProduct.typeRow=='text'">
-                      <quill-editor [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].title">
-                        <div quill-editor-toolbar>
-                          <span class="ql-formats">
-                        <button class="ql-bold" [title]="'Bold'"></button>
-                        <button class="ql-italic" [title]="'Italic'"></button>
-                        <button class="ql-underline" [title]="'Underline'"></button>
-
-                      </span>
-                          <span class="ql-formats">
-                        <button class="ql-list" [title]="'list'" value='ordered'></button>
-                        <button class="ql-list" [title]="'list'" value='bullet'></button>
-                        <!-- <button class="ql-italic" [title]="'Italic'"></button> -->
-
-                      </span>
-
-                          <span class="ql-formats">
-                        <select class="ql-align" [title]="'Aligment'">
-                          <option selected></option>
-                          <option value="center"></option>
-                          <option value="right"></option>
-                          <option value="justify"></option>
-                        </select>
-                      </span>
-                        </div>
+                      <div *ngIf="fetchedQuote.devisDetails[i].bucketProducts[j].isEditMode">
+                      <quill-editor
+                        [ngModelOptions]="{standalone: true}"
+                        [options]="editorOptions"
+                        (blur)="onEditorBlured($event, i, j)"
+                        (focus)="onEditorFocused($event)"
+                        (ready)="onEditorCreated($event)"
+                        (change)="onContentChanged($event)"
+                        [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].title">
                       </quill-editor>
+                    </div>
+                    <div
+                      (click)="changeQuillEditMode(i, j)"
+                      *ngIf="!fetchedQuote.devisDetails[i].bucketProducts[j].isEditMode"
+                      [innerHtml]="fetchedQuote.devisDetails[i].bucketProducts[j].title"
+                      >
+
+                    </div>
 
                       <!-- <ckeditor
                     [ngModelOptions]="{standalone: true}"

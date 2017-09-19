@@ -59,6 +59,14 @@ export class QuoteComponent implements OnInit {
   statusQuotes = StatusQuotes
   totalPaiementAmount: number = 0
   myForm: FormGroup;
+
+  public editorOptions = {
+    placeholder: "insert content...",
+    modules: {
+      // toolbar: [['bold', 'italic'], ['link', 'image']] // see https://quilljs.com/docs/formats/
+    }
+  };
+
   // autocompleteProduct: String = ''
   fetchedUsers: User[] = [];
   arrayContentToSearch = []
@@ -98,8 +106,7 @@ export class QuoteComponent implements OnInit {
     //
 
     dragulaService.setOptions('third-bag', {
-      moves: function(el, container, handle) {
-        console.log(handle.className)
+      moves: function (el, container, handle) {
         return (handle.className === 'fa fa-arrows handle' || handle.className === 'btn btn-sm handle');
       }
     });
@@ -110,6 +117,24 @@ export class QuoteComponent implements OnInit {
   changeStatutsQuote(statusQuoteSelect){
     console.log(statusQuoteSelect)
   }
+
+
+  onEditorBlured(quill, i, j) {
+    this.changeQuillEditMode(i, j)
+  }
+
+  onEditorFocused(quill) {
+  }
+
+  onEditorCreated(quill) {
+  }
+
+  onContentChanged({ quill, html, text }) {
+  }
+  changeQuillEditMode(i: number, j: number) {
+    this.fetchedQuote.devisDetails[i].bucketProducts[j].isEditMode = !this.fetchedQuote.devisDetails[i].bucketProducts[j].isEditMode
+  }
+
 
   ngOnInit() {
     // this.statusQuotes.forEach((statusQuote,i)=>{this.statusQuotes[i].label=this.translateService.instant(statusQuote.label)})
@@ -164,18 +189,20 @@ export class QuoteComponent implements OnInit {
         this.getProject(params['idProject'])
     })
   }
-  onChange(event) {
-    console.log(event)
-  }
-  onReady(event) {
-    console.log(event)
-  }
-  onFocus(event) {
-    console.log(event)
-  }
-  onBlur(event) {
-    console.log(event)
-  }
+  // onChange(event) {
+  //   console.log(event)
+  // }
+  // onReady(event) {
+  //   console.log(event)
+  // }
+  // onFocus(event) {
+  //   console.log(event)
+  // }
+  // onBlur(event) {
+  //   console.log(event)
+  // }
+
+
 
 
   private signaturePadOptions: Object = { // passed through to szimek/signature_pad constructor

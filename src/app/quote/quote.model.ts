@@ -68,6 +68,7 @@ export class BucketProduct {
   vat: number;
   quantity: number;
   discount: number;
+  isEditMode: boolean = false;
 
 }
 

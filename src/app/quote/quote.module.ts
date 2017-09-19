@@ -29,13 +29,15 @@ import { PaiementQuoteModule} from '../paiementQuote/paiementQuote.module'
 
 import { DragulaModule } from 'ng2-dragula';
 
-import { QuillModule } from 'ngx-quill'
+// import { QuillModule } from 'ngx-quill'
 
+import { QuillEditorModule } from 'ngx-quill-editor';
 
 @NgModule({
   imports:      [
+    QuillEditorModule,
     // ProjectModule,
-    QuillModule,
+    // QuillModule,
     QuoteRouting,
     CommonModule,
     FormsModule,
