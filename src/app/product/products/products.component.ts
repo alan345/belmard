@@ -60,7 +60,10 @@ export class ProductsComponent implements OnInit {
   }
 
 
-
+  orderBy(orderBy: string) {
+    // this.search.orderBy = orderBy;
+    this.getProducts(this.paginationData.currentPage, this.search);
+  }
 
   onDelete(id: string) {
     this.productService.deleteProduct(id)

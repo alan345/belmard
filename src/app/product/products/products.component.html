@@ -19,12 +19,18 @@
           <tr>
 
             <th class="centre tdunder">{{'Image' | translate}}</th>
-            <th class="centre tdunder">{{'Name' | translate}}</th>
-            <th class="centre tdunder">{{'Description' | translate}}</th>
+            <th class="centre tdunder">{{'Name' | translate}}
+              <app-sort (orderBy)="orderBy($event)" [search]="search" [filedToOrder]="'details.referenceName'"></app-sort>
+            </th>
+            <th class="centre tdunder">{{'Description' | translate}}
+              <app-sort (orderBy)="orderBy($event)" [search]="search" [filedToOrder]="'details.description'"></app-sort>
+            </th>
             <!-- <th class="centre tdunder">{{'Description' | translate}}</th> -->
 
 
-            <th class="centre tdunder">{{'Price without taxes' | translate}}</th>
+            <th class="centre tdunder">{{'Price without taxes' | translate}}
+              <app-sort (orderBy)="orderBy($event)" [search]="search" [filedToOrder]="'details.price.sellingPrice'"></app-sort>
+            </th>
           </tr>
         </thead>
         <tbody class="clienttbl">

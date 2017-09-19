@@ -80,7 +80,7 @@ export class AdminUsersComponent implements OnInit {
     this.getUsers(this.paginationData.currentPage, this.search);
   }
   orderBy(orderBy: string) {
-    this.search.orderBy = orderBy;
+    // this.search.orderBy = orderBy;
     this.getUsers(this.paginationData.currentPage, this.search);
   }
 

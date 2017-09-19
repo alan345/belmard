@@ -21,15 +21,17 @@
           <tr>
             <th class="centre tdunder">Type</th>
             <th class="centre tdunder">Titre
-              <i (click)="orderBy('profile.title')" *ngIf="search.orderBy  !== 'profile.title' && search.orderBy  !== '-profile.title'" class="fa fa-arrow-down grey"></i>
+              <app-sort (orderBy)="orderBy($event)" [search]="search" [filedToOrder]="'profile.title'"></app-sort>
+              <!-- <i (click)="orderBy('profile.title')" *ngIf="search.orderBy  !== 'profile.title' && search.orderBy  !== '-profile.title'" class="fa fa-arrow-down grey"></i>
               <i (click)="orderBy('-profile.title')" *ngIf="search.orderBy  === 'profile.title'" class="fa fa-arrow-down"></i>
-              <i (click)="orderBy('profile.title')" *ngIf="search.orderBy  === '-profile.title'" class="fa fa-arrow-up"></i>
+              <i (click)="orderBy('profile.title')" *ngIf="search.orderBy  === '-profile.title'" class="fa fa-arrow-up"></i> -->
             </th>
             <th class="centre tdunder">
               Nom
-              <i (click)="orderBy('profile.lastName')" *ngIf="search.orderBy  !== 'profile.lastName' && search.orderBy  !== '-profile.lastName'" class="fa fa-arrow-down grey"></i>
+              <app-sort (orderBy)="orderBy($event)" [search]="search" [filedToOrder]="'profile.lastName'"></app-sort>
+              <!-- <i (click)="orderBy('profile.lastName')" *ngIf="search.orderBy  !== 'profile.lastName' && search.orderBy  !== '-profile.lastName'" class="fa fa-arrow-down grey"></i>
               <i (click)="orderBy('-profile.lastName')" *ngIf="search.orderBy  === 'profile.lastName'" class="fa fa-arrow-down"></i>
-              <i (click)="orderBy('profile.lastName')" *ngIf="search.orderBy  === '-profile.lastName'" class="fa fa-arrow-up"></i>
+              <i (click)="orderBy('profile.lastName')" *ngIf="search.orderBy  === '-profile.lastName'" class="fa fa-arrow-up"></i> -->
             </th>
             <th class="centre tdunder">
               Société
@@ -38,11 +40,14 @@
             <th class="centre tdunder">Ville
 
             </th>
-            <th class="centre tdunder">Téléphone</th>
+            <th class="centre tdunder">Téléphone
+              <app-sort (orderBy)="orderBy($event)" [search]="search" [filedToOrder]="'profile.phoneNumber'"></app-sort>
+            </th>
             <th class="centre tdunder">Date
-              <i (click)="orderBy('createdAt')" *ngIf="search.orderBy  !== 'createdAt' && search.orderBy  !== '-createdAt'" class="fa fa-arrow-down grey"></i>
+              <app-sort (orderBy)="orderBy($event)" [search]="search" [filedToOrder]="'createdAt'"></app-sort>
+              <!-- <i (click)="orderBy('createdAt')" *ngIf="search.orderBy  !== 'createdAt' && search.orderBy  !== '-createdAt'" class="fa fa-arrow-down grey"></i>
               <i (click)="orderBy('-createdAt')" *ngIf="search.orderBy  === 'createdAt'" class="fa fa-arrow-down"></i>
-              <i (click)="orderBy('createdAt')" *ngIf="search.orderBy  === '-createdAt'" class="fa fa-arrow-up"></i>
+              <i (click)="orderBy('createdAt')" *ngIf="search.orderBy  === '-createdAt'" class="fa fa-arrow-up"></i> -->
             </th>
           </tr>
         </thead>
