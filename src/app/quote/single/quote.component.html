@@ -20,12 +20,12 @@
           download PDF
           </button>
         </div>
-          <div class="col-4" *ngIf="fetchedQuote.typeQuote === 'quote'">
+          <div class="col-8 alright" *ngIf="fetchedQuote.typeQuote === 'quote'">
 
             <button *ngIf="!fetchedQuote.invoices.length" type="button" class="btn btn-primary" (click)="saveAsInvoice()">
             {{'Save As Invoice' | translate}}
             </button>
-            <div class="col-4" *ngFor="let invoice of fetchedQuote.invoices">
+            <div class="col-12 alright" *ngFor="let invoice of fetchedQuote.invoices">
               <button type="button" class="btn btn-primary" (click)="goToInvoice(invoice._id)">{{'Go to Invoice' | translate}}</button>
             </div>
           </div>
