@@ -153,8 +153,8 @@ router.get('/page/:page', function (req, res, next) {
     searchQuery['details.name'] = new RegExp(req.query.search, 'i')
 
 
-  if(req.query.idQuote)
-    searchQuery['quotes'] = mongoose.Types.ObjectId(req.query.idQuote)
+  if(req.query.quoteId)
+    searchQuery['quotes'] = mongoose.Types.ObjectId(req.query.quoteId)
 
 
 // console.log(req.query.isExpense)

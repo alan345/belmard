@@ -4,6 +4,10 @@
       <h4 *ngIf="search.isExternalUser == 'true'"> {{'Payments' | translate}}</h4>
       <h4 *ngIf="search.isExternalUser == 'false'"> {{'Expenses' | translate}}</h4>
     </div>
+
+    <div class="p-2">
+      <app-newObjDialog icone="fa fa-plus-square fa-2x ml" [search]="search" (saved)="saved($event)" [typeObj]="'paiementQuote'"></app-newObjDialog>
+    </div>
     <!-- <div class="p-2">
       <app-header [search]="search" (saved)="saved($event)" [nameButton]="'Create a new Paiement'" [nameObject]="'paiementQuote'" [openInDialog]=true>
       </app-header>

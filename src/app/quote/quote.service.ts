@@ -104,10 +104,10 @@ export class QuoteService {
   // }
 
 
-  getQuote(id: string, search: any) : Observable<Quote> {
+  getQuote(id: string) : Observable<Quote> {
     let headers = new Headers({'Content-Type': 'application/json'});
     headers.append('Authorization', '' );
-    let options = new RequestOptions({ headers: headers, search: search});
+    let options = new RequestOptions({ headers: headers, search: {}});
     return this.http.get(this.url + 'quote/' + id, options)
       .map((response: Response) => {
         return response.json().item;

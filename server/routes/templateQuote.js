@@ -190,7 +190,6 @@ router.get('/page/:page', function (req, res, next) {
   let nameQuery = {}
   let cityQuery = {}
   let searchQuery = {}
-  searchQuery['ownerCompanies'] = req.user.ownerCompanies
 
   let arrObj = []
   if(req.query.search) {
@@ -203,6 +202,7 @@ router.get('/page/:page', function (req, res, next) {
     //findQuery['address.city'] = new RegExp(req.query.search, 'i')
   }
 
+  // searchQuery['ownerCompanies'] = req.user.ownerCompanies
 
   if(req.query.userId)
     searchQuery['clients'] = mongoose.Types.ObjectId(req.query.userId)
@@ -215,7 +215,13 @@ router.get('/page/:page', function (req, res, next) {
 
   TemplateQuote
   .find(searchQuery)
-  .populate({ path: 'clients', model: 'User'})
+  .populate({
+    path: 'devisDetails.bucketProducts.productInit',
+    model: 'Product',
+    populate: {
+      path: 'forms',
+      model: 'Form'
+    }})
   .limit(itemsPerPage)
   .skip(skip)
   .sort(req.query.orderBy)

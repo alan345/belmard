@@ -72,12 +72,12 @@ export class QuoteComponent implements OnInit {
   arrayContentToSearch = []
   // ckeditorContent=''
   ckeConfig: any;
-  rowTypes = [
-    { label: 'Category', value: 'category' },
-    { label: 'Product', value: 'product' },
-    { label: 'Text', value: 'text' },
-
-  ]
+  // rowTypes = [
+  //   { label: 'Category', value: 'category' },
+  //   { label: 'Product', value: 'product' },
+  //   { label: 'Text', value: 'text' },
+  //
+  // ]
   constructor(
     private quoteService: QuoteService,
     private templateQuoteService: TemplateQuoteService,
@@ -138,7 +138,7 @@ export class QuoteComponent implements OnInit {
 
   ngOnInit() {
     // this.statusQuotes.forEach((statusQuote,i)=>{this.statusQuotes[i].label=this.translateService.instant(statusQuote.label)})
-
+    // this.search.isExpense = false
     this.ckeConfig = {
       // height: 500,
       language: "en",
@@ -270,26 +270,26 @@ export class QuoteComponent implements OnInit {
 
 
 
-
-  openDialog() {
-
-    // dialogComp = PaiementQuoteDialogComponent
-    //
-
-    let dialogRef = this.dialog.open(PaiementQuoteDialogComponent, {
-      data: this.fetchedQuote
-    });
-    // dialogRef.componentInstance.fetchedQuote = this.fetchedQuote;
-    dialogRef.afterClosed().subscribe(result => {
-      this.paiementQuotesComponent.getPaiementQuotesInit()
-      // console.log(result)
-      // this.autocompleteSearch = ''
-      // if(result) {
-      //   console.log(result)
-      //   this.fetchedProject.forms.push( result)
-      // }
-    })
-  }
+  //
+  // openDialog() {
+  //
+  //   // dialogComp = PaiementQuoteDialogComponent
+  //   //
+  //
+  //   let dialogRef = this.dialog.open(PaiementQuoteDialogComponent, {
+  //     data: this.fetchedQuote
+  //   });
+  //   // dialogRef.componentInstance.fetchedQuote = this.fetchedQuote;
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     this.paiementQuotesComponent.getPaiementQuotesInit()
+  //     // console.log(result)
+  //     // this.autocompleteSearch = ''
+  //     // if(result) {
+  //     //   console.log(result)
+  //     //   this.fetchedProject.forms.push( result)
+  //     // }
+  //   })
+  // }
 
 
   getBase64Image(imgUrl) {
@@ -703,12 +703,16 @@ export class QuoteComponent implements OnInit {
     })
   }
   getQuote(id: string) {
-    this.quoteService.getQuote(id, {})
+    this.quoteService.getQuote(id)
       .subscribe(
       res => {
         this.fetchedQuote = res
         this.fetchedQuote.detail.dateQuote.issueDateString = this.authService.isoDateToHtmlDate(this.fetchedQuote.detail.dateQuote.issueDate)
         this.fetchedQuote.detail.dateQuote.expiryDateString = this.authService.isoDateToHtmlDate(this.fetchedQuote.detail.dateQuote.expiryDate)
+
+        this.fetchedQuote.projects.forEach(project => { this.search.projectId = project._id })
+        this.fetchedQuote.clients.forEach(user => { this.search.userId = user._id })
+
 
       },
       error => { console.log(error) }

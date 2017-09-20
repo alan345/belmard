@@ -7,6 +7,9 @@ import { MdDialog} from '@angular/material';
 import { Router, ActivatedRoute, Params} from '@angular/router';
 import { Location} from '@angular/common';
 
+import { Search} from '../../shared/shared.model'
+
+
 
 
 @Component({
@@ -16,10 +19,14 @@ import { Location} from '@angular/common';
 })
 export class PaiementQuotesComponent implements OnInit {
   // @Input() userId = '';
-  @Input() idQuote = '';
-  @Input() showHeader: boolean = true;
+  // @Input() idQuote = '';
+  // @Input() showHeader: boolean = true;
   @Output() getPaiementQuotesCross: EventEmitter<any> = new EventEmitter();
-  @Input() showCreate: boolean = true;
+  // @Input() showCreate: boolean = true;
+  @Input() search: Search = new Search()
+
+
+
 
   fetchedPaiementQuotes: PaiementQuote[] = [];
   loading: boolean;
@@ -29,12 +36,12 @@ export class PaiementQuotesComponent implements OnInit {
     totalItems: 0
   };
 
-  search = {
-    orderBy : '',
-    search: '',
-    idQuote:'',
-    isExpense: false
-  };
+  // search = {
+  //   orderBy : '',
+  //   search: '',
+  //   idQuote:'',
+  //   isExpense: false
+  // };
 
   constructor(
     private paiementQuoteService: PaiementQuoteService,
@@ -62,7 +69,7 @@ export class PaiementQuotesComponent implements OnInit {
   getPaiementQuotesInit() {
     let this2 = this
     setTimeout(function(){
-      this2.search.idQuote = this2.idQuote
+      // this2.search.quoteId = this2.idQuote
       this2.search.orderBy = 'name'
       this2.getPaiementQuotes(1, this2.search)
     }, 200);
@@ -105,7 +112,7 @@ export class PaiementQuotesComponent implements OnInit {
 
 
   getPaiementQuotes(page: number, search: any) {
-    this.loading = true;    
+    this.loading = true;
     this.paiementQuoteService.getPaiementQuotes(page, search)
       .subscribe(
         res => {

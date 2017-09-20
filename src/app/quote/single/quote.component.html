@@ -257,10 +257,13 @@
 
           <div class="row ac font-weight-bold">
             <div class="col-3">
-              <select class="form-control" #t (change)="addRow(t.value); t.value = ''">
+              <!-- <select class="form-control" #t (change)="addRow(t.value); t.value = ''">
             <option [attr.value]="''">{{'Add row' | translate}}</option>
             <option *ngFor="let n of rowTypes" [attr.value]="n.value">{{n.label}}</option>
-          </select>
+          </select> -->
+          <button type="button" (click)="addRow('category')">+ category</button>
+          <button type="button" (click)="addRow('text')">+ text</button>
+          <button type="button" (click)="addRow('product')">+ product</button>
 
 
             </div>
@@ -345,11 +348,11 @@
 
         <div (click)="togglePaiements()">Paiements</div>
         <div *ngIf="showPaiements">
-          <button class="btn btn-success" type="button" md-button (click)="openDialog()">
+          <!-- <button class="btn btn-success" type="button" md-button (click)="openDialog()">
           <i class="fa fa-plus"></i> Add new one
-        </button>
+        </button> -->
           <br>
-          <app-paiementQuotes (getPaiementQuotesCross)="getPaiementQuotes($event)" [showHeader]="false" [showCreate]="false" [idQuote]="fetchedQuote._id">
+          <app-paiementQuotes (getPaiementQuotesCross)="getPaiementQuotes($event)" [search]="search">
           </app-paiementQuotes>
           {{'Total Paiement' | translate}} = {{totalPaiementAmount}}
           <br> {{'To be paid' | translate}} = {{fetchedQuote.priceQuote.priceQuoteWithoutTaxes*1 - totalPaiementAmount*1| round}}

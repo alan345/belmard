@@ -23,6 +23,8 @@ import { User } from '../../user/user.model';
 import { Quote } from '../../quote/quote.model';
 import { Product } from '../../product/product.model';
 import { Project } from '../../project/project.model';
+import { Search} from '../../shared/shared.model'
+
 
 
 
@@ -34,11 +36,8 @@ import { Project } from '../../project/project.model';
 })
 export class EditPaiementQuoteComponent implements OnInit {
   @Output() saved: EventEmitter<any> = new EventEmitter();
-  @Input() showHeader = true;
   @Input() fetchedQuotes: Quote[] = []
-  @Input() search: any = {
-    isExpense:false
-  };
+  @Input() search: Search = new Search()
 
   showPaiements: boolean = false
   fetchedPaiementQuote: PaiementQuote = new PaiementQuote()
@@ -101,7 +100,7 @@ export class EditPaiementQuoteComponent implements OnInit {
     this.authService
     .isoDateToHtmlDate(this.fetchedPaiementQuote.datePaiement)
 
-    this.fetchedPaiementQuote.isExpense = this.search.isExpense
+    // this.fetchedPaiementQuote.isExpense = this.search.isExpense
     this.activatedRoute.params.subscribe((params: Params) => {
       if(params['isExpense']) {this.fetchedPaiementQuote.isExpense = true}
       if(params['isGooplusPaiement']) {this.fetchedPaiementQuote.isGooplusPaiement = true}
@@ -123,7 +122,7 @@ export class EditPaiementQuoteComponent implements OnInit {
     }
 
     getQuote(idQuote: string) {
-      this.quoteService.getQuote(idQuote, {})
+      this.quoteService.getQuote(idQuote)
         .subscribe(
           res => {
             this.fetchedPaiementQuote.quotes = [res]

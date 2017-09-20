@@ -1,11 +1,11 @@
 <h4>Search</h4>
 <div class="row">
   <div class="col-md-4">
-    <app-autocomplete [typeAutocomplete]="'user'" [title]="''" [singleChoice]="'true'" [arrayContent]="searchData.fetchedUserSearchs" (getResultAutocomplete)="selectUserSearch()" (clearAutocomplete)="removeUserSearch()">
+    <app-autocomplete [typeAutocomplete]="'user'" [title]="'Client'" [singleChoice]="'true'" [arrayContent]="searchData.fetchedUserSearchs" (getResultAutocomplete)="selectUserSearch()" (clearAutocomplete)="removeUserSearch()">
     </app-autocomplete>
   </div>
   <div class="col-md-4">
-    <app-autocomplete [typeAutocomplete]="'project'" [title]="''" [singleChoice]="'true'" [arrayContent]="searchData.fetchedProjectSearchs" (getResultAutocomplete)="selectProjectSearch()" (clearAutocomplete)="removeUserSearch()">
+    <app-autocomplete [typeAutocomplete]="'project'" [title]="'Project'" [singleChoice]="'true'" [arrayContent]="searchData.fetchedProjectSearchs" (getResultAutocomplete)="selectProjectSearch()" (clearAutocomplete)="removeUserSearch()">
     </app-autocomplete>
   </div>
   <div class="col-md-4">
