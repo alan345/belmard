@@ -677,8 +677,8 @@ router.get('/page/:page', function(req, res, next) {
   // } else {
   //   searchQuery['ownerCompanies'] = req.user.ownerCompanies
   // }
-
-  searchQuery['typeQuote'] = req.query.typeQuote
+  if(req.query.typeQuote)
+    searchQuery['typeQuote'] = req.query.typeQuote
 
 
 

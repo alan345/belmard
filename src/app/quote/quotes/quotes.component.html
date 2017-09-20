@@ -5,9 +5,12 @@
     </div>
     <div class="p-2">
       <!-- <app-header [showHeader]="showHeader" showBackButton="showBackButton" [nameObject]="'quote'" [idProject]="idProject" [idClient]="idClient"></app-header> -->
+
+
       <app-newObjDialog
-        *ngIf="search.typeQuote ==='quote'"
-        icone="fa fa-plus-square fa-2x ml" [search]="search" (saved)="saved($event)" [typeObj]="'quote'"></app-newObjDialog>
+      *ngIf="search.typeQuote !=='invoice'"
+      icone="fa fa-plus-square fa-2x ml" [search]="search" (saved)="saved($event)" [typeObj]="'quote'"></app-newObjDialog>
+
     </div>
   </div>
   <div class="d-flex flex-row">
