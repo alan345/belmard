@@ -8,6 +8,7 @@ var mongoose                = require('mongoose'),
 var quote = new Schema({
     ownerCompanies: [{type: Schema.Types.ObjectId, ref: 'Companie'}],
     projects: [{type: Schema.Types.ObjectId, ref: 'Project'}],
+    invoices: [{type: Schema.Types.ObjectId, ref: 'Quote'}],
     // ownerQuotes: [{type: Schema.Types.ObjectId, ref: 'User'}],
     clients: [{type: Schema.Types.ObjectId, ref: 'User'}],
     // companieClients: [{type: Schema.Types.ObjectId, ref: 'Companie'}],

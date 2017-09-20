@@ -1,16 +1,32 @@
-
 <div class="container-fluid">
-  <div class="hdform">
+  <!-- <div *ngIf="fetchedQuote.typeQuote === 'quote'" class="hdform">
     <h3><i class="fa fa-university" aria-hidden="true"></i>{{'Quote' | translate}}</h3>
+  </div> -->
+  <div class="hdform">
+    <h3 *ngIf="fetchedQuote.typeQuote === 'invoice'"><i class="fa fa-university" aria-hidden="true"></i>{{'Invoice' | translate}}</h3>
+    <h3 *ngIf="fetchedQuote.typeQuote === 'quote'"><i class="fa fa-university" aria-hidden="true"></i>{{'Quote' | translate}}</h3>
   </div>
   <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
     <div class="row">
       <div class="col-2">
       </div>
       <div class="col-2">
-        <button type="button" class="btn btn-primary" (click)="downloadPDF()">
+        <div *ngIf="fetchedQuote._id">
+          <button type="button" class="btn btn-primary" (click)="downloadPDF()">
           download PDF
         </button>
+
+          <div *ngIf="fetchedQuote.typeQuote === 'quote'">
+
+            <button *ngIf="!fetchedQuote.invoices.length" type="button" class="btn btn-primary" (click)="saveAsInvoice()">
+            {{'Save As Invoice' | translate}}
+            </button>
+            <div *ngFor="let invoice of fetchedQuote.invoices">
+              <button type="button" class="btn btn-primary" (click)="goToInvoice(invoice._id)">{{'Go to Invoice' | translate}}</button>
+            </div>
+          </div>
+        </div>
+
         <!--   <h4 class="dspl-nn">id: {{fetchedQuote._id}}</h4> -->
       </div>
       <div class="col-8">
@@ -22,9 +38,9 @@
       <div class="col-3">
         <div class="row">
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
           typeQuote: {{fetchedQuote.typeQuote}}
-        </div>
+        </div> -->
         <div class="form-group">
           {{'Quote number' | translate}}
           <!-- <input class="form-control" name="EstimateCode" type="text" value="28" /> -->

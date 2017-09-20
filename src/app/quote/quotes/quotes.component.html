@@ -5,7 +5,9 @@
     </div>
     <div class="p-2">
       <!-- <app-header [showHeader]="showHeader" showBackButton="showBackButton" [nameObject]="'quote'" [idProject]="idProject" [idClient]="idClient"></app-header> -->
-      <app-newObjDialog icone="fa fa-plus-square fa-2x ml" [search]="search" (saved)="saved($event)" [typeObj]="'quote'"></app-newObjDialog>
+      <app-newObjDialog
+        *ngIf="search.typeQuote ==='quote'"
+        icone="fa fa-plus-square fa-2x ml" [search]="search" (saved)="saved($event)" [typeObj]="'quote'"></app-newObjDialog>
     </div>
   </div>
   <div class="d-flex flex-row">
@@ -23,15 +25,16 @@
             <th class="centre tdunder">{{'Client' | translate}}</th>
             <th class="centre tdunder">{{'Name' | translate}}</th>
             <th class="centre tdunder">{{'Date' | translate}}</th>
-            <th class="centre tdunder">{{'Owner' | translate}}</th>
+
             <th class="centre tdunder">{{'Status' | translate}}</th>
           </tr>
         </thead>
         <tbody class="clienttbl">
           <tr *ngFor="let quote of fetchedQuotes" [routerLink]="['/quote/' + quote._id]" routerLinkActive="active">
-            <td class="centre tdunder"></td>
             <td class="centre tdunder">
-
+              {{quote.typeQuote}}
+            </td>
+            <td class="centre tdunder">
               <div *ngFor="let client of quote.clients">
                 {{client.profile.name}} {{client.profile.lastName}}
               </div>
@@ -39,7 +42,6 @@
             </td>
             <td class="centre tdunder">{{quote.name}}</td>
             <td class="centre tdunder">{{quote.detail.dateQuote.issueDate | date:'yyyy-MM-dd' }}</td>
-            <td class="centre tdunder"></td>
             <td class="centre tdunder">{{quote.statusQuoteString}}</td>
           </tr>
         </tbody>

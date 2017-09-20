@@ -48,8 +48,16 @@ export class QuotesComponent implements OnInit {
   }
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
-      if(params['isQuoteAssignedToMe']) {
-        this.search.isQuoteAssignedToMe = params['isQuoteAssignedToMe']
+      // if(params['searchType'] === 'quoteAssignedToMe') {
+      //   this.search.isQuoteAssignedToMe = true
+      //   this.getQuotes(this.paginationData.currentPage, this.search);
+      // }
+      if(params['searchType'] === 'invoice') {
+        this.search.typeQuote = params['searchType']
+        this.getQuotes(this.paginationData.currentPage, this.search);
+      }
+      if(params['searchType'] === 'quote') {
+        this.search.typeQuote = params['searchType']
         this.getQuotes(this.paginationData.currentPage, this.search);
       }
     })

@@ -8,6 +8,7 @@ export class Search {
   assignedToId: string = '';
   projectId: string = '';
   isExternalUser: boolean = true;
+  typeQuote: string = '';
 };
 
 

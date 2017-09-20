@@ -340,6 +340,19 @@ export class QuoteComponent implements OnInit {
         }
       )
   }
+
+  saveAsInvoice() {
+    this.quoteService.saveAsInvoice(this.fetchedQuote)
+      .subscribe(
+      res => {
+        this.toastr.success('Great!', res.message)
+        this.goToInvoice(res.obj._id)
+      }, error => { console.log(error) } )
+  }
+
+  goToInvoice(id: string){
+    this.router.navigate(['quote/' + id]);
+  }
   // downloadPDF2() {
   //   let this2 = this
   //   let base64image = this.getBase64Image(this.imgLogoUrl).then(function(dataImg: any) {
@@ -502,15 +515,15 @@ export class QuoteComponent implements OnInit {
         .subscribe(
         res => {
           this.toastr.success('Great!', res.message)
-          // this.getQuote(res.obj._id)
           this.saved.emit(res)
-          // this.router.navigate(['quote/edit/' + res.obj._id])
         },
         error => { console.log(error) }
         )
     }
-
   }
+
+
+
   removeBucketProducts(i) {
     this.fetchedQuote.devisDetails.splice(i, 1);
     this.calculateQuote()
@@ -631,9 +644,9 @@ export class QuoteComponent implements OnInit {
 
 
 
-  goBack() {
-    this.location.back();
-  }
+  // goBack() {
+  //   this.location.back();
+  // }
 
   // addUser(user) {
   //   const control = <FormArray>this.myForm.controls['_users'];

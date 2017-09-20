@@ -44,7 +44,12 @@ router.get('/:id', function(req, res, next) {
         path: 'assignedTos',
         model: 'User'
       }
-    }).populate({path: 'companieClients', model: 'Companie'}).populate({path: 'signature.users', model: 'User'}).populate({path: 'clients', model: 'User'}).populate({path: 'devisDetails.bucketProducts.productInit', model: 'Product'}).populate({
+    }).populate({path: 'companieClients', model: 'Companie'})
+    .populate({path: 'signature.users', model: 'User'})
+    .populate({path: 'clients', model: 'User'})
+    .populate({path: 'invoices', model: 'Quote'})
+    // .populate({path: 'devisDetails.bucketProducts.productInit', model: 'Product'})
+    .populate({
       path: 'devisDetails.bucketProducts.productInit',
       model: 'Product',
       populate: {
@@ -612,6 +617,46 @@ router.post('/', function(req, res, next) {
   })
 });
 
+
+router.post('/saveAsInvoice/', function(req, res, next) {
+  if (!shared.isCurentUserHasAccess(req.user, nameObject, 'write')) {
+    return res.status(404).json({
+      title: 'No rights',
+      error: {
+        message: 'No rights'
+      }
+    })
+  }
+  if (!req.user.ownerCompanies.length) {
+    return res.status(404).json({message: 'You must belong to a companie', err: ''})
+  }
+  let idQuote = req.body._id
+  delete req.body._id
+  var quote = new Quote(req.body);
+
+  quote.typeQuote = 'invoice'
+  quote.save(function(err, result) {
+    if (err) {
+      return res.status(403).json({
+        title: 'There was an issue',
+        error: {
+          message: 'ERROR' + err
+        }
+      });
+    }
+    Quote.findById(({_id: idQuote}), function(err, item) {
+      if (err) return res.status(404).json({message: '', err: err})
+      item.invoices = result
+      item.save(function(err, resultQuote) {
+        if (err) {
+          return res.status(404).json({message: 'There was an error, please try again', err: err});
+        }
+        res.status(201).json({message: '', obj: result});
+      });
+    })
+  })
+});
+
 // get all forms from database
 router.get('/page/:page', function(req, res, next) {
   var itemsPerPage = 5
@@ -625,13 +670,17 @@ router.get('/page/:page', function(req, res, next) {
   let arrObj = []
 
   let searchQuery = {}
+  searchQuery['ownerCompanies'] = req.user.ownerCompanies
 
-  if (req.query.isQuoteAssignedToMe === 'true') {
-    searchQuery['clients'] = req.user._id
-  } else {
-    searchQuery['ownerCompanies'] = req.user.ownerCompanies
+  // if (req.query.isQuoteAssignedToMe === 'true') {
+  //   searchQuery['clients'] = req.user._id
+  // } else {
+  //   searchQuery['ownerCompanies'] = req.user.ownerCompanies
+  // }
 
-  }
+  searchQuery['typeQuote'] = req.query.typeQuote
+
+
 
   if (req.query.search) {
     //  nameQuery['name'] = new RegExp(req.query.search, 'i')
@@ -657,7 +706,9 @@ router.get('/page/:page', function(req, res, next) {
   if (req.query.projectId)
     searchQuery['projects'] = mongoose.Types.ObjectId(req.query.projectId)
 
-  Quote.find(searchQuery).populate({path: 'clients', model: 'User'})
+  Quote.find(searchQuery)
+  .populate({path: 'clients', model: 'User'})
+
   // .populate({path: 'devisDetails.bucketProducts.productInit', model: 'Product'})
     .limit(itemsPerPage).skip(skip).sort(req.query.orderBy).exec(function(err, item) {
     if (err) {
