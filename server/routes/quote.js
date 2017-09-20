@@ -323,7 +323,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                    font-weight: bold;
                  }
                  #pageHeader {
-                   
+
                    width:100%;
                    height: 50px;
 
@@ -341,18 +341,18 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                        <thead>
                          <tr>
                            <th class="col-4 cobo desc">
-                            
+
                            <p>Belmard Bâtiment</p>
-                           <p>30, rue Belgrand</p>                       
-                           <p>75020 Paris</p>                            
+                           <p>30, rue Belgrand</p>
+                           <p>75020 Paris</p>
                            <p>Tel : 01.40.33.88.33</p>
-                           <p>Mail : Belmard.batiment@gmail.com</p>                          
-                            
+                           <p>Mail : Belmard.batiment@gmail.com</p>
+
                            </th>
                            <th class="col-4 nobo"></th>
                            <th class="col-4 cobo desc">`
-              
-                            item.clients.forEach(user => {
+
+                          item.clients.forEach(user => {
                             html += user.profile.name
                             html += '<br>'
                             html += user.profile.title
@@ -363,13 +363,11 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                             html += '<br>'
                             html += user.profile.fax
                           })
-                           `
+                      html += `
                            </th>
                          </tr>
                        </thead>
-                     </table>`
-
-              html += `
+                     </table>
                      <br>
                      <table>
                        <thead>
