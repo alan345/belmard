@@ -258,6 +258,11 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                    height: 20px;
                  }
 
+                 .imglogo {
+                   height: 50px;
+                   text-align: center; 
+                 }
+
                  .tabo {
                    border: 1px solid #ddd;
                  }
@@ -325,7 +330,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
 
                  </style>
                  `
-              html += `<div id="pageHeader" class="col-12"> <img class="img" src="http://belmard-renovation.fr/wp-content/uploads/2016/05/BELMARD.png">
+              html += `<div id="pageHeader" class="col-12"> <img class="imglogo" src="http://belmard-renovation.fr/wp-content/uploads/2016/05/BELMARD.png">
 
                   </div>`
 
