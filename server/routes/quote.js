@@ -356,7 +356,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                            <th class="col-4 nobo"></th>
                            <th class="col-4 cobo desc">`
 
-              html += user.profile.title user.profile.name user.profile.lastName
+              html += user.profile.title
               html += '<br>'
               html += companie.email
               html += '<br>'
