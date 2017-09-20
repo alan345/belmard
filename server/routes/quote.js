@@ -682,6 +682,7 @@ router.get('/page/:page', function(req, res, next) {
 
 
 
+
   if (req.query.search) {
     //  nameQuery['name'] = new RegExp(req.query.search, 'i')
     //  cityQuery['address.city'] = new RegExp(req.query.search, 'i')
