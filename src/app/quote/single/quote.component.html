@@ -18,8 +18,8 @@
         <div class="col-4" *ngIf="fetchedQuote._id">
           <button type="button" class="btn btn-primary" (click)="downloadPDF()">
           download PDF
-        </button>
-
+          </button>
+        </div>
           <div class="col-4" *ngIf="fetchedQuote.typeQuote === 'quote'">
 
             <button *ngIf="!fetchedQuote.invoices.length" type="button" class="btn btn-primary" (click)="saveAsInvoice()">
@@ -29,7 +29,7 @@
               <button type="button" class="btn btn-primary" (click)="goToInvoice(invoice._id)">{{'Go to Invoice' | translate}}</button>
             </div>
           </div>
-      </div>
+      
      </div>
     </div>
     <div class="row">
