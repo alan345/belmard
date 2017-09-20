@@ -16,7 +16,7 @@
           download PDF
         </button>
 
-          <div *ngIf="fetchedQuote.typeQuote === 'quote'">
+          <div class="row" *ngIf="fetchedQuote.typeQuote === 'quote'">
 
             <button *ngIf="!fetchedQuote.invoices.length" type="button" class="btn btn-primary" (click)="saveAsInvoice()">
             {{'Save As Invoice' | translate}}
