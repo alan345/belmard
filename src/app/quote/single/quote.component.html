@@ -261,9 +261,9 @@
             <option [attr.value]="''">{{'Add row' | translate}}</option>
             <option *ngFor="let n of rowTypes" [attr.value]="n.value">{{n.label}}</option>
           </select> -->
-          <button type="button" (click)="addRow('category')">+ category</button>
-          <button type="button" (click)="addRow('text')">+ text</button>
-          <button type="button" (click)="addRow('product')">+ product</button>
+          <button type="button" class="btn btn-primary" (click)="addRow('category')">+ category</button>
+          <button type="button" class="btn btn-primary" (click)="addRow('text')">+ text</button>
+          <button type="button" class="btn btn-primary" (click)="addRow('product')">+ product</button>
 
 
             </div>
