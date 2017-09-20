@@ -335,12 +335,14 @@
                   <div class="ac" *ngFor="let user of fetchedQuote.signature.users">
                     {{fetchedQuote.signature.dateSignature | date:'yMdjm'}} - {{user.profile.name }}
                   </div>
+                  <div class="row">
                   <button type="button" class="valid" (click)="validateSignature()">
                   {{'Validate' | translate}}
-              </button>
+                  </button>
                   <button type="button" class="false" (click)="removeSignature()">
                   {{'Unsign' | translate}}
-              </button>
+                  </button>
+                  </div>  
                 </div>
               </div>
             </div>
