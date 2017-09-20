@@ -260,7 +260,10 @@ router.get('/pdf/:quoteId', function(req, res, next) {
 
                  .imglogo {
                    height: 50px;
-                   text-align: center; 
+                   text-align: center;
+                  display: block;
+                  margin-left: auto;
+                  margin-right: auto
                  }
 
                  .tabo {
