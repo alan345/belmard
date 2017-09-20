@@ -11,12 +11,12 @@
       <div class="col-2">
       </div>
       <div class="col-2 row">
-        <div *ngIf="fetchedQuote._id">
+        <div class="col-6" *ngIf="fetchedQuote._id">
           <button type="button" class="btn btn-primary" (click)="downloadPDF()">
           download PDF
         </button>
 
-          <div *ngIf="fetchedQuote.typeQuote === 'quote'">
+          <div class="col-6" *ngIf="fetchedQuote.typeQuote === 'quote'">
 
             <button *ngIf="!fetchedQuote.invoices.length" type="button" class="btn btn-primary" (click)="saveAsInvoice()">
             {{'Save As Invoice' | translate}}
