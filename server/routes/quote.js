@@ -341,7 +341,22 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                        <thead>
                          <tr>
                            <th class="col-4 cobo desc">`
-              item.clients.forEach(user => {
+                            html += 'Belmard Bâtiment'
+                            html += '<br>'
+              html += '30, rue Belgrand'
+              html += '<br>'
+              html += '75020 Paris'
+              html += '<br>'
+              html += 'Tel : 01.40.33.88.33 '
+              html += '<br>'
+              html += 'Mail : Belmard.batiment@gmail.com'
+              html += '<br>'
+
+                
+               `</th>
+                           <th class="col-4 nobo"></th>
+                           <th class="col-4 cobo desc">`
+                item.clients.forEach(user => {
                 html += user.profile.name
                 html += '<br>'
                 html += user.profile.title
@@ -352,25 +367,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                 html += '<br>'
                 html += user.profile.fax
               })
-              html += `</th>
-                           <th class="col-4 nobo"></th>
-                           <th class="col-4 cobo desc">`
-
-              html += user.profile.title
-              html += '<br>'
-              html += companie.email
-              html += '<br>'
-              html += companie.address.address
-              html += '<br>'
-              html += companie.address.city
-              html += '<br>'
-              html += companie.address.state
-              html += '<br>'
-              html += companie.address.zip
-              html += '<br>'
-              html += companie.address.country
-              html += '<br>'
-              html += `
+                           `
                            </th>
                          </tr>
                        </thead>
