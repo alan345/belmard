@@ -341,19 +341,13 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                        <thead>
                          <tr>
                            <th class="col-4 cobo desc">
-                            `
-                            html += '<div>Belmard Bâtiment</div>'
-                                    '<div>30, rue Belgrand</div>'
-                            html += '<br>'
-                            html += ''
-                            html += '<br>'
-                            html += '<div>75020 Paris</div>'
-                            html += '<br>'
-                            html += '<div>Tel : 01.40.33.88.33</div>'
-                            html += '<br>'
-                            html += '<div>Mail : Belmard.batiment@gmail.com</div>'
-                            html += '<br>'
-                            `
+                            
+                           <p>Belmard Bâtiment</p>
+                           <p>30, rue Belgrand</p>                       
+                           <p>75020 Paris</p>                            
+                           <p>Tel : 01.40.33.88.33</p>
+                           <p>Mail : Belmard.batiment@gmail.com</p>                          
+                            
                            </th>
                            <th class="col-4 nobo"></th>
                            <th class="col-4 cobo desc">`
