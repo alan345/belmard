@@ -353,14 +353,14 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                            <th class="col-4 cobo desc">`
 
                           item.clients.forEach(user => {
-                            html += user.profile.name
-                            html += '<br>'
                             html += user.profile.title
-                            html += '<br>'
+                            html += ' '
+                            html += user.profile.name
+                            html += ' '
                             html += user.profile.lastName
-                            html += '<br>'
+                            html += '<br>Tel :'
                             html += user.profile.phoneNumber
-                            html += '<br>'
+                            html += '<br>Fax :'
                             html += user.profile.fax
                           })
                       html += `
