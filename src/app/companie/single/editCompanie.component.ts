@@ -4,7 +4,8 @@ import {CompanieService} from '../companie.service';
 import {UserService} from '../../user/user.service';
 
 
-import {Companie, Categorie0, Address} from '../companie.model';
+import {Companie, Categorie0} from '../companie.model';
+import {Address} from '../../user/user.model';
 
 import {ToastsManager} from 'ng2-toastr';
 

@@ -353,14 +353,14 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                            <th class="col-4 cobo desc">`
 
                           item.clients.forEach(user => {
-                            html += user.profile.title
-                            html += ' '
                             html += user.profile.name
-                            html += ' '
+                            html += '<br>'
+                            html += user.profile.title
+                            html += '<br>'
                             html += user.profile.lastName
-                            html += '<br>Tel :'
+                            html += '<br>'
                             html += user.profile.phoneNumber
-                            html += '<br>Fax :'
+                            html += '<br>'
                             html += user.profile.fax
                           })
                       html += `
@@ -437,7 +437,8 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                      <table>
                        <thead>
                          <tr>
-                           <th class="col-3 desc"><p>Entreprise</p>
+                           <th class="col-3 desc">
+                           <p>Entreprise</p>
                                                  <p class="inf2">Lu et approuvé</p>
                                                  <p class="inf2">Le</p>
                            </th>
@@ -601,8 +602,12 @@ router.post('/', function(req, res, next) {
   if (!req.user.ownerCompanies.length) {
     return res.status(404).json({message: 'You must belong to a companie', err: ''})
   }
+
+  req.body.projects.forEach(project => req.body.clients = project.clients )
+  
   var quote = new Quote(req.body);
   quote.ownerCompanies = req.user.ownerCompanies
+
   quote.save(function(err, result) {
     if (err) {
       return res.status(403).json({

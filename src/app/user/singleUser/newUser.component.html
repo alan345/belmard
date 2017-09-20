@@ -5,47 +5,36 @@
       <h3 *ngIf="!fetchedUser.isExternalUser"><i class="fa fa-user" aria-hidden="true"></i>{{'Team' | translate}}</h3>
     </div>
     <div class="row">
-
       <div class="row">
         <div class="col">
-
           <h5>{{'Identity' | translate}}</h5>
-
           <div class="form-group">
             <select [(ngModel)]="fetchedUser.profile.title" class="form-control" formControlName="title">
             <option *ngFor="let n of titleArray" [value]="n">{{n}}</option>
             </select>
           </div>
-
           <div class="form-group">
             <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedUser.profile.name" placeholder="{{'Firstname' | translate}}">
           </div>
-
           <div class="form-group">
             <input type="text" class="form-control" formControlName="lastName" [(ngModel)]="fetchedUser.profile.lastName" placeholder="{{'Lastname' | translate}}">
           </div>
-
           <div class="form-group">
             <input type="text" class="form-control" formControlName="email" [(ngModel)]="fetchedUser.email" placeholder="{{'Email' | translate}}">
           </div>
-
           <div class="form-group">
             <input type="text" class="form-control" formControlName="phoneNumber" [(ngModel)]="fetchedUser.profile.phoneNumber" placeholder="{{'Phone Number' | translate}}">
           </div>
-
           <div class="form-group">
             <select [(ngModel)]="fetchedUser.profile.typeClient" class="form-control" formControlName="typeClient">
             <option *ngFor="let n of typeClientArray" [attr.value]="n">{{n}}</option>
             </select>
           </div>
-
-
           <div class="form-group">
             <select [(ngModel)]="fetchedUser.profile.statusHouse" class="form-control" formControlName="statusHouse">
             <option *ngFor="let n of statusHouseArray" [attr.value]="n">{{n}}</option>
             </select>
           </div>
-
           <!-- <div class="form-group" *ngIf="fetchedUser.isExternalUser">
             <app-autocomplete [title]="'Entreprise'" [singleChoice]="'true'" [typeAutocomplete]="'companie'" [arrayContent]="fetchedUser.ownerCompanies" (getResultAutocomplete)="selectCompanie($event[0])">
             </app-autocomplete>
@@ -56,7 +45,6 @@
               <option *ngFor="let n of languageArray" [value]="n">{{n}}</option>
             </select>
           </div>   -->
-
           <div *ngIf="!fetchedUser.isExternalUser" class="form-group">
             <div *ngFor="let ownerCompanie of currentUser.ownerCompanies">
               <select [(ngModel)]="fetchedUser.typeUsers" name="language" class="form-control" formControlName="typeUsers">
@@ -64,11 +52,8 @@
               </select>
             </div>
           </div>
-
         </div>
-
         <div class="col">
-
           <h5>{{'Address' | translate}}</h5>
           <button type="button" (click)="newAddress()">New Address</button>
           <div *ngFor="let singleAddresss of fetchedUser.profile.address; let i = index;">
@@ -81,38 +66,27 @@
                         <option value="shipping">shipping</option>
                       </select>
             </div>
-
-
             <div class="form-group">
               <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedUser.profile.address[i].address" placeholder="{{'Address' | translate}}">
             </div>
-
             <div class="form-group">
               <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedUser.profile.address[i].address2" placeholder="{{'Additional address' | translate}}">
             </div>
-
             <div class="form-group">
               <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedUser.profile.address[i].zip" placeholder="{{'Zip' | translate}}">
             </div>
-
             <div class="form-group">
               <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedUser.profile.address[i].city" placeholder="{{'City' | translate}}">
             </div>
-
             <!--   <div class="form-group">
             <input type="text" class="form-control" formControlName="state" [(ngModel)]="fetchedUser.profile.address.state" placeholder="{{'State' | translate}}">
           </div> -->
-
             <div class="form-group">
               <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedUser.profile.address[i].country" placeholder="{{'Country' | translate}}">
             </div>
           </div>
         </div>
-
-
-
         <div class="col">
-
           <h5>{{'Divers' | translate}}</h5>
           <div class="form-group" *ngIf="fetchedUser.isExternalUser">
             <div class="form-group">
@@ -120,62 +94,47 @@
                <option *ngFor="let n of typeHouseArray" [attr.value]="n">{{n}}</option>
               </select>
             </div>
-
             <div class="form-group">
               <input type="text" class="form-control" formControlName="surface" [(ngModel)]="fetchedUser.profile.detailHouse.surface" placeholder="{{'Surface' | translate}}">
             </div>
-
             <div class="form-group">
               <input type="text" class="form-control" formControlName="accesCode" [(ngModel)]="fetchedUser.profile.detailHouse.accesCode" placeholder="{{'Acces Code' | translate}}">
             </div>
-
             <div class="form-group">
               <input type="text" class="form-control" formControlName="floor" [(ngModel)]="fetchedUser.profile.detailHouse.floor" placeholder="{{'Floor' | translate}}">
             </div>
-
             <div class="form-group">
               <input type="text" class="form-control" formControlName="accessType" [(ngModel)]="fetchedUser.profile.detailHouse.accessType" placeholder="{{'Acces Type' | translate}}">
             </div>
+            <div class="form-group">
+              <input type="text" class="form-control" formControlName="accessType" [(ngModel)]="fetchedUser.profile.detailHouse.accessType" placeholder="{{'Source' | translate}}">
+            </div>
           </div>
-
           <div class="form-group">
             <textarea class="form-control" formControlName="otherData" [(ngModel)]="fetchedUser.profile.otherData" placeholder="{{'Other' | translate}}">
               </textarea>
           </div>
-
-          <div class="form-group">
-            <input type="text" class="form-control" formControlName="accessType" [(ngModel)]="fetchedUser.profile.detailHouse.accessType" placeholder="{{'Source' | translate}}">
-          </div>
-
           <div *ngIf="!fetchedUser.isExternalUser" class="form-group">
-            <app-autocomplete [typeAutocomplete]="'right'" [canDelete]="true" [title]="" [singleChoice]="true" [arrayContent]="fetchedUser.rights" (getResultAutocomplete)="selectRight($event[0])">
+            <app-autocomplete [typeAutocomplete]="'right'" [canDelete]="true" [title]="'Right'" [singleChoice]="true" [arrayContent]="fetchedUser.rights" (getResultAutocomplete)="selectRight($event[0])">
             </app-autocomplete>
           </div>
-          <div class="form-group">
+          <div *ngIf="!fetchedUser.isExternalUser" class="form-group">
             <div>
               <label>{{'Calendar Color' | translate}}</label>
               <div class="round" [style.background-color]="fetchedUser.profile.colorCalendar"></div>
               <input type="color" formControlName="colorCalendar" [(ngModel)]="fetchedUser.profile.colorCalendar">
             </div>
           </div>
-
           <app-picture [forms]="fetchedUser.forms" (getPicture)="getPicture($event)"></app-picture>
         </div>
-
       </div>
-
-
-
-
-
     </div>
-
-
-
-
-
-
-
+    <div *ngIf="fetchedUser._id">
+      <button type="button" (click)="showProjects = !showProjects">Projects</button>
+      <div *ngIf="showProjects">
+        <app-projects [search]="search"></app-projects>
+      </div>
+    </div>
     <div class="valid-edit row col-12">
       <button type="submit" class="valid" [disabled]="!myForm.valid" [ngClass]="{'done':myForm.valid,'pas-done':!myForm.valid}">{{'Done' | translate}}</button>
       <button *ngIf="fetchedUser._id" type="button" class="valid" (click)="saveAndCreateProject()" [disabled]="!myForm.valid">

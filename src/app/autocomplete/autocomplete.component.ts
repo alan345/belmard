@@ -148,6 +148,13 @@ export class AutocompleteComponent {
 
   selectData(data) {
 
+    // if(this.typeAutocomplete ==='user')
+    //   this.search.userId = data._id
+    //
+    // if(this.typeAutocomplete ==='project')
+    //   this.search.projectId = data._id
+
+
     this.autocompleteSearch = ''
     this.fetchedData = []
     this.arrayContent.push(data)

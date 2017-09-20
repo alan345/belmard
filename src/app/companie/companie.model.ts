@@ -1,5 +1,6 @@
 import { Form } from '../picture/form/form.model';
 import { User } from '../user/user.model';
+import { Address } from '../user/user.model';
 
 
 export class Companie {
@@ -91,13 +92,13 @@ export class Calendar {
   slotDuration: string = '00:30:00';
 
 }
-
-export class Address {
-  nameAddress: string = '';
-  address: string = '';
-  city: string = '';
-  state: string = '';
-  zip: string = '';
-  country: string = '';
-
-}
+//
+// export class Address {
+//   nameAddress: string = '';
+//   address: string = '';
+//   city: string = '';
+//   state: string = '';
+//   zip: string = '';
+//   country: string = '';
+//
+// }

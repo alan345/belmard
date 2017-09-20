@@ -22,11 +22,11 @@ import { Search, PaginationData } from '../../shared/shared.model';
 
 })
 export class ProjectsComponent implements OnInit {
-  @Input() userId = '';
-  @Input() showHeader = true;
+  // @Input() userId = '';
+  // @Input() showHeader = true;
   // token: string = localStorage.getItem('id_token');
   fetchedProjects: Project[] = [];
-  search:Search = new Search()
+  @Input() search: Search = new Search()
   // {
   //   categories : [],
   //   search: ''
@@ -62,7 +62,7 @@ export class ProjectsComponent implements OnInit {
     let this2 = this
 
     // setTimeout(function(){
-      this2.search.userId = this2.userId
+      // this2.search.userId = this2.userId
       this2.search.orderBy = 'details.name';
       this2.getProjects(1, this2.search)
     // }, 200);

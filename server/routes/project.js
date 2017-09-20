@@ -146,10 +146,15 @@ router.post('/', function(req, res, next) {
       }
     })
   }
-  // if (!req.user.companies.length) {
-  //   return res.status(404).json({message: 'You must belong to a companie', err: ''})
-  // }
-  console.log(req.user.companies)
+
+  if (!req.user.ownerCompanies.length) {
+    return res.status(404).json({message: 'You must belong to a companie', err: ''})
+  }
+
+  if (!req.body.clients.length) {
+    return res.status(404).json({message: 'Select a client', err: ''})
+  }
+
   req.body.ownerCompanies = req.user.ownerCompanies
 
   // project.ownerCompanies = req.user.companies

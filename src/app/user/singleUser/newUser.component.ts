@@ -16,6 +16,8 @@ import { User, TypeUser , Address} from '../user.model';
 
 import { FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { DeleteDialog } from '../../deleteDialog/deleteDialog.component'
+import { Search } from '../../shared/shared.model';
+
 
 
 @Component({
@@ -27,9 +29,8 @@ import { DeleteDialog } from '../../deleteDialog/deleteDialog.component'
 
 export class NewUserComponent implements OnInit {
   @Output() saved: EventEmitter<any> = new EventEmitter();
-  @Input() search: any = {
-    isExternalUser: true
-  };
+  @Input() search: Search = new Search()
+
   fetchedCompanies: Companie[] = []
   autocompleteCompanie: string = '';
 
@@ -49,7 +50,7 @@ export class NewUserComponent implements OnInit {
 
   fetchedUser: User = new User();
   currentUser: User = new User();
-
+  showProjects: boolean = false;
 
 
   public myForm: FormGroup;
@@ -103,6 +104,9 @@ export class NewUserComponent implements OnInit {
       this.activatedRoute.params.subscribe((params: Params) => {
         if(params['id']) {
           this.getUser(params['id'])
+
+          this.search.userId = params['id']
+          console.log(this.search)
         } else {
           if(params['isExternalUser'] === 'false') {
             this.fetchedUser.isExternalUser = false
@@ -111,32 +115,32 @@ export class NewUserComponent implements OnInit {
 
       })
     }
+  //
+  // searchCompanies() {
+  //   if(!this.autocompleteCompanie) {
+  //     this.fetchedCompanies = []
+  //   } else {
+  //     let search = {
+  //         search: this.autocompleteCompanie,
+  //       };
+  //     this.getCompanies(1, search)
+  //   }
+  // }
 
-  searchCompanies() {
-    if(!this.autocompleteCompanie) {
-      this.fetchedCompanies = []
-    } else {
-      let search = {
-          search: this.autocompleteCompanie,
-        };
-      this.getCompanies(1, search)
-    }
-  }
-
-  getCompanies(page: number, search: any) {
-    this.companieService.getCompanies(page, search)
-      .subscribe(
-        res => {
-          this.fetchedCompanies = res.data
-        },
-        error => {
-          console.log(error);
-        }
-      );
-  }
-  selectCompanie(companie: Companie) {
-    this.fetchedUser.ownerCompanies = [companie]
-  }
+  // getCompanies(page: number, search: any) {
+  //   this.companieService.getCompanies(page, search)
+  //     .subscribe(
+  //       res => {
+  //         this.fetchedCompanies = res.data
+  //       },
+  //       error => {
+  //         console.log(error);
+  //       }
+  //     );
+  // }
+              // selectCompanie(companie: Companie) {
+              //   this.fetchedUser.ownerCompanies = [companie]
+              // }
   newAddress() {
     let newAddress = new Address()
     this.fetchedUser.profile.address.push(newAddress)
