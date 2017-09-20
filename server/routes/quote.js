@@ -323,7 +323,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                    font-weight: bold;
                  }
                  #pageHeader {
-                   background-color:silver;
+                   
                    width:100%;
                    height: 50px;
 
