@@ -688,15 +688,13 @@ router.get('/page/:page', function(req, res, next) {
     arrObj.push({
       'name': new RegExp(req.query.search, 'i')
     })
-    arrObj.push({
-      'address.city': new RegExp(req.query.search, 'i')
-    })
-    arrObj.push({
-      'address.address': new RegExp(req.query.search, 'i')
-    })
-    searchQuery = {
-      $or: arrObj
-    }
+    // arrObj.push({
+    //   'quoteNumber': new RegExp(req.query.search, 'i')
+    // })
+    // arrObj.push({
+    //   'address.address': new RegExp(req.query.search, 'i')
+    // })
+    searchQuery['$or'] = arrObj
     //findQuery['address.city'] = new RegExp(req.query.search, 'i')
   }
 

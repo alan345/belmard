@@ -71,7 +71,9 @@ export class QuotesComponent implements OnInit {
     // }, 200);
 
   }
-
+  searchUsers() {
+    this.getQuotes(this.paginationData.currentPage, this.search)
+  }
   saved(result) {
     this.getQuotes(this.paginationData.currentPage, this.search)
   }

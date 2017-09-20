@@ -23,10 +23,16 @@
           <tr>
             <th class="centre tdunder">{{'Type' | translate}}</th>
             <th class="centre tdunder">{{'Client' | translate}}</th>
-            <th class="centre tdunder">{{'Name' | translate}}</th>
-            <th class="centre tdunder">{{'Date' | translate}}</th>
+            <th class="centre tdunder">{{'Name' | translate}}
+              <app-sort (orderBy)="orderBy($event)" [search]="search" [filedToOrder]="'name'"></app-sort>
+            </th>
+            <th class="centre tdunder">{{'Date' | translate}}
+              <app-sort (orderBy)="orderBy($event)" [search]="search" [filedToOrder]="'createdAt'"></app-sort>
+            </th>
 
-            <th class="centre tdunder">{{'Status' | translate}}</th>
+            <th class="centre tdunder">{{'Status' | translate}}
+              <app-sort (orderBy)="orderBy($event)" [search]="search" [filedToOrder]="'statusQuote'"></app-sort>
+            </th>
           </tr>
         </thead>
         <tbody class="clienttbl">
