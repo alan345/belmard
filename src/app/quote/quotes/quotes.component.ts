@@ -47,6 +47,8 @@ export class QuotesComponent implements OnInit {
     this.getQuotes(this.paginationData.currentPage, this.search);
   }
   ngOnInit() {
+
+    this.search.orderBy = '-createdAt'
     this.activatedRoute.params.subscribe((params: Params) => {
       // if(params['searchType'] === 'quoteAssignedToMe') {
       //   this.search.isQuoteAssignedToMe = true

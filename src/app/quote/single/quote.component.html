@@ -10,16 +10,16 @@
     <div class="row">
       <div class="col-2">
       </div>
-     
 
-        <!--   <h4 class="dspl-nn">id: {{fetchedQuote._id}}</h4> -->
-     
+
+      <!--   <h4 class="dspl-nn">id: {{fetchedQuote._id}}</h4> -->
+
       <div class="col-8 row nopad">
         <div class="col-4" *ngIf="fetchedQuote._id">
           <button type="button" class="btn btn-primary" (click)="downloadPDF()">
           download PDF
           </button>
-        </div>
+
           <div class="col-8 alright" *ngIf="fetchedQuote.typeQuote === 'quote'">
 
             <button *ngIf="!fetchedQuote.invoices.length" type="button" class="btn btn-primary" (click)="saveAsInvoice()">
@@ -29,8 +29,8 @@
               <button type="button" class="btn btn-primary" (click)="goToInvoice(invoice._id)">{{'Go to Invoice' | translate}}</button>
             </div>
           </div>
-      
-     </div>
+        </div>
+      </div>
     </div>
     <div class="row">
       <div class="col-2">
@@ -48,7 +48,8 @@
         </div>
 
         <div class="form-group">
-          <app-autocomplete [search]="search" [displayIfContentIsNull]=false [canDelete]=false [enableLink]=true [typeAutocomplete]="'user'" [title]="'Contact'" [search]="{isExternalUser:true}" [title]="" [singleChoice]="'true'" [arrayContent]="fetchedQuote.clients" (getResultAutocomplete)="selectUser($event[0])">
+          <app-autocomplete [search]="search" [displayIfContentIsNull]=false [canDelete]=false [enableLink]=true [typeAutocomplete]="'user'" [title]="'Contact'" [search]="{isExternalUser:true}" [title]="" [singleChoice]="'true'" [arrayContent]="fetchedQuote.clients"
+            (getResultAutocomplete)="selectUser($event[0])">
           </app-autocomplete>
         </div>
         <!-- <div class="form-group">
@@ -69,10 +70,10 @@
           {{'Quote validity date' | translate}}
           <input type="date" class="form-control" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedQuote.detail.dateQuote.expiryDateString">
         </div>
-        <div class="form-group">
+        <!-- <div class="form-group">
           {{'Discount in %' | translate}}
           <input id="DiscountPercent" name="DiscountPercent" class="form-control" data-bind='value: formattedDefaultDiscount' />
-        </div>
+        </div> -->
         <div class="form-group">
           {{'Status' | translate}}
           <select class="form-control" formControlName="statusQuote" placeholder="" [(ngModel)]="fetchedQuote.statusQuote" name="statusQuote">
@@ -261,9 +262,9 @@
             <option [attr.value]="''">{{'Add row' | translate}}</option>
             <option *ngFor="let n of rowTypes" [attr.value]="n.value">{{n.label}}</option>
           </select> -->
-          <button type="button" class="btn btn-primary btn-sm" (click)="addRow('category')">+ category</button>
-          <button type="button" class="btn btn-primary btn-sm" (click)="addRow('text')">+ text</button>
-          <button type="button" class="btn btn-primary btn-sm" (click)="addRow('product')">+ product</button>
+              <button type="button" class="btn btn-primary btn-sm" (click)="addRow('category')">+ category</button>
+              <button type="button" class="btn btn-primary btn-sm" (click)="addRow('text')">+ text</button>
+              <button type="button" class="btn btn-primary btn-sm" (click)="addRow('product')">+ product</button>
 
 
             </div>
@@ -323,28 +324,28 @@
             <div class="ac sign">
               <div class="card ac">
                 <div class="ac" *ngIf="!fetchedQuote.signature.base64">
-                       <div class="row">
-                  <button type="button" class="false" (click)="resetSignature()">
+                  <div class="row">
+                    <button type="button" class="false" (click)="resetSignature()">
                   {{'Reset' | translate}}
               </button>
-                  <button type="button" class="valid" (click)="validateSignature()">
+                    <button type="button" class="valid" (click)="validateSignature()">
                   {{'Validate' | translate}}
                   </button>
-                  <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()">
-                  </signature-pad>
-                 </div>  
+                    <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()">
+                    </signature-pad>
+                  </div>
                 </div>
                 <div class="ac" *ngIf="fetchedQuote.signature.base64">
                   <img class="img ac" [src]="fetchedQuote.signature.base64" />
                   <div class="ac" *ngFor="let user of fetchedQuote.signature.users">
                     {{fetchedQuote.signature.dateSignature | date:'yMdjm'}} - {{user.profile.name }}
                   </div>
-             
-                  
-                 
-                   
+
+
+
+
                 </div>
-                 
+
               </div>
               <button type="button" class="false" (click)="removeSignature()">
                   {{'Unsign' | translate}}

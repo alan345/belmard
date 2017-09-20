@@ -147,6 +147,7 @@ export class AutocompleteComponent {
   }
 
   selectData(data) {
+
     this.autocompleteSearch = ''
     this.fetchedData = []
     this.arrayContent.push(data)
@@ -156,9 +157,10 @@ export class AutocompleteComponent {
     if (!this.autocompleteSearch) {
       this.fetchedData = []
     } else {
-      this.search.search = this.autocompleteSearch,
+      let cloneSearch = Object.assign({}, this.search);
+      cloneSearch.search = this.autocompleteSearch,
 
-      this.getData(1, this.search)
+      this.getData(1, cloneSearch)
     }
   }
   removeData(i: number) {
