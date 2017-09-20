@@ -340,33 +340,35 @@ router.get('/pdf/:quoteId', function(req, res, next) {
               html += `<table class="test">
                        <thead>
                          <tr>
-                           <th class="col-4 cobo desc">`
-                            html += 'Belmard Bâtiment'
+                           <th class="col-4 cobo desc">
+                            `
+                            html += '<div>Belmard Bâtiment</div>'
+                                    '<div>30, rue Belgrand</div>'
                             html += '<br>'
-              html += '30, rue Belgrand'
-              html += '<br>'
-              html += '75020 Paris'
-              html += '<br>'
-              html += 'Tel : 01.40.33.88.33 '
-              html += '<br>'
-              html += 'Mail : Belmard.batiment@gmail.com'
-              html += '<br>'
-
-                
-               `</th>
+                            html += ''
+                            html += '<br>'
+                            html += '<div>75020 Paris</div>'
+                            html += '<br>'
+                            html += '<div>Tel : 01.40.33.88.33</div>'
+                            html += '<br>'
+                            html += '<div>Mail : Belmard.batiment@gmail.com</div>'
+                            html += '<br>'
+                            `
+                           </th>
                            <th class="col-4 nobo"></th>
                            <th class="col-4 cobo desc">`
-                item.clients.forEach(user => {
-                html += user.profile.name
-                html += '<br>'
-                html += user.profile.title
-                html += '<br>'
-                html += user.profile.lastName
-                html += '<br>'
-                html += user.profile.phoneNumber
-                html += '<br>'
-                html += user.profile.fax
-              })
+              
+                            item.clients.forEach(user => {
+                            html += user.profile.name
+                            html += '<br>'
+                            html += user.profile.title
+                            html += '<br>'
+                            html += user.profile.lastName
+                            html += '<br>'
+                            html += user.profile.phoneNumber
+                            html += '<br>'
+                            html += user.profile.fax
+                          })
                            `
                            </th>
                          </tr>
