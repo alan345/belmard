@@ -447,32 +447,32 @@ router.get('/pdf/:quoteId', function(req, res, next) {
               html += 'Total ' + item.priceQuote.priceQuoteWithoutTaxes + ' '
               html += 'priceQuoteWithTaxes ' + item.priceQuote.priceQuoteWithTaxes + '€ TTC'
               
-              html += `<table class="alright cobo">
+              html += `<table class="cobo">
                          <tr class="cobo">
                         
-                           <td class="col-6 "></td>
-                           <td class="col-2 ts">TVA 5.5%</td>
-                           <td class="col-2 ts">TVA 10%</td>
-                           <td class="col-2 ts"><b>TOTAL</b></td>
+                           <td class="col-6 alright"></td>
+                           <td class="col-2 ts elem">TVA 5.5%</td>
+                           <td class="col-2 ts elem">TVA 10%</td>
+                           <td class="col-2 ts elem"><b>TOTAL</b></td>
                            </tr>
                            <tr class="cobo">
-                           <td class="col-6 ts">Sous-Total HT</td>
-                           <td class="col-2">sous-total ht tva 5.5</td>
-                           <td class="col-2">sous-total ht 10</td>
-                           <td class="col-2"><b>sous-total ht</b></td>
+                           <td class="col-6 alright ts">Sous-Total HT</td>
+                           <td class="col-2 elem">sous-total ht tva 5.5</td>
+                           <td class="col-2 elem">sous-total ht 10</td>
+                           <td class="col-2 elem"><b>' + item.priceQuote.priceQuoteWithoutTaxes + '</b></td>
                            </tr>
                            <tr class="cobo">
-                           <td class="col-6 ts">Montant de TVA</td>
-                           <td class="col-2">Montant de TVA 5.5</td>
-                           <td class="col-2">Montant de TVA 10</td>
-                           <td class="col-2"><b>Montant de TVA</b></td>
+                           <td class="col-6 alright ts">Montant de TVA</td>
+                           <td class="col-2 elem">Montant de TVA 5.5</td>
+                           <td class="col-2 elem">Montant de TVA 10</td>
+                           <td class="col-2 elem"><b>Montant de TVA</b></td>
                            </tr> 
 
                            <tr class="cobo">
-                           <td class="col-6 ts"><b>TOTAL TTC</b></td>
-                           <td class="col-2"><b>TOTAL TTC 5.5</b></td>
-                           <td class="col-2"><b>TOTAL TTC 10</b></td>
-                           <td class="col-2"><b>TOTAL TTC</b></td>
+                           <td class="col-6 alright ts"><b>TOTAL TTC</b></td>
+                           <td class="col-2 elem"><b>TOTAL TTC 5.5</b></td>
+                           <td class="col-2 elem"><b>TOTAL TTC 10</b></td>
+                           <td class="col-2 elem"><b>' + item.priceQuote.priceQuoteWithTaxes + '€ TTC</b></td>
 
                          </tr>
             
