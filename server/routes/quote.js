@@ -318,7 +318,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                    font-size: 10px;
                  }
                   
-                  a  {
+                  p  {
                    font-size: 9px;
                  }
  
