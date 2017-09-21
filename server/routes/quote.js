@@ -363,6 +363,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                             html += user.profile.name
                             html += ' '
                             html += user.profile.lastName
+                            html += '<br>'
                             html += 'Numéro & rue'
                             html += '<br>'
                             html += 'Zip & City'
