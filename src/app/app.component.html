@@ -7,12 +7,14 @@
 <app-navbar></app-navbar>
 
 <md-sidenav-container class="example-container">
-  <md-sidenav #sidenav mode="side" opened="true">
+  <md-sidenav #sidenav mode="side" opened="false">
     <!-- <button md-mini-fab class="example-fab" (click)="sidenav.toggle()">
       <md-icon>Nav</md-icon>
     </button>
     test -->
-    <app-sidebar></app-sidebar>
+    <div *ngIf="sidenav.opened">
+      <app-sidebar></app-sidebar>
+    </div>
   </md-sidenav>
 
 
