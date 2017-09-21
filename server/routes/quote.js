@@ -445,31 +445,31 @@ router.get('/pdf/:quoteId', function(req, res, next) {
               html += 'priceQuoteWithTaxes ' + item.priceQuote.priceQuoteWithTaxes + '€ TTC'
               
               html += `<table>
-                         <tr class="col-6">
+                         <tr>
                         
-                           <td></td>
-                           <td>Sous-Total HT</td>
-                           <td>Montant de TVA</td>
-                           <td><b>TOTAL TTC</b></td>
+                           <td class="col-6"></td>
+                           <td class="col-6">Sous-Total HT</td>
+                           <td class="col-6">Montant de TVA</td>
+                           <td class="col-6"><b>TOTAL TTC</b></td>
                            </tr>
-                           <tr class="col-2">
-                           <td>TVA 5.5%</td>
-                           <td>sous-total ht tva 5.5</td>
-                           <td>Montant de TVA 5.5</td>
-                           <td><b>TOTAL TTC 5.5</b></td>
+                           <tr>
+                           <td class="col-2">TVA 5.5%</td>
+                           <td class="col-2">sous-total ht tva 5.5</td>
+                           <td class="col-2">Montant de TVA 5.5</td>
+                           <td class="col-2"><b>TOTAL TTC 5.5</b></td>
                            </tr>
-                           <tr class="col-2">
-                           <td>TVA 10%</td>
-                           <td>sous-total ht tva 10</td>
-                           <td>Montant de TVA 10</td>
-                           <td><b>TOTAL TTC 10</b></td>
+                           <tr>
+                           <td class="col-2">TVA 10%</td>
+                           <td class="col-2">sous-total ht tva 10</td>
+                           <td class="col-2">Montant de TVA 10</td>
+                           <td class="col-2"><b>TOTAL TTC 10</b></td>
                            </tr> 
 
-                           <tr class="col-2">
-                           <td><b>TOTAL</b></td>
-                           <td><b>sous-total ht</b></td>
-                           <td><b>Montant de TVA</b></td>
-                           <td><b>TOTAL TTC</b></td>
+                           <tr>
+                           <td class="col-2"><b>TOTAL</b></td>
+                           <td class="col-2"><b>sous-total ht</b></td>
+                           <td class="col-2"><b>Montant de TVA</b></td>
+                           <td class="col-2"><b>TOTAL TTC</b></td>
 
                          </tr>
             
