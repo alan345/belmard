@@ -477,6 +477,28 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                          </tr>
             
                      </table>`
+              
+              html += `<table class="cobo">
+                        
+                           <tr class="cobo">
+                           <td class="col-6 alright ts">Acompte à la commande 40% </td>
+                           <td class="col-6 alright">=40% du total ttc</td>
+
+                           </tr>
+                           <tr class="cobo">
+                           <td class="col-6 alright ts">Acompte intermédiaire</td>
+                           <td class="col-6 alright">sur avancement</td>
+
+                           </tr> 
+
+                           <tr class="cobo">
+                           <td class="col-6 alright ts"><b>Solde</b></td>
+                           <td class="col-6 alright"><b>à la livraison</b></td>
+
+
+                         </tr>
+            
+                     </table>`
 
               html += `
                      <table>
