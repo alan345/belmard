@@ -370,7 +370,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                             html += '<br>'
                             html += user.profile.phoneNumber
                             html += '<br>'
-                            html += user.profile.fax
+                            html += 'Mail : client@mail.com'
                             
                             
                           })
