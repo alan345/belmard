@@ -54,8 +54,9 @@ export class LoginComponent implements OnInit, AfterViewInit {
     this._authService.signin(user)
       .subscribe(
         data => {
-          this.globalEventsManager.showNavBar(true);
-          this.globalEventsManager.showTopNavBar(true);
+          // this.globalEventsManager.showNavBar(true);
+          // this.globalEventsManager.showTopNavBar(true);
+          // this.globalEventsManager.isLoggedIn(true);
           //console.log(data)
           // if the user credentials are correct, set the localStorage token and userId,
           // we need these info in order to do stuff later when the user is signed in and verified

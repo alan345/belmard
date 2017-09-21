@@ -16,6 +16,7 @@ import {Router} from '@angular/router';
 import {JwtHelper} from 'angular2-jwt';
 // import {UserService} from '../user/user.service'
 import {User} from '../user/user.model'
+import {GlobalEventsManager} from '../globalEventsManager';
 
 
 @Injectable()
@@ -39,6 +40,7 @@ export class AuthService {
     private errorService: ErrorService,
     private toastr: ToastsManager,
     private router: Router,
+    private globalEventsManager: GlobalEventsManager,
     // private userService: UserService,
   ) {
 
@@ -301,6 +303,11 @@ export class AuthService {
 
   // logout function to be used in html file of both pages (login/register) in order to clear the localStorage from token and user id.
   logout() {
+    this.globalEventsManager.isLoggedIn(false);
+    this.globalEventsManager.showNavBar(false);
+    this.globalEventsManager.showTopNavBar(false);
+
+
     localStorage.clear();
     this.token = null;
 
@@ -314,8 +321,15 @@ export class AuthService {
   // check if the user is logged in or not, if token is expired, token is deleted from localstorage
   isLoggedIn() {
     // console.log(tokenNotExpired())
+
     if (!tokenNotExpired()) {
       localStorage.clear();
+    } else {
+      this.globalEventsManager.isLoggedIn(true);
+      this.globalEventsManager.showNavBar(true);
+      this.globalEventsManager.showTopNavBar(true);
+
+
     }
     return tokenNotExpired();
   }

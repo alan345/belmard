@@ -24,6 +24,7 @@ import {tokenNotExpired} from 'angular2-jwt';
 })
 export class AppComponent {
 loading: boolean = true;
+isLoggedIn: boolean = false;
 @ViewChild('sidenav') public sidenav: MdSidenav;
 
 
@@ -46,6 +47,13 @@ loading: boolean = true;
           // this.showNavBar = mode;
           // this.fetchedUser = this.authService.getCurrentUser()
         }
+
+        this.globalEventsManager.isLoggedInEmitter.subscribe((mode) => {
+          if (mode !== null) {
+            this.isLoggedIn = mode;
+          }
+        });
+
     });
 
     this.toastr.setRootViewContainerRef(vcr);
@@ -59,13 +67,13 @@ loading: boolean = true;
     this.globalEventsManager.showNavBar(true);
   }
 
-  isLoggedIn() {
-    // console.log(tokenNotExpired())
-    if (!tokenNotExpired()) {
-      localStorage.clear();
-    }
-    return tokenNotExpired();
-  }
+  // isLoggedIn() {
+  //   // console.log(tokenNotExpired())
+  //   // if (!tokenNotExpired()) {
+  //   //   localStorage.clear();
+  //   // }
+  //   // return tokenNotExpired();
+  // }
 
       // Shows and hides the loading spinner during RouterEvent changes
       navigationInterceptor(event: RouterEvent): void {

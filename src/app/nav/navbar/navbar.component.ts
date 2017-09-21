@@ -68,7 +68,7 @@ export class NavbarComponent implements OnInit {
       let this2=this
       setTimeout(function () {
           this2.globalEventsManager.showNavBar(true);
-      }, 20);
+      }, 2000);
 
 
       this.globalEventsManager.showTopNavBar(true);
@@ -202,8 +202,7 @@ export class NavbarComponent implements OnInit {
   // this calls the logout function from our authentication service, it's activated when user clicks logout in front end.
   // It's called by the (click)='logout()' when the user presses the button
   logout() {
-    this.globalEventsManager.showNavBar(false);
-    this.globalEventsManager.showTopNavBar(false);
+
     this.authService.logout();
     let this2 = this
     setTimeout(function() {

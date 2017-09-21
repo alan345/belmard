@@ -20,6 +20,7 @@ export class SidebarComponent implements OnInit {
   // @Input() sidenav: any;
   // @ViewChild('sidenav') public sidenav: MdSidenav;
   showNavBar: boolean = false;
+  isLoggedIn: boolean = false;
  // private userId: string = localStorage.getItem('userId');
   // private userId: string;
   fetchedUser: User = new User();
@@ -33,6 +34,11 @@ export class SidebarComponent implements OnInit {
     // private companieGuardService: CompanieGuardService,
     // private paiementGuardService: PaiementGuardService,
   ) {
+    this.globalEventsManager.isLoggedInEmitter.subscribe((mode) => {
+      if (mode !== null) {
+        this.isLoggedIn = mode;
+      }
+    });
     // this.globalEventsManager.showNavBarEmitter.subscribe((mode)=>{
     //     // mode will be null the first time it is created, so you need to igonore it when null
     //     if (mode !== null) {
@@ -62,8 +68,9 @@ export class SidebarComponent implements OnInit {
   }
   redirect(typeObj) {
       this.router.navigate([typeObj]);
-
   }
+
+
   // isCurrentUserIsInSubPeriod(){
   //   return this.userService.isCurrentUserIsInSubPeriod()
   // }
@@ -83,7 +90,7 @@ export class SidebarComponent implements OnInit {
   getUser(id: string) {
 
     this.fetchedUser = this.authService.getCurrentUser()
-    console.log(this.fetchedUser)
+    // console.log(this.fetchedUser)
     // let this2 = this
     // setTimeout(function(){
     //     this2.fetchedUser = this2.authService.getCurrentUser()
@@ -108,9 +115,9 @@ export class SidebarComponent implements OnInit {
   // }
 
   // check if user is logged in by asking our authentication service, we use this function in html file *ngIf directive
-  isLoggedIn() {
-    return this.authService.isLoggedIn();
-  }
+  // isLoggedIn() {
+  //   return this.authService.isLoggedIn();
+  // }
 
   // this calls the logout function from our authentication service, it's activated when user clicks logout in front end.
   // It's called by the (click)='logout()' when the user presses the button

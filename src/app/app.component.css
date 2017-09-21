@@ -5,3 +5,10 @@
 .example-scrolling-content {
   overflow: auto;
 }
+
+/*alan*/
+.burger {
+  position: absolute;
+  z-index: 1;
+}
+/*alan*/
