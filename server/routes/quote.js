@@ -283,6 +283,9 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                  .elem {
                    text-align: center;
                  }
+                 .alright {
+                   text-align: right;
+                 } 
 
                  .inf {
                    font-size: 10px;
@@ -444,31 +447,31 @@ router.get('/pdf/:quoteId', function(req, res, next) {
               html += 'Total ' + item.priceQuote.priceQuoteWithoutTaxes + ' '
               html += 'priceQuoteWithTaxes ' + item.priceQuote.priceQuoteWithTaxes + '€ TTC'
               
-              html += `<table>
+              html += `<table class="col-6 alright">
                          <tr>
                         
                            <td class="col-6"></td>
-                           <td class="col-6">Sous-Total HT</td>
-                           <td class="col-6">Montant de TVA</td>
-                           <td class="col-6"><b>TOTAL TTC</b></td>
+                           <td class="col-2 ts">TVA 5.5%</td>
+                           <td class="col-2 ts">TVA 10%</td>
+                           <td class="col-2 ts"><b>TOTAL</b></td>
                            </tr>
                            <tr>
-                           <td class="col-2">TVA 5.5%</td>
-                           <td class="col-2">sous-total ht tva 5.5</td>
+                           <td class="col-6 ts">Sous-Total HT</td>
+                           <td class="col-2 ts">sous-total ht tva 5.5</td>
+                           <td class="col-2">sous-total ht 10</td>
+                           <td class="col-2"><b>sous-total ht</b></td>
+                           </tr>
+                           <tr>
+                           <td class="col-6 ts">Montant de TVA</td>
                            <td class="col-2">Montant de TVA 5.5</td>
-                           <td class="col-2"><b>TOTAL TTC 5.5</b></td>
-                           </tr>
-                           <tr>
-                           <td class="col-2">TVA 10%</td>
-                           <td class="col-2">sous-total ht tva 10</td>
                            <td class="col-2">Montant de TVA 10</td>
-                           <td class="col-2"><b>TOTAL TTC 10</b></td>
+                           <td class="col-2"><b>Montant de TVA</b></td>
                            </tr> 
 
                            <tr>
-                           <td class="col-2"><b>TOTAL</b></td>
-                           <td class="col-2"><b>sous-total ht</b></td>
-                           <td class="col-2"><b>Montant de TVA</b></td>
+                           <td class="col-6 ts"><b>TOTAL TTC</b></td>
+                           <td class="col-2"><b>TOTAL TTC 5.5</b></td>
+                           <td class="col-2"><b>TOTAL TTC 10</b></td>
                            <td class="col-2"><b>TOTAL TTC</b></td>
 
                          </tr>
