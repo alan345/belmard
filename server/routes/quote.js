@@ -321,6 +321,11 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                    font-size: 10px;
                  }
                   
+                  .cgv {
+                   font-size: 6px;
+                  text-align: center;
+                 }
+                  
                   p  {
                    font-size: 9px;
                     font-weight: 300;
@@ -476,8 +481,10 @@ router.get('/pdf/:quoteId', function(req, res, next) {
 
                          </tr>
             
-                     </table>`
-              
+                     </table>
+                    html += '<br>'
+                    html += '<br>'`
+
               html += `<table class="cobo">
                         
                            <tr class="cobo">
@@ -517,6 +524,9 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                          </tr>
                        </thead>
                      </table>
+                  html += '<br>'
+                  html += '<br>'
+                  html += '<a class="cgv">Ce devis est valable 3 mois. Les prix sont établis sur la base des taux en vigeur à la date de remise de l'offre et toute variation ultérieure de ces taux sera répercutée sur ces prix en application du Code Général des Impôts</a>'
                     <div id="pageFooter">Default Footer</div>`
 
               pdf.create(html, options).toFile('./server/uploads/pdf/' + req.params.quoteId + '.pdf', function(err, resPDF) {
