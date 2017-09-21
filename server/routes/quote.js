@@ -317,7 +317,11 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                  th {
                    font-size: 10px;
                  }
-
+                  
+                  a  {
+                   font-size: 9px;
+                 }
+ 
                  .ts {
                    background-color: #aba4a4;
                    font-weight: bold;
@@ -340,9 +344,9 @@ router.get('/pdf/:quoteId', function(req, res, next) {
               html += `<table class="test">
                        <thead>
                          <tr>
-                           <th class="col-4 cobo">
+                           <th class="col-4 cobo desc">
 
-                           <p class="desc">Belmard Bâtiment</p>
+                           <p><b>Belmard Bâtiment</b></p>
                            <p>30, rue Belgrand</p>
                            <p>75020 Paris</p>
                            <p>Tel : 01.40.33.88.33</p>
