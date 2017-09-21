@@ -320,6 +320,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                   
                   p  {
                    font-size: 9px;
+                    font-weight: 300;
                  }
  
                  .ts {
