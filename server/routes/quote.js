@@ -128,7 +128,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
       "height": "50px"
     },
     "footer": {
-      "height": "50px"
+      "height": "0px"
     },
     "border": "10px"
   };
@@ -464,7 +464,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                            <td class="col-6 alright ts">Sous-Total HT</td>
                            <td class="col-2 elem">sous-total ht tva 5.5</td>
                            <td class="col-2 elem">sous-total ht 10</td>
-                           <td class="col-2 elem"><b>ici mont total HT</b></td>
+                           <td class="col-2 elem"><b>` + item.priceQuote.priceQuoteWithoutTaxes + `</b></td>
                            </tr>
                            <tr class="cobo">
                            <td class="col-6 alright ts">Montant de TVA</td>
@@ -477,7 +477,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                            <td class="col-6 alright ts"><b>TOTAL TTC</b></td>
                            <td class="col-2 elem"><b>TOTAL TTC 5.5</b></td>
                            <td class="col-2 elem"><b>TOTAL TTC 10</b></td>
-                           <td class="col-2 elem"><b>ici montant total ttc</b></td>
+                           <td class="col-2 elem"><b>` + item.priceQuote.priceQuoteWithTaxes + `</b></td>
 
                          </tr>
             
@@ -527,7 +527,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                   <br>
                 
                   <a class="cgv">Ce devis est valable 3 mois. Les prix sont établis sur la base des taux en vigeur à la date de remise de l'offre et toute variation ultérieure de ces taux sera répercutée sur ces prix en application du Code Général des Impôts</a>
-                    <div id="pageFooter">Default Footer</div>`
+                    `
 
               pdf.create(html, options).toFile('./server/uploads/pdf/' + req.params.quoteId + '.pdf', function(err, resPDF) {
                 if (err) {
