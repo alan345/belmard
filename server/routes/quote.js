@@ -340,9 +340,9 @@ router.get('/pdf/:quoteId', function(req, res, next) {
               html += `<table class="test">
                        <thead>
                          <tr>
-                           <th class="col-4 cobo desc">
+                           <th class="col-4 cobo">
 
-                           <p>Belmard Bâtiment</p>
+                           <p class="desc">Belmard Bâtiment</p>
                            <p>30, rue Belgrand</p>
                            <p>75020 Paris</p>
                            <p>Tel : 01.40.33.88.33</p>
