@@ -7,22 +7,25 @@
 <app-navbar></app-navbar>
 
 <md-sidenav-container class="example-container">
-  <md-sidenav #sidenav mode="side" opened="true" class="example-sidenav">
+  <md-sidenav #sidenav mode="side" opened="true">
     <!-- <button md-mini-fab class="example-fab" (click)="sidenav.toggle()">
       <md-icon>Nav</md-icon>
-    </button> -->
-    <app-sidebar [sidenav]="sidenav"></app-sidebar>
+    </button>
+    test -->
+    <app-sidebar></app-sidebar>
   </md-sidenav>
 
 
-  <div class="example-sidenav-content">
+  <div class="example-scrolling-content">
 
     <!-- <button *ngIf="!sidenav.opened" type="button" (click)="sidenav.toggle()">
       Nav
     </button> -->
-    <i *ngIf="!sidenav.opened" (click)="sidenav.toggle()" class="fa fa-bars" aria-hidden="true"></i>
-
+    <div style="height:20px">
+      <i *ngIf="!sidenav.opened" (click)="openSideBar()" class="fa fa-bars" aria-hidden="true"></i>
+    </div>
     <router-outlet></router-outlet>
+
 
   </div>
 

@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, ViewChild} from '@angular/core';
 import {AuthService} from '../../auth/auth.service';
 import {AdminService} from '../../admin/services/admin.service';
 import {Router} from '@angular/router';
@@ -8,7 +8,7 @@ import { CompanieGuardService} from '../../companie/companieGuard.service'
 import { PaiementGuardService} from '../../user/paiement/paiementGuard.service'
 import { ChangeDetectionStrategy} from '@angular/core';
 import {GlobalEventsManager} from '../../globalEventsManager';
-
+import {MdSidenav} from '@angular/material';
 
 @Component({
   selector: 'app-sidebar',
@@ -17,7 +17,8 @@ import {GlobalEventsManager} from '../../globalEventsManager';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-  @Input() sidenav: any;
+  // @Input() sidenav: any;
+  // @ViewChild('sidenav') public sidenav: MdSidenav;
   showNavBar: boolean = false;
  // private userId: string = localStorage.getItem('userId');
   // private userId: string;
@@ -32,16 +33,23 @@ export class SidebarComponent implements OnInit {
     // private companieGuardService: CompanieGuardService,
     // private paiementGuardService: PaiementGuardService,
   ) {
-    this.globalEventsManager.showNavBarEmitter.subscribe((mode)=>{
-        // mode will be null the first time it is created, so you need to igonore it when null
-        if (mode !== null) {
-          this.showNavBar = mode;
-          this.fetchedUser = this.authService.getCurrentUser()
-        }
-    });
+    // this.globalEventsManager.showNavBarEmitter.subscribe((mode)=>{
+    //     // mode will be null the first time it is created, so you need to igonore it when null
+    //     if (mode !== null) {
+    //
+    //       if(mode) {
+    //         this.sidenav.open()
+    //       } else {
+    //         this.sidenav.close()
+    //       }
+    //       // this.showNavBar = mode;
+    //       this.fetchedUser = this.authService.getCurrentUser()
+    //     }
+    // });
   }
-  ngAfterViewInit() {
-
+  ngAfterViewInit() {}
+  closeSideBar() {
+    this.globalEventsManager.showNavBar(false);
   }
   ngOnInit() {
     if (this.authService.isLoggedIn()) {

@@ -12,13 +12,11 @@
       <input class="form-control margebasse col-md-12" type="text" name="Search" placeholder="Rechercher" [(ngModel)]="search.search" (ngModelChange)="searchProjects()">
     </div>
   </div>
-
   <div class="row">
     <div class="col-md-12">
       <table class="table table-hover">
         <thead>
           <tr>
-
             <th class="centre tdunder">Type</th>
             <th class="centre tdunder">Client
             </th>
@@ -26,7 +24,6 @@
               <!-- <i (click)="orderBy('details.name')" *ngIf="search.orderBy  !== 'details.name' && search.orderBy  !== '-details.name'" class="fa fa-arrow-down grey"></i>
               <i (click)="orderBy('-details.name')" *ngIf="search.orderBy  === 'details.name'" class="fa fa-arrow-down"></i>
               <i (click)="orderBy('details.name')" *ngIf="search.orderBy  === '-details.name'" class="fa fa-arrow-up"></i> -->
-
               <app-sort (orderBy)="orderBy($event)" [search]="search" [filedToOrder]="'details.name'"></app-sort>
             </th>
             <th class="centre tdunder">Date
@@ -54,7 +51,6 @@
               {{project.createdAt| date:'dd-MM-yyyy' }}
             </td>
             <td class="centre tdunder">{{project.details.date}}</td>
-
             <td class="centre tdunder">{{project.status}}</td>
           </tr>
         </tbody>

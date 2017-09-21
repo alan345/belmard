@@ -1,4 +1,4 @@
-import {Component, ViewContainerRef} from '@angular/core';
+import {Component, ViewContainerRef, ViewChild} from '@angular/core';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import {
     Router,
@@ -10,6 +10,10 @@ import {
     NavigationError
 } from '@angular/router'
 import {AuthService} from './auth/auth.service';
+import {GlobalEventsManager} from './globalEventsManager';
+import {MdSidenav} from '@angular/material';
+
+//
 
 @Component({
   selector: 'app-root',
@@ -18,20 +22,40 @@ import {AuthService} from './auth/auth.service';
 })
 export class AppComponent {
 loading: boolean = true;
+@ViewChild('sidenav') public sidenav: MdSidenav;
+
 
   constructor(
+    private globalEventsManager: GlobalEventsManager,
     private router: Router,
     private authService: AuthService,
     public toastr: ToastsManager,
     public vcr: ViewContainerRef
   ) {
+    this.globalEventsManager.showNavBarEmitter.subscribe((mode)=>{
+        // mode will be null the first time it is created, so you need to igonore it when null
+        if (mode !== null) {
+
+          if(mode) {
+            this.sidenav.open()
+          } else {
+            this.sidenav.close()
+          }
+          // this.showNavBar = mode;
+          // this.fetchedUser = this.authService.getCurrentUser()
+        }
+    });
+
     this.toastr.setRootViewContainerRef(vcr);
     router.events.subscribe((event: RouterEvent) => {
           this.navigationInterceptor(event);
       });
+
   }
 
-
+  openSideBar() {
+    this.globalEventsManager.showNavBar(true);
+  }
 
 
       // Shows and hides the loading spinner during RouterEvent changes

@@ -2,3 +2,6 @@
   box-shadow: none !important;
   bottom: initial !important;
 }*/
+.example-scrolling-content {
+  overflow: auto;
+}
