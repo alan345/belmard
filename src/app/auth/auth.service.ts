@@ -313,6 +313,7 @@ export class AuthService {
 
   // check if the user is logged in or not, if token is expired, token is deleted from localstorage
   isLoggedIn() {
+    // console.log(tokenNotExpired())
     if (!tokenNotExpired()) {
       localStorage.clear();
     }

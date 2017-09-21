@@ -13,6 +13,8 @@ import {AuthService} from './auth/auth.service';
 import {GlobalEventsManager} from './globalEventsManager';
 import {MdSidenav} from '@angular/material';
 
+import {tokenNotExpired} from 'angular2-jwt';
+
 //
 
 @Component({
@@ -57,6 +59,13 @@ loading: boolean = true;
     this.globalEventsManager.showNavBar(true);
   }
 
+  isLoggedIn() {
+    // console.log(tokenNotExpired())
+    if (!tokenNotExpired()) {
+      localStorage.clear();
+    }
+    return tokenNotExpired();
+  }
 
       // Shows and hides the loading spinner during RouterEvent changes
       navigationInterceptor(event: RouterEvent): void {

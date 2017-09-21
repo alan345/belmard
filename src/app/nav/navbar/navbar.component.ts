@@ -46,7 +46,7 @@ export class NavbarComponent implements OnInit {
     // private companieGuardService: CompanieGuardService,
     // private paiementGuardService: PaiementGuardService,
   ) {
-    this.globalEventsManager.showNavBarEmitter.subscribe((mode) => {
+    this.globalEventsManager.showTopNavBarEmitter.subscribe((mode) => {
       // mode will be null the first time it is created, so you need to igonore it when null
       if (mode !== null) {
         this.showNavBar = mode;
@@ -65,8 +65,13 @@ export class NavbarComponent implements OnInit {
       Observable.interval(1000 * 30).subscribe(x => {
         this.getNotifications(1, {})
       });
+      let this2=this
+      setTimeout(function () {
+          this2.globalEventsManager.showNavBar(true);
+      }, 20);
 
-      this.globalEventsManager.showNavBar(true);
+
+      this.globalEventsManager.showTopNavBar(true);
       this.showNavBar = true;
       this.fetchedUser = this.authService.getCurrentUser()
     }
@@ -198,6 +203,7 @@ export class NavbarComponent implements OnInit {
   // It's called by the (click)='logout()' when the user presses the button
   logout() {
     this.globalEventsManager.showNavBar(false);
+    this.globalEventsManager.showTopNavBar(false);
     this.authService.logout();
     let this2 = this
     setTimeout(function() {
