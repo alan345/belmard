@@ -55,8 +55,17 @@ export class Signature {
 export class PriceQuote {
   priceQuoteWithoutTaxes: number = 0;
   priceQuoteWithTaxes: number = 0;
-  paiementQuote: number = 0;
+  // paiementQuote: number = 0;
+  priceQuoteTaxes: PriceQuoteTaxe[] = []
 }
+
+export class PriceQuoteTaxe {
+  VAT: number = 0;
+  TotalVAT: number = 0;
+}
+
+
+
 
 
 export class BucketProduct {

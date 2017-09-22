@@ -53,7 +53,7 @@ export class Profile {
 
 export class DetailHouse {
   typeHouse: string = '';
-  surface: number = 0;
+  surface: number;
   accesCode: string = '';
   floor: string = '';
   accessType: string = '';

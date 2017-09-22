@@ -242,7 +242,7 @@
                   </div>
 
                   <div class="col-md-1 ac">
-                    <input class="gooplusInput ac" type="text" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].vat" placeholder="vat">
+                    <input class="gooplusInput ac" type="number" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].vat" placeholder="vat">
                   </div>
                   <div class="col-1">
                     <a class="form-control"> {{fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithoutTaxes | round}} </a>
@@ -256,12 +256,25 @@
           </div>
 
 
+          <div *ngFor="let priceQuoteTaxe of fetchedQuote.priceQuote.priceQuoteTaxes">
+            <div class="row ac font-weight-bold">
+              <div class="col-6">
+              </div>
+              <div class="col-2 form-control">
+                TVA: {{priceQuoteTaxe.VAT}}%
+              </div>
+              <div class="col-2 form-control">
+                {{priceQuoteTaxe.TotalVAT | round}} €
+              </div>
+            </div>
+          </div>
+
           <div class="row ac font-weight-bold">
             <div class="col-3">
               <!-- <select class="form-control" #t (change)="addRow(t.value); t.value = ''">
-            <option [attr.value]="''">{{'Add row' | translate}}</option>
-            <option *ngFor="let n of rowTypes" [attr.value]="n.value">{{n.label}}</option>
-          </select> -->
+                      <option [attr.value]="''">{{'Add row' | translate}}</option>
+                      <option *ngFor="let n of rowTypes" [attr.value]="n.value">{{n.label}}</option>
+                    </select> -->
               <button type="button" class="btn btn-primary btn-sm" (click)="addRow('category')">+ category</button>
               <button type="button" class="btn btn-primary btn-sm" (click)="addRow('text')">+ text</button>
               <button type="button" class="btn btn-primary btn-sm" (click)="addRow('product')">+ product</button>

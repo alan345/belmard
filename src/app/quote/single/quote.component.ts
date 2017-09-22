@@ -7,7 +7,7 @@ import { DragulaService } from 'ng2-dragula';
 import {ProductService} from '../../product/product.service';
 import { ProjectService} from '../../project/project.service';
 
-import {Quote, DevisDetail, BucketProduct, StatusQuotes, Signature } from '../quote.model';
+import {Quote, DevisDetail, BucketProduct, StatusQuotes, Signature, PriceQuoteTaxe } from '../quote.model';
 import {TemplateQuote } from '../templateQuote.model';
 
 import {ToastsManager} from 'ng2-toastr';
@@ -72,6 +72,7 @@ export class QuoteComponent implements OnInit {
   arrayContentToSearch = []
   // ckeditorContent=''
   ckeConfig: any;
+  VATs: number[] = [20, 19.6]
   // rowTypes = [
   //   { label: 'Category', value: 'category' },
   //   { label: 'Product', value: 'product' },
@@ -547,7 +548,7 @@ export class QuoteComponent implements OnInit {
     // let bucketProduct: BucketProduct = new BucketProduct()
 
     this.fetchedQuote.devisDetails[i].bucketProducts[j].productInit = [product],
-      this.fetchedQuote.devisDetails[i].bucketProducts[j].vat = 20,
+      this.fetchedQuote.devisDetails[i].bucketProducts[j].vat = product.details.price.vat,
       this.fetchedQuote.devisDetails[i].bucketProducts[j].priceWithoutTaxes = product.details.price.sellingPrice,
       this.fetchedQuote.devisDetails[i].bucketProducts[j].priceWithTaxes = 0,
       this.fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithTaxes = 0,
@@ -565,6 +566,14 @@ export class QuoteComponent implements OnInit {
     setTimeout(function() {
       this2.fetchedQuote.priceQuote.priceQuoteWithTaxes = 0
       this2.fetchedQuote.priceQuote.priceQuoteWithoutTaxes = 0
+
+      this2.fetchedQuote.priceQuote.priceQuoteTaxes = []
+      this2.VATs.forEach(VAT => {
+        let newPriceQuoteTaxe = new PriceQuoteTaxe()
+        newPriceQuoteTaxe.VAT = VAT
+        this2.fetchedQuote.priceQuote.priceQuoteTaxes.push(newPriceQuoteTaxe)
+      })
+
       this2.fetchedQuote.devisDetails.forEach((devisDetails, i) => {
         this2.fetchedQuote.devisDetails[i].bucketProducts.forEach((product, j) => {
           this2.fetchedQuote.devisDetails[i].bucketProducts[j].priceWithTaxes = product.priceWithoutTaxes * 1 + (product.priceWithoutTaxes * product.vat / 100)
@@ -573,6 +582,15 @@ export class QuoteComponent implements OnInit {
 
           this2.fetchedQuote.priceQuote.priceQuoteWithTaxes = this2.fetchedQuote.priceQuote.priceQuoteWithTaxes * 1 + this2.fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithTaxes * 1
           this2.fetchedQuote.priceQuote.priceQuoteWithoutTaxes = this2.fetchedQuote.priceQuote.priceQuoteWithoutTaxes * 1 + this2.fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithoutTaxes * 1
+
+
+          this2.fetchedQuote.priceQuote.priceQuoteTaxes.forEach((priceQuoteTaxe, i) => {
+            if(priceQuoteTaxe.VAT === product.vat) {
+              this2.fetchedQuote.priceQuote.priceQuoteTaxes[i].TotalVAT += (product.priceWithoutTaxes * product.vat / 100) * product.quantity
+            }
+          })
+
+
         })
       })
 

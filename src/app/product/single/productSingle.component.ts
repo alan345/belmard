@@ -84,7 +84,7 @@ export class ProductSingleComponent implements OnInit {
 
         costPrice: [''],
         sellingPrice: [''],
-        vat: [''],
+        vat: [],
 
         height: [''],
         width: [''],
