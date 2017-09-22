@@ -125,7 +125,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
   var options = {
     format: 'Letter',
     "header": {
-      "height": "50px"
+      "height": "60px"
     },
     "footer": {
       "height": "0px"
