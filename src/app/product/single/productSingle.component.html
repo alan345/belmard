@@ -87,6 +87,10 @@
           <input type="number" class="form-control col-md-6" formControlName="sellingPrice" placeholder="sellingPrice" [(ngModel)]="fetchedProduct.details.price.sellingPrice">
         </div>
         <div>
+          <label>{{'VAT (%)' | translate}}</label>
+          <input type="number" class="form-control col-md-6" formControlName="vat" placeholder="vat" [(ngModel)]="fetchedProduct.details.price.vat">
+        </div>
+        <div>
           <label>{{'Unit' | translate}}</label>
           <input type="text" class="form-control col-md-6" formControlName="unit" placeholder="Unit" [(ngModel)]="fetchedProduct.details.unit">
         </div>

@@ -14,6 +14,7 @@ var product = new Schema({
       price: {
         costPrice: {type: Number},
         sellingPrice: {type: Number},
+        vat: {type: Number},
       },
       description: {type: String},
       dimension: {

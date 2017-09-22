@@ -39,6 +39,7 @@ export class Categ {
 export class Price {
   costPrice: number = 0;
   sellingPrice: number = 0;
+  vat: number = 0;
 }
 export class Dimension {
   height: number = 0;
