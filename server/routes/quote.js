@@ -378,7 +378,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                             html += '<br>'
                             html += user.profile.phoneNumber
                             html += '<br>'
-                            html += 'Mail : client@mail.com'
+                            html += 'Mail : client.avec.un.mail.super.long.qui.depasse@mail.com'
                             
                             
                           })
