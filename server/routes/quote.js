@@ -449,8 +449,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                      </table>
                      <br>`
 
-              html += 'Total ' + item.priceQuote.priceQuoteWithoutTaxes + ' '
-              html += 'priceQuoteWithTaxes ' + item.priceQuote.priceQuoteWithTaxes + '€ TTC'
+
               
               html += `<table class="cobo">
                          <tr class="cobo">
