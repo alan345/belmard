@@ -19,7 +19,6 @@ import { DeleteDialog } from '../../deleteDialog/deleteDialog.component'
 import { Search } from '../../shared/shared.model';
 
 
-
 @Component({
   selector: 'app-newUser',
   templateUrl: './newUser.component.html',
@@ -48,10 +47,11 @@ export class NewUserComponent implements OnInit {
   typeUserDropDown = ''
   typeUser = TypeUser
 
+
   fetchedUser: User = new User();
   currentUser: User = new User();
   showProjects: boolean = false;
-
+  places = []
 
   public myForm: FormGroup;
 
@@ -68,8 +68,25 @@ export class NewUserComponent implements OnInit {
   ) {
   }
 
-
+    selectCity(i, city: string){
+      this.fetchedUser.profile.address[i].city = city
+      this.places = []
+    }
+    searchCities(zip) {
+      if(zip.length > 4)
+        this.userService.getCityByZip(zip)
+          .subscribe(
+            res => {
+              this.places = res.places
+              // console.log(this.places)
+            },
+            error => {
+              console.log(error);
+            }
+          )
+    }
     ngOnInit() {
+
       this.currentUser = this.authService.getCurrentUser()
       this.myForm = this._fb.group({
           email: [this.emailValidator],
