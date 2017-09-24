@@ -67,6 +67,7 @@ export class Address {
     address: string = '';
     address2: string = '';
     city: string = '';
+    cities: string[] = [];
     state : string = '';
     zip : string = '';
     country : string = '';

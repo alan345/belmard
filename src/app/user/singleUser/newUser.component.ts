@@ -70,14 +70,15 @@ export class NewUserComponent implements OnInit {
 
     selectCity(i, city: string){
       this.fetchedUser.profile.address[i].city = city
-      this.places = []
+      this.fetchedUser.profile.address[i].cities = []
+      // this.places = []
     }
-    searchCities(zip) {
+    searchCities(zip, i) {
       if(zip.length > 4)
         this.userService.getCityByZip(zip)
           .subscribe(
             res => {
-              this.places = res.places
+              this.fetchedUser.profile.address[i].cities = res.places
               // console.log(this.places)
             },
             error => {
