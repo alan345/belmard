@@ -326,10 +326,8 @@ export class AuthService {
       localStorage.clear();
     } else {
       this.globalEventsManager.isLoggedIn(true);
-      this.globalEventsManager.showNavBar(true);
+      // this.globalEventsManager.showNavBar(true);
       this.globalEventsManager.showTopNavBar(true);
-
-
     }
     return tokenNotExpired();
   }
