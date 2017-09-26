@@ -33,7 +33,11 @@
               </div>
             </td>
             <td class="centre tdunder">{{companie.nameCompanie}}</td>
-            <td class="centre tdunder">{{companie.address.city}}</td>
+            <td class="centre tdunder">
+              <div *ngFor="let singleAddress of companie.address">
+                {{singleAddress.city}}
+              </div>
+            </td>
             <td class="centre tdunder">{{companie.phoneNumber}}</td>
             <td class="centre tdunder">{{companie.createdAt | date:'dd-MM-yyyy' }}</td>
           </tr>

@@ -22,20 +22,13 @@
             <th class="centre tdunder">Type</th>
             <th class="centre tdunder">Titre
               <app-sort (orderBy)="orderBy($event)" [search]="search" [filedToOrder]="'profile.title'"></app-sort>
-              <!-- <i (click)="orderBy('profile.title')" *ngIf="search.orderBy  !== 'profile.title' && search.orderBy  !== '-profile.title'" class="fa fa-arrow-down grey"></i>
-              <i (click)="orderBy('-profile.title')" *ngIf="search.orderBy  === 'profile.title'" class="fa fa-arrow-down"></i>
-              <i (click)="orderBy('profile.title')" *ngIf="search.orderBy  === '-profile.title'" class="fa fa-arrow-up"></i> -->
             </th>
             <th class="centre tdunder">
               Nom
               <app-sort (orderBy)="orderBy($event)" [search]="search" [filedToOrder]="'profile.lastName'"></app-sort>
-              <!-- <i (click)="orderBy('profile.lastName')" *ngIf="search.orderBy  !== 'profile.lastName' && search.orderBy  !== '-profile.lastName'" class="fa fa-arrow-down grey"></i>
-              <i (click)="orderBy('-profile.lastName')" *ngIf="search.orderBy  === 'profile.lastName'" class="fa fa-arrow-down"></i>
-              <i (click)="orderBy('profile.lastName')" *ngIf="search.orderBy  === '-profile.lastName'" class="fa fa-arrow-up"></i> -->
             </th>
             <th class="centre tdunder">
               Société
-
             </th>
             <th class="centre tdunder">Ville
 
@@ -45,18 +38,16 @@
             </th>
             <th class="centre tdunder">Date
               <app-sort (orderBy)="orderBy($event)" [search]="search" [filedToOrder]="'createdAt'"></app-sort>
-              <!-- <i (click)="orderBy('createdAt')" *ngIf="search.orderBy  !== 'createdAt' && search.orderBy  !== '-createdAt'" class="fa fa-arrow-down grey"></i>
-              <i (click)="orderBy('-createdAt')" *ngIf="search.orderBy  === 'createdAt'" class="fa fa-arrow-down"></i>
-              <i (click)="orderBy('createdAt')" *ngIf="search.orderBy  === '-createdAt'" class="fa fa-arrow-up"></i> -->
             </th>
           </tr>
         </thead>
         <tbody class="clienttbl">
           <tr *ngFor="let user of fetchedUsers" [routerLink]="['/user/' + user._id]" routerLinkActive="active">
             <td class="centre tdunder">
-              <div *ngFor="let singleType of user.typeUsers">
+              {{user.profile.typeClient}}
+              <!-- <div *ngFor="let singleType of user.typeUsers">
                 {{singleType}} {{user.profile.typeClient}}
-              </div>
+              </div> -->
             </td>
             <td class="centre tdunder">{{user.profile.title}}</td>
             <td class="centre tdunder">{{user.profile.lastName}} {{user.profile.name}}</td>

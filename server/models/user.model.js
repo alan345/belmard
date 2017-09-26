@@ -34,6 +34,7 @@ var user = new Schema({
       profilePicture : [{type: Schema.Types.ObjectId, ref: 'Form'}],
       language: {type: String, default: ['en']},
       name: {type: String, default: ['']},
+      companyName: {type: String, default: ['']},
       fax:{type: String, default: ['']},
       title: {type: String, default: ['']},
       lastName: {type: String, default: ['']},

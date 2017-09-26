@@ -36,6 +36,8 @@ export class Profile {
   lastName: string = '';
   phoneNumber: string = '';
   otherData: string = '';
+  companyName: string = '';
+
   parentUser: User[] = [];
   profilePicture: Form[] = [];
   colorCalendar: string = '';
