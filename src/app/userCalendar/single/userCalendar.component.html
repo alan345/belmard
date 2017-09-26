@@ -43,9 +43,8 @@
           </app-autocomplete>
         </div>
         <div class="col-md-12">
-          <app-autocomplete [typeAutocomplete]="'user'" [title]="'Réparateur'" [singleChoice]="'true'" [arrayContent]="fetchedUserCalendar.assignedTos" (getResultAutocomplete)="selectUser($event[0])" (clearAutocomplete)="removeUser()">
+          <app-autocomplete [typeAutocomplete]="'user'" [search]="{isExternalUser:false}" [title]="'Réparateur'" [singleChoice]="'true'" [arrayContent]="fetchedUserCalendar.assignedTos" (getResultAutocomplete)="selectUser($event[0])" (clearAutocomplete)="removeUser()">
           </app-autocomplete>
-
         </div>
         <!-- <div class="col-md-12">
           <textarea class="form-control" formControlName="description" [(ngModel)]="fetchedUserCalendar.details.description" required placeholder="Description">

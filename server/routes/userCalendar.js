@@ -186,7 +186,7 @@ router.get('/page/:page', function(req, res, next) {
         if (req.query.typeUser) {
           var itemFiltered = []
           item.forEach(event => {
-            event.users.forEach(user => {
+            event.assignedTos.forEach(user => {
               if (user.typeUsers.length) {
                 if (user.typeUsers[0] === req.query.typeUser) {
                   itemFiltered.push(event)

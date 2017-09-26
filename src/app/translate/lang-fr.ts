@@ -18,7 +18,7 @@ export const LANG_FR_TRANS = {
     'Expense': 'Dépense',
     'Reporting': 'Statistiques',
     'Settings': 'Paramètres',
-  
+
 
     'Add a product': 'Ajouter un produit',
     'Create a new': 'Créer un nouveau',
@@ -29,7 +29,7 @@ export const LANG_FR_TRANS = {
     'Name': 'Nom',
     'Price without taxes': 'Prix HT',
     'Product Name': 'Nom du Produit',
-    'companie': 'Entreprise', 
+    'companie': 'Entreprise',
     'Height': 'Hauteur',
     'Width': 'Largeur',
     'Depth': 'Profondeur',
@@ -37,6 +37,7 @@ export const LANG_FR_TRANS = {
     'Selling Price': 'Prix de vente',
     'Save': 'Sauvegarder',
     'Delete': 'Supprimer',
+    'Project': 'Projet',
 
     'Users': 'Contacts',
     'User': 'Contact',
@@ -71,7 +72,7 @@ export const LANG_FR_TRANS = {
     'Surface': 'Surface',
     'Phone': 'Téléphone',
     'Add Picture': 'Ajouter image',
-  
+
 
     'Quotes': 'Devis',
     'quote': 'devis',
@@ -119,7 +120,7 @@ export const LANG_FR_TRANS = {
     'Pending Approval': 'Attente de signature',
     'right': 'droit',
     'Rights': 'Droits',
-  
+
     'Search': 'Recherche',
 
 };
