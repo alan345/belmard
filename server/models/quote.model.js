@@ -45,7 +45,6 @@ var quote = new Schema({
             quantity: {type: Number},
             discount: {type: Number},
             productInit: [{type: Schema.Types.ObjectId, ref: 'User'}],
-
           }
         ]
       }

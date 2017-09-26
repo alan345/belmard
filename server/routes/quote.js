@@ -343,11 +343,11 @@ router.get('/pdf/:quoteId', function(req, res, next) {
 
                  </style>
                  `
-              html += `<div id="pageHeader" class="col-12"> <img class="imglogo" src="http://belmard-renovation.fr/wp-content/uploads/2016/05/BELMARD.png">
-
-                  </div>`
-
-              html += `<table class="test">
+              html += `
+              <div id="pageHeader" class="col-12">
+                <img class="imglogo" src="http://belmard-renovation.fr/wp-content/uploads/2016/05/BELMARD.png">
+              </div>
+              <table class="test">
                        <thead>
                          <tr>
                            <th class="col-4 cobo desc">
@@ -408,7 +408,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                        <tbody>`
 
               item.devisDetails.forEach(devisDetail => {
-                html += '<tr class="ts">'
+              html += '<tr class="ts">'
                 html += '<td class="desc">' + devisDetail.nameBucketProducts + '</td>'
                 html += `
                          <td class="desc"></td>
@@ -416,25 +416,35 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                          <td class="desc"></td>
                          <td class="desc"></td>
                          <td class="desc"></td>
-                         <td class="desc"></td>
-
-                   `
-                html += '</tr>'
+                         <td class="desc"></td>`
+              html += '</tr>'
                 devisDetail.bucketProducts.forEach(bucketProduct => {
                   html += '<tr>'
+                    let description = ''
+                    let img = ''
+                    let unit = ''
+                    if(bucketProduct.typeRow === 'text') {
+                      description = bucketProduct.title
+                    }
+                    if(bucketProduct.typeRow === 'product') {
+                      bucketProduct.productInit.forEach(product => {
+                        description = product.details.referenceName
+                        unit = product.details.unit
+                        product.forms.forEach(form => {
+                          img = '<img class="img" src="' + 'http://localhost/uploads/forms/' + form.owner + '/' + form.imagePath + '">'
+                        })
+                      })
+                    }
+                    html += '<td class="desc">' + description + '</td>'
+                    html += '<td class="elem">' + img + '</td>'
+                    // html += '<td class="desc">' + bucketProduct.typeRow + '</td>'
+                    // html += '<td class="elem">' + bucketProduct.title + '</td>'
+                    html += '<td class="elem">' + unit + '</td>'
+                    html += '<td class="elem">' + bucketProduct.quantity + '</td>'
+                    html += '<td class="elem">' + bucketProduct.priceWithoutTaxes + '</td>'
+                    html += '<td class="elem">' + bucketProduct.totalPriceWithoutTaxes + '</td>'
 
-                  bucketProduct.productInit.forEach(product => {
-                    html += '<td class="desc">' + product.details.referenceName + '</td>'
-                    product.forms.forEach(form => {
-                      let img = 'http://localhost/uploads/forms/' + form.owner + '/' + form.imagePath
-                      html += '<td class="elem">' + '<img class="img" src="' + img + '">' + '</td>'
-                    })
-                  })
-                  html += '<td class="desc">' + bucketProduct.typeRow + '</td>'
-                  html += '<td class="elem">' + bucketProduct.title + '</td>'
-                  html += '<td class="elem">' + bucketProduct.discount + '</td>'
-                  html += '<td class="elem">' + bucketProduct.priceWithoutTaxes + '</td>'
-                  html += '<td class="elem">' + bucketProduct.vat + '</td>'
+                    html += '<td class="elem">' + bucketProduct.vat + '%</td>'
                   html += '</tr>'
 
                 })
@@ -443,9 +453,8 @@ router.get('/pdf/:quoteId', function(req, res, next) {
               html += `
                        </tbody>
                      </table>
-                     <br>`
-
-              html += `<table class="cobo">
+                     <br>
+                     <table class="cobo">
                          <tr class="cobo">
 
                            <td class="col-6 alright"></td>
@@ -458,12 +467,36 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                            <td class="col-2 elem">sous-total ht tva 5.5</td>
                            <td class="col-2 elem">sous-total ht 10</td>
                            <td class="col-2 elem"><b>` + item.priceQuote.priceQuoteWithoutTaxes + `</b></td>
-                           </tr>
-                           <tr class="cobo">
-                           <td class="col-6 alright ts">Montant de TVA</td>
-                           <td class="col-2 elem">Montant de TVA 5.5</td>
-                           <td class="col-2 elem">Montant de TVA 10</td>
-                           <td class="col-2 elem"><b>Montant de TVA</b></td>
+                           </tr>`
+
+
+
+
+
+                                                      item.priceQuote.priceQuoteTaxes.forEach(priceQuoteTaxe => {
+
+                                                        html += `
+                                                        <tr>
+                                                            <td>
+                                                            </td>
+                                                            <td class="col-2 form-control">
+                                                              TVA: ` + priceQuoteTaxe.VAT + `%
+                                                            </td>
+                                                            <td class="col-2 form-control">
+                                                              ` + priceQuoteTaxe.TotalVAT + `€
+                                                            </td>
+                                                        </tr>`
+                                                     })
+
+
+
+
+
+                           html += `<tr class="cobo">
+                             <td class="col-6 alright ts">Montant de TVA</td>
+                             <td class="col-2 elem">Montant de TVA 5.5</td>
+                             <td class="col-2 elem">Montant de TVA 10</td>
+                             <td class="col-2 elem"><b>Montant de TVA</b></td>
                            </tr>
 
                            <tr class="cobo">
