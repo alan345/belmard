@@ -45,7 +45,7 @@
 
       <div class="form-group">
       <!-- <app-autocomplete class="col-md-4" [typeAutocomplete]="'user'" [search]="{isExternalUser:false, userId:search.userId}" [title]="'Client'" [canDelete]=false [singleChoice]="'true'" [arrayContent]="fetchedProject.clients" (getResultAutocomplete)="selectUser($event[0])"> -->
-      <app-autocomplete class="form-control col-md-4" [typeAutocomplete]="'user'" [search]="{isExternalUser:true}" [title]="'Client'" [canDelete]=false [singleChoice]="'true'" [arrayContent]="fetchedProject.clients" (getResultAutocomplete)="selectUser($event[0])">
+      <app-autocomplete class="form-control col-md-4 bn" [typeAutocomplete]="'user'" [search]="{isExternalUser:true}" [title]="'Client'" [canDelete]=false [singleChoice]="'true'" [arrayContent]="fetchedProject.clients" (getResultAutocomplete)="selectUser($event[0])">
       </app-autocomplete>
       </div>
       <br>
