@@ -25,18 +25,18 @@
           <div class="form-group">
             <input type="text" class="form-control" formControlName="phoneNumber" [(ngModel)]="fetchedUser.profile.phoneNumber" placeholder="{{'Phone Number' | translate}}">
           </div>
-          <div class="form-group">
+          <div *ngIf="fetchedUser.isExternalUser" class="form-group">
             <select [(ngModel)]="fetchedUser.profile.typeClient" class="form-control" formControlName="typeClient">
             <option *ngFor="let n of typeClientArray" [attr.value]="n">{{n}}</option>
             </select>
           </div>
-          <div class="form-group">
+          <div *ngIf="fetchedUser.isExternalUser" class="form-group">
               <input type="text" class="form-control" formControlName="accessType" [(ngModel)]="fetchedUser.profile.detailHouse.accessType" placeholder="{{'Company name' | translate}}">
             </div>
-          <div class="form-group">
+          <div *ngIf="fetchedUser.isExternalUser" class="form-group">
               <input type="text" class="form-control" formControlName="accessType" [(ngModel)]="fetchedUser.profile.detailHouse.accessType" placeholder="{{'Administration name' | translate}}">
             </div>
-          <div class="form-group">
+          <div c*ngIf="fetchedUser.isExternalUser" lass="form-group">
             <select [(ngModel)]="fetchedUser.profile.statusHouse" class="form-control" formControlName="statusHouse">
             <option *ngFor="let n of statusHouseArray" [attr.value]="n">{{n}}</option>
             </select>
