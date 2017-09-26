@@ -129,10 +129,10 @@
       <h4>type Users</h4>
       <div class="btn btn-warning btn-sm" (click)="seeTypeUser=!seeTypeUser">See Categs Project</div>
       <div *ngIf="seeTypeUser">
-        <button type="button" (click)="addTypeUser()">addTypeUser</button>
+        <button type="button" class="valid" (click)="addTypeUser()">addTypeUser</button>
         <div *ngFor="let typeUser of fetchedCompanie.typeUsers; let i=index;">
           <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.typeUsers[i].value">
-          <button type="button" (click)="removeTypeUser(i)">X</button>
+          <button type="button" class="false btn-xs"(click)="removeTypeUser(i)">x</button>
         </div>
       </div>
 
