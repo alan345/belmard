@@ -3,9 +3,7 @@
     <h3><i class="fa fa-user" aria-hidden="true"></i>{{'Product' | translate}}</h3>
   </div>
   <div class="row">
-    <div class="col-2">
-    </div>
-    <div class="col-8">
+     <div class="col-12">
       <div class="row">
         <button (click)="changeCascade(i, -1, -1)" *ngFor="let itemStep of itemSteps;let i=index;" type="button" class="btn" [ngClass]="{'btn-success': i==selectedIndex0, '': i!=selectedIndex0}">
         {{itemStep.categ}}
@@ -25,8 +23,6 @@
       </div>
     </div>
 
-    <div class="col-2">
-    </div>
   </div>
   <form [formGroup]="myForm" novalidate (ngSubmit)="save()" (keydown.enter)="$event.preventDefault()">
     <div class="row">
