@@ -33,12 +33,12 @@
 
       <div class="form-group">
 
-        <div class="form-group">
+        <div class="form-group col-md-4">
           <label>{{'Name' | translate}}</label>
           <input class="form-control col-md-4" type="text" formControlName="name" [(ngModel)]="fetchedProject.details.name" placeholder="{{'Ref' | translate}}">
         </div>
       </div>
-      <div class="form-group">
+      <div class="form-group col-md-4">
         <label>{{'Description' | translate}}</label>
         <input class="form-control col-md-4" type="text" formControlName="description" placeholder="{{'Description' | translate}}" [(ngModel)]="fetchedProject.details.description">
       </div>
@@ -64,14 +64,14 @@
 
 
 
-      <div class="form-group">
+      <div class="form-groupcol-md-4">
         {{'Status' | translate}}
         <select class="form-control col-md-3" formControlName="status" [(ngModel)]="fetchedProject.status">
           <option *ngFor="let n of status" [ngValue]="n.index">{{n.label}}</option>
         </select>
       </div>
 
-      <div class="form-group">
+      <div class="form-group col-md-4">
         <!-- <app-autocomplete [typeAutocomplete]="'user'" [title]="'Assigned To'" [singleChoice]=true [search]="{isExternalUser:false, userId:search.assignedToId}" [arrayContent]="fetchedProject.assignedTos" (getResultAutocomplete)="selectAssignedTo($event[0])"> -->
         <app-autocomplete class="col-md-4" [typeAutocomplete]="'user'" [title]="'Assigned To'" [singleChoice]=true [search]="{isExternalUser:false}" [arrayContent]="fetchedProject.assignedTos" (getResultAutocomplete)="selectAssignedTo($event[0])">
         </app-autocomplete>
