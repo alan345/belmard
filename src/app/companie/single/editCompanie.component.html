@@ -32,11 +32,13 @@
       </div>
       <div class="col">
         <h5>{{'Details' | translate}}</h5>
-        <button type="button" (click)="newAddress()">New Address</button>
+        <button type="button" class="btn btn-primary btn-sm" (click)="newAddress()">New Address</button>
 
         <div *ngFor="let singleAddresss of fetchedCompanie.address; let i = index;">
-          <h3>Address {{fetchedCompanie.address[i].nameAddress}}</h3><button type="button" (click)="removeAddress(i)">X</button>
-          <div class="form-group">
+          <div class="row">
+          <h6>Address {{fetchedCompanie.address[i].nameAddress}}</h6><button class="false btn-xs ml mb2br0"type="button" (click)="removeAddress(i)">X</button>
+          </div>
+            <div class="form-group">
             <!-- <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].nameAddress" placeholder="nameAddress"> -->
             <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].nameAddress">
               <option value="billing">Facturation</option>
