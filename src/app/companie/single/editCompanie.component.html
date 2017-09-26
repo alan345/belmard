@@ -34,29 +34,32 @@
 
         <div *ngFor="let singleAddresss of fetchedCompanie.address; let i = index;">
           <div class="row">
-          <h6>Address {{fetchedCompanie.address[i].nameAddress}}</h6><button class="false btn-xs ml mb2br0"type="button" (click)="removeAddress(i)">X</button>
+          <h6>{{'Contact person' | translate}}</h6><button class="false btn-xs ml mb2br0"type="button" (click)="removeAddress(i)">X</button>
           </div>
-            <div class="form-group">
-            <!-- <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].nameAddress" placeholder="nameAddress"> -->
+            <!-- <div class="form-group">
+            <!-- <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].nameAddress" placeholder="nameAddress"> 
             <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].nameAddress">
               <option value="billing">Facturation</option>
               <option value="shipping">shipping</option>
             </select>
+          </div> -->
+          <div class="form-group">
+            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].address" placeholder="{{'Contact type' | translate}}">
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].address" placeholder="Addresse">
+            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].address" placeholder="{{'Lastname' | translate}}">
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].city"  placeholder="Ville">
+            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].city"  placeholder="{{'Firstname' | translate}}">
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].zip"  placeholder="Code postal">
+            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].zip"  placeholder="{{'Phone number' | translate}}">
           </div>
           <!-- <div class="form-group">
           <input type="text" class="form-control" formControlName="state" [(ngModel)]="fetchedCompanie.address.state" required minlength="5" placeholder="State">
         </div> -->
           <div class="form-group">
-            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].country"  placeholder="Pays">
+            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].country"  placeholder="{{'Email' | translate}}">
           </div>
         </div>
    
