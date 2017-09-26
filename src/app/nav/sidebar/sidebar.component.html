@@ -4,7 +4,7 @@
 
 
 
-  <i (click)="closeSideBar()" class="fa fa10 fa-bars" aria-hidden="true"></i>
+  <i (click)="closeSideBar()" class="fa fal fa-bars" aria-hidden="true"></i>
   <div class="sideBar" id="accordion" role="tablist" aria-multiselectable="true">
     <div class="card noborder">
       <div class="" role="tab" id="headingZero">
@@ -186,7 +186,7 @@
     <div *ngIf="authService.showObjHTML('reporting', 'read')" class="card noborder">
       <div class="">
         <a [routerLink]="['/reporting']" data-toggle="collapse" routerLinkActive="active" class="nav-link" data-parent="#accordion">
-          <span class="fa fa-bar-chart" aria-hidden="true"></span> {{'Reporting'|translate}}
+          <span class="fa fa10 fa-bar-chart" aria-hidden="true"></span> {{'Reporting'|translate}}
         </a>
       </div>
     </div>
