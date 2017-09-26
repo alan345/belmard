@@ -31,6 +31,12 @@
             </select>
           </div>
           <div class="form-group">
+              <input type="text" class="form-control" formControlName="accessType" [(ngModel)]="fetchedUser.profile.detailHouse.accessType" placeholder="{{'Company name' | translate}}">
+            </div>
+          <div class="form-group">
+              <input type="text" class="form-control" formControlName="accessType" [(ngModel)]="fetchedUser.profile.detailHouse.accessType" placeholder="{{'Administration name' | translate}}">
+            </div>
+          <div class="form-group">
             <select [(ngModel)]="fetchedUser.profile.statusHouse" class="form-control" formControlName="statusHouse">
             <option *ngFor="let n of statusHouseArray" [attr.value]="n">{{n}}</option>
             </select>
@@ -55,10 +61,10 @@
         </div>
         <div class="col">
           <h5>{{'Address' | translate}}</h5>
-          <button type="button" (click)="newAddress()">New Address</button>
+          <button type="button" class="btn btn-primary btn-sm" (click)="newAddress()">New Address</button>
           <div *ngFor="let singleAddresss of fetchedUser.profile.address; let i = index;">
             <h3>Address {{fetchedUser.profile.address[i].nameAddress}}</h3>
-            <button type="button" (click)="removeAddress(i)">X</button>
+            <button type="button" class="false btn-sm" (click)="removeAddress(i)">X</button>
             <div class="form-group">
               <!-- <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].nameAddress" placeholder="nameAddress"> -->
               <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedUser.profile.address[i].nameAddress">
