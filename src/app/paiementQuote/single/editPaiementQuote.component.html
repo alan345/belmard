@@ -42,8 +42,8 @@
       <input type="date" class="form-control" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedPaiementQuote.datePaiementString">
 
       <div class="valid-edit">
-        <button type="submit" class="sln-edt done">{{'Save' | translate}}</button>
-        <button *ngIf="fetchedPaiementQuote._id" type="button" class="delete" md-button (click)="openDialogDelete()">
+        <button type="submit" class="valid">{{'Save' | translate}}</button>
+        <button *ngIf="fetchedPaiementQuote._id" type="false" class="delete" md-button (click)="openDialogDelete()">
             Delete
           </button>
       </div>
@@ -53,10 +53,10 @@
     <div *ngIf="fetchedPaiementQuote.type=='stripe' && fetchedPaiementQuote._id">
       <h4>{{'Stripe Paiement' | translate}}</h4>
       <div *ngIf="!stripeCust.id">
-        <button type="button" class="done" (click)="saveCustInStripe()">{{'Start paying in stripe'}}</button>
+        <button type="button" class="valid" (click)="saveCustInStripe()">{{'Start paying in stripe'}}</button>
       </div>
       <div *ngIf="stripeCust.id">
-        <button *ngIf="fetchedPaiementQuote.amount =='0'" type="button" class="done" (click)="deleteCustInStripe()">deleteCustInStripe</button>
+        <button *ngIf="fetchedPaiementQuote.amount =='0'" type="button" class="false" (click)="deleteCustInStripe()">deleteCustInStripe</button>
         <div class="form-control">
           {{stripeCust.id}}
         </div>
@@ -79,7 +79,7 @@
           <input type="text" [(ngModel)]="newCard.exp_month" placeholder="exp_month" class="form-control"> eg: 2018
           <input type="text" [(ngModel)]="newCard.exp_year" placeholder="exp_year" class="form-control"> eg: 4242424242424242
           <input type="text" [(ngModel)]="newCard.number" placeholder="number" class="form-control">
-          <button type="button" class="done" (click)="saveCardInStripe()">saveCardInStripe</button>
+          <button type="button" class="valid" (click)="saveCardInStripe()">saveCardInStripe</button>
         </div>
 
 
@@ -97,17 +97,17 @@
           <div class="form-control">{{card.exp_year}}</div>
           <div class="form-control">{{card.funding}}</div>
           <div class="form-control">{{card.last4}}</div>
-          <button *ngIf="fetchedPaiementQuote.amount =='0'" type="button" class="done" (click)="deleteCardInStripe(card.id)">delete Card</button>
+          <button *ngIf="fetchedPaiementQuote.amount =='0'" type="button" class="false" (click)="deleteCardInStripe(card.id)">delete Card</button>
         </div>
         <div *ngIf="fetchedPaiementQuote.amount =='0'">
           <div *ngIf="stripeCust.sources.data.length">
             <h4>{{'Paiement' | translate}}</h4>
             <input type="number" class="form-control" #amountStripe placeholder="Amount">
-            <button type="button" class="done" (click)="payInStripe(amountStripe.value)">Pay!</button>
+            <button type="button" class="valid" (click)="payInStripe(amountStripe.value)">Pay!</button>
           </div>
           <div *ngIf="!stripeCust.subscriptions.data.length">
-            <button type="button" class="done" (click)="saveSubscriptionInStripe('gold')">Plan Gold!</button>
-            <button type="button" class="done" (click)="saveSubscriptionInStripe('daily')">Plan daily!</button>
+            <button type="button" class="valid" (click)="saveSubscriptionInStripe('gold')">Plan Gold!</button>
+            <button type="button" class="valid" (click)="saveSubscriptionInStripe('daily')">Plan daily!</button>
           </div>
 
         </div>
@@ -130,7 +130,7 @@
             <div class="form-control">{{sub.plan.interval}}</div>
             <div class="form-control">{{sub.plan.interval_count}}</div>
             <div class="form-control">{{sub.plan.name}}</div>
-            <button type="button" class="done" (click)="deleteSubInStripe(sub.id)">deleteSubInStripe</button>
+            <button type="button" class="false" (click)="deleteSubInStripe(sub.id)">deleteSubInStripe</button>
 
           </div>
           <div *ngIf="showReLoginInApp">
