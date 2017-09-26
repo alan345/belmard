@@ -86,6 +86,10 @@ textarea::placeholder {
   margin-right: 10px;
 }
 
+.fal {
+  margin-left: 10px;
+}
+
 .card{
   margin: 0px!important;
   border-radius: 0px!important;
