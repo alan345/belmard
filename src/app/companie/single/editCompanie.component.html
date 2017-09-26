@@ -110,18 +110,19 @@
         </div>
         <app-picture [forms]="fetchedCompanie.forms" (getPicture)="getPicture($event)"></app-picture>
       </div>
-    </div>
-
-
-
-
-
-    <div *ngIf="isMyCompanie()" class="form-group sln-inffrm">
+          <div *ngIf="isMyCompanie()" class="form-group sln-inffrm">
       <h4>Options Calendar</h4> timeBegin: '06:00:00' (login => logout is required)
       <input type="text" class="form-control" formControlName="timeBegin" [(ngModel)]="fetchedCompanie.option.calendar.timeBegin" required minlength="1" placeholder="timeBegin"> timeEnd: '19:00:00' (login => logout is required)
       <input type="text" class="form-control" formControlName="timeEnd" [(ngModel)]="fetchedCompanie.option.calendar.timeEnd" required minlength="1" placeholder="timeEnd"> slotDuration: default: '00:30:00' (30 minutes) (login => logout is required)
       <input type="text" class="form-control" formControlName="slotDuration" [(ngModel)]="fetchedCompanie.option.calendar.slotDuration" placeholder="slotDuration">
     </div>
+    </div>
+
+
+
+
+
+
 
     <div *ngIf="isMyCompanie()">
       <h4>type Users</h4>
