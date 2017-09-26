@@ -7,7 +7,7 @@ import { DragulaService } from 'ng2-dragula';
 import {ProductService} from '../../product/product.service';
 import { ProjectService} from '../../project/project.service';
 
-import {Quote, DevisDetail, BucketProduct, StatusQuotes, Signature, PriceQuoteTaxe } from '../quote.model';
+import {Quote, DevisDetail, BucketProduct, StatusQuotes, Signature, PriceQuoteTaxe, ModelVATs } from '../quote.model';
 import {TemplateQuote } from '../templateQuote.model';
 
 import {ToastsManager} from 'ng2-toastr';
@@ -72,7 +72,8 @@ export class QuoteComponent implements OnInit {
   arrayContentToSearch = []
   // ckeditorContent=''
   ckeConfig: any;
-  VATs: number[] = [20, 19.6]
+
+  VATs = ModelVATs
   // rowTypes = [
   //   { label: 'Category', value: 'category' },
   //   { label: 'Product', value: 'product' },

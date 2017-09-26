@@ -14,6 +14,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { DeleteDialog } from '../../deleteDialog/deleteDialog.component'
 import { UserService } from '../../user/user.service'
 import { User } from '../../user/user.model'
+import { ModelVATs } from '../../quote/quote.model'
 import { AuthService} from '../../auth/auth.service';
 
 
@@ -38,6 +39,7 @@ export class ProductSingleComponent implements OnInit {
   // categ3: string = '';
   itemSteps = ItemSteps;
 
+  VATs = ModelVATs
 
   autocompleteCompanie: string = '';
 

@@ -18,6 +18,7 @@ export const LANG_FR_TRANS = {
     'Expense': 'Dépense',
     'Reporting': 'Statistiques',
     'Settings': 'Paramètres',
+    'Product': 'Produit',
 
 
     'Add a product': 'Ajouter un produit',

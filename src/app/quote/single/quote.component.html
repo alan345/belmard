@@ -243,13 +243,12 @@
 
                   <div class="col-md-1 ac">
 
-                    <!-- <select placeholder="typeUser" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].vat" name="vat">
-                      <option *ngFor="let VAT of VATs" [value]="VAT">
-                        {{VAT}}
+                    <select (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].vat">
+                      <option *ngFor="let VAT of VATs" [ngValue]="VAT">
+                        {{VAT}}%
                       </option>
-                    </select> -->
-                    
-                    <input class="gooplusInput ac" type="number" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].vat" placeholder="vat">
+                    </select>
+                    <!-- <input class="gooplusInput ac" type="number" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].vat" placeholder="vat"> -->
                   </div>
                   <div class="col-1">
                     <a class="form-control"> {{fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithoutTaxes | round}} </a>

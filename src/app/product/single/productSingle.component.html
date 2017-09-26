@@ -26,7 +26,7 @@
   </div>
   <form [formGroup]="myForm" novalidate (ngSubmit)="save()" (keydown.enter)="$event.preventDefault()">
     <div class="row">
-      
+
       <div class="col-6">
 
         <div>
@@ -83,7 +83,13 @@
         </div>
         <div>
           <label>{{'VAT (%)' | translate}}</label>
-          <input type="number" class="form-control col-md-6" formControlName="vat" placeholder="vat" [(ngModel)]="fetchedProduct.details.price.vat">
+
+          <select class="form-control col-md-6" formControlName="vat" [(ngModel)]="fetchedProduct.details.price.vat">
+            <option *ngFor="let VAT of VATs" [ngValue]="VAT">
+              {{VAT}}%
+            </option>
+          </select>
+          <!-- <input type="number" class="form-control col-md-6" formControlName="vat" placeholder="vat" [(ngModel)]="fetchedProduct.details.price.vat"> -->
         </div>
         <div>
           <label>{{'Unit' | translate}}</label>
@@ -92,7 +98,7 @@
       </div>
     </div>
     <div class="container">
-    
+
       <div class="valid-edit row col-12">
         <button type="submit" class="valid" [disabled]="!myForm.valid">{{'Save' | translate}}</button>
         <button *ngIf="fetchedProduct._id" type="button" class="false" (click)="openDialogDelete()">Effacer produit</button>

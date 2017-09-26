@@ -86,7 +86,7 @@ export class AuthService {
           this.token = token
           this.currentUser = currentUser
           this.user = this.jwtHelper.decodeToken(token).user
-
+          this.globalEventsManager.showNavBar(true);
         //  console.log(this.currentUser)
           localStorage.setItem('currentUser', JSON.stringify(currentUser))
         }

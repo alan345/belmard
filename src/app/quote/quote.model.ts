@@ -65,7 +65,7 @@ export class PriceQuoteTaxe {
 }
 
 
-
+export const ModelVATs: number[] = [5.5, 10]
 
 
 export class BucketProduct {
