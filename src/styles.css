@@ -3,6 +3,11 @@
 /*@import "~angular-calendar/dist/css/angular-calendar.css";*/
 /*@import "~@ng-bootstrap/ng-bootstrap/dist/css/bootstrap.min.css";*/
 
+.mb2br0 {
+    border-radius: 0px;
+    margin-bottom: 2px;
+}
+
 .alright { text-align: right;
 }
 
