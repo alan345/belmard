@@ -123,10 +123,10 @@
 
 
 
-
+    <div class="col-12">
 
     <div *ngIf="isMyCompanie()">
-      <h4>type Users</h4>
+      <h6>type Users</h6>
       <div class="btn btn-warning btn-sm" (click)="seeTypeUser=!seeTypeUser">See Categs Project</div>
       <div *ngIf="seeTypeUser">
         <button type="button" class="valid" (click)="addTypeUser()">addTypeUser</button>
@@ -137,7 +137,7 @@
       </div>
 
 
-      <h4>Categories</h4>
+      <h6>Categories</h6>
       <div class="btn btn-warning btn-sm" (click)="seeCategProject=!seeCategProject">See Categs Project</div>
       <div *ngIf="seeCategProject">
         <button type="button" class="valid" (click)="addCateg('categProject', 0, 0, 0, 0)">Add Categ Project</button>
@@ -177,7 +177,7 @@
           </div>
         </div>
       </div>
-
+</div>
       <div *ngIf="1==2">
         <div *ngIf="isMyCompanie()">
           <button type="button" class="valid" [routerLink]="['/user/paiement']">{{'Plan' | translate}}</button> {{'Plan' | translate}}: {{fetchedCompanie.planDetail.plan}} ({{fetchedCompanie.planDetail.current_period_end | date:'yyyy-MM-dd'}})
