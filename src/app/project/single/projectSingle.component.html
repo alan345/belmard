@@ -3,7 +3,7 @@
       <h3><i class="fa fa10 fa-user" aria-hidden="true"></i>{{'Project' | translate}}</h3>
       
     </div>
-  <app-header [showBackButton]="true" [nameObject]="'project'" [showCreateButton]=false [openInDialog]=true></app-header>
+  <!-- <app-header [showBackButton]="true" [nameObject]="'project'" [showCreateButton]=false [openInDialog]=true></app-header> -->
   <div>
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()" (keydown.enter)="$event.preventDefault()">
       <div *ngIf="fetchedProject._id">
