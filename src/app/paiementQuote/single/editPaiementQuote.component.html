@@ -12,16 +12,16 @@
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
 
 
-      <app-autocomplete [canDelete]=false [typeAutocomplete]="'quote'" [search]="search" [canDelete]="true" [title]="'devis'" [singleChoice]="true" [arrayContent]="fetchedPaiementQuote.quotes" (getResultAutocomplete)="selectQuote($event[0])">
+      <app-autocomplete class="form-control"[canDelete]=false [typeAutocomplete]="'quote'" [search]="search" [canDelete]="true" [title]="{{'Quote' | translate}}" [singleChoice]="true" [arrayContent]="fetchedPaiementQuote.quotes" (getResultAutocomplete)="selectQuote($event[0])">
       </app-autocomplete>
       <div *ngFor="let quote of fetchedPaiementQuote.quotes">
         {{'Quote Amont' | translate}}: {{quote.priceQuote.priceQuoteWithoutTaxes}}
       </div>
 
-      <app-autocomplete [canDelete]=false [typeAutocomplete]="'project'" [search]="search" [canDelete]="true" [title]="'Projet'" [singleChoice]="true" [arrayContent]="fetchedPaiementQuote.projects" (getResultAutocomplete)="selectProject($event[0])">
+      <app-autocomplete  class="form-control"[canDelete]=false [typeAutocomplete]="'project'" [search]="search" [canDelete]="true" [title]="{{'Project' | translate}}" [singleChoice]="true" [arrayContent]="fetchedPaiementQuote.projects" (getResultAutocomplete)="selectProject($event[0])">
       </app-autocomplete>
 
-      <app-autocomplete [canDelete]=false [typeAutocomplete]="'user'" [search]="search" [canDelete]="true" [title]="'User impacté'" [singleChoice]="true" [arrayContent]="fetchedPaiementQuote.userDebiteds" (getResultAutocomplete)="selectUserDebited($event[0])">
+      <app-autocomplete class="form-control" [canDelete]=false [typeAutocomplete]="'user'" [search]="search" [canDelete]="true" [title]="{{'Customer' | translate}}" [singleChoice]="true" [arrayContent]="fetchedPaiementQuote.userDebiteds" (getResultAutocomplete)="selectUserDebited($event[0])">
       </app-autocomplete>
 
       <div *ngIf="fetchedPaiementQuote.amount == 0 || fetchedPaiementQuote.type != 'stripe'">
