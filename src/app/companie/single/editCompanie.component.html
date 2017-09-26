@@ -29,6 +29,37 @@
           <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedCompanie.nameCompanie" required minlength="5" placeholder="Téléphone interlocuteur">
         </div> -->
 
+        <h5>{{'Contact person' | translate}}</h5>
+        <button type="button" class="btn btn-primary btn-sm" (click)="newAddress()">New contact person</button>
+
+        <div *ngFor="let singleAddresss of fetchedCompanie.address; let i = index;">
+          <div class="row">
+          <h6>Address {{fetchedCompanie.address[i].nameAddress}}</h6><button class="false btn-xs ml mb2br0"type="button" (click)="removeAddress(i)">X</button>
+          </div>
+            <div class="form-group">
+            <!-- <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].nameAddress" placeholder="nameAddress"> -->
+            <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].nameAddress">
+              <option value="billing">Facturation</option>
+              <option value="shipping">shipping</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].address" placeholder="Addresse">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].city"  placeholder="Ville">
+          </div>
+          <div class="form-group">
+            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].zip"  placeholder="Code postal">
+          </div>
+          <!-- <div class="form-group">
+          <input type="text" class="form-control" formControlName="state" [(ngModel)]="fetchedCompanie.address.state" required minlength="5" placeholder="State">
+        </div> -->
+          <div class="form-group">
+            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].country"  placeholder="Pays">
+          </div>
+        </div>
+   
       </div>
       <div class="col">
         <h5>{{'Details' | translate}}</h5>
