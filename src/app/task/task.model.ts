@@ -16,6 +16,7 @@ export class Task {
     startString: string = '';
     end: Date = new Date()
     endString: string = '';
+    assignedTos: User[] = [];
 
     // dateTask: DateTask = new DateTask()
 }

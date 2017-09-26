@@ -146,6 +146,8 @@ export class ProjectService {
   updateProject(project) {
     let projectTemp = JSON.parse(JSON.stringify(project))
     projectTemp.bucketTasks.forEach((bucketTask, i) => {
+      console.log(bucketTask.tasks)
+
       bucketTask.tasks.forEach((task, j) => {
         task.assignedTos.forEach((assignedTo, k) => {
           let assignedToId = assignedTo._id
