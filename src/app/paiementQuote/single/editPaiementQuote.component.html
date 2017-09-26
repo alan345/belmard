@@ -1,7 +1,10 @@
 <div class="container">
-  <app-header [nameObject]="'paiementQuote'" [showCreateButton]=false></app-header>
+    <div class="hdform">
+      <h3><i class="fa fa10 fa-user" aria-hidden="true"></i>{{'Paiementquote' | translate}}</h3>
+      
+    </div>
 
-  <div>
+  <div col-12>
     <h4 class="dspl-nn">id: {{fetchedPaiementQuote._id}}</h4>
     IsExpense: {{fetchedPaiementQuote.isExpense}}<br>
     isGooplusPaiement: {{fetchedPaiementQuote.isGooplusPaiement}}
