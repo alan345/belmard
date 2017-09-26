@@ -36,7 +36,7 @@
           <div *ngIf="fetchedUser.isExternalUser" class="form-group">
               <input type="text" class="form-control" formControlName="accessType" [(ngModel)]="fetchedUser.profile.detailHouse.accessType" placeholder="{{'Administration name' | translate}}">
             </div>
-          <div c*ngIf="fetchedUser.isExternalUser" lass="form-group">
+          <div *ngIf="fetchedUser.isExternalUser" class="form-group">
             <select [(ngModel)]="fetchedUser.profile.statusHouse" class="form-control" formControlName="statusHouse">
             <option *ngFor="let n of statusHouseArray" [attr.value]="n">{{n}}</option>
             </select>
