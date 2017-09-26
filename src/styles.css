@@ -8,6 +8,12 @@
     margin-bottom: 2px;
 }
 
+.btnadr {
+    background: none;
+    border: none;
+    padding-top: 0px;
+}
+
 .alright { text-align: right;
 }
 
