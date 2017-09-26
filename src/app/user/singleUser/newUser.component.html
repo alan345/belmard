@@ -131,7 +131,7 @@
               <input type="color" formControlName="colorCalendar" [(ngModel)]="fetchedUser.profile.colorCalendar">
             </div>
           </div>
-          <app-picture [forms]="fetchedUser.forms" (getPicture)="getPicture($event)"></app-picture>
+          <app-picture *ngIf="!fetchedUser.isExternalUser" [forms]="fetchedUser.forms" (getPicture)="getPicture($event)"></app-picture>
         </div>
       </div>
     </div>
