@@ -45,9 +45,9 @@
           <tr *ngFor="let user of fetchedUsers" [routerLink]="['/user/' + user._id]" routerLinkActive="active">
             <td class="centre tdunder">
               {{user.profile.typeClient}}
-              <!-- <div *ngFor="let singleType of user.typeUsers">
-                {{singleType}} {{user.profile.typeClient}}
-              </div> -->
+              <div *ngFor="let singleType of user.typeUsers">
+                {{singleType}}
+              </div>
             </td>
             <td class="centre tdunder">{{user.profile.title}}</td>
             <td class="centre tdunder">{{user.profile.lastName}} {{user.profile.name}}</td>

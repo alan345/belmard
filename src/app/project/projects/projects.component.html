@@ -29,7 +29,7 @@
             <th class="centre tdunder">Date
               <app-sort (orderBy)="orderBy($event)" [search]="search" [filedToOrder]="'createdAt'"></app-sort>
             </th>
-            <th class="centre tdunder">Statut</th>
+            <!-- <th class="centre tdunder">Statut</th> -->
           </tr>
         </thead>
         <tbody class="clienttbl">
@@ -51,7 +51,7 @@
               {{project.createdAt| date:'dd-MM-yyyy' }}
             </td>
             <td class="centre tdunder">{{project.details.date}}</td>
-            <td class="centre tdunder">{{project.status}}</td>
+            <!-- <td class="centre tdunder">{{project.status}}</td> -->
           </tr>
         </tbody>
       </table>

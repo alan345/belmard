@@ -22,7 +22,19 @@ export class Companie {
   planDetail = new PlanDetail()
   rights: Rigth[] = [];
   banck: Banck = new Banck()
+  contactsPerson: ContactsPerson[] = []
 }
+
+
+export class ContactsPerson {
+  contactType: string = '';
+  contactName: string = '';
+  contactFirstName: string = '';
+  contactPhoneNumber: string = '';
+  contactEmail: string = '';
+}
+
+
 export class TypeUsers {
   value: string = '';
 }

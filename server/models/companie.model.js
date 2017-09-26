@@ -14,6 +14,13 @@ var companie = new Schema({
         secretKey:{type: String, default: ['']},
       }
     },
+    contactsPerson:[{
+      contactType:{type: String, default: ['']},
+      contactName:{type: String, default: ['']},
+      contactFirstName:{type: String, default: ['']},
+      contactPhoneNumber:{type: String, default: ['']},
+      contactEmail:{type: String, default: ['']},
+    }],
     planDetail:{
       plan:{type: String, default: ['']},
       current_period_end:{type: Date}

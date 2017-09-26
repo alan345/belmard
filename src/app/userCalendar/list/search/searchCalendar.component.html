@@ -10,11 +10,11 @@
   </div>
   <div class="col-md-4">
     <div *ngFor="let ownerCompanie of currentUser.ownerCompanies">
-      <md-select (change)="changeTypeUsers()" placeholder="typeUser" [(ngModel)]="searchData.typeUser" name="typeUsers">
-        <md-option *ngFor="let typeUser of ownerCompanie.typeUsers" [value]="typeUser.value">
+      <select (change)="changeTypeUsers()" placeholder="typeUser" [(ngModel)]="searchData.typeUser" name="typeUsers">
+        <option *ngFor="let typeUser of ownerCompanie.typeUsers" [value]="typeUser.value">
           {{typeUser.value}}
-        </md-option>
-      </md-select>
+        </option>
+      </select>
       <button type="button" (click)="searchData.typeUser = undefined;changeTypeUsers()"><i class="fa fa-times" aria-hidden="true"></i></button>
     </div>
   </div>

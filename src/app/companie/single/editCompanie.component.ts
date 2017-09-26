@@ -4,7 +4,7 @@ import {CompanieService} from '../companie.service';
 import {UserService} from '../../user/user.service';
 
 
-import {Companie, Categorie0} from '../companie.model';
+import {Companie, Categorie0, ContactsPerson} from '../companie.model';
 import {Address} from '../../user/user.model';
 
 import {ToastsManager} from 'ng2-toastr';
@@ -129,6 +129,13 @@ export class EditCompanieComponent implements OnInit {
   }
   removeAddress(i) {
     this.fetchedCompanie.address.splice(i, 1);
+  }
+  newContact() {
+    let newContact = new ContactsPerson()
+    this.fetchedCompanie.contactsPerson.push(newContact)
+  }
+  removeContact(i) {
+    this.fetchedCompanie.contactsPerson.splice(i, 1);
   }
   isMyCompanie() {
     let currentUser = this.authService.getCurrentUser()
