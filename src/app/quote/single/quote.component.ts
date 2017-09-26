@@ -701,7 +701,7 @@ export class QuoteComponent implements OnInit {
     dialogRefDelete.afterClosed().subscribe(result => {
       if (result) {
         this.onDelete(this.fetchedQuote._id).then(function() {
-          this2.router.navigate(['quote']);
+          this2.router.navigate(['quote/list/quote']);
         })
 
       }

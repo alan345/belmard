@@ -44,12 +44,9 @@ router.get('/:id', function(req, res, next) {
         path: 'assignedTos',
         model: 'User'
       }
-    }).populate({path: 'companieClients', model: 'Companie'})
-    .populate({path: 'signature.users', model: 'User'})
-    .populate({path: 'clients', model: 'User'})
-    .populate({path: 'invoices', model: 'Quote'})
+    }).populate({path: 'companieClients', model: 'Companie'}).populate({path: 'signature.users', model: 'User'}).populate({path: 'clients', model: 'User'}).populate({path: 'invoices', model: 'Quote'})
     // .populate({path: 'devisDetails.bucketProducts.productInit', model: 'Product'})
-    .populate({
+      .populate({
       path: 'devisDetails.bucketProducts.productInit',
       model: 'Product',
       populate: {
@@ -285,7 +282,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                  }
                  .alright {
                    text-align: right;
-                 } 
+                 }
 
                  .inf {
                    font-size: 10px;
@@ -320,17 +317,17 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                  th {
                    font-size: 10px;
                  }
-                  
+
                   .cgv {
                    font-size: 6px;
                   text-align: center!important;
                  }
-                  
+
                   p  {
                    font-size: 9px;
                     font-weight: 300;
                  }
- 
+
                  .ts {
                    background-color: #aba4a4;
                    font-weight: bold;
@@ -365,24 +362,23 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                            <th class="col-4 nobo"></th>
                            <th class="col-4 cobo desc">`
 
-                          item.clients.forEach(user => {
-                            html += user.profile.title
-                            html += ' '
-                            html += user.profile.name
-                            html += ' '
-                            html += user.profile.lastName
-                            html += '<br>'
-                            html += 'Numéro & rue'
-                            html += '<br>'
-                            html += 'Zip & City'
-                            html += '<br>'
-                            html += user.profile.phoneNumber
-                            html += '<br>'
-                            html += 'Mail : client@mail.com'
-                            
-                            
-                          })
-                      html += `
+              item.clients.forEach(user => {
+                html += user.profile.title
+                html += ' '
+                html += user.profile.name
+                html += ' '
+                html += user.profile.lastName
+                html += '<br>'
+                html += 'Numéro & rue'
+                html += '<br>'
+                html += 'Zip & City'
+                html += '<br>'
+                html += user.profile.phoneNumber
+                html += '<br>'
+                html += 'Mail : client@mail.com'
+
+              })
+              html += `
                            </th>
                          </tr>
                        </thead>
@@ -449,11 +445,9 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                      </table>
                      <br>`
 
-
-              
               html += `<table class="cobo">
                          <tr class="cobo">
-                        
+
                            <td class="col-6 alright"></td>
                            <td class="col-2 ts elem">TVA 5.5%</td>
                            <td class="col-2 ts elem">TVA 10%</td>
@@ -470,7 +464,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                            <td class="col-2 elem">Montant de TVA 5.5</td>
                            <td class="col-2 elem">Montant de TVA 10</td>
                            <td class="col-2 elem"><b>Montant de TVA</b></td>
-                           </tr> 
+                           </tr>
 
                            <tr class="cobo">
                            <td class="col-6 alright ts"><b>TOTAL TTC</b></td>
@@ -479,12 +473,12 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                            <td class="col-2 elem"><b>` + item.priceQuote.priceQuoteWithTaxes + `</b></td>
 
                          </tr>
-            
+
                      </table>
                      <br>`
 
               html += `<table class="cobo">
-                        
+
                            <tr class="cobo">
                            <td class="col-6 alright ts">Acompte à la commande 40% </td>
                            <td class="col-6 alright">=40% du total ttc</td>
@@ -494,7 +488,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                            <td class="col-6 alright ts">Acompte intermédiaire</td>
                            <td class="col-6 alright">sur avancement</td>
 
-                           </tr> 
+                           </tr>
 
                            <tr class="cobo">
                            <td class="col-6 alright ts"><b>Solde</b></td>
@@ -502,7 +496,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
 
 
                          </tr>
-            
+
                      </table>
                      <br>`
 
@@ -524,7 +518,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                        </thead>
                      </table>
                   <br>
-                
+
                   <a class="cgv">Ce devis est valable 3 mois. Les prix sont établis sur la base des taux en vigeur à la date de remise de l'offre et toute variation ultérieure de ces taux sera répercutée sur ces prix en application du Code Général des Impôts</a>
                     `
 
@@ -679,24 +673,28 @@ router.post('/', function(req, res, next) {
     return res.status(404).json({message: 'You must belong to a companie', err: ''})
   }
 
-  req.body.projects.forEach(project => req.body.clients = project.clients )
-  
-  var quote = new Quote(req.body);
-  quote.ownerCompanies = req.user.ownerCompanies
+  let searchQuery = {}
+  searchQuery['ownerCompanies'] = req.user.ownerCompanies
+  Quote.find(searchQuery).count().exec(function(err, count) {
+    req.body.quoteNumber = count * 1 + 1
+    req.body.projects.forEach(project => req.body.clients = project.clients)
 
-  quote.save(function(err, result) {
-    if (err) {
-      return res.status(403).json({
-        title: 'There was an issue',
-        error: {
-          message: 'The email you entered already exists'
-        }
-      });
-    }
-    res.status(200).json({message: 'Registration Successfull', obj: result})
+    var quote = new Quote(req.body);
+    quote.ownerCompanies = req.user.ownerCompanies
+
+    quote.save(function(err, result) {
+      if (err) {
+        return res.status(403).json({
+          title: 'There was an issue',
+          error: {
+            message: 'The email you entered already exists'
+          }
+        });
+      }
+      res.status(200).json({message: 'Registration Successfull', obj: result})
+    })
   })
 });
-
 
 router.post('/saveAsInvoice/', function(req, res, next) {
   if (!shared.isCurentUserHasAccess(req.user, nameObject, 'write')) {
@@ -707,32 +705,38 @@ router.post('/saveAsInvoice/', function(req, res, next) {
       }
     })
   }
-  if (!req.user.ownerCompanies.length) {
+  if (!req.user.ownerCompanies.length)
     return res.status(404).json({message: 'You must belong to a companie', err: ''})
-  }
-  let idQuote = req.body._id
-  delete req.body._id
-  var quote = new Quote(req.body);
 
-  quote.typeQuote = 'invoice'
-  quote.save(function(err, result) {
-    if (err) {
-      return res.status(403).json({
-        title: 'There was an issue',
-        error: {
-          message: 'ERROR' + err
-        }
-      });
-    }
-    Quote.findById(({_id: idQuote}), function(err, item) {
-      if (err) return res.status(404).json({message: '', err: err})
-      item.invoices = result
-      item.save(function(err, resultQuote) {
-        if (err) {
-          return res.status(404).json({message: 'There was an error, please try again', err: err});
-        }
-        res.status(201).json({message: '', obj: result});
-      });
+  let searchQuery = {}
+  searchQuery['ownerCompanies'] = req.user.ownerCompanies
+  Quote.find(searchQuery).count().exec(function(err, count) {
+    req.body.quoteNumber = count * 1 + 1
+    let idQuote = req.body._id
+    delete req.body._id
+    var quote = new Quote(req.body);
+
+    quote.typeQuote = 'invoice'
+    quote.save(function(err, result) {
+      if (err) {
+        return res.status(403).json({
+          title: 'There was an issue',
+          error: {
+            message: 'ERROR' + err
+          }
+        });
+      }
+      Quote.findById(({_id: idQuote}), function(err, item) {
+        if (err)
+          return res.status(404).json({message: '', err: err})
+        item.invoices = result
+        item.save(function(err, resultQuote) {
+          if (err) {
+            return res.status(404).json({message: 'There was an error, please try again', err: err});
+          }
+          res.status(201).json({message: '', obj: result});
+        });
+      })
     })
   })
 });
@@ -757,11 +761,8 @@ router.get('/page/:page', function(req, res, next) {
   // } else {
   //   searchQuery['ownerCompanies'] = req.user.ownerCompanies
   // }
-  if(req.query.typeQuote)
+  if (req.query.typeQuote)
     searchQuery['typeQuote'] = req.query.typeQuote
-
-
-
 
   if (req.query.search) {
     //  nameQuery['name'] = new RegExp(req.query.search, 'i')
@@ -785,8 +786,7 @@ router.get('/page/:page', function(req, res, next) {
   if (req.query.projectId)
     searchQuery['projects'] = mongoose.Types.ObjectId(req.query.projectId)
 
-  Quote.find(searchQuery)
-  .populate({path: 'clients', model: 'User'})
+  Quote.find(searchQuery).populate({path: 'clients', model: 'User'})
 
   // .populate({path: 'devisDetails.bucketProducts.productInit', model: 'Product'})
     .limit(itemsPerPage).skip(skip).sort(req.query.orderBy).exec(function(err, item) {

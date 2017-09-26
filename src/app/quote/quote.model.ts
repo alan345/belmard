@@ -12,7 +12,7 @@ export class Quote {
   statusQuote: number = 0;
   statusQuoteString: string = '';
   typeQuote: string = 'quote';
-  quoteNumber: number = 0;
+  quoteNumber: number;
   // _users: User[] = [];
   // ownerQuotes: User[] = [];
   // companieClients: Companie[] = []

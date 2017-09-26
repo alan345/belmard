@@ -19,17 +19,17 @@
           <button type="button" class="btn btn-primary" (click)="downloadPDF()">
           download PDF
           </button>
+        </div>
+        <div class="col-8 alright" *ngIf="fetchedQuote.typeQuote === 'quote'">
 
-          <div class="col-8 alright" *ngIf="fetchedQuote.typeQuote === 'quote'">
-
-            <button *ngIf="!fetchedQuote.invoices.length" type="button" class="btn btn-primary" (click)="saveAsInvoice()">
+          <button *ngIf="!fetchedQuote.invoices.length" type="button" class="btn btn-primary" (click)="saveAsInvoice()">
             {{'Save As Invoice' | translate}}
             </button>
-            <div class="col-12 alright" *ngFor="let invoice of fetchedQuote.invoices">
-              <button type="button" class="btn btn-primary" (click)="goToInvoice(invoice._id)">{{'Go to Invoice' | translate}}</button>
-            </div>
+          <div *ngFor="let invoice of fetchedQuote.invoices">
+            <button type="button" class="btn btn-primary" (click)="goToInvoice(invoice._id)">{{'Go to Invoice' | translate}}</button>
           </div>
         </div>
+
       </div>
     </div>
     <div class="row">
@@ -41,7 +41,7 @@
         <!-- <div class="form-group">
           typeQuote: {{fetchedQuote.typeQuote}}
         </div> -->
-        <div class="form-group">
+        <div *ngIf="fetchedQuote.quoteNumber" class="form-group">
           {{'Quote number' | translate}}
           <!-- <input class="form-control" name="EstimateCode" type="text" value="28" /> -->
           <input class="gooplusInput ac" formControlName="quoteNumber" type="number" [(ngModel)]="fetchedQuote.quoteNumber" placeholder="quoteNumber">
