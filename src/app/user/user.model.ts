@@ -42,7 +42,7 @@ export class Profile {
   profilePicture: Form[] = [];
   colorCalendar: string = '';
   fax: string = '';
-  title: string = 'Mr.';
+  title: string = '';
   typeClient: string = '';
   statusHouse: string = '';
   sourceContact: string = '';

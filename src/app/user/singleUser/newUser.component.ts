@@ -89,10 +89,10 @@ export class NewUserComponent implements OnInit {
           )
     }
     ngOnInit() {
-      this.authService.getCurrentUser().ownerCompanies.forEach((companie, i) => {
-        if(companie.typeUsers.length)
-          this.fetchedUser.typeUsers.push(companie.typeUsers[0].value)
-      })
+      // this.authService.getCurrentUser().ownerCompanies.forEach((companie, i) => {
+      //   if(companie.typeUsers.length)
+      //     this.fetchedUser.typeUsers.push(companie.typeUsers[0].value)
+      // })
 
 
       this.currentUser = this.authService.getCurrentUser()
