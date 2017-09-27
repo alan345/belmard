@@ -155,8 +155,9 @@ router.get('/page/:page', function(req, res, next) {
   // if (req.query.typeUser)
   //   searchQuery['users.type'] = req.query.typeUser
 
+
   if (req.query.userSearch)
-    searchQuery['users'] = mongoose.Types.ObjectId(req.query.userSearch)
+    searchQuery['clients'] = mongoose.Types.ObjectId(req.query.userSearch)
 
   // if (req.query.projectSearch)
   //   searchQuery['projects'] = mongoose.Types.ObjectId(JSON.parse(req.query.projectSearch)._id)

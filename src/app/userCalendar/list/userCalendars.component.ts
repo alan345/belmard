@@ -307,10 +307,10 @@ export class UserCalendarsComponent implements OnInit {
     // console.log(new Date(start._d))
     // console.log(new Date(start._d).toISOString())
     let newUserCalendar = new UserCalendar()
-    newUserCalendar.clients = this.searchData.fetchedUserSearchs
-    newUserCalendar.projects = this.searchData.fetchedProjectSearchs
-
-    console.log(this.searchData.fetchedProjectSearchs)
+    // newUserCalendar.clients = this.searchData.fetchedUserSearchs
+    // newUserCalendar.projects = this.searchData.fetchedProjectSearchs
+    //
+    // console.log(this.searchData.fetchedProjectSearchs)
     newUserCalendar.start = start._d
     newUserCalendar.end = end._d
     this.openDialog(newUserCalendar)
