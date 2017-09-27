@@ -457,53 +457,78 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                      <table class="cobo">
                          <tr class="cobo">
 
-                           <td class="col-6 alright"></td>
-                           <td class="col-2 ts elem">TVA 5.5%</td>
-                           <td class="col-2 ts elem">TVA 10%</td>
-                           <td class="col-2 ts elem"><b>TOTAL</b></td>
+                           <td class="col-6 alright"></td>`
+
+
+
+                          item.priceQuote.priceQuoteTaxes.forEach(priceQuoteTaxe => {
+                              html += `<td class="col-2 ts elem">TVA: ` + priceQuoteTaxe.VAT + `%</td>`
+                              // html += `<td class="col-2 ts elem">` + priceQuoteTaxe.TotalVAT + `€</td>`
+                          })
+
+                          //  <td class="col-2 ts elem">TVA 5.5%</td>
+                          //  <td class="col-2 ts elem">TVA 10%</td>
+                           html += `
+                            <td class="col-2 ts elem"><b>TOTAL</b></td>
                            </tr>
                            <tr class="cobo">
-                           <td class="col-6 alright ts">Sous-Total HT</td>
-                           <td class="col-2 elem">sous-total ht tva 5.5</td>
-                           <td class="col-2 elem">sous-total ht 10</td>
-                           <td class="col-2 elem"><b>` + item.priceQuote.priceQuoteWithoutTaxes + `</b></td>
+                           <td class="col-6 alright ts">Sous-Total HT</td>`
+
+
+                           item.priceQuote.priceQuoteTaxes.forEach(priceQuoteTaxe => {
+                              //  html += `<td class="col-2 ts elem">TVA: ` + priceQuoteTaxe.VAT + `%</td>`
+                               html += `<td class="col-2 elem">` + Math.round(priceQuoteTaxe.TotalVAT / (priceQuoteTaxe.VAT /100)) + `€</td>`
+                           })
+                           html += `
+
+                           <td class="col-2 elem"><b>` + Math.round(item.priceQuote.priceQuoteWithoutTaxes) + `€</b></td>
                            </tr>`
 
 
 
 
-
-                                                      item.priceQuote.priceQuoteTaxes.forEach(priceQuoteTaxe => {
-
-                                                        html += `
-                                                        <tr>
-                                                            <td>
-                                                            </td>
-                                                            <td class="col-2 form-control">
-                                                              TVA: ` + priceQuoteTaxe.VAT + `%
-                                                            </td>
-                                                            <td class="col-2 form-control">
-                                                              ` + priceQuoteTaxe.TotalVAT + `€
-                                                            </td>
-                                                        </tr>`
-                                                     })
+                        //
+                        //     item.priceQuote.priceQuoteTaxes.forEach(priceQuoteTaxe => {
+                        // html += `<tr>
+                        //           <td>
+                        //           </td>
+                        //           <td class="col-2 form-control">
+                        //             TVA: ` + priceQuoteTaxe.VAT + `%
+                        //           </td>
+                        //           <td class="col-2 form-control">
+                        //             ` + priceQuoteTaxe.TotalVAT + `€
+                        //           </td>
+                        //       </tr>`
+                        //    })
 
 
 
 
 
                            html += `<tr class="cobo">
-                             <td class="col-6 alright ts">Montant de TVA</td>
-                             <td class="col-2 elem">Montant de TVA 5.5</td>
-                             <td class="col-2 elem">Montant de TVA 10</td>
-                             <td class="col-2 elem"><b>Montant de TVA</b></td>
+                             <td class="col-6 alright ts">Montant de TVA</td>`
+                             let vatTotal = 0
+                             item.priceQuote.priceQuoteTaxes.forEach(priceQuoteTaxe => {
+                               vatTotal += priceQuoteTaxe.TotalVAT*1
+                                //  html += `<td class="col-2 ts elem">TVA: ` + priceQuoteTaxe.VAT + `%</td>`
+                                 html += `<td class="col-2 elem">` +  Math.round(priceQuoteTaxe.TotalVAT)  + `€</td>`
+                                //  html += `<td class="col-2 elem">` + priceQuoteTaxe.VAT + priceQuoteTaxe.TotalVAT / (priceQuoteTaxe.VAT /100) + `€</td>`
+                             })
+                             html += `
+                             <td class="col-2 elem"><b>`+ Math.round(vatTotal) +`€</b></td>
                            </tr>
 
                            <tr class="cobo">
-                           <td class="col-6 alright ts"><b>TOTAL TTC</b></td>
-                           <td class="col-2 elem"><b>TOTAL TTC 5.5</b></td>
-                           <td class="col-2 elem"><b>TOTAL TTC 10</b></td>
-                           <td class="col-2 elem"><b>` + item.priceQuote.priceQuoteWithTaxes + `</b></td>
+                           <td class="col-6 alright ts"><b>TOTAL TTC</b></td>`
+
+
+                           item.priceQuote.priceQuoteTaxes.forEach(priceQuoteTaxe => {
+                              //  html += `<td class="col-2 ts elem">TVA: ` + priceQuoteTaxe.VAT + `%</td>`
+                               html += `<td class="col-2 elem">` + Math.round(priceQuoteTaxe.TotalVAT / (priceQuoteTaxe.VAT /100)  + priceQuoteTaxe.TotalVAT*1 )+ `€</td>`
+                           })
+                           html += `
+
+                           <td class="col-2 elem"><b>` + Math.round(item.priceQuote.priceQuoteWithTaxes) + `€</b></td>
 
                          </tr>
 
