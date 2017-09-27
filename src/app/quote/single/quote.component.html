@@ -117,11 +117,11 @@
       </div>
       <div class="col-2">
       </div>
-      <!-- <div class="col-12"> -->
-        <!-- <div class="row">
+      <div class="col-12">
+        <div class="row">
           <div>
           </div>
-        </div> -->
+        </div>
 
 
 
@@ -315,6 +315,22 @@
               <app-autocomplete [typeAutocomplete]="'templateQuote'" [title]="" [singleChoice]=true [arrayContent]="arrayContentToSearch" (getResultAutocomplete)="selectTemplateQuote($event[0])">
               </app-autocomplete>
             </div> -->
+            <div>
+              <div (click)="togglePaiements()">Paiements</div>
+              <div *ngIf="showPaiements">
+                <!-- <button class="btn btn-success" type="button" md-button (click)="openDialog()">
+                <i class="fa fa-plus"></i> Add new one
+              </button> -->
+                <br>
+                <app-paiementQuotes (getPaiementQuotesCross)="getPaiementQuotes($event)" [search]="search">
+                </app-paiementQuotes>
+                {{'Total Paiement' | translate}} = {{totalPaiementAmount}}
+                <br> {{'To be paid' | translate}} = {{fetchedQuote.priceQuote.priceQuoteWithoutTaxes*1 - totalPaiementAmount*1| round}}
+                <!-- <app-paiementQuote [showHeader]="false" (newPaiementQuoteSaved)="newPaiementQuoteSaved()">
+              </app-paiementQuote> -->
+              </div>
+            </div>
+                        
           </div>
 
           <div class="col-5">
@@ -358,10 +374,6 @@
                   <div class="ac" *ngFor="let user of fetchedQuote.signature.users">
                     {{fetchedQuote.signature.dateSignature | date:'yMdjm'}} - {{user.profile.name }}
                   </div>
-
-
-
-
                 </div>
 
               </div>
@@ -370,38 +382,20 @@
                   </button>
             </div>
           </div>
-        </div>
-        <div class="row">
-          <div (click)="togglePaiements()">Paiements</div>
-          <div *ngIf="showPaiements">
-            <!-- <button class="btn btn-success" type="button" md-button (click)="openDialog()">
-            <i class="fa fa-plus"></i> Add new one
-          </button> -->
-            <br>
-            <app-paiementQuotes (getPaiementQuotesCross)="getPaiementQuotes($event)" [search]="search">
-            </app-paiementQuotes>
-            {{'Total Paiement' | translate}} = {{totalPaiementAmount}}
-            <br> {{'To be paid' | translate}} = {{fetchedQuote.priceQuote.priceQuoteWithoutTaxes*1 - totalPaiementAmount*1| round}}
-            <!-- <app-paiementQuote [showHeader]="false" (newPaiementQuoteSaved)="newPaiementQuoteSaved()">
-          </app-paiementQuote> -->
+          <div>
+            <div class="valid-edit">
+              <button type="submit" class="btn valid">{{'Save' | translate}}</button>
+              <button *ngIf="fetchedQuote._id" type="button" class="btn false" (click)="openDialogDelete()">
+                {{'Delete' | translate}}
+              </button>
+            </div>
           </div>
+
         </div>
 
+      </div>
 
 
-
-
-
-        <br><br>
-        <div class="col-12">
-          <div class="valid-edit">
-            <button type="submit" class="btn valid">{{'Save' | translate}}</button>
-            <button *ngIf="fetchedQuote._id" type="button" class="btn false" (click)="openDialogDelete()">
-              {{'Delete' | translate}}
-            </button>
-          </div>
-        </div>
-      <!-- </div> -->
 
     </div>
   </form>
