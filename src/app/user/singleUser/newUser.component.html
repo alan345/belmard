@@ -59,6 +59,7 @@
           <div *ngIf="!fetchedUser.isExternalUser" class="form-group">
             <div *ngFor="let ownerCompanie of currentUser.ownerCompanies">
               <select [(ngModel)]="fetchedUser.typeUsers" name="language" class="form-control" formControlName="typeUsers">
+                <option value="" disabled selected>Type</option>
                 <option *ngFor="let typeUser of ownerCompanie.typeUsers" [value]="typeUser.value">{{typeUser.value}}</option>
               </select>
             </div>

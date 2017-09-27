@@ -97,7 +97,7 @@ export class NewUserComponent implements OnInit {
 
       this.currentUser = this.authService.getCurrentUser()
       this.myForm = this._fb.group({
-          email: [Validators.required, this.emailValidator, Validators.minLength(3)],
+          email: ['', [Validators.required, Validators.minLength(3)]],
           typeUsers: [''],
           language: [''],
           colorCalendar: [''],
@@ -107,8 +107,8 @@ export class NewUserComponent implements OnInit {
           phoneNumber: [''],
           fax: [''],
           title: ['', [Validators.required, Validators.minLength(1)]],
-          typeClient: ['', [Validators.required, Validators.minLength(1)]],
-          statusHouse: ['', [Validators.required, Validators.minLength(1)]],
+          typeClient: [''],
+          statusHouse: [''],
           sourceContact: [''],
 
           typeHouse: [''],
