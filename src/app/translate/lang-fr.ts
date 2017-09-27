@@ -19,6 +19,7 @@ export const LANG_FR_TRANS = {
     'Reporting': 'Statistiques',
     'Settings': 'Paramètres',
     'Product': 'Produit',
+    'Invoice': 'Facture',
 
 
     'Add a product': 'Ajouter un produit',

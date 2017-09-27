@@ -10,7 +10,7 @@
           <h5>{{'Identity' | translate}}</h5>
           <div class="form-group">
             <select [(ngModel)]="fetchedUser.profile.title" class="form-control" formControlName="title">
-            <option *ngFor="let n of titleArray" [value]="n">{{n}}</option>
+              <option *ngFor="let n of titleArray" [value]="n">{{n}}</option>
             </select>
           </div>
           <div class="form-group">
@@ -116,10 +116,16 @@
               <input type="text" class="form-control" formControlName="floor" [(ngModel)]="fetchedUser.profile.detailHouse.floor" placeholder="{{'Floor' | translate}}">
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" formControlName="accessType" [(ngModel)]="fetchedUser.profile.detailHouse.accessType" placeholder="{{'Acces Type' | translate}}">
+              <select [(ngModel)]="fetchedUser.profile.detailHouse.accessType" class="form-control" formControlName="title">
+                <option *ngFor="let n of accessTypeArray" [value]="n">{{n}}</option>
+              </select>
+              <!-- <input type="text" class="form-control" formControlName="accessType" [(ngModel)]="fetchedUser.profile.detailHouse.accessType" placeholder="{{'Acces Type' | translate}}"> -->
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" formControlName="accessType" [(ngModel)]="fetchedUser.profile.detailHouse.accessType" placeholder="{{'Source' | translate}}">
+              <select [(ngModel)]="fetchedUser.profile.sourceContact" class="form-control" formControlName="sourceContact">
+                <option *ngFor="let n of sourceContactArray" [value]="n">{{n}}</option>
+              </select>
+              <!-- <input type="text" class="form-control" formControlName="accessType" [(ngModel)]="fetchedUser.profile.sourceContact" placeholder="{{'Source' | translate}}"> -->
             </div>
           </div>
           <div class="form-group">

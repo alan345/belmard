@@ -43,6 +43,8 @@ export class NewUserComponent implements OnInit {
   typeClientArray=['Particulier','Societe','Administration']
   statusHouseArray=['Propriétaire','Locataire']
   typeHouseArray=['Pavillon','Immeuble']
+  accessTypeArray=['','escalier', 'ascenseur']
+  sourceContactArray=['','Adwords','Appel Entrant', 'Apporteur Affaire']
   companieIndexToSelect = ''
   typeUserDropDown = ''
   typeUser = TypeUser
@@ -87,6 +89,11 @@ export class NewUserComponent implements OnInit {
           )
     }
     ngOnInit() {
+      this.authService.getCurrentUser().ownerCompanies.forEach((companie, i) => {
+        if(companie.typeUsers.length)
+          this.fetchedUser.typeUsers.push(companie.typeUsers[0].value)
+      })
+
 
       this.currentUser = this.authService.getCurrentUser()
       this.myForm = this._fb.group({
@@ -102,6 +109,7 @@ export class NewUserComponent implements OnInit {
           title: [''],
           typeClient: [''],
           statusHouse: [''],
+          sourceContact: [''],
 
           typeHouse: [''],
           surface: [''],

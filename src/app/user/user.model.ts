@@ -45,6 +45,7 @@ export class Profile {
   title: string = 'Mr.';
   typeClient: string = '';
   statusHouse: string = '';
+  sourceContact: string = '';
   detailHouse: DetailHouse = new DetailHouse();
   address: Address[] = [];
   language: string = 'en';

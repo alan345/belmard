@@ -387,7 +387,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                      <table>
                        <thead>
                          <tr>
-                           <th class="col-12 cobo desc">Objet :
+                           <th class="col-12 cobo desc">Objet : ` + item.name + `
                            </th>
                          </tr>
                        </thead>
@@ -408,7 +408,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                        <tbody>`
 
               item.devisDetails.forEach(devisDetail => {
-              html += '<tr class="ts">'
+                html += '<tr class="ts">'
                 html += '<td class="desc">' + devisDetail.nameBucketProducts + '</td>'
                 html += `
                          <td class="desc"></td>
@@ -416,22 +416,23 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                          <td class="desc"></td>
                          <td class="desc"></td>
                          <td class="desc"></td>
-                         <td class="desc"></td>`
-              html += '</tr>'
+                         <td class="desc"></td>
+                        </tr>`
                 devisDetail.bucketProducts.forEach(bucketProduct => {
                   html += '<tr>'
                     let description = ''
                     let img = ''
                     let unit = ''
-                    if(bucketProduct.typeRow === 'text') {
+                    if (bucketProduct.typeRow === 'text') {
                       description = bucketProduct.title
                     }
-                    if(bucketProduct.typeRow === 'product') {
+                    if (bucketProduct.typeRow === 'product') {
                       bucketProduct.productInit.forEach(product => {
                         description = product.details.referenceName
                         unit = product.details.unit
                         product.forms.forEach(form => {
-                          img = '<img class="img" src="' + 'http://localhost/uploads/forms/' + form.owner + '/' + form.imagePath + '">'
+                          img = '<img class="img" src="' +
+                            'http://localhost/uploads/forms/' + form.owner + '/' + form.imagePath + '">'
                         })
                       })
                     }
@@ -443,7 +444,6 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                     html += '<td class="elem">' + bucketProduct.quantity + '</td>'
                     html += '<td class="elem">' + bucketProduct.priceWithoutTaxes + '</td>'
                     html += '<td class="elem">' + bucketProduct.totalPriceWithoutTaxes + '</td>'
-
                     html += '<td class="elem">' + bucketProduct.vat + '%</td>'
                   html += '</tr>'
 
@@ -459,74 +459,63 @@ router.get('/pdf/:quoteId', function(req, res, next) {
 
                            <td class="col-6 alright"></td>`
 
+              item.priceQuote.priceQuoteTaxes.forEach(priceQuoteTaxe => {
+                html += `<td class="col-2 ts elem">TVA: ` + priceQuoteTaxe.VAT + `%</td>`
+                // html += `<td class="col-2 ts elem">` + priceQuoteTaxe.TotalVAT + `€</td>`
+              })
 
-
-                          item.priceQuote.priceQuoteTaxes.forEach(priceQuoteTaxe => {
-                              html += `<td class="col-2 ts elem">TVA: ` + priceQuoteTaxe.VAT + `%</td>`
-                              // html += `<td class="col-2 ts elem">` + priceQuoteTaxe.TotalVAT + `€</td>`
-                          })
-
-                          //  <td class="col-2 ts elem">TVA 5.5%</td>
-                          //  <td class="col-2 ts elem">TVA 10%</td>
-                           html += `
+              //  <td class="col-2 ts elem">TVA 5.5%</td>
+              //  <td class="col-2 ts elem">TVA 10%</td>
+              html += `
                             <td class="col-2 ts elem"><b>TOTAL</b></td>
                            </tr>
                            <tr class="cobo">
                            <td class="col-6 alright ts">Sous-Total HT</td>`
 
-
-                           item.priceQuote.priceQuoteTaxes.forEach(priceQuoteTaxe => {
-                              //  html += `<td class="col-2 ts elem">TVA: ` + priceQuoteTaxe.VAT + `%</td>`
-                               html += `<td class="col-2 elem">` + Math.round(priceQuoteTaxe.TotalVAT / (priceQuoteTaxe.VAT /100)) + `€</td>`
-                           })
-                           html += `
+              item.priceQuote.priceQuoteTaxes.forEach(priceQuoteTaxe => {
+                //  html += `<td class="col-2 ts elem">TVA: ` + priceQuoteTaxe.VAT + `%</td>`
+                html += `<td class="col-2 elem">` + Math.round(priceQuoteTaxe.TotalVAT / (priceQuoteTaxe.VAT / 100)) + `€</td>`
+              })
+              html += `
 
                            <td class="col-2 elem"><b>` + Math.round(item.priceQuote.priceQuoteWithoutTaxes) + `€</b></td>
                            </tr>`
 
+              //
+              //     item.priceQuote.priceQuoteTaxes.forEach(priceQuoteTaxe => {
+              // html += `<tr>
+              //           <td>
+              //           </td>
+              //           <td class="col-2 form-control">
+              //             TVA: ` + priceQuoteTaxe.VAT + `%
+              //           </td>
+              //           <td class="col-2 form-control">
+              //             ` + priceQuoteTaxe.TotalVAT + `€
+              //           </td>
+              //       </tr>`
+              //    })
 
-
-
-                        //
-                        //     item.priceQuote.priceQuoteTaxes.forEach(priceQuoteTaxe => {
-                        // html += `<tr>
-                        //           <td>
-                        //           </td>
-                        //           <td class="col-2 form-control">
-                        //             TVA: ` + priceQuoteTaxe.VAT + `%
-                        //           </td>
-                        //           <td class="col-2 form-control">
-                        //             ` + priceQuoteTaxe.TotalVAT + `€
-                        //           </td>
-                        //       </tr>`
-                        //    })
-
-
-
-
-
-                           html += `<tr class="cobo">
+              html += `<tr class="cobo">
                              <td class="col-6 alright ts">Montant de TVA</td>`
-                             let vatTotal = 0
-                             item.priceQuote.priceQuoteTaxes.forEach(priceQuoteTaxe => {
-                               vatTotal += priceQuoteTaxe.TotalVAT*1
-                                //  html += `<td class="col-2 ts elem">TVA: ` + priceQuoteTaxe.VAT + `%</td>`
-                                 html += `<td class="col-2 elem">` +  Math.round(priceQuoteTaxe.TotalVAT)  + `€</td>`
-                                //  html += `<td class="col-2 elem">` + priceQuoteTaxe.VAT + priceQuoteTaxe.TotalVAT / (priceQuoteTaxe.VAT /100) + `€</td>`
-                             })
-                             html += `
-                             <td class="col-2 elem"><b>`+ Math.round(vatTotal) +`€</b></td>
+              let vatTotal = 0
+              item.priceQuote.priceQuoteTaxes.forEach(priceQuoteTaxe => {
+                vatTotal += priceQuoteTaxe.TotalVAT * 1
+                //  html += `<td class="col-2 ts elem">TVA: ` + priceQuoteTaxe.VAT + `%</td>`
+                html += `<td class="col-2 elem">` + Math.round(priceQuoteTaxe.TotalVAT) + `€</td>`
+                //  html += `<td class="col-2 elem">` + priceQuoteTaxe.VAT + priceQuoteTaxe.TotalVAT / (priceQuoteTaxe.VAT /100) + `€</td>`
+              })
+              html += `
+                             <td class="col-2 elem"><b>` + Math.round(vatTotal) + `€</b></td>
                            </tr>
 
                            <tr class="cobo">
                            <td class="col-6 alright ts"><b>TOTAL TTC</b></td>`
 
-
-                           item.priceQuote.priceQuoteTaxes.forEach(priceQuoteTaxe => {
-                              //  html += `<td class="col-2 ts elem">TVA: ` + priceQuoteTaxe.VAT + `%</td>`
-                               html += `<td class="col-2 elem">` + Math.round(priceQuoteTaxe.TotalVAT / (priceQuoteTaxe.VAT /100)  + priceQuoteTaxe.TotalVAT*1 )+ `€</td>`
-                           })
-                           html += `
+              item.priceQuote.priceQuoteTaxes.forEach(priceQuoteTaxe => {
+                //  html += `<td class="col-2 ts elem">TVA: ` + priceQuoteTaxe.VAT + `%</td>`
+                html += `<td class="col-2 elem">` + Math.round(priceQuoteTaxe.TotalVAT / (priceQuoteTaxe.VAT / 100) + priceQuoteTaxe.TotalVAT * 1) + `€</td>`
+              })
+              html += `
 
                            <td class="col-2 elem"><b>` + Math.round(item.priceQuote.priceQuoteWithTaxes) + `€</b></td>
 
@@ -770,6 +759,7 @@ router.post('/saveAsInvoice/', function(req, res, next) {
   searchQuery['ownerCompanies'] = req.user.ownerCompanies
   Quote.find(searchQuery).count().exec(function(err, count) {
     req.body.quoteNumber = count * 1 + 1
+    req.body.signature = {}
     let idQuote = req.body._id
     delete req.body._id
     var quote = new Quote(req.body);
