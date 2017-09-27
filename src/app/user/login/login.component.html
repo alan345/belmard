@@ -5,6 +5,7 @@
     <div class="input-group">
       <input #userEmail type="text" formControlName="email" placeholder="Email" class="form-control">
     </div>
+    
     <div [hidden]="email.valid || email.pristine" class="alert alert-danger">Please enter a valid email format</div>
     <div class="input-group">
       <input type="password" formControlName="password" placeholder="Password" class="form-control">

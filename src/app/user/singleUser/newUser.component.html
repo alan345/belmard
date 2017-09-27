@@ -10,26 +10,29 @@
           <h5>{{'Identity' | translate}}</h5>
           <div class="form-group">
 
-            <select [(ngModel)]="fetchedUser.profile.title" class="form-control" formControlName="title">
+            <select [ngClass]="{'has-error':!myForm.controls['title'].valid && !myForm.controls['title'].pristine}" [(ngModel)]="fetchedUser.profile.title" class="form-control" formControlName="title">
+              <option value="" disabled selected>Title</option>
               <option *ngFor="let n of titleArray" [ngValue]="n">{{n}}</option>
             </select>
 
+
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedUser.profile.name" placeholder="{{'Firstname' | translate}}">
+            <input [ngClass]="{'has-error':!myForm.controls['name'].valid && !myForm.controls['name'].pristine}" type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedUser.profile.name" placeholder="{{'Firstname' | translate}}">
           </div>
           <div class="form-group">
             <input type="text" class="form-control" formControlName="lastName" [(ngModel)]="fetchedUser.profile.lastName" placeholder="{{'Lastname' | translate}}">
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" formControlName="email" [(ngModel)]="fetchedUser.email" placeholder="{{'Email' | translate}}">
+            <input [ngClass]="{'has-error':!myForm.controls['email'].valid && !myForm.controls['email'].pristine}" type="text" class="form-control" formControlName="email" [(ngModel)]="fetchedUser.email" placeholder="{{'Email' | translate}}">
           </div>
           <div class="form-group">
             <input type="text" class="form-control" formControlName="phoneNumber" [(ngModel)]="fetchedUser.profile.phoneNumber" placeholder="{{'Phone Number' | translate}}">
           </div>
           <div *ngIf="fetchedUser.isExternalUser" class="form-group">
-            <select [(ngModel)]="fetchedUser.profile.typeClient" class="form-control" formControlName="typeClient">
-            <option *ngFor="let n of typeClientArray" [attr.value]="n">{{n}}</option>
+            <select [ngClass]="{'has-error':!myForm.controls['typeClient'].valid && !myForm.controls['typeClient'].pristine}" [(ngModel)]="fetchedUser.profile.typeClient" class="form-control" formControlName="typeClient">
+              <option value="" disabled selected>Type</option>
+              <option *ngFor="let n of typeClientArray" [ngValue]="n">{{n}}</option>
             </select>
           </div>
           <div *ngIf="fetchedUser.isExternalUser" class="form-group">
@@ -37,10 +40,12 @@
             <input *ngIf="fetchedUser.profile.typeClient ==='Societe'" type="text" class="form-control" formControlName="accessType" [(ngModel)]="fetchedUser.profile.companyName" placeholder="Nom Societé">
           </div>
           <div *ngIf="fetchedUser.isExternalUser" class="form-group">
-            <select [(ngModel)]="fetchedUser.profile.statusHouse" class="form-control" formControlName="statusHouse">
-            <option *ngFor="let n of statusHouseArray" [attr.value]="n">{{n}}</option>
+            <select [ngClass]="{'has-error':!myForm.controls['statusHouse'].valid && !myForm.controls['statusHouse'].pristine}" [(ngModel)]="fetchedUser.profile.statusHouse" class="form-control" formControlName="statusHouse">
+              <option value="" disabled selected>Statut</option>
+              <option *ngFor="let n of statusHouseArray" [ngValue]="n">{{n}}</option>
             </select>
           </div>
+
           <!-- <div class="form-group" *ngIf="fetchedUser.isExternalUser">
             <app-autocomplete [title]="'Entreprise'" [singleChoice]="'true'" [typeAutocomplete]="'companie'" [arrayContent]="fetchedUser.ownerCompanies" (getResultAutocomplete)="selectCompanie($event[0])">
             </app-autocomplete>
@@ -105,7 +110,8 @@
           <div class="form-group" *ngIf="fetchedUser.isExternalUser">
             <div class="form-group">
               <select [(ngModel)]="fetchedUser.profile.detailHouse.typeHouse" class="form-control" formControlName="typeHouse">
-               <option *ngFor="let n of typeHouseArray" [attr.value]="n">{{n}}</option>
+                <option value="" disabled selected>Type Maison</option>
+               <option *ngFor="let n of typeHouseArray" [ngValue]="n">{{n}}</option>
               </select>
             </div>
             <div class="form-group">
@@ -119,12 +125,14 @@
             </div>
             <div class="form-group">
               <select [(ngModel)]="fetchedUser.profile.detailHouse.accessType" class="form-control" formControlName="title">
+                <option value="" disabled selected>Acces</option>
                 <option *ngFor="let n of accessTypeArray" [value]="n">{{n}}</option>
               </select>
               <!-- <input type="text" class="form-control" formControlName="accessType" [(ngModel)]="fetchedUser.profile.detailHouse.accessType" placeholder="{{'Acces Type' | translate}}"> -->
             </div>
             <div class="form-group">
               <select [(ngModel)]="fetchedUser.profile.sourceContact" class="form-control" formControlName="sourceContact">
+                <option value="" disabled selected>Source Contact</option>
                 <option *ngFor="let n of sourceContactArray" [value]="n">{{n}}</option>
               </select>
               <!-- <input type="text" class="form-control" formControlName="accessType" [(ngModel)]="fetchedUser.profile.sourceContact" placeholder="{{'Source' | translate}}"> -->
@@ -156,7 +164,7 @@
       </div>
     </div>
     <div class="valid-edit row col-12">
-      <button type="submit" class="valid" [disabled]="!myForm.valid" [ngClass]="{'done':myForm.valid,'pas-done':!myForm.valid}">{{'Done' | translate}}</button>
+      <button type="submit"[disabled]="!myForm.valid" [ngClass]="{'valid':myForm.valid,'has-error':!myForm.valid}">{{'Done' | translate}}</button>
       <button *ngIf="fetchedUser._id" type="button" class="valid" (click)="saveAndCreateProject()" [disabled]="!myForm.valid">
           {{'Save & Create project' | translate}}
         </button>

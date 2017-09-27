@@ -42,7 +42,7 @@ export class NewUserComponent implements OnInit {
   languageArray=['fr','en']
   typeClientArray=['Particulier','Societe','Administration']
   statusHouseArray=['Propriétaire','Locataire']
-  typeHouseArray=['Pavillon','Immeuble']
+  typeHouseArray=['','Pavillon','Immeuble']
   accessTypeArray=['','escalier', 'ascenseur']
   sourceContactArray=['','Adwords','Appel Entrant', 'Apporteur Affaire']
   companieIndexToSelect = ''
@@ -97,7 +97,7 @@ export class NewUserComponent implements OnInit {
 
       this.currentUser = this.authService.getCurrentUser()
       this.myForm = this._fb.group({
-          email: [this.emailValidator],
+          email: [Validators.required, this.emailValidator, Validators.minLength(3)],
           typeUsers: [''],
           language: [''],
           colorCalendar: [''],
@@ -106,9 +106,9 @@ export class NewUserComponent implements OnInit {
           lastName: ['', [Validators.required, Validators.minLength(3)]],
           phoneNumber: [''],
           fax: [''],
-          title: [''],
-          typeClient: [''],
-          statusHouse: [''],
+          title: ['', [Validators.required, Validators.minLength(1)]],
+          typeClient: ['', [Validators.required, Validators.minLength(1)]],
+          statusHouse: ['', [Validators.required, Validators.minLength(1)]],
           sourceContact: [''],
 
           typeHouse: [''],
