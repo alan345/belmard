@@ -42,7 +42,7 @@
           typeQuote: {{fetchedQuote.typeQuote}}
         </div> -->
         <div *ngIf="fetchedQuote.quoteNumber" class="form-group">
-          {{'Quote number' | translate}}
+          {{'Number' | translate}}
           <!-- <input class="form-control" name="EstimateCode" type="text" value="28" /> -->
           <input class="gooplusInput ac" formControlName="quoteNumber" type="number" [(ngModel)]="fetchedQuote.quoteNumber" placeholder="quoteNumber">
         </div>
@@ -84,7 +84,9 @@
       <div class="col-3">
         <div class="form-control" *ngFor="let client of fetchedQuote.clients">
           <h4>
-              <div>{{client.profile.name}} {{client.profile.lastName}}</div></h4>
+            <div>{{client.profile.name}} {{client.profile.lastName}}</div>
+          </h4>
+          <div>{{client.profile.companyName}}</div>
           <div *ngFor="let singleAddress of client.profile.address">
             <h5>{{singleAddress.nameAddress}}</h5>
             <div>{{singleAddress.address}}</div>
@@ -111,7 +113,7 @@
       </div>
       <div class="col-8">
         <div class="form-group">
-          {{'Quote title' | translate}}
+          {{'Title' | translate}}
           <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedQuote.name" required minlength="5" placeholder="{{'Quote title' | translate}}">
         </div>
       </div>
@@ -339,15 +341,15 @@
 
 
 
-          <div style="height:280px" class="col-4">
+          <div *ngIf="fetchedQuote.typeQuote === 'quote'" style="height:280px" class="col-4">
 
             <div class="ac sign">
               <div class="card ac">
                 <div class="ac" *ngIf="!fetchedQuote.signature.base64">
                   <div class="row">
                     <button type="button" class="false" (click)="resetSignature()">
-                  {{'Reset' | translate}}
-              </button>
+                        {{'Reset' | translate}}
+                    </button>
                     <button type="button" class="valid" (click)="validateSignature()">
                   {{'Validate' | translate}}
                   </button>
@@ -403,13 +405,8 @@
               </div>
             </div>
           </div>
-
         </div>
-
       </div>
-
-
-
     </div>
   </form>
 </div>
