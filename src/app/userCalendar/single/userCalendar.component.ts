@@ -127,8 +127,9 @@ export class UserCalendarComponent implements OnInit {
 
 
     save() {
-      this.fetchedUserCalendar.projects.forEach(project=> {
+      this.fetchedUserCalendar.projects.forEach(project => {
         this.fetchedUserCalendar.clients = project.clients
+        this.fetchedUserCalendar.assignedTos = project.assignedTos
       })
 
       if(this.fetchedUserCalendar._id) {
