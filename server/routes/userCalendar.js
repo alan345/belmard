@@ -112,6 +112,13 @@ router.post('/', function(req, res, next) {
   if (!req.user.ownerCompanies.length) {
     return res.status(404).json({message: 'You must belong to a companie', err: ''})
   }
+
+
+  req.body.projects.forEach(project => {
+    req.body.clients = project.clients
+    req.body.assignedTos = project.assignedTos
+  })
+
   //console.log(req.body)
   //var UserCalendar = new UserCalendar(req.body)
   var userCalendar = new UserCalendar(req.body)

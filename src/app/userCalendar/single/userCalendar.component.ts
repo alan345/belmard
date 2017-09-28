@@ -100,7 +100,9 @@ export class UserCalendarComponent implements OnInit {
     let dialogRefDelete = this.dialog.open(DeleteDialog)
     dialogRefDelete.afterClosed().subscribe(result => {
       if (result) {
+        let this2 = this;
         this.onDelete(this.fetchedUserCalendar._id).then(function(){
+          this2.saved.emit()
           // this2.router.navigate(['paiementQuote']);
         })
 
@@ -115,6 +117,7 @@ export class UserCalendarComponent implements OnInit {
         .subscribe(
           res => {
             this2.toastr.success('Great!', res.message);
+
             resolve(res)
           },
           error => {
@@ -127,10 +130,10 @@ export class UserCalendarComponent implements OnInit {
 
 
     save() {
-      this.fetchedUserCalendar.projects.forEach(project => {
-        this.fetchedUserCalendar.clients = project.clients
-        this.fetchedUserCalendar.assignedTos = project.assignedTos
-      })
+      // this.fetchedUserCalendar.projects.forEach(project => {
+      //   this.fetchedUserCalendar.clients = project.clients
+      //   this.fetchedUserCalendar.assignedTos = project.assignedTos
+      // })
 
       if(this.fetchedUserCalendar._id) {
         this.userCalendarService.updateUserCalendar(this.fetchedUserCalendar)

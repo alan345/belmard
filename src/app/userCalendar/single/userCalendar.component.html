@@ -2,9 +2,6 @@
   <app-header [showBackButton]="true" [nameObject]="'userCalendar'" [showCreateButton]="false"></app-header>
 
   <div>
-    <h4 class="dspl-nn">id: {{fetchedUserCalendar._id}}</h4>
-
-
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
 
 
@@ -43,26 +40,10 @@
           </app-autocomplete>
         </div>
         <div *ngIf="fetchedUserCalendar.assignedTos.length" class="col-md-12">
-          <app-autocomplete [typeAutocomplete]="'user'" [search]="{isExternalUser:false}" [title]="'Réparateur'" [singleChoice]="'true'" [arrayContent]="fetchedUserCalendar.assignedTos" (getResultAutocomplete)="selectUser($event[0])" (clearAutocomplete)="removeUser()">
+          <app-autocomplete [typeAutocomplete]="'user'" [canDelete]=false [search]="{isExternalUser:false}" [title]="'Réparateur'" [singleChoice]="'true'" [arrayContent]="fetchedUserCalendar.assignedTos" (getResultAutocomplete)="selectUser($event[0])" (clearAutocomplete)="removeUser()">
           </app-autocomplete>
         </div>
-        <!-- <div class="col-md-12">
-          <textarea class="form-control" formControlName="description" [(ngModel)]="fetchedUserCalendar.details.description" required placeholder="Description">
-              </textarea>
-        </div> -->
-        <!-- <div class="col-md-12">
-              <mwl-demo-utils-date-time-picker [(date)]="fetchedUserCalendar.start" (dateChange)="refresh.next()" placeholder="Not set">
-              </mwl-demo-utils-date-time-picker>
-            </div> -->
-        <!-- <div class="col-md-12">
-              <mwl-demo-utils-date-time-picker [(date)]="fetchedUserCalendar.end" (dateChange)="refresh.next()" placeholder="Not set">
-              </mwl-demo-utils-date-time-picker>
-            </div> -->
-        <!-- <div class="col-md-12">
-              <button class="btn btn-danger" (click)="deleteEvent(event, index)">Delete</button>
-              <button class="btn btn-succes" (click)="save()">Update</button>
-            </div> -->
-        <!-- </div> -->
+
 
       </div>
 

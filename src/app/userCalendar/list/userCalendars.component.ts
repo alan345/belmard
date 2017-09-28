@@ -221,8 +221,10 @@ export class UserCalendarsComponent implements OnInit {
 
           event.clients.forEach((user, j) => {
             this.events[i].color = user.profile.colorCalendar
-            this.events[i].title += user.profile.name + '/'
+            this.events[i].title += user.profile.lastName + ' '+ user.profile.name + '  '
             user.profile.address.forEach(singleAddress => {
+              this.events[i].title += singleAddress.zip
+              this.events[i].title += ' ';
               this.events[i].title += singleAddress.city
             })
           });
