@@ -139,8 +139,8 @@ export class UserCalendarsComponent implements OnInit {
       nowIndicator: true,
       businessHours: {
         dow: [1, 2, 3, 4, 5],
-        start: '10:00',
-        end: '18:00',
+        start: timeBeginbusinessHours,
+        end: timeEndbusinessHours,
       },
       header: {
         left: 'title',

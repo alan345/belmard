@@ -102,7 +102,7 @@ export class NewUserComponent implements OnInit {
           language: [''],
           colorCalendar: [''],
           otherData: [''],
-          name: ['', [Validators.required, Validators.minLength(3)]],
+          name: [''],
           lastName: ['', [Validators.required, Validators.minLength(3)]],
           phoneNumber: [''],
           fax: [''],
