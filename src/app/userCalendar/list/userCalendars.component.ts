@@ -115,7 +115,7 @@ export class UserCalendarsComponent implements OnInit {
       timeBegin = companie.option.calendar.timeBegin
       timeEnd = companie.option.calendar.timeEnd
       timeBeginbusinessHours = companie.option.calendar.timeBeginbusinessHours
-      timeEndbusinessHours = companie.option.calendar.timeBeginbusinessHours
+      timeEndbusinessHours = companie.option.calendar.timeEndbusinessHours
 
       slotDuration = companie.option.calendar.slotDuration
     })
