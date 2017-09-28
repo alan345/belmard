@@ -42,7 +42,7 @@
           <app-autocomplete [typeAutocomplete]="'user'" [canDelete]=false [title]="'Utilisateur'" [singleChoice]="'true'" [arrayContent]="fetchedUserCalendar.clients">
           </app-autocomplete>
         </div>
-        <div class="col-md-12">
+        <div *ngIf="fetchedUserCalendar.assignedTos.length" class="col-md-12">
           <app-autocomplete [typeAutocomplete]="'user'" [search]="{isExternalUser:false}" [title]="'Réparateur'" [singleChoice]="'true'" [arrayContent]="fetchedUserCalendar.assignedTos" (getResultAutocomplete)="selectUser($event[0])" (clearAutocomplete)="removeUser()">
           </app-autocomplete>
         </div>
