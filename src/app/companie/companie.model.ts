@@ -103,6 +103,8 @@ export class Calendar {
   timeEnd: string = '19:00:00';
   slotDuration: string = '00:30:00';
 
+  timeBeginbusinessHours: string = '10:00:00';
+  timeEndbusinessHours: string = '17:00:00';
 }
 //
 // export class Address {

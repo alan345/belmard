@@ -41,6 +41,8 @@ var companie = new Schema({
         timeBegin: {type: String, default: ['06:00:00']},
         timeEnd: {type: String, default: ['19:00:00']},
         slotDuration: {type: String, default: ['00:30:00']},
+        timeBeginbusinessHours: {type: String, default: ['10:30:00']},
+        timeEndbusinessHours: {type: String, default: ['17:00:00']},
       }
     },
     faxNumber: {type: String, default: ['']},

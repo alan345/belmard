@@ -106,11 +106,17 @@ export class UserCalendarsComponent implements OnInit {
     let slotDuration = ''
     let timeBegin= ''
     let timeEnd = ''
+    let timeBeginbusinessHours= ''
+    let timeEndbusinessHours = ''
+
 
     this.currentUser = this.authService.getCurrentUser()
     this.currentUser.ownerCompanies.forEach(companie => {
       timeBegin = companie.option.calendar.timeBegin
       timeEnd = companie.option.calendar.timeEnd
+      timeBeginbusinessHours = companie.option.calendar.timeBeginbusinessHours
+      timeEndbusinessHours = companie.option.calendar.timeBeginbusinessHours
+
       slotDuration = companie.option.calendar.slotDuration
     })
     if(!slotDuration) slotDuration = '00:30:00'
