@@ -281,7 +281,10 @@ export class ProjectSingleComponent implements OnInit {
             this.saved.emit(res.obj)
             // this.router.navigate(['project/' + res.obj._id]);
           },
-          error => {console.log(error)}
+          error => {
+            this.toastr.error('Error!', error.message)
+            console.log(error)
+          }
         );
     } else {
       this.projectService.saveProject(this.fetchedProject)

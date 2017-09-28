@@ -164,7 +164,8 @@ export class ProjectService {
     headers.append('Authorization', '' + this.authService.currentUser.token);
     return this.http.put(this.url + 'project/' + project._id, body, {headers: headers})
       .map(response => response.json())
-      .catch((error: Response) => {
+      .catch((error) => {
+        console.log(error)
         this.errorService.handleError(error.json());
         return Observable.throw(error.json());
       });

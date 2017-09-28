@@ -227,18 +227,24 @@ export class QuoteComponent implements OnInit {
   }
   resetSignature() {
     this.signaturePad.clear();
+    this.fetchedQuote.signature.isSigned = false
   }
   removeSignature() {
     this.fetchedQuote.signature = new Signature()
     this.fetchedQuote.statusQuote = 0
+    this.fetchedQuote.signature.isSigned = false
     this.updateSignature()
   }
   validateSignature() {
-    this.fetchedQuote.signature.base64 = this.imgSignatureBase64Temp
-    this.fetchedQuote.signature.dateSignature = new Date()
-    this.fetchedQuote.signature.users = [this.authService.getCurrentUser()]
-    this.fetchedQuote.statusQuote = 1
-    this.updateSignature()
+    if(this.imgSignatureBase64Temp) {
+      this.fetchedQuote.signature.base64 = this.imgSignatureBase64Temp
+      this.fetchedQuote.signature.isSigned = true
+      this.fetchedQuote.signature.dateSignature = new Date()
+      this.fetchedQuote.signature.users = [this.authService.getCurrentUser()]
+      this.fetchedQuote.statusQuote = 1
+      this.updateSignature()
+    }
+
   }
   drawComplete() {
     // will be notified of szimek/signature_pad's onEnd event

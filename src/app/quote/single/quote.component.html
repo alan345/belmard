@@ -43,8 +43,8 @@
         </div> -->
         <div *ngIf="fetchedQuote.quoteNumber" class="form-group">
           {{'Number' | translate}}
-          <!-- <input class="form-control" name="EstimateCode" type="text" value="28" /> -->
-          <input class="gooplusInput ac" formControlName="quoteNumber" type="number" [(ngModel)]="fetchedQuote.quoteNumber" placeholder="quoteNumber">
+          <!-- <input [readonly]="fetchedQuote.signature.isSigned" class="form-control" name="EstimateCode" type="text" value="28" /> -->
+          <input [readonly]="fetchedQuote.signature.isSigned" class="gooplusInput ac" formControlName="quoteNumber" type="number" [(ngModel)]="fetchedQuote.quoteNumber" placeholder="quoteNumber">
         </div>
 
         <div class="form-group">
@@ -64,22 +64,18 @@
       <div class="col-2">
         <div class="form-group">
           {{'Quote edit date' | translate}}
-          <input type="date" class="form-control" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedQuote.detail.dateQuote.issueDateString">
+          <input [readonly]="fetchedQuote.signature.isSigned" type="date" class="form-control" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedQuote.detail.dateQuote.issueDateString">
         </div>
         <div class="form-group">
           {{'Quote validity date' | translate}}
-          <input type="date" class="form-control" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedQuote.detail.dateQuote.expiryDateString">
+          <input [readonly]="fetchedQuote.signature.isSigned" type="date" class="form-control" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedQuote.detail.dateQuote.expiryDateString">
         </div>
         <!-- <div class="form-group">
-          {{'Discount in %' | translate}}
-          <input id="DiscountPercent" name="DiscountPercent" class="form-control" data-bind='value: formattedDefaultDiscount' />
-        </div> -->
-        <div class="form-group">
           {{'Status' | translate}}
-          <select class="form-control" formControlName="statusQuote" placeholder="" [(ngModel)]="fetchedQuote.statusQuote" name="statusQuote">
+          <select [disabled]="fetchedQuote.signature.isSigned" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.statusQuote" name="statusQuote">
             <option *ngFor="let n of statusQuotes" [value]="n.indexStatus">{{n.label}}</option>
           </select>
-        </div>
+        </div> -->
       </div>
       <div class="col-3">
         <div class="form-control" *ngFor="let client of fetchedQuote.clients">
@@ -94,18 +90,6 @@
             <div>{{client.profile.phoneNumber}}</div>
           </div>
         </div>
-
-        <!-- <div class="form-control" *ngFor="let companie of fetchedQuote.companieClients">
-          <h4>
-              <div>{{companie.nameCompanie}}</div></h4>
-          <div *ngFor="let singleAddress of companie.address">
-            <h5>{{singleAddress.nameAddress}}</h5>
-            <div>{{singleAddress.address}}</div>
-            <div>{{singleAddress.zip}} {{singleAddress.city}}</div>
-            <div>{{companie.phoneNumber}}</div>
-            <div>{{companie.email}}</div>
-          </div>
-        </div> -->
       </div>
       <div class="col-2">
       </div>
@@ -114,42 +98,29 @@
       <div class="col-8">
         <div class="form-group">
           {{'Title' | translate}}
-          <input type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedQuote.name" required minlength="5" placeholder="{{'Quote title' | translate}}">
+          <input [readonly]="fetchedQuote.signature.isSigned" type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedQuote.name" required minlength="5" placeholder="{{'Quote title' | translate}}">
         </div>
       </div>
       <div class="col-2">
       </div>
       <div class="col-12">
-        <!-- <div class="row">
-          <div>
-          </div>
-        </div> -->
-
-
-
-        <ul class="nav nav-tabs justify-content-end">
-
+        <ul *ngIf="!fetchedQuote.signature.isSigned" class="nav nav-tabs justify-content-end">
           <li class="nav-item dropdown">
             <a class="nav-link active dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{'Template' | translate}}</a>
             <div class="dropdown-menu">
-
               <app-autocomplete [typeAutocomplete]="'templateQuote'" [title]="'Load bucket'" [singleChoice]=true [arrayContent]="arrayContentToSearch" (getResultAutocomplete)="selectTemplateQuote($event[0])">
               </app-autocomplete>
               Save Template
               <div class="row">
                 <div>
-                  <input type="text" class="form-control" placeholder="nameTemplate" #nameTemplate>
+                  <input [readonly]="fetchedQuote.signature.isSigned" type="text" class="form-control" placeholder="nameTemplate" #nameTemplate>
                 </div>
                 <div>
                   <button type="button" class="btn btn-success" (click)="saveTemplateQuote(nameTemplate.value);nameTemplate.value=''"><i class="fa fa-floppy-o"></i></button>
                 </div>
               </div>
-              <!-- <a class="dropdown-item" href="#"></a>
-              <a class="dropdown-item" href="#">Name Bucket</a>
-              <a class="dropdown-item" href="#">Save Bucket</a> -->
             </div>
           </li>
-
         </ul>
 
         <div class="form-control">
@@ -162,14 +133,11 @@
             <div class="h6 col-1">{{'Price excl tax' | translate}}</div>
             <div class="h6 col-1">{{'VAT(%)' | translate}}</div>
             <div class="h6 col-1">{{'Total excl tax' | translate}}</div>
-            <!-- <div class="h6 col-2">{{'Total with taxes' | translate}}</div> -->
           </div>
-
-          <!-- <button type="button" class="btn btn-success" (click)="addBucketProducts()">AddBucketProducts</button> -->
           <div *ngFor="let devisDetail of fetchedQuote.devisDetails; let i=index">
             <div class="row">
-              <input class="form-control col-2" type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].nameBucketProducts" placeholder="Category">
-              <button type="button" class="btn btn-danger btn-sm" (click)="removeBucketProducts(i)"><i class="fa fa-times"></i></button>
+              <input [readonly]="fetchedQuote.signature.isSigned" class="form-control col-2" type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].nameBucketProducts" placeholder="Category">
+              <button *ngIf="!fetchedQuote.signature.isSigned" type="button" class="btn btn-danger btn-sm" (click)="removeBucketProducts(i)"><i class="fa fa-times"></i></button>
             </div>
             <div style="min-height: 20px" [dragulaModel]='fetchedQuote.devisDetails[i].bucketProducts' [dragula]='"third-bag"'>
               <div *ngFor="let bucketProduct of devisDetail.bucketProducts; let j=index">
@@ -177,91 +145,56 @@
 
                   <div class="col-1">
                     <div class="row">
-                      <button type="button" class="btn btn-danger btn-sm" (click)="removeRow(i, j)"><i class="fa fa-times"></i></button>
-
-                      <button type="button" class="btn btn-sm handle"><i class="fa fa-arrows handle"></i></button>
-                      <!-- <button type="button" class="btn btn-sm" (click)="editRaw(i, j)"><i class="fa fa-times"></i></button> -->
+                      <button *ngIf="!fetchedQuote.signature.isSigned" type="button" class="btn btn-danger btn-sm" (click)="removeRow(i, j)"><i class="fa fa-times"></i></button>
+                      <button *ngIf="!fetchedQuote.signature.isSigned" type="button" class="btn btn-sm handle"><i class="fa fa-arrows handle"></i></button>
                     </div>
                   </div>
-
                   <div class="col-1">
                     <div *ngIf="bucketProduct.typeRow=='product'">
                       <div *ngFor="let product of fetchedQuote.devisDetails[i].bucketProducts[j].productInit">
                         <app-picture [addPicture]=false [deletePicture]=false [forms]="product.forms"></app-picture>
                       </div>
                     </div>
-
                   </div>
-
                   <div class="col-6">
                     <div *ngIf="bucketProduct.typeRow=='product'">
-                      <app-autocomplete [typeAutocomplete]="'product'" [title]="" [singleChoice]=true [arrayContent]="fetchedQuote.devisDetails[i].bucketProducts[j].productInit" (getResultAutocomplete)="selectProduct($event[0], i, j)">
+                      <app-autocomplete [typeAutocomplete]="'product'" [canDelete]="!fetchedQuote.signature.isSigned" [title]="" [singleChoice]=true [arrayContent]="fetchedQuote.devisDetails[i].bucketProducts[j].productInit" (getResultAutocomplete)="selectProduct($event[0], i, j)">
                       </app-autocomplete>
                     </div>
-                    <!-- <a [routerLink]="['/product/' + bucketProduct.productInit._id]" class="admn-btn">
-                    {{bucketProduct.productInit.details.reference}}
-                  </a> -->
                     <div *ngIf="bucketProduct.typeRow=='text'">
                       <div *ngIf="fetchedQuote.devisDetails[i].bucketProducts[j].isEditMode">
                         <quill-editor [ngModelOptions]="{standalone: true}" [options]="editorOptions" (blur)="onEditorBlured($event, i, j)" (focus)="onEditorFocused($event)" (ready)="onEditorCreated($event)" (change)="onContentChanged($event)" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].title">
                         </quill-editor>
                       </div>
                       <div (click)="changeQuillEditMode(i, j)" *ngIf="!fetchedQuote.devisDetails[i].bucketProducts[j].isEditMode" [innerHtml]="fetchedQuote.devisDetails[i].bucketProducts[j].title">
-
                       </div>
-
-                      <!-- <ckeditor
-                    [ngModelOptions]="{standalone: true}"
-                    [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].title"
-                    [config]="ckeConfig"
-                    [readonly]="false"
-                    (change)="onChange($event)"
-                    (ready)="onReady($event)"
-                    (focus)="onFocus($event)"
-                    (blur)="onBlur($event)"
-                    debounce="500">
-                  </ckeditor> -->
                     </div>
                   </div>
-                  <!-- <div class="col-md-2">
-                <a [routerLink]="['/product/' + bucketProduct.productInit._id]" class="admn-btn">
-                          {{bucketProduct.productInit.details.reference}}
-                        </a>
-              </div> -->
                   <div class="col-1">
-                    <input class="gooplusInput ac" type="number" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].quantity" placeholder="quantity">
+                    <input [readonly]="fetchedQuote.signature.isSigned" class="gooplusInput ac" type="number" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].quantity" placeholder="quantity">
                     <div *ngIf="bucketProduct.typeRow=='product'">
-
                       <div *ngFor="let product of fetchedQuote.devisDetails[i].bucketProducts[j].productInit">
                         {{product.details.unit}}
                       </div>
-
                     </div>
                   </div>
                   <div class="col-1 ac">
-                    <input class="gooplusInput ac" type="number" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].priceWithoutTaxes" placeholder="priceWithoutTaxes">
+                    <input [readonly]="fetchedQuote.signature.isSigned" class="gooplusInput ac" type="number" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].priceWithoutTaxes" placeholder="priceWithoutTaxes">
                   </div>
-
                   <div class="col-md-1 ac">
-
-                    <select (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].vat">
+                    <select [disabled]="fetchedQuote.signature.isSigned" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].vat">
                       <option *ngFor="let VAT of VATs" [ngValue]="VAT">
                         {{VAT}}%
                       </option>
                     </select>
-                    <!-- <input class="gooplusInput ac" type="number" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].vat" placeholder="vat"> -->
                   </div>
                   <div class="col-1">
                     <a class="form-control"> {{fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithoutTaxes | round}} </a>
                   </div>
-                  <!-- <div class="col-2">
-                {{fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithTaxes | round}}
-              </div>  -->
                 </div>
               </div>
             </div>
           </div>
-
 
           <div *ngFor="let priceQuoteTaxe of fetchedQuote.priceQuote.priceQuoteTaxes">
             <div class="row ac font-weight-bold">
@@ -277,16 +210,10 @@
           </div>
 
           <div class="row ac font-weight-bold">
-            <div class="col-3">
-              <!-- <select class="form-control" #t (change)="addRow(t.value); t.value = ''">
-                      <option [attr.value]="''">{{'Add row' | translate}}</option>
-                      <option *ngFor="let n of rowTypes" [attr.value]="n.value">{{n.label}}</option>
-                    </select> -->
+            <div *ngIf="!fetchedQuote.signature.isSigned" class="col-3">
               <button type="button" class="btn btn-primary btn-sm" (click)="addRow('category')">+ category</button>
               <button type="button" class="btn btn-primary btn-sm" (click)="addRow('text')">+ text</button>
               <button type="button" class="btn btn-primary btn-sm" (click)="addRow('product')">+ product</button>
-
-
             </div>
             <div class="col-3">
             </div>
@@ -303,24 +230,7 @@
         </div>
         <div class="row">
           <div class="col-3">
-            <!-- <div class="row">
-              <select class="form-control" #t (change)="addRow(t.value); t.value = ''">
-            <option [attr.value]="''">{{'Add row' | translate}}</option>
-            <option *ngFor="let n of rowTypes" [attr.value]="n.value">{{n.label}}</option>
-          </select>
-            </div>
-            <div class="row">
-              <input type="text" class="form-control" placeholder="nameTemplate" #nameTemplate>
-              <button type="button" class="btn btn-success" (click)="saveTemplateQuote(nameTemplate.value)">saveTemplateQuote</button>
-            </div>
-            <div class="row">
-              <app-autocomplete [typeAutocomplete]="'templateQuote'" [title]="" [singleChoice]=true [arrayContent]="arrayContentToSearch" (getResultAutocomplete)="selectTemplateQuote($event[0])">
-              </app-autocomplete>
-            </div> -->
-
-
           </div>
-
           <div class="col-5">
             <div *ngIf="fetchedQuote._id">
               <div class="FormGroup">
@@ -328,21 +238,13 @@
                  <i class="fa fa-calendar" aria-hidden="true"></i>
                  <span>{{'Show Comments' | translate}}</span>
                 </button>
-
                 <div *ngIf="showLogs">
                   <app-comments [search]="search"></app-comments>
                 </div>
               </div>
-
             </div>
-            <!-- <textarea class="form-control" rows="10" placeholder="Infos" ></textarea> -->
           </div>
-
-
-
-
           <div *ngIf="fetchedQuote.typeQuote === 'quote'" style="height:280px" class="col-4">
-
             <div class="ac sign">
               <div class="card ac">
                 <div class="ac" *ngIf="!fetchedQuote.signature.base64">
@@ -397,7 +299,7 @@
         <div class="row">
           <div class="col-12">
             <div>
-              <div class="valid-edit">
+              <div *ngIf="!fetchedQuote.signature.isSigned" class="valid-edit">
                 <button type="submit" class="btn valid">{{'Save' | translate}}</button>
                 <button *ngIf="fetchedQuote._id" type="button" class="btn false" (click)="openDialogDelete()">
                   {{'Delete' | translate}}

@@ -49,6 +49,7 @@ export class DateQuote {
 
 export class Signature {
   base64: string = '';
+  isSigned: boolean = false;
   dateSignature: Date;
   users: User[] = [];
 }

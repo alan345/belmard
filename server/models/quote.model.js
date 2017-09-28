@@ -60,6 +60,7 @@ var quote = new Schema({
       // paiementQuote: {type: Number, default: [0]},
     },
     signature:{
+      isSigned:{type: Boolean, default: [false]},
       base64:{type: String, default: ['']},
       dateSignature:{type: Date},
       users:[{type: Schema.Types.ObjectId, ref: 'User'}],
