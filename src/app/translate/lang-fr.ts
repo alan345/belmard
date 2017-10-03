@@ -126,6 +126,9 @@ export const LANG_FR_TRANS = {
     '+ text': '+ Texte',
     '+ product': '+ Produit',
     'priceWithoutTaxes': 'Prix HT',
+    'Reset': 'Recommencer',
+    'Unsign': 'Effacer',
+    'Quote': 'Devis',
   
     'Today': 'Aujourd´hui',
 
