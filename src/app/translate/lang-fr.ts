@@ -76,6 +76,8 @@ export const LANG_FR_TRANS = {
     'Phone': 'Téléphone',
     'Add Picture': 'Ajouter image',
     'New Address': 'Nouvelle Adresse',
+    'Mr.': 'M.',
+    'Mrs.': 'Mme',
 
 
     'Quotes': 'Devis',
