@@ -40,6 +40,7 @@ export const LANG_FR_TRANS = {
     'Save': 'Sauvegarder',
     'Delete': 'Supprimer',
     'Project': 'Projet',
+    'Save & Create project': 'Sauvegarder et Créer Projet',
 
     'Users': 'Contacts',
     'User': 'Contact',
@@ -62,7 +63,7 @@ export const LANG_FR_TRANS = {
     'Zip': 'Code Postal',
     'Country': 'Pays',
     'Acces Code': 'Code Entrée',
-    'Done': 'Enregistrer',
+    'Done': 'Terminer',
     'accessCode': 'Code Immeuble',
     'Acces type': 'Type d´accès',
     'floor': 'Etage',
@@ -83,6 +84,7 @@ export const LANG_FR_TRANS = {
     'Additionnal address': 'Complément adresse',
     'New contact person': 'Nouveau interlocuteur',
     'Contact person': 'Interlocuteur',
+    'Company': 'Entreprise',
     
 
 
@@ -129,6 +131,12 @@ export const LANG_FR_TRANS = {
     'Reset': 'Recommencer',
     'Unsign': 'Effacer',
     'Quote': 'Devis',
+    'referenceName': 'Nom du Produit',
+    'description': 'Description',
+    'Unit': 'Unité',
+  
+    'Invoices': 'Factures',
+    'invoice': 'Facture',
   
     'Today': 'Aujourd´hui',
 
