@@ -78,6 +78,12 @@ export const LANG_FR_TRANS = {
     'New Address': 'Nouvelle Adresse',
     'Mr.': 'M.',
     'Mrs.': 'Mme',
+    'Address shipping': 'Adresse Intervention',
+    'Address billing': 'Adresse de Facturation',
+    'Additionnal address': 'Complément adresse',
+    'New contact person': 'Nouveau interlocuteur',
+    'Contact person': 'Interlocuteur',
+    
 
 
     'Quotes': 'Devis',
