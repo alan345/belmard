@@ -115,13 +115,30 @@ export const LANG_FR_TRANS = {
     'Create a new Paiement': 'Nouveau Paiement',
     'Please Select': 'Mode de Paiement',
     'Amount': 'Montant',
-
+    'Quote edit date': 'Date Édition',
+    'Quote validity date': 'Date de Validité',
+    'Quote title': 'Titre du devis',
+    'Template': 'Modèle',
+    'Price excl tax': 'Prix HT',
+    'VAT(%)': 'TVA(%)',
+    'Total excl tax': 'Total HT',
+    '+ category': '+ Catégorie',
+    '+ text': '+ Texte',
+    '+ product': '+ Produit',
+    'priceWithoutTaxes': 'Prix HT',
+  
     'Today': 'Aujourd´hui',
 
 
     'project': 'Projet',
     'Projects': 'Projets',
     'Ref': 'Nom',
+    'Name Project': 'Nom du Projet',
+    'Started': 'En cours',
+    'Done': 'Terminé',
+    'Assigned To': 'Assigné à',
+    'My tasks': 'Mes tâches',
+    'Name Task': 'Description',
 
 
     'task': 'tâche',
