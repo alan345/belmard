@@ -63,7 +63,6 @@ export const LANG_FR_TRANS = {
     'Zip': 'Code Postal',
     'Country': 'Pays',
     'Acces Code': 'Code Entrée',
-    'Done': 'Terminer',
     'accessCode': 'Code Immeuble',
     'Acces type': 'Type d´accès',
     'floor': 'Etage',
@@ -85,7 +84,7 @@ export const LANG_FR_TRANS = {
     'New contact person': 'Nouveau interlocuteur',
     'Contact person': 'Interlocuteur',
     'Company': 'Entreprise',
-    
+
 
 
     'Quotes': 'Devis',
@@ -134,10 +133,10 @@ export const LANG_FR_TRANS = {
     'referenceName': 'Nom du Produit',
     'description': 'Description',
     'Unit': 'Unité',
-  
+
     'Invoices': 'Factures',
     'invoice': 'Facture',
-  
+
     'Today': 'Aujourd´hui',
 
 
