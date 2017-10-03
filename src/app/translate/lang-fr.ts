@@ -47,6 +47,7 @@ export const LANG_FR_TRANS = {
     'External Contact': 'Contact Externe',
     'Create a new team member': 'Créer un nouveau membre interne',
     'Create a new external member': 'Créer un nouveau contact externe',
+    'Title': 'Titre',
     'Firstname': 'Prénom',
     'Lastname': 'Nom',
     'Type User': 'Fonction',
