@@ -1,5 +1,5 @@
 import { Component, ViewChild , Inject} from '@angular/core';
-import { MdDialogRef, MdDialogConfig, MD_DIALOG_DATA} from '@angular/material';
+import { MatDialogRef, MatDialogConfig, MAT_DIALOG_DATA} from '@angular/material';
 import { CommentComponent }  from '../comment.component';
 import { Quote } from '../../../quote/quote.model'
 import { Comment } from '../../comment.model';
@@ -18,8 +18,8 @@ export class CommentDialogComponent {
   // private editCommentComponent: EditCommentComponent;
 
   constructor(
-    public dialogRef: MdDialogRef<CommentComponent>,
-    @Inject(MD_DIALOG_DATA) public data: any
+    public dialogRef: MatDialogRef<CommentComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     console.log(data)
      this.fetchedComment = data.fetchedComment

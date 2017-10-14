@@ -1,9 +1,9 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
-import { MdDialogRef} from '@angular/material';
+import { MatDialogRef} from '@angular/material';
 // import { ProjectSingleComponent }  from '../projectSingle.component';
 import { Form } from './form/form.model';
 import { EditOptionsComponentDialog } from './form/single/modalLibrary/modalLibrary.component';
-import { MdDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-picture',
@@ -20,7 +20,7 @@ export class PictureComponent {
 
 
   constructor(
-    public dialog: MdDialog,
+    public dialog: MatDialog,
   ) {}
 
   openDialog(positionImage: string) {

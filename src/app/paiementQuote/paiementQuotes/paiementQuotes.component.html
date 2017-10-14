@@ -56,8 +56,8 @@
         </tbody>
       </table>
       <div>
-        <md-paginator [length]="paginationData.totalItems" [pageSize]="paginationData.itemsPerPage" (page)="getPage($event.pageIndex*1+1)">
-        </md-paginator>
+        <mat-paginator [length]="paginationData.totalItems" [pageSize]="paginationData.itemsPerPage" (page)="getPage($event.pageIndex*1+1)">
+        </mat-paginator>
         <app-loadingInApp *ngIf="loading"></app-loadingInApp>
       </div>
     </div>

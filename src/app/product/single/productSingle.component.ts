@@ -3,7 +3,7 @@ import { ProductService} from '../product.service';
 import { CompanieService} from '../../companie/companie.service';
 
 import { ToastsManager} from 'ng2-toastr';
-import { MdDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { Product, ItemSteps } from '../product.model';
@@ -62,7 +62,7 @@ export class ProductSingleComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private productService: ProductService,
     private toastr: ToastsManager,
-    public dialog: MdDialog,
+    public dialog: MatDialog,
     private router: Router,
     private location: Location,
     private activatedRoute: ActivatedRoute,

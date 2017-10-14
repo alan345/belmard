@@ -3,7 +3,7 @@ import { AuthService} from '../../auth/auth.service';
 import { ProductService} from '../product.service';
 import { Product} from '../product.model';
 import { ToastsManager} from 'ng2-toastr';
-import { MdDialog} from '@angular/material';
+import { MatDialog} from '@angular/material';
 import { Router} from '@angular/router';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ViewEncapsulation} from '@angular/core';
@@ -41,7 +41,7 @@ export class ProductsComponent implements OnInit {
     private sanitizer: DomSanitizer,
     private productService: ProductService,
     private toastr: ToastsManager,
-    public dialog: MdDialog,
+    public dialog: MatDialog,
     private router: Router,
     // private location: Location,
     private authService: AuthService,

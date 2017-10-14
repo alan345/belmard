@@ -12,7 +12,7 @@ import { NotificationDialogComponent} from './single/dialog/notificationDialog.c
 
 import { NotificationService} from './notification.service';
 import { NotificationRouting} from './notificationRouting.module';
-import { MaterialModule } from '@angular/material';
+// import { MaterialModule } from '@angular/material';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -22,7 +22,7 @@ import { SharedModule } from '../shared/shared.module';
     NotificationRouting,
     CommonModule,
     FormsModule,
-    MaterialModule,
+    // MaterialModule,
     ReactiveFormsModule,
     RouterModule,
     SharedModule,

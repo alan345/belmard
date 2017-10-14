@@ -14,7 +14,7 @@ import {Search} from '../../shared/shared.model'
 import { PaiementQuoteDialogComponent } from '../../paiementQuote/single/dialog/paiementQuoteDialog.component';
 
 
-import { MdDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 
 
 @Component({
@@ -36,7 +36,7 @@ export class newObjDialogComponent implements OnInit {
     private router: Router,
     private location: Location,
     private translateService: TranslateService,
-    public mdDialog: MdDialog,
+    public mdDialog: MatDialog,
   ) { }
 
 

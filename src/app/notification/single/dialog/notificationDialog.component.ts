@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { MdDialogRef} from '@angular/material';
+import { MatDialogRef} from '@angular/material';
 import { NotificationComponent }  from '../notification.component';
 
 
@@ -13,7 +13,7 @@ export class NotificationDialogComponent {
   // @ViewChild(NotificationSingleComponent)
   // private notificationSingleComponent: NotificationSingleComponent;
 
-  constructor(public dialogRef: MdDialogRef<NotificationComponent>) {}
+  constructor(public dialogRef: MatDialogRef<NotificationComponent>) {}
 
   saved(data) {
     this.dialogRef.close(data)

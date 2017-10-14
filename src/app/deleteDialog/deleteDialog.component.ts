@@ -1,6 +1,6 @@
 import { Component} from '@angular/core';
 
-import {  MdDialogRef} from '@angular/material';
+import {  MatDialogRef} from '@angular/material';
 
 
 @Component({
@@ -8,7 +8,7 @@ import {  MdDialogRef} from '@angular/material';
   templateUrl: './deleteDialog.component.html',
 })
 export class DeleteDialog {
-  constructor(public dialogRefDelete: MdDialogRef<DeleteDialog>) {}
+  constructor(public dialogRefDelete: MatDialogRef<DeleteDialog>) {}
 
   // deletePress(){
   //   console.log("delete")

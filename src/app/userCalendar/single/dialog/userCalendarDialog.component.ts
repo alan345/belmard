@@ -1,5 +1,5 @@
 import { Component, ViewChild , Inject} from '@angular/core';
-import { MdDialogRef, MdDialogConfig, MD_DIALOG_DATA} from '@angular/material';
+import { MatDialogRef, MatDialogConfig, MAT_DIALOG_DATA} from '@angular/material';
 import { UserCalendarComponent }  from '../userCalendar.component';
 import { Quote } from '../../../quote/quote.model'
 import { UserCalendar } from '../../userCalendar.model';
@@ -18,8 +18,8 @@ export class UserCalendarDialogComponent {
   // private editUserCalendarComponent: EditUserCalendarComponent;
 
   constructor(
-    public dialogRef: MdDialogRef<UserCalendarComponent>,
-    @Inject(MD_DIALOG_DATA) public data: any
+    public dialogRef: MatDialogRef<UserCalendarComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
      this.fetchedUserCalendar._id = data.fetchedUserCalendar._id
      this.fetchedUserCalendar.title = data.fetchedUserCalendar.title

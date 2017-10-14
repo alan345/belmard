@@ -11,7 +11,7 @@ import {
 } from '@angular/router'
 import {AuthService} from './auth/auth.service';
 import {GlobalEventsManager} from './globalEventsManager';
-import {MdSidenav} from '@angular/material';
+import {MatSidenav} from '@angular/material';
 
 import {tokenNotExpired} from 'angular2-jwt';
 
@@ -25,7 +25,7 @@ import {tokenNotExpired} from 'angular2-jwt';
 export class AppComponent {
 loading: boolean = true;
 isLoggedIn: boolean = false;
-@ViewChild('sidenav') public sidenav: MdSidenav;
+@ViewChild('sidenav') public sidenav: MatSidenav;
 
 
   constructor(

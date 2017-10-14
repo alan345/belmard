@@ -1,5 +1,5 @@
 import { Component, ViewChild,Inject } from '@angular/core';
-import { MdDialogRef, MD_DIALOG_DATA} from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { QuoteComponent }  from '../quote.component';
 import { Search } from '../../../shared/shared.model';
 
@@ -16,8 +16,8 @@ export class QuoteDialogComponent {
   // private quoteSingleComponent: QuoteSingleComponent;
 
   constructor(
-     public dialogRef: MdDialogRef<QuoteComponent>,
-     @Inject(MD_DIALOG_DATA) public data: any
+     public dialogRef: MatDialogRef<QuoteComponent>,
+     @Inject(MAT_DIALOG_DATA) public data: any
    ) {
      this.search = data.search
    }

@@ -5,7 +5,7 @@ import { QuoteService} from '../quote/quote.service';
 
 import { PaiementQuote} from '../paiementQuote/paiementQuote.model';
 import { ToastsManager} from 'ng2-toastr';
-import { MdDialog} from '@angular/material';
+import { MatDialog} from '@angular/material';
 import { Router} from '@angular/router';
 import { Location} from '@angular/common';
 import { PaiementQuoteGraph } from './reporting.model'
@@ -47,7 +47,7 @@ export class ReportingsComponent implements OnInit {
     private authService: AuthService,
   //  private modalService: NgbModal,
     private toastr: ToastsManager,
-    public dialog: MdDialog,
+    public dialog: MatDialog,
     private router: Router,
     private location: Location,
     private quoteService: QuoteService,

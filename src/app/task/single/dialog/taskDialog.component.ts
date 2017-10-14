@@ -1,5 +1,5 @@
 import { Component, ViewChild , Inject} from '@angular/core';
-import { MdDialogRef, MdDialogConfig, MD_DIALOG_DATA} from '@angular/material';
+import { MatDialogRef, MatDialogConfig, MAT_DIALOG_DATA} from '@angular/material';
 import { TaskComponent }  from '../task.component';
 import { Quote } from '../../../quote/quote.model'
 import { Task } from '../../task.model';
@@ -18,8 +18,8 @@ export class TaskDialogComponent {
   // private editTaskComponent: EditTaskComponent;
 
   constructor(
-    public dialogRef: MdDialogRef<TaskComponent>,
-    @Inject(MD_DIALOG_DATA) public data: any
+    public dialogRef: MatDialogRef<TaskComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     console.log(data)
      this.fetchedTask = data.fetchedTask

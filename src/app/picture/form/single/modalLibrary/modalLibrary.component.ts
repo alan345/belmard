@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { MdDialogRef} from '@angular/material';
+import { MatDialogRef} from '@angular/material';
 import { UserFormsComponent }  from '../../list/userForms.component';
 
 
@@ -13,7 +13,7 @@ export class EditOptionsComponentDialog {
   @ViewChild(UserFormsComponent)
   private userFormsComponent: UserFormsComponent;
 
-  constructor(public dialogRef: MdDialogRef<EditOptionsComponentDialog>) {}
+  constructor(public dialogRef: MatDialogRef<EditOptionsComponentDialog>) {}
 
 
   onUploadFinisedChildToParent() {

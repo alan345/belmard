@@ -3,7 +3,7 @@ import { AuthService} from '../../auth/auth.service';
 import { QuoteService} from '../../quote/quote.service';
 import { Quote, StatusQuotes} from '../../quote/quote.model';
 import { ToastsManager} from 'ng2-toastr';
-import { MdDialog} from '@angular/material';
+import { MatDialog} from '@angular/material';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location} from '@angular/common';
 import { Search, PaginationData } from '../../shared/shared.model';
@@ -36,7 +36,7 @@ export class QuotesComponent implements OnInit {
     private authService: AuthService,
   //  private modalService: NgbModal,
     private toastr: ToastsManager,
-    public dialog: MdDialog,
+    public dialog: MatDialog,
     private router: Router,
     private location: Location,
     private activatedRoute: ActivatedRoute,

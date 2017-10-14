@@ -7,7 +7,9 @@ import { TemplateQuoteService} from '../quote/templateQuote.service';
 
 import { RightService} from '../right/right.service';
 import { ProjectService} from '../project/project.service';
-import { MdDialog } from '@angular/material';
+// import { MatDialog } from '@angular/material';
+import {MatDialogModule} from '@angular/material';
+
 
 // import { UserDialogComponent } from '../user/singleUser/dialog/userDialog.component';
 // import { CompanieDialogComponent } from '../companie/single/dialog/companieDialog.component';
@@ -42,7 +44,7 @@ export class AutocompleteComponent {
 
 
   constructor(
-    public dialog: MdDialog,
+    public dialog: MatDialogModule,
     private userService: UserService,
     private companieService: CompanieService,
     private productService: ProductService,

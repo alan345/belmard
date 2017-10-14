@@ -15,13 +15,14 @@ import { RoundPipe} from './round.pipe';
 import { HeaderComponent } from '../nav/header/header.component';
 // import { newObjDialogComponent } from '../nav/newObjDialog/newObjDialog.component';
 
-import { MaterialModule } from '@angular/material';
+// import { MaterialModule } from '@angular/material';
 
 import { LoadingInAppComponent } from '../nav/loadingInApp/loadingInApp.component';
 import { LoginInAppComponent } from '../nav/loginInApp/loginInApp.component';
 
 import {CommentModule} from '../comment/comment.module';
 import { TranslateModule}   from '../translate/translate.module';
+import { MatPaginatorModule} from '@angular/material';
 
 
 
@@ -33,7 +34,8 @@ import { TranslateModule}   from '../translate/translate.module';
     // AutocompleteModule,
     PictureModule,
     // CommentModule,
-    MaterialModule,
+    // MaterialModule,
+    MatPaginatorModule,
     TranslateModule,
 
 
@@ -62,7 +64,8 @@ import { TranslateModule}   from '../translate/translate.module';
     LoadingInAppComponent,
     LoginInAppComponent,
     PictureModule,
-    MaterialModule,
+    // MaterialModule,
+    MatPaginatorModule,
     TranslateModule,
     // CommentModule,
     // CommentModule,

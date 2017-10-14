@@ -15,7 +15,7 @@ import { NotificationDialogComponent } from '../../notification/single/dialog/no
 import { ListNewObjDialogComponent } from './newObj/dialog/listNewObjDialog.component'
 
 
-import { MdDialog } from '@angular/material';
+import { MatDialog } from '@angular/material';
 
 
 
@@ -40,7 +40,7 @@ export class NavbarComponent implements OnInit {
     private authService: AuthService,
     private adminService: AdminService,
     private notificationService: NotificationService,
-    public mdDialog: MdDialog,
+    public mdDialog: MatDialog,
     // private userService: UserService,
     private router: Router,
     // private companieGuardService: CompanieGuardService,

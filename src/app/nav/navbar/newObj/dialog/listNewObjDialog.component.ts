@@ -1,5 +1,5 @@
 import { Component, ViewChild, AfterViewInit} from '@angular/core';
-import { MdDialogRef} from '@angular/material';
+import { MatDialogRef} from '@angular/material';
 // import { ListNewObjComponent }  from '../listNewObj.component';
 import { AuthService} from '../../../../auth/auth.service';
 import {

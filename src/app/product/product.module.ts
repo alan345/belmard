@@ -10,7 +10,7 @@ import { ProductSingleComponent} from './single/productSingle.component';
 import { ProductService} from './product.service';
 import { CompanieModule } from '../companie/companie.module';
 import { ProductRouting} from './productRouting.module';
-import { MaterialModule } from '@angular/material';
+// import { MaterialModule } from '@angular/material';
 
 
 import {SharedModule } from '../shared/shared.module';
@@ -21,7 +21,7 @@ import {SharedModule } from '../shared/shared.module';
     ProductRouting,
     CommonModule,
     FormsModule,
-    MaterialModule,
+    // MaterialModule,
     ReactiveFormsModule,
     CompanieModule,
     SharedModule,

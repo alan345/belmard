@@ -3,7 +3,7 @@ import { AuthService} from '../../auth/auth.service';
 import { RightService} from '../../right/right.service';
 import { Right} from '../right.model';
 import { ToastsManager} from 'ng2-toastr';
-import { MdDialog} from '@angular/material';
+import { MatDialog} from '@angular/material';
 import { Router} from '@angular/router';
 import { Location} from '@angular/common';
 
@@ -34,7 +34,7 @@ export class RightsComponent implements OnInit {
     private authService: AuthService,
   //  private modalService: NgbModal,
     private toastr: ToastsManager,
-    public dialog: MdDialog,
+    public dialog: MatDialog,
     private router: Router,
     private location: Location,
   ) {}

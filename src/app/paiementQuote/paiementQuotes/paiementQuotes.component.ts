@@ -3,7 +3,7 @@ import { AuthService} from '../../auth/auth.service';
 import { PaiementQuoteService} from '../../paiementQuote/paiementQuote.service';
 import { PaiementQuote} from '../../paiementQuote/paiementQuote.model';
 import { ToastsManager} from 'ng2-toastr';
-import { MdDialog} from '@angular/material';
+import { MatDialog} from '@angular/material';
 import { Router, ActivatedRoute, Params} from '@angular/router';
 import { Location} from '@angular/common';
 
@@ -48,7 +48,7 @@ export class PaiementQuotesComponent implements OnInit {
     private authService: AuthService,
     private activatedRoute: ActivatedRoute,
     private toastr: ToastsManager,
-    public dialog: MdDialog,
+    public dialog: MatDialog,
     private router: Router,
     private location: Location,
   ) {}
