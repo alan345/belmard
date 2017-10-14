@@ -23,6 +23,7 @@ import { LoginInAppComponent } from '../nav/loginInApp/loginInApp.component';
 import {CommentModule} from '../comment/comment.module';
 import { TranslateModule}   from '../translate/translate.module';
 import { MatPaginatorModule} from '@angular/material';
+import {MatDialogModule} from '@angular/material';
 
 
 
@@ -36,6 +37,7 @@ import { MatPaginatorModule} from '@angular/material';
     // CommentModule,
     // MaterialModule,
     MatPaginatorModule,
+    MatDialogModule,
     TranslateModule,
 
 
@@ -58,6 +60,7 @@ import { MatPaginatorModule} from '@angular/material';
     CommonModule,
     FormsModule,
     RoundPipe,
+    MatDialogModule,
     // HeaderComponent,
     // newObjDialogComponent,
     // LoadingComponent,
