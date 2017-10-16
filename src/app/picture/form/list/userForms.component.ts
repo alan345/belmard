@@ -3,7 +3,7 @@ import { FormService} from '../form.service';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../auth/auth.service';
 // import { SeePictureDialogComponent } from '../seePictureDialog/seePictureDialog.component';
-import { MdDialog} from '@angular/material';
+import { MatDialog} from '@angular/material';
 import { Form } from '../form.model';
 
 
@@ -35,7 +35,7 @@ export class UserFormsComponent implements OnInit {
 
 
   constructor(
-    public dialog: MdDialog,
+    public dialog: MatDialog,
     private formService: FormService,
     private activatedRoute: ActivatedRoute,
     private authService: AuthService,

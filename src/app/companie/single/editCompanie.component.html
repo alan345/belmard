@@ -103,7 +103,7 @@
           <input type="text" class="form-control" formControlName="timeBeginbusinessHours" [(ngModel)]="fetchedCompanie.option.calendar.timeBeginbusinessHours" placeholder="timeBeginbusinessHours">
           <input type="text" class="form-control" formControlName="timeEndbusinessHours" [(ngModel)]="fetchedCompanie.option.calendar.timeEndbusinessHours" placeholder="timeEndbusinessHours">
 
-  
+
 
         </div>
       </div>
@@ -176,11 +176,11 @@
         <button type="button" class="false" (click)="initDataToRemove()">Init Data</button>
         <h4>{{'banck' | translate}}</h4>
         <h4>{{'Stripe' | translate}}</h4>
-        <md-radio-group class="example-radio-group" formControlName="serviceSelected" [(ngModel)]="fetchedCompanie.banck.serviceSelected">
-          <md-radio-button class="btn btn-warning btn-sm" *ngFor="let servicesBank of servicesBanks" [value]="servicesBank">
+        <!-- <mat-radio-group class="example-radio-group" formControlName="serviceSelected" [(ngModel)]="fetchedCompanie.banck.serviceSelected">
+          <mat-radio class="btn btn-warning btn-sm" *ngFor="let servicesBank of servicesBanks" [value]="servicesBank">
             {{servicesBank}}
-          </md-radio-button>
-        </md-radio-group>
+          </mat-radio>
+        </mat-radio-group> -->
 
         <input type="text" class="form-control" formControlName="secretKey" [(ngModel)]="fetchedCompanie.banck.stripe.secretKey" placeholder="secretKey">
       </div>

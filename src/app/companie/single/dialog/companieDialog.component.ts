@@ -1,5 +1,5 @@
 import { Component, ViewChild } from '@angular/core';
-import { MdDialogRef} from '@angular/material';
+import { MatDialogRef} from '@angular/material';
 // import { EditCompanieComponent }  from '../editCompanie.component';
 
 
@@ -13,7 +13,7 @@ export class CompanieDialogComponent {
   // @ViewChild(EditCompanieComponent)
   // private editCompanieComponent: EditCompanieComponent;
 
-  constructor(public dialogRef: MdDialogRef<CompanieDialogComponent>) {}
+  constructor(public dialogRef: MatDialogRef<CompanieDialogComponent>) {}
 
   saved(data) {
     this.dialogRef.close(data)

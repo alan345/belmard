@@ -1,5 +1,5 @@
 import { Component, ViewChild, Inject } from '@angular/core';
-import { MdDialogRef, MdDialogConfig, MD_DIALOG_DATA} from '@angular/material';
+import { MatDialogRef, MatDialogConfig, MAT_DIALOG_DATA} from '@angular/material';
 import { NewUserComponent }  from '../newUser.component';
 
 
@@ -15,8 +15,8 @@ export class UserDialogComponent{
   search: any;
 
   constructor(
-    public dialogRef: MdDialogRef<NewUserComponent>,
-    @Inject(MD_DIALOG_DATA) public data: any
+    public dialogRef: MatDialogRef<NewUserComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     console.log(data.search)
     this.search = data.search

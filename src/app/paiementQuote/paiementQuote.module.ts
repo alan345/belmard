@@ -13,7 +13,7 @@ import { EditPaiementQuoteComponent} from './single/editPaiementQuote.component'
 import { PaiementQuoteService} from './paiementQuote.service';
 import { PaiementService} from './paiement.service';
 import { PaiementQuoteRouting} from './paiementQuoteRouting.module';
-import { MaterialModule } from '@angular/material';
+// import { MaterialModule } from '@angular/material';
 
 import { ProductModule } from '../product/product.module';
 // import { AutocompleteComponent } from '../autocomplete/autocomplete.component'

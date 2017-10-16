@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MainPageHomeService} from './mainPageHome.service';
 import { FormGroup } from '@angular/forms';
 import { ToastsManager} from 'ng2-toastr';
-import { MdDialog} from '@angular/material';
+import { MatDialog} from '@angular/material';
 // import { EditOptionsComponentDialog }  from '../form/modalLibrary/modalLibrary.component';
 import { AdminService} from '../admin/services/admin.service';
 
@@ -47,7 +47,7 @@ export class MainPageHomeComponent implements OnInit {
     private adminService: AdminService,
     private mainPageHomeService: MainPageHomeService,
     private toastr: ToastsManager,
-    public dialog: MdDialog,
+    public dialog: MatDialog,
 
     private authService: AuthService,
   ) {}

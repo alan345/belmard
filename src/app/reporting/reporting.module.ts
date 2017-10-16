@@ -12,7 +12,7 @@ import { ReportingsComponent} from './reportings.component';
 
 // import { ReportingService} from './reporting.service';
 import { ReportingRouting} from './reportingRouting.module';
-import { MaterialModule } from '@angular/material';
+// import { MaterialModule } from '@angular/material';
 
 import { ProductModule } from '../product/product.module';
 // import { AutocompleteComponent } from '../autocomplete/autocomplete.component'
@@ -29,7 +29,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
     ReportingRouting,
     CommonModule,
     FormsModule,
-    MaterialModule,
+    // MaterialModule,
     ReactiveFormsModule,
     RouterModule,
     ProductModule,

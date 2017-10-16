@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { MaterialModule } from '@angular/material';
+// import { MaterialModule } from '@angular/material';
 
 
 
@@ -28,7 +28,7 @@ import {SharedModule } from '../shared/shared.module';
     TaskRouting,
     CommonModule,
     FormsModule,
-    MaterialModule,
+    // MaterialModule,
     ReactiveFormsModule,
     QuoteModule,
     SharedModule

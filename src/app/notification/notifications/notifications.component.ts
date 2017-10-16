@@ -3,7 +3,7 @@ import { AuthService} from '../../auth/auth.service';
 import { NotificationService} from '../../notification/notification.service';
 import { Notification} from '../notification.model';
 import { ToastsManager} from 'ng2-toastr';
-import { MdDialog} from '@angular/material';
+import { MatDialog} from '@angular/material';
 import { Router} from '@angular/router';
 import { Location} from '@angular/common';
 import { UserService} from '../../user/user.service';
@@ -34,7 +34,7 @@ export class NotificationsComponent implements OnInit {
     private authService: AuthService,
     private userService: UserService,
     private toastr: ToastsManager,
-    public dialog: MdDialog,
+    public dialog: MatDialog,
     private router: Router,
     private location: Location,
   ) {}

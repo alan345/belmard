@@ -17,7 +17,7 @@ import { QuoteComponent} from './single/quote.component';
 import { QuoteService} from './quote.service';
 import { TemplateQuoteService} from './templateQuote.service';
 import { QuoteRouting} from './quoteRouting.module';
-import { MaterialModule } from '@angular/material';
+// import { MaterialModule } from '@angular/material';
 
 import { ProductModule } from '../product/product.module';
 // import { AutocompleteComponent } from '../autocomplete/autocomplete.component'
@@ -41,7 +41,7 @@ import { QuillEditorModule } from 'ngx-quill-editor';
     QuoteRouting,
     CommonModule,
     FormsModule,
-    MaterialModule,
+    // MaterialModule,
     ReactiveFormsModule,
     RouterModule,
     ProductModule,

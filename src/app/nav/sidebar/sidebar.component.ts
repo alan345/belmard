@@ -8,7 +8,7 @@ import { CompanieGuardService} from '../../companie/companieGuard.service'
 import { PaiementGuardService} from '../../user/paiement/paiementGuard.service'
 import { ChangeDetectionStrategy} from '@angular/core';
 import {GlobalEventsManager} from '../../globalEventsManager';
-import {MdSidenav} from '@angular/material';
+import {MatSidenav} from '@angular/material';
 
 @Component({
   selector: 'app-sidebar',
@@ -18,7 +18,7 @@ import {MdSidenav} from '@angular/material';
 })
 export class SidebarComponent implements OnInit {
   // @Input() sidenav: any;
-  // @ViewChild('sidenav') public sidenav: MdSidenav;
+  // @ViewChild('sidenav') public sidenav: MatSidenav;
   showNavBar: boolean = false;
   isLoggedIn: boolean = false;
  // private userId: string = localStorage.getItem('userId');

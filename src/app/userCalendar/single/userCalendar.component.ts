@@ -8,7 +8,7 @@ import {UserCalendar} from '../userCalendar.model';
 
 import {ToastsManager} from 'ng2-toastr';
 
-import {MdDialog } from '@angular/material';
+import {MatDialog } from '@angular/material';
 import {Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup} from '@angular/forms';
@@ -40,7 +40,7 @@ export class UserCalendarComponent implements OnInit {
     private userCalendarService: UserCalendarService,
     // private projectService: ProjectService,
     private toastr: ToastsManager,
-    public dialog: MdDialog,
+    public dialog: MatDialog,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private location: Location,

@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule} from '@angular/forms';
 
 import { UserRouting } from './userRouting.module';
-import { MaterialModule } from '@angular/material';
+// import { MaterialModule } from '@angular/material';
 
 
 //import { UserDeleteDialog} from './userDeleteDialog.component';
@@ -63,7 +63,7 @@ import {SharedModule } from '../shared/shared.module';
     UserRouting,
     // CommonModule,
     // FormsModule,
-    MaterialModule,
+    // MaterialModule,
     ReactiveFormsModule,
     QuoteModule,
     ProjectModule,

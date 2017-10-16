@@ -1,5 +1,5 @@
 import { Component , Inject} from '@angular/core';
-import { MdDialogRef, MD_DIALOG_DATA} from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { ProjectSingleComponent }  from '../projectSingle.component';
 import { Search } from '../../../shared/shared.model';
 
@@ -17,8 +17,8 @@ export class ProjectDialogComponent {
   search: Search = new Search();
 
   constructor(
-    public dialogRef: MdDialogRef<ProjectSingleComponent>,
-    @Inject(MD_DIALOG_DATA) public data: any
+    public dialogRef: MatDialogRef<ProjectSingleComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {
     this.search = data.search
   }

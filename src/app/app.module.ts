@@ -5,7 +5,7 @@ import { HttpModule, RequestOptions, Http} from '@angular/http';
 import { AppComponent} from './app.component';
 // import { NgbModule} from '@ng-bootstrap/ng-bootstrap';
 // import { MaterialModule } from '@angular/material';
-import {MdSidenavModule} from '@angular/material';
+import {MatSidenavModule} from '@angular/material';
 
 
 import { GlobalEventsManager } from './globalEventsManager';
@@ -219,7 +219,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     // MaterialModule,
     NavbarModule,
     SidebarModule,
-    MdSidenavModule,
+    MatSidenavModule,
     // CKEditorModule,
     // NgbModule.forRoot(),
     UserModule,
@@ -236,7 +236,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
   ],
   exports: [
     UserModule,
-    MdSidenavModule
+    MatSidenavModule
    ],
   providers: [
     AuthGuardService,
