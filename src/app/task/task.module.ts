@@ -20,6 +20,7 @@ import { TaskDialogComponent } from './single/dialog/taskDialog.component'
 // import { AutocompleteModule } from '../autocomplete/autocomplete.module'
 import {SharedModule } from '../shared/shared.module';
 // import {UserModule} from '../user/user.module';
+import {MatCheckboxModule} from '@angular/material';
 
 @NgModule({
   imports:     [
@@ -31,7 +32,8 @@ import {SharedModule } from '../shared/shared.module';
     // MaterialModule,
     ReactiveFormsModule,
     QuoteModule,
-    SharedModule
+    SharedModule,
+    MatCheckboxModule
 
     // AutocompleteModule,
   ],

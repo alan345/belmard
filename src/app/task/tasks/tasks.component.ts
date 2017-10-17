@@ -14,13 +14,13 @@ import { UserService} from '../../user/user.service';
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
   styleUrls: ['../task.component.css'],
-  encapsulation: ViewEncapsulation.None
+  // encapsulation: ViewEncapsulation.None
 
 })
 export class TasksComponent implements OnInit {
   @Input() userId = '';
-  @Input() showHeader = true;
-  token: string = localStorage.getItem('id_token');
+  // @Input() showHeader = true;
+  // token: string = localStorage.getItem('id_token');
   fetchedTasks: Task[] = [];
   search: any = {
     categories : [],
@@ -102,15 +102,15 @@ export class TasksComponent implements OnInit {
   }
 
   ngOnInit() {
-    let this2 = this
-    setTimeout(function(){
-      this2.search.userId = this2.userId
-      this2.search.orderBy = 'name'
-      this2.getTasks(1, this2.search)
-    }, 200);
+    // let this2 = this
+    // setTimeout(function(){
+    //   this2.search.userId = this2.userId
+    //   this2.search.orderBy = 'name'
+    //   this2.getTasks(1, this2.search)
+    // }, 200);
   }
 
-  isAdmin() {
-    return this.authService.isAdmin();
-  }
+  // isAdmin() {
+  //   return this.authService.isAdmin();
+  // }
 }
