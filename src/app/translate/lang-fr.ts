@@ -143,6 +143,7 @@ export const LANG_FR_TRANS = {
     'Go to Invoice': 'Consulter Facture',
     'Validate': 'Valider',
     'Show Comments': 'Voir Commentaires',
+    'Reference': 'Référence',
    
 
     'Invoices': 'Factures',
