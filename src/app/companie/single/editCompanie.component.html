@@ -129,7 +129,7 @@
         </div>
 
 
-        <h6>Categories</h6>
+        <h6>{{'Categories' | translate}}</h6>
         <div class="btn btn-warning btn-sm" (click)="seeCategProject=!seeCategProject">{{'See Categs Project' | translate}}</div>
         <div *ngIf="seeCategProject">
           <button type="button" class="valid" (click)="addCateg('categProject', 0, 0, 0, 0)">{{'Add Categ Project' | translate}}</button>
@@ -151,7 +151,7 @@
         </div>
 
 
-        <div class="btn btn-warning btn-sm" (click)="seeCategProduct=!seeCategProduct">{{'See Categs Productd' | translate}}</div>
+        <div class="btn btn-warning btn-sm" (click)="seeCategProduct=!seeCategProduct">{{'See Categs Products' | translate}}</div>
         <div *ngIf="seeCategProduct">
           <button type="button" class="valid" (click)="addCateg('categProduct', 0, 0, 0, 0)">{{'Add Categ Products' | translate}}</button>
           <div *ngFor="let categorie0 of fetchedCompanie.categories.categProduct; let i = index;">
