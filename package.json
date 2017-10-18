@@ -53,7 +53,6 @@
     "ng2-progress-bar": "0.0.8",
     "ng2-toastr": "^4.1.2",
     "ngx-quill-editor": "^2.2.1",
-    "node-schedule": "^1.2.1",
     "nodemailer": "4.0.1",
     "nodemailer-sendgrid-transport": "latest",
     "password-hash": "^1.2.2",
