@@ -22,6 +22,7 @@ var quote = new Schema({
       dateQuote: {
         issueDate: {type: Date, default: [Date()]},
         expiryDate: {type: Date, default: [Date()]},
+        dateInvoicePaid: {type: Date, default: [Date()]},
       }
     },
 

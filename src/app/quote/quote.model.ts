@@ -38,6 +38,8 @@ export class DateQuote {
   issueDateString: string = '';
   expiryDate: Date = new Date();
   expiryDateString: string ='';
+  dateInvoicePaid: Date = new Date();
+  dateInvoicePaidString: string ='';
 }
 
 // export class Paiement {
@@ -92,15 +94,16 @@ export class DevisDetail {
 
 export const StatusQuotes =
 [
-  // {index: 0, label: 'RDV planifié'},
-  // {index: 1, label: 'Rappeler'},
-  // {index: 2, label: 'Stand-By'},
-  // {index: 3, label: 'Devis à faire'},
   {indexStatus: 0, label: 'Pending Approval'},
   {indexStatus: 1, label: 'Signed'},
   {indexStatus: 2, label: 'Rejected'},
   {indexStatus: 3, label: 'Signed, pending paiement'},
   {indexStatus: 4, label: 'Done'},
+]
+export const StatusQuotesInvoice =
+[
+  {indexStatus: 100, label: 'Sent'},
+  {indexStatus: 101, label: 'Paid'},
 ]
 
 // export class Address {

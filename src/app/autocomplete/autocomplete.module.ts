@@ -6,11 +6,12 @@ import { FormsModule }         from '@angular/forms';
 // import {NewUserComponent} from '../user/singleUser/newUser.component'
 // import {SharedModule } from '../shared/shared.module';
 import { newObjDialogComponent } from './newObjDialog/newObjDialog.component';
-
+import { TranslateModule}   from '../translate/translate.module';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
+    TranslateModule,
     // SharedModule,
     // UserModule,
 

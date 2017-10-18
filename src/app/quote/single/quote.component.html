@@ -1,7 +1,4 @@
 <div class="container-fluid">
-  <!-- <div *ngIf="fetchedQuote.typeQuote === 'quote'" class="hdform">
-    <h3><i class="fa fa-university" aria-hidden="true"></i>{{'Quote' | translate}}</h3>
-  </div> -->
   <div class="hdform">
     <h3 *ngIf="fetchedQuote.typeQuote === 'invoice'"><i class="fa fa10 fa-clipboard" aria-hidden="true"></i>{{'Invoice' | translate}}</h3>
     <h3 *ngIf="fetchedQuote.typeQuote === 'quote'"><i class="fa fa10 fa-clipboard" aria-hidden="true"></i>{{'Quote' | translate}}</h3>
@@ -10,10 +7,6 @@
     <div class="row">
       <div class="col-2">
       </div>
-
-
-      <!--   <h4 class="dspl-nn">id: {{fetchedQuote._id}}</h4> -->
-
       <div class="col-8 row nopad">
         <div class="col-4" *ngIf="fetchedQuote._id">
           <button type="button" class="btn btn-primary" (click)="downloadPDF()">
@@ -21,15 +14,13 @@
           </button>
         </div>
         <div class="col-8 alright" *ngIf="fetchedQuote.typeQuote === 'quote'">
-
-          <button *ngIf="!fetchedQuote.invoices.length" type="button" class="btn btn-primary" (click)="saveAsInvoice()">
+          <button *ngIf="!fetchedQuote.invoices.length && fetchedQuote._id" type="button" class="btn btn-primary" (click)="saveAsInvoice()">
             {{'Save As Invoice' | translate}}
             </button>
           <div *ngFor="let invoice of fetchedQuote.invoices">
             <button type="button" class="btn btn-primary" (click)="goToInvoice(invoice._id)">{{'Go to Invoice' | translate}}</button>
           </div>
         </div>
-
       </div>
     </div>
     <div class="row">
@@ -38,9 +29,6 @@
       <div class="col-3">
         <div class="row">
         </div>
-        <!-- <div class="form-group">
-          typeQuote: {{fetchedQuote.typeQuote}}
-        </div> -->
         <div *ngIf="fetchedQuote.quoteNumber" class="form-group">
           {{'Number' | translate}}
           <!-- <input [readonly]="fetchedQuote.signature.isSigned" class="form-control" name="EstimateCode" type="text" value="28" /> -->
@@ -70,12 +58,20 @@
           {{'Quote validity date' | translate}}
           <input [readonly]="fetchedQuote.signature.isSigned" type="date" class="form-control" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedQuote.detail.dateQuote.expiryDateString">
         </div>
-        <!-- <div class="form-group">
+        <div class="form-group">
           {{'Status' | translate}}
-          <select [disabled]="fetchedQuote.signature.isSigned" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.statusQuote" name="statusQuote">
+          <select *ngIf="fetchedQuote.typeQuote === 'quote'" [disabled]="fetchedQuote.signature.isSigned" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.statusQuote" name="statusQuote">
             <option *ngFor="let n of statusQuotes" [value]="n.indexStatus">{{n.label}}</option>
           </select>
-        </div> -->
+          <select *ngIf="fetchedQuote.typeQuote === 'invoice'" [disabled]="fetchedQuote.signature.isSigned" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.statusQuote" name="statusQuote">
+            <option *ngFor="let n of statusQuotesInvoice" [value]="n.indexStatus">{{n.label}}</option>
+          </select>
+        </div>
+        <div *ngIf="fetchedQuote.typeQuote === 'invoice' && fetchedQuote.statusQuote == '101'" class="form-group">
+          {{'Date Invoice Paid' | translate}}
+          <input type="date" class="form-control" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedQuote.detail.dateQuote.dateInvoicePaidString">
+        </div>
+
       </div>
       <div class="col-3">
         <div class="form-control" *ngFor="let client of fetchedQuote.clients">
@@ -84,7 +80,7 @@
           </h4>
           <div>{{client.profile.companyName}}</div>
           <div *ngFor="let singleAddress of client.profile.address">
-    <!--          <h5>{{singleAddress.nameAddress}}</h5>  -->
+            <!--          <h5>{{singleAddress.nameAddress}}</h5>  -->
             <div>{{singleAddress.address}}</div>
             <div>{{singleAddress.zip}} {{singleAddress.city}}</div>
             <div>{{client.profile.phoneNumber}}</div>
@@ -166,7 +162,7 @@
                         <quill-editor [ngModelOptions]="{standalone: true}" [options]="editorOptions" (blur)="onEditorBlured($event, i, j)" (focus)="onEditorFocused($event)" (ready)="onEditorCreated($event)" (change)="onContentChanged($event)" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].title">
                         </quill-editor>
                       </div>
-                      <div (click)="changeQuillEditMode(i, j)" *ngIf="!fetchedQuote.devisDetails[i].bucketProducts[j].isEditMode" [innerHtml]="fetchedQuote.devisDetails[i].bucketProducts[j].title">
+                      <div class="textNoEditMode" (click)="changeQuillEditMode(i, j)" *ngIf="!fetchedQuote.devisDetails[i].bucketProducts[j].isEditMode" [innerHtml]="fetchedQuote.devisDetails[i].bucketProducts[j].title">
                       </div>
                     </div>
                   </div>

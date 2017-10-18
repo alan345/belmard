@@ -7,7 +7,7 @@ import { DragulaService } from 'ng2-dragula';
 import {ProductService} from '../../product/product.service';
 import { ProjectService} from '../../project/project.service';
 
-import {Quote, DevisDetail, BucketProduct, StatusQuotes, Signature, PriceQuoteTaxe, ModelVATs } from '../quote.model';
+import {Quote, DevisDetail, BucketProduct, StatusQuotes, StatusQuotesInvoice, Signature, PriceQuoteTaxe, ModelVATs } from '../quote.model';
 import {TemplateQuote } from '../templateQuote.model';
 
 import {ToastsManager} from 'ng2-toastr';
@@ -57,6 +57,7 @@ export class QuoteComponent implements OnInit {
   imgSignatureBase64Temp = ''
   fetchedPaiementQuotes: PaiementQuote[] = []
   statusQuotes = StatusQuotes
+  statusQuotesInvoice = StatusQuotesInvoice
   totalPaiementAmount: number = 0
   myForm: FormGroup;
 
@@ -174,6 +175,7 @@ export class QuoteComponent implements OnInit {
 
     this.fetchedQuote.detail.dateQuote.issueDateString = this.authService.isoDateToHtmlDate(this.fetchedQuote.detail.dateQuote.issueDate)
     this.fetchedQuote.detail.dateQuote.expiryDateString = this.authService.isoDateToHtmlDate(this.fetchedQuote.detail.dateQuote.expiryDate)
+    this.fetchedQuote.detail.dateQuote.dateInvoicePaidString = this.authService.isoDateToHtmlDate(this.fetchedQuote.detail.dateQuote.dateInvoicePaid)
 
     // this.getCurrentUser();
 
@@ -504,6 +506,7 @@ export class QuoteComponent implements OnInit {
   save() {
     this.fetchedQuote.detail.dateQuote.issueDate = this.authService.HTMLDatetoIsoDate(this.fetchedQuote.detail.dateQuote.issueDateString)
     this.fetchedQuote.detail.dateQuote.expiryDate = this.authService.HTMLDatetoIsoDate(this.fetchedQuote.detail.dateQuote.expiryDateString)
+    this.fetchedQuote.detail.dateQuote.dateInvoicePaid = this.authService.HTMLDatetoIsoDate(this.fetchedQuote.detail.dateQuote.dateInvoicePaidString)
 
     if (this.fetchedQuote._id) {
       this.quoteService.updateQuote(this.fetchedQuote)
@@ -734,6 +737,7 @@ export class QuoteComponent implements OnInit {
         this.fetchedQuote = res
         this.fetchedQuote.detail.dateQuote.issueDateString = this.authService.isoDateToHtmlDate(this.fetchedQuote.detail.dateQuote.issueDate)
         this.fetchedQuote.detail.dateQuote.expiryDateString = this.authService.isoDateToHtmlDate(this.fetchedQuote.detail.dateQuote.expiryDate)
+        this.fetchedQuote.detail.dateQuote.dateInvoicePaidString = this.authService.isoDateToHtmlDate(this.fetchedQuote.detail.dateQuote.dateInvoicePaid)
 
         this.fetchedQuote.projects.forEach(project => { this.search.projectId = project._id })
         this.fetchedQuote.clients.forEach(user => { this.search.userId = user._id })

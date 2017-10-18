@@ -1,6 +1,6 @@
 <div *ngIf="isLoggedIn">
 
-<!-- <md-sidenav #sidenav mode="side" opened="true"> -->
+  <!-- <md-sidenav #sidenav mode="side" opened="true"> -->
 
 
 
@@ -95,38 +95,19 @@
         </div>
       </div>
     </div>
-<!--
+
+
+
+
     <div *ngIf="authService.showObjHTML('userCalendar', 'read')" class="card noborder">
-      <div class="">
-        <a class="nav-link" [routerLink]="['/userCalendar', {idUserSearch: fetchedUser._id}]" data-toggle="collapse" data-parent="#accordion" routerLinkActive="active">
-          <span class="fa fa-calendar" aria-hidden="true"></span> {{'Planning'|translate}}</a>
-      </div>
-    </div> -->
-        <div *ngIf="authService.showObjHTML('userCalendar', 'read')" class="card noborder">
-          <div class="" role="tab" id="headingFifteen">
-            <a class="nav-link" data-toggle="collapse" data-parent="#accordion" href="#collapseFifteen" aria-expanded="true" aria-controls="collapseFifteen">
+      <div class="" role="tab" id="headingFifteen">
+        <a [routerLink]="['/userCalendar']" routerLinkActive="active" class="nav-link" data-toggle="collapse" data-parent="#accordion" href="#collapseFifteen" aria-expanded="true" aria-controls="collapseFifteen">
               <span class="fa fa10 fa-calendar" aria-hidden="true"></span> {{'Planning'|translate}}
             </a>
-          </div>
-          <div id="collapseFifteen" class="collapse" role="tabpanel" aria-labelledby="headingFifteen">
-            <div class="card-block">
-              <div class="panel-body">
-                <table class="table">
-                  <tr>
-                    <td class="nav-item subItem">
-                      <a class="nav-link" [routerLink]="['/userCalendar']"routerLinkActive="active">{{'Planning'|translate}}</a>
-                    </td>
-                  </tr>
-                  <!-- <tr>
-                    <td class="nav-item subItem">
-                      <a class="nav-link" [routerLink]="['/userCalendar', {idUserSearch: fetchedUser._id}]" routerLinkActive="active">{{'My planning'|translate}}</a>
-                    </td>
-                  </tr> -->
-                </table>
-              </div>
-            </div>
-          </div>
-        </div>
+      </div>
+      <div id="collapseFifteen" class="collapse" role="tabpanel" aria-labelledby="headingFifteen">
+      </div>
+    </div>
     <div *ngIf="authService.showObjHTML('quote', 'read')" class="card noborder">
       <div class="" role="tab" id="headingTen">
         <a class="nav-link" data-toggle="collapse" data-parent="#accordion" href="#collapseTen" aria-expanded="true" aria-controls="collapseTen">

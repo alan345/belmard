@@ -22,6 +22,9 @@
 .movingRow {
   min-height: 100px!important;
 }
+.textNoEditMode {
+  text-align: left!important;
+}
 /*------------------------- Alan ---------------------*/
 
 /*------------------------- Guillaume ---------------------*/
