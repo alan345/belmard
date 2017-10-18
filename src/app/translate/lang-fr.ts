@@ -128,7 +128,7 @@ export const LANG_FR_TRANS = {
     'Quote title': 'Titre du devis',
     'Template': 'Modèle',
     'Price excl tax': 'Prix HT',
-    'VAT(%)': 'TVA(%)',
+    'VAT (%)': 'TVA (%)',
     'Total excl tax': 'Total HT',
     'Category': 'Catégorie',
     'Text': 'Texte',
