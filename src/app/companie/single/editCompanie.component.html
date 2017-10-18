@@ -30,7 +30,7 @@
         </div> -->
 
         <h5>{{'Contact person' | translate}}</h5>
-        <button type="button" class="btn btn-primary btn-sm" (click)="newContact()">{{'New Contact person' | translate}}</button>
+        
 
         <div *ngFor="let contactPerson of fetchedCompanie.contactsPerson; let k = index;">
           <div class="row">
@@ -53,11 +53,11 @@
             <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.contactsPerson[k].contactEmail" placeholder="{{'Email' | translate}}">
           </div>
         </div>
-
+      <button type="button" class="btn btn-primary btn-sm" (click)="newContact()">{{'New Contact person' | translate}}</button>
       </div>
       <div class="col">
         <h5>{{'Details' | translate}}</h5>
-        <button type="button" class="btn btn-primary btn-sm" (click)="newAddress()">{{'New Address' | translate}}</button>
+        
         <div *ngFor="let singleAddresss of fetchedCompanie.address; let i = index;">
           <div class="row">
             <h6>Address {{fetchedCompanie.address[i].nameAddress}}</h6><button class="ml btnadr" type="button" (click)="removeAddress(i)"><i class="fa fa-times" aria-hidden="true"></i></button>
@@ -81,6 +81,7 @@
             <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].country" placeholder="{{'Country' | translate}}">
           </div>
         </div>
+        <button type="button" class="btn btn-primary btn-sm" (click)="newAddress()">{{'New Address' | translate}}</button>
       </div>
 
 
