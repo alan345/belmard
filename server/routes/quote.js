@@ -203,151 +203,155 @@ router.get('/pdf/:quoteId', function(req, res, next) {
               html += `
                  <style type="text/css">
 
-                 .col-1 {
-                   width: 8.33%;
-                 }
+                       .col-1 {
+                         width: 8.33%;
+                       }
 
-                 .col-2 {
-                   width: 16.66%;
-                 }
+                       .col-2 {
+                         width: 16.66%;
+                       }
 
-                 .col-3 {
-                   width: 25%;
-                 }
+                       .col-3 {
+                         width: 25%;
+                       }
 
-                 .col-4 {
-                   width: 33.33%;
-                 }
+                       .col-4 {
+                         width: 33.33%;
+                       }
 
-                 .col-5 {
-                   width: 41.66%;
-                 }
+                       .col-5 {
+                         width: 41.66%;
+                       }
 
-                 .col-6 {
-                   width: 50%;
-                 }
+                       .col-6 {
+                         width: 50%;
+                       }
 
-                 .col-7 {
-                   width: 58.33%;
-                 }
+                       .col-7 {
+                         width: 58.33%;
+                       }
 
-                 .col-8 {
-                   width: 66.66%;
-                 }
+                       .col-8 {
+                         width: 66.66%;
+                       }
 
-                 .col-9 {
-                   width: 75%;
-                 }
+                       .col-9 {
+                         width: 75%;
+                       }
 
-                 .col-10 {
-                   width: 83.33%;
-                 }
+                       .col-10 {
+                         width: 83.33%;
+                       }
 
-                 .col-11 {
-                   width: 91.66%;
-                 }
+                       .col-11 {
+                         width: 91.66%;
+                       }
 
-                 .col-12 {
-                   width: 100%;
-                 }
+                       .col-12 {
+                         width: 100%;
+                       }
 
-                 .img {
-                   height: 20px;
-                 }
+                       .img {
+                         height: 20px;
+                       }
 
-                 .imglogo {
-                   height: 50px;
-                   text-align: center;
-                  display: block;
-                  margin-left: auto;
-                  margin-right: auto
-                 }
+                       .imglogo {
+                         height: 50px;
+                         text-align: center;
+                        display: block;
+                        margin-left: auto;
+                        margin-right: auto
+                       }
 
-                 .tabo {
-                   border: 1px solid #ddd;
-                 }
+                       .tabo {
+                         border: 1px solid #ddd;
+                       }
 
-                 .bgh {
-                   background-color: #595959;
-                   color: white;
-                   border: 1px solid #ddd;
-                 }
+                       .bgh {
+                         background-color: #595959;
+                         color: white;
+                         border: 1px solid #ddd;
+                       }
 
-                 .desc {
-                   text-align: left;
-                 }
+                       .desc {
+                         text-align: left;
+                       }
 
-                 .elem {
-                   text-align: center;
-                 }
-                 .alright {
-                   text-align: right;
-                 }
+                       .elem {
+                         text-align: center;
+                       }
+                       .alright {
+                         text-align: right;
+                       }
 
-                 .inf {
-                   font-size: 10px;
-                 }
+                       .inf {
+                         font-size: 10px;
+                       }
 
-                 .inf2 {
-                   font-size: 9px;
-                 }
+                       .inf2 {
+                         font-size: 9px;
+                       }
 
-                 .nobo {
-                   border-top: none!important;
-                   border-bottom: none!important;
-                 }
+                       .nobo {
+                         border-top: none!important;
+                         border-bottom: none!important;
+                       }
 
-                 .cobo {
-                   border: 1px solid #ddd;
-                 }
+                       .cobo {
+                         border: 1px solid #ddd;
+                       }
 
-                 table {
-                   border-collapse: collapse;
-                   width: 100%;
-                 }
+                       table {
+                         border-collapse: collapse;
+                         width: 100%;
+                       }
 
-                 td {
-                   font-size: 9px;
-                   height: 20px;
-                   vertical-align: center;
-                   border-left: 1px solid #ddd;
-                   border-right: 1px solid #ddd;
-                 }
+                       td {
+                         font-size: 9px;
+                         height: 20px;
+                         vertical-align: center;
+                         border-left: 1px solid #ddd;
+                         border-right: 1px solid #ddd;
+                       }
 
-                 th {
-                   font-size: 10px;
-                 }
+                       th {
+                         font-size: 10px;
+                       }
 
-                  .cgv {
-                   font-size: 6px;
-                  text-align: center!important;
-                 }
+                        .cgv {
+                         font-size: 6px;
+                        text-align: center!important;
+                       }
 
-                  p  {
-                   font-size: 9px;
-                    font-weight: 300;
-                 }
+                        p  {
+                         font-size: 9px;
+                          font-weight: 300;
+                       }
 
-                 .ts {
-                   background-color: #aba4a4;
-                   font-weight: bold;
-                 }
-                 #pageHeader {
+                       .ts {
+                         background-color: #aba4a4;
+                         font-weight: bold;
+                       }
+                       #pageHeader {
 
-                   width:100%;
-                   height: 50px;
+                         width:100%;
+                         height: 50px;
 
-                }
-               #pageBody {height: 0px;}
-               .test2 {margin-bottom: -50px; }
+                      }
+                      .avoid {
+                          page-break-inside: avoid !important;
+                          margin: 4px 0 4px 0;  /* to keep the page break from cutting too close to the text in the div */
+                        }
+                     #pageBody {height: 0px;}
+                     .test2 {margin-bottom: -50px; }
 
                  </style>
                  `
               html += `
               <div id="pageHeader" class="col-12">
-                <img class="imglogo" src="http://belmard-renovation.fr/wp-content/uploads/2016/05/BELMARD.png">
+                <img class="imglogo" src="http://belmard-renovation.fr/wp-content/uploads/2017/10/belmard_logo_100.png">
               </div>
-              <table class="test">
+              <table class="print-friendly">
                        <thead>
                          <tr>
                            <th class="col-4 cobo desc">
@@ -436,7 +440,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                         })
                       })
                     }
-                    html += '<td class="desc">' + description + '</td>'
+                    html += '<td class="desc"><div class="avoid">' + description + '</div></td>'
                     html += '<td class="elem">' + img + '</td>'
                     // html += '<td class="desc">' + bucketProduct.typeRow + '</td>'
                     // html += '<td class="elem">' + bucketProduct.title + '</td>'
@@ -481,19 +485,6 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                            <td class="col-2 elem"><b>` + Math.round(item.priceQuote.priceQuoteWithoutTaxes) + `€</b></td>
                            </tr>`
 
-              //
-              //     item.priceQuote.priceQuoteTaxes.forEach(priceQuoteTaxe => {
-              // html += `<tr>
-              //           <td>
-              //           </td>
-              //           <td class="col-2 form-control">
-              //             TVA: ` + priceQuoteTaxe.VAT + `%
-              //           </td>
-              //           <td class="col-2 form-control">
-              //             ` + priceQuoteTaxe.TotalVAT + `€
-              //           </td>
-              //       </tr>`
-              //    })
 
               html += `<tr class="cobo">
                              <td class="col-6 alright ts">Montant de TVA</td>`

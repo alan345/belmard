@@ -104,7 +104,7 @@ export class UserCalendarsComponent implements OnInit {
   }
   ngOnInit() {
     let slotDuration = ''
-    let timeBegin= ''
+    let timeBegin = ''
     let timeEnd = ''
     let timeBeginbusinessHours= ''
     let timeEndbusinessHours = ''
@@ -229,6 +229,13 @@ export class UserCalendarsComponent implements OnInit {
               this.events[i].title += singleAddress.city
             })
           });
+          event.assignedTos.forEach((assignedTo, j) => {
+            this.events[i].color = assignedTo.profile.colorCalendar
+            this.events[i].title += ' Réparateur: ' + assignedTo.profile.lastName + ' '+ assignedTo.profile.name + '  '
+          });
+
+
+
         })
         this.updateCalendar()
 
