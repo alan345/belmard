@@ -90,6 +90,7 @@ export const LANG_FR_TRANS = {
     'Contact type': 'Fonction',
     'New Contact person': 'Nouvel Interlocuteur',
     'Phone number': 'Téléphone',
+    'Status': 'Statut',
 
 
 
