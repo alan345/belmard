@@ -87,6 +87,9 @@ export const LANG_FR_TRANS = {
     'Companies': 'Fournisseurs',
     'Billing': 'Facturation',
     'Shipping': 'Intervention',
+    'Contact type': 'Fonction',
+    'New Contact person': 'Nouveau Interlocuteur',
+    'Phone number': 'Téléphone',
 
 
 
