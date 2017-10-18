@@ -141,6 +141,7 @@ export const LANG_FR_TRANS = {
     'description': 'Description',
     'Unit': 'Unité',
     'Save as Invoice': 'Convertir en Facture',
+    'Go to Invoice': 'Consulter Facture',
 
     'Invoices': 'Factures',
     'invoice': 'Facture',
