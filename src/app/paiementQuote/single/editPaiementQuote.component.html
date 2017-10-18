@@ -1,6 +1,8 @@
 <div class="container">
     <div class="hdform">
-      <h3><i class="fa fa10 fa-user" aria-hidden="true"></i>{{'Paiementquote' | translate}}</h3>
+     
+      <h3 *ngIf="!fetchedPaiementQuote.isExpense"> {{'Payment' | translate}} <i class="fa fa10 fa-user" aria-hidden="true"></i></h3>
+      <h3 *ngIf="fetchedPaiementQuote.isExpense"> {{'Expense' | translate}} <i class="fa fa10 fa-user" aria-hidden="true"></i></h3>
       
     </div>
 
