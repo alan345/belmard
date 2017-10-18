@@ -148,6 +148,7 @@ border-radius: 0px!important;
 .form-control {
 margin-bottom: 8px;
 border-radius: 0px!important;
+background-color: none;  
 }
 
 .container {
