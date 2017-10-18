@@ -140,6 +140,7 @@ export const LANG_FR_TRANS = {
     'referenceName': 'Nom du Produit',
     'description': 'Description',
     'Unit': 'Unité',
+    'Save as Invoice': 'Convertir en Facture',
 
     'Invoices': 'Factures',
     'invoice': 'Facture',
