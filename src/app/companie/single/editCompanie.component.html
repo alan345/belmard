@@ -151,9 +151,9 @@
         </div>
 
 
-        <div class="btn btn-warning btn-sm" (click)="seeCategProduct=!seeCategProduct">See Categs Products</div>
+        <div class="btn btn-warning btn-sm" (click)="seeCategProduct=!seeCategProduct">{{'See Categs Project' | translate}}</div>
         <div *ngIf="seeCategProduct">
-          <button type="button" class="valid" (click)="addCateg('categProduct', 0, 0, 0, 0)">Add Categ Project{{'See Categs Project' | translate}}</button>
+          <button type="button" class="valid" (click)="addCateg('categProduct', 0, 0, 0, 0)">{{'Add Categ Project' | translate}}</button>
           <div *ngFor="let categorie0 of fetchedCompanie.categories.categProduct; let i = index;">
             <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.categories.categProduct[i].categ">
             <button type="button" class="false" (click)="removeCateg('categProduct', 1,i,0,0)">x</button>
