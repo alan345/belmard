@@ -67,7 +67,7 @@
         </div>
         <div class="col">
           <h5>{{'Address' | translate}}</h5>
-          
+
           <div *ngFor="let singleAddresss of fetchedUser.profile.address; let i = index;">
             <div class="row">
             <h6>{{fetchedUser.profile.address[i].nameAddress}} {{'Address' | translate}}</h6>
@@ -167,9 +167,9 @@
     </div>
     <div class="valid-edit row col-12">
       <button type="submit"[disabled]="!myForm.valid" [ngClass]="{'valid':myForm.valid,'has-error':!myForm.valid}">{{'Done' | translate}}</button>
-      <button *ngIf="fetchedUser._id" type="button" class="valid" (click)="saveAndCreateProject()" [disabled]="!myForm.valid">
+      <!-- <button *ngIf="fetchedUser._id" type="button" class="valid" (click)="saveAndCreateProject()" [disabled]="!myForm.valid">
           {{'Save & Create project' | translate}}
-        </button>
+        </button> -->
       <div *ngIf="!isUserIsMyself()">
         <button type="button" *ngIf="fetchedUser._id" class="false" (click)="openDialogDelete()">{{'Delete' | translate}}</button>
       </div>
