@@ -144,6 +144,7 @@ export const LANG_FR_TRANS = {
     'Validate': 'Valider',
     'Show Comments': 'Voir Commentaires',
     'Reference': 'Référence',
+    'Paymentquote': 'Encaissement',
    
 
     'Invoices': 'Factures',
