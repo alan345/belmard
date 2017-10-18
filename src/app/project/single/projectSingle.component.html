@@ -85,7 +85,7 @@
 
       <div class="form-group col-md-4 nopad">
         <!-- <app-autocomplete [typeAutocomplete]="'user'" [title]="'Assigned To'" [singleChoice]=true [search]="{isExternalUser:false, userId:search.assignedToId}" [arrayContent]="fetchedProject.assignedTos" (getResultAutocomplete)="selectAssignedTo($event[0])"> -->
-        <app-autocomplete class="col-md-4 bn" [typeAutocomplete]="'user'" [title]="{{'Assigned To' | translate}}" [singleChoice]=true [search]="{isExternalUser:false}" [arrayContent]="fetchedProject.assignedTos" (getResultAutocomplete)="selectAssignedTo($event[0])">
+        <app-autocomplete class="col-md-4 bn" [typeAutocomplete]="'user'" [title]="'Assigned To'" [singleChoice]=true [search]="{isExternalUser:false}" [arrayContent]="fetchedProject.assignedTos" (getResultAutocomplete)="selectAssignedTo($event[0])">
         </app-autocomplete>
       </div>
 
