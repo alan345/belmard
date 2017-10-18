@@ -164,7 +164,7 @@
         <app-projects [search]="search"></app-projects>
       </div>
     </div>
-    <div class="valid-edit row col-12">
+    <div class="row col-12">
       <button type="submit"[disabled]="!myForm.valid" [ngClass]="{'valid':myForm.valid,'has-error':!myForm.valid}">{{'Done' | translate}}</button>
       <button *ngIf="fetchedUser._id" type="button" class="valid" (click)="saveAndCreateProject()" [disabled]="!myForm.valid">
           {{'Save & Create project' | translate}}
