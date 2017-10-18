@@ -129,6 +129,7 @@ textarea::placeholder {
 .example-container {
 margin-top: 50px !important;
   height: 100%;
+  background-color: #ddd;
 }
 
 .a {
