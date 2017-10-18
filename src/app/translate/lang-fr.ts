@@ -88,7 +88,7 @@ export const LANG_FR_TRANS = {
     'Billing': 'Facturation',
     'Shipping': 'Intervention',
     'Contact type': 'Fonction',
-    'New Contact person': 'Nouveau Interlocuteur',
+    'New Contact person': 'Nouvel Interlocuteur',
     'Phone number': 'Téléphone',
 
 
