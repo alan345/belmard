@@ -30,7 +30,7 @@
         </div> -->
 
         <h5>{{'Contact person' | translate}}</h5>
-        <button type="button" class="btn btn-primary btn-sm" (click)="newContact()">New contact person</button>
+        <button type="button" class="btn btn-primary btn-sm" (click)="newContact()">{{'New Contact person' | translate}}</button>
 
         <div *ngFor="let contactPerson of fetchedCompanie.contactsPerson; let k = index;">
           <div class="row">
@@ -38,7 +38,7 @@
           </div>
 
           <div class="form-group">
-            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.contactsPerson[k].contactType" placeholder="Contact type">
+            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.contactsPerson[k].contactType" placeholder="{{'Contact type' | translate}}">
           </div>
           <div class="form-group">
             <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.contactsPerson[k].contactName" placeholder="{{'Lastname' | translate}}">
@@ -57,28 +57,28 @@
       </div>
       <div class="col">
         <h5>{{'Details' | translate}}</h5>
-        <button type="button" class="btn btn-primary btn-sm" (click)="newAddress()">New Address</button>
+        <button type="button" class="btn btn-primary btn-sm" (click)="newAddress()">{{'New Address' | translate}}</button>
         <div *ngFor="let singleAddresss of fetchedCompanie.address; let i = index;">
           <div class="row">
             <h6>Address {{fetchedCompanie.address[i].nameAddress}}</h6><button class="ml btnadr" type="button" (click)="removeAddress(i)"><i class="fa fa-times" aria-hidden="true"></i></button>
           </div>
           <div class="form-group">
             <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].nameAddress">
-              <option value="billing">Facturation</option>
-              <option value="shipping">shipping</option>
+              <option value="billing">{{'Billing' | translate}}</option>
+              <option value="shipping">{{'Shipping' | translate}}</option>
             </select>
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].address" placeholder="Addresse">
+            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].address" placeholder="{{'Address' | translate}}">
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].city" placeholder="Ville">
+            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].city" placeholder="{{'City' | translate}}">
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].zip" placeholder="Code postal">
+            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].zip" placeholder="{{'Zip' | translate}}">
           </div>
           <div class="form-group">
-            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].country" placeholder="Pays">
+            <input type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.address[i].country" placeholder="{{'Country' | translate}}">
           </div>
         </div>
       </div>
