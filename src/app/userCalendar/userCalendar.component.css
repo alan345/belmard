@@ -4,3 +4,6 @@
 .calendar{
     height:100vh;
 }
+table, tr, td {
+  border: 20px solid black;
+}
