@@ -5,7 +5,7 @@
 
   <div *ngIf="!arrayContent.length || !singleChoice">
 
-    <div class="input-group">
+    <div class="input-group mb8">
       <input class="form-control" autofocus autocapitalize="none" autocomplete="off" spellcheck="false" autocorrect="none" type="text" name="Search" placeholder="🔎 Search" [(ngModel)]="autocompleteSearch" (ngModelChange)="searchData()">
       <app-newObjDialog *ngIf="typeAutocomplete=='user' || typeAutocomplete=='companie' || typeAutocomplete=='project' || typeAutocomplete=='product'" (saved)="saved($event)" [search]="search" class="input-group-addon" [typeObj]="typeAutocomplete"></app-newObjDialog>
 
