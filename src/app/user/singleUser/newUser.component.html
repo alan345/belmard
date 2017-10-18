@@ -158,8 +158,8 @@
         </div>
       </div>
     </div>
-    <div *ngIf="fetchedUser._id">
-      <button type="button" (click)="showProjects = !showProjects">Projects</button>
+    <div class="valid-edit row col-12" *ngIf="fetchedUser._id">
+      <button type="button" class="btn btn-warning" (click)="showProjects = !showProjects">Projects</button>
       <div *ngIf="showProjects">
         <app-projects [search]="search"></app-projects>
       </div>
