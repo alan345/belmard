@@ -413,7 +413,7 @@ margin-bottom: 5px;
 
 /*alan*/
 .has-error {
-  box-shadow: 0 0 5px rgba(255, 49, 76, 1);
+  box-shadow: 0 0 5px rgba(255, 49, 76, 0.3);
   border: 1px solid rgba(255, 49, 76, 1);
 }
 /*alan*/
