@@ -47,7 +47,7 @@ export class EditPaiementQuoteComponent implements OnInit {
   fetchedProjects: Project[] = []
   stripeCust: StripeCustomer = new StripeCustomer()
   // currentUser: User = new User()
-  imgLogoUrl: string = './assets/images/profile-placeholder.jpg'
+  // imgLogoUrl: string = './assets/images/profile-placeholder.jpg'
   imgSignatureBase64Temp = ''
 
   showReLoginInApp:boolean = false
@@ -87,7 +87,7 @@ export class EditPaiementQuoteComponent implements OnInit {
 
   ngOnInit() {
 
-    console.log(this.fetchedPaiementQuote)
+    console.log(this.search)
     // this.fetchedPaiementQuote.quotes = this.fetchedQuotes
     this.myForm = this._fb.group({
       amount: [''],
@@ -100,14 +100,13 @@ export class EditPaiementQuoteComponent implements OnInit {
     this.authService
     .isoDateToHtmlDate(this.fetchedPaiementQuote.datePaiement)
 
-    // this.fetchedPaiementQuote.isExpense = this.search.isExpense
-    this.activatedRoute.params.subscribe((params: Params) => {
-      if(params['isExpense']) {this.fetchedPaiementQuote.isExpense = true}
-      if(params['isGooplusPaiement']) {this.fetchedPaiementQuote.isGooplusPaiement = true}
-      if(params['idPaiementQuote']) {this.getPaiementQuote(params['idPaiementQuote'])}
-      if(params['idQuote']) {this.getQuote(params['idQuote'])}
-
-    })
+    this.fetchedPaiementQuote.isExpense = this.search.isExpense
+    // this.activatedRoute.params.subscribe((params: Params) => {
+    //   if(params['isExpense']) {this.fetchedPaiementQuote.isExpense = true}
+    //   if(params['isGooplusPaiement']) {this.fetchedPaiementQuote.isGooplusPaiement = true}
+    //   if(params['idPaiementQuote']) {this.getPaiementQuote(params['idPaiementQuote'])}
+    //   if(params['idQuote']) {this.getQuote(params['idQuote'])}
+    // })
   }
 
 
