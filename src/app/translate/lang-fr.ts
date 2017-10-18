@@ -80,7 +80,7 @@ export const LANG_FR_TRANS = {
     'Mrs.': 'Mme',
     'Address shipping': 'Adresse Intervention',
     'Address billing': 'Adresse de Facturation',
-    'Additionnal address': 'Complément adresse',
+    'Additional address': 'Complément adresse',
     'New contact person': 'Nouveau interlocuteur',
     'Contact person': 'Interlocuteur',
     'Company': 'Entreprise',
