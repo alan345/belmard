@@ -136,7 +136,7 @@ export const LANG_FR_TRANS = {
     'Reset': 'Recommencer',
     'Unsign': 'Effacer',
     'Quote': 'Devis',
-    'referenceName': 'Nom du Produit',
+    'Reference Name': 'Nom du Produit',
     'description': 'Description',
     'Unit': 'Unité',
     'Save As Invoice': 'Convertir en Facture',
