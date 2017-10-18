@@ -31,15 +31,15 @@
 
         <div>
           <label>{{'Product Name' | translate}}</label>
-          <input type="text" class="form-control col-md-8" formControlName="referenceName" placeholder="referenceName" [(ngModel)]="fetchedProduct.details.referenceName">
+          <input type="text" class="form-control col-md-8" formControlName="referenceName" placeholder="{{'Reference Name' | translate}}" [(ngModel)]="fetchedProduct.details.referenceName">
         </div>
         <div>
           <label>{{'Ref' | translate}}</label>
-          <input type="text" class="form-control col-md-8" formControlName="reference" placeholder="reference" [(ngModel)]="fetchedProduct.details.reference">
+          <input type="text" class="form-control col-md-8" formControlName="reference" placeholder="{{'Reference' | translate}}" [(ngModel)]="fetchedProduct.details.reference">
         </div>
         <div>
           <label>{{'description' | translate}}</label>
-          <input type="text" class="form-control col-md-10" formControlName="description" placeholder="description" [(ngModel)]="fetchedProduct.details.description">
+          <input type="text" class="form-control col-md-10" formControlName="description" placeholder="{{'Description' | translate}}" [(ngModel)]="fetchedProduct.details.description">
         </div>
         <!-- <app-autocomplete [typeAutocomplete]="'companie'" [title]="'Companie'" [singleChoice]="'true'" [arrayContent]="fetchedProduct.vendors" (getResultAutocomplete)="selectCompanie($event[0])">
         </app-autocomplete> -->
@@ -93,7 +93,7 @@
         </div>
         <div>
           <label>{{'Unit' | translate}}</label>
-          <input type="text" class="form-control col-md-6" formControlName="unit" placeholder="Unit" [(ngModel)]="fetchedProduct.details.unit">
+          <input type="text" class="form-control col-md-6" formControlName="unit" placeholder="{{'Unit' | translate}}" [(ngModel)]="fetchedProduct.details.unit">
         </div>
       </div>
     </div>
