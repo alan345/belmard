@@ -118,8 +118,8 @@
     <div class="col-12">
 
       <div *ngIf="isMyCompanie()">
-        <h6>type Users</h6>
-        <div class="btn btn-warning btn-sm" (click)="seeTypeUser=!seeTypeUser">See Categs Project</div>
+        <h6>{{'Type Users' | translate}}</h6>
+        <div class="btn btn-warning btn-sm" (click)="seeTypeUser=!seeTypeUser">{{'See Type Users' | translate}}</div>
         <div *ngIf="seeTypeUser">
           <button type="button" class="valid" (click)="addTypeUser()">addTypeUser</button>
           <div *ngFor="let typeUser of fetchedCompanie.typeUsers; let i=index;">
@@ -132,7 +132,7 @@
         <h6>Categories</h6>
         <div class="btn btn-warning btn-sm" (click)="seeCategProject=!seeCategProject">{{'See Categs Project' | translate}}</div>
         <div *ngIf="seeCategProject">
-          <button type="button" class="valid" (click)="addCateg('categProject', 0, 0, 0, 0)">Add Categ Project{{'See Categs Project' | translate}}</button>
+          <button type="button" class="valid" (click)="addCateg('categProject', 0, 0, 0, 0)">{{'Add Categ Project' | translate}}</button>
           <div *ngFor="let categorie0 of fetchedCompanie.categories.categProject; let i = index;">
             <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.categories.categProject[i].categ">
             <input type="checkbox" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.categories.categProject[i].isFlagged">isFlagged
@@ -151,9 +151,9 @@
         </div>
 
 
-        <div class="btn btn-warning btn-sm" (click)="seeCategProduct=!seeCategProduct">{{'See Categs Project' | translate}}</div>
+        <div class="btn btn-warning btn-sm" (click)="seeCategProduct=!seeCategProduct">{{'See Categs Productd' | translate}}</div>
         <div *ngIf="seeCategProduct">
-          <button type="button" class="valid" (click)="addCateg('categProduct', 0, 0, 0, 0)">{{'Add Categ Project' | translate}}</button>
+          <button type="button" class="valid" (click)="addCateg('categProduct', 0, 0, 0, 0)">{{'Add Categ Products' | translate}}</button>
           <div *ngFor="let categorie0 of fetchedCompanie.categories.categProduct; let i = index;">
             <input type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedCompanie.categories.categProduct[i].categ">
             <button type="button" class="false" (click)="removeCateg('categProduct', 1,i,0,0)">x</button>
