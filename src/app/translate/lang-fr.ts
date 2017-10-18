@@ -130,9 +130,8 @@ export const LANG_FR_TRANS = {
     'Price excl tax': 'Prix HT',
     'VAT(%)': 'TVA(%)',
     'Total excl tax': 'Total HT',
-    '+ category': '+ Catégorie',
-    '+ text': '+ Texte',
-    '+ product': '+ Produit',
+    'Category': 'Catégorie',
+    'Text': 'Texte',
     'priceWithoutTaxes': 'Prix HT',
     'Reset': 'Recommencer',
     'Unsign': 'Effacer',
@@ -142,6 +141,7 @@ export const LANG_FR_TRANS = {
     'Unit': 'Unité',
     'Save as Invoice': 'Convertir en Facture',
     'Go to Invoice': 'Consulter Facture',
+   
 
     'Invoices': 'Factures',
     'invoice': 'Facture',
