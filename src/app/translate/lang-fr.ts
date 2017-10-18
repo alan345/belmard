@@ -81,7 +81,7 @@ export const LANG_FR_TRANS = {
     'Address shipping': 'Adresse Intervention',
     'Address billing': 'Adresse de Facturation',
     'Additional address': 'Complément adresse',
-    'New contact person': 'Nouveau interlocuteur',
+    'New contact person': 'Nouvel interlocuteur',
     'Contact person': 'Interlocuteur',
     'Company': 'Entreprise',
     'Companies': 'Fournisseurs',
