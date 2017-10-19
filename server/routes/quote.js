@@ -202,14 +202,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
               var html = ''
               html += `
                  <style type="text/css">
-<<<<<<< HEAD
-=======
 
-                       .row { display: table;
-                        float:left;
-                        }
-
->>>>>>> b198b3a9afc729c37b476f5ebbdaf08a6cf350a2
                        .col-1 {
                          width: 8.33%;
                        }
@@ -445,29 +438,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
               html += `
                        </tbody>
                      </table>
-<<<<<<< HEAD
-=======
 
-            <div class="row">
-              <div class="col-5">descriptif du produit
-              </div>
-               <div class="col-1">Image
-              </div>
-              <div class="col-1">Unit
-              </div>
-               <div class="col-1">Quantity
-              </div>
-               <div class="col-1">Unit Price
-              </div>
-               <div class="col-1">Prix HT'
-              </div>
-
-            </div>
-
-
-
-
->>>>>>> b198b3a9afc729c37b476f5ebbdaf08a6cf350a2
                      <br>
                      <table class="cobo">
                          <tr class="cobo">
