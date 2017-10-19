@@ -203,6 +203,9 @@ router.get('/pdf/:quoteId', function(req, res, next) {
               html += `
                  <style type="text/css">
 
+                       .row { display: inline-block;
+                        } 
+
                        .col-1 {
                          width: 8.33%;
                        }
