@@ -317,10 +317,10 @@ export class UserCalendarsComponent implements OnInit {
     let newUserCalendar = new UserCalendar()
     newUserCalendar.start = start._d
     newUserCalendar.end = end._d
-    //this.openDialog(newUserCalendar)
+    this.openDialog(newUserCalendar)
   }
   eventClick(event, jsEvent, view) {
-    //this.openDialog(event)
+    this.openDialog(event)
   }
   unselect(event, jsEvent, view) {
     // console.log('unselect')
