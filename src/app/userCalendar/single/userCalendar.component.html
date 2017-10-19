@@ -1,7 +1,7 @@
 <div class="container">
   <div class="hdform nopad">
     <h3 ><i class="fa fa10 fa-calendar" aria-hidden="true"></i>{{'Appointment' | translate}}</h3>
-    
+
   </div>
 
   <div>
@@ -11,10 +11,10 @@
       <div class="row">
 
         <div class="col-md-12">
-          {{'Start:' | translate}} {{fetchedUserCalendar.start | date:'yMMMdjms'  }}
+          {{'Start:' | translate}} {{fetchedUserCalendar.start | date:'dd/MM/yyyy HH:mm'}}
         </div>
         <div class="col-md-12">
-          {{'End:' | translate}} {{fetchedUserCalendar.end | date:'yMMMdjms'}}
+          {{'End:' | translate}} {{fetchedUserCalendar.end | date:'dd/MM/yyyy HH:mm'}}
         </div>
         <!-- <div class="col-md-12">
             <button class="btn btn-primary pull-right" (click)="addEvent()">
