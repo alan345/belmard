@@ -475,8 +475,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
               </div>
                <div class="col-1">Prix HT
               </div>
-               <div class="col-2">TVA
-              </div>
+            
             </div>
 
 
