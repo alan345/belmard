@@ -1,7 +1,7 @@
 import { Component, OnInit, Input} from '@angular/core';
 import { AuthService} from '../../auth/auth.service';
 import { QuoteService} from '../../quote/quote.service';
-import { Quote, StatusQuotes} from '../../quote/quote.model';
+import { Quote, StatusQuotes, StatusQuotesInvoice} from '../../quote/quote.model';
 import { ToastsManager} from 'ng2-toastr';
 import { MatDialog} from '@angular/material';
 import { Router, ActivatedRoute, Params } from '@angular/router';
@@ -28,7 +28,7 @@ export class QuotesComponent implements OnInit {
   paginationData = new PaginationData()
 
   statusQuotes = StatusQuotes
-
+  statusQuotesInvoice = StatusQuotesInvoice
   @Input() search = new Search()
 
   constructor(
@@ -131,15 +131,14 @@ export class QuotesComponent implements OnInit {
           this.paginationData = res.paginationData;
           this.fetchedQuotes =  res.data
           this.fetchedQuotes.forEach((quote, i) => {
-            // console.log(quote)
             this.statusQuotes.forEach(status => {
-
-                if(status.indexStatus === quote.statusQuote) {
-                  // console.log(status.label)
-                  this.fetchedQuotes[i].statusQuoteString = status.label
-                }
-
-            });
+              if(status.indexStatus === quote.statusQuote)
+                this.fetchedQuotes[i].statusQuoteString = status.label
+            })
+            this.statusQuotesInvoice.forEach(status => {
+              if(status.indexStatus === quote.statusQuote)
+                this.fetchedQuotes[i].statusQuoteString = status.label
+            })
           })
 
 
