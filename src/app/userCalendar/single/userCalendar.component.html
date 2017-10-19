@@ -1,5 +1,8 @@
 <div class="container">
-  <app-header [showBackButton]="true" [nameObject]="'userCalendar'" [showCreateButton]="false"></app-header>
+  <div class="hdform">
+    <h3 ><i class="fa fa10 fa-calendar" aria-hidden="true"></i>{{'Calendar' | translate}}</h3>
+    
+  </div>
 
   <div>
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
