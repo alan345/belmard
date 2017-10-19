@@ -36,7 +36,7 @@
 
 
 
-        <div [ngClass]="{'form-group col-md-4 nopad':!notification.isRead, 'form-group col-md-12 nopad': notification.isRead}" class="form-group col-md-4 nopad">
+        <div [ngClass]="{'form-group col-md-12 nopad':!fetchedProject._id, 'form-group col-md-4 nopad': fetchedProject._id}" >
           <label>{{'Name Project' | translate}}</label>
           <input class="form-control" type="text" formControlName="name" [(ngModel)]="fetchedProject.details.name" placeholder="{{'Ref' | translate}}">
         </div>
