@@ -344,7 +344,6 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                         }
                      #pageBody {height: 0px;}
                      .test2 {margin-bottom: -50px; }
-
                  </style>
                  `
               html += `
