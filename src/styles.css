@@ -3,6 +3,9 @@
 /*@import "~angular-calendar/dist/css/angular-calendar.css";*/
 /*@import "~@ng-bootstrap/ng-bootstrap/dist/css/bootstrap.min.css";*/
 
+.boad {    background-color: #ddd;
+}
+
 .mb8 {
     margin-bottom: 8px;
 }
