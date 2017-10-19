@@ -461,7 +461,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
               html += `
                        </tbody>
                      </table>
-
+ html += `
             <div class="row">
               <div class="col-5">descriptif du produit
               </div>
@@ -477,7 +477,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
               </div>
             
             </div>
-
+  html += `
 
 
 
