@@ -462,22 +462,22 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                        </tbody>
                      </table>
  html += `
-            <div class="row">
-              <div class="col-5">descriptif du produit
+            '<div class="row">
+              '<div class="col-5">descriptif du produit
               </div>
-               <div class="col-1">Image
+               '<div class="col-1">Image
               </div>
-               <div class="col-1">Unit
+              '<div class="col-1">Unit
               </div>
-               <div class="col-1">Quantity
+               '<div class="col-1">Quantity
               </div>
-               <div class="col-1">Unit Price
+               '<div class="col-1">Unit Price
               </div>
-               <div class="col-1">Prix HT
+               '<div class="col-1">Prix HT'
               </div>
             
-            </div>
-  html += `
+            </div>`
+
 
 
 
