@@ -84,7 +84,7 @@
 
         <div *ngIf="search.projectId.length && search.userId.length">
           <!-- <div *ngFor="let user of fetchedProject.clients"> -->
-          <label>{{'Quote' | translate}}</label>
+          <label><h6>{{'Quote' | translate}}</h6></label>
           <app-quotes [showHeader]=false [search]="search" [showBackButton]=false>
           </app-quotes>
         </div>
