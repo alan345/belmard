@@ -13,8 +13,6 @@
               <option value="" disabled selected>{{'Title' | translate}}</option>
               <option *ngFor="let n of titleArray" [ngValue]="n">{{ n | translate}}</option>
             </select>
-
-
           </div>
           <div class="form-group">
             <input [ngClass]="{'has-error':!myForm.controls['name'].valid && !myForm.controls['name'].pristine}" type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedUser.profile.name" placeholder="{{'Firstname' | translate}}">
