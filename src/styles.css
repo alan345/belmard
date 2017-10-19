@@ -3,6 +3,14 @@
 /*@import "~angular-calendar/dist/css/angular-calendar.css";*/
 /*@import "~@ng-bootstrap/ng-bootstrap/dist/css/bootstrap.min.css";*/
 
+
+.pr0 { padding-right: 0px;
+}
+
+.pl0 { padding-left: 0px;
+}
+
+
 .cdk-overlay-pane {
 
     min-width: 1000px;
