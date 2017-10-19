@@ -203,7 +203,8 @@ router.get('/pdf/:quoteId', function(req, res, next) {
               html += `
                  <style type="text/css">
 
-                       .row { display: inline-block;
+                       .row { display: table;
+                        float:left;
                         } 
 
                        .col-1 {
