@@ -273,13 +273,14 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                          border: 1px solid #ddd;
                        }
 
-                       .desc {
-                          font-size: 9px;
+
+                      .desc {
+                          
                          text-align: left;
                        }
 
                        .elem {
-                         font-size: 9px;
+                         
                          text-align: center;
                        }
                        .alright {
@@ -439,7 +440,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                         })
                       })
                     }
-                    html += '<td class="desc"><div class="avoid">' + description + '</div></td>'
+                    html += '<td class="desc"><div class="avoid inf2">' + description + '</div></td>'
                     html += '<td class="elem">' + img + '</td>'
                     // html += '<td class="desc">' + bucketProduct.typeRow + '</td>'
                     // html += '<td class="elem">' + bucketProduct.title + '</td>'
