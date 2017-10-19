@@ -441,14 +441,14 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                       })
                     }
                     html += '<td class="desc"><div class="avoid inf2">' + description + '</div></td>'
-                    html += '<td class="elem"><div class="avoid inf2">' + img + '</div></td>'
+                    html += '<td class="elem">' + img + '</td>'
                     // html += '<td class="desc">' + bucketProduct.typeRow + '</td>'
                     // html += '<td class="elem">' + bucketProduct.title + '</td>'
-                    html += '<td class="elem"><div class="avoid inf2">' + unit + '</div></td>'
-                    html += '<td class="elem"><div class="avoid inf2">' + bucketProduct.quantity + '</div></td>'
-                    html += '<td class="elem"><div class="avoid inf2">' + bucketProduct.priceWithoutTaxes + '</div></td>'
-                    html += '<td class="elem"><div class="avoid inf2">' + bucketProduct.totalPriceWithoutTaxes + '</div></td>'
-                    html += '<td class="elem"><div class="avoid inf2">' + bucketProduct.vat + '%</div></td>'
+                    html += '<td class="elem">' + unit + '</div></td>'
+                    html += '<td class="elem">' + bucketProduct.quantity + '</td>'
+                    html += '<td class="elem">' + bucketProduct.priceWithoutTaxes + '</td>'
+                    html += '<td class="elem">' + bucketProduct.totalPriceWithoutTaxes + '</td>'
+                    html += '<td class="elem">' + bucketProduct.vat + '%</td>'
                   html += '</tr>'
 
                 })
@@ -457,6 +457,27 @@ router.get('/pdf/:quoteId', function(req, res, next) {
               html += `
                        </tbody>
                      </table>
+
+            <div class="row">
+              < div class="col-5">descriptif du produit
+              </div>
+               <div class="col-1">Image
+              </div>
+               <div class="col-1">Unit
+              </div>
+               <div class="col-1">Quantity
+              </div>
+               <div class="col-1">Unit Price
+              </div>
+               <div class="col-1">Prix HT
+              </div>
+               <div class="col-2">TVA
+              </div>
+            </div>
+
+
+
+
                      <br>
                      <table class="cobo">
                          <tr class="cobo">
