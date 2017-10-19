@@ -85,6 +85,7 @@
           <label>{{'VAT (%)' | translate}}</label>
 
           <select class="form-control col-md-6" formControlName="vat" [(ngModel)]="fetchedProduct.details.price.vat">
+            <option value=0 disabled selected>{{'VAT (%)' | translate}}</option>
             <option *ngFor="let VAT of VATs" [ngValue]="VAT">
               {{VAT}}%
             </option>
