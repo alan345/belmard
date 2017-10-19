@@ -165,7 +165,7 @@ export const LANG_FR_TRANS = {
     'Ref': 'Référence',
     'Name Project': 'Nom du Projet',
     'Started': 'En cours',
-    'Done': 'Enregistrer',
+    'Done': 'Terminé',
     'Assigned To': 'Assigné à',
     'My tasks': 'Mes tâches',
     'Name Task': 'Description tâche',
