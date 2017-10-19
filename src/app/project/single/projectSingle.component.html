@@ -32,21 +32,21 @@
       <br>
 
       <div class="row">
-        <div>
+        <div class="col-5 nopad">
 
-          <div class="form-group col-md-4 nopad">
+          <div class="form-group">
             <label>{{'Name Project' | translate}}</label>
             <input class="form-control" type="text" formControlName="name" [(ngModel)]="fetchedProject.details.name" placeholder="{{'Ref' | translate}}">
           </div>
 
           <div class="form-group">
             {{'Status' | translate}}
-            <select class="form-control col-md-3" formControlName="status" [(ngModel)]="fetchedProject.status">
+            <select class="form-control" formControlName="status" [(ngModel)]="fetchedProject.status">
           <option *ngFor="let n of status" [ngValue]="n.index">{{n.label}}</option>
         </select>
           </div>
 
-          <div class="form-group col-md-4 nopad">
+          <div class="form-group">
 
             <!-- <app-autocomplete [typeAutocomplete]="'user'" [title]="'Assigned To'" [singleChoice]=true [search]="{isExternalUser:false, userId:search.assignedToId}" [arrayContent]="fetchedProject.assignedTos" (getResultAutocomplete)="selectAssignedTo($event[0])"> -->
             <app-autocomplete class="col-md-4 bn" [typeAutocomplete]="'user'" [title]="translate('Assigned To')" [singleChoice]=true [search]="{isExternalUser:false}" [arrayContent]="fetchedProject.assignedTos" (getResultAutocomplete)="selectAssignedTo($event[0])">
@@ -60,8 +60,8 @@
 
         </div>
 
-        <div>
-          <div class="form-group col-md-4 nopad">
+        <div class="form-group col-5">
+          <div class="form-group">
             <!-- <app-autocomplete class="col-md-4" [typeAutocomplete]="'user'" [search]="{isExternalUser:false, userId:search.userId}" [title]="'Client'" [canDelete]=false [singleChoice]="'true'" [arrayContent]="fetchedProject.clients" (getResultAutocomplete)="selectUser($event[0])"> -->
             <app-autocomplete class="col-md-4 bn" [typeAutocomplete]="'user'" [search]="{isExternalUser:true}" [title]="'Client'" [canDelete]=false [singleChoice]="'true'" [arrayContent]="fetchedProject.clients" (getResultAutocomplete)="selectUser($event[0])">
             </app-autocomplete>
@@ -126,7 +126,7 @@
 
 
 
-      <div class="valid-edit row col-12">
+      <div class="valid-edit row col-12 nopad">
         <button type="submit" class="valid" [disabled]="!myForm.valid">{{'Save' | translate}}</button>
         <button *ngIf="fetchedProject._id" type="button" class="false" (click)="openDialogDelete()">
         {{'Delete' | translate}}
