@@ -16,6 +16,7 @@ import { User } from '../../user/user.model';
 import { Quote } from '../../quote/quote.model';
 import { AuthService} from '../../auth/auth.service';
 import { Search } from '../../shared/shared.model';
+import { TranslateService } from '../../translate/translate.service';
 
 
 
@@ -71,12 +72,15 @@ export class ProjectSingleComponent implements OnInit {
     private userService: UserService,
     private quoteService: QuoteService,
     private authService: AuthService,
+    private translateService: TranslateService,
   ) {
   }
 
 
 
-
+  translate(text: string) {
+    return this.translateService.instant(<string>text)
+  }
 
   ngOnInit() {
     this.myForm = this._fb.group({

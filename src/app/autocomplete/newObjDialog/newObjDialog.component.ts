@@ -2,7 +2,7 @@ import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
-import { TranslateService } from '../../translate/translate.service';
+// import { TranslateService } from '../../translate/translate.service';
 import { UserDialogComponent } from '../../user/singleUser/dialog/userDialog.component';
 import { QuoteDialogComponent } from '../../quote/single/dialog/quoteDialog.component';
 import { CompanieDialogComponent } from '../../companie/single/dialog/companieDialog.component';
@@ -35,7 +35,7 @@ export class newObjDialogComponent implements OnInit {
     private authService: AuthService,
     private router: Router,
     private location: Location,
-    private translateService: TranslateService,
+    // private translateService: TranslateService,
     public mdDialog: MatDialog,
   ) { }
 
