@@ -87,7 +87,7 @@
               <input (ngModelChange)="searchCities($event, i)" type="text" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedUser.profile.address[i].zip" placeholder="{{'Zip' | translate}}">
             </div>
             <div class="form-group">
-              <div *ngFor="let place of fetchedUser.profile.address[i].cities; let j = index">
+              <div class="row" *ngFor="let place of fetchedUser.profile.address[i].cities; let j = index">
                 <div>
                   {{place['place name']}} 
                 </div>
