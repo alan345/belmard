@@ -9,10 +9,9 @@
         <div class="col">
           <h5>{{'Identity' | translate}}</h5>
           <div class="form-group">
-
             <select [ngClass]="{'has-error':!myForm.controls['title'].valid && !myForm.controls['title'].pristine}" [(ngModel)]="fetchedUser.profile.title" class="form-control" formControlName="title">
               <option value="" disabled selected>{{'Title' | translate}}</option>
-              <option *ngFor="let n of titleArray" [ngValue]="n">{{n}}</option>
+              <option *ngFor="let n of titleArray" [ngValue]="n">{{ n | translate}}</option>
             </select>
 
 
