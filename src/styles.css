@@ -3,6 +3,9 @@
 /*@import "~angular-calendar/dist/css/angular-calendar.css";*/
 /*@import "~@ng-bootstrap/ng-bootstrap/dist/css/bootstrap.min.css";*/
 
+.mb25 {
+    margin-bottom: 25px;
+}
 
 .pr0 { padding-right: 0px;
 }
