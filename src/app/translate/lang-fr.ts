@@ -147,6 +147,7 @@ export const LANG_FR_TRANS = {
     'Reference': 'Référence',
     'Paymentquote': 'Encaissement',
     'Sent': 'Envoyée',
+    'Date Invoice Paid': 'Date Encaissement',
 
     'Calendar': 'Calendrier',
     'Start:': 'Débute le :',
