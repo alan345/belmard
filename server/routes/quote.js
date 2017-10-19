@@ -459,7 +459,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                      </table>
 
             <div class="row">
-              < div class="col-5">descriptif du produit
+              <div class="col-5">descriptif du produit
               </div>
                <div class="col-1">Image
               </div>
