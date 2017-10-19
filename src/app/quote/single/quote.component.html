@@ -45,7 +45,7 @@
           </app-autocomplete>
         </div> -->
         <div class="form-group">
-          <app-autocomplete [search]="search" [canDelete]=false [enableLink]=true [typeAutocomplete]="'project'" [title]="'Project'" [singleChoice]="true" [arrayContent]="fetchedQuote.projects">
+          <app-autocomplete [search]="search" [canDelete]=false [enableLink]=true [typeAutocomplete]="'project'" [title]="'Projet'" [singleChoice]="true" [arrayContent]="fetchedQuote.projects">
           </app-autocomplete>
         </div>
       </div>
@@ -61,10 +61,10 @@
         <div class="form-group">
           {{'Status' | translate}}
           <select *ngIf="fetchedQuote.typeQuote === 'quote'" [disabled]="fetchedQuote.signature.isSigned" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.statusQuote" name="statusQuote">
-            <option *ngFor="let n of statusQuotes" [value]="n.indexStatus">{{n.label}}</option>
+            <option *ngFor="let n of statusQuotes" [value]="n.indexStatus">{{n.label | translate}}</option>
           </select>
           <select *ngIf="fetchedQuote.typeQuote === 'invoice'" [disabled]="fetchedQuote.signature.isSigned" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.statusQuote" name="statusQuote">
-            <option *ngFor="let n of statusQuotesInvoice" [value]="n.indexStatus">{{n.label}}</option>
+            <option *ngFor="let n of statusQuotesInvoice" [value]="n.indexStatus">{{n.label | translate}}</option>
           </select>
         </div>
         <div *ngIf="fetchedQuote.typeQuote === 'invoice' && fetchedQuote.statusQuote == '101'" class="form-group">
@@ -80,10 +80,11 @@
           </h4>
           <div>{{client.profile.companyName}}</div>
           <div *ngFor="let singleAddress of client.profile.address">
-            <!--          <h5>{{singleAddress.nameAddress}}</h5>  -->
-            <div>{{singleAddress.address}}</div>
-            <div>{{singleAddress.zip}} {{singleAddress.city}}</div>
-            <div>{{client.profile.phoneNumber}}</div>
+            <div *ngIf="singleAddress.nameAddress ==='billing'">
+              <div>{{singleAddress.address}}</div>
+              <div>{{singleAddress.zip}} {{singleAddress.city}}</div>
+              <div>{{client.profile.phoneNumber}}</div>
+            </div>
           </div>
         </div>
       </div>

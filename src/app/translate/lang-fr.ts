@@ -95,6 +95,7 @@ export const LANG_FR_TRANS = {
 
 
     'Quotes': 'Devis',
+    'Paid': 'Payé',
     'quote': 'devis',
     'Create a new quote': 'Créer un nouveau Devis',
     'Assigned to me': 'Assigné à Moi',
@@ -145,12 +146,12 @@ export const LANG_FR_TRANS = {
     'Show Comments': 'Voir Commentaires',
     'Reference': 'Référence',
     'Paymentquote': 'Encaissement',
-  
+
     'Calendar': 'Calendrier',
     'Start:': 'Débute le :',
     'End:': 'Termine le :',
     'Appointment': 'Rendez-vous',
-  
+
     'Invoices': 'Factures',
     'invoice': 'Facture',
 
@@ -165,7 +166,7 @@ export const LANG_FR_TRANS = {
     'Done': 'Enregistrer',
     'Assigned To': 'Assigné à',
     'My tasks': 'Mes tâches',
-    'Name Task': 'Description',
+    'Name Task': 'Description tâche',
 
 
     'task': 'tâche',
