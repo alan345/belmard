@@ -307,7 +307,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                        }
 
                        td {
-                         font-size: 9px;
+                         /*font-size: 9px;*/
                          height: 20px;
                          vertical-align: center;
                          border-left: 1px solid #ddd;
@@ -340,7 +340,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                       }
                       .avoid {
                           page-break-inside: avoid !important;
-                          margin: 4px 0 4px 0;  /* to keep the page break from cutting too close to the text in the div */
+                        /*  margin: 4px 0 4px 0;   to keep the page break from cutting too close to the text in the div */
                         }
                      #pageBody {height: 0px;}
                      .test2 {margin-bottom: -50px; }
@@ -461,16 +461,13 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                      <table class="cobo">
                          <tr class="cobo">
 
-                           <td class="col-6 alright"></td>`
+                           <td class="col-6 ts elem alright"><div class="avoid">alan</div></td>`
 
-              item.priceQuote.priceQuoteTaxes.forEach(priceQuoteTaxe => {
-                html += `<td class="col-2 ts elem">TVA: ` + priceQuoteTaxe.VAT + `%</td>`
-                // html += `<td class="col-2 ts elem">` + priceQuoteTaxe.TotalVAT + `€</td>`
-              })
-
-              //  <td class="col-2 ts elem">TVA 5.5%</td>
-              //  <td class="col-2 ts elem">TVA 10%</td>
-              html += `
+                        item.priceQuote.priceQuoteTaxes.forEach(priceQuoteTaxe => {
+                          html += `
+                            <td class="col-2 ts elem">TVA: ` + priceQuoteTaxe.VAT + `%</td>`
+                        })
+                        html += `
                             <td class="col-2 ts elem"><b>TOTAL</b></td>
                            </tr>
                            <tr class="cobo">
