@@ -146,6 +146,7 @@ export const LANG_FR_TRANS = {
     'Show Comments': 'Voir Commentaires',
     'Reference': 'Référence',
     'Paymentquote': 'Encaissement',
+    'Sent': 'Envoyée',
 
     'Calendar': 'Calendrier',
     'Start:': 'Débute le :',
