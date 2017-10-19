@@ -307,11 +307,11 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                        }
 
                        td {
-                         font-size: 9px;
+                     /*    font-size: 9px;
                          height: 20px;
-                         vertical-align: center;
+                         vertical-align: center;  */
                          border-left: 1px solid #ddd;
-                         border-right: 1px solid #ddd;
+                         border-right: 1px solid #ddd;  
                        }
 
                        th {
