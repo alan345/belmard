@@ -12,8 +12,6 @@ import { UserService} from '../../user/user.service';
 import { Search, PaginationData } from '../../shared/shared.model';
 
 
-
-
 @Component({
   selector: 'app-projects',
   templateUrl: './projects.component.html',
@@ -22,49 +20,25 @@ import { Search, PaginationData } from '../../shared/shared.model';
 
 })
 export class ProjectsComponent implements OnInit {
-  // @Input() userId = '';
-  // @Input() showHeader = true;
-  // token: string = localStorage.getItem('id_token');
+
   fetchedProjects: Project[] = [];
   @Input() search: Search = new Search()
-  // {
-  //   categories : [],
-  //   search: ''
-  // };
   loading: boolean;
-
-  paginationData:PaginationData = new PaginationData()
-  //  = {
-  //   currentPage: 1,
-  //   itemsPerPage: 0,
-  //   totalItems: 0
-  // };
-
-
-  categories2 = '';
-
-
+  paginationData: PaginationData = new PaginationData()
 
   constructor(
-    // private sanitizer: DomSanitizer,
     private projectService: ProjectService,
     private toastr: ToastsManager,
-    // public dialog: MatDialog,
-    // private router: Router,
-    // private location: Location,
-    // private authService: AuthService,
-    // private userService: UserService,
-
   ) {
   }
 
   ngOnInit() {
-    let this2 = this
+
 
     // setTimeout(function(){
       // this2.search.userId = this2.userId
-      this2.search.orderBy = 'details.name';
-      this2.getProjects(1, this2.search)
+      this.search.orderBy = '-createdAt';
+      this.getProjects(1, this.search)
     // }, 200);
   }
   // goBack() {
