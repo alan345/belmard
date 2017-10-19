@@ -3,6 +3,10 @@
 /*@import "~angular-calendar/dist/css/angular-calendar.css";*/
 /*@import "~@ng-bootstrap/ng-bootstrap/dist/css/bootstrap.min.css";*/
 
+.validadress {
+      color: #4CAF50;
+}
+
 .boad {    background-color: #ddd;
 }
 
