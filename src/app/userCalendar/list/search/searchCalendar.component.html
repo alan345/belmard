@@ -10,16 +10,7 @@
   </div>
   <div class="col-md-4">
     <div *ngFor="let ownerCompanie of currentUser.ownerCompanies">
-    
-    <div class="input-group">
-      <select class="form-control" (change)="changeTypeUsers()" placeholder="typeUser" [(ngModel)]="searchData.typeUser" name="typeUsers"><option *ngFor="let typeUser of ownerCompanie.typeUsers" [value]="typeUser.value">
-       {{typeUser.value}}
-      <span class="input-group-btn"> 
-        <button type="button" (click)="searchData.typeUser = undefined;changeTypeUsers()"><i class="fa fa-times" aria-hidden="true"></i></button>
-      </span>
-    </div>
-    
-    
+     
       <select class="form-control" (change)="changeTypeUsers()" placeholder="typeUser" [(ngModel)]="searchData.typeUser" name="typeUsers">
         <option *ngFor="let typeUser of ownerCompanie.typeUsers" [value]="typeUser.value">
           {{typeUser.value}}
