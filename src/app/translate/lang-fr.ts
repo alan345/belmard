@@ -159,7 +159,7 @@ export const LANG_FR_TRANS = {
 
     'project': 'Projet',
     'Projects': 'Projets',
-    'Ref': 'Nom',
+    'Ref': 'Référence',
     'Name Project': 'Nom du Projet',
     'Started': 'En cours',
     'Done': 'Enregistrer',
