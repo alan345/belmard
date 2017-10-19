@@ -51,15 +51,15 @@
       <app-autocomplete class="col-md-4 bn" [typeAutocomplete]="'user'" [search]="{isExternalUser:true}" [title]="'Client'" [canDelete]=false [singleChoice]="'true'" [arrayContent]="fetchedProject.clients" (getResultAutocomplete)="selectUser($event[0])">
       </app-autocomplete>
       <div *ngFor="let client of fetchedProject.clients">
-        <div *ngFor="let singleAddress of client.profile.address">
-          Ville: {{singleAddress.city}}
+        <div class="form-control" *ngFor="let singleAddress of client.profile.address">
+          <b>{{'City' | translate}} :</b> {{singleAddress.city}}
           <br>
-          Zip: {{singleAddress.zip}}
+          <b>{{'Zip' | translate}} :</b> {{singleAddress.zip}}
         </div>
       </div>
 
       </div>
-      <br>
+   
       <div *ngIf="fetchedProject._id">
 
         <div *ngIf="search.projectId.length && search.userId.length">
