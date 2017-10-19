@@ -202,62 +202,45 @@ router.get('/pdf/:quoteId', function(req, res, next) {
               var html = ''
               html += `
                  <style type="text/css">
-
-                       .row { display: inline-block;
-                        } 
-
                        .col-1 {
                          width: 8.33%;
                        }
-
                        .col-2 {
                          width: 16.66%;
                        }
-
                        .col-3 {
                          width: 25%;
                        }
-
                        .col-4 {
                          width: 33.33%;
                        }
-
                        .col-5 {
                          width: 41.66%;
                        }
-
                        .col-6 {
                          width: 50%;
                        }
-
                        .col-7 {
                          width: 58.33%;
                        }
-
                        .col-8 {
                          width: 66.66%;
                        }
-
                        .col-9 {
                          width: 75%;
                        }
-
                        .col-10 {
                          width: 83.33%;
                        }
-
                        .col-11 {
                          width: 91.66%;
                        }
-
                        .col-12 {
                          width: 100%;
                        }
-
                        .img {
                          height: 20px;
                        }
-
                        .imglogo {
                          height: 50px;
                          text-align: center;
@@ -265,82 +248,79 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                         margin-left: auto;
                         margin-right: auto
                        }
-
                        .tabo {
                          border: 1px solid #ddd;
                        }
-
                        .bgh {
                          background-color: #595959;
                          color: white;
                          border: 1px solid #ddd;
                        }
 
-
-                      .desc {
-                          
+                       .bghFree {
+                         background-color: #595959;
+                         color: #595959;
+                         border: 1px solid #ddd;
+                       }
+                       .desc {
                          text-align: left;
                        }
-
                        .elem {
-                         
                          text-align: center;
+                         font-size: 9px;
+
+                       }
+                       .titleGooplus1 {
+                         font-size: 11px;
                        }
                        .alright {
                          text-align: right;
                        }
-
                        .inf {
                          font-size: 10px;
                        }
-
                        .inf2 {
                          font-size: 9px;
                        }
-
                        .nobo {
                          border-top: none!important;
                          border-bottom: none!important;
                        }
-
                        .cobo {
                          border: 1px solid #ddd;
                        }
-
                        table {
                          border-collapse: collapse;
                          width: 100%;
                        }
 
+
+
                        td {
-                         
+
+                         height: 20px;
+                         vertical-align: bottom;
                          border-left: 1px solid #ddd;
-                         border-right: 1px solid #ddd;  
+                         border-right: 1px solid #ddd;
                        }
-
                        th {
-                         font-size: 10px;
+                         /*font-size: 10px;*/
                        }
-
                         .cgv {
                          font-size: 6px;
                         text-align: center!important;
                        }
-
                         p  {
                          font-size: 9px;
                           font-weight: 300;
                        }
-
                        .ts {
                          background-color: #aba4a4;
                          font-weight: bold;
                        }
                        #pageHeader {
-
                          width:100%;
                          height: 50px;
-
                       }
                       .avoid {
                           page-break-inside: avoid !important;
@@ -358,13 +338,11 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                        <thead>
                          <tr>
                            <th class="col-4 cobo desc">
-
                            <p><b>Belmard Bâtiment</b></p>
                            <p>30, rue Belgrand</p>
                            <p>75020 Paris</p>
                            <p>Tel : 01.40.33.88.33</p>
                            <p>Mail : Belmard.batiment@gmail.com</p>
-
                            </th>
                            <th class="col-4 nobo"></th>
                            <th class="col-4 cobo desc">`
@@ -403,13 +381,13 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                      <table class="tabo">
                        <thead>
                          <tr>
-                           <th class="col-5 bgh">Description</th>
-                           <th class="col-1 bgh">Image</th>
-                           <th class="col-1 bgh">Unit</th>
-                           <th class="col-1 bgh">Quantity</th>
-                           <th class="col-1 bgh">Unit Price</th>
-                           <th class="col-1 bgh">Total tax excl</th>
-                           <th class="col-2 bgh">Tax</th>
+                           <th class="col-5 bgh titleGooplus1">Description</th>
+                           <th class="col-1 bgh titleGooplus1">Image</th>
+                           <th class="col-1 bgh titleGooplus1">Price_Unit</th>
+                           <th class="col-1 bgh titleGooplus1">Quantity</th>
+                           <th class="col-1 bgh titleGooplus1">Unit</th>
+                           <th class="col-1 bgh titleGooplus1">Total_tax_excl</th>
+                           <th class="col-2 bgh titleGooplus1">Tax</th>
                          </tr>
                        </thead>
                        <tbody>`
@@ -443,11 +421,11 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                         })
                       })
                     }
-                    html += '<td class="desc"><div class="avoid inf2">' + description + '</div></td>'
+                    html += '<td class="desc"><div class="avoid">' + description + '</div></td>'
                     html += '<td class="elem">' + img + '</td>'
                     // html += '<td class="desc">' + bucketProduct.typeRow + '</td>'
                     // html += '<td class="elem">' + bucketProduct.title + '</td>'
-                    html += '<td class="elem">' + unit + '</div></td>'
+                    html += '<td class="elem">' + unit + '</td>'
                     html += '<td class="elem">' + bucketProduct.quantity + '</td>'
                     html += '<td class="elem">' + bucketProduct.priceWithoutTaxes + '</td>'
                     html += '<td class="elem">' + bucketProduct.totalPriceWithoutTaxes + '</td>'
@@ -460,31 +438,9 @@ router.get('/pdf/:quoteId', function(req, res, next) {
               html += `
                        </tbody>
                      </table>
-
-            <div class="row">
-              <div class="col-5">descriptif du produit
-              </div>
-               <div class="col-1">Image
-              </div>
-               <div class="col-1">Unit
-              </div>
-               <div class="col-1">Quantity
-              </div>
-               <div class="col-1">Unit Price
-              </div>
-               <div class="col-1">Prix HT
-              </div>
-               <div class="col-2">TVA
-              </div>
-            </div>
-
-
-
-
                      <br>
                      <table class="cobo">
                          <tr class="cobo">
-
                            <td class="col-6 alright"></td>`
 
               item.priceQuote.priceQuoteTaxes.forEach(priceQuoteTaxe => {
@@ -505,7 +461,6 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                 html += `<td class="col-2 elem">` + Math.round(priceQuoteTaxe.TotalVAT / (priceQuoteTaxe.VAT / 100)) + `€</td>`
               })
               html += `
-
                            <td class="col-2 elem"><b>` + Math.round(item.priceQuote.priceQuoteWithoutTaxes) + `€</b></td>
                            </tr>`
 
@@ -522,7 +477,6 @@ router.get('/pdf/:quoteId', function(req, res, next) {
               html += `
                              <td class="col-2 elem"><b>` + Math.round(vatTotal) + `€</b></td>
                            </tr>
-
                            <tr class="cobo">
                            <td class="col-6 alright ts"><b>TOTAL TTC</b></td>`
 
@@ -531,34 +485,24 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                 html += `<td class="col-2 elem">` + Math.round(priceQuoteTaxe.TotalVAT / (priceQuoteTaxe.VAT / 100) + priceQuoteTaxe.TotalVAT * 1) + `€</td>`
               })
               html += `
-
                            <td class="col-2 elem"><b>` + Math.round(item.priceQuote.priceQuoteWithTaxes) + `€</b></td>
-
                          </tr>
-
                      </table>
                      <br>`
 
               html += `<table class="cobo">
-
                            <tr class="cobo">
-                           <td class="col-6 alright ts">Acompte à la commande 40% </td>
-                           <td class="col-6 alright">=40% du total ttc</td>
-
+                           <td class="col-6 alright ts elem">Acompte à la commande 40% </td>
+                           <td class="col-6 alright elem">=40% du total ttc</td>
                            </tr>
                            <tr class="cobo">
-                           <td class="col-6 alright ts">Acompte intermédiaire</td>
-                           <td class="col-6 alright">sur avancement</td>
-
+                           <td class="col-6 alright ts elem">Acompte intermédiaire</td>
+                           <td class="col-6 alright elem">sur avancement</td>
                            </tr>
-
                            <tr class="cobo">
-                           <td class="col-6 alright ts"><b>Solde</b></td>
-                           <td class="col-6 alright"><b>à la livraison</b></td>
-
-
+                           <td class="col-6 alright ts elem"><b>Solde</b></td>
+                           <td class="col-6 alright elem"><b>à la livraison</b></td>
                          </tr>
-
                      </table>
                      <br>`
 
@@ -575,12 +519,10 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                            <th class="col-3 desc"><p>Client</p>
                                                  <p class="inf2">Lu et approuvé</p>
                                                  <p class="inf2">Le</p></th>
-
                          </tr>
                        </thead>
                      </table>
                   <br>
-
                   <a class="cgv">Ce devis est valable 3 mois. Les prix sont établis sur la base des taux en vigeur à la date de remise de l'offre et toute variation ultérieure de ces taux sera répercutée sur ces prix en application du Code Général des Impôts</a>
                     `
 
