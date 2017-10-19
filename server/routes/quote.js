@@ -300,7 +300,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                        td {
 
                          height: 20px;
-                         vertical-align: bottom;
+                         vertical-align: center;
                          border-left: 1px solid #ddd;
                          border-right: 1px solid #ddd;
                        }
