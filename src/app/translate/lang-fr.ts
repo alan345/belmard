@@ -145,8 +145,12 @@ export const LANG_FR_TRANS = {
     'Show Comments': 'Voir Commentaires',
     'Reference': 'Référence',
     'Paymentquote': 'Encaissement',
-   
-
+  
+    'Calendar': 'Calendrier',
+    'Start:': 'Débute le :',
+    'End:': 'Termine le :',
+    'Appointment': 'Rendez-vous',
+  
     'Invoices': 'Factures',
     'invoice': 'Facture',
 
