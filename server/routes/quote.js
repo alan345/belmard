@@ -348,22 +348,34 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                            <th class="col-4 nobo"></th>
                            <th class="col-4 cobo desc">`
 
-              item.clients.forEach(user => {
-                html += user.profile.title
-                html += ' '
-                html += user.profile.name
-                html += ' '
-                html += user.profile.lastName
-                html += '<br>'
-                html += 'Numéro & rue'
-                html += '<br>'
-                html += 'Zip & City'
-                html += '<br>'
-                html += user.profile.phoneNumber
-                html += '<br>'
-                html += 'Mail : client@mail.com'
+                        item.clients.forEach(user => {
 
-              })
+                          html += '<p><b>'
+                          html += user.profile.title + ' ' + user.profile.name + ' ' + user.profile.lastName
+                          html += '</b></p>'
+                          user.profile.address.forEach(singleAddress => {
+                            if(singleAddress.nameAddress === 'billing') {
+                              html += '<p>'
+                              html += singleAddress.address + ' ' + singleAddress.address2
+                              html += '</p>'
+                              html += '<p>'
+                              html += singleAddress.city + ' ' + singleAddress.state
+                              html += '</p>'
+                              html += '<p>'
+                              html += singleAddress.zip + ' ' + singleAddress.country
+                              html += '</p>'
+                            }
+                          })
+
+
+                          html += '<p>'
+                          html += 'Tel : ' + user.profile.phoneNumber
+                          html += '</p><p>'
+                          html += 'Mail : ' + user.email
+                          html += '</p>'
+                        })
+
+
               html += `
                            </th>
                          </tr>
@@ -394,14 +406,14 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                        <tbody>`
               item.devisDetails.forEach(devisDetail => {
                 html += '<tr class="ts">'
-                html += '<td class="desc">' + devisDetail.nameBucketProducts + '</td>'
-                html += `
-                         <td class="desc"></td>
-                         <td class="desc"></td>
-                         <td class="desc"></td>
-                         <td class="desc"></td>
-                         <td class="desc"></td>
-                         <td class="desc"></td>
+                  html += '<td class="desc">' + devisDetail.nameBucketProducts + '</td>'
+                  html += `
+                           <td class="desc"></td>
+                           <td class="desc"></td>
+                           <td class="desc"></td>
+                           <td class="desc"></td>
+                           <td class="desc"></td>
+                           <td class="desc"></td>
                         </tr>`
                 devisDetail.bucketProducts.forEach(bucketProduct => {
                   html += '<tr>'
@@ -421,7 +433,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                         })
                       })
                     }
-                    html += '<td class="desc"><div class="avoid">' + description + '</div></td>'
+                    html += '<td class="desc"><div class="avoid elem">' + description + '</div></td>'
                     html += '<td class="elem">' + img + '</td>'
                     // html += '<td class="desc">' + bucketProduct.typeRow + '</td>'
                     // html += '<td class="elem">' + bucketProduct.title + '</td>'
@@ -455,19 +467,19 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                             <td class="col-2 ts elem"><b>TOTAL</b></td>
                            </tr>
                            <tr class="cobo">
-                           <td class="col-6 alright ts">Sous-Total HT</td>`
+                            <td class="col-6 alright ts elem">Sous-Total HT</td>`
 
-              item.priceQuote.priceQuoteTaxes.forEach(priceQuoteTaxe => {
-                //  html += `<td class="col-2 ts elem">TVA: ` + priceQuoteTaxe.VAT + `%</td>`
-                html += `<td class="col-2 elem">` + Math.round(priceQuoteTaxe.TotalVAT / (priceQuoteTaxe.VAT / 100)) + `€</td>`
-              })
-              html += `
-                           <td class="col-2 elem"><b>` + Math.round(item.priceQuote.priceQuoteWithoutTaxes) + `€</b></td>
+                  item.priceQuote.priceQuoteTaxes.forEach(priceQuoteTaxe => {
+                    //  html += `<td class="col-2 ts elem">TVA: ` + priceQuoteTaxe.VAT + `%</td>`
+                    html += `<td class="col-2 elem">` + Math.round(priceQuoteTaxe.TotalVAT / (priceQuoteTaxe.VAT / 100)) + `€</td>`
+                  })
+                  html += `
+                            <td class="col-2 elem"><b>` + Math.round(item.priceQuote.priceQuoteWithoutTaxes) + `€</b></td>
                            </tr>`
 
 
               html += `<tr class="cobo">
-                             <td class="col-6 alright ts">Montant de TVA</td>`
+                             <td class="col-6 alright ts elem">Montant de TVA</td>`
               let vatTotal = 0
               item.priceQuote.priceQuoteTaxes.forEach(priceQuoteTaxe => {
                 vatTotal += priceQuoteTaxe.TotalVAT * 1
@@ -479,7 +491,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                              <td class="col-2 elem"><b>` + Math.round(vatTotal) + `€</b></td>
                            </tr>
                            <tr class="cobo">
-                           <td class="col-6 alright ts"><b>TOTAL TTC</b></td>`
+                            <td class="col-6 alright ts elem"><b>TOTAL TTC</b></td>`
 
               item.priceQuote.priceQuoteTaxes.forEach(priceQuoteTaxe => {
                 //  html += `<td class="col-2 ts elem">TVA: ` + priceQuoteTaxe.VAT + `%</td>`
