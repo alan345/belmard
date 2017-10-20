@@ -223,9 +223,11 @@ export class QuoteComponent implements OnInit {
   }
 
   ngAfterViewInit() {
-    // this.signaturePad is now available
-    this.signaturePad.set('minWidth', 1); // set szimek/signature_pad options at runtime
-    this.signaturePad.clear(); // invoke functions from szimek/signature_pad API
+    if(this.fetchedQuote._id) {
+      // this.signaturePad is now available
+      this.signaturePad.set('minWidth', 1); // set szimek/signature_pad options at runtime
+      this.signaturePad.clear(); // invoke functions from szimek/signature_pad API
+    }
   }
   resetSignature() {
     this.signaturePad.clear();

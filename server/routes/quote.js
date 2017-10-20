@@ -353,33 +353,31 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                            <th class="col-4 nobo"></th>
                            <th class="col-4 cobo desc">`
 
-                        item.clients.forEach(user => {
+              item.clients.forEach(user => {
 
-                          html += '<p><b>'
-                          html += user.profile.title + ' ' + user.profile.name + ' ' + user.profile.lastName
-                          html += '</b></p>'
-                          user.profile.address.forEach(singleAddress => {
-                            if(singleAddress.nameAddress === 'billing') {
-                              html += '<p>'
-                              html += singleAddress.address + ' ' + singleAddress.address2
-                              html += '</p>'
-                              html += '<p>'
-                              html += singleAddress.city + ' ' + singleAddress.state
-                              html += '</p>'
-                              html += '<p>'
-                              html += singleAddress.zip + ' ' + singleAddress.country
-                              html += '</p>'
-                            }
-                          })
+                html += '<p><b>'
+                html += user.profile.title + ' ' + user.profile.name + ' ' + user.profile.lastName
+                html += '</b></p>'
+                user.profile.address.forEach(singleAddress => {
+                  if (singleAddress.nameAddress === 'billing') {
+                    html += '<p>'
+                    html += singleAddress.address + ' ' + singleAddress.address2
+                    html += '</p>'
+                    html += '<p>'
+                    html += singleAddress.city + ' ' + singleAddress.state
+                    html += '</p>'
+                    html += '<p>'
+                    html += singleAddress.zip + ' ' + singleAddress.country
+                    html += '</p>'
+                  }
+                })
 
-
-                          html += '<p>'
-                          html += 'Tel : ' + user.profile.phoneNumber
-                          html += '</p><p>'
-                          html += 'Mail : ' + user.email
-                          html += '</p>'
-                        })
-
+                html += '<p>'
+                html += 'Tel : ' + user.profile.phoneNumber
+                html += '</p><p>'
+                html += 'Mail : ' + user.email
+                html += '</p>'
+              })
 
               html += `
                            </th>
@@ -411,8 +409,8 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                        <tbody>`
               item.devisDetails.forEach(devisDetail => {
                 html += '<tr class="ts">'
-                  html += '<td class="desc elem">' + devisDetail.nameBucketProducts + '</td>'
-                  html += `
+                html += '<td class="desc elem">' + devisDetail.nameBucketProducts + '</td>'
+                html += `
                            <td class="desc"></td>
                            <td class="desc"></td>
                            <td class="desc"></td>
@@ -422,31 +420,31 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                         </tr>`
                 devisDetail.bucketProducts.forEach(bucketProduct => {
                   html += '<tr>'
-                    let description = ''
-                    let img = ''
-                    let unit = ''
-                    if (bucketProduct.typeRow === 'text') {
-                      description = bucketProduct.title
-                    }
-                    if (bucketProduct.typeRow === 'product') {
-                      bucketProduct.productInit.forEach(product => {
-                        description = product.details.referenceName
-                        unit = product.details.unit
-                        product.forms.forEach(form => {
-                          img = '<img class="img" src="' +
-                            'http://localhost/uploads/forms/' + form.owner + '/' + form.imagePath + '">'
-                        })
+                  let description = ''
+                  let img = ''
+                  let unit = ''
+                  if (bucketProduct.typeRow === 'text') {
+                    description = bucketProduct.title
+                  }
+                  if (bucketProduct.typeRow === 'product') {
+                    bucketProduct.productInit.forEach(product => {
+                      description = product.details.referenceName
+                      unit = product.details.unit
+                      product.forms.forEach(form => {
+                        img = '<img class="img" src="' +
+                          'http://localhost/uploads/forms/' + form.owner + '/' + form.imagePath + '">'
                       })
-                    }
-                    html += '<td class="desc"><div class="avoid elem">' + description + '</div></td>'
-                    html += '<td class="elem">' + img + '</td>'
-                    // html += '<td class="desc">' + bucketProduct.typeRow + '</td>'
-                    // html += '<td class="elem">' + bucketProduct.title + '</td>'
-                    html += '<td class="elem">' + unit + '</td>'
-                    html += '<td class="elem">' + bucketProduct.quantity + '</td>'
-                    html += '<td class="elem">' + bucketProduct.priceWithoutTaxes + '</td>'
-                    html += '<td class="elem">' + bucketProduct.totalPriceWithoutTaxes + '</td>'
-                    html += '<td class="elem">' + bucketProduct.vat + '%</td>'
+                    })
+                  }
+                  html += '<td class="desc"><div class="avoid elem">' + description + '</div></td>'
+                  html += '<td class="elem">' + img + '</td>'
+                  // html += '<td class="desc">' + bucketProduct.typeRow + '</td>'
+                  // html += '<td class="elem">' + bucketProduct.title + '</td>'
+                  html += '<td class="elem">' + unit + '</td>'
+                  html += '<td class="elem">' + bucketProduct.quantity + '</td>'
+                  html += '<td class="elem">' + bucketProduct.priceWithoutTaxes + '</td>'
+                  html += '<td class="elem">' + bucketProduct.totalPriceWithoutTaxes + '</td>'
+                  html += '<td class="elem">' + bucketProduct.vat + '%</td>'
                   html += '</tr>'
 
                 })
@@ -474,14 +472,13 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                            <tr class="cobo">
                             <td class="col-6 alright ts elem">Sous-Total HT</td>`
 
-                  item.priceQuote.priceQuoteTaxes.forEach(priceQuoteTaxe => {
-                    //  html += `<td class="col-2 ts elem">TVA: ` + priceQuoteTaxe.VAT + `%</td>`
-                    html += `<td class="col-2 elem">` + Math.round(priceQuoteTaxe.TotalVAT / (priceQuoteTaxe.VAT / 100)) + `€</td>`
-                  })
-                  html += `
+              item.priceQuote.priceQuoteTaxes.forEach(priceQuoteTaxe => {
+                //  html += `<td class="col-2 ts elem">TVA: ` + priceQuoteTaxe.VAT + `%</td>`
+                html += `<td class="col-2 elem">` + Math.round(priceQuoteTaxe.TotalVAT / (priceQuoteTaxe.VAT / 100)) + `€</td>`
+              })
+              html += `
                             <td class="col-2 elem"><b>` + Math.round(item.priceQuote.priceQuoteWithoutTaxes) + `€</b></td>
                            </tr>`
-
 
               html += `<tr class="cobo">
                              <td class="col-6 alright ts elem">Montant de TVA</td>`
@@ -493,10 +490,10 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                 //  html += `<td class="col-2 elem">` + priceQuoteTaxe.VAT + priceQuoteTaxe.TotalVAT / (priceQuoteTaxe.VAT /100) + `€</td>`
               })
               html += `
-                             <td class="col-2 elem"><b>` + Math.round(vatTotal) + `€</b></td>
-                           </tr>
-                           <tr class="cobo">
-                            <td class="col-6 alright ts elem"><b>TOTAL TTC</b></td>`
+                         <td class="col-2 elem"><b>` + Math.round(vatTotal) + `€</b></td>
+                       </tr>
+                       <tr class="cobo">
+                        <td class="col-6 alright ts elem"><b>TOTAL TTC</b></td>`
 
               item.priceQuote.priceQuoteTaxes.forEach(priceQuoteTaxe => {
                 //  html += `<td class="col-2 ts elem">TVA: ` + priceQuoteTaxe.VAT + `%</td>`
@@ -536,19 +533,18 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                          <th class="col-6 nobo"></th>
                          <th class="col-3 desc">
                            <p>Client : `
-                           item.clients.forEach(user => {
-                             html += user.profile.title + ' ' + user.profile.name + ' ' + user.profile.lastName
-                           })
-                           html += `</p><p class="inf2">Lu et approuvé</p>`
-                           if(item.signature.base64)
-                            html += `<img class="imgSignature" src="${item.signature.base64}" />`
+              item.clients.forEach(user => {
+                html += user.profile.title + ' ' + user.profile.name + ' ' + user.profile.lastName
+              })
+              html += `</p><p class="inf2">Lu et approuvé</p>`
+              if (item.signature.base64)
+                html += `<img class="imgSignature" src="${item.signature.base64}" />`
 
-                          html += `<p class="inf2">Le `
-                          if(item.signature.dateSignature)
-                           html += item.signature.dateSignature.toLocaleDateString("fr-FR")
+              html += `<p class="inf2">Le `
+              if (item.signature.dateSignature)
+                html += item.signature.dateSignature.toLocaleDateString("fr-FR")
 
-
-                          html += `</p></th>
+              html += `</p></th>
                          </tr>
                        </thead>
                      </table>
