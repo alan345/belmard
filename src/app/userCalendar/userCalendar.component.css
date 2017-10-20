@@ -6,3 +6,11 @@
 }
 
 
+.right {
+  text-align: right;
+}
+
+.btnTransparent {
+  background: transparent;
+  border: 0;
+}

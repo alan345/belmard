@@ -269,7 +269,9 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                        .elem {
                          text-align: center;
                          font-size: 9px;
-
+                       }
+                       .smallSize {
+                         font-size: 9px;
                        }
                        .titleGooplus1 {
                          font-size: 11px;
@@ -385,7 +387,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                      <table>
                        <thead>
                          <tr>
-                           <th class="col-12 cobo desc">Objet : ` + item.name + `
+                           <th class="col-12 cobo desc smallSize">Objet : ` + item.name + `
                            </th>
                          </tr>
                        </thead>
