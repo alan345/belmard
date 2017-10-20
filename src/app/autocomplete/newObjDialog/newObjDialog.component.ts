@@ -41,6 +41,7 @@ export class newObjDialogComponent implements OnInit {
 
 
   ngOnInit() { }
+  ngOnChanges() { }
 
   openDialog(typeObj: string) {
     // console.log(this.search)

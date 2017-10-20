@@ -31,21 +31,17 @@ export class ProjectSingleComponent implements OnInit {
 
   @Input() showBackButton: Boolean = true;
   @Output() saved: EventEmitter<any> = new EventEmitter();
-
+  @Input() search: Search = new Search()
 
 
   selectedIndex0: number = -1
   selectedIndex1: number = -1
   selectedIndex2: number = -1
-  // show1 = false
-  // show2 = false
-  // categ0: string = '';
-  // categ1: string = '';
-  // categ2: string = '';
+
 
   itemSteps:any =[];
 
-  @Input() search: Search = new Search()
+
   status = StatusProject
   categ: string = 'Electricité';
   subCateg: string = 'file';
