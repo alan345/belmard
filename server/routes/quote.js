@@ -536,7 +536,6 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                          <th class="col-6 nobo"></th>
                          <th class="col-3 desc">
                            <p>Client : `
-
                            item.clients.forEach(user => {
                              html += user.profile.title + ' ' + user.profile.name + ' ' + user.profile.lastName
                            })
