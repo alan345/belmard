@@ -406,7 +406,7 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                        <tbody>`
               item.devisDetails.forEach(devisDetail => {
                 html += '<tr class="ts">'
-                  html += '<td class="desc">' + devisDetail.nameBucketProducts + '</td>'
+                  html += '<td class="desc elem">' + devisDetail.nameBucketProducts + '</td>'
                   html += `
                            <td class="desc"></td>
                            <td class="desc"></td>
