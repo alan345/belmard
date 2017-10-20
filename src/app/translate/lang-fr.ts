@@ -95,7 +95,7 @@ export const LANG_FR_TRANS = {
 
 
     'Quotes': 'Devis',
-    'Paid': 'Payé',
+    'Paid': 'Payée',
     'quote': 'devis',
     'Create a new quote': 'Créer un nouveau Devis',
     'Assigned to me': 'Assigné à Moi',
