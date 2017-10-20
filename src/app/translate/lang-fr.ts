@@ -169,6 +169,7 @@ export const LANG_FR_TRANS = {
     'Assigned To': 'Assigné à',
     'My tasks': 'Mes tâches',
     'Name Task': 'Description tâche',
+    'Project sheet': 'Fiche Projet',
 
 
     'task': 'tâche',
