@@ -242,6 +242,9 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                        .img {
                          height: 20px;
                        }
+                       .imgSignature {
+                         height: 45px;
+                       }
                        .imglogo {
                          height: 50px;
                          text-align: center;
@@ -527,13 +530,26 @@ router.get('/pdf/:quoteId', function(req, res, next) {
                          <tr>
                            <th class="col-3 desc">
                            <p>Entreprise</p>
-                                                 <p class="inf2">Lu et approuvé</p>
-                                                 <p class="inf2">Le</p>
-                           </th>
-                           <th class="col-6 nobo"></th>
-                           <th class="col-3 desc"><p>Client</p>
-                                                 <p class="inf2">Lu et approuvé</p>
-                                                 <p class="inf2">Le</p></th>
+                           <p class="inf2">Lu et approuvé</p>
+                           <p class="inf2">Le</p>
+                         </th>
+                         <th class="col-6 nobo"></th>
+                         <th class="col-3 desc">
+                           <p>Client : `
+
+                           item.clients.forEach(user => {
+                             html += user.profile.title + ' ' + user.profile.name + ' ' + user.profile.lastName
+                           })
+                           html += `</p><p class="inf2">Lu et approuvé</p>`
+                           if(item.signature.base64)
+                            html += `<img class="imgSignature" src="${item.signature.base64}" />`
+
+                          html += `<p class="inf2">Le `
+                          if(item.signature.dateSignature)
+                           html += item.signature.dateSignature.toLocaleDateString("fr-FR")
+
+
+                          html += `</p></th>
                          </tr>
                        </thead>
                      </table>
