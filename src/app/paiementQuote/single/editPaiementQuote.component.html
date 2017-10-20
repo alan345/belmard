@@ -7,9 +7,7 @@
     </div>
 
   <div class="col-6">
-    <h4 class="dspl-nn">id: {{fetchedPaiementQuote._id}}</h4>
-    IsExpense: {{fetchedPaiementQuote.isExpense}}<br>
-    isGooplusPaiement: {{fetchedPaiementQuote.isGooplusPaiement}}
+  
 
     <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
 
@@ -17,7 +15,7 @@
       <app-autocomplete class="mb8 bn"[canDelete]=false [typeAutocomplete]="'quote'" [search]="search" [canDelete]="true" [title]="'Quote'" [singleChoice]="true" [arrayContent]="fetchedPaiementQuote.quotes" (getResultAutocomplete)="selectQuote($event[0])">
       </app-autocomplete>
       <div *ngFor="let quote of fetchedPaiementQuote.quotes">
-        {{'Quote Amont' | translate}}: {{quote.priceQuote.priceQuoteWithoutTaxes}}
+        {{'Quote Amount' | translate}}: {{quote.priceQuote.priceQuoteWithoutTaxes}}
       </div>
 
       <app-autocomplete  class="mb8 bn"[canDelete]=false [typeAutocomplete]="'project'" [search]="search" [canDelete]="true" [title]="'Project'" [singleChoice]="true" [arrayContent]="fetchedPaiementQuote.projects" (getResultAutocomplete)="selectProject($event[0])">
