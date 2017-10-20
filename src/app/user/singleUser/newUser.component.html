@@ -5,7 +5,7 @@
       <h3 *ngIf="!fetchedUser.isExternalUser"><i class="fa fa10 fa-user" aria-hidden="true"></i>{{'Team' | translate}}</h3>
     </div>
     <div class="row">
-      <div class="row">
+      
         <div class="col">
           <h5>{{'Identity' | translate}}</h5>
           <div class="form-group">
@@ -152,7 +152,7 @@
             </div>
           </div>
           <app-picture *ngIf="!fetchedUser.isExternalUser" [forms]="fetchedUser.forms" (getPicture)="getPicture($event)"></app-picture>
-        </div>
+       
       </div>
     </div>
     <div class="col" *ngIf="fetchedUser._id">
