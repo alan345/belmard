@@ -21,7 +21,7 @@
 .cdk-overlay-pane {
 
     min-width: 1000px;
-  
+
 }
 
 .validadress {
@@ -159,7 +159,7 @@ textarea::placeholder {
 
 
 .example-container {
-margin-top: 50px !important;
+  margin-top: 50px !important;
   height: 100%;
   background-color: #b6b6b6;
 }
@@ -179,7 +179,7 @@ border-radius: 0px!important;
 
 .form-control {
 margin-bottom: 8px;
-border-radius: 0px!important; 
+border-radius: 0px!important;
 }
 
 .container {
