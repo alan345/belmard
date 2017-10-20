@@ -1,4 +1,4 @@
-<h4>Search</h4>
+<h4>{{'Search' | translate}}</h4>
 <div class="row">
   <div class="col-md-4">
     <app-autocomplete [typeAutocomplete]="'user'" [title]="'Client'" [singleChoice]="'true'" [arrayContent]="searchData.fetchedUserSearchs" (getResultAutocomplete)="selectUserSearch()" (clearAutocomplete)="removeUserSearch()">
@@ -10,7 +10,8 @@
   </div>
   <div class="col-md-4">
     <div *ngFor="let ownerCompanie of currentUser.ownerCompanies">
-      <div class="right">
+      <div class="">
+        {{'Type' | translate}}
         <button class="btnTransparent" type="button" (click)="searchData.typeUser = undefined;changeTypeUsers()"><i class="fa fa-times" aria-hidden="true"></i></button>
         <select class="form-control" (change)="changeTypeUsers()" placeholder="typeUser" [(ngModel)]="searchData.typeUser" name="typeUsers">
         <option *ngFor="let typeUser of ownerCompanie.typeUsers" [value]="typeUser.value">
