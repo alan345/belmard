@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, Injectable, NgModule } from '@angular/core';
+import { Component, OnInit, Input, ViewChild} from '@angular/core';
 import { AuthService } from '../../auth/auth.service';
 import { UserCalendarService } from '../userCalendar.service';
 
@@ -6,16 +6,16 @@ import { UserCalendar, SearchData } from '../userCalendar.model';
 import { ToastsManager } from 'ng2-toastr';
 
 import { MatDialog } from '@angular/material';
-import { Router, ActivatedRoute, Params } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { UserService } from '../../user/user.service';
 
-import { DeleteDialog } from '../../deleteDialog/deleteDialog.component';
+// import { DeleteDialog } from '../../deleteDialog/deleteDialog.component';
 import { User } from '../../user/user.model';
 import { Quote } from '../../quote/quote.model';
-import { Product } from '../../product/product.model';
-import { Project } from '../../project/project.model';
+// import { Product } from '../../product/product.model';
+// import { Project } from '../../project/project.model';
 
 
 import { CalendarComponent } from 'ap-angular2-fullcalendar';
@@ -42,40 +42,20 @@ export class UserCalendarsComponent implements OnInit {
 
   isSearchInitReady: boolean = false
   fetchedUserCalendar: UserCalendar = new UserCalendar()
-  // autocompleteUser: string = '';
-  // autocompleteProject: string = '';
-  // fetchedProducts: Product[] = []
-  // fetchedProjects: Project[] = []
+
   currentUser: User = new User()
-  // imgLogoUrl: string = './assets/images/profile-placeholder.jpg'
-  // imgSignatureBase64Temp = ''
-  // userAdmins : User[] = []
-  // userManagers : User[] = []
-  // userClients : User[] = []
-  // usersSalesRep : User[] = []
-  // userStylists : User[] = []
+
   searchData: SearchData = new SearchData()
   search = {
     typeUser: '',
-    // clientSearch: '',
     userSearch: '',
     projectSearch: '',
     endDate: new Date(),
     startDate: new Date(),
   }
-  // events: UserCalendar[] = []
+
   events: UserCalendar[] = []
   myForm: FormGroup;
-  // autocompleteProduct: String = ''
-  // fetchedUsers: User[] = [];
-  // arrayContentToSearch = []
-
-  // paiementsTypes = [
-  //   { label: 'cheque', value: 'check' },
-  //   { label: 'Espece', value: 'cash' }
-  // ]
-
-  // fetchedUserSearchs: User[] = [];
 
   loading: boolean = false;
   calendarOptions: {}
@@ -127,7 +107,7 @@ export class UserCalendarsComponent implements OnInit {
 
     this.calendarOptions = {
       timezone: 'local',
-      height: 550,
+      // height: 'auto',
       selectable: true,
       firstDay: 1,
       minTime: timeBegin,
