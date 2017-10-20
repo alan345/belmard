@@ -148,6 +148,9 @@ export const LANG_FR_TRANS = {
     'Paymentquote': 'Encaissement',
     'Sent': 'Envoyée',
     'Date Invoice Paid': 'Date Encaissement',
+    'Signed': 'Signé avec règlement',
+    'Rejected': 'Refusé',
+    'Signed, pending payment': 'Signé, en attente de règlement',
 
     'Calendar': 'Calendrier',
     'Start:': 'Débute le :',
