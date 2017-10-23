@@ -394,7 +394,7 @@ router.post('/', function(req, res, next) {
         <head>
           <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-          <title>Email from My Chair App by Phyto Paris</title>
+          <title>Email depuis Belmard Gestion</title>
           <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"></link>
         </head>
         <body style="margin: 0; padding: 0; font-family: 'Montserrat', sans-serif;">
@@ -404,11 +404,11 @@ router.post('/', function(req, res, next) {
               <td bgcolor="#ffffff" style="padding: 15px 15px 15px 15px;">
                 <table border="0" cellpadding="0" cellspacing="0" width="100%">
                   <tr>
-                    <td>Hi ${user.profile.name} ${user.profile.lastName},</td>
+                    <td>Bonjour ${user.profile.name} ${user.profile.lastName},</td>
                   </tr>
                   <tr>
                     <td style="padding: 15px 0 30px 0;">
-                      You have been invited to join a salon on the Gooplus Management App.
+                      Vous êtes invité à rejoindre l'application Belmard Gestion
                     </td>
                   </tr>
                   <tr>
@@ -417,7 +417,7 @@ router.post('/', function(req, res, next) {
                         href="http://${req.headers.host}/#/user/reset/${token}"
                         style="color: #ffffff; text-decoration: none;"
                       >
-                        Accept the Invitation
+                        Accepter l'invitation
                       </a>
                     </td>
                   </tr>
