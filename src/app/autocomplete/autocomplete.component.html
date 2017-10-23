@@ -1,5 +1,5 @@
 <div *ngIf="displayIfContentIsNull || arrayContent.length">
-  {{title}}
+  {{title | translate}}
   <div *ngIf="!arrayContent.length || !singleChoice">
     <div class="input-group mb8">
       <input class="form-control" autofocus autocapitalize="none" autocomplete="off" spellcheck="false" autocorrect="none" type="text" name="Search" placeholder="🔎 {{'Search'| translate}}" [(ngModel)]="autocompleteSearch" (ngModelChange)="searchData()">
