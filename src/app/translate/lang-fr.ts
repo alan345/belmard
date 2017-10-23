@@ -185,5 +185,6 @@ export const LANG_FR_TRANS = {
     'Rights': 'Droits',
 
     'Search': 'Recherche',
+    'This action is not reversible. Are you sure you want to delete?': 'Cette action est irréversible. Confirmez-vous la suppression ?',
 
 };
