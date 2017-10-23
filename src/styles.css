@@ -3,6 +3,11 @@
 /*@import "~angular-calendar/dist/css/angular-calendar.css";*/
 /*@import "~@ng-bootstrap/ng-bootstrap/dist/css/bootstrap.min.css";*/
 
+.displayed {
+    display: block;
+    margin-left: auto;
+    margin-right: auto }
+
 .mat-paginator {
    min-height: 0px!important;
 }
