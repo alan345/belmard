@@ -107,7 +107,7 @@ export class UserCalendarsComponent implements OnInit {
 
     this.calendarOptions = {
       timezone: 'local',
-      // height: 'auto',
+      height: 'auto',
       selectable: true,
       firstDay: 1,
       minTime: timeBegin,
