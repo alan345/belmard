@@ -382,7 +382,9 @@ router.post('/', function(req, res, next) {
       },
       function(token, user, done) {
         var mailer = nodemailer.createTransport({
-          service: "Gmail",
+          // service: "Gmail",
+          host: 'auth.smtp.1and1.fr',
+          port: 465,
           auth: {
             user: config.userGmail,
             pass: config.passGmail
@@ -431,7 +433,7 @@ router.post('/', function(req, res, next) {
       `;
         var mailOptions = {
           to: user.email,
-          from: 'hello@gooplus.fr',
+          from: config.userGmail,
           subject: 'Gooplus Management | New Invitation',
           html: html
         };
