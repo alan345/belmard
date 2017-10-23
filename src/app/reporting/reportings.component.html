@@ -11,10 +11,14 @@
 <!-- <app-header [nameObject]="'reporting'"></app-header> -->
 
 
-<div class="container"  style="width: 100%" >
+<div class="container nopad"  style="width: 100%" >
+  <div class="hdform">
+      <h3> <i class="fa fa10 fa-bar-chart" aria-hidden="true"></i>{{'Reporting' | translate}}</h3>
+  
+    </div>
 
   <div class="">
-    <div class="col-12 nopad">
+    <div class="col-12">
       <div *ngFor="let d of lineChartData; let i= index;">
         <div *ngIf="i==0">
           {{d.year}}
@@ -24,13 +28,13 @@
 
 
 
-    <div class="col-12 nopad">
+    <div class="col-12">
 
       <canvas baseChart  style="height: 50%; width: 50%;" class="h50 bgw" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
     </div>
 
-    <div class="col-12 bgw nopad">
-      <table class="table table-responsive table-condensed">
+    <div class="col-12">
+      <table class="table table-responsive table-condensed  bgw">
         <tr>
           <th></th>
           <th *ngFor="let label of lineChartLabels">{{label}}</th>
