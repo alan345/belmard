@@ -345,11 +345,22 @@ export class QuoteComponent implements OnInit {
           console.log(res)
            window.open( '/uploads/pdf/' + res );
            this.loading = false
-
         },
-        error => {
-          console.log(error);
-        }
+        error => { console.log(error) }
+      )
+  }
+
+  sendQuoteByEmailToClient() {
+    this.loading = true
+    this.quoteService.sendQuoteByEmailToClient(this.fetchedQuote._id)
+      .subscribe(
+        res => {
+          // console.log(res)
+          this.toastr.success('Great!', 'Mail envoyeé!')
+          //  window.open( '/uploads/pdf/' + res );
+           this.loading = false
+        },
+        error => { console.log(error) }
       )
   }
 

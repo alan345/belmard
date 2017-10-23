@@ -20,7 +20,7 @@ export const LANG_FR_TRANS = {
     'Settings': 'Paramètres',
     'Product': 'Produit',
     'Invoice': 'Facture',
-
+    'Send document to client': 'Envoyer le document par mail',
 
     'Add a product': 'Ajouter un produit',
     'Create a new': 'Créer un nouveau',
