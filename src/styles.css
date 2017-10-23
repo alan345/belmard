@@ -6,6 +6,10 @@
 html {     background-color: #b6b6b6;
 }
 
+.message {
+    color: rgba(0,0,0,.87);
+  font-size: 12px;}
+
 .pagelogin {
     
     margin-top: 0px;
