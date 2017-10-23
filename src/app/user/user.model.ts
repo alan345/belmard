@@ -48,7 +48,7 @@ export class Profile {
   sourceContact: string = '';
   detailHouse: DetailHouse = new DetailHouse();
   address: Address[] = [];
-  language: string = 'en';
+  language: string = 'fr';
 }
 
 
