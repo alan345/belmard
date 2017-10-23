@@ -275,7 +275,7 @@ export class NewUserComponent implements OnInit {
           this.toastr.error('Error!')
           console.log(error)
         }
-        )
+      )
     } else {
       this.userService.saveUser(this.fetchedUser)
         .subscribe(
