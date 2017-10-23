@@ -426,7 +426,6 @@ router.post('/', function(req, res, next) {
                 </table>
               </td>
             </tr>
-
           </table>
         </body>
       </html>
