@@ -3,6 +3,12 @@
 /*@import "~angular-calendar/dist/css/angular-calendar.css";*/
 /*@import "~@ng-bootstrap/ng-bootstrap/dist/css/bootstrap.min.css";*/
 
+html {     background-color: #b6b6b6;
+}
+
+.messagelogin > a {
+    color: rgba(0,0,0,.87)!important;
+  font-size: 12px;}
 
 .pagelogin {
     
