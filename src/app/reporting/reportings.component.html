@@ -14,8 +14,8 @@
 <div class="container">
 
   <div class="row">
-    <div class="col-md-12" style="height: 50px">
-      <div *ngFor="let d of lineChartData; let i= index;">
+    <div class="col-md-12">
+      <div style="height: 50px" *ngFor="let d of lineChartData; let i= index;">
         <div *ngIf="i==0">
           {{d.year}}
         </div>
