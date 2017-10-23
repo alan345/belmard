@@ -24,12 +24,12 @@
 
 
 
-    <div class="col-md-12">
+    <div class="col-12 nopad">
 
-      <canvas baseChart   style="height: 50%; width: 50%;" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+      <canvas baseChart   class="h50 bgw" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
     </div>
 
-    <div class="col-md-12" style="margin-bottom: 10px">
+    <div class="col-12 bgw nopad">
       <table class="table table-responsive table-condensed">
         <tr>
           <th></th>
