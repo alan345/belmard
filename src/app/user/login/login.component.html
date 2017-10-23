@@ -1,4 +1,4 @@
-<div class="container" style="width:100%">
+<div class="pagelogin">
 
    <div class="login ac">
 
@@ -10,14 +10,14 @@
       <input #userEmail type="text" formControlName="email" placeholder="Email" class="form-control">
     </div>
     
-    <div [hidden]="email.valid || email.pristine" class="alert alert-danger">Please enter a valid email format</div>
+    <div [hidden]="email.valid || email.pristine" class="alert alert-danger">Merci d'entrer un email valide</div>
     <div class="input-group">
-      <input type="password" formControlName="password" placeholder="Password" class="form-control">
+      <input type="password" formControlName="password" placeholder="Mote de passe" class="form-control">
     </div>
     <div [hidden]="password.valid || password.pristine" class="alert alert-danger">Password must contain 6 or more characters</div>
     <button type="submit" [disabled]="!myForm.valid" [ngClass]="{'done':myForm.valid,'pas-done':!myForm.valid}">Login</button>
-    <p class="message"><a [routerLink]="'/user/reset'">Forgot Your Password?</a></p>
-    <p class="message"><a [routerLink]="'/user/register'">Don't have an Account? Register</a></p>
+    <p class="message"><a [routerLink]="'/user/reset'">Mot de passe oublié?</a></p>
+    <p class="message"><a [routerLink]="'/user/register'">Vous n'avez pas de compte? S'enregistrer</a></p>
   </form>
  
   </div>
