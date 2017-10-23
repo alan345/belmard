@@ -1,4 +1,4 @@
-import { NgModule }            from '@angular/core';
+import { NgModule, Injectable }            from '@angular/core';
 import { CommonModule }        from '@angular/common';
 import { FormsModule }         from '@angular/forms';
 
@@ -22,11 +22,12 @@ import { LoginInAppComponent } from '../nav/loginInApp/loginInApp.component';
 
 import {CommentModule} from '../comment/comment.module';
 import { TranslateModule}   from '../translate/translate.module';
-import { MatPaginatorModule} from '@angular/material';
-import {MatDialogModule} from '@angular/material';
+import { MatDialogModule} from '@angular/material';
+import { MatPaginatorModule, MatPaginatorIntl} from '@angular/material';
 
 
 
+import { MatPaginatorIntlCro } from './matPaginatorIntlCroClass'
 
 @NgModule({
   imports:      [
@@ -38,6 +39,7 @@ import {MatDialogModule} from '@angular/material';
     // MaterialModule,
     MatPaginatorModule,
     MatDialogModule,
+
     TranslateModule,
 
 
@@ -64,6 +66,7 @@ import {MatDialogModule} from '@angular/material';
     // HeaderComponent,
     // newObjDialogComponent,
     // LoadingComponent,
+
     LoadingInAppComponent,
     LoginInAppComponent,
     PictureModule,
@@ -75,6 +78,7 @@ import {MatDialogModule} from '@angular/material';
     // AutocompleteComponent,
   ],
   providers: [
+    { provide: MatPaginatorIntl, useClass: MatPaginatorIntlCro}
     // TRANSLATION_PROVIDERS,
     // TranslateService,
   ]
