@@ -33,8 +33,8 @@
       <canvas baseChart  style="height: 50%; width: 50%;" class="h50 bgw" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
     </div>
 
-    <div class="col-12 bgw">
-      <table class="table table-responsive table-condensed">
+    <div class="col-12">
+      <table class="table table-responsive table-condensed  bgw">
         <tr>
           <th></th>
           <th *ngFor="let label of lineChartLabels">{{label}}</th>
