@@ -14,10 +14,12 @@
     <div class="input-group login ac">
       <input type="password" formControlName="password" placeholder="Mote de passe" class="form-control">
     </div>
-    <div class="login ac" [hidden]="password.valid || password.pristine" class="alert alert-danger">Votre mot de passe doit contenir au moins 6 caractères</div>
+    <div class="login ac"
+    <div [hidden]="password.valid || password.pristine" class="alert alert-danger">Votre mot de passe doit contenir au moins 6 caractères</div>
     <button type="submit" class="has-error" [disabled]="!myForm.valid" [ngClass]="{'done':myForm.valid,'pas-done':!myForm.valid}">Login</button>
     <p class="message"><a [routerLink]="'/user/reset'">Mot de passe oublié?</a></p>
     <p class="message"><a [routerLink]="'/user/register'">Vous n'avez pas de compte? S'enregistrer</a></p>
+  </div> 
   </form>
  
   </div>
