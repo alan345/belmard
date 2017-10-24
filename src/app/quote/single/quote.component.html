@@ -43,10 +43,6 @@
             (getResultAutocomplete)="selectUser($event[0])">
           </app-autocomplete>
         </div>
-        <!-- <div class="form-group">
-          <app-autocomplete [search]="search" [enableLink]=true [typeAutocomplete]="'companie'" [title]="'Companie'" [title]="" [singleChoice]="'true'" [arrayContent]="fetchedQuote.companieClients">
-          </app-autocomplete>
-        </div> -->
         <div class="form-group">
           <app-autocomplete [search]="search" [canDelete]=false [enableLink]=true [typeAutocomplete]="'project'" [title]="'Projet'" [singleChoice]="true" [arrayContent]="fetchedQuote.projects">
           </app-autocomplete>
@@ -231,7 +227,7 @@
         <div class="row">
           <div class="col-3">
           </div>
-          <div class="col-5">
+          <div *ngIf="authService.showObjHTML('comment', 'read')" class="col-5">
             <div *ngIf="fetchedQuote._id">
               <div class="FormGroup">
                 <button type="button" class="btn btn-warning" (click)="showLogs = !showLogs">
@@ -244,51 +240,44 @@
               </div>
             </div>
           </div>
-          <div *ngIf="fetchedQuote.typeQuote === 'quote' && fetchedQuote._id" style="height:280px" class="col-4">
-            <div class="ac sign">
-              <div class="card ac">
-                <div class="ac" *ngIf="!fetchedQuote.signature.base64">
-                  <div class="row">
-                    <button type="button" class="false" (click)="resetSignature()">
+          <div *ngIf="authService.showObjHTML('quote', 'signature')">
+            <div *ngIf="fetchedQuote.typeQuote === 'quote' && fetchedQuote._id" style="height:280px" class="col-4">
+              <div class="ac sign">
+                <div class="card ac">
+                  <div class="ac" *ngIf="!fetchedQuote.signature.base64">
+                    <div class="row">
+                      <button type="button" class="false" (click)="resetSignature()">
                         {{'Reset' | translate}}
                     </button>
-                    <button type="button" class="valid" (click)="validateSignature()">
+                      <button type="button" class="valid" (click)="validateSignature()">
                   {{'Validate' | translate}}
                   </button>
-                    <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()">
-                    </signature-pad>
+                      <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()">
+                      </signature-pad>
+                    </div>
+                  </div>
+                  <div class="ac" *ngIf="fetchedQuote.signature.base64">
+                    <img class="img ac" [src]="fetchedQuote.signature.base64" />
+                    <div class="ac" *ngFor="let user of fetchedQuote.signature.users">
+                      {{fetchedQuote.signature.dateSignature | date:'yMdjm'}} - {{user.profile.name }}
+                    </div>
                   </div>
                 </div>
-                <div class="ac" *ngIf="fetchedQuote.signature.base64">
-                  <img class="img ac" [src]="fetchedQuote.signature.base64" />
-                  <div class="ac" *ngFor="let user of fetchedQuote.signature.users">
-                    {{fetchedQuote.signature.dateSignature | date:'yMdjm'}} - {{user.profile.name }}
-                  </div>
-                </div>
-              </div>
-              <button type="button" class="false" (click)="removeSignature()">
+                <button type="button" class="false" (click)="removeSignature()">
                   {{'Unsign' | translate}}
                   </button>
+              </div>
             </div>
           </div>
-
-
         </div>
-        <div class="row">
+        <div *ngIf="authService.showObjHTML('paiement', 'read')" class="row">
           <div class="col-12">
             <button type="button" class="btn btn-warning" (click)="togglePaiements()"><i class="fa fa10 fa-university" aria-hidden="true"></i><span>{{'Payments' | translate}}</span></button>
-
             <div *ngIf="showPaiements">
-              <!-- <button class="btn btn-success" type="button" md-button (click)="openDialog()">
-              <i class="fa fa-plus"></i> Add new one
-            </button> -->
-
               <app-paiementQuotes (getPaiementQuotesCross)="getPaiementQuotes($event)" [search]="search">
               </app-paiementQuotes>
               {{'Total Paiement' | translate}} = {{totalPaiementAmount}}
               <br> {{'To be paid' | translate}} = {{fetchedQuote.priceQuote.priceQuoteWithoutTaxes*1 - totalPaiementAmount*1| round}}
-              <!-- <app-paiementQuote [showHeader]="false" (newPaiementQuoteSaved)="newPaiementQuoteSaved()">
-            </app-paiementQuote> -->
             </div>
           </div>
         </div>

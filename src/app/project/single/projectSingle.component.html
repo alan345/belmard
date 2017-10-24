@@ -89,24 +89,15 @@
 
 
       <div *ngIf="fetchedProject._id">
-
-        <div *ngIf="search.projectId.length && search.userId.length">
-          <!-- <div *ngFor="let user of fetchedProject.clients"> -->
-          <label><h5>{{'Quote' | translate}}</h5></label>
-          <app-quotes [showHeader]=false [search]="search" [showBackButton]=false>
-          </app-quotes>
+        <div *ngIf="authService.showObjHTML('quote', 'read')">
+          <div *ngIf="search.projectId.length && search.userId.length">
+            <label><h5>{{'Quote' | translate}}</h5></label>
+            <app-quotes [showHeader]=false [search]="search" [showBackButton]=false>
+            </app-quotes>
+          </div>
         </div>
-      </div>
 
-
-
-
-
-
-
-
-      <div *ngIf="fetchedProject._id">
-        <div class="FormGroup">
+        <div *ngIf="authService.showObjHTML('comment', 'read')" class="FormGroup">
           <button type="button" class="btn btn-warning" (click)="showLogs = !showLogs">
            <i class="fa fa-calendar" aria-hidden="true"></i>
            <span>{{'Show Comments' | translate}}</span>
@@ -117,17 +108,17 @@
           </div>
         </div>
 
-        <div class="FormGroup whtxt">
+        <div *ngIf="authService.showObjHTML('task', 'read')" class="FormGroup whtxt">
           <a class="btn btn-warning" [routerLink]="['/task/project/' + fetchedProject._id]">
-         <i class="fa fa-calendar" aria-hidden="true"></i>
-         <span>{{'Tasks' | translate}}</span>
-        </a>
+           <i class="fa fa-calendar" aria-hidden="true"></i>
+           <span>{{'Tasks' | translate}}</span>
+          </a>
         </div>
-        <div class="FormGroup whtxt">
+        <div *ngIf="authService.showObjHTML('userCalendar', 'read')" class="FormGroup whtxt">
           <button type="button" class="btn btn-warning" (click)="seeCalendar()">
-         <i class="fa fa-calendar" aria-hidden="true"></i>
-         <span>{{'See calendar' | translate}}</span>
-       </button>
+           <i class="fa fa-calendar" aria-hidden="true"></i>
+           <span>{{'See calendar' | translate}}</span>
+         </button>
         </div>
       </div>
 

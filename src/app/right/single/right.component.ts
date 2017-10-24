@@ -40,30 +40,29 @@ export class RightComponent implements OnInit {
     {name : 'Project', value: 'project', typeAccess:
       [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
     {name : 'Product', value: 'product', typeAccess:
-      [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
+      [{value:'read',name:'Read'},{value:'write', name:'Write'}]},
     {name : 'Quote', value: 'quote', typeAccess:
-      [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
+      [{value:'read',name:'Read'},{value:'write', name:'Write'},{value:'notification', name:'Get notification'}, {value:'signature', name:'Signature'}]},
     {name : 'Reporting', value: 'reporting', typeAccess:
-      [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
+      [{value:'read',name:'Read'},{value:'write', name:'Write'}]},
     {name : 'Companie', value: 'companie', typeAccess:
-      [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
-    {name : 'User', value: 'user', typeAccess:
-      [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
-    {name : 'Paiement', value: 'paiementQuote', typeAccess:
-      [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
-    {name : 'Task', value: 'task', typeAccess:
-      [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
-    {name : 'userCalendar', value: 'userCalendar', typeAccess:
-      [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
-    {name : 'Plan', value: 'plan', typeAccess:
-      [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
-    {name : 'Right', value: 'right', typeAccess:
-      [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
-    {name : 'Expense', value: 'expense', typeAccess:
-      [{value:'read',name:'Read'},{value:'write',name:'Write'},{value:'notification',name:'Get notification'}]},
-    {name : 'Comment', value: 'comment', typeAccess:
       [{value:'read',name:'Read'},{value:'write',name:'Write'}]},
-
+    {name : 'User', value: 'user', typeAccess:
+      [{value:'read',name:'Read'},{value:'write', name:'Write'}]},
+    {name : 'Paiement', value: 'paiementQuote', typeAccess:
+      [{value:'read',name:'Read'},{value:'write', name:'Write'}]},
+    {name : 'Task', value: 'task', typeAccess:
+      [{value:'read',name:'Read'},{value:'write', name:'Write'}]},
+    {name : 'userCalendar', value: 'userCalendar', typeAccess:
+      [{value:'read',name:'Read'},{value:'write', name:'Write'}]},
+    {name : 'Plan', value: 'plan', typeAccess:
+      [{value:'read',name:'Read'},{value:'write', name:'Write'}]},
+    {name : 'Right', value: 'right', typeAccess:
+      [{value:'read',name:'Read'},{value:'write', name:'Write'}]},
+    {name : 'Expense', value: 'expense', typeAccess:
+      [{value:'read',name:'Read'},{value:'write', name:'Write'}]},
+    {name : 'Comment', value: 'comment', typeAccess:
+      [{value:'read',name:'Read'},{value:'write', name:'Write'}]},
   ]
   constructor(
     private rightService: RightService,

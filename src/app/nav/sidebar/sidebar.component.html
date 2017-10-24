@@ -17,7 +17,7 @@
       <div id="collapseZero" class="collapse show" role="tabpanel" aria-labelledby="headingZero">
       </div>
     </div>
-    <div class="card noborder">
+    <div *ngIf="authService.showObjHTML('user', 'read') || authService.showObjHTML('companie', 'read')" class="card noborder">
       <div class="" role="tab" id="headingOne">
         <a data-toggle="collapse" class="nav-link" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
           <span class="fa fa10 fa-user" aria-hidden="true"></span>
@@ -36,7 +36,8 @@
               </tr>
               <tr *ngIf="authService.showObjHTML('companie', 'read')">
                 <td class="nav-item subItem">
-                  <a class="nav-link" [routerLink]="['/companie']" routerLinkActive="active">{{'Suppliers'|translate}}</a>
+                  <a class="nav-link" [routerLink]="['/companie']" routerLinkActive="active">
+                    {{'Suppliers'|translate}}</a>
                 </td>
               </tr>
 
@@ -171,7 +172,11 @@
         </a>
       </div>
     </div>
-    <div class="card noborder">
+    <div *ngIf="
+      authService.showObjHTML('companie', 'read') ||
+      authService.showObjHTML('right', 'read') ||
+      authService.showObjHTML('user', 'read')
+      " class="card noborder">
       <div class="" role="tab" id="headingfour">
         <a data-toggle="collapse" class="nav-link" data-parent="#accordion" href="#collapsefour" aria-expanded="true" aria-controls="collapsefour">
             <span class="fa fa10 fa-cog" aria-hidden="true"></span> {{'Settings'|translate}}
