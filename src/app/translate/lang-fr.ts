@@ -21,6 +21,7 @@ export const LANG_FR_TRANS = {
     'Product': 'Produit',
     'Invoice': 'Facture',
     'Send document to client': 'Envoyer le document par mail',
+    'Home': 'Tableau de bord',
 
     'Add a product': 'Ajouter un produit',
     'Create a new': 'Créer un nouveau',
