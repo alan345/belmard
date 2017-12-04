@@ -17,6 +17,16 @@
       <div id="collapseZero" class="collapse show" role="tabpanel" aria-labelledby="headingZero">
       </div>
     </div>
+    <div *ngIf="authService.showObjHTML('userCalendar', 'read')" class="card noborder">
+      <div class="" role="tab" id="headingFifteen">
+        <a [routerLink]="['/userCalendar']" routerLinkActive="active" class="nav-link" data-toggle="collapse" data-parent="#accordion" href="#collapseFifteen" aria-expanded="true" aria-controls="collapseFifteen">
+              <span class="fa fa10 fa-calendar" aria-hidden="true"></span> {{'Planning'|translate}}
+            </a>
+      </div>
+      <div id="collapseFifteen" class="collapse" role="tabpanel" aria-labelledby="headingFifteen">
+      </div>
+    </div>
+    
     <div *ngIf="authService.showObjHTML('user', 'read') || authService.showObjHTML('companie', 'read')" class="card noborder">
       <div class="" role="tab" id="headingOne">
         <a data-toggle="collapse" class="nav-link" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -46,7 +56,7 @@
         </div>
       </div>
     </div>
-    <div *ngIf="authService.showObjHTML('project', 'read')" class="card noborder">
+    <!-- <div *ngIf="authService.showObjHTML('project', 'read')" class="card noborder">
       <div class="" role="tab" id="headingthree">
         <a data-toggle="collapse" class="nav-link" data-parent="#accordion" href="#collapsethree" aria-expanded="true" aria-controls="collapsethree">
             <span class="fa fa10 fa-tty" aria-hidden="true"></span> {{'Services'|translate}}
@@ -70,7 +80,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div>  
     <div class="card noborder">
       <div class="" role="tab" id="headingFive">
         <a class="nav-link" data-toggle="collapse" data-parent="#accordion" href="#collapseFive" aria-expanded="true" aria-controls="collapseFive">
@@ -95,20 +105,12 @@
           </div>
         </div>
       </div>
-    </div>
+    </div>  -->
 
 
 
 
-    <div *ngIf="authService.showObjHTML('userCalendar', 'read')" class="card noborder">
-      <div class="" role="tab" id="headingFifteen">
-        <a [routerLink]="['/userCalendar']" routerLinkActive="active" class="nav-link" data-toggle="collapse" data-parent="#accordion" href="#collapseFifteen" aria-expanded="true" aria-controls="collapseFifteen">
-              <span class="fa fa10 fa-calendar" aria-hidden="true"></span> {{'Planning'|translate}}
-            </a>
-      </div>
-      <div id="collapseFifteen" class="collapse" role="tabpanel" aria-labelledby="headingFifteen">
-      </div>
-    </div>
+
     <div *ngIf="authService.showObjHTML('quote', 'read')" class="card noborder">
       <div class="" role="tab" id="headingTen">
         <a class="nav-link" data-toggle="collapse" data-parent="#accordion" href="#collapseTen" aria-expanded="true" aria-controls="collapseTen">
