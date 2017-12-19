@@ -32,6 +32,7 @@
           <input type="text" class="form-control" formControlName="title" [(ngModel)]="fetchedUserCalendar.title" placeholder="Name">
         </div> -->
 
+
         <br>
         <div class="col-md-12">
           <app-autocomplete [typeAutocomplete]="'user'" (getResultAutocomplete)="getResultAutocompleteUser()" [search]="search" [canDelete]=false [title]="'Client'" [singleChoice]="'true'" [arrayContent]="fetchedUserCalendar.clients">
