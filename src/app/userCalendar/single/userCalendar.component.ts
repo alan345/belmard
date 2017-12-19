@@ -63,6 +63,17 @@ export class UserCalendarComponent implements OnInit {
         this.getUserCalenddar(params['idUserCalendar'])
     })
   }
+  getResultAutocompleteUser(){
+    this.fetchedUserCalendar.clients.forEach(client => {
+      this.search.userId = client._id
+    })
+  }
+
+  getResultAutocompleteProject() {
+    this.fetchedUserCalendar.projects.forEach(project => {
+      this.search.projectId = project._id
+    })
+  }
   selectUser(user: User) {
     // this.fetchedUserCalendar.users.forEach(client => { this.search.userId = client._id })
     // this.fetchedUserCalendar.assignedTos.forEach(client => { this.search.assignedToId = client._id })

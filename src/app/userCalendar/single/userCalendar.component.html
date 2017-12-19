@@ -34,18 +34,18 @@
 
         <br>
         <div class="col-md-12">
-          <app-autocomplete [typeAutocomplete]="'project'" [canDelete]=false [title]="'Projet'" [search]="search" [singleChoice]="'true'" [arrayContent]="fetchedUserCalendar.projects" (getResultAutocomplete)="selectProject($event[0])">
+          <app-autocomplete [typeAutocomplete]="'user'" (getResultAutocomplete)="getResultAutocompleteUser()" [search]="search" [canDelete]=false [title]="'Client'" [singleChoice]="'true'" [arrayContent]="fetchedUserCalendar.clients">
+          </app-autocomplete>
+        </div>
+        <div class="col-md-12">
+          <app-autocomplete [typeAutocomplete]="'project'" (getResultAutocomplete)="getResultAutocompleteProject()" [canDelete]=false [title]="'Projet'" [search]="search" [singleChoice]="'true'" [arrayContent]="fetchedUserCalendar.projects" (getResultAutocomplete)="selectProject($event[0])">
           </app-autocomplete>
         </div>
 
-        <div *ngIf="fetchedUserCalendar.clients.length" class="col-md-12">
-          <app-autocomplete [typeAutocomplete]="'user'" [canDelete]=false [title]="'Client'" [singleChoice]="'true'" [arrayContent]="fetchedUserCalendar.clients">
-          </app-autocomplete>
-        </div>
-        <div *ngIf="fetchedUserCalendar.assignedTos.length" class="col-md-12">
+        <!-- <div *ngIf="fetchedUserCalendar.assignedTos.length" class="col-md-12">
           <app-autocomplete [typeAutocomplete]="'user'" [canDelete]=false [search]="{isExternalUser:false}" [title]="'Réparateur'" [singleChoice]="'true'" [arrayContent]="fetchedUserCalendar.assignedTos" (getResultAutocomplete)="selectUser($event[0])" (clearAutocomplete)="removeUser()">
           </app-autocomplete>
-        </div>
+        </div> -->
 
 
       </div>
