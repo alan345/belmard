@@ -1,0 +1,87 @@
+<div *ngFor="let devisDetail of fetchedQuote.devisDetails; let i=index">
+  <div class='wrapper'>
+    <div class="container" [dragulaModel]='fetchedQuote.devisDetails[i].bucketProducts' [dragula]='"third-bag"'>
+      <div *ngFor="let bucketProduct of devisDetail.bucketProducts; let j=index">
+
+        <!-- <div class="col-6 nopad">
+          <mat-icon *ngIf="fetchedQuote.statusQuote === 'pending'" class="btn btn-sm handle">clear</mat-icon>
+          <button *ngIf="fetchedQuote.statusQuote === 'pending'" type="button" class="btn btn-sm handle">
+            <i class="fa fa-arrows handle">aaa</i>
+          </button>
+        </div> -->
+
+
+        <div class="row">
+          <div class="col-9">
+            <div class="row">
+              <div class="col-1">
+                <div class="row nopad">
+                  <div class="col-6 nopad" *ngIf="fetchedQuote.statusQuote === 'pending'">
+                    <button mat-icon-button>
+                      <mat-icon>import_export</mat-icon>
+                    </button>
+                    <!-- <button *ngIf="fetchedQuote.statusQuote === 'pending'" type="button" class="btn btn-sm handle">
+                      <i class="fa fa-arrows handle">aaa</i>
+                    </button> -->
+                  </div>
+                  <div class="col-6 nopad">
+
+                    <button *ngIf="fetchedQuote.statusQuote === 'pending'" color="warn" (click)="removeRow(i, j)" mat-icon-button>
+                    <mat-icon>clear</mat-icon>
+                  </button>
+
+                  </div>
+
+                  <!-- <button *ngIf="fetchedQuote.statusQuote === 'pending'" color="warn" (click)="removeRow(i, j)" mat-icon-button>
+                  <mat-icon>clear</mat-icon>
+                </button>
+                 -->
+                </div>
+              </div>
+              <div *ngIf="bucketProduct.typeRow=='text'" class="col-11">
+                <mat-form-field>
+                  <textarea matInput placeholder="{{'Title' | translate}}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].title" matTextareaAutosize matAutosizeMinRows="1" matAutosizeMaxRows="5">
+              </textarea>
+                </mat-form-field>
+              </div>
+
+              <div *ngIf="bucketProduct.typeRow=='product'" class="col-6">
+                <app-autocomplete [typeAutocomplete]="'product'" [canDelete]="fetchedQuote.statusQuote === 'pending'" [title]="'Product'" [singleChoice]=true [arrayContent]="fetchedQuote.devisDetails[i].bucketProducts[j].productInit" (getResultAutocomplete)="selectProduct($event[0], i, j)">
+                </app-autocomplete>
+              </div>
+              <div *ngIf="bucketProduct.typeRow=='product'" class="col-5">
+                <div *ngFor="let product of fetchedQuote.devisDetails[i].bucketProducts[j].productInit; let k=index;">
+                  <mat-form-field>
+                    <input readonly matInput placeholder="{{'Description' | translate}}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].productInit[k].details.description">
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div class="row">
+              <div class="col-5">
+                <mat-form-field>
+                  <input matInput type="number" (ngModelChange)="calculateQuote()" [readonly]="fetchedQuote.statusQuote !== 'pending'" placeholder="{{'Quantity' | translate}}" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].quantity"
+                    placeholder="{{'Quantity' | translate}}">
+                  <span matSuffix>{{fetchedQuote.devisDetails[i].bucketProducts[j].productInit[0]?.details.unit}}</span>
+                </mat-form-field>
+              </div>
+              <div class="col-4">
+                <mat-form-field>
+                  <input matInput type="number" (ngModelChange)="calculateQuote()" [readonly]="fetchedQuote.statusQuote !== 'pending'" placeholder="{{'Price' | translate}}" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].priceWithoutTaxes"
+                    placeholder="{{'Quantity' | translate}}">
+                </mat-form-field>
+              </div>
+              <div class="col-3">
+                <mat-form-field>
+                  <input matInput disabled value="{{fetchedQuote.devisDetails[i].bucketProducts[j].priceWithQuantityWithDiscount | round | currency:fetchedQuote.detail.currency}}" placeholder="{{'Total' | translate}}">
+                </mat-form-field>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

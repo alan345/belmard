@@ -1,0 +1,19 @@
+<form [formGroup]="myForm" novalidate>
+  <div class="row">
+    <div class="col-12 col-lg-6">
+      <h5>{{'Details' | translate}}</h5>
+      <mat-form-field>
+        <input matInput type="text" formControlName="nameCompanie" [(ngModel)]="fetchedCompanie.nameCompanie" required minlength="5" placeholder="{{'Company name' | translate}}">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput formControlName="email" [(ngModel)]="fetchedCompanie.email" placeholder="{{'Company Email' | translate}}">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="text" formControlName="phoneNumber" [(ngModel)]="fetchedCompanie.phoneNumber" placeholder="{{'Phone number' | translate}}">
+      </mat-form-field>
+    </div>
+    <div class="col-12 col-lg-6">
+      <app-address [isSingleAddress]="isMyCompanie()" [addresses]="fetchedCompanie.address"></app-address>
+    </div>
+  </div>
+</form>

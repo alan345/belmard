@@ -14,11 +14,12 @@ import {AuthService} from '../../../auth/auth.service';
 export class FormComponent implements OnInit {
 
 
-    @ViewChild('item') item: ElementRef;
-    @ViewChild('appendToChildEl') appendToChildEl: ElementRef;
+  @ViewChild('item') item: ElementRef;
+  @ViewChild('appendToChildEl') appendToChildEl: ElementRef;
 
 
   @Output() onPassForm = new EventEmitter<any>();
+  @Input() openCameraStraight = false;
   // setting up the form
   myForm: FormGroup;
   // textInput1: FormControl;
@@ -27,12 +28,12 @@ export class FormComponent implements OnInit {
   // get the Auth Token from localStorage in order to Authenticate to back end while submitting the form
   token: string = localStorage.getItem('id_token');
   angleInDegrees = 0
-  url: string = '/uploads';
+  url = '/uploads';
   maxSize: number = 50000000;
-  invalidFileSizeMessage: string = '{0}: Invalid file size, ';
-  invalidFileSizeMessageDetail: string = 'Maximum upload size is {0}.';
+  invalidFileSizeMessage = '{0}: Invalid file size, ';
+  invalidFileSizeMessageDetail = 'Maximum upload size is {0}.';
   public files: File[];
-  public progress: number = 0;
+  public progress = 0;
   public submitStarted: boolean;
   @ViewChild('textOne') textOne: ElementRef;
   @ViewChild('fileInput') fileInput: ElementRef;
@@ -45,7 +46,7 @@ export class FormComponent implements OnInit {
   onClear: EventEmitter<any> = new EventEmitter();
 
   constructor(
-      private _fb: FormBuilder,
+      // private _fb: FormBuilder,
       private toastr: ToastsManager,
       private router: Router,
       private sanitizer: DomSanitizer,
@@ -53,9 +54,6 @@ export class FormComponent implements OnInit {
       private authService: AuthService,
 
     ) {}
-
-
-
 
     //
     // drawRotated(degrees: number, file: any){
@@ -115,7 +113,7 @@ export class FormComponent implements OnInit {
           file.objectURL = this.sanitizer.bypassSecurityTrustUrl((window.URL.createObjectURL(files[i])));
           file.notSafeURL = window.URL.createObjectURL(files[i])
           this.files.push(files[i]);
-
+          this.onSubmit()
         }
       } else if (!this.isImage(file)) {
         this.toastr.error('Only images are allowed');
@@ -178,10 +176,10 @@ export class FormComponent implements OnInit {
     // this.textInput1 = new FormControl('');
     // this.textInput2 = new FormControl('');
     //
-    this.myForm = this._fb.group({
-      // textInput1: this.textInput1,
-      // textInput2: this.textInput2
-    });
+    // this.myForm = this._fb.group({
+    //   // textInput1: this.textInput1,
+    //   // textInput2: this.textInput2
+    // });
   }
   // focus on first input box after the view is initialized
   // ngAfterViewInit() {

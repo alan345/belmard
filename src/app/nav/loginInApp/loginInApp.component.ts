@@ -1,9 +1,9 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {AuthService} from '../../auth/auth.service';
 import { Location } from '@angular/common';
-import {Router} from '@angular/router';
+import { Router} from '@angular/router';
 import { TranslateService } from '../../translate/translate.service';
-
+import { ToastsManager} from 'ng2-toastr';
 
 @Component({
   selector: 'app-loginInApp',
@@ -11,12 +11,14 @@ import { TranslateService } from '../../translate/translate.service';
   styleUrls: ['./loginInApp.component.css']
 })
 export class LoginInAppComponent implements OnInit {
-
-
+  @Output() loginInAppDone: EventEmitter<any> = new EventEmitter();
+  @Input() infoOnly = false;
+  loading = false;
   constructor(
     private authService: AuthService,
     private router: Router,
     private location: Location,
+    private toastr: ToastsManager,
     private translateService: TranslateService,
   ) {}
 
@@ -26,18 +28,24 @@ export class LoginInAppComponent implements OnInit {
   }
 
   loginInApp(password: string) {
-    let userAuth = {
+    this.loading = true
+    const userAuth = {
       email: this.authService.user.email,
       password: password
     }
     this.authService.signin(userAuth).subscribe(
       data => {
-        console.log('loginInApp')
+        this.loading = false
+        this.toastr.success('Great!');
         localStorage.setItem('id_token', data.token);
         localStorage.setItem('token', data.token);
-        location.reload();
+        this.loginInAppDone.emit(data.token)
+        // location.reload();
       },
-      error => console.log(error)
+      error => {
+        this.loading = false
+        console.log(error)
+      }
     );
   }
 

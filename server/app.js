@@ -1,4 +1,5 @@
 var express      = require('express'),
+    cors = require('cors'),
     path         = require('path'),
     logger       = require('morgan'),
     cookieParser = require('cookie-parser'),
@@ -15,12 +16,14 @@ var forgotRoutes = require('./routes/forgetPassword')
 var resetRoutes  = require('./routes/resetPassword')
 var userForms    = require('./routes/userForms')
 var userProfile  = require('./routes/userProfile')
+var userCross  = require('./routes/userCross')
 var adminPage    = require('./routes/admin')
 var tasks        = require('./routes/task')
 var products    = require('./routes/product')
 var projects    = require('./routes/project')
 var userCalendars    = require('./routes/userCalendar')
 var paiement    = require('./routes/paiement')
+var stripeConnect    = require('./routes/stripeConnect')
 var paiementQuote    = require('./routes/paiementQuote')
 var expense    = require('./routes/expense')
 var templateQuotes    = require('./routes/templateQuote')
@@ -64,8 +67,10 @@ var chat    = require('./routes/chat')
 
 
 
-
 var app = express()
+
+// app.use(cors())
+// app.options('*', cors())
 
 mongoose.Promise = global.Promise  // gets rid of the mongoose promise deprecated warning
 mongoose.connect(config.database)
@@ -75,8 +80,11 @@ app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'hbs')
 
 app.use(logger('dev'))
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({extended: false}))
+// app.use(bodyParser.json())
+
+app.use(bodyParser.json({limit: '10mb'}));
+app.use(bodyParser.urlencoded({limit: '10mb', extended: true}));
+// app.use(bodyParser.urlencoded({extended: false}))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, '../dist')))
 app.use('/uploads', express.static(__dirname + '/uploads'))
@@ -85,7 +93,7 @@ app.use('/uploads', express.static(__dirname + '/uploads'))
 app.use(function (req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*')
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PATCH, DELETE, OPTIONS')
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With, Content-Type, Authorization')
+  res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Authorization')
   next()
 })
 
@@ -93,6 +101,7 @@ app.use(function (req, res, next) {
 app.use('/user', userRoute)
 // app.use('/promotion', promotionRoute)
 app.use('/profile', userProfile)
+app.use('/userCross', userCross.router)
 app.use('/companie', companieRoute)
 app.use('/quote', quoteRoute)
 app.use('/user/forgot', forgotRoutes)
@@ -104,7 +113,8 @@ app.use('/product', products)
 app.use('/project', projects)
 app.use('/admin', adminPage)
 app.use('/userCalendar', userCalendars)
-app.use('/paiement', paiement)
+app.use('/paiement', paiement.router)
+app.use('/stripeConnect', stripeConnect.router)
 app.use('/paiementQuote', paiementQuote)
 app.use('/expense', expense)
 app.use('/templateQuote', templateQuotes)

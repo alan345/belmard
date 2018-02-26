@@ -1,41 +1,36 @@
-import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import { Component, OnInit, OnChanges, Input, Output, EventEmitter} from '@angular/core';
 import { AuthService} from '../../auth/auth.service';
 import { PaiementQuoteService} from '../../paiementQuote/paiementQuote.service';
 import { PaiementQuote} from '../../paiementQuote/paiementQuote.model';
-import { ToastsManager} from 'ng2-toastr';
 import { MatDialog} from '@angular/material';
 import { Router, ActivatedRoute, Params} from '@angular/router';
-import { Location} from '@angular/common';
-
-import { Search} from '../../shared/shared.model'
-
+import { Search, PaginationData} from '../../shared/shared.model';
+import { GlobalEventsManager } from '../../globalEventsManager';
+import { PaiementQuoteDialogComponent } from '../single/dialog/paiementQuoteDialog.component';
+// import { ToastsManager} from 'ng2-toastr';
+// import { Location} from '@angular/common';
 
 
 
 @Component({
   selector: 'app-paiementQuotes',
   templateUrl: './paiementQuotes.component.html',
-  styleUrls: ['../../admin/admin.component.css'],
+  styleUrls: ['../paiementQuote.component.css'],
 })
-export class PaiementQuotesComponent implements OnInit {
+export class PaiementQuotesComponent implements OnInit, OnChanges {
+  @Output() getPaiementQuotesCross: EventEmitter<any> = new EventEmitter();
+  @Input() search: Search = new Search();
+  @Input() showBack: number = -1;
+  loading = false;
+  fetchedPaiementQuotes: PaiementQuote[] = [];
+
+  paginationData = new PaginationData();
+
   // @Input() userId = '';
   // @Input() idQuote = '';
-  // @Input() showHeader: boolean = true;
-  @Output() getPaiementQuotesCross: EventEmitter<any> = new EventEmitter();
-  // @Input() showCreate: boolean = true;
-  @Input() search: Search = new Search()
-
-
-
-
-  fetchedPaiementQuotes: PaiementQuote[] = [];
-  loading: boolean;
-  paginationData = {
-    currentPage: 1,
-    itemsPerPage: 0,
-    totalItems: 0
-  };
-
+  // @Input() showHeader = true;
+  // @Output() newPaiementSaved: EventEmitter<any> = new EventEmitter();
+  // @Input() showCreate = true;
   // search = {
   //   orderBy : '',
   //   search: '',
@@ -47,39 +42,46 @@ export class PaiementQuotesComponent implements OnInit {
     private paiementQuoteService: PaiementQuoteService,
     private authService: AuthService,
     private activatedRoute: ActivatedRoute,
-    private toastr: ToastsManager,
+    // private toastr: ToastsManager,
     public dialog: MatDialog,
     private router: Router,
-    private location: Location,
+    // private location: Location,
+    private globalEventsManager: GlobalEventsManager,
   ) {}
 
 
 
+  ngOnChanges() {
+    // console.log(this.search)
+    this.getPaiementQuotes(this.paginationData.currentPage, this.search);
+  }
+
   ngOnInit() {
     this.activatedRoute.params.subscribe((params: Params) => {
-      if(params['isExpense']=='true') {this.search.isExpense = true} else {this.search.isExpense = false}
-        this.getPaiementQuotesInit()
+      if(params['isExpense'] === 'true') {
+        this.search.isExpense = true
+      } else {
+        this.search.isExpense = false
+      }
+      this.getPaiementQuotesInit();
     })
-
-
-
   }
 
 
   getPaiementQuotesInit() {
-    let this2 = this
+    const this2 = this
     setTimeout(function(){
       // this2.search.quoteId = this2.idQuote
-      this2.search.orderBy = 'name'
+      this2.search.orderBy = 'name';
       this2.getPaiementQuotes(1, this2.search)
     }, 200);
   }
-  searchPaiementQuotes(){}
+  // searchPaiementQuotes() {}
 
 
-  goBack() {
-    this.location.back();
-  }
+  // goBack() {
+  //   this.location.back();
+  // }
 
   searchInput() {
     this.getPaiementQuotes(this.paginationData.currentPage, this.search)
@@ -90,20 +92,20 @@ export class PaiementQuotesComponent implements OnInit {
     this.getPaiementQuotes(this.paginationData.currentPage, this.search)
   }
 
-  onDelete(id: string) {
-    this.paiementQuoteService.deletePaiementQuote(id)
-      .subscribe(
-        res => {
-          this.getPaiementQuotesInit()
-          this.toastr.success('Great!', res.message);
-          this.getPaiementQuotesCross.emit(this.fetchedPaiementQuotes)
-          // console.log(res);
-        },
-        error => {
-          console.log(error);
-        }
-      );
-  }
+  // onDelete(id: string) {
+  //   this.paiementQuoteService.deletePaiementQuote(id)
+  //     .subscribe(
+  //       res => {
+  //         this.getPaiementQuotesInit()
+  //         this.authService.successNotif(res.message);
+  //         this.getPaiementQuotesCross.emit(this.fetchedPaiementQuotes)
+  //         // console.log(res);
+  //       },
+  //       error => {
+  //         console.log(error);
+  //       }
+  //     );
+  // }
 
 
   getPage(page: number) {
@@ -122,17 +124,43 @@ export class PaiementQuotesComponent implements OnInit {
           this.getPaiementQuotesCross.emit(this.fetchedPaiementQuotes)
         },
         error => {
+          this.loading = false;
           console.log(error);
         }
       );
   }
   saved(result) {
-    this.getPaiementQuotesInit()
+    // this.getPaiementQuotesInit()
+    // console.log('saved')
+    // this.newPaiementSaved.emit()
+    this.getPaiementQuotes(1, this.search)
   }
 
-  isAdmin() {
-    return this.authService.isAdmin();
+  openDialogPaiement(paiementQuoteId: string) {
+    const this2 = this
+    const dialogRef = this.dialog.open(PaiementQuoteDialogComponent, {
+      data : {
+        search: {
+          paiementQuoteId: paiementQuoteId
+        }
+      }
+    })
+    dialogRef.afterClosed().subscribe(result => {
+      // console.log('ab')
+      // if (result) {
+      //   console.log('a')
+      // console.log(this.search)
+        this.getPaiementQuotes(this.paginationData.currentPage, this.search)
+        // this.onDelete(this.fetchedPaiementQuote._id).then(function(){
+        //   this2.router.navigate(['paiementQuote/list']);
+        // })
+      // }
+    })
   }
+
+  // isAdmin() {
+  //   return this.authService.isAdmin();
+  // }
 
 
 }

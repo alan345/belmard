@@ -1,0 +1,101 @@
+<div class="container">
+  <app-header-title [title]="'Settings'" [icon]="'dashboard'"></app-header-title>
+  <mat-accordion class="example-headers-align">
+    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>account_balance</mat-icon>
+        </mat-panel-title>
+        <mat-panel-description>
+          {{'Companie' | translate}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-detailsCompanie [fetchedCompanie]="fetchedCompanie"></app-detailsCompanie>
+      <mat-action-row>
+        <button *ngIf="fetchedCompanie._id && !isMyCompanie()" mat-mini-fab color="warn" (click)="openDialogDelete()">
+          <mat-icon aria-label="Clear">clear</mat-icon>
+        </button>
+        <button mat-mini-fab color="primary" (click)="saveAndNextStep()">
+          <mat-icon aria-label="Next">forward</mat-icon>
+        </button>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>explore</mat-icon>
+        </mat-panel-title>
+        <mat-panel-description>
+          {{'Plan' | translate}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-debug *ngIf="debugMode" [fetchedCompanie]="fetchedCompanie"></app-debug>
+      <app-paiement [fetchedCompanie]="fetchedCompanie" *ngIf="step === 1"></app-paiement>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel *ngIf="authService.isCurrentUserIsInSubPeriod()" [expanded]="step === 2" (opened)="setStep(2)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>credit_card</mat-icon>
+        </mat-panel-title>
+        <mat-panel-description>
+          {{'Online payment' | translate}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-connect-stripe *ngIf="step === 2" [fetchedCompanie]="fetchedCompanie"></app-connect-stripe>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel *ngIf="authService.isCurrentUserIsInSubPeriod()"  [expanded]="step === 3" (opened)="setStep(3)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>dns</mat-icon>
+        </mat-panel-title>
+        <mat-panel-description>
+          {{'Product Categories' | translate}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-categ-product (save)="save()" [fetchedCompanie]="fetchedCompanie"></app-categ-product>
+      <mat-action-row>
+        <button mat-mini-fab color="primary" (click)="saveAndNextStep()">
+          <mat-icon aria-label="Next">forward</mat-icon>
+        </button>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel *ngIf="authService.isCurrentUserIsInSubPeriod()"  [expanded]="step === 4" (opened)="setStep(4)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>event</mat-icon>
+        </mat-panel-title>
+        <mat-panel-description>
+          {{'Calendar Options' | translate}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-details-calendar (saveEmit)="save()" [fetchedCompanie]="fetchedCompanie"></app-details-calendar>
+      <mat-action-row>
+        <button mat-mini-fab color="primary" (click)="saveAndNextStep()">
+          <mat-icon aria-label="Next">forward</mat-icon>
+        </button>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel *ngIf="authService.isCurrentUserIsInSubPeriod()"  [expanded]="step === 5" (opened)="setStep(5)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>build</mat-icon>
+        </mat-panel-title>
+        <mat-panel-description>
+          {{'Documents Settings' | translate}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-quote-settings (saveEmit)="save()" [fetchedCompanie]="fetchedCompanie"></app-quote-settings>
+      <mat-action-row>
+        <button mat-mini-fab color="primary" (click)="saveAndNextStep()">
+          <mat-icon aria-label="Next">forward</mat-icon>
+        </button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+<app-loadingInApp [loading]="loading"></app-loadingInApp>

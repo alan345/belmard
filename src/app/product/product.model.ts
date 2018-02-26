@@ -3,10 +3,10 @@ import { Companie } from '../companie/companie.model';
 import { User } from '../user/user.model';
 
 export class Product {
-    _id: string = '';
+    _id = '';
     details: Details = new Details();
-    referenceName: string = '';
-    reference: string = '';
+    referenceName = '';
+    reference = '';
     forms: Form[] = [];
     categorie: Categorie = new Categorie();
     owner: User[] = [];
@@ -14,11 +14,11 @@ export class Product {
 }
 
 export class Details {
-  unit: string = '';
-  referenceName: string = '';
-  reference: string = '';
+  unit = '';
+  referenceName = '';
+  reference = '';
   price: Price = new Price();
-  description: string = '';
+  description = '';
   dimension: Dimension = new Dimension();
   stock: Stock = new Stock();
 }
@@ -31,40 +31,53 @@ export class Categorie {
 
 
 export class Categ {
-  name: string = '';
+  name = '';
 }
 
 
 
 export class Price {
-  costPrice: number = 0;
-  sellingPrice: number = 0;
-  vat: number = 0;
+  costPrice: number;
+  sellingPrice: number;
+  vat: number;
 }
 export class Dimension {
-  height: number = 0;
-  width: number = 0;
-  depth: number = 0;
+  height = 0;
+  width = 0;
+  depth = 0;
 }
 export class Stock {
-  quantity: number = 0;
+  quantity = 0;
+}
+
+export class SubCateg2 {
+  categ = '';
+}
+export class SubCateg {
+  categ = '';
+  subCateg: SubCateg2[] = []
+}
+
+export class ItemStepClass {
+  categ = '';
+  subCateg: SubCateg[] = []
 }
 
 
-export const ItemSteps =
-[
-  {
-    'categ':'',
-    'subCateg': [
-      {
-        'categ':'',
-        'subCateg': [
-          {categ: ''},
-        ]
-      }
-    ]
-  }
-]
+// export const ItemSteps =
+// [
+//   {
+//     'categ':'',
+//     'subCateg': [
+//       {
+//         'categ':'',
+//         'subCateg': [
+//           {categ: ''},
+//         ]
+//       }
+//     ]
+//   }
+// ]
 //
 // [
 //   {

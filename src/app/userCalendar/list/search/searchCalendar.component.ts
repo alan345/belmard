@@ -1,36 +1,36 @@
-import {Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, Injectable, NgModule} from '@angular/core';
+import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import {AuthService} from '../../../auth/auth.service';
 import {UserCalendarService} from '../../userCalendar.service';
-
-import {UserCalendar, SearchData} from '../../userCalendar.model';
-import {ToastsManager} from 'ng2-toastr';
-
+import {SearchData} from '../../userCalendar.model';
 import {MatDialog } from '@angular/material';
 import {Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
-// import { FormBuilder, FormGroup} from '@angular/forms';
 import { UserService} from '../../../user/user.service';
+import { User } from '../../../user/user.model';
 //
 // import { DeleteDialog } from '../../../deleteDialog/deleteDialog.component';
-import { User } from '../../../user/user.model';
+// import { FormBuilder, FormGroup} from '@angular/forms';
 // import { Quote } from '../../quote/quote.model';
 // import { Product } from '../../product/product.model';
 // import { Project } from '../../project/project.model';
-import { ProjectService} from '../../../project/project.service';
+// import { ProjectService} from '../../../project/project.service';
 
-import {CalendarComponent} from 'ap-angular2-fullcalendar';
-
+// import {CalendarComponent} from 'ap-angular2-fullcalendar';
+// import {ToastsManager} from 'ng2-toastr';
+// import {Search} from '../../../shared/shared.model'
 // import { UserCalendarDialogComponent } from '../single/dialog/userCalendarDialog.component';
 
 // import * as $ from 'jquery';
 
 @Component({
-  selector: 'app-userCalendarSearch',
+  selector: 'app-user-calendarSearch',
   templateUrl: './searchCalendar.component.html',
   styleUrls: ['../../userCalendar.component.css'],
 })
 export class SearchCalendarComponent implements OnInit {
   @Output() getUserCalendarBySearch: EventEmitter<any> = new EventEmitter();
+  currentUser: User = new User();
+  searchData: SearchData = new SearchData();
 
   // @Output() newUserCalendarSaved: EventEmitter<any> = new EventEmitter();
   // @Input() showHeader = true;
@@ -39,14 +39,13 @@ export class SearchCalendarComponent implements OnInit {
   // @ViewChild('myCal', { read: ElementRef }) myCal: ElementRef;
 
   //
-  // showPaiements: boolean = false
+  // showPaiements = false;
   // fetchedUserCalendar: UserCalendar = new UserCalendar()
-  // autocompleteUser: string = '';
-  // autocompleteProject: string = '';
+  // autocompleteUser = '';
+  // autocompleteProject = '';
   // fetchedProducts: Product[] = []
   // fetchedProjects: Project[] = []
-  currentUser: User = new User()
-  // imgLogoUrl: string = './assets/images/profile-placeholder.jpg'
+  // imgLogoUrl = './assets/images/profile-placeholder.jpg'
   // imgSignatureBase64Temp = ''
   // userAdmins : User[] = []
   // userManagers : User[] = []
@@ -64,7 +63,7 @@ export class SearchCalendarComponent implements OnInit {
   // events: UserCalendar[] = []
   // events: UserCalendar[] = []
   // myForm: FormGroup;
-  // autocompleteProduct: String = ''
+  // autocompleteProduct = ''
   // fetchedUsers: User[] = [];
   // arrayContentToSearch = []
   //
@@ -72,31 +71,30 @@ export class SearchCalendarComponent implements OnInit {
   //
   // fetchedUserSearchs: User[] = [];
   // fetchedProjectSearchs: Project[] = [];
-  typeUsers = ['plombier','electricien']
+  // typeUsers = ['plombier', 'electricien']
 
-  searchData: SearchData = new SearchData()
 
 
   constructor(
     private userService: UserService,
     private userCalendarService: UserCalendarService,
-    private toastr: ToastsManager,
     public dialog: MatDialog,
     private activatedRoute: ActivatedRoute,
     private router: Router,
     private location: Location,
-    // private _fb: FormBuilder,
-    private projectService: ProjectService,
     private authService: AuthService,
+    // private _fb: FormBuilder,
+    // private projectService: ProjectService,
+    // private toastr: ToastsManager,
   ) { }
 
   ngOnInit() {
     this.currentUser = this.authService.getCurrentUser()
   }
 
-  ngAfterViewInit() {
-
-  }
+  // ngAfterViewInit() {
+  //
+  // }
   calendarInitialized() {
     this.activatedRoute.params.subscribe((params: Params) => {
       if(Object.keys(params).length === 0 && params.constructor === Object) {
@@ -104,27 +102,27 @@ export class SearchCalendarComponent implements OnInit {
         this.getUserCalendarBySearch.emit(this.searchData)
       } else {
         if (params['idUserSearch']) { this.getUserSearch(params['idUserSearch']) }
-        if (params['idProjectSearch']) { this.getProjectSearch(params['idProjectSearch']) }
+        // if (params['idProjectSearch']) { this.getProjectSearch(params['idProjectSearch']) }
       }
 
 
       // if(params['typeUserSearch']) {this.selectTypeUser(params['typeUserSearch'])}
     })
   }
-
-  getProjectSearch(id: string) {
-    this.projectService.getProject(id)
-      .subscribe(
-      res => {
-        // this.search.projectSearch = id
-        this.searchData.fetchedProjectSearchs = [res]
-        // let searchData = { fetchedUserSearchs: this.fetchedUserSearchs, fetchedProjectSearchs: this.fetchedProjectSearchs}
-        this.getUserCalendarBySearch.emit(this.searchData)
-        // this.selectProjectSearch(res)
-      },
-      error => { console.log(error) }
-      )
-  }
+  //
+  // getProjectSearch(id: string) {
+  //   this.projectService.getProject(id)
+  //     .subscribe(
+  //     res => {
+  //       // this.search.projectSearch = id
+  //       this.searchData.fetchedProjectSearchs = [res]
+  //       // let searchData = { fetchedUserSearchs: this.fetchedUserSearchs, fetchedProjectSearchs: this.fetchedProjectSearchs}
+  //       this.getUserCalendarBySearch.emit(this.searchData)
+  //       // this.selectProjectSearch(res)
+  //     },
+  //     error => { console.log(error) }
+  //     )
+  // }
 
   getUserSearch(id: string) {
     this.userService.getUser(id)
@@ -163,7 +161,7 @@ export class SearchCalendarComponent implements OnInit {
   }
   // autocolplete typeUser
   //  fetchedTypeUsers = []
-  //  autocompleteTypeUser: string = '';
+  //  autocompleteTypeUser = '';
   //  searchTypeUser() {
   //    if(!this.autocompleteTypeUser) {
   //      this.fetchedTypeUsers = []

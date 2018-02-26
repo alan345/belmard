@@ -5,7 +5,8 @@ var express = require('express'),
     Right    = require('../models/right.model'),
     Form    = require('../models/form.model'),
     fs      = require('fs'),
-    jwt     = require('jsonwebtoken')
+    jwt     = require('jsonwebtoken'),
+    nameObject = 'right'
 
 // this process does not hang the nodejs server on error
 process.on('uncaughtException', function (err) {
@@ -29,7 +30,11 @@ router.use('/', function (req, res, next) {
       })
     }
     if (decoded) {
-      User.findById(decoded.user._id, function (err, doc) {
+      User
+      .findById(decoded.user._id)
+      .populate({ path: 'rights', model: 'Right'})
+      .populate({ path: 'ownerCompanies', model: 'Companie'})
+      .exec(function (err, doc) {
         if (err) {
           return res.status(500).json({
             message: 'Fetching user failed',
@@ -40,6 +45,12 @@ router.use('/', function (req, res, next) {
           return res.status(404).json({
             title: 'User not found',
             error: {message: 'The user was not found'}
+          })
+        }
+        if(!shared.isCurentUserHasAccess(doc, nameObject, 'read')) {
+          return res.status(404).json({
+            title: 'No rights',
+            error: {message: 'No rights'}
           })
         }
         if (doc) {
@@ -55,6 +66,7 @@ router.use('/', function (req, res, next) {
 
 //update
 router.put('/:id', function (req, res, next) {
+
   Right.findById(({_id: req.params.id}), function (err, item) {
     if (err) {
       return res.status(404).json({

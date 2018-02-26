@@ -1,4 +1,11 @@
-<div
+<!-- <div
   (click)="openDialog(typeObj)">
   <i [ngClass]="icone" aria-hidden="true"></i>
-</div>
+</div> -->
+
+
+<div *ngIf="title">{{title | translate}}</div>
+<button mat-icon-button color="primary" (click)="openDialog(typeObj)">
+  <mat-icon *ngIf="!icon">playlist_add</mat-icon>
+  <mat-icon *ngIf="icon">{{icon}}</mat-icon>
+</button>

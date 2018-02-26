@@ -1,114 +1,144 @@
 import { Form } from '../picture/form/form.model';
-import { User } from '../user/user.model';
+import { User, UserCross } from '../user/user.model';
 import { Product } from '../product/product.model';
-import { Project } from '../project/project.model';
+// import { Project } from '../project/project.model';
 import { Companie } from '../companie/companie.model';
+// import { Drawing } from './single/drawing/drawing.model';
+import { DrawingSignature } from './single/drawingSignature/drawingSignature.model';
 
 
 export class Quote {
-  _id: string = '';
+  _id = '';
   clients: User[] = [];
-  name: string = '';
-  statusQuote: number = 0;
-  statusQuoteString: string = '';
-  typeQuote: string = 'quote';
+  assignedTos: User[] = [];
+  historyClients: User[] = [];
+  historyClientsCross: UserCross[] = [];
+  name = '';
+  statusQuote = 'pending';
+  // statusQuoteString = '';
+  typeQuote = 'quote';
   quoteNumber: number;
-  // _users: User[] = [];
+  isSigned = false;;
+  legalApprovals: string[] = []
+  typeIntervention = '';  // _users: User[] = [];
   // ownerQuotes: User[] = [];
   // companieClients: Companie[] = []
   forms: Form[] = [];
-  invoices: Quote[] = [];
+  parentQuotes: Quote[] = [];
   products: Product[] = [];
-  projects: Project[] = [];
+  // projects: Project[] = [];
   devisDetails: DevisDetail[] = []
-  priceQuote: PriceQuote = new PriceQuote()
-  signature: Signature = new Signature()
-  detail: Detail = new Detail()
-  // paiements: Paiement[] = []
+  priceQuote: PriceQuote = new PriceQuote();
+  // signature: Signature = new Signature();
+  detail: Detail = new Detail();
+  // drawing: Drawing = new Drawing();
+  drawingSignature: DrawingSignature = new DrawingSignature();
+
+
 }
 
 export class Detail {
-  currency: string = '';
-  quoteRef: string = '';
+  currency = '';
+  quoteRef = '';
   dateQuote: DateQuote = new DateQuote()
 }
 
+const tomorrow = new Date();
+tomorrow.setDate(tomorrow.getDate() + 30);
+
 export class DateQuote {
   issueDate: Date = new Date();
-  issueDateString: string = '';
-  expiryDate: Date = new Date();
-  expiryDateString: string ='';
+  // issueDateString = '';
+  expiryDate: Date = tomorrow;
+  // expiryDateString: string ='';
   dateInvoicePaid: Date = new Date();
-  dateInvoicePaidString: string ='';
+  // dateInvoicePaidString: string ='';
 }
 
-// export class Paiement {
-//   type: string = '';
-//   amount: number= 0;
-//   datePaiement: Date = new Date();
-//   editDateMode : boolean = false
+
+
+//
+// export class Signature {
+//   base64 = '';
+//   isSigned = false;
+//   dateSignature: Date;
+//   users: User[] = [];
 // }
-
-export class Signature {
-  base64: string = '';
-  isSigned: boolean = false;
-  dateSignature: Date;
-  users: User[] = [];
-}
 export class PriceQuote {
-  priceQuoteWithoutTaxes: number = 0;
-  priceQuoteWithTaxes: number = 0;
-  // paiementQuote: number = 0;
+  priceQuoteWithoutTaxes = 0;
+  priceQuoteWithTaxes = 0;
+  discountGlobal = 0;
+  painfulnessGlobal = 0;
+  priceGlobalWithDiscount = 0;
+  priceGlobalWithTaxesWithDiscount = 0;
+
+  totalPaiementAmount = 0;
+  outstandingBalance = 0;
+  // priceGlobalWithDiscount = 0;
+  vatGlobal = 0;
   priceQuoteTaxes: PriceQuoteTaxe[] = []
 }
 
 export class PriceQuoteTaxe {
-  VAT: number = 0;
-  TotalVAT: number = 0;
+  VAT = 0;
+  TotalVAT = 0;
 }
 
-
-export const ModelVATs: number[] = [5.5, 10]
+export const ModelVATs: number[] = [0, 5.5, 10]
 
 
 export class BucketProduct {
-  typeRow: string = '';
-  title: string = '';
+  typeRow = '';
+  title = '';
   productInit: Product[] = [];
-  priceWithoutTaxes: number;
-  priceWithTaxes: number;
-  totalPriceWithoutTaxes: number;
-  totalPriceWithTaxes: number;
-  vat: number;
-  quantity: number;
-  discount: number;
-  isEditMode: boolean = false;
+  priceWithoutTaxes = 0;
+  priceWithDiscount = 0;
+  priceWithQuantityWithDiscount = 0;
+  // priceWithQuantityWithDiscount = 0;
+  priceWithTaxesWithQuantityWithDiscount = 0;
+  // priceWithTaxesWithQuantityWithDiscount = 0;
+  priceWithTaxesWithDiscount = 0;
+  priceWithTaxes = 0;
+  priceWithQuantity = 0;
 
+  priceWithTaxesWithQuantity = 0;
+  vat = 0;
+  quantity: number = 1;
+  length: number = 1;
+  width: number = 1;
+  surface: number = 1;
+  discount = 0;
+  isEditMode = false;
 }
 
+export class TextToQuote {
+    title = '';
+    priceWithoutTaxes: number;
+  }
 
 export class DevisDetail {
-  nameBucketProducts: string = '';
+  nameBucketProducts = '';
   bucketProducts: BucketProduct[] = []
 }
 
 export const StatusQuotes =
 [
-  {indexStatus: 0, label: 'Pending Approval'},
-  {indexStatus: 1, label: 'Signed'},
-  {indexStatus: 2, label: 'Rejected'},
-  {indexStatus: 3, label: 'Signed, pending paiement'},
-  {indexStatus: 4, label: 'Done'},
+  {indexStatus: 'pending', label: 'Pending Approval', icon: 'alarm', color: ''},
+  {indexStatus: 'signed', label: 'Signed', icon: 'border_color', color: 'primary'},
+  {indexStatus: 'paid', label: 'Paid', icon: 'attach_money', color: 'accent'},
+  {indexStatus: 'rejected', label: 'Rejected', icon: 'face', color: 'warn'},
+  // {indexStatus: 3, label: 'Signed, pending paiement'},
+  // {indexStatus: 4, label: 'Done'},
 ]
-export const StatusQuotesInvoice =
-[
-  {indexStatus: 100, label: 'Sent'},
-  {indexStatus: 101, label: 'Paid'},
-]
+// export const StatusQuotesInvoice =
+// [
+//   {indexStatus: 'sent', label: 'Sent'},
+//   {indexStatus: 'paid', label: 'Paid'},
+// ]
 
 // export class Address {
-//   address: string = '';
-//   city: string = '';
-//   state: string = '';
-//   zip: string = '';
+//   address = '';
+//   city = '';
+//   state = '';
+//   zip = '';
 // }

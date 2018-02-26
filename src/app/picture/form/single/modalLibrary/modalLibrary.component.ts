@@ -1,11 +1,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { MatDialogRef} from '@angular/material';
-import { UserFormsComponent }  from '../../list/userForms.component';
+import { UserFormsComponent } from '../../list/userForms.component';
 
 
 
 @Component({
-  selector: 'edit-options-dialog',
+  selector: 'app-edit-options-dialog',
   templateUrl: './editOptionsDialog.component.html',
 })
 

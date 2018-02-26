@@ -3,10 +3,9 @@ import {FormGroup, FormControl, FormBuilder, Validators} from '@angular/forms';
 import {ToastsManager} from 'ng2-toastr';
 import {Router} from '@angular/router';
 import {newPassword} from '../../user.model';
-
 import { AuthService} from '../../../auth/auth.service';
 import { UserService} from '../../user.service';
-import { User } from '../../user.model'
+import { User } from '../../user.model';
 import { Location } from '@angular/common';
 
 @Component({
@@ -76,7 +75,7 @@ export class ChangePasswordComponent implements OnInit, AfterViewInit {
     this.userService.updateUser(this.fetchedUser)
       .subscribe(
         res => {
-          this.toastr.success('Great!', res.message)
+          this.authService.successNotif(res.message)
           this.router.navigate(['/']);
         },
         error => {console.log(error)}

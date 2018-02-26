@@ -1,18 +1,37 @@
-<div class="container nopad" style="width: 100%;">
-  <div class="hdform">
-      <h3> <i class="fa fa10 fa-calendar" aria-hidden="true"></i>{{'Calendar' | translate}}</h3>
-  
-    </div>
-  
-  <div class="row pad15">
-    <div class="col-12">
-      <app-userCalendarSearch (getUserCalendarBySearch)="getUserCalendarBySearch($event)"></app-userCalendarSearch>
-    </div>
+<div class="container width100perc">
+  <app-header-title *ngIf="showTitle" [title]="'Calendar'" [icon]="'event_available'"></app-header-title>
 
-    <div class="col-12">
-      <angular2-fullcalendar #myCal [options]="calendarOptions" (initialized)="onCalendarInit($event)">
-      </angular2-fullcalendar>
+  <!-- <div class="d-flex flex-row">
+    <div class="p-2">
+      <h4>
+      <mat-icon>event_available</mat-icon>
+      {{'Calendar' | translate}}
+    </h4>
     </div>
+  </div> -->
+  <div class="row pad15">
+    <div *ngIf="showSearch" class="col-12">
+      <app-user-calendarSearch (getUserCalendarBySearch)="getUserCalendarBySearch($event)"></app-user-calendarSearch>
+    </div>
+    <div class="showMobile col-12">
+      <mat-slide-toggle
+        [(ngModel)]="modeInput">
+        <div *ngIf="modeInput">{{'Edit Event' | translate}}</div>
+        <div *ngIf="!modeInput">{{'Move Event' | translate}}</div>
+      </mat-slide-toggle>
+    </div>
+    <div *ngIf="search.clientId" class="col-12">
+
+      {{'Global view' | translate}}
+      <mat-slide-toggle [(ngModel)]="showCustomerData" (change)="resetSearchGetUserCalendars()">
+        </mat-slide-toggle>
+        {{'Client view' | translate}}
+
+
+
+    </div>
+    <angular2-fullcalendar *ngIf="readyCalendar" #myCal [options]="calendarOptions" (initialized)="onCalendarInit($event)">
+    </angular2-fullcalendar>
   </div>
 </div>
-<app-loadingInApp *ngIf="loading"></app-loadingInApp>
+<app-loadingInApp [loading]="loading"></app-loadingInApp>

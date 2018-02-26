@@ -1,51 +1,66 @@
-import { Component, OnInit} from '@angular/core';
-import { AuthService} from '../../auth/auth.service';
+import { Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { ProductService} from '../product.service';
 import { Product} from '../product.model';
 import { ToastsManager} from 'ng2-toastr';
-import { MatDialog} from '@angular/material';
 import { Router} from '@angular/router';
-import { DomSanitizer } from '@angular/platform-browser';
-import { ViewEncapsulation} from '@angular/core';
-import { UserService} from '../../user/user.service';
+import { GlobalEventsManager } from '../../globalEventsManager';
+import { Search, PaginationData } from '../../shared/shared.model';
+import { trigger, state, style, animate, transition} from '@angular/animations';
+import { AuthService} from '../../auth/auth.service';
+// import { ViewEncapsulation} from '@angular/core';
+
+// import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+// import { DomSanitizer } from '@angular/platform-browser';
+// import { UserService} from '../../user/user.service';
+// import { MatDialog} from '@angular/material';
 // import { TranslateService } from '../../translate/translate.service';
 
 @Component({
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['../product.component.css'],
-  encapsulation: ViewEncapsulation.None
+  animations: [
+    trigger('hideShowAnimator', [
+        state('true' , style({ backgroundColor: '#6be576' })),
+        state('false', style({ backgroundColor: 'white' })),
+        transition('0 => 1', animate('.2s')),
+        transition('1 => 0', animate('.7s'))
+    ])
+]
+  // encapsulation: ViewEncapsulation.None
 
 })
 export class ProductsComponent implements OnInit {
-  token: string = localStorage.getItem('id_token');
+  @Input() customButton = false;
+  @Input() showNewItem = true;
+  @Input() showTitle = true;
+  @Input() isDialog = false;
+  @Output() customButtonActionEmit: EventEmitter<any> = new EventEmitter();
+  @Output() closeDialogEmit: EventEmitter<any> = new EventEmitter();
+  // token: string = localStorage.getItem('id_token');
   fetchedProducts: Product[] = [];
-  search: any = {
-    categories : [],
-    search: ''
-  };
-  loading: boolean= false;
+  listProductsTempToAdd: Product[] = [];
+  search: Search = new Search()
+  loading = false;
+  valueTempProduct = 0;
+  hideShowAnimator = false;;
+  paginationData: PaginationData = new PaginationData()
 
-  paginationData = {
-    currentPage: 1,
-    itemsPerPage: 0,
-    totalItems: 0
-  };
-
-  trackinPage : any = {
-    lastVisitPagePressCount:[],
-    lastVisitPageProductCount:[]
-  }
+  // trackinPage : any = {
+  //   lastVisitPagePressCount:[],
+  //   lastVisitPageProductCount:[]
+  // }
 
   constructor(
-    private sanitizer: DomSanitizer,
     private productService: ProductService,
     private toastr: ToastsManager,
-    public dialog: MatDialog,
     private router: Router,
+    private globalEventsManager: GlobalEventsManager,
+    // private sanitizer: DomSanitizer,
+    // public dialog: MatDialog,
     // private location: Location,
     private authService: AuthService,
-    private userService: UserService,
+    // private userService: UserService,
     // private translateService: TranslateService,
   ) {
   }
@@ -53,10 +68,29 @@ export class ProductsComponent implements OnInit {
 
 
 
+  customButtonAction(product: Product) {
+    const this2 = this
+    this.hideShowAnimator = true;
+    setTimeout(_ => {
+      this2.hideShowAnimator = false;
+    }, 500);
 
 
+
+    this.listProductsTempToAdd.push(product)
+    this.valueTempProduct += product.details.price.sellingPrice
+    this.customButtonActionEmit.emit(product);
+  }
+
+  actionRow(productId: string) {
+    if(!this.customButton)
+      this.router.navigate(['/product/' + productId]);
+  }
   searchProducts() {
     this.getProducts(1, this.search)
+  }
+  closeDialog() {
+    this.closeDialogEmit.emit()
   }
 
 
@@ -69,7 +103,7 @@ export class ProductsComponent implements OnInit {
     this.productService.deleteProduct(id)
       .subscribe(
         res => {
-          this.toastr.success('Great!', res.message);
+          this.authService.successNotif(res.message);
           console.log(res);
         },
         error => {
@@ -82,8 +116,10 @@ export class ProductsComponent implements OnInit {
     this.getProducts(page, this.search);
   }
   saved(result) {
-    if(result)
+    console.log(result)
+    if(result) {
       this.getProducts(1, this.search)
+    }
   }
 
   // loadMore(){
@@ -92,15 +128,18 @@ export class ProductsComponent implements OnInit {
   // }
 
   getProducts(page: number, search: any) {
-    this.loading = true;
+    // this.globalEventsManager.isLoadding(true);
+    this.loading = true
     this.productService.getProducts(page, search)
       .subscribe(
         res => {
           this.paginationData = res.paginationData;
           this.fetchedProducts = res.data
-          this.loading = false;
+          this.loading = false
+          // this.globalEventsManager.isLoadding(false);
         },
         error => {
+          this.loading = false
           console.log(error);
         }
       );
@@ -113,7 +152,7 @@ export class ProductsComponent implements OnInit {
     this.getProducts(1, this.search)
   }
 
-  isAdmin() {
-    return this.authService.isAdmin();
-  }
+  // isAdmin() {
+  //   return this.authService.isAdmin();
+  // }
 }

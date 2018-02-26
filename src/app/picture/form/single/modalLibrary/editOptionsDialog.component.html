@@ -1,15 +1,17 @@
 
 
 
-<md-tab-group>
-  <md-tab label="Load">
-    <app-form (onPassForm)="dialogRef.close($event)" (onUploadFinisedChildToParent)="onUploadFinisedChildToParent()"></app-form>
-  </md-tab>
-  <md-tab label="Medias">
+<mat-tab-group>
+  <mat-tab label="Medias">
     <app-user-form
       (onPassForm)="dialogRef.close($event)"
-      [itemsPerPage]=6
+      [itemsPerPage]=10
       [isDialog]=true
     ></app-user-form>
-  </md-tab>
-</md-tab-group>
+  </mat-tab>
+  <mat-tab label="{{'Upload' | translate}}">
+    <app-form
+      (onPassForm)="dialogRef.close($event)"
+      (onUploadFinisedChildToParent)="onUploadFinisedChildToParent()"></app-form>
+  </mat-tab>
+</mat-tab-group>

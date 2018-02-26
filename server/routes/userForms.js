@@ -79,6 +79,7 @@ router.get('/page/:page', function (req, res, next) {
         .find(findQuery)
         .limit(itemsPerPage)
         .skip(skip)
+        .sort('-createdAt')
         .exec(function (err, item) {
           if (err) {
             return res.status(404).json({
@@ -96,6 +97,7 @@ router.get('/page/:page', function (req, res, next) {
                   currentPage : currentPage,
                   itemsPerPage : itemsPerPage
                 },
+                query: req.query,
                 data: item
               })
             })

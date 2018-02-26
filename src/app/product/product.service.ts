@@ -4,15 +4,16 @@ import {Response, Headers, Http, RequestOptions} from '@angular/http';
 import {ErrorService} from '../errorHandler/error.service';
 import {Product} from './product.model';
 import {ToastsManager} from 'ng2-toastr';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
+// // import 'rxjs/add/operator/map';
+// // import 'rxjs/add/operator/catch';
 import { AuthService } from '../auth/auth.service';
+import { Config } from '../shared/config.model';
 
 
 @Injectable()
 export class ProductService {
 
-  private url: string = '/';
+  private url = Config.backendURL;
 //  private token: string = localStorage.getItem('id_token');
 //  private productId: string = localStorage.getItem('productId');
   // private products = [];
@@ -31,7 +32,7 @@ export class ProductService {
     headers.append('Authorization', '' + this.authService.currentUser.token);
     let options = new RequestOptions({ headers: headers, search: search});
     return this.http.get(this.url + 'product/page/' + page , options)
-      .timeout(9000)
+      .timeout(15000)
       .map((response: Response) => {
 
         const products = response.json();
@@ -49,7 +50,7 @@ export class ProductService {
     headers.append('Authorization', '' + this.authService.currentUser.token);
     let options = new RequestOptions({ headers: headers});
     return this.http.get(this.url + 'product/countNewItemForUser/' + this.authService.currentUser.userId, options)
-      .timeout(9000)
+      .timeout(15000)
       .map((response: Response) => {
         const products = response.json();
         return products;

@@ -1,2 +1,12 @@
-<input type="password" placeHolder="Password" #password>
-<button type="button"  (click)="loginInApp(password.value)"> Re-log</button>
+<mat-form-field *ngIf="!infoOnly">
+  <input matInput type="password" placeholder="{{'Password' | translate}}" #password>
+  <button matSuffix mat-icon-button color="warn" class="mediumIcon" (click)="loginInApp(password.value)">
+    <mat-icon *ngIf="password.value">forward</mat-icon>
+  </button>
+  <mat-hint align="start"><strong>{{'Enter your password to approve changes' | translate}}</strong> </mat-hint>
+</mat-form-field>
+<app-loadingInApp [loading]="loading"></app-loadingInApp>
+
+<div *ngIf="!infoOnly">
+  {{'The changes will apply after the next log in' | translate}}
+</div>

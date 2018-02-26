@@ -2,21 +2,22 @@ import { Component, OnInit} from '@angular/core';
 import { AuthService} from '../../auth/auth.service';
 import { CompanieService} from '../../companie/companie.service';
 import { Companie} from '../../companie/companie.model';
-import { ToastsManager} from 'ng2-toastr';
 import { MatDialog} from '@angular/material';
 import { Router} from '@angular/router';
 import { Location} from '@angular/common';
+import { GlobalEventsManager } from '../../globalEventsManager';
 
+// import { ToastsManager} from 'ng2-toastr';
 
 
 @Component({
   selector: 'app-companie',
   templateUrl: './companies.component.html',
-  styleUrls: ['../../admin/admin.component.css'],
+  styleUrls: ['../companie.component.css'],
 })
 export class CompaniesComponent implements OnInit {
   fetchedCompanies: Companie[] = [];
-  loading: boolean=false;
+  // loading: boolean=false;
   paginationData = {
     currentPage: 1,
     itemsPerPage: 0,
@@ -33,22 +34,23 @@ export class CompaniesComponent implements OnInit {
     private companieService: CompanieService,
     private authService: AuthService,
   //  private modalService: NgbModal,
-    private toastr: ToastsManager,
+    // private toastr: ToastsManager,
     public dialog: MatDialog,
     private router: Router,
     private location: Location,
+    private globalEventsManager: GlobalEventsManager,
   ) {}
 
   ngOnInit() {
-    this.search.orderBy = 'name'
-    this.getPage(1)
+    this.search.orderBy = 'name';
+    this.getPage(1);
   }
   getPage(page: number) {
 
     this.getCompanies(page, this.search);
   }
   saved(result) {
-    this.getCompanies(this.paginationData.currentPage, this.search)
+    this.getCompanies(this.paginationData.currentPage, this.search);
   }
   // openDialog() {
   // }
@@ -58,19 +60,19 @@ export class CompaniesComponent implements OnInit {
   // }
 
   searchInput() {
-    this.getCompanies(this.paginationData.currentPage, this.search)
+    this.getCompanies(this.paginationData.currentPage, this.search);
   }
 
   orderBy(orderBy: string) {
-    this.search.orderBy = orderBy
-    this.getCompanies(this.paginationData.currentPage, this.search)
+    this.search.orderBy = orderBy;
+    this.getCompanies(this.paginationData.currentPage, this.search);
   }
 
   onDelete(id: string) {
     this.companieService.deleteCompanie(id)
       .subscribe(
         res => {
-          this.toastr.success('Great!', res.message);
+          this.authService.successNotif(res.message);
           console.log(res);
         },
         error => {
@@ -81,7 +83,7 @@ export class CompaniesComponent implements OnInit {
 
 
   searchCompanies() {
-    this.getCompanies(1, this.search)
+    this.getCompanies(1, this.search);
   }
 
 
@@ -89,15 +91,15 @@ export class CompaniesComponent implements OnInit {
 
 
   getCompanies(page: number, search: any) {
-    this.loading = true;
+    this.globalEventsManager.isLoadding(true);
     this.companieService.getCompanies(page, search)
       .subscribe(
         res => {
         //  console.log("companies");
         //  console.log(res);
           this.paginationData = res.paginationData;
-          this.fetchedCompanies =  res.data
-          this.loading = false;
+          this.fetchedCompanies = res.data;
+          this.globalEventsManager.isLoadding(false);
         },
         error => {
           console.log(error);
@@ -106,9 +108,9 @@ export class CompaniesComponent implements OnInit {
   }
 
 
-  isAdmin() {
-    return this.authService.isAdmin();
-  }
+  // isAdmin() {
+  //   return this.authService.isAdmin();
+  // }
 
 
 }

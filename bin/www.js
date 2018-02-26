@@ -7,6 +7,33 @@
 var app = require('../server/app')
 var debug = require('debug')('petlocator_ng2:server')
 var http = require('http')
+var https = require('https');
+var fs = require('fs');
+
+
+
+// set port 80 to redirect to https
+var express = require('express');
+var app2 = express();
+app2.get('*',function (req, res) {
+    res.redirect('https://' + req.headers.host + req.url);
+});
+app2.listen(80,  function () {
+   console.log('Started port: 80');
+});
+
+
+
+
+var sslOptions = {
+  key: fs.readFileSync(__dirname + '/certs/app.mirabelle.io_private_key.key', 'utf8'),
+  cert: fs.readFileSync(__dirname + '/certs/app.mirabelle.io_ssl_certificate.cer', 'utf8'),
+  ca: fs.readFileSync(__dirname + '/certs/app.mirabelle.io_ssl_certificate_INTERMEDIATE.cer', 'utf8'),
+  requestCert: false,
+  rejectUnauthorized: false
+};
+// console.log(sslOptions)
+//https://www.1and1.com/cloud-community/learn/networking/ssl-certificates/set-up-a-11-ssl-certificate/
 
 /**
  * Get port from environment and store in Express.
@@ -15,7 +42,7 @@ var http = require('http')
 //console.log(app.get('env'))
 
 
-var port = normalizePort(process.env.PORT || '80')
+var port = normalizePort(process.env.PORT || '443')
 //var port = normalizePort(process.env.PORT || '3000')
 
 
@@ -25,13 +52,15 @@ app.set('port', port)
  * Create HTTP server.
  */
 
-var server = http.createServer(app)
+var server = https.createServer(sslOptions, app)
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port)
+server.listen(port,  function () {
+   console.log('Started port: ' + port);
+})
 server.on('error', onError)
 server.on('listening', onListening)
 

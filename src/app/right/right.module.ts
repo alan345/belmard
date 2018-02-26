@@ -3,18 +3,16 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { RouterModule} from '@angular/router';
 
-// import { RightDetailUsersComponent} from './rightDetailUsers.component';
-// import { AddUserByRightComponent} from './addUser/addUserByRight.component';
 import { RightsComponent} from './rights/rights.component';
 import { RightComponent} from './single/right.component';
-// import { EditAddUserToRightComponent} from './addUser/editAddUserToRight.component';
-
 import { RightService} from './right.service';
 import { RightRouting} from './rightRouting.module';
-// import { MaterialModule } from '@angular/material';
-
 import { SharedModule } from '../shared/shared.module';
-
+import { MatCardModule} from '@angular/material/card';
+// import { RightDetailUsersComponent} from './rightDetailUsers.component';
+// import { AddUserByRightComponent} from './addUser/addUserByRight.component';
+// import { EditAddUserToRightComponent} from './addUser/editAddUserToRight.component';
+// import { MaterialModule } from '@angular/material';
 
 @NgModule({
   imports:      [
@@ -25,6 +23,7 @@ import { SharedModule } from '../shared/shared.module';
     ReactiveFormsModule,
     RouterModule,
     SharedModule,
+    MatCardModule,
   ],
   declarations: [
     // RightDetailUsersComponent,

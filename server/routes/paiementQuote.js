@@ -5,9 +5,10 @@ var express = require('express'),
     PaiementQuote    = require('../models/paiementQuote.model'),
     Form    = require('../models/form.model'),
     fs      = require('fs'),
-    jwt     = require('jsonwebtoken')
+    jwt     = require('jsonwebtoken'),
     shared = require('./shared.js'),
-    nameObject = 'paiementQuote'
+    pdfGenerator = require('./pdfGenerator.js'),
+    nameObject = 'paiementQuote';
 
 // this process does not hang the nodejs server on error
 process.on('uncaughtException', function (err) {
@@ -34,6 +35,7 @@ router.use('/', function (req, res, next) {
       User
       .findById(decoded.user._id)
       .populate({ path: 'rights', model: 'Right'})
+      .populate({ path: 'ownerCompanies', model: 'Companie'})
       .exec(function (err, doc) {
         if (err) {
           return res.status(500).json({
@@ -47,6 +49,7 @@ router.use('/', function (req, res, next) {
             error: {message: 'The user was not found'}
           })
         }
+
         if(!shared.isCurentUserHasAccess(doc, nameObject, 'read')) {
           return res.status(404).json({
             title: 'No rights',
@@ -84,6 +87,9 @@ router.put('/:id', function (req, res, next) {
         item.datePaiement = req.body.datePaiement
         item.userDebiteds = req.body.userDebiteds
         item.projects = req.body.projects
+        item.isPaid = req.body.isPaid
+        item.title = req.body.title
+
 
 
 
@@ -140,6 +146,8 @@ router.post('/', function (req, res, next) {
 
 // get all forms from database
 router.get('/page/:page', function (req, res, next) {
+
+
   var itemsPerPage = 15
   var currentPage = Number(req.params.page)
   var pageNumber = currentPage - 1
@@ -156,23 +164,25 @@ router.get('/page/:page', function (req, res, next) {
   if(req.query.quoteId)
     searchQuery['quotes'] = mongoose.Types.ObjectId(req.query.quoteId)
 
+  if(req.query.userId)
+    searchQuery['userDebiteds'] = mongoose.Types.ObjectId(req.query.userId)
 
-// console.log(req.query.isExpense)
+
+// console.log(req.query.orderBy)
   searchQuery['isExpense'] = false
   if(req.query.isExpense === 'true')
     searchQuery['isExpense'] = true
 
   PaiementQuote
   .find(searchQuery)
-  .sort('-createdAt')
   .populate({path: 'userDebiteds', model: 'User'})
   .populate({
     path: 'quotes',
     model: 'Quote',
-    populate: {
-      path: 'clients',
-      model: 'User'
-    }
+    // populate: {
+    //   path: 'clients',
+    //   model: 'User'
+    // }
   })
 
 
@@ -184,7 +194,10 @@ router.get('/page/:page', function (req, res, next) {
   //   })
   .limit(itemsPerPage)
   .skip(skip)
+  .sort(req.query.orderBy)
   .exec(function (err, item) {
+    // res.status(200).json({'alan':item})
+
     if (err) {
       return res.status(404).json({
         message: 'No results',
@@ -195,12 +208,17 @@ router.get('/page/:page', function (req, res, next) {
       .find(searchQuery)
       .count()
       .exec(function (err, count) {
+        // console.log(err)
+        // console.log(count)
+        // console.log(item)
+        // res.status(200).json({'alan':'200'})
       res.status(200).json({
           paginationData : {
             totalItems: count,
             currentPage : currentPage,
             itemsPerPage : itemsPerPage
           },
+          query: req.query,
           data: item
         })
       })
@@ -210,12 +228,22 @@ router.get('/page/:page', function (req, res, next) {
 
 
 
+router.get('/pdf/:paiementId', function(req, res, next) {
+  pdfGenerator.generatePaiementQuotePDF(req, res, next).then(paiementId => {
+    res.status(200).json({
+      message: 'Success',
+      item: paiementId + '.pdf'
+    })
+  }).catch((error) => {
+    return res.status(404).json({title: 'Error', error: error})
+  })
+})
 
 
-router.get('/graph/:year', function (req, res, next) {
+router.get('/graph', function (req, res, next) {
   // let searchQuery = {}
-  let dateBegin = req.params.year*1 + '-01-01'
-  let dateEnd = req.params.year*1 +1 + '-01-01'
+  let dateBegin = req.query.year*1 + '-01-01'
+  let dateEnd = req.query.year*1 +1 + '-01-01'
   //
   // console.log(dateBegin, dateEnd)
   // if(req.query.search)
@@ -246,7 +274,8 @@ router.get('/graph/:year', function (req, res, next) {
           month: { $month : "$datePaiement" },
             //  day: { $dayOfMonth : "$datePaiement" }
         },
-         amountTotal : { $sum : "$amount" }
+       amountTotal : { $sum : "$amount" },
+       count:{$sum:1}
       }
     }
   )
@@ -275,14 +304,18 @@ router.get('/:id', function (req, res, next) {
   PaiementQuote.findById((req.params.id), function (err, obj) {
     if (err) {
       return res.status(500).json({
-        message: 'An error occured',
-        err: err
+        title: 'No form found',
+        error: {
+          message: err
+        }
       })
     }
     if (!obj) {
-      return res.status(404).json({
-        title: 'No obj found',
-        error: {message: 'Obj not found!'}
+      return res.status(500).json({
+        title: 'No form found',
+        error: {
+          message: 'not founded'
+        }
       })
     }
 

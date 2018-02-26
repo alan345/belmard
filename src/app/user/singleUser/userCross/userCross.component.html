@@ -1,0 +1,43 @@
+<form [formGroup]="myForm">
+  <div class="row">
+    <div class="col-sm-12 col-lg-6 col-lg-4">
+      <div *ngIf="fetchedUser.isExternalUser">
+        <mat-form-field>
+          <mat-select placeholder="{{'Type Client' | translate}}" [(ngModel)]="fetchedUserCross.profile.typeClient" formControlName="typeClient">
+            <mat-option [value]="" disabled selected>Type</mat-option>
+            <mat-option *ngFor="let n of typeClientArray" [value]="n">{{n | translate}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div *ngIf="fetchedUser.isExternalUser">
+        <mat-form-field *ngIf="fetchedUserCross.profile.typeClient ==='Company'">
+          <input matInput type="text" formControlName="accessType" [(ngModel)]="fetchedUserCross.profile.companyName" placeholder="{{'Company name' | translate}}">
+        </mat-form-field>
+      </div>
+      <mat-form-field>
+        <input matInput formControlName="phoneNumber" [(ngModel)]="fetchedUserCross.profile.phoneNumber" placeholder="{{'Phone Number' | translate}}">
+        <a matSuffix *ngIf="fetchedUserCross.profile.phoneNumber" href="tel:{{fetchedUserCross.profile.phoneNumber}}"><mat-icon>phone</mat-icon></a>
+      </mat-form-field>
+    </div>
+    <div class="col-sm-12 col-lg-6 col-lg-4">
+      <app-address [isSingleAddress]="!fetchedUser.isExternalUser" [addresses]="fetchedUserCross.profile.address"></app-address>
+    </div>
+    <div class="col-sm-12 col-lg-6 col-lg-4">
+      <h5>{{'Divers' | translate}}</h5>
+      <div *ngIf="fetchedUserCross.isExternalUser">
+      </div>
+      <div>
+        <mat-form-field>
+          <textarea matInput formControlName="otherData" [(ngModel)]="fetchedUserCross.profile.otherData" placeholder="{{'Other' | translate}}">
+              </textarea>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+  <mat-action-row>
+    <button mat-mini-fab color="primary" (click)="save()">
+      <mat-icon aria-label="Next">forward</mat-icon>
+    </button>
+  </mat-action-row>
+</form>
+<app-loadingInApp [loading]="loading"></app-loadingInApp>

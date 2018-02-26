@@ -1,65 +1,53 @@
 <div class="container">
-  <div class="d-flex flex-row">
-    <div class="p-2">
-      <h4 *ngIf="!search.isExpense"> {{'Payments' | translate}}</h4>
-      <h4 *ngIf="search.isExpense"> {{'Expenses' | translate}}</h4>
-    </div>
-
-    <div class="p-2">
-      <app-newObjDialog icone="fa fa-plus-square fa-2x ml" [search]="search" (saved)="saved($event)" [typeObj]="'paiementQuote'"></app-newObjDialog>
-    </div>
-    <!-- <div class="p-2">
-      <app-header [search]="search" (saved)="saved($event)" [nameButton]="'Create a new Paiement'" [nameObject]="'paiementQuote'" [openInDialog]=true>
-      </app-header>
-    </div> -->
-  </div>
-  <div class="d-flex flex-row">
-    <div class="p-2">
-      <input class="form-control margebasse col-md-12" type="text" name="Search" placeholder="Rechercher" [(ngModel)]="search.search" (ngModelChange)="searchPaiementQuotes()">
-    </div>
-  </div>
-
+  <app-header-title [showBack]="showBack" [title]="'Payments'" (saved)="saved($event)" [search]="{userId: search.userId, quoteId: search.quoteId}" [typeObj]="'paiementQuote'"></app-header-title>
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-lg-12">
       <table class="table table-hover">
         <thead>
           <tr>
-            <th class="centre tdunder">Type</th>
-            <th class="centre tdunder">Client</th>
-            <th class="centre tdunder">Nom</th>
-            <th class="centre tdunder">Date</th>
-            <th class="centre tdunder">Montant</th>
+            <th class="centre tdunder hideMobile">
+              {{'Type' | translate}}
+              <app-sort (orderBy)="orderBy($event)" [search]="search" [filedToOrder]="'type'"></app-sort>
+            </th>
+            <th class="centre tdunder hideMobile">
+              {{'quote' | translate}}
+            </th>
+            <th class="centre tdunder">{{'Client'| translate}}</th>
+            <th class="centre tdunder hideMobile">
+              {{'Date' | translate}}
+              <app-sort (orderBy)="orderBy($event)" [search]="search" [filedToOrder]="'datePaiement'"></app-sort>
+            </th>
+            <th class="centre tdunder">
+              {{'Amount' | translate}}
+              <app-sort (orderBy)="orderBy($event)" [search]="search" [filedToOrder]="'amount'"></app-sort>
+            </th>
           </tr>
         </thead>
-
         <tbody class="clienttbl">
-          <tr *ngFor="let paiementQuote of fetchedPaiementQuotes" [routerLink]="['/paiementQuote/edit/' + paiementQuote._id]" routerLinkActive="active">
-            <td class="centre tdunder">{{paiementQuote.type}}</td>
-            <td class="centre tdunder">
+          <tr *ngFor="let paiementQuote of fetchedPaiementQuotes" (click)="openDialogPaiement(paiementQuote._id)" routerLinkActive="active">
+            <td class="centre tdunder hideMobile">
+              {{paiementQuote.type | translate}}
+            </td>
+            <td class="centre tdunder hideMobile">
               <div *ngFor="let quote of paiementQuote.quotes">
-
-                <div *ngFor="let client of quote.clients">
-                  {{client.profile.name}}
-                </div>
+                  {{quote.name}}
               </div>
             </td>
             <td class="centre tdunder">
-              <div *ngFor="let quote of paiementQuote.quotes">
-                <div *ngFor="let client of quote.clients">
-                  {{client.profile.lastName}}
-                </div>
+              <div *ngFor="let client of paiementQuote.userDebiteds">
+                  {{client.profile.name}} {{client.profile.lastName}}
               </div>
             </td>
-            <td class="centre tdunder">{{paiementQuote.datePaiement | date:'yyyy-MM-dd' }}</td>
-            <td class="centre tdunder">{{paiementQuote.amount}}</td>
+            <td class="centre tdunder hideMobile">{{paiementQuote.datePaiement | date:'longDate' }}</td>
+            <td class="centre tdunder">{{paiementQuote.amount | round | currency:paiementQuote.currency}}</td>
           </tr>
         </tbody>
       </table>
       <div>
-        <mat-paginator [length]="paginationData.totalItems" [pageSize]="paginationData.itemsPerPage" (page)="getPage($event.pageIndex*1+1)">
+        <mat-paginator *ngIf="paginationData.totalItems>paginationData.itemsPerPage" [length]="paginationData.totalItems" [pageIndex]="paginationData.currentPage-1" [pageSize]="paginationData.itemsPerPage" (page)="getPage($event.pageIndex*1+1)">
         </mat-paginator>
-        <app-loadingInApp *ngIf="loading"></app-loadingInApp>
       </div>
     </div>
   </div>
 </div>
+<app-loadingInApp [loading]="loading"></app-loadingInApp>

@@ -1,11 +1,11 @@
-import { Component, ViewChild, Inject } from '@angular/core';
-import { MatDialogRef, MatDialogConfig, MAT_DIALOG_DATA} from '@angular/material';
-import { NewUserComponent }  from '../newUser.component';
+import { Component, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { UserComponent } from '../user.component';
 
 
 
 @Component({
-  selector: 'edit-options-dialog',
+  selector: 'app-edit-options-dialog',
   templateUrl: './userDialog.component.html',
 })
 
@@ -15,10 +15,10 @@ export class UserDialogComponent{
   search: any;
 
   constructor(
-    public dialogRef: MatDialogRef<NewUserComponent>,
+    public dialogRef: MatDialogRef<UserComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
-    console.log(data.search)
+    // console.log(data.search)
     this.search = data.search
   }
   saved(data) {

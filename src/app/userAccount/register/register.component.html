@@ -1,0 +1,52 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-4 col-xs-12">
+      <form [formGroup]="myForm" (ngSubmit)="onSubmit()" class="register-form" novalidate>
+        <mat-card class="ac">
+          <mat-card-header class="headerCardCenter">
+            <mat-card-title>
+              <h3>Mirabelle.io</h3>
+              <p>{{'Your quotes at you clients place' | translate}}</p>
+            </mat-card-title>
+            <mat-card-subtitle></mat-card-subtitle>
+          </mat-card-header>
+          <img mat-card-image src="/assets/images/Logo-Mirabelle.png" [routerLink]="['/']" class="logomira" alt="Bienvenue sur Mirabelle">
+          <mat-card-content>
+            <mat-form-field>
+              <input matInput #userEmail formControlName="email" placeholder="Email">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput type="password" formControlName="password" placeholder="{{'Password' | translate}}">
+            </mat-form-field>
+            <div [hidden]="password.valid || password.pristine" class="alert alert-danger">
+              {{'Password must contain 6 or more characters' | translate}}</div>
+            <br>
+            <div formGroupName="profile">
+              <mat-form-field>
+                <input matInput #name type="text" formControlName="name" placeholder="{{'Firstname' | translate}}">
+              </mat-form-field>
+              <mat-form-field>
+                <input matInput #lastName type="text" formControlName="lastName" placeholder="{{'Lastname' | translate}}">
+              </mat-form-field>
+            </div>
+            <div formGroupName="company">
+              <mat-form-field>
+                <input matInput #nameCompanie formControlName="nameCompanie" placeholder="{{'Name of Companie' | translate}}">
+              </mat-form-field>
+              <mat-form-field>
+                <mat-select formControlName="typeCompanie" placeholder="{{'Type Company' | translate}}">
+                  <mat-option *ngFor="let typeCompanie of typesCompanie" [value]="typeCompanie">
+                    {{ typeCompanie | translate }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button type="submit" [disabled]="!myForm.valid">Ok</button>
+          </mat-card-actions>
+        </mat-card>
+      </form>
+    </div>
+  </div>
+</div>

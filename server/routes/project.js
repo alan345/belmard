@@ -134,6 +134,7 @@ router.put('/:id', function(req, res, next) {
       item.progressTasks = req.body.progressTasks
       item.dateProject = req.body.dateProject
       item.logs = req.body.logs
+      item.drawing = req.body.drawing
 
 
       item.save(function(err, result) {
@@ -208,6 +209,7 @@ router.get('/page/:page', function(req, res, next) {
   Project.find(searchQuery)
   .populate({path: 'clients', model: 'User'})
   .populate({path: 'assignedTos', model: 'User'})
+
   // .populate({path: 'bucketTasks.tasks', model: 'Task'})
   // .populate({path: 'bucketTasks.tasks.assignedTos', model: 'User'})
   .populate({
@@ -294,7 +296,12 @@ router.get('/:id', function(req, res, next) {
 
   Project.findById((req.params.id), function(err, obj) {
     if (err) {
-      return res.status(500).json({message: 'An error occured', err: err})
+      return res.status(500).json({
+        title: 'No form found',
+        error: {
+          message: err
+        }
+      })
     }
     if (!obj) {
       return res.status(404).json({
@@ -309,6 +316,7 @@ router.get('/:id', function(req, res, next) {
     .populate({path: 'clients', model: 'User'})
     .populate({path: 'logs.forms', model: 'Form'})
     .populate({path: 'logs.by', model: 'User'})
+    .populate({path: 'drawing.backgroundForms', model: 'Form'})
     .populate({path: 'assignedTos', model: 'User'})
     .populate({
       path: 'bucketTasks.tasks',

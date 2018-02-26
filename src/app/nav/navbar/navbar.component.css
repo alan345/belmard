@@ -1,5 +1,50 @@
+
+
 .logo-header {
   width: 100px;
+}
+
+.burgerNav {
+  color: #FFFFFF;
+  font-size: 40px;
+  height: 40px;
+  width: 40px;
+  cursor: pointer;
+}
+
+.noOutline {
+  outline: none;
+}
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+  padding: 0px !important;
+}
+
+.flex-spacer {
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+}
+
+.docs-navbar-header {
+  display: flex;
+  flex-wrap: wrap;
+  -webkit-box-align: center;
+  align-items: center;
+  padding: 8px 16px;
+  background: #393a41;
 }
 
 .navbar-toggleable-md2 {
@@ -50,10 +95,8 @@
 }
 
 .table-hover2 td:hover {
-  background-color: rgba(148, 17, 17, 1);
+  background-color: #512d44;
 }
-
-
 
 .table-bordered {
   border: 1px solid rgba(255, 255, 255, .87);

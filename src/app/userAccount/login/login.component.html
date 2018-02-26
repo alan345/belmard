@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-lg-4 col-xs-12">
+      <form [formGroup]="myForm" (ngSubmit)="onSubmit()" class="login-form" novalidate>
+        <mat-card class="ac">
+          <mat-card-header class="headerCardCenter">
+            <mat-card-title>
+              <h3>Mirabelle.io</h3>
+              <p>{{'Your quotes at you clients place' | translate}}</p>
+            </mat-card-title>
+            <mat-card-subtitle></mat-card-subtitle>
+          </mat-card-header>
+          <img mat-card-image src="/assets/images/Logo-Mirabelle.png" class="logomira" alt="Bienvenue sur Mirabelle">
+          <mat-card-content>
+            <mat-form-field>
+              <input matInput #userEmail formControlName="email" placeholder="Email">
+            </mat-form-field>
+            <mat-form-field>
+              <input matInput type="password" formControlName="password" placeholder="{{'Password' | translate}}">
+              <mat-error *ngIf="!password.valid && !password.pristine">
+                {{'Your password must have at least 6 characters' | translate}}
+              </mat-error>
+            </mat-form-field>
+          </mat-card-content>
+          <mat-card-actions>
+            <div class="login ac">
+              <button type="submit" mat-raised-button color="primary">{{'Login' | translate}}</button>
+              <p class="messagelogin"><a [routerLink]="'/userAccount/reset'">{{'Forgotten password?' | translate}}</a></p>
+              <p class="messagelogin"><a [routerLink]="['/userAccount/register', {lang: langParam}]">
+              {{'Register' | translate}}
+            </a></p>
+            </div>
+          </mat-card-actions>
+        </mat-card>
+      </form>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,77 @@
+<div class="container">
+  <app-header-title [showBack]="showBack" [createNewButton]="createNewButton" [title]="'Interventions'" (saved)="saved($event)" [search]="search" [typeObj]="'quote'"></app-header-title>
+  <div>
+    <div *ngIf="showSearch" class="d-flex flex-row">
+      <div class="p-2">
+        <mat-form-field>
+          <input matInput type="text" autocomplete="off" name="Search" placeholder="{{'Search' | translate}}" [(ngModel)]="search.search" (ngModelChange)="searchData()">
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row" *ngIf="fetchedQuotes.length">
+      <div class="col-lg-12">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th class="centre tdunder hideMobile">
+                {{'Number Id' | translate}}
+                <app-sort (orderBy)="orderBy($event)" [search]="search" [filedToOrder]="'quoteNumber'"></app-sort>
+              </th>
+              <th class="centre tdunder hideMobile">{{'Client' | translate}}</th>
+              <th class="centre tdunder">{{'Name' | translate}}
+                <app-sort (orderBy)="orderBy($event)" [search]="search" [filedToOrder]="'name'"></app-sort>
+              </th>
+              <th class="centre tdunder hideMobile">{{'Date' | translate}}
+                <app-sort (orderBy)="orderBy($event)" [search]="search" [filedToOrder]="'detail.dateQuote.issueDate'"></app-sort>
+              </th>
+              <th class="centre tdunder">{{'Price' | translate}}
+                <app-sort (orderBy)="orderBy($event)" [search]="search" [filedToOrder]="'priceQuote.priceGlobalWithDiscount'"></app-sort>
+              </th>
+              <th class="centre tdunder">{{'Status' | translate}}
+                <app-sort (orderBy)="orderBy($event)" [search]="search" [filedToOrder]="'statusQuote'"></app-sort>
+              </th>
+              <th class="centre tdunder hideMobile">
+                {{'Invoice' | translate}}
+              </th>
+              <th class="centre tdunder hideMobile">
+                {{'Quote' | translate}}
+              </th>
+            </tr>
+          </thead>
+          <tbody class="clienttbl">
+            <tr *ngFor="let quote of fetchedQuotes" routerLinkActive="active">
+              <td class="centre tdunder hideMobile" (click)="navigateToQuote(quote)">
+                {{quote.quoteNumber}}
+              </td>
+              <td class="centre tdunder hideMobile" (click)="navigateToQuote(quote)">
+                <div *ngFor="let client of quote.clients">
+                  {{client.profile.name}} {{client.profile.lastName}}
+                </div>
+              </td>
+              <td class="centre tdunder showMobile" (click)="navigateToQuote(quote)">{{quote.name | smallText}}</td>
+              <td class="centre tdunder hideMobile" (click)="navigateToQuote(quote)">{{quote.name | mediumText}}</td>
+              <td class="centre tdunder hideMobile" (click)="navigateToQuote(quote)">{{quote.detail.dateQuote.issueDate | date:'longDate' }}</td>
+              <td class="centre tdunder" (click)="navigateToQuote(quote)">
+                {{quote.priceQuote.priceGlobalWithDiscount | round | currency:quote.detail.currency}}
+              </td>
+              <td class="centre tdunder" (click)="navigateToQuote(quote)">
+                <app-quote-status [showSingleSelected]=true [fetchedQuote]="quote"></app-quote-status>
+              </td>
+              <td class="centre tdunder hideMobile">
+                  <app-invoice-action-button [fetchedQuote]="quote" [typeQuote]="'invoice'" [showLabel]=false></app-invoice-action-button>
+              </td>
+              <td class="centre tdunder hideMobile">
+                  <app-invoice-action-button [fetchedQuote]="quote" [typeQuote]="'quote'" [showLabel]=false></app-invoice-action-button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div>
+          <mat-paginator *ngIf="paginationData.totalItems>paginationData.itemsPerPage" [length]="paginationData.totalItems" [pageIndex]="paginationData.currentPage-1" [pageSize]="paginationData.itemsPerPage" (page)="getPage($event.pageIndex*1+1)">
+          </mat-paginator>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-loadingInApp [loading]="loading"></app-loadingInApp>

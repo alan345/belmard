@@ -1,19 +1,15 @@
-
-      <div class="form-group prmimg-cnt">
-        <div *ngFor="let singleForm of forms; let i=index;">
-          <img class="imgList" src="./uploads/forms/{{singleForm.owner}}/{{singleForm.imagePath}}" onerror="this.src ='assets/images/no-image-found.jpg'">
-          <button *ngIf="deletePicture" type="button" md-button (click)="removePic(i)">
-            <i class="fa fa-times"></i>
-          </button>
-        </div>
-
-        <div *ngIf="addPicture">
-          <button type="button" mat-button (click)="openDialog('img')" class="addpic-squr">
-            Add Picture
-
-            <br>
-            <i class="fa fa-plus"></i>
-          </button>
-          <!-- <app-form (onPassForm)="onPassForm($event)"></app-form> -->
+  <app-user-form-list *ngIf="showPictures" [itemsPerPage]=8 [deletePicture]="deletePicture" [fetchedForms]="forms" [showPagination]="showPagination" (removeForm)="removeForm($event)" (onPassForm)="onGetForm($event)">
+  </app-user-form-list>
+  <div class="tac" *ngIf="!singleForm || forms.length<1">
+    <div *ngIf="addPicture">
+      <app-form *ngIf="!openLibrairy" [openCameraStraight]="openCameraStraight" (onPassForm)="onPassForm($event)"></app-form>
+      <div *ngIf="openLibrairy">
+        <div>
+            <mat-icon class="bigIcon pointer" (click)="openDialog('img')" color="primary">cloud_upload</mat-icon>
+          <div>
+            {{'Add document' | translate}}
+          </div>
         </div>
       </div>
+    </div>
+  </div>

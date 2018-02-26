@@ -9,6 +9,7 @@ import { UserCalendarDialogComponent } from './single/dialog/userCalendarDialog.
 import { UserCalendarsComponent} from './list/userCalendars.component';
 import { SearchCalendarComponent} from './list/search/searchCalendar.component';
 
+// import { UserModule} from '../user/user.module';
 
 import { UserCalendarComponent} from './single/userCalendar.component';
 
@@ -21,11 +22,12 @@ import { ProductModule } from '../product/product.module';
 // import { AutocompleteComponent } from '../autocomplete/autocomplete.component'
 
 import {SharedModule } from '../shared/shared.module';
-import { SignaturePadModule } from 'angular2-signaturepad';
+// import { SignaturePadModule } from 'angular2-signaturepad';
 // import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {CalendarModule} from 'ap-angular2-fullcalendar';
+// import {DeleteDialog} from '../deleteDialog/deleteDialog.component'
 
-
+import {MatSlideToggleModule} from '@angular/material';
 
 
 @NgModule({
@@ -40,8 +42,10 @@ import {CalendarModule} from 'ap-angular2-fullcalendar';
     RouterModule,
     ProductModule,
     SharedModule,
-    SignaturePadModule,
+    // SignaturePadModule,
     CalendarModule,
+    MatSlideToggleModule,
+    // UserModule,
     // AutocompleteComponent,
   ],
   declarations: [
@@ -49,6 +53,7 @@ import {CalendarModule} from 'ap-angular2-fullcalendar';
     UserCalendarComponent,
     UserCalendarDialogComponent,
     SearchCalendarComponent,
+    // DeleteDialog,
 
     // AutocompleteComponent
   ],
@@ -61,6 +66,7 @@ import {CalendarModule} from 'ap-angular2-fullcalendar';
   providers:    [ UserCalendarService ],
   entryComponents: [
     UserCalendarDialogComponent,
+    // DeleteDialog
   ]
 })
 export class UserCalendarModule { }

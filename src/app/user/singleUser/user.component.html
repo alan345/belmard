@@ -1,0 +1,83 @@
+<div class="container">
+  <div class="">
+    <app-header-title [showBack]=1 [isDialog]="isDialog" *ngIf="fetchedUser.isExternalUser" [title]="'Customer'" [icon]="'supervisor_account'"></app-header-title>
+    <app-header-title [showBack]=1 [isDialog]="isDialog" *ngIf="!fetchedUser.isExternalUser && isUserIsMyself()" [title]="'My profile'" [icon]="'account_circle'"></app-header-title>
+    <app-header-title [showBack]=1 [isDialog]="isDialog" *ngIf="!fetchedUser.isExternalUser && !isUserIsMyself()" [title]="'Team'" [icon]="'supervisor_account'"></app-header-title>
+  </div>
+
+
+  <mat-accordion class="example-headers-align">
+    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>face</mat-icon>
+        </mat-panel-title>
+        <mat-panel-description>
+          {{'User' | translate}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-details-user [customFormControls]="customFormControls" [myForm]="myForm" (save)="save()" [fetchedUser]="fetchedUser"></app-details-user>
+      <mat-action-row>
+        <div class="spaceBetween width100perc">
+          <div>
+            <button *ngIf="!isUserIsMyself() && fetchedUser._id" mat-mini-fab color="warn" (click)="openDialogDelete()">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </div>
+          <button *ngIf="step === 0" [disabled]="!myForm.valid" mat-mini-fab color="primary" (click)="saveAndNextStep()">
+          <mat-icon aria-label="Next">forward</mat-icon>
+        </button>
+        </div>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel *ngIf="authService.showObjHTML('client', 'read') && fetchedUser._id" [expanded]="step === 1" (opened)="setStep(1)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>assignment_ind</mat-icon>
+        </mat-panel-title>
+        <mat-panel-description>
+          {{'Details' | translate}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-user-cross *ngIf="step === 1" [fetchedUser]="fetchedUser" (saved)=savedCrossUser($event)></app-user-cross>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel *ngIf="fetchedUser._id && fetchedUser.isExternalUser && !search.isFromAutocomplete" [expanded]="step === 2" (opened)="setStep(2)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>build</mat-icon>
+        </mat-panel-title>
+        <mat-panel-description>
+          {{'Interventions' | translate}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-quotes *ngIf="step === 2" [showBack]=0 (savedEmit)="savedEmitExternElement()" [search]="{userId: fetchedUser._id, typeQuote: 'quote'}"></app-quotes>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel *ngIf="authService.showObjHTML('paiementQuote', 'read') && fetchedUser._id && fetchedUser.isExternalUser && !search.isFromAutocomplete" [expanded]="step === 3" (opened)="setStep(3)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>credit_card</mat-icon>
+        </mat-panel-title>
+        <mat-panel-description>
+          {{'Paiements' | translate}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-paiementQuotes *ngIf="step === 3" [showBack]=0 (savedEmit)="savedEmitExternElement()" [search]="{userId: fetchedUser._id}"></app-paiementQuotes>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel *ngIf="authService.showObjHTML('userCalendar', 'read') && fetchedUser._id && fetchedUser.isExternalUser && !search.isFromAutocomplete" [expanded]="step === 4" (opened)="setStep(4)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>event_available</mat-icon>
+        </mat-panel-title>
+        <mat-panel-description>
+          {{'Calendar' | translate}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-user-calendars *ngIf="step === 4" [showTitle]=false [showSearch]=false [search]="{clientId: fetchedUser._id}"></app-user-calendars>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+<app-loadingInApp [loading]="loading"></app-loadingInApp>

@@ -6,17 +6,18 @@ import { ToastsManager} from 'ng2-toastr';
 import { MatDialog} from '@angular/material';
 import { Router} from '@angular/router';
 import { Location} from '@angular/common';
+import { GlobalEventsManager } from '../../globalEventsManager';
 
 
 
 @Component({
   selector: 'app-right',
   templateUrl: './rights.component.html',
-  styleUrls: ['../../admin/admin.component.css'],
+  styleUrls: ['../right.component.css'],
 })
 export class RightsComponent implements OnInit {
   fetchedRights: Right[] = [];
-  loading: boolean;
+  loading = false;
   paginationData = {
     currentPage: 1,
     itemsPerPage: 0,
@@ -37,6 +38,7 @@ export class RightsComponent implements OnInit {
     public dialog: MatDialog,
     private router: Router,
     private location: Location,
+    private globalEventsManager: GlobalEventsManager,
   ) {}
 
   ngOnInit() {
@@ -44,13 +46,13 @@ export class RightsComponent implements OnInit {
     this.getRights(this.paginationData.currentPage, this.search)
   }
 
-  // openDialog() {
-  //
-  // }
+  saved(result) {
 
-  goBack() {
-    this.location.back();
   }
+
+  // goBack() {
+  //   this.location.back();
+  // }
 
   // searchInput() {
   //   this.getRights(this.paginationData.currentPage, this.search)
@@ -62,14 +64,17 @@ export class RightsComponent implements OnInit {
   // }
 
   onDelete(id: string) {
+    this.loading = true;
     this.rightService.deleteRight(id)
       .subscribe(
         res => {
-          this.toastr.success('Great!', res.message);
+          this.authService.successNotif(res.message);
           console.log(res);
+          this.loading = false;
         },
         error => {
           console.log(error);
+          this.loading = false;
         }
       );
   }
@@ -82,18 +87,20 @@ export class RightsComponent implements OnInit {
 
   getPage(page: number) {
 
-    this.loading = true;
+    this.globalEventsManager.isLoadding(true);
     this.getRights(page, this.search);
   }
 
 
   getRights(page: number, search: any) {
+    this.loading = true;
     this.rightService.getRights(page, search)
       .subscribe(
         res => {
+          this.loading = false;
           this.paginationData = res.paginationData;
           this.fetchedRights =  res.data
-          this.loading = false;
+          this.globalEventsManager.isLoadding(false);
         },
         error => {
           console.log(error);
@@ -102,9 +109,9 @@ export class RightsComponent implements OnInit {
   }
 
 
-  isAdmin() {
-    return this.authService.isAdmin();
-  }
+  // isAdmin() {
+  //   return this.authService.isAdmin();
+  // }
 
 
 }

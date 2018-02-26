@@ -1,0 +1,50 @@
+<form [formGroup]="myForm">
+  <div *ngIf="authService.getCurrentUser().isAdmin" class="row">
+    <app-autocomplete [title]="'Entreprise(ONLY ADMIN CAN SEE)'" [singleChoice]="'true'" [typeAutocomplete]="'companie'" [arrayContent]="fetchedUser.ownerCompanies">
+    </app-autocomplete>
+  </div>
+  <div *ngIf="fetchedUser.isAdminOfHisCompanie" class="row">
+    <mat-icon>star_rate</mat-icon> {{'Main user' | translate}}
+  </div>
+  <br><br>
+  <div class="row">
+    <mat-radio-group [(ngModel)]="fetchedUser.profile.title" formControlName="title">
+      <mat-radio-button *ngFor="let n of titleArray" [value]="n">{{ n | translate}}</mat-radio-button>
+    </mat-radio-group>
+    <mat-form-field>
+      <input matInput type="text" formControlName="name" [(ngModel)]="fetchedUser.profile.name" placeholder="{{'Firstname' | translate}}">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" formControlName="lastName" [(ngModel)]="fetchedUser.profile.lastName" placeholder="{{'Lastname' | translate}}">
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput type="text" formControlName="email" [(ngModel)]="fetchedUser.email" placeholder="{{'Email' | translate}}">
+      <mat-error *ngIf="customFormControls.emailFormControl.hasError('pattern')">
+        {{'Please enter a valid email address' | translate}}
+      </mat-error>
+      <mat-error *ngIf="customFormControls.emailFormControl.hasError('required')">
+        {{'Email is' | translate}} <strong>{{'required' | translate}}</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field *ngIf="isUserIsMyself()">
+      <mat-select (change)="onChangeLang()" [(ngModel)]="fetchedUser.profile.language" name="language" formControlName="language">
+        <mat-option *ngFor="let n of languageArray" [value]="n">{{n}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <app-loginInApp style="width:100%;" *ngIf="showLoginInApp" (loginInAppDone)="showLoginInApp=false"></app-loginInApp>
+  </div>
+  <div class="row" *ngIf="authService.showObjHTML('right', 'read') && !fetchedUser.isExternalUser && !fetchedUser.isAdminOfHisCompanie">
+    <app-autocomplete [title]="'Right'" (getResultAutocomplete)="getResultAutocompleteRights()" (clearAutocomplete)="clearAutocompleteRight()" [typeAutocomplete]="'right'" [arrayContent]="fetchedUser.rights">
+    </app-autocomplete>
+    <app-loginInApp *ngIf="showLoginInApp" [infoOnly]=true (loginInAppDone)="loginInAppDone()"></app-loginInApp>
+  </div>
+  <div class="row">
+    <div *ngIf="authService.showObjHTML('userCalendar', 'read')">
+      <div *ngIf="!fetchedUser.isExternalUser">
+        <label>{{'Calendar Color' | translate}}</label>
+        <div class="round" [style.background-color]="fetchedUser.profile.colorCalendar"></div>
+        <input type="color" formControlName="colorCalendar" [(ngModel)]="fetchedUser.profile.colorCalendar">
+      </div>
+    </div>
+  </div>
+</form>

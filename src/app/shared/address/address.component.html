@@ -1,0 +1,57 @@
+<h5>{{'Address' | translate}}</h5>
+<button *ngIf="!isSingleAddress" mat-raised-button (click)="newAddress()">
+  <mat-icon>add</mat-icon> {{'New Address' | translate}}
+</button>
+<div *ngFor="let singleAddresss of addresses; let i = index;" class="form-control">
+  <div *ngIf="!isSingleAddress" class="alright">
+    <button mat-icon-button (click)="moveAddress(i, -1)">
+      <mat-icon>arrow_upward</mat-icon>
+    </button>
+    <button mat-icon-button (click)="moveAddress(i, 1)">
+      <mat-icon>arrow_downward</mat-icon>
+    </button>
+    <button mat-icon-button (click)="removeAddress(i)">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </div>
+  <div *ngIf="!isSingleAddress">
+    <mat-form-field>
+      <mat-select [ngModelOptions]="{standalone: true}" [(ngModel)]="addresses[i].nameAddress">
+        <mat-option *ngFor="let n of addressTypes" [value]="n.value">{{n.label | translate}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <input matInput type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="addresses[i].address" placeholder="{{'Address' | translate}}">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <input matInput type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="addresses[i].address2" placeholder="{{'Additional address' | translate}}">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <input matInput (ngModelChange)="searchCities($event, i)" type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="addresses[i].zip" placeholder="{{'Zip' | translate}}">
+    </mat-form-field>
+  </div>
+  <div>
+    <div *ngFor="let place of addresses[i].cities; let j = index">
+      <button mat-icon-button color="primary" (click)="selectCity(i, place)">
+        <mat-icon>done</mat-icon>
+      </button>
+      {{place}}
+    </div>
+  </div>
+  <div>
+    <mat-form-field>
+      <input matInput type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="addresses[i].city" placeholder="{{'City' | translate}}">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <input matInput type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="addresses[i].country" placeholder="{{'Country' | translate}}">
+    </mat-form-field>
+  </div>
+</div>

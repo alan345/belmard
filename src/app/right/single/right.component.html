@@ -1,82 +1,100 @@
-
 <div class="container">
-  <h3>{{'Right'| translate}}</h3>
-  <h4>id: {{fetchedRight._id}}</h4>
-  <button type="button" class="btn btn-outline-primary" (click)="setAllRights()">{{'Set all Rights' | translate}}</button>
+  <app-header-title [showBack]=1 [isDialog]=false [title]="'Right'" [icon]="'dvr'"></app-header-title>
   <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
+    <div class="row">
+      <div class="col-12">
+        <mat-card>
+          <mat-form-field>
+            <input matInput type="text" placeholder="{{'Right name' | translate}}" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.nameRight">
+          </mat-form-field>
+        </mat-card>
+        <br>
+        <button type="button" mat-button color="primary" (click)="addRight(1,0,0,0)">
+          <mat-icon>add</mat-icon>
+          {{'Add a type of right' | translate}}
+        </button>
+
+        <button type="button" mat-button color="accent" (click)="setAllRights()">
+          <mat-icon>done_all</mat-icon>
+          {{'Set all Rights' | translate}}
+        </button>
+        <button type="button" mat-button color="warn" (click)="clearAllRights()">
+          <mat-icon>clear</mat-icon>
+          {{'Clear all Rights' | translate}}
+        </button>
+        <mat-card>
+        <div class="categ1" *ngFor="let permission of fetchedRight.detailRight.permissions; let j = index;">
+          <table>
+            <tr>
+              <td class="tdbtn1">
+                <mat-form-field>
+                  <mat-select [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].namePermission">
+                    <mat-option *ngFor="let n of typesRights" [value]="n.namePermission">{{n.namePermission | translate}}</mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </td>
+              <td class="tdbtn7">
+                <button type="button" mat-button class="btn btn-danger btn-sm" (click)="removeRight( 2,i,j,0)">
+              <mat-icon>clear</mat-icon>
+            </button>
+              </td>
+              <td class="tdbtn7">
+                <button type="button" mat-button class="btn btn-success btn-sm" (click)="addRight(2,i,j,0)">
+              <mat-icon>add</mat-icon>
+            </button>
+              </td>
+            </tr>
+          </table>
+          <div class="form-control" class="categ2" *ngFor="let singleAccess of permission.access; let k = index;">
+            <table>
+              <tr>
+                <td class="tdbtn1">
+
+                  <div *ngFor="let typesRight of typesRights">
+                    <div *ngIf="typesRight.namePermission === fetchedRight.detailRight.permissions[j].namePermission">
 
 
-    <input type="text" class="form-control col-md-3" placeholder="Name Right Profile" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.nameRight">
+                      <mat-form-field>
+                        <mat-select [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].access[k].typeAccess">
+                          <mat-option *ngFor="let n of typesRight.access" [value]="n.typeAccess">{{n.typeAccess | translate}}</mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                    </div>
+                  </div>
 
-    <button type="button" class="btn btn-success" (click)="addRight(1,0,0,0)"><i class="fa fa-plus"></i> Add Type</button>
-    <div class="categ1" *ngFor="let permission of fetchedRight.detailRight.permissions; let j = index;">
-      <table class="col-md-3">
-        <tr>
-          <td class="tdbtn1">
-            <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].namePermission">
-            <option *ngFor="let n of typesRights" [attr.value]="n.value">{{n.name}}</option>
-          </select>
-          </td>
-          <td class="tdbtn7">
-            <button type="button" class="btn btn-danger btn-sm" (click)="removeRight( 2,i,j,0)"><i class="fa fa-times"></i></button>
-          </td>
-          <td class="tdbtn7">
-            <button type="button" class="btn btn-success btn-sm" (click)="addRight(2,i,j,0)"><i class="fa fa-plus"></i></button>
-          </td>
-        </tr>
-      </table>
-      <div class="form-control" class="categ2" *ngFor="let singleAccess of permission.access; let k = index;">
-
-        <table class="col-md-2">
-          <tr>
-            <td class="tdbtn1">
-
-              <div *ngFor="let typesRight of typesRights">
-                <div *ngIf="typesRight.value === fetchedRight.detailRight.permissions[j].namePermission">
-                  <!-- {{typesRight.typeAccess|json}} -->
-
-
-                  <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].access[k].typeAccess">
-                    <option *ngFor="let n of typesRight.typeAccess" [attr.value]="n.value">{{n.name}}</option>
-
-                    <!-- <option [attr.value]="'read'">{{'Read' | translate}}</option>
-                    <option [attr.value]="'write'">{{'write' | translate}}</option>
-                    <option [attr.value]="'notification'">{{'Get Notifications' | translate}}</option> -->
-                  </select>
-                </div>
-              </div>
-
-              <!-- <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].access[k].typeAccess">
+                  <!-- <select class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedRight.detailRight.permissions[j].access[k].typeAccess">
                 <option *ngIf="fetchedRight.detailRight.permissions[j].namePermission == 'companie'" [attr.value]="'readMyProfile'">{{'Read My Profile' | translate}}</option>
                 <option [attr.value]="'read'">{{'Read' | translate}}</option>
                 <option [attr.value]="'write'">{{'write' | translate}}</option>
                 <option [attr.value]="'notification'">{{'Get Notifications' | translate}}</option>
               </select> -->
 
-            </td>
-            <td class="tdbtn7">
+                </td>
+                <td class="tdbtn7">
+                  <button mat-button class="btn btn-danger btn-sm" type="button" (click)="removeRight( 3,i,j,k)">
+                  <mat-icon>clear</mat-icon>
+                </button>
+                </td>
+              </tr>
+            </table>
+          </div>
 
-              <button class="btn btn-danger btn-sm" type="button" (click)="removeRight( 3,i,j,k)"><i class="fa fa-times"></i></button>
-            </td>
-          </tr>
-        </table>
+        </div>
+      </mat-card>
+        <!-- </div> -->
+
+
+        <div class="valid-edit">
+          <button type="submit" mat-raised-button color="primary">
+            <mat-icon>save</mat-icon>
+          </button>
+          <button *ngIf="fetchedRight._id" type="button" mat-raised-button color="warn" (click)="onDelete(fetchedRight._id)">
+            <mat-icon>clear</mat-icon>
+          </button>
+        </div>
+        <div class="clearfix"></div>
       </div>
-
     </div>
-
-    <!-- </div> -->
-
-
-    <div class="valid-edit">
-      <button type="submit" class="btn btn-success sln-edt done">
-          Enregistrer
-        </button>
-
-
-      <button *ngIf="fetchedRight._id" type="button" class="btn btn-danger sln-edt done" (click)="onDelete(fetchedRight._id)">
-          Delete
-        </button>
-    </div>
-    <div class="clearfix"></div>
   </form>
 </div>
+<app-loadingInApp [loading]="loading"></app-loadingInApp>

@@ -1,0 +1,16 @@
+<mat-form-field>
+  <input matInput type="number" [(ngModel)]="VATvalueToAdd" placeholder="{{'VAT. Example: 20' | translate}}">
+  <button matSuffix mat-raised-button color="primary" (click)="addVAT()">
+    <mat-icon>add</mat-icon>
+  </button>
+</mat-form-field>
+
+
+<div *ngFor="let modelVAT of fetchedCompanie.modelVATs; let i=index;">
+  {{modelVAT}}%
+  <button mat-icon-button color="warn" (click)="removeVAT(i)">
+    <mat-icon>clear</mat-icon>
+  </button>
+</div>
+
+<!-- <app-loginInApp *ngIf="showLoginInApp" (loginInAppDone)="loginInAppDone()"></app-loginInApp> -->

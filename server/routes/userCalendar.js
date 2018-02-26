@@ -9,7 +9,7 @@ var express = require('express'),
   nameObject = 'userCalendar'
 
 // this process does not hang the nodejs server on error
-process.on('uncaughtException', function(err) {
+process.on('uncaughtException', function (err) {
   console.log(err)
 })
 
@@ -29,7 +29,13 @@ router.use('/', function(req, res, next) {
       })
     }
     if (decoded) {
-      User.findById(decoded.user._id).populate({path: 'rights', model: 'Right'}).exec(function(err, doc) {
+      User
+      .findById(decoded.user._id)
+      .populate({ path: 'rights', model: 'Right'})
+      .populate({ path: 'ownerCompanies', model: 'Companie'})
+      // .populate({ path: 'rights', model: 'Right'})
+      .populate({ path: 'ownerCompanies', model: 'Companie'})
+      .exec(function(err, doc) {
         if (err) {
           return res.status(500).json({message: 'Fetching user failed', err: err})
         }
@@ -59,20 +65,20 @@ router.use('/', function(req, res, next) {
 })
 
 //update
-router.put('/:id', function(req, res, next) {
-  if (!shared.isCurentUserHasAccess(req.user, nameObject, 'write')) {
-    return res.status(404).json({
-      title: 'No rights',
-      error: {
-        message: 'No rights'
-      }
-    })
-  }
+router.put('/:id', function (req, res, next) {
+  // console.log(req.user.ownerCompanies)
+  // if (!shared.isCurentUserHasAccess(req.user, nameObject, 'write')) {
+  //   return res.status(404).json({
+  //     title: 'No rights',
+  //     error: {
+  //       message: 'No rights'
+  //     }
+  //   })
+  // }
   UserCalendar.findById(({_id: req.params.id}), function(err, item) {
     if (err) {
       return res.status(404).json({message: '', err: err})
     } else {
-
       item.title = req.body.title,
       item.url = req.body.url,
       item.start = req.body.start,
@@ -88,11 +94,11 @@ router.put('/:id', function(req, res, next) {
         if (err) {
           return res.status(404).json({message: 'There was an error, please try again', err: err})
         }
-        shared.postNotification(req, 'userCalendar')
-        .then(notification => {
-          res.status(201).json({message: 'Updated successfully', obj: result})
-        })
-        .catch(error=>{return res.status(404).json({message: 'There was an error, please try again', err: err})})
+        // shared.postNotification(req, 'userCalendar')
+        // .then(notification => {
+          res.status(200).json({message: 'Updated successfully', obj: result})
+        // })
+        // .catch(error=>{return res.status(404).json({message: 'There was an error, please try again', err: err})})
 
       })
 
@@ -101,6 +107,7 @@ router.put('/:id', function(req, res, next) {
 })
 
 router.post('/', function(req, res, next) {
+
   if (!shared.isCurentUserHasAccess(req.user, nameObject, 'write')) {
     return res.status(404).json({
       title: 'No rights',
@@ -109,15 +116,15 @@ router.post('/', function(req, res, next) {
       }
     })
   }
-  if (!req.user.ownerCompanies.length) {
-    return res.status(404).json({message: 'You must belong to a companie', err: ''})
-  }
+  // if (!req.user.ownerCompanies.length) {
+  //   return res.status(404).json({message: 'You must belong to a companie', err: ''})
+  // }
 
 
-  req.body.projects.forEach(project => {
-    req.body.clients = project.clients
-    req.body.assignedTos = project.assignedTos
-  })
+  // req.body.projects.forEach(project => {
+  //   req.body.clients = project.clients
+  //   req.body.assignedTos = project.assignedTos
+  // })
 
   //console.log(req.body)
   //var UserCalendar = new UserCalendar(req.body)
@@ -135,47 +142,64 @@ router.post('/', function(req, res, next) {
         }
       })
     }
-    shared.postNotification(req, 'userCalendar').then(notification => {
-      res.status(200).json({message: 'Registration Successfull', obj: result})
-    })
-    .catch(error=>{return res.status(404).json({message: 'There was an error, please try again', err: err})})
+    res.status(200).json({message: 'Registration Successfull', obj: result})
+    // shared.postNotification(req, 'userCalendar').then(notification => {
+    //   res.status(200).json({message: 'Registration Successfull', obj: result})
+    // })
+    // .catch(error=>{return res.status(404).json({message: 'There was an error, please try again', err: err})})
   })
 })
 
 // get all forms from database
 router.get('/page/:page', function(req, res, next) {
-  var itemsPerPage = 15
+  var itemsPerPage = 200
   var currentPage = Number(req.params.page)
   var pageNumber = currentPage - 1
   var skip = (itemsPerPage * pageNumber)
 
+  var startDate = new Date(JSON.parse(req.query.startDate))
+  var endDate = new Date(JSON.parse(req.query.endDate))
+  startDate = startDate.setDate(startDate.getDate() - 2)
+  endDate = endDate.setDate(endDate.getDate() + 2)
+
   let searchQuery = {
     start: {
-      "$gt": req.query.startDate
+      "$gt": startDate
     },
     end: {
-      "$lt": req.query.endDate
+      "$lt": endDate
     }
   }
+
+  if (!shared.isCurentUserHasAccess(req.user, 'userCalendar', 'seeAll')) {
+    searchQuery['assignedTos'] = mongoose.Types.ObjectId(req.user._id)
+  }
+
   searchQuery['ownerCompanies'] = req.user.ownerCompanies
 
   // if (req.query.typeUser)
   //   searchQuery['users.type'] = req.query.typeUser
 
 
-  if (req.query.userSearch)
-    searchQuery['clients'] = mongoose.Types.ObjectId(req.query.userSearch)
+
+  if (req.query.userId) {
+    searchQuery['assignedTos'] = mongoose.Types.ObjectId(req.query.userId)
+  }
+  if (req.query.clientId) {
+    searchQuery['clients'] = mongoose.Types.ObjectId(req.query.clientId)
+  }
 
   // if (req.query.projectSearch)
   //   searchQuery['projects'] = mongoose.Types.ObjectId(JSON.parse(req.query.projectSearch)._id)
 
-  if (req.query.projectSearch)
-    searchQuery['projects'] = mongoose.Types.ObjectId(req.query.projectSearch)
+  // if (req.query.projectSearch)
+  //   searchQuery['projects'] = mongoose.Types.ObjectId(req.query.projectSearch)
+  //
 
 
-
-  if (req.query.search)
-    searchQuery['name'] = new RegExp(req.query.search, 'i')
+  // if (req.query.search)
+  //   searchQuery['name'] = new RegExp(req.query.search, 'i')
+  console.log(searchQuery)
 
   UserCalendar
   .find(searchQuery)
@@ -212,6 +236,7 @@ router.get('/page/:page', function(req, res, next) {
             currentPage: currentPage,
             itemsPerPage: itemsPerPage
           },
+          query: req.query,
           data: item
         })
       })
@@ -249,14 +274,14 @@ router.get('/:id', function(req, res, next) {
 })
 
 router.delete('/:id', function(req, res, next) {
-  if (!shared.isCurentUserHasAccess(req.user, nameObject, 'write')) {
-    return res.status(404).json({
-      title: 'No rights',
-      error: {
-        message: 'No rights'
-      }
-    })
-  }
+  // if (!shared.isCurentUserHasAccess(req.user, nameObject, 'write')) {
+  //   return res.status(404).json({
+  //     title: 'No rights',
+  //     error: {
+  //       message: 'No rights'
+  //     }
+  //   })
+  // }
   UserCalendar.findById((req.params.id), function(err, item) {
     if (err) {
       return res.status(500).json({message: 'An error occured', err: err})

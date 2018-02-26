@@ -6,7 +6,7 @@ import { Search } from '../../../shared/shared.model';
 
 
 @Component({
-  selector: 'edit-options-dialog',
+  selector: 'app-edit-options-dialog',
   templateUrl: './paiementQuoteDialog.component.html',
 })
 
@@ -22,7 +22,9 @@ export class PaiementQuoteDialogComponent {
     this.search = data.search
   }
 
-
+  closeDialog(result) {
+    this.dialogRef.close()
+  }
   saved() {
     this.dialogRef.close()
     // this.userFormsComponent.onUploadFinisedParentToChild();

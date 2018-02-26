@@ -1,71 +1,83 @@
 import { Form } from '../picture/form/form.model';
 import { User } from '../user/user.model';
-import { Address } from '../user/user.model';
-
+// import { Address } from '../user/address/address.model';
+import {Address} from '../shared/address/address.model';
 
 export class Companie {
-  _id: string = '';
-  nameCompanie: string = '';
-  // typeCompanie: string = '';
-  isSupplier: boolean = false;
-  phoneNumber: string= '';
-  faxNumber: string= '';
-  email: string= '';
-  VAT: string= '';
+  _id = '';
+  nameCompanie = '';
+  // typeCompanie = '';
+  isSupplier = false;
+  phoneNumber = '';
+  faxNumber = '';
+  email = '';
+  VAT = '';
+  modelVATs: number[] = [];
+  legalApprovals: string[] = [];
+  typeInterventions: string[] = [];
   address: Address[] = [];
   option: Option = new Option();
   users: User[] = [];
   forms: Form[] = [];
   // categJson: CategJson = new CategJson();
+  quoteSettings: QuoteSettings = new QuoteSettings
   categories = new Categorie()
   typeUsers: TypeUsers[] = []
   planDetail = new PlanDetail()
   rights: Rigth[] = [];
   banck: Banck = new Banck()
-  contactsPerson: ContactsPerson[] = []
+  // contactsPerson: ContactsPerson[] = []
 }
 
 
-export class ContactsPerson {
-  contactType: string = '';
-  contactName: string = '';
-  contactFirstName: string = '';
-  contactPhoneNumber: string = '';
-  contactEmail: string = '';
+export class QuoteSettings {
+  legalNotice = '';
+  legalNoticeInvoice = '';
+  prefixInvoice = '';
+  prefixQuote = '';
+  prefixIntervention = '';
 }
+// export class ContactsPerson {
+//   contactType = '';
+//   contactName = '';
+//   contactFirstName = '';
+//   contactPhoneNumber = '';
+//   contactEmail = '';
+// }
 
 
 export class TypeUsers {
-  value: string = '';
+  value = '';
 }
 
 export class Banck {
-  serviceSelected: string = '';
-  stripe: Stripe = new Stripe()
+  serviceSelected = '';
+  stripe: Stripe = new Stripe();
 }
 export class Stripe {
-  secretKey: string = '';
+  stripe_user_id = '';
+  stripe_user_id_gooplus = '';
 }
 
 export class Rigth {
-  nameRight: string = '';
-  permissions: Permission[] = []
+  nameRight = '';
+  permissions: Permission[] = [];
 }
 
 export class Permission {
-  namePermission: string = '';
-  access: Access[] = []
+  namePermission = '';
+  access: Access[] = [];
 }
 
 
 
 export class Access {
-  typeAccess: string= '';
+  typeAccess = '';
 }
 
 export class PlanDetail {
-  current_period_end: Date
-  plan: string= '';
+  current_period_end: Date;
+  plan = '';
 }
 
 export class Categorie {
@@ -75,44 +87,46 @@ export class Categorie {
 
 
 export class Categorie0 {
-  categ: string= '';
-  isFlagged: boolean = false;
+  categ = '';
+  isFlagged = false;
   subCateg: Categorie1[] = []
 }
 
 export class Categorie1 {
-  categ: string= '';
+  categ = '';
   subCateg: Categorie2[] = []
 }
 
 export class Categorie2 {
-  categ: string= '';
+  categ = '';
 
 }
 
 // export class CategJson {
-//   categProduct: string= '';
-//   categProject: string= '';
+//   categProduct = '';
+//   categProject = '';
 // }
 export class Option {
   calendar: Calendar = new Calendar();
+  currency = '€';
 }
 
 export class Calendar {
-  timeBegin: string = '06:00:00';
-  timeEnd: string = '19:00:00';
-  slotDuration: string = '00:30:00';
+  timeBegin = '06:00:00';
+  timeEnd = '19:00:00';
+  slotDuration = '00:30:00';
 
-  timeBeginbusinessHours: string = '10:00:00';
-  timeEndbusinessHours: string = '17:00:00';
+  timeBeginbusinessHours = '10:00:00';
+  timeEndbusinessHours = '17:00:00';
+  daysToHide: number[] = [];
 }
 //
 // export class Address {
-//   nameAddress: string = '';
-//   address: string = '';
-//   city: string = '';
-//   state: string = '';
-//   zip: string = '';
-//   country: string = '';
+//   nameAddress = '';
+//   address = '';
+//   city = '';
+//   state = '';
+//   zip = '';
+//   country = '';
 //
 // }

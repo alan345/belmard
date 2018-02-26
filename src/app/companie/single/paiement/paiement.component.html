@@ -1,0 +1,221 @@
+<mat-card-content>
+  <mat-accordion class="example-headers-align">
+    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
+      <mat-expansion-panel-header>
+        <mat-panel-title (dblclick)="dblclickDunction()">
+          {{'Terms' | translate}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div *ngIf="!stripeCust.id">
+        <mat-checkbox [(ngModel)]="approveTnC">{{'I approve the' | translate}} <a target="_blank" href="http://mirabelle.io/conditions-generales-dutilisation">{{'TandC' | translate}}</a></mat-checkbox>
+        <br>
+        <button *ngIf="approveTnC" mat-raised-button color="primary" color="primary" (click)="saveCustInStripe()">
+          {{'Welcome!' | translate}}
+        </button>
+      </div>
+      <div *ngIf="stripeCust.id">
+        <mat-icon color="accent">done</mat-icon> {{'TandC approved' | translate}}
+      </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel *ngIf="stripeCust.id" [expanded]="step === 1" (opened)="setStep(1)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{'Plan' | translate}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="row ac">
+        <mat-card class="col-sm-12 col-lg-6">
+          <div>
+            <h1 class="green">Offre Artisan</h1>
+          </div>
+          <div>
+            <h5>Utilisateur unique</h5>
+          </div>
+          <mat-card-content>
+            <h1 class="green">9 € <span class="withoutVAT">HT</span></h1>
+            <h5> par mois</h5>
+            <div>Gestion des contacts</div>
+            <div>Devis</div>
+            <div>Catalogue produit</div>
+            <div>Signature électronique</div>
+            <div>Prise de photos</div>
+            <div>Factures</div>
+            <div>Paiement en ligne</div>
+            <div>Planning</div>
+          </mat-card-content>
+          <mat-card-actions>
+            <!-- <button (click)="changePlan('artisan')" disabled="{{stripeCust.subscriptions.data.length !== 0}}" mat-raised-button color="primary">{{'Suscribe' | translate}}</button> -->
+            <button
+              (click)="changePlan('artisan')"
+              *ngIf="plan === 'artisan'"
+              disabled="{{stripeCust.subscriptions.data.length !== 0}}"
+              mat-raised-button color="primary">{{'Suscribe' | translate}}</button>
+            <button
+              (click)="changePlan('artisan')"
+              *ngIf="plan !== 'artisan'"
+              disabled="{{stripeCust.subscriptions.data.length !== 0}}"
+              mat-raised-button>{{'Suscribe' | translate}}</button>
+          </mat-card-actions>
+        </mat-card>
+        <mat-card class="col-sm-12 col-lg-6">
+          <div>
+            <h1 class="green">Offre Équipe</h1>
+          </div>
+          <div>
+            <h5>Juqu'à 5 Utilisateurs</h5>
+          </div>
+          <mat-card-content>
+            <h1 class="green">15 € <span class="withoutVAT">HT</span></h1>
+            <h5> par mois</h5>
+            <div>Gestion des contacts</div>
+            <div>Devis</div>
+            <div>Catalogue produit</div>
+            <div>Signature électronique</div>
+            <div>Prise de photos</div>
+            <div>Factures</div>
+            <div>Paiement en ligne</div>
+            <div>Planning</div>
+          </mat-card-content>
+          <mat-card-actions>
+            <button
+              (click)="changePlan('equipe')"
+              *ngIf="plan === 'equipe'"
+              disabled="{{stripeCust.subscriptions.data.length !== 0}}"
+              mat-raised-button color="primary">{{'Suscribe' | translate}}</button>
+            <button
+              (click)="changePlan('equipe')"
+              *ngIf="plan !== 'equipe'"
+              disabled="{{stripeCust.subscriptions.data.length !== 0}}"
+              mat-raised-button>{{'Suscribe' | translate}}</button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel *ngIf="stripeCust.id && plan" [expanded]="step === 2" (opened)="setStep(2)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{'Card' | translate}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+
+      <div *ngIf="step === 2">
+        <mat-tab-group>
+          <mat-tab label="{{'Card' | translate}}">
+
+            <h4>{{'No commitment!' | translate}}</h4>
+            <h5>{{'You can unsubscribe anytime.' | translate}}</h5>
+            <br>
+            <div *ngIf="!stripeCust.sources.data.length">
+              <app-paiement-card [newCard]="newCard"></app-paiement-card>
+            </div>
+            <div *ngFor="let card of stripeCust.sources.data; let i=index;">
+              <div class="row">
+                <div class="col-sm-12 col-lg-6">
+                  <mat-form-field>
+                    <input matInput readonly value="{{card.id}}" placeholder="cardId">
+                  </mat-form-field>
+                  <mat-form-field>
+                    <input matInput readonly value="{{card.address_city}}" placeholder="address_city">
+                  </mat-form-field>
+                  <mat-form-field>
+                    <input matInput readonly value="{{card.address_country}}" placeholder="address_country">
+                  </mat-form-field>
+                  <mat-form-field>
+                    <input matInput readonly value="{{card.address_line1}}" placeholder="address_line1">
+                  </mat-form-field>
+                  <mat-form-field>
+                    <input matInput readonly value="{{card.address_line2}}" placeholder="address_line2">
+                  </mat-form-field>
+                  <mat-form-field>
+                    <input matInput readonly value="{{card.address_state}}" placeholder="address_state">
+                  </mat-form-field>
+                  <mat-form-field>
+                    <input matInput readonly value="{{card.address_zip}}" placeholder="address_zip">
+                  </mat-form-field>
+                </div>
+                <div class="col-sm-12 col-lg-6">
+                  <mat-form-field>
+                    <input matInput readonly value="{{card.brand}}" placeholder="brand">
+                  </mat-form-field>
+                  <mat-form-field>
+                    <input matInput readonly value="{{card.country}}" placeholder="country">
+                  </mat-form-field>
+                  <mat-form-field>
+                    <input matInput readonly value="{{card.exp_month}}" placeholder="exp_month">
+                  </mat-form-field>
+                  <mat-form-field>
+                    <input matInput readonly value="{{card.exp_year}}" placeholder="exp_year">
+                  </mat-form-field>
+                  <mat-form-field>
+                    <input matInput readonly value="{{card.funding}}" placeholder="funding">
+                  </mat-form-field>
+                  <mat-form-field>
+                    <input matInput readonly value="{{card.last4}}" placeholder="last4">
+                  </mat-form-field>
+                </div>
+              </div>
+              <button mat-button color="warn" (click)="deleteCardInStripe(card.id)">delete Card</button>
+            </div>
+            <mat-action-row>
+              <!-- <button mat-button color="warn" (click)="prevStep()">Previous</button> -->
+              <button *ngIf="!stripeCust.sources.data.length" mat-raised-button color="primary" (click)="saveCardInStripe()">{{'Save Card' | translate}}</button>
+              <button *ngIf="stripeCust.sources.data.length" mat-button color="primary" (click)="nextStep()">{{'Next' | translate}}</button>
+            </mat-action-row>
+          </mat-tab>
+          <mat-tab label="{{'Promotional code' | translate}}">
+
+            <h4>{{'No commitment!' | translate}}</h4>
+            <h6>{{'You can unsubscribe anytime.' | translate}}</h6>
+            <h5>{{'Code:' | translate}} Gooplus30Days</h5>
+            <mat-form-field>
+              <input matInput placeholder="Code" #password>
+              <mat-icon color="accent" class="pointer" matSuffix (click)="sendPassword(password.value)">done</mat-icon>
+            </mat-form-field>
+          </mat-tab>
+        </mat-tab-group>
+
+      </div>
+
+    </mat-expansion-panel>
+    <mat-expansion-panel
+      *ngIf="(stripeCust.id && (stripeCust.sources.data.length || stripeCust.subscriptions.data.length || passwordIsGood))"
+      [expanded]="step === 3" (opened)="setStep(3)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{'Subscription' | translate}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div>
+        <div *ngIf="!stripeCust.subscriptions.data.length">
+          {{'I confirm to suscribe to the plan:' | translate}}
+          <button mat-raised-button color="primary" (click)="saveSubscriptionInStripe()">{{plan | translate}}</button>
+        </div>
+        <div *ngFor="let sub of stripeCust.subscriptions.data">
+          <mat-form-field>
+            <mat-icon matPrefix color="accent">done</mat-icon>
+            <input matInput readonly value="{{sub.plan.id}}" placeholder="Plan">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput readonly value="{{sub.plan.amount / 100 + ' ' + sub.plan.currency + ' / ' + sub.plan.interval}}" placeholder="{{'Amount' | translate}}">
+          </mat-form-field>
+          <button mat-raised-button color="warn" (click)="unscribeMode = true">{{'I want to unscribe' | translate}}</button>
+          <mat-form-field *ngIf="unscribeMode">
+            <textarea [(ngModel)]="reasonToUnscribe" matInput placeholder="{{'Why?' | translate}}" matTextareaAutosize matAutosizeMinRows="2"
+                      matAutosizeMaxRows="5">
+            </textarea>
+            <mat-hint align="end">{{reasonToUnscribe.length}} > 20</mat-hint>
+          </mat-form-field>
+          <button *ngIf="unscribeMode" [disabled]="reasonToUnscribe.length < 20" mat-raised-button color="warn" (click)="deleteSubInStripe(sub.id)">{{'Ok' | translate}}</button>
+        </div>
+      </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel *ngIf="showReLoginInApp" [expanded]="step === 4" (opened)="setStep(4)">
+      <mat-expansion-panel-header>
+        {{'Password Confirmation' | translate}}
+      </mat-expansion-panel-header>
+      {{'Confirm your password:' | translate}}
+      <app-loginInApp (loginInAppDone)="loginInAppDone()"></app-loginInApp>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <app-loadingInApp [loading]="loading"></app-loadingInApp>

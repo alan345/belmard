@@ -1,0 +1,24 @@
+<div *ngIf="!typeObj" class="row p-2">
+  <!-- <div class="col-2 p-2">
+    <div *ngIf="showBack && !isDialog" class="goBack">
+      <mat-icon (click)="goBack()">arrow_back</mat-icon>
+    </div>
+  </div> -->
+  <div class="col-8 p-2">
+    <h3>
+      <mat-icon>{{icon}}</mat-icon>
+      {{title | translate}}
+    </h3>
+  </div>
+</div>
+
+
+
+<div *ngIf="typeObj" class="d-flex flex-row">
+  <div class="p-2">
+    <h4>
+      {{title | translate}}
+      <app-new-obj-dialog *ngIf="createNewButton" [search]="search" (saved)="savedEmit($event)" [typeObj]="typeObj"></app-new-obj-dialog>
+    </h4>
+  </div>
+</div>

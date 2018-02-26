@@ -1,144 +1,87 @@
 <div class="container">
-    <div class="hdform">
-     
-      <h3 *ngIf="!fetchedPaiementQuote.isExpense"><i class="fa fa10 fa-university" aria-hidden="true"></i> {{'Payment' | translate}}</h3>
-      <h3 *ngIf="fetchedPaiementQuote.isExpense"><i class="fa fa10 fa-university" aria-hidden="true"></i> {{'Expense' | translate}}</h3>
-      
-    </div>
-
-  <div class="col-6">
-  
-
-    <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
-
-
-      <app-autocomplete class="mb8 bn"[canDelete]=false [typeAutocomplete]="'quote'" [search]="search" [canDelete]="true" [title]="'Quote'" [singleChoice]="true" [arrayContent]="fetchedPaiementQuote.quotes" (getResultAutocomplete)="selectQuote($event[0])">
-      </app-autocomplete>
-      <div *ngFor="let quote of fetchedPaiementQuote.quotes">
-        {{'Quote Amount' | translate}}: {{quote.priceQuote.priceQuoteWithoutTaxes}}
-      </div>
-
-      <app-autocomplete  class="mb8 bn"[canDelete]=false [typeAutocomplete]="'project'" [search]="search" [canDelete]="true" [title]="'Project'" [singleChoice]="true" [arrayContent]="fetchedPaiementQuote.projects" (getResultAutocomplete)="selectProject($event[0])">
-      </app-autocomplete>
-
-      <app-autocomplete class="mb8 bn" [canDelete]=false [typeAutocomplete]="'user'" [search]="search" [canDelete]="true" [title]="'Customer'" [singleChoice]="true" [arrayContent]="fetchedPaiementQuote.userDebiteds" (getResultAutocomplete)="selectUserDebited($event[0])">
-      </app-autocomplete>
-
-      <div *ngIf="fetchedPaiementQuote.amount == 0 || fetchedPaiementQuote.type != 'stripe'">
-        <select class="form-control" formControlName="type" [(ngModel)]="fetchedPaiementQuote.type">
-            <!-- <option [attr.value]="''">Please Select</option> -->
-            <option *ngFor="let n of paiementsTypes" [value]="n.value">{{n.label}}</option>
-        </select>
-      </div>
-      <div class="form-control" *ngIf="fetchedPaiementQuote.amount !=0 && fetchedPaiementQuote.type == 'stripe'">
-        {{fetchedPaiementQuote.type}}
-      </div>
-
-
-      <input *ngIf="fetchedPaiementQuote.type!='stripe'" type="number" class="form-control" formControlName="amount" [(ngModel)]="fetchedPaiementQuote.amount" placeholder="Amount">
-      <div *ngIf="fetchedPaiementQuote.type=='stripe'" class="form-control">
-        {{fetchedPaiementQuote.amount}}
-      </div>
-      <input type="date" class="form-control" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedPaiementQuote.datePaiementString">
-
-      <div class="valid-edit">
-        <button type="submit" class="valid">{{'Save' | translate}}</button>
-        <button *ngIf="fetchedPaiementQuote._id" type="false" class="delete" md-button (click)="openDialogDelete()">
-            Delete
+  <app-header-title [showBack]=1 [isDialog]="isDialog" [title]="'Payment'" [icon]="'credit_card'"></app-header-title>
+  <mat-accordion>
+    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>attach_money</mat-icon>
+        </mat-panel-title>
+        <mat-panel-description>
+          {{'Paiement' | translate}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
+        <div class="row">
+          <div class="col-12 col-lg-6">
+            <app-autocomplete class="mb8 bn" [canDelete]=true [typeAutocomplete]="'user'" [search]="{paiementQuoteId: search.paiementQuoteId, isExternalUser: true, userId:search.userId, quoteId:search.quoteId}" [canDelete]="true" [title]="'Customer'" [singleChoice]="true" [arrayContent]="fetchedPaiementQuote.userDebiteds" (clearAutocomplete)="clearAutocompleteClient()"
+              (getResultAutocomplete)="selectUserDebited($event[0])" (autocompleteAfterNgChanges)="autocompleteAfterNgChangesUser($event)">
+            </app-autocomplete>
+          </div>
+          <div class="col-12 col-lg-6">
+            <app-autocomplete *ngIf="fetchedPaiementQuote.userDebiteds.length" class="mb8 bn" [canDelete]=true [typeAutocomplete]="'quote'" [search]="search" [canDelete]="true" [title]="'Intervention'" [singleChoice]="true" [arrayContent]="fetchedPaiementQuote.quotes"
+              (getResultAutocomplete)="selectQuote($event[0])" (autocompleteAfterNgChanges)="autocompleteAfterNgChanges($event)">
+            </app-autocomplete>
+          </div>
+          <div class="col-12 col-lg-6">
+            <mat-form-field>
+              <input matInput type="number" formControlName="amount" [(ngModel)]="fetchedPaiementQuote.amount" placeholder="{{'Amount' | translate}}">
+            </mat-form-field>
+          </div>
+          <div class="col-12 col-lg-6">
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker" placeholder="{{'Paiement Date' | translate}}" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedPaiementQuote.datePaiement">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </div>
+        </div>
+      </form>
+      <mat-action-row>
+        <div class="spaceBetween width100perc">
+          <div>
+            <button *ngIf="fetchedPaiementQuote._id" mat-mini-fab color="warn" (click)="openDialogDelete()">
+              <mat-icon aria-label="delete">delete</mat-icon>
+            </button>
+          </div>
+          <button mat-mini-fab color="primary" (click)="nextStep()">
+            <mat-icon aria-label="Next">forward</mat-icon>
           </button>
-      </div>
-    </form>
-
-
-    <div *ngIf="fetchedPaiementQuote.type=='stripe' && fetchedPaiementQuote._id">
-      <h4>{{'Stripe Paiement' | translate}}</h4>
-      <div *ngIf="!stripeCust.id">
-        <button type="button" class="valid" (click)="saveCustInStripe()">{{'Start paying in stripe'}}</button>
-      </div>
-      <div *ngIf="stripeCust.id">
-        <button *ngIf="fetchedPaiementQuote.amount =='0'" type="button" class="false" (click)="deleteCustInStripe()">deleteCustInStripe</button>
-        <div class="form-control">
-          {{stripeCust.id}}
         </div>
-        <div class="form-control">
-          {{stripeCust.created | timestampToDate}}
-        </div>
-        <div class="form-control">
-          {{stripeCust.email}}
-        </div>
-
-        <h4>Card</h4>
-        <div *ngIf="!stripeCust.sources.data.length">
-          <h6>Create a new card</h6>
-          <input type="text" [(ngModel)]="newCard.address_city" placeholder="address_city" class="form-control">
-          <input type="text" [(ngModel)]="newCard.address_country" placeholder="address_country" class="form-control">
-          <input type="text" [(ngModel)]="newCard.address_line1" placeholder="address_line1" class="form-control">
-          <input type="text" [(ngModel)]="newCard.address_line2" placeholder="address_line2" class="form-control">
-          <input type="text" [(ngModel)]="newCard.address_state" placeholder="address_state" class="form-control">
-          <input type="text" [(ngModel)]="newCard.address_zip" placeholder="address_zip" class="form-control"> eg: 8
-          <input type="text" [(ngModel)]="newCard.exp_month" placeholder="exp_month" class="form-control"> eg: 2018
-          <input type="text" [(ngModel)]="newCard.exp_year" placeholder="exp_year" class="form-control"> eg: 4242424242424242
-          <input type="text" [(ngModel)]="newCard.number" placeholder="number" class="form-control">
-          <button type="button" class="valid" (click)="saveCardInStripe()">saveCardInStripe</button>
-        </div>
-
-
-        <div *ngFor="let card of stripeCust.sources.data; let i=index;">
-          <div class="form-control">{{card.id}}</div>
-          <div class="form-control">{{card.address_city}}</div>
-          <div class="form-control">{{card.address_country}}</div>
-          <div class="form-control">{{card.address_line1}}</div>
-          <div class="form-control">{{card.address_line2}}</div>
-          <div class="form-control">{{card.address_state}}</div>
-          <div class="form-control">{{card.address_zip}}</div>
-          <div class="form-control">{{card.brand}}</div>
-          <div class="form-control">{{card.country}}</div>
-          <div class="form-control">{{card.exp_month}}</div>
-          <div class="form-control">{{card.exp_year}}</div>
-          <div class="form-control">{{card.funding}}</div>
-          <div class="form-control">{{card.last4}}</div>
-          <button *ngIf="fetchedPaiementQuote.amount =='0'" type="button" class="false" (click)="deleteCardInStripe(card.id)">delete Card</button>
-        </div>
-        <div *ngIf="fetchedPaiementQuote.amount =='0'">
-          <div *ngIf="stripeCust.sources.data.length">
-            <h4>{{'Paiement' | translate}}</h4>
-            <input type="number" class="form-control" #amountStripe placeholder="Amount">
-            <button type="button" class="valid" (click)="payInStripe(amountStripe.value)">Pay!</button>
-          </div>
-          <div *ngIf="!stripeCust.subscriptions.data.length">
-            <button type="button" class="valid" (click)="saveSubscriptionInStripe('gold')">Plan Gold!</button>
-            <button type="button" class="valid" (click)="saveSubscriptionInStripe('daily')">Plan daily!</button>
-          </div>
-
-        </div>
-
-
-        <div *ngIf="stripeCust.sources.data.length">
-
-          <div *ngFor="let sub of stripeCust.subscriptions.data">
-            <div class="form-control">{{sub.id}}</div>
-            <div class="form-control">{{sub.created | timestampToDate}}</div>
-            <div class="form-control">{{sub.current_period_start | timestampToDate}}</div>
-            <div class="form-control">{{sub.current_period_end | timestampToDate}}</div>
-
-
-            <h4>Plan</h4>
-            <div class="form-control">{{sub.plan.id}}</div>
-            <div class="form-control">{{sub.plan.amount}}</div>
-            <div class="form-control">{{sub.plan.created | timestampToDate}}</div>
-            <div class="form-control">{{sub.plan.currency}}</div>
-            <div class="form-control">{{sub.plan.interval}}</div>
-            <div class="form-control">{{sub.plan.interval_count}}</div>
-            <div class="form-control">{{sub.plan.name}}</div>
-            <button type="button" class="false" (click)="deleteSubInStripe(sub.id)">deleteSubInStripe</button>
-
-          </div>
-          <div *ngIf="showReLoginInApp">
-            {{'You must loggin agin to apply changes:' | translate}}
-            <app-loginInApp></app-loginInApp>
-          </div>
+      </mat-action-row>
+    </mat-expansion-panel>
+    <mat-expansion-panel *ngIf="fetchedPaiementQuote._id && fetchedPaiementQuote.amount" [expanded]="step === 1" (opened)="setStep(1)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>credit_card</mat-icon>
+        </mat-panel-title>
+        <mat-panel-description>
+          {{'Payment method' | translate}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div *ngIf="fetchedPaiementQuote.isPaid">
+        <mat-radio-group *ngIf="fetchedPaiementQuote.stripe.charge.status !=='succeeded'" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedPaiementQuote.type">
+          <mat-radio-button class="paiementsTypes" *ngFor="let n of paiementsTypes" [value]="n.value">{{n.label | translate}}</mat-radio-button>
+          <mat-radio-button *ngIf="accountConnectStripe.id" [value]="'stripe'">{{'Card' | translate}}</mat-radio-button>
+        </mat-radio-group>
+        <div *ngIf="fetchedPaiementQuote.type=='stripe' && fetchedPaiementQuote._id">
+          <mat-card *ngIf="fetchedPaiementQuote.stripe.charge.status !=='succeeded'">
+            <app-paiement-card [hideAddress]=true [newCard]="newCard"></app-paiement-card>
+          </mat-card>
+          <mat-card *ngIf="fetchedPaiementQuote.stripe.charge.status ==='succeeded'">
+            <mat-icon color="accent">done</mat-icon>
+            {{fetchedPaiementQuote.stripe.charge.amount / 100}} {{fetchedPaiementQuote.stripe.charge.currency}} ({{fetchedPaiementQuote.stripe.charge.created * 1000 | date: 'dd/MM/yyyy'}})
+            <p>{{'Funding'| translate}}: {{fetchedPaiementQuote.stripe.charge.source.funding}}</p>
+          </mat-card>
         </div>
       </div>
-    </div>
-  </div>
+      <mat-action-row>
+        <button mat-mini-fab mat-mini-fab color="primary" *ngIf="fetchedPaiementQuote.type==='stripe' && fetchedPaiementQuote.stripe.charge.status !=='succeeded'" (click)="payByCardConnect()">
+          <mat-icon>credit_card</mat-icon>
+        </button>
+        <button *ngIf="fetchedPaiementQuote.type!=='stripe'" mat-mini-fab color="primary" (click)="closeDialog()">
+          <mat-icon aria-label="save">check_circle</mat-icon>
+        </button>
+      </mat-action-row>
+    </mat-expansion-panel>
+  </mat-accordion>
 </div>

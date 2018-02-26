@@ -9,12 +9,13 @@ var express = require('express'),
   multer = require('multer'),
   mime = require('mime'),
   path = require('path'),
+  Companie = require('../models/companie.model'),
   crypto = require("crypto"),
-  gm = require('gm').subClass({imageMagick: true});
-
-var User = require('../models/user.model');
-
-var stripe = require("stripe")("sk_test_cg4vcpE5gV1ApywsErwoWL7u");
+  gm = require('gm').subClass({imageMagick: true}),
+  User = require('../models/user.model'),
+  shared = require('./shared.js'),
+  emailGenerator = require('./emailGenerator');
+  // stripe = require("stripe")("sk_test_cg4vcpE5gV1ApywsErwoWL7u");
 
 router.use('/', function(req, res, next) {
   var token = req.headers['authorization'];
@@ -31,7 +32,13 @@ router.use('/', function(req, res, next) {
       });
     }
     if (decoded) {
-      User.findById(decoded.user._id, function(err, doc) {
+      User
+      .findById(decoded.user._id)
+      .populate({ path: 'rights', model: 'Right'})
+      .populate({ path: 'ownerCompanies', model: 'Companie'})
+      // .populate({ path: 'rights', model: 'Right'})
+      .populate({ path: 'ownerCompanies', model: 'Companie'})
+      .exec(function(err, doc) {
         if (err) {
           return res.status(500).json({title: 'Fetching user failed', message: 'Fetching user failed', err: err});
         }
@@ -58,24 +65,30 @@ router.get('/page/:page', function(req, res, next) {
   var currentPage = Number(req.params.page)
   var pageNumber = currentPage - 1
   var skip = (itemsPerPage * pageNumber)
-  var limit = (itemsPerPage * pageNumber) + itemsPerPage
+  // var limit = (itemsPerPage * pageNumber) + itemsPerPage
 
   //  let parentUserToSearch = ''
   let roleToSearch = []
   let searchQuery = {}
 
-  if (req.query.isExternalUser === 'true') {
-    // searchQuery['isExternalUser'] = true
-    searchQuery['canBeSeenByCompanies'] = req.user.ownerCompanies
-    searchQuery['ownerCompanies'] = {
-      $ne: req.user.ownerCompanies
+  if (req.query.isAdmin === 'true' && req.user.isAdmin === true) {
+    // admin data
+  } else {
+    // client
+    if (req.query.isExternalUser === 'true') {
+      if (!shared.isCurentUserHasAccess(req.user, 'client', 'seeAll')) {
+        searchQuery['createdByUser'] = mongoose.Types.ObjectId(req.user._id)
+      }
+      // searchQuery['isExternalUser'] = true
+      searchQuery['canBeSeenByCompanies'] = req.user.ownerCompanies
+      searchQuery['ownerCompanies'] = {
+        $ne: req.user.ownerCompanies
+      }
+    } else {
+      // searchQuery['isExternalUser'] = false
+      searchQuery['ownerCompanies'] = req.user.ownerCompanies
+
     }
-  }
-
-  if (req.query.isExternalUser === 'false') {
-    // searchQuery['isExternalUser'] = false
-    searchQuery['ownerCompanies'] = req.user.ownerCompanies
-
   }
 
   if (req.query.search) {
@@ -86,12 +99,15 @@ router.get('/page/:page', function(req, res, next) {
     arrObj.push({
       'profile.lastName': new RegExp(req.query.search, 'i')
     })
+    arrObj.push({
+      'email': new RegExp(req.query.search, 'i')
+    })
     searchQuery['$or'] = arrObj
   }
-
+  // console.log(searchQuery)
   User.find(searchQuery)
   // .populate({ path: 'companies', model: 'Companie'})
-    .populate({path: 'ownerCompanies', model: 'Companie'}).limit(itemsPerPage).skip(skip).sort(req.query.orderBy).exec(function(err, item) {
+  .populate({path: 'ownerCompanies', model: 'Companie'}).limit(itemsPerPage).skip(skip).sort(req.query.orderBy).exec(function(err, item) {
     if (err) {
       return res.status(404).json({message: 'No results', err: err})
     } else {
@@ -102,6 +118,7 @@ router.get('/page/:page', function(req, res, next) {
             currentPage: currentPage,
             itemsPerPage: itemsPerPage
           },
+          query: req.query,
           data: item
         })
       })
@@ -110,15 +127,13 @@ router.get('/page/:page', function(req, res, next) {
 })
 
 function getUser(req, res, next, id) {
-  User.findById(id).populate({path: 'forms', model: 'Form'}).populate({path: 'rights', model: 'Right'}).populate({path: 'salesMan', model: 'User'}).populate({path: 'ownerCompanies', model: 'Companie'}).populate({path: 'profile.profilePicture', model: 'Form'})
-  // .populate({
-  //     path: 'companies',
-  //     model: 'Companie',
-  //     populate: {
-  //       path: 'forms',
-  //       model: 'Form'
-  //     }
-  //   })
+
+  let searchQuery = {}
+  // searchQuery['ownerCompanies'] = req.user.ownerCompanies
+  searchQuery['_id'] = id
+
+  User.findOne(searchQuery).populate({path: 'forms', model: 'Form'}).populate({path: 'rights', model: 'Right'}).populate({path: 'salesMan', model: 'User'}).populate({path: 'ownerCompanies', model: 'Companie'}).populate({path: 'profile.profilePicture', model: 'Form'})
+
     .exec(function(err, user) {
     if (err) {
       return res.status(403).json({title: 'There was a problem', error: err});
@@ -133,17 +148,14 @@ function getUser(req, res, next, id) {
       });
     }
 
-    // user.isExternalUser = false
-    user.isExternalUser = true
-    user.ownerCompanies.forEach((companie, index) => {
-      // console.log(companie._id )
-      // console.log(req.user.ownerCompanies , companie._id.toString()  )
-      console.log(req.user.ownerCompanies.toString(), companie._id.toString())
-      if (req.user.ownerCompanies.toString() == companie._id.toString())
-        user.isExternalUser = false
-    })
-    console.log(user.isExternalUser)
-    // console.log(user)
+    // user.isExternalUser = true
+    // user.ownerCompanies.forEach((companie, index) => {
+    //
+    //   console.log(req.user.ownerCompanies.toString(), companie._id.toString())
+    //   if (req.user.ownerCompanies.toString() == companie._id.toString())
+    //     user.isExternalUser = false
+    // })
+
     return res.status(200).json({user: user})
   })
 }
@@ -295,6 +307,7 @@ router.put('/:id', function(req, res, next) {
       item.ownerCompanies = req.body.ownerCompanies
       item.email = req.body.email
       item.forms = req.body.forms
+      item.isAdminOfHisCompanie = req.body.isAdminOfHisCompanie
       // item.salesMan = req.body.salesMan
       item.profile = req.body.profile
       item.typeUsers = req.body.typeUsers
@@ -318,136 +331,196 @@ function makeid() {
   return text;
 }
 //
-// // user Create without email. See register
+//  user Create without email. See register
 router.post('/', function(req, res, next) {
   //  console.log(req.body)
   // let uniqueString = makeid()
   // let email = ''
   // let role = ''
-  // if (req.body.email) {
-  //   email = req.body.email
-  // } else {
-  //   email = 'random_' + uniqueString + '@random.com'
-  // }
-
-  if (req.body.role) {
-    role = req.body.role
+  if (req.body.email) {
+    email = req.body.email
   } else {
-    role = ['client']
+    email = 'random_' + uniqueString + '@random.com'
   }
+
+  // if (req.body.role) {
+  //   role = req.body.role
+  // } else {
+  //   role = ['client']
+  // }
 
   // if(!req.body.companies.length)
   //   req.body.companies = req.body.ownerCompanies
 
   // req.body.isInOwnerCompanie = false
-  if (!req.body.isExternalUser)
-    req.body.ownerCompanies = req.user.ownerCompanies
+  //
 
-  if (req.body.isExternalUser) {
-    req.body.ownerCompanies = req.body.canBeSeenByCompanies
-    req.body.canBeSeenByCompanies = req.user.ownerCompanies
-  }
+  User.findOne({email: req.body.email}).exec(function(err, user) {
+    if (err) {
+      return res.status(403).json({
+        title: 'An error occured',
+        error: {
+          message: err
+        }
+      })
 
-  delete req.body._id
-  // var project = new Project(req.body)
-  var user = new User(req.body)
+    }
+    if (user) {
+      return res.status(500).json({
+        title: 'Email',
+        error: {
+          message: 'Email already exists'
+        }
+      })
+    }
+    if (!user) {
+      if (!req.body.isExternalUser)
+        req.body.ownerCompanies = req.user.ownerCompanies
 
-    user.role = role
-    user.password = passwordHash.generate(makeid()),
-
-    user.save(function(err, user) {
-      if (err) {
-        return res.status(403).json({title: 'There was an issue', error: err});
+      if (req.body.isExternalUser) {
+        req.body.ownerCompanies = req.body.canBeSeenByCompanies
+        req.body.canBeSeenByCompanies = req.user.ownerCompanies
       }
-      res.status(200).json({message: 'Registration Successfull', obj: user})
-      sendEmailToUserToJoinCompanie(req, user)
+
+      req.body.createdByUser = req.user
+      // var companie = new Companie()
+      // companie.save(function(err, CompanieResult) {
+      //   if (err) {
+      //     return res.status(403).json({title: 'There was an issue', error: err});
+      //   }
+
+        delete req.body._id
+        // var project = new Project(req.body)
+        var user = new User(req.body)
+
+          // user.role = role
+          user.password = passwordHash.generate(makeid())
+          // user.ownerCompanies = [CompanieResult._id]
+
+          user.save(function(err, user) {
+            if (err) {
+              return res.status(403).json({title: 'There was an issue', error: err});
+            }
+            if (!req.body.isExternalUser) {
+              emailGenerator.sendEmailToUserToJoinCompanie(req, user)
+            }
+
+
+
+                    User.findById(user._id)
+                    .populate({path: 'forms', model: 'Form'})
+                    .populate({path: 'rights', model: 'Right'})
+                    .populate({path: 'ownerCompanies', model: 'Companie'})
+                    .populate({path: 'profile.profilePicture', model: 'Form'})
+                      .exec(function(err, user) {
+                      if (err) {
+                        return res.status(403).json({title: 'There was a problem', error: err});
+                      }
+                      if (!user) {
+                        return res.status(404).json({
+                          title: 'No form found',
+                          error: {
+                            message: 'Item not found!'
+                          }
+                        });
+                      }
+                      res.status(200).json({message: 'Registration Successfull', obj: user})
+                    })
+
+
+          })
+      // })
+
+      }
+
     })
+
   });
-
-  function sendEmailToUserToJoinCompanie(req, user) {
-    async.waterfall([
-      function(done) {
-        crypto.randomBytes(20, function(err, buf) {
-          var token = buf.toString('hex');
-          done(err, token);
-        });
-      },
-      function(token, done) {
-        user.resetPasswordToken = token;
-        user.resetPasswordExpires = Date.now() + 3600000; // 1 hour
-        user.save(function(err) {
-          done(err, token, user);
-        });
-
-      },
-      function(token, user, done) {
-        var mailer = nodemailer.createTransport({
-          // service: "Gmail",
-          host: 'auth.smtp.1and1.fr',
-          port: 465,
-          auth: {
-            user: config.userGmail,
-            pass: config.passGmail
-          }
-        })
-        var html = `
-      <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-      <html xmlns="http://www.w3.org/1999/xhtml">
-        <head>
-          <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-          <title>Email depuis Belmard Gestion</title>
-          <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"></link>
-        </head>
-        <body style="margin: 0; padding: 0; font-family: 'Montserrat', sans-serif;">
-          <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border: 1px solid #cccccc;">
-
-            <tr>
-              <td bgcolor="#ffffff" style="padding: 15px 15px 15px 15px;">
-                <table border="0" cellpadding="0" cellspacing="0" width="100%">
-                  <tr>
-                    <td>Bonjour ${user.profile.name} ${user.profile.lastName},</td>
-                  </tr>
-                  <tr>
-                    <td style="padding: 15px 0 30px 0;">
-                      Vous êtes invité à rejoindre l'application Belmard Gestion
-                    </td>
-                  </tr>
-                  <tr>
-                    <td align="center" style="background-color: #0a2f87; padding: 10px 15px; cursor: pointer;">
-                      <a
-                        href="http://${req.headers.host}/#/user/reset/${token}"
-                        style="color: #ffffff; text-decoration: none;"
-                      >
-                        Accepter l'invitation
-                      </a>
-                    </td>
-                  </tr>
-                </table>
-              </td>
-            </tr>
-          </table>
-        </body>
-      </html>
-      `;
-        var mailOptions = {
-          to: user.email,
-          from: config.userGmail,
-          subject: 'Gooplus Management | New Invitation',
-          html: html
-        };
-        mailer.sendMail(mailOptions, function(err) {
-          console.log('info', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
-          return res.status(200).json({message: 'Success', token: 'InMail'})
-        });
-      }
-    ], function(err) {
-      console.log(err)
-      if (err)
-        return next(err);
-      }
-    );
-  }
+  //
+  // function sendEmailToUserToJoinCompanie(req, user) {
+  //   async.waterfall([
+  //     function(done) {
+  //       crypto.randomBytes(20, function(err, buf) {
+  //         var token = buf.toString('hex');
+  //         done(err, token);
+  //       });
+  //     },
+  //     function(token, done) {
+  //       user.resetPasswordToken = token;
+  //       user.resetPasswordExpires = Date.now() + 3600000;  1 hour
+  //       user.save(function(err) {
+  //         done(err, token, user);
+  //       });
+  //
+  //     },
+  //     function(token, user, done) {
+  //       var mailer = nodemailer.createTransport({
+  //          service: "Gmail",
+  //         host: config.hostName,
+  //         port: config.port,
+  //         auth: {
+  //           user: config.userGmail,
+  //           pass: config.passGmail
+  //         }
+  //       })
+  //       var html = `
+  //     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  //     <html xmlns="http://www.w3.org/1999/xhtml">
+  //       <head>
+  //         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  //         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  //         <title>Email d'invitation à Mirabelle</title>
+  //         <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"></link>
+  //       </head>
+  //       <body style="margin: 0; padding: 0; font-family: 'Montserrat', sans-serif;">
+  //         <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border: 1px solid #cccccc;">
+  //
+  //           <tr>
+  //             <td bgcolor="#ffffff" style="padding: 15px 15px 15px 15px;">
+  //               <table border="0" cellpadding="0" cellspacing="0" width="100%">
+  //                 <tr>
+  //                   <td>Bonjour ${user.profile.name} ${user.profile.lastName},</td>
+  //                 </tr>
+  //                 <tr>
+  //                   <td style="padding: 15px 0 30px 0;">
+  //                     Vous êtes invité à rejoindre l'application Mirabelle
+  //                   </td>
+  //                 </tr>
+  //                 <tr>
+  //                   <td align="center" style="background-color: #ff4351; padding: 10px 15px; cursor: pointer;">
+  //                     <a
+  //                       href="http://${req.headers.host}/#/user/reset/${token}"
+  //                       style="color: #ffffff; text-decoration: none;"
+  //                     >
+  //                       Accepter l'invitation
+  //                     </a>
+  //                   </td>
+  //                 </tr>
+  //               </table>
+  //             </td>
+  //           </tr>
+  //         </table>
+  //       </body>
+  //     </html>
+  //     `;
+  //       var mailOptions = {
+  //         to: user.email,
+  //         from: config.userGmail,
+  //         subject: 'Mirabelle | Invitation',
+  //         html: html
+  //       };
+  //       mailer.sendMail(mailOptions, function(err) {
+  //         console.log('info', 'An e-mail has been sent to ' + user.email + ' with further instructions.');
+  //         return res.status(200).json({message: 'Success', token: 'InMail'})
+  //       });
+  //     }
+  //   ], function(err) {
+  //     console.log(err)
+  //     if (err)
+  //       return next(err);
+  //     }
+  //   );
+  // }
 
   //
   // var rmDir = function (dirPath, removeSelf) {

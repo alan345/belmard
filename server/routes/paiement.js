@@ -1,46 +1,40 @@
 var express = require('express'),
-    router  = express.Router(),
-    config  = require('../config/config'),
-    User    = require('../models/user.model'),
-    Companie= require('../models/companie.model'),
-    PaiementQuote=require('../models/paiementQuote.model'),
-    fs      = require('fs'),
-    jwt     = require('jsonwebtoken'),
-    stripe  = require("stripe")("sk_test_cg4vcpE5gV1ApywsErwoWL7u");
+  router = express.Router(),
+  config = require('../config/config'),
+  User = require('../models/user.model'),
+  Companie = require('../models/companie.model'),
+  emailGenerator = require('./emailGenerator.js'),
+  // PaiementQuote = require('../models/paiementQuote.model'),
+  // fs      = require('fs'),
+  jwt = require('jsonwebtoken'),
+  stripe = require("stripe")(config.stripe.client_secret);
 
-router.use('/', function (req, res, next) {
+router.use('/', function(req, res, next) {
   var token = req.headers['authorization'];
-  jwt.verify(token, config.secret, function (err, decoded) {
+  jwt.verify(token, config.secret, function(err, decoded) {
     if (err) {
-      return res.status(401).json({
-        title: 'Authentication failed',
-        message: 'Authentication failed',
-        error: err
-      })
+      return res.status(401).json({title: 'Authentication failed', message: 'Authentication failed', error: err})
     }
     if (!decoded) {
       return res.status(403).json({
         title: 'Authentication failed',
-        error: {message: 'Authentication failed'}
+        error: {
+          message: 'Authentication failed'
+        }
       });
     }
     if (decoded) {
 
-      User
-      .findById(decoded.user._id)
-      .populate({ path: 'rights', model: 'Right'})
-      .exec(function (err, doc) {
+      User.findById(decoded.user._id).populate({path: 'rights', model: 'Right'}).exec(function(err, doc) {
         if (err) {
-          return res.status(500).json({
-            title: 'Fetching user failed',
-            message: 'Fetching user failed',
-            err: err
-          });
+          return res.status(500).json({title: 'Fetching user failed', message: 'Fetching user failed', err: err});
         }
         if (!doc) {
           return res.status(404).json({
             title: 'The user was not found',
-            error: {message: 'The user was not found'}
+            error: {
+              message: 'The user was not found'
+            }
           })
         }
         // if (!shared.isCurentUserHasAccess(doc, nameObject, 'plan')) {
@@ -60,480 +54,501 @@ router.use('/', function (req, res, next) {
   });
 });
 
+//
+// router.get('/getStripeCust/:paiementQuoteId', function (req, res, next) {
+//     PaiementQuote.findById((req.params.paiementQuoteId), function (err, obj) {
+//       if (err) {
+//         return res.status(500).json({
+//           message: 'An error occured',
+//           err: err
+//         })
+//       }
+//       if (!obj) {
+//         return res.status(404).json({
+//           title: 'No obj found',
+//           error: {message: 'Obj not found!'}
+//         })
+//       }
+//
+//
+//                 stripe.customers.retrieve(obj.stripe.cusId,
+//                   function(err, customer) {
+//                     if(err) {
+//                       return res.status(404).json({
+//                         title: 'No data in stripe',
+//                         error: 'noData'
+//                       });
+//                     } else {
+//                       if(customer.deleted) {
+//                         return res.status(404).json({
+//                           title: 'Deleted',
+//                           error: customer
+//                         });
+//                       }
+//                       return res.status(200).json({
+//                         customer: customer
+//                       })
+//                     }
+//                   }
+//                 );
+//           })
+//
+// })
 
-router.get('/getStripeCust/:paiementQuoteId', function (req, res, next) {
+// router.get('/getStripeAccountDetails', function(req, res, next) {
+//   // if(!req.user.paiement.stripe.cusId) {
+//   //   return res.status(404).json({
+//   //     title: 'No data',
+//   //     error: 'noData'
+//   //   });
+//   // }
+//
+//   stripe.accounts.retrieve(
+//   // req.user.paiement.stripe.cusId,
+//   '', function(err, customer) {
+//     if (err) {
+//       return res.status(404).json({title: 'No data in stripe', error: 'noData'});
+//     } else {
+//       if (customer.deleted) {
+//         return res.status(404).json({title: 'Deleted', error: customer});
+//       }
+//       return res.status(200).json({customer: customer})
+//     }
+//   });
+// })
 
 
-    PaiementQuote.findById((req.params.paiementQuoteId), function (err, obj) {
-      if (err) {
-        return res.status(500).json({
-          message: 'An error occured',
-          err: err
-        })
-      }
-      if (!obj) {
-        return res.status(404).json({
-          title: 'No obj found',
-          error: {message: 'Obj not found!'}
-        })
-      }
 
 
-                stripe.customers.retrieve(obj.stripe.cusId,
-                  function(err, customer) {
-                    if(err) {
-                      return res.status(404).json({
-                        title: 'No data in stripe',
-                        error: 'noData'
-                      });
-                    } else {
-                      if(customer.deleted) {
-                        return res.status(404).json({
-                          title: 'Deleted',
-                          error: customer
-                        });
-                      }
-                      return res.status(200).json({
-                        customer: customer
-                      })
-                    }
-                  }
-                );
-          })
 
+router.get('/getStripeCust', function (req, res, next) {
+  getStripeCust(req.user.ownerCompanies[0]).then(customer => {
+    return res.status(200).json({customer: customer})
+  }).catch(err => {
+    return res.status(404).json(err)
+  })
 })
 
-
-router.get('/getStripeAccountDetails', function (req, res, next) {
-    // if(!req.user.paiement.stripe.cusId) {
-    //   return res.status(404).json({
-    //     title: 'No data',
-    //     error: 'noData'
-    //   });
-    // }
-
-
-    stripe.accounts.retrieve(
-      // req.user.paiement.stripe.cusId,
-      '',
-      function(err, customer) {
-        if(err) {
-          return res.status(404).json({
-            title: 'No data in stripe',
-            error: 'noData'
-          });
-        } else {
-          if(customer.deleted) {
-            return res.status(404).json({
-              title: 'Deleted',
-              error: customer
-            });
-          }
-          return res.status(200).json({
-            customer: customer
-          })
-        }
+router.post('/saveCustInStripe/', function(req, res, next) {
+  createCustomerInStripe(req).then(function(customer) {
+    Companie.update({
+      _id: req.user.ownerCompanies[0]
+    }, {
+      $set: {
+        'banck.stripe.stripe_user_id_gooplus': customer.id
       }
-    );
+    }, function(err, item) {
+      if (item) {
+        return res.status(200).json({customer: customer})
+      } else {
+        return res.status(404).json({title: 'Error Not saved in stripe', error: err});
+      }
+    })
+  })
 })
 
-
-
-router.post('/saveCustInStripe/', function (req, res, next) {
-    createCustomerInStripe(req).then(function(customer){
-      updateStripeCustomerIdToDb(req, customer).then(function(item){
-        if(item) {
-          return res.status(200).json({
-            customer: customer
-          })
-        } else {
-          return res.status(404).json({
-            title: 'No data in stripe',
-            error: 'noData'
-          });
-        }
-      }).catch((error) => {
-        return res.status(404).json({
-          title: 'Error not saved in db',
-          error: error
-        });
-      });
-    }).catch((error) => {
-      return res.status(404).json({
-        title: 'Error Not saved in stripe',
-        error: error
-      });
-    });
+router.post('/saveCardInStripe/', function(req, res, next) {
+  // if(req.user.paiement.stripe.cusId) {
+  createCardInStripe(req).then((card) => {
+    return res.status(200).json({card: card})
+  }).catch((error) => {
+    return res.status(404).json({title: 'Error Not saved in stripe', error: error});
+  });
 });
-router.post('/saveCardInStripe/:paiementQuoteId', function (req, res, next) {
 
 
-  PaiementQuote.findById((req.params.paiementQuoteId), function (err, obj) {
+router.post('/saveSubscriptionInStripe/', function(req, res, next) {
+
+  Companie.findById((req.user.ownerCompanies[0]), function(err, companie) {
     if (err) {
-      return res.status(500).json({
-        message: 'An error occured',
-        err: err
-      })
+      return res.status(500).json({message: 'An error occured', err: err})
     }
-    if (!obj) {
+    if (!companie) {
       return res.status(404).json({
         title: 'No obj found',
-        error: {message: 'Obj not found!'}
+        error: {
+          message: 'Obj not found!'
+        }
       })
     }
 
-    createCardInStripe(req, obj)
-    .then((card) => {
-      return res.status(200).json({
-        card: card
-      })
-    })
-    .catch((error) => {
-      return res.status(404).json({
-        title: 'Error Not saved in stripe',
-        error: error
-      });
-    });
-  })
-});
-router.post('/payInStripe/:paiementQuoteId', function (req, res, next) {
-
-    PaiementQuote.findById((req.params.paiementQuoteId), function (err, obj) {
-      if (err) {
-        return res.status(500).json({
-          message: 'An error occured',
-          err: err
+    stripe.subscriptions.create({
+      customer: companie.banck.stripe.stripe_user_id_gooplus,
+      plan: req.body.plan
+    }, function (err, subscription) {
+      if (subscription) {
+        savePlanDetailsInDB(req.user.ownerCompanies[0], subscription).then(item => {
+          return res.status(200).json({obj: item})
+        }).catch(err => {
+          return res.status(404).json({title: 'Error', error: err});
         })
+      } else {
+        return res.status(404).json({title: 'Error', error: err})
       }
-      if (!obj) {
-        return res.status(404).json({
-          title: 'No obj found',
-          error: {message: 'Obj not found!'}
-        })
-      }
-
-      // var stripe = require("stripe")(
-      //   "sk_test_uGq5JgMivZapIzAj14uAZKqw"
-      // );
-
-      // console.log(req.body.quote.name)
-      // let cusId = req.user.paiement.stripe.cusId
-      console.log(req.body)
-      stripe.charges.create({
-        amount: req.body.amount*100,
-        customer: obj.stripe.cusId,
-        currency: "usd",
-        // source: "tok_visa", // obtained with Stripe.js
-        description: 'quote'
-      }, function(err, charge) {
-        if(charge) {
-
-
-          PaiementQuote.update({ _id: req.params.paiementQuoteId}, { $set: { amount: req.body.amount }}, function (err, item) {
-            if (item) {
-              return res.status(200).json({
-                charge: charge
-              })
-            } else {
-              return res.status(404).json({
-                title: 'Error Not Updtaed price',
-                error: err
-              });
-            }
-          });
-
-        } else {
-          return res.status(404).json({
-            title: 'Error Not saved in stripe',
-            error: err
-          });
-
-
-        }
-        // asynchronously called
-      });
-
-  })
-});
-
-
-
-
-router.post('/saveSubscriptionInStripe/:paiementQuoteId', function (req, res, next) {
-
-  PaiementQuote.findById((req.params.paiementQuoteId), function (err, obj) {
-    if (err) {
-      return res.status(500).json({
-        message: 'An error occured',
-        err: err
-      })
-    }
-    if (!obj) {
-      return res.status(404).json({
-        title: 'No obj found',
-        error: {message: 'Obj not found!'}
-      })
-    }
-
-
-    createSubInStripe(req, obj)
-    .then(function(subscription){
-      // console.log('ssssss')
-      updateCurrent_period_endInDb(req, subscription.current_period_end, subscription.plan.id)
-      .then(item => { console.log(item) })
-      .catch(err => {
-        return res.status(404).json({
-          title: 'Error not saved in db',
-          error: err
-        });
-      })
-
-      return res.status(200).json({
-        subscription: subscription
-      })
     })
-    .catch((error) => {
-      return res.status(404).json({
-        title: 'Error Not saved in stripe',
-        error: error
-      });
-    });
-  })
-});
-
-
-
-
-
-
-  router.delete('/deleteSub/:idSub', function (req, res, next) {
-    stripe.subscriptions.del(
-      req.params.idSub,
-      function(err, confirmation) {
-        if(confirmation) {
-
-            updateCurrent_period_endInDb(req, '', 'free')
-            .then(item => { console.log(item) })
-            .catch(err => {
-              return res.status(404).json({
-                title: 'Error not saved in db',
-                error: err
-              });
-            })
-
-
-
-          return res.status(200).json({
-            message: confirmation
-          })
-        } else {
-          return res.status(404).json({
-            title: 'Error',
-            error: err
-          });
-        }
-      }
-    );
-  })
-
-  router.delete('/deleteCard/:idCard/:paiementQuoteId', function (req, res, next) {
-
-
-        PaiementQuote.findById((req.params.paiementQuoteId), function (err, obj) {
-          if (err) {
-            return res.status(500).json({
-              message: 'An error occured',
-              err: err
-            })
-          }
-          if (!obj) {
-            return res.status(404).json({
-              title: 'No obj found',
-              error: {message: 'Obj not found!'}
-            })
-          }
-
-
-        stripe.customers.deleteCard(
-          obj.stripe.cusId,
-          req.params.idCard,
-          function(err, confirmation) {
-            if(confirmation) {
-              return res.status(200).json({
-                message: confirmation
-              })
-            } else {
-              return res.status(404).json({
-                title: 'Error',
-                error: err
-              });
-            }
-          }
-        );
-    })
-  })
-
-router.delete('/deleteCustInStripe/:paiementQuoteId', function (req, res, next) {
-
-  PaiementQuote.findById((req.params.paiementQuoteId), function (err, obj) {
-    if (err) {
-      return res.status(500).json({
-        message: 'An error occured',
-        err: err
-      })
-    }
-    if (!obj) {
-      return res.status(404).json({
-        title: 'No obj found',
-        error: {message: 'Obj not found!'}
-      })
-    }
-
-
-    stripe.customers.del(obj.stripe.cusId,
-      function(err, confirmation) {
-        if(confirmation) {
-          return res.status(200).json({
-            message: confirmation
-          })
-        } else {
-          return res.status(404).json({
-            title: 'Error',
-            error: err
-          });
-        }
-      }
-    );
   })
 })
 
 
 
-function updateCurrent_period_endInDb(req, current_period_end, plan){
-  return new Promise(function(resolve, reject) {
-    resolve()
+router.post('/deleteSub/', function(req, res, next) {
+  console.log(req.body)
+  stripe.subscriptions.del(req.body.subId, function (err, subscription) {
+    if (subscription) {
+      detetePlanDetailsInDB(req.user.ownerCompanies[0]).then(item => {
+        emailGenerator.sendUnscribeMailToGooplus(req.body.reasonToUnscribe)
+        return res.status(200).json({obj: item})
+      }).catch(err => {
+        return res.status(404).json({title: 'Error', error: err});
+      })
+    } else {
+      return res.status(404).json({title: 'Error', error: err})
+    }
   })
-  // let paiement = req.user.paiement
-  // paiement.stripe.planDetail.current_period_end = current_period_end*1000
-  // paiement.stripe.planDetail.plan = plan
+})
+
+
+router.post('/password', function (req, res, next) {
+  // console.log(req.body.password)
+
+  if(req.body.password !== config.passwordFree30days) {
+    return res.status(404).json({
+      message: 'WRONG CODE',
+      error: {
+        message: 'WRONG CODE',
+        error: 'WRONG CODE'
+      }
+    })
+  } else {
+    req.user.ownerCompanies.forEach(companieId => {
+      Companie.findById(({_id: companieId}), function (err, item) {
+        if (err) { console.log(err) }
+        item.planDetail.promoCode = req.body.password
+        item.save(function (err, result) {
+          if (err) { console.log(err) }
+          res.status(201).json({
+            message: 'ok',
+            obj: 'password OK'
+          })
+        })
+      })
+    })
+  }
+
+  // req.user.ownerCompanies.forEach(companie => {
+  //   Companie.findById(({_id: companie._id}), function (err, item) {
+  //     if (err) {
+  //       return res.status(404).json({
+  //         message: err,
+  //         err: err
+  //       })
+  //     }
   //
-  //
-  // let planDetail = {
-  //   current_period_end: current_period_end*1000,
-  //   plan: plan
-  // }
-  // return new Promise(function(resolve, reject) {
-  //   User.update({ _id: req.user._id }, { $set: { paiement: paiement}}, function (err, item) {
-  //     if (item) {
-  //       Companie.update({ _id: req.user.ownerCompanies[0] }, { $set: { planDetail: planDetail}}, function (err, item) {
-  //         if (item) { resolve(item) } else { reject(err) }
+  //     var newDate = new Date();
+  //     newDate.setDate(newDate.getDate() + 30);
+  //     item.planDetail.current_period_end = newDate
+  //     item.planDetail.plan = 'gold'
+  //     item.banck.stripe.stripe_user_id_gooplus = 'cus_passwordFree30days'
+  //     item.save(function (err, result) {
+  //       if (err) {
+  //         return res.status(404).json({
+  //           message: 'There was an error, please try again',
+  //           err: err
+  //         });
+  //       }
+  //       res.status(201).json({
+  //         message: '',
+  //         obj: result
   //       });
-  //     } else { reject(err) }
-  //   });
-  //
+  //     });
+  //   })
   // })
-}
+
+  //
+  // var companie = new Companie(req.body);
+  //
+  // companie.canBeSeenByCompanies = req.user.ownerCompanies
+  //
+  //
+  // companie.save(function (err, result) {
+  //   if (err) {
+  //     return res.status(403).json({
+  //       title: 'There was an issue',
+  //       error: {message: 'The email you entered already exists'}
+  //     });
+  //   }
+  //   res.status(200).json({
+  //     message: 'Registration Successfull',
+  //     obj: result
+  //   })
+  // })
+});
 
 
+router.delete('/deleteCard/:idCard', function(req, res, next) {
+  Companie.findById((req.user.ownerCompanies[0]), function(err, companie) {
+    if (err) {
+      return res.status(500).json({message: 'An error occured', err: err})
+    }
+    if (!companie) {
+      return res.status(404).json({
+        title: 'No obj found',
+        error: {
+          message: 'Obj not found!'
+        }
+      })
+    }
 
-
-function updateStripeCustomerIdToDb(req, customer) {
-  return new Promise(function(resolve, reject) {
-    PaiementQuote.update({ _id: req.body._id }, { $set: { stripe: {cusId : customer.id}}}, function (err, item) {
-      if (item) { resolve(item) } else { reject(err) }
+    stripe.customers.deleteCard(companie.banck.stripe.stripe_user_id_gooplus, req.params.idCard, function(err, confirmation) {
+      if (confirmation) {
+        return res.status(200).json({message: confirmation})
+      } else {
+        return res.status(404).json({title: 'Error', error: err});
+      }
     });
   })
-}
+})
 
+router.delete('/deleteCustInStripe', function(req, res, next) {
+  Companie.findById((req.user.ownerCompanies[0]), function(err, companie) {
+    if (err) {
+      return res.status(500).json({message: 'An error occured', err: err})
+    }
+    if (!companie) {
+      return res.status(404).json({
+        title: 'No obj found',
+        error: {
+          message: 'Obj not found!'
+        }
+      })
+    }
+
+    stripe.customers.del(companie.banck.stripe.stripe_user_id_gooplus, function(err, confirmation) {
+      if (confirmation) {
+        return res.status(200).json({message: confirmation})
+      } else {
+        return res.status(404).json({title: 'Error', error: err});
+      }
+    });
+  })
+})
+
+//
+// function updateCurrent_period_endInDb(req, current_period_end, plan) {
+//   let paiement = req.user.paiement
+//   paiement.stripe.planDetail.current_period_end = current_period_end * 1000
+//   paiement.stripe.planDetail.plan = plan
+//
+//   let planDetail = {
+//     current_period_end: current_period_end * 1000,
+//     plan: plan
+//   }
+//   return new Promise(function(resolve, reject) {
+//     User.update({
+//       _id: req.user._id
+//     }, {
+//       $set: {
+//         paiement: paiement
+//       }
+//     }, function(err, item) {
+//       if (item) {
+//         Companie.update({
+//           _id: req.user.ownerCompanies[0]
+//         }, {
+//           $set: {
+//             planDetail: planDetail
+//           }
+//         }, function(err, item) {
+//           if (item) {
+//             resolve(item)
+//           } else {
+//             reject(err)
+//           }
+//         });
+//       } else {
+//         reject(err)
+//       }
+//     })
+//   })
+// }
+
+
+function getStripeCust (companieId) {
+  return new Promise(function (resolve, reject) {
+    Companie.findById((companieId), function (err, companie) {
+      if (err) {
+        reject(err)
+        return;
+      }
+      // console.log(companie.banck.stripe.stripe_user_id_gooplus)
+
+      if (!companie.banck.stripe.stripe_user_id_gooplus) {
+        reject(new Error({title: 'No data', error: 'noData'}))
+        detetePlanDetailsInDB(companie._id)
+        return;
+        // return res.status(404).json({title: 'No data', error: 'noData'});
+      }
+      // if (companie.banck.stripe.stripe_user_id_gooplus === 'cus_passwordFree30days') {
+      //   reject(new Error({title: 'cus_passwordFree30days', error: 'cus_passwordFree30days'}))
+      //   // console.log('bcc')
+      //   // console.log(companie.planDetail)
+      //   return;
+      // }
+      // console.log('p')
+      stripe.customers.retrieve(companie.banck.stripe.stripe_user_id_gooplus, function (err, customer) {
+        if (err) {
+          detetePlanDetailsInDB(companie._id).then(_=> {
+            console.log('err1')
+            reject(err)
+            // return;
+          })
+
+          // return res.status(404).json({title: 'No data in stripe', error: 'noData'});
+        } else {
+          console.log(customer)
+          console.log(typeof customer.deleted)
+          if (customer.deleted) {
+            detetePlanDetailsInDB(companie._id).then(_=> {
+              console.log('user existed but deleted')
+              reject('')
+              // return;
+            })
+            // return res.status(404).json({title: 'Deleted', error: customer});
+          }
+
+
+          if(!customer.subscriptions) {
+            detetePlanDetailsInDB(companie._id).then(_=> {
+              console.log('no sub in stripe')
+              resolve(customer)
+              // return;
+            })
+          } else if(!customer.subscriptions.data.length) {
+            detetePlanDetailsInDB(companie._id).then(_=> {
+              console.log('no sub in stripe2')
+              resolve(customer)
+              // return;
+            })
+          } else {
+            customer.subscriptions.data.forEach(subscription => {
+              savePlanDetailsInDB(companieId, subscription).then(_=> {
+                console.log('sub founded in stripe')
+                resolve(customer)
+                // return;
+              })
+            })
+          }
+          // return res.status(200).json({customer: customer})
+        }
+      })
+    })
+  })
+}
 
 function createCustomerInStripe(req) {
   return new Promise(function(resolve, reject) {
     stripe.customers.create({
-      description: 'Customer for' + req.user.email,
+      description: 'Gooplus',
       email: req.user.email
     }, function(err, customer) {
-      if(customer){
-        console.log("customer Created in Stripe")
-        // console.log(customer)
+      if (customer) {
         resolve(customer)
       } else {
-        // console.log(err)
-        reject(error)
+        reject(err)
       }
     })
   })
 }
 
 
-
-
-
-function createSubInStripe(req, obj){
-
-    // let cusId = req.user.paiement.stripe.cusId
-    // console.log(req.body)
-    return new Promise(function(resolve, reject) {
-      stripe.subscriptions.create({
-        customer: obj.stripe.cusId,
-        plan: req.body.plan
-      }, function(err, subscription) {
-        if(subscription) {
-          // console.log(subscription)
-          resolve(subscription)
+function savePlanDetailsInDB (companieId, subscription) {
+  console.log('savePlanDetailsInDB')
+  return new Promise(function (resolve, reject) {
+    let planDetail = {
+      current_period_end: subscription.current_period_end * 1000,
+      plan: subscription.plan.id
+    }
+    // console.log(planDetail)
+    // req.user.ownerCompanies.forEach(companieSingle => {
+      Companie.update({
+        _id: companieId
+      }, {
+        $set: {
+          planDetail: planDetail
+        }
+      }, function (err, item) {
+        if (item) {
+          resolve(item)
         } else {
-          // console.log(err)
           reject(err)
         }
-      });
-    })
+      })
+  })
 }
 
-function createCardInStripe(req, obj){
-  let cusId = obj.stripe.cusId
-  console.log(obj.stripe.cusId)
-  let card = req.body
-  // console.log(card)
-  // console.log(req.body)
-  delete card.id
-  delete card.brand
-  delete card.country
-  delete card.funding
+function detetePlanDetailsInDB (companieId) {
+  return new Promise(function (resolve, reject) {
+    let planDetail = {
+      current_period_end: '',
+      plan: '',
+    }
 
-  return new Promise(function(resolve, reject) {
-      stripe.customers.createSource(
-        cusId,
-        {
-          source: card
-          // {
-          //   "object": "card",
-          //   "address_city": "EPinal",
-          //   "address_country": "France",
-          //   "address_line1": "70 chemin du petit chaperon rouge",
-          //   "address_line2": "",
-          //   "address_state": "assignedTos",
-          //   "address_zip": "10100",
-          //   "exp_month": 8,
-          //   "exp_year": 2018,
-          //   "number": "4242424242424242",
-          //   // "last4": "4242",
-          //   // "metadata": {},
-          //   // "name": null,
-          // }
-         },
-        function(err, card) {
-          if(card) {
-            resolve(card)
-          } else {
-            console.log(err)
-            reject(err)
-          }
+    // req.user.ownerCompanies.forEach(companieSingle => {
+      Companie.update({
+        _id: companieId
+      }, {
+        $set: {
+          planDetail: planDetail
         }
-      );
+      }, function (err, item) {
+        if (item) {
+          resolve(item)
+        } else {
+          reject(err)
+        }
+      })
   })
 }
 
 
+function createCardInStripe(req) {
+  return new Promise(function(resolve, reject) {
+    Companie.findById((req.user.ownerCompanies[0]), function(err, obj) {
+      if (err) {
+        return res.status(500).json({message: 'An error occured', err: err})
+      }
+      if (!obj) {
+        return res.status(404).json({
+          title: 'No obj found',
+          error: {
+            message: 'Obj not found!'
+          }
+        })
+      }
 
+      let cusId = obj.banck.stripe.stripe_user_id_gooplus
+      let card = req.body
 
+      delete card.id
+      delete card.brand
+      delete card.country
+      delete card.funding
 
-module.exports = router;
+      stripe.customers.createSource(cusId, {
+        source: card
+      }, function(err, card) {
+        if (card) {
+          resolve(card)
+        } else {
+          console.log(err)
+          reject(err)
+        }
+      });
+    })
+  })
+}
+
+module.exports = {
+  router: router,
+  getStripeCust: getStripeCust
+}

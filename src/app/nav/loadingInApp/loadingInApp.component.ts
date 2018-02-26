@@ -1,7 +1,7 @@
 import {Component, OnInit, Input} from '@angular/core';
+import { GlobalEventsManager } from '../../globalEventsManager';
 
-import {Router} from '@angular/router';
-
+// import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-loadingInApp',
@@ -9,13 +9,20 @@ import {Router} from '@angular/router';
   styleUrls: ['./loadingInApp.component.css']
 })
 export class LoadingInAppComponent implements OnInit {
-  @Input() sidenav: any;
-
+  // @Input() sidenav: any;
+  @Input() loading = false;
 
   constructor(
     // private authService: AuthService,
-    private router: Router,
-  ) {}
+    private globalEventsManager: GlobalEventsManager,
+    // private router: Router,
+  ) {
+    this.globalEventsManager.isLoaddingEmitter.subscribe((mode) => {
+        if (mode !== null) {
+          this.loading = mode;
+        }
+    });
+  }
 
 
   ngOnInit() {}

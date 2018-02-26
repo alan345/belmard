@@ -1,10 +1,12 @@
-import { Component, OnInit, EventEmitter, Input, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output, OnChanges} from '@angular/core';
 import { FormService} from '../form.service';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../../auth/auth.service';
 // import { SeePictureDialogComponent } from '../seePictureDialog/seePictureDialog.component';
 import { MatDialog} from '@angular/material';
 import { Form } from '../form.model';
+import { GlobalEventsManager } from '../../../globalEventsManager';
+
 
 
 @Component({
@@ -12,15 +14,16 @@ import { Form } from '../form.model';
   templateUrl: './userForms.component.html',
   styleUrls: ['../form.component.css']
 })
-export class UserFormsComponent implements OnInit {
+export class UserFormsComponent implements OnInit, OnChanges {
   @Input() itemsPerPage: number;
   @Input() isDialog: boolean;
+  @Input() deletePicture = true;
 
 
   @Output() onPassForm = new EventEmitter<any>();
   fetchedForms: Form[] = [];
 
-  loading: boolean;
+
   paginationData = {
     currentPage: 1,
     itemsPerPage: 0,
@@ -39,12 +42,13 @@ export class UserFormsComponent implements OnInit {
     private formService: FormService,
     private activatedRoute: ActivatedRoute,
     private authService: AuthService,
+    private globalEventsManager: GlobalEventsManager,
   ) {}
 
   ngOnInit() {
-      this.refresh()
+      // this.refresh()
   }
-  refresh(){
+  ngOnChanges(){
     let this2 = this
     setTimeout(function(){
         this2.getUserForms(this2.paginationData.currentPage)
@@ -57,7 +61,7 @@ export class UserFormsComponent implements OnInit {
   }
 
   getUserForms(page: number){
-    this.loading = true;
+    this.globalEventsManager.isLoadding(true);
     this.search['id'] = this.authService.currentUser.userId,
     this.search['itemsPerPage'] = this.itemsPerPage,
 
@@ -65,7 +69,7 @@ export class UserFormsComponent implements OnInit {
     this.formService.getUserForms(page, this.search)
       .subscribe(
         res => {
-          this.loading = false;
+          this.globalEventsManager.isLoadding(false);
           this.paginationData = res.paginationData;
           this.fetchedForms = res.data
         },
@@ -77,28 +81,25 @@ export class UserFormsComponent implements OnInit {
     return false
   }
   onSelectRow(form: Form){
-
-    if(this.isDialog) {
+    // console.log(form)
+    // if(this.isDialog) {
       this.onPassForm.emit(form);
-    } else {
-      if(this.isFormPdf(form)) {
-        let url = './uploads/forms/' + form.owner + '/' + form.imagePath
-        window.open(url);
-      } else {
-        // let dialogRef = this.dialog.open(SeePictureDialogComponent)
-        // dialogRef.componentInstance.form = form;
-        // dialogRef.afterClosed().subscribe(result => {
-        // })
-      }
+    // } else {
+    //   if(this.isFormPdf(form)) {
+    //     let url = './uploads/forms/' + form.owner + '/' + form.imagePath
+    //     window.open(url);
+    //   } else {
+    //
+    //   }
 
-    }
+    // }
 
   }
-  isAdmin() {
-    return this.authService.isAdmin();
-  }
+  // isAdmin() {
+  //   return this.authService.isAdmin();
+  // }
 
-  onDelete(formId: Form) {
+  onDelete(formId: string) {
     this.formService.deleteForm(formId)
       .subscribe(
         res => {

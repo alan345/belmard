@@ -1,18 +1,22 @@
 import { Component, ViewChild , Inject} from '@angular/core';
 import { MatDialogRef, MatDialogConfig, MAT_DIALOG_DATA} from '@angular/material';
-import { UserCalendarComponent }  from '../userCalendar.component';
+import { UserCalendarComponent } from '../userCalendar.component';
 import { Quote } from '../../../quote/quote.model'
 import { UserCalendar } from '../../userCalendar.model';
+import { Search } from '../../../shared/shared.model';
+
+
 
 
 @Component({
-  selector: 'edit-options-dialog',
+  selector: 'app-edit-options-dialog',
   templateUrl: './userCalendarDialog.component.html',
 })
 
 export class UserCalendarDialogComponent {
   // fetchedQuote: Quote
   fetchedUserCalendar: UserCalendar = new UserCalendar()
+  search = new Search()
   //
   // @ViewChild(EditUserCalendarComponent)
   // private editUserCalendarComponent: EditUserCalendarComponent;
@@ -21,18 +25,22 @@ export class UserCalendarDialogComponent {
     public dialogRef: MatDialogRef<UserCalendarComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {
+      this.search = data.search
      this.fetchedUserCalendar._id = data.fetchedUserCalendar._id
      this.fetchedUserCalendar.title = data.fetchedUserCalendar.title
      this.fetchedUserCalendar.start = data.fetchedUserCalendar.start
      this.fetchedUserCalendar.end = data.fetchedUserCalendar.end
      this.fetchedUserCalendar.clients = data.fetchedUserCalendar.clients
-     this.fetchedUserCalendar.projects = data.fetchedUserCalendar.projects
+    //  this.fetchedUserCalendar.projects = data.fetchedUserCalendar.projects
      this.fetchedUserCalendar.color = data.fetchedUserCalendar.color
      this.fetchedUserCalendar.details = data.fetchedUserCalendar.details
      this.fetchedUserCalendar.assignedTos = data.fetchedUserCalendar.assignedTos
   }
 
   saved() {
+    this.dialogRef.close()
+  }
+  deleted() {
     this.dialogRef.close()
   }
   // newUserCalendarSaved() {

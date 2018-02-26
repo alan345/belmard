@@ -1,302 +1,218 @@
-<div class="container-fluid">
-  <div class="hdform">
-    <h3 *ngIf="fetchedQuote.typeQuote === 'invoice'"><i class="fa fa10 fa-clipboard" aria-hidden="true"></i>{{'Invoice' | translate}}</h3>
-    <h3 *ngIf="fetchedQuote.typeQuote === 'quote'"><i class="fa fa10 fa-clipboard" aria-hidden="true"></i>{{'Quote' | translate}}</h3>
-  </div>
-  <form [formGroup]="myForm" novalidate (ngSubmit)="save()">
-    <div class="row">
-      <div class="col-2">
+<div class="container">
+
+  <app-header-title [showBack]=1 [title]="'Intervention'" [icon]="'build'"></app-header-title>
+
+  <mat-accordion class="example-headers-align">
+    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <app-quote-status [showSingleSelected]=true [fetchedQuote]="fetchedQuote"></app-quote-status>
+          <!-- <mat-icon>build</mat-icon> -->
+        </mat-panel-title>
+        <mat-panel-description>
+          {{'Intervention' | translate}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-quoteInfo
+        [search]="search"
+        [(myCompanie)] = "myCompanie"
+        [fetchedQuote]="fetchedQuote" (save)="save()" (quoteStatusChangedEmit)="save()"></app-quoteInfo>
+      <mat-action-row *ngIf="fetchedQuote.statusQuote === 'pending'">
+        <div class="width100perc">
+          <app-actionButtons
+            class="width100perc"
+            *ngIf="fetchedQuote.statusQuote === 'pending'"
+            (nextStep)="nextStep()" [isDialog]="isDialog"
+            [fetchedQuote]="fetchedQuote" (closeDialog)="closeDialog()" (saveEmmit)="save()">
+          </app-actionButtons>
+        </div>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+
+
+    <mat-expansion-panel
+      *ngIf="
+        fetchedQuote._id"
+        [expanded]="step === 1"
+        (opened)="setStep(1)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>camera</mat-icon>
+        </mat-panel-title>
+        <mat-panel-description>
+          {{'Documents' | translate}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="row">
+
+        <div class="col-6 col-lg-12">
+          <app-picture
+            [showPagination]=false
+            [showPictures]=false
+            [openLibrairy]=true
+            [forms]="fetchedQuote.forms"></app-picture>
+        </div>
+
+        <div class="col-6 showMobile">
+          <app-picture
+            [showPagination]=false [showPictures]=false
+            [openLibrairy]=false [openCameraStraight]=true
+            [forms]="fetchedQuote.forms"></app-picture>
+        </div>
+
       </div>
-      <div class="col-8 row nopad">
-        <div class="col-4" *ngIf="fetchedQuote._id">
-          <button type="button" class="btn btn-primary" (click)="downloadPDF()">
-          {{'Download PDF' | translate}}
+      <app-picture
+        [showPagination]=false
+        [showPictures]=true
+        [addPicture]=false
+        [forms]="fetchedQuote.forms"></app-picture>
+      <mat-action-row>
+        <app-actionButtons *ngIf="fetchedQuote.statusQuote === 'pending'" (nextStep)="nextStep()" [showDeleteButton]=false [fetchedQuote]="fetchedQuote"></app-actionButtons>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+
+    <mat-expansion-panel *ngIf="fetchedQuote._id" [expanded]="step === 2" (opened)="setStep(2)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>touch_app</mat-icon>
+        </mat-panel-title>
+        <mat-panel-description>
+          {{'Quote' | translate}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-quoteDetails
+        *ngIf="step === 2"
+        [(fetchedQuote)]="fetchedQuote"
+        [(myCompanie)] = "myCompanie"
+        (calculateQuoteEmit)="calculateQuote()"
+        (quoteDetailsUpdated)="quoteDetailsUpdated($event)"></app-quoteDetails>
+      <mat-action-row>
+        <app-actionButtons *ngIf="fetchedQuote.statusQuote === 'pending'" (nextStep)="nextStep()" [isDialog]="isDialog" [fetchedQuote]="fetchedQuote" [showDeleteButton]=false (closeDialog)="closeDialog()" (saved)="savedQuote($event)">
+        </app-actionButtons>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel
+      *ngIf="authService.showObjHTML('quote', 'signature') &&
+      fetchedQuote._id" [expanded]="step === 3" (opened)="setStep(3)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>border_color</mat-icon>
+        </mat-panel-title>
+        <mat-panel-description>
+          {{'Signature' | translate}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-drawing-signature
+        *ngIf="fetchedQuote.statusQuote === 'pending'"
+        (updated)="drawingSignatureUpdated($event)">
+      </app-drawing-signature>
+      <img style="width: 100%;" *ngIf="fetchedQuote.statusQuote !== 'pending'" [src]="'./uploads/signature/' + fetchedQuote.drawingSignature.namePicture">
+      <mat-action-row *ngIf="fetchedQuote.statusQuote === 'pending'">
+        <div class="spaceBetween width100perc">
+          <button mat-mini-fab color="warn" (click)="clearDrawing()">
+            <mat-icon aria-label="clear">clear</mat-icon>
           </button>
-          <button type="button" class="btn btn-primary" (click)="sendQuoteByEmailToClient()">
-          {{'Send document to client' | translate}}
+
+          <button mat-mini-fab color="primary" (click)="saveSignature()">
+            <mat-icon aria-label="clear">forward</mat-icon>
           </button>
         </div>
-        <div class="col-8 alright" *ngIf="fetchedQuote.typeQuote === 'quote'">
-          <button *ngIf="!fetchedQuote.invoices.length && fetchedQuote._id" type="button" class="btn btn-primary" (click)="saveAsInvoice()">
-            {{'Save As Invoice' | translate}}
-            </button>
-          <div *ngFor="let invoice of fetchedQuote.invoices">
-            <button type="button" class="btn btn-primary" (click)="goToInvoice(invoice._id)">{{'Go to Invoice' | translate}}</button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-2">
-      </div>
-      <div class="col-3">
-        <div class="row">
-        </div>
-        <div *ngIf="fetchedQuote.quoteNumber" class="form-group">
-          {{'Number' | translate}}
-          <!-- <input [readonly]="fetchedQuote.signature.isSigned" class="form-control" name="EstimateCode" type="text" value="28" /> -->
-          <input [readonly]="fetchedQuote.signature.isSigned" class="gooplusInput ac" formControlName="quoteNumber" type="number" [(ngModel)]="fetchedQuote.quoteNumber" placeholder="quoteNumber">
-        </div>
 
-        <div class="form-group">
-          <app-autocomplete [search]="search" [displayIfContentIsNull]=false [canDelete]=false [enableLink]=true [typeAutocomplete]="'user'" [title]="'Contact'" [search]="{isExternalUser:true}" [title]="" [singleChoice]="'true'" [arrayContent]="fetchedQuote.clients"
-            (getResultAutocomplete)="selectUser($event[0])">
-          </app-autocomplete>
-        </div>
-        <div class="form-group">
-          <app-autocomplete [search]="search" [canDelete]=false [enableLink]=true [typeAutocomplete]="'project'" [title]="'Projet'" [singleChoice]="true" [arrayContent]="fetchedQuote.projects">
-          </app-autocomplete>
-        </div>
-      </div>
-      <div class="col-2">
-        <div class="form-group">
-          {{'Quote edit date' | translate}}
-          <input [readonly]="fetchedQuote.signature.isSigned" type="date" class="form-control" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedQuote.detail.dateQuote.issueDateString">
-        </div>
-        <div class="form-group">
-          {{'Quote validity date' | translate}}
-          <input [readonly]="fetchedQuote.signature.isSigned" type="date" class="form-control" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedQuote.detail.dateQuote.expiryDateString">
-        </div>
-        <div class="form-group">
-          {{'Status' | translate}}
-          <select *ngIf="fetchedQuote.typeQuote === 'quote'" [disabled]="fetchedQuote.signature.isSigned" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.statusQuote" name="statusQuote">
-            <option *ngFor="let n of statusQuotes" [value]="n.indexStatus">{{n.label | translate}}</option>
-          </select>
-          <select *ngIf="fetchedQuote.typeQuote === 'invoice'" [disabled]="fetchedQuote.signature.isSigned" class="form-control" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.statusQuote" name="statusQuote">
-            <option *ngFor="let n of statusQuotesInvoice" [value]="n.indexStatus">{{n.label | translate}}</option>
-          </select>
-        </div>
-        <div *ngIf="fetchedQuote.typeQuote === 'invoice' && fetchedQuote.statusQuote == '101'" class="form-group">
-          {{'Date Invoice Paid' | translate}}
-          <input type="date" class="form-control" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedQuote.detail.dateQuote.dateInvoicePaidString">
-        </div>
+        <!-- <app-actionButtons
+          *ngIf="fetchedQuote.statusQuote === 'pending'"
+          [fetchedQuote]="fetchedQuote"
+          [showSaveSignatureButton]=true
+          [showSaveButton]=false [showDeleteButton]=false
+          (saveSignatureEmit)="saveSignature()"
+          (nextStep)="buttonSaved($event)">
+        </app-actionButtons> -->
+      </mat-action-row>
+    </mat-expansion-panel>
 
-      </div>
-      <div class="col-3">
-        <div class="form-control" *ngFor="let client of fetchedQuote.clients">
-          <h4>
-            <div>{{client.profile.name}} {{client.profile.lastName}}</div>
-          </h4>
-          <div>{{client.profile.companyName}}</div>
-          <div *ngFor="let singleAddress of client.profile.address">
-            <div *ngIf="singleAddress.nameAddress ==='billing'">
-              <div>{{singleAddress.address}}</div>
-              <div>{{singleAddress.zip}} {{singleAddress.city}}</div>
-              <div>{{client.profile.phoneNumber}}</div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-2">
-      </div>
-      <div class="col-2">
-      </div>
-      <div class="col-8">
-        <div class="form-group">
-          {{'Title' | translate}}
-          <input [readonly]="fetchedQuote.signature.isSigned" type="text" class="form-control" formControlName="name" [(ngModel)]="fetchedQuote.name" required minlength="5" placeholder="{{'Quote title' | translate}}">
-        </div>
-      </div>
-      <div class="col-2">
-      </div>
-      <div class="col-12">
-        <ul *ngIf="!fetchedQuote.signature.isSigned" class="nav nav-tabs justify-content-end">
-          <li class="nav-item dropdown">
-            <a class="nav-link active dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{'Template' | translate}}</a>
-            <div class="dropdown-menu">
-              <app-autocomplete [typeAutocomplete]="'templateQuote'" [title]="'Load bucket'" [singleChoice]=true [arrayContent]="arrayContentToSearch" (getResultAutocomplete)="selectTemplateQuote($event[0])">
-              </app-autocomplete>
-              Save Template
-              <div class="row">
-                <div>
-                  <input [readonly]="fetchedQuote.signature.isSigned" type="text" class="form-control" placeholder="nameTemplate" #nameTemplate>
-                </div>
-                <div>
-                  <button type="button" class="btn btn-success" (click)="saveTemplateQuote(nameTemplate.value);nameTemplate.value=''"><i class="fa fa-floppy-o"></i></button>
-                </div>
-              </div>
-            </div>
-          </li>
-        </ul>
-
-        <div class="form-control">
-          <div class="row ac">
-            <div class="h6 col-1"></div>
-            <div class="h6 col-md-1">{{'Image' | translate}}</div>
-            <div class="h6 col-6">{{'Item' | translate}}</div>
-            <!-- <div class="h6 col-md-2">{{'Ref' | translate}}</div> -->
-            <div class="h6 col-1">{{'Quantity' | translate}}</div>
-            <div class="h6 col-1">{{'Price excl tax' | translate}}</div>
-            <div class="h6 col-1">{{'VAT(%)' | translate}}</div>
-            <div class="h6 col-1">{{'Total excl tax' | translate}}</div>
-          </div>
-          <div *ngFor="let devisDetail of fetchedQuote.devisDetails; let i=index">
-            <div class="row">
-              <input [readonly]="fetchedQuote.signature.isSigned" class="form-control col-2" type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].nameBucketProducts" placeholder="Category">
-              <button *ngIf="!fetchedQuote.signature.isSigned" type="button" class="btn btn-danger btn-sm" (click)="removeBucketProducts(i)"><i class="fa fa-times"></i></button>
-            </div>
-            <div style="min-height: 20px" [dragulaModel]='fetchedQuote.devisDetails[i].bucketProducts' [dragula]='"third-bag"'>
-              <div *ngFor="let bucketProduct of devisDetail.bucketProducts; let j=index">
-                <div class="row ac">
-
-                  <div class="col-1">
-                    <div class="row">
-                      <button *ngIf="!fetchedQuote.signature.isSigned" type="button" class="btn btn-danger btn-sm" (click)="removeRow(i, j)"><i class="fa fa-times"></i></button>
-                      <button *ngIf="!fetchedQuote.signature.isSigned" type="button" class="btn btn-sm handle"><i class="fa fa-arrows handle"></i></button>
-                    </div>
-                  </div>
-                  <div class="col-1">
-                    <div *ngIf="bucketProduct.typeRow=='product'">
-                      <div *ngFor="let product of fetchedQuote.devisDetails[i].bucketProducts[j].productInit">
-                        <app-picture [addPicture]=false [deletePicture]=false [forms]="product.forms"></app-picture>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-6">
-                    <div *ngIf="bucketProduct.typeRow=='product'">
-                      <app-autocomplete [typeAutocomplete]="'product'" [canDelete]="!fetchedQuote.signature.isSigned" [title]="" [singleChoice]=true [arrayContent]="fetchedQuote.devisDetails[i].bucketProducts[j].productInit" (getResultAutocomplete)="selectProduct($event[0], i, j)">
-                      </app-autocomplete>
-                    </div>
-                    <div *ngIf="bucketProduct.typeRow=='text'">
-                      <div *ngIf="fetchedQuote.devisDetails[i].bucketProducts[j].isEditMode">
-                        <quill-editor [ngModelOptions]="{standalone: true}" [options]="editorOptions" (blur)="onEditorBlured($event, i, j)" (focus)="onEditorFocused($event)" (ready)="onEditorCreated($event)" (change)="onContentChanged($event)" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].title">
-                        </quill-editor>
-                      </div>
-                      <div class="textNoEditMode form-control" (click)="changeQuillEditMode(i, j)" *ngIf="!fetchedQuote.devisDetails[i].bucketProducts[j].isEditMode" [innerHtml]="fetchedQuote.devisDetails[i].bucketProducts[j].title">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-1">
-                    <input [readonly]="fetchedQuote.signature.isSigned" class="gooplusInput ac" type="number" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].quantity" placeholder="quantity">
-                    <div *ngIf="bucketProduct.typeRow=='product'">
-                      <div *ngFor="let product of fetchedQuote.devisDetails[i].bucketProducts[j].productInit">
-                        {{product.details.unit}}
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-1 ac">
-                    <input [readonly]="fetchedQuote.signature.isSigned" class="gooplusInput ac" type="number" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].priceWithoutTaxes" placeholder="priceWithoutTaxes">
-                  </div>
-                  <div class="col-md-1 ac">
-                    <select [disabled]="fetchedQuote.signature.isSigned" (ngModelChange)="calculateQuote()" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].bucketProducts[j].vat">
-                      <option *ngFor="let VAT of VATs" [ngValue]="VAT">
-                        {{VAT}}%
-                      </option>
-                    </select>
-                  </div>
-                  <div class="col-1">
-                    <a class="form-control"> {{fetchedQuote.devisDetails[i].bucketProducts[j].totalPriceWithoutTaxes | round}} </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div *ngFor="let priceQuoteTaxe of fetchedQuote.priceQuote.priceQuoteTaxes">
-            <div class="row ac font-weight-bold">
-              <div class="col-6">
-              </div>
-              <div class="col-2 form-control">
-                TVA: {{priceQuoteTaxe.VAT}}%
-              </div>
-              <div class="col-2 form-control">
-                {{priceQuoteTaxe.TotalVAT | round}} €
-              </div>
-            </div>
-          </div>
-
-          <div class="row ac font-weight-bold">
-            <div *ngIf="!fetchedQuote.signature.isSigned" class="col-3">
-              <button type="button" class="btn btn-primary btn-sm" (click)="addRow('category')">+ {{'Category' | translate}}</button>
-              <button type="button" class="btn btn-primary btn-sm" (click)="addRow('text')">+ {{'Text' | translate}}</button>
-              <button type="button" class="btn btn-primary btn-sm" (click)="addRow('product')">+ {{'Product' | translate}}</button>
-            </div>
-            <div class="col-3">
-            </div>
-            <div class="col-2 form-control fcp">
-              {{'Total' | translate}}
-            </div>
-            <div class="col-2 form-control">
-              {{fetchedQuote.priceQuote.priceQuoteWithoutTaxes | round}} € HT
-            </div>
-            <div class="col-2 form-control">
-              {{fetchedQuote.priceQuote.priceQuoteWithTaxes | round}} € TTC
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-3">
-          </div>
-          <div *ngIf="authService.showObjHTML('comment', 'read')" class="col-5">
-            <div *ngIf="fetchedQuote._id">
-              <div class="FormGroup">
-                <button type="button" class="btn btn-warning" (click)="showLogs = !showLogs">
-                 <i class="fa fa-calendar" aria-hidden="true"></i>
-                 <span>{{'Show Comments' | translate}}</span>
-                </button>
-                <div *ngIf="showLogs">
-                  <app-comments [search]="search"></app-comments>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div *ngIf="authService.showObjHTML('quote', 'signature')">
-            <div *ngIf="fetchedQuote.typeQuote === 'quote' && fetchedQuote._id" style="height:280px" class="col-4">
-              <div class="ac sign">
-                <div class="card ac">
-                  <div class="ac" *ngIf="!fetchedQuote.signature.base64">
-                    <div class="row">
-                      <button type="button" class="false" (click)="resetSignature()">
-                        {{'Reset' | translate}}
-                    </button>
-                      <button type="button" class="valid" (click)="validateSignature()">
-                  {{'Validate' | translate}}
-                  </button>
-                      <signature-pad [options]="signaturePadOptions" (onBeginEvent)="drawStart()" (onEndEvent)="drawComplete()">
-                      </signature-pad>
-                    </div>
-                  </div>
-                  <div class="ac" *ngIf="fetchedQuote.signature.base64">
-                    <img class="img ac" [src]="fetchedQuote.signature.base64" />
-                    <div class="ac" *ngFor="let user of fetchedQuote.signature.users">
-                      {{fetchedQuote.signature.dateSignature | date:'yMdjm'}} - {{user.profile.name }}
-                    </div>
-                  </div>
-                </div>
-                <button type="button" class="false" (click)="removeSignature()">
-                  {{'Unsign' | translate}}
-                  </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div *ngIf="authService.showObjHTML('paiement', 'read')" class="row">
-          <div class="col-12">
-            <button type="button" class="btn btn-warning" (click)="togglePaiements()"><i class="fa fa10 fa-university" aria-hidden="true"></i><span>{{'Payments' | translate}}</span></button>
-            <div *ngIf="showPaiements">
-              <app-paiementQuotes (getPaiementQuotesCross)="getPaiementQuotes($event)" [search]="search">
-              </app-paiementQuotes>
-              {{'Total Paiement' | translate}} = {{totalPaiementAmount}}
-              <br> {{'To be paid' | translate}} = {{fetchedQuote.priceQuote.priceQuoteWithoutTaxes*1 - totalPaiementAmount*1| round}}
-            </div>
-          </div>
-        </div>
+    <mat-expansion-panel *ngIf="
+          authService.showObjHTML('paiementQuote', 'read') &&
+          fetchedQuote.statusQuote !=='pending' &&
+          fetchedQuote.statusQuote !=='rejected' &&
+          fetchedQuote._id" [expanded]="step === 4" (opened)="setStep(4)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>attach_money</mat-icon>
+        </mat-panel-title>
+        <mat-panel-description>
+          {{'Paiements' | translate}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-paiementQuotes
+        [showBack]=0 *ngIf="step === 4"
+        (getPaiementQuotesCross)="getPaiementQuotes($event)"
+        [search]="{userId: search.userId, isExpense:search.isExpense, quoteId:fetchedQuote._id}">
+      </app-paiementQuotes>
+      <mat-card>
+        {{'Paiements' | translate}}: {{fetchedQuote.priceQuote.totalPaiementAmount | round | currency:fetchedQuote.detail.currency}}
+        <br>
+        {{'Outstanding balance' | translate}}: {{fetchedQuote.priceQuote.outstandingBalance | round | currency:fetchedQuote.detail.currency}}
+      </mat-card>
+      <mat-action-row>
+        <app-actionButtons [fetchedQuote]="fetchedQuote" [showDeleteButton]=false (nextStep)="nextStep()">
+        </app-actionButtons>
+      </mat-action-row>
+    </mat-expansion-panel>
 
 
-        <div class="row">
-          <div class="col-12">
-            <div>
-              <div *ngIf="!fetchedQuote.signature.isSigned" class="valid-edit">
-                <button type="submit" class="btn valid">{{'Save' | translate}}</button>
-                <button *ngIf="fetchedQuote._id" type="button" class="btn false" (click)="openDialogDelete()">
-                  {{'Delete' | translate}}
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </form>
+    <mat-expansion-panel *ngIf="
+      fetchedQuote._id &&
+      fetchedQuote.priceQuote.priceGlobalWithDiscount
+      "
+      [expanded]="step === 5"
+      (opened)="setStep(5)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>assignment_turned_in</mat-icon>
+        </mat-panel-title>
+        <mat-panel-description>
+          {{'PDF' | translate}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <app-invoice-action [fetchedQuote]="fetchedQuote"></app-invoice-action>
+    </mat-expansion-panel>
+
+
+
+    <!-- <mat-expansion-panel *ngIf="authService.showObjHTML('quote', 'comment') && fetchedQuote._id" [expanded]="step === 7" (opened)="setStep(7)">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>date_range</mat-icon>
+        </mat-panel-title>
+        <mat-panel-description>
+          {{'Comments' | translate}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+    </mat-expansion-panel> -->
+
+
+
+  </mat-accordion>
+
+
+
+
+  <!-- <mat-expansion-panel *ngIf="authService.showObjHTML('quote', 'drawing') && fetchedQuote._id" [expanded]="step === 3" (opened)="setStep(3)">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            {{'Drawing' | translate}}
+          </mat-panel-title>
+          <mat-panel-description>
+            <mat-icon>view_quilt</mat-icon>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <app-drawing [drawing]="fetchedQuote.drawing" (updated)="drawingUpdated($event)"></app-drawing>
+        <mat-action-row>
+          <app-actionButtons *ngIf="fetchedQuote.statusQuote === 'pending'" [fetchedQuote]="fetchedQuote" [showDeleteButton]=false (nextStep)="nextStep()">
+          </app-actionButtons>
+        </mat-action-row>
+      </mat-expansion-panel> -->
 </div>
-<app-loadingInApp *ngIf="loading"></app-loadingInApp>
+<app-loadingInApp [loading]="loading"></app-loadingInApp>

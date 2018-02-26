@@ -1,0 +1,70 @@
+<mat-card>
+  {{'Your company logo' | translate}}
+  <app-picture [showPagination]=false [singleForm]=true [forms]="fetchedCompanie.forms"></app-picture>
+</mat-card>
+<br>
+<mat-card>
+  <mat-form-field>
+    <textarea matInput type="text" [(ngModel)]="fetchedCompanie.quoteSettings.legalNotice"
+      matTextareaAutosize matAutosizeMinRows="5" matAutosizeMaxRows="10"
+      (blur)="save()"
+      placeholder="{{'Quote Legal Notice' | translate}}">
+
+    </textarea>
+  </mat-form-field>
+</mat-card>
+<br>
+<mat-card>
+  <mat-form-field>
+    <textarea matInput type="text" [(ngModel)]="fetchedCompanie.quoteSettings.legalNoticeInvoice"
+      matTextareaAutosize matAutosizeMinRows="5" matAutosizeMaxRows="10"
+      (blur)="save()"
+      placeholder="{{'Invoice Legal Notice' | translate}}">
+    </textarea>
+  </mat-form-field>
+</mat-card>
+<br>
+<mat-card>
+  <mat-form-field>
+    <input matInput type="text" [(ngModel)]="fetchedCompanie.quoteSettings.prefixIntervention"
+      (blur)="save()"
+      placeholder="{{'Prefix Intervention' | translate}}">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="text" [(ngModel)]="fetchedCompanie.quoteSettings.prefixInvoice"
+      (blur)="save()"
+      placeholder="{{'Prefix Invoice' | translate}}">
+  </mat-form-field>
+  <mat-form-field>
+    <input matInput type="text" [(ngModel)]="fetchedCompanie.quoteSettings.prefixQuote"
+      (blur)="save()"
+      placeholder="{{'Prefix Quote' | translate}}">
+  </mat-form-field>
+</mat-card>
+<br>
+<mat-card>
+  <app-quote-legal-approval (save)="save()" [fetchedCompanie]="fetchedCompanie"></app-quote-legal-approval>
+</mat-card>
+<br>
+
+<mat-card>
+  <app-quote-type-intervention (save)="save()" [fetchedCompanie]="fetchedCompanie"></app-quote-type-intervention>
+</mat-card>
+<br>
+
+<mat-card>
+  <app-quote-vat (save)="save()" [fetchedCompanie]="fetchedCompanie"></app-quote-vat>
+</mat-card>
+<br>
+
+<mat-card class="ac">
+  <mat-button-toggle-group (change)="changeCurrency()" [(ngModel)]="fetchedCompanie.option.currency">
+    <mat-button-toggle value="€">
+      <mat-icon>euro_symbol</mat-icon>
+    </mat-button-toggle>
+    <mat-button-toggle value="$">
+      <mat-icon>attach_money</mat-icon>
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+  <app-loginInApp *ngIf="showLoginInApp" (loginInAppDone)="loginInAppDone()"></app-loginInApp>
+</mat-card>

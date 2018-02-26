@@ -1,26 +1,62 @@
 import { Form } from '../picture/form/form.model';
 import { Companie } from '../companie/companie.model';
 import { Right } from '../right/right.model';
+import { Address } from '../shared/address/address.model';
 
 
-export const TypeUser = ['plombier', 'serrurier']
+// export const TypeUser = ['plombier', 'serrurier'];
 
 export class User {
-  _id: string = '';
+  _id = '';
   canBeSeenByCompanies: Companie[] = [];
   ownerCompanies: Companie[] = [];
   dateSeeLatestNotif: Date= new Date()
-  // isAdminOfHisCompanie: Boolean = false;
-  isExternalUser: Boolean = true;
-  email: string = '';
-  role: string[] = [];
-  typeUsers: string[] = [];
+  isAdminOfHisCompanie = false;
+  isExternalUser = true;
+  email = '';
+  // role: string[] = [];
+  isAdmin = false;
+  typeUsers = '';
   forms: Form[] = [];
   rights: Right[] = []
+  rightsInApp: Right[] = []
   profile: Profile = new Profile();
-  password: string = '';
+  password = '';
   salesMan: User[] = [];
   paiement: Paiement= new Paiement()
+}
+export class UserRegister {
+
+  email = '';
+
+  profile: Profile = new Profile();
+  password = '';
+  company: CompanyRegister = new CompanyRegister()
+
+}
+
+export class CompanyRegister {
+  nameCompanie = '';
+  typeCompanie = '';
+}
+
+export class UserCross {
+  _id = '';
+  ownerCompanies: Companie[] = [];
+  users: User[] = [];
+
+  // isAdminOfHisCompanie = false;
+  isExternalUser = true;
+  email = '';
+  role: string[] = [];
+  // typeUsers: string[] = [];
+  forms: Form[] = [];
+  // rights: Right[] = []
+  rightsInApp: Right[] = []
+  profile: Profile = new Profile();
+  password = '';
+  // salesMan: User[] = [];
+  // paiement: Paiement= new Paiement()
 }
 
 export class Paiement{
@@ -32,49 +68,55 @@ export class Stripe {
 
 
 export class Profile {
-  name: string = '';
-  lastName: string = '';
-  phoneNumber: string = '';
-  otherData: string = '';
-  companyName: string = '';
+  name = '';
+  lastName = '';
+  phoneNumber = '';
+  otherData = '';
+  companyName = '';
 
-  parentUser: User[] = [];
+  // parentUser: User[] = [];
   profilePicture: Form[] = [];
-  colorCalendar: string = '';
-  fax: string = '';
-  title: string = '';
-  typeClient: string = '';
-  statusHouse: string = '';
-  sourceContact: string = '';
-  detailHouse: DetailHouse = new DetailHouse();
+  colorCalendar = '';
+  // fax = '';
+  title = 'Mr.';
+  typeClient = 'Individual';
+  // statusHouse = '';
+  // sourceContact = '';
+  // detailHouse: DetailHouse = new DetailHouse();
   address: Address[] = [];
-  language: string = 'fr';
+  language = 'fr';
 }
 
 
 
 
-export class DetailHouse {
-  typeHouse: string = '';
-  surface: number;
-  accesCode: string = '';
-  floor: string = '';
-  accessType: string = '';
-}
+// export class DetailHouse {
+//   typeHouse = '';
+//   surface: number;
+//   accesCode = '';
+//   floor = '';
+//   accessType = '';
+// }
 
 
-
-
-export class Address {
-    nameAddress: string = 'shipping';
-    address: string = '';
-    address2: string = '';
-    city: string = '';
-    cities: string[] = [];
-    state : string = '';
-    zip : string = '';
-    country : string = '';
-}
+//
+// export const AddressTypes =
+// [
+//   {value: 'shipping', label: 'Shipping'},
+//   {value: 'billing', label: 'Billing'},
+// ]
+//
+//
+// export class Address {
+//     nameAddress = 'shipping';
+//     address = '';
+//     address2 = '';
+//     city = '';
+//     cities: string[] = [];
+//     state  = '';
+//     zip  = '';
+//     country  = '';
+// }
 
 
 export class UserProfile {

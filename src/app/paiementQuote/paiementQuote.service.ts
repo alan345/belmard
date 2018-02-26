@@ -3,39 +3,54 @@ import {Observable} from 'rxjs/Observable';
 import {Response, Headers, Http, RequestOptions} from '@angular/http';
 import {ErrorService} from '../errorHandler/error.service';
 import {PaiementQuote} from './paiementQuote.model';
-import {ToastsManager} from 'ng2-toastr';
 import { AuthService } from '../auth/auth.service';
+import { Config } from '../shared/config.model';
+// import {ToastsManager} from 'ng2-toastr';
+// import 'rxjs/add/operator/map';
+// import 'rxjs/add/operator/catch';
 
 
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class PaiementQuoteService {
 
 
-  private url: string = '/';
+  private url = Config.backendURL;
 //  private token: string = localStorage.getItem('id_token');
 //  private userId: string = localStorage.getItem('userId');
-  private paiementQuotesForCurrentUser: PaiementQuote[] = [];
-  private singlePaiementQuote = Object;
+  // private paiementQuotesForCurrentUser: PaiementQuote[] = [];
+  // private singlePaiementQuote = Object;
 
   constructor(
     private http: Http,
     private errorService: ErrorService,
-    private toastr: ToastsManager,
+    // private toastr: ToastsManager,
     private authService: AuthService) {}
 
 
-  getPaiementQuotesGraph(year: number, search: any) {
-    let headers = new Headers({'Content-Type': 'application/json'});
+  getPaiementQuotesGraph(search: any) {
+    const headers = new Headers({'Content-Type': 'application/json'});
     headers.append('Authorization', '' + this.authService.currentUser.token)
-    let options = new RequestOptions({ headers: headers, search: search});
-    return this.http.get(this.url + 'paiementQuote/graph/' + year , options)
-      .timeout(5000)
+    const options = new RequestOptions({ headers: headers, search: search});
+    return this.http.get(this.url + 'paiementQuote/graph/' , options)
+      .timeout(15000)
       .map((response: Response) => {
         const paiementQuotes = response.json();
         return paiementQuotes;
+      })
+      .catch((error: Response) => {
+        this.errorService.handleError(error.json());
+        return Observable.throw(error.json());
+      });
+  }
+
+
+  downloadPDF(id: string) {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    headers.append('Authorization', '' + this.authService.currentUser.token);
+    return this.http.get(this.url + 'paiementQuote/pdf/' + id, {headers: headers})
+      .map((response: Response) => {
+        return response.json().item;
       })
       .catch((error: Response) => {
         this.errorService.handleError(error.json());
@@ -48,7 +63,7 @@ export class PaiementQuoteService {
     headers.append('Authorization', '' + this.authService.currentUser.token)
     let options = new RequestOptions({ headers: headers, search: search});
     return this.http.get(this.url + 'paiementQuote/page/' + page , options)
-      .timeout(5000)
+      .timeout(15000)
       .map((response: Response) => {
         const paiementQuotes = response.json();
         return paiementQuotes;

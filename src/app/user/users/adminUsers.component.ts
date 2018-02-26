@@ -6,7 +6,7 @@ import { ToastsManager} from 'ng2-toastr';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 import { Search, PaginationData } from '../../shared/shared.model';
-
+import { GlobalEventsManager } from '../../globalEventsManager';
 
 
 
@@ -19,8 +19,9 @@ import { Search, PaginationData } from '../../shared/shared.model';
 })
 export class AdminUsersComponent implements OnInit {
   fetchedUsers: User[] = [];
-  loading: boolean;
-  search: Search = new Search()
+  loading = false;
+  search: Search = new Search();
+  createNewTeam = false;
   // {
   //   orderBy : '',
   //   search: '',
@@ -37,15 +38,19 @@ export class AdminUsersComponent implements OnInit {
 
   constructor(
     private userService: UserService,
+    private globalEventsManager: GlobalEventsManager,
     private toastr: ToastsManager,
     private router: Router,
     private location: Location,
-    private authService: AuthService,
+    public authService: AuthService,
     private activatedRoute: ActivatedRoute,
   ) {}
 
 
   ngOnInit() {
+
+
+
     this.activatedRoute.params.subscribe((params: Params) => {
       if(params['isExternalUser']) {
         this.search.isExternalUser = (params['isExternalUser'] === 'true')
@@ -88,7 +93,7 @@ export class AdminUsersComponent implements OnInit {
     this.userService.deleteUser(id)
       .subscribe(
         res => {
-          this.toastr.success('Great!', res.message);
+          this.authService.successNotif(res.message);
         },
         error => {
           console.log(error);
@@ -97,23 +102,47 @@ export class AdminUsersComponent implements OnInit {
   }
 
   getPage(page: number) {
-
-    this.loading = true;
     this.getUsers(page, this.search);
   }
 
   getUsers(page: number, search: any) {
+    this.loading = true
     this.userService.getUsers(page, search)
       .subscribe(
         res => {
           this.paginationData = res.paginationData;
           this.fetchedUsers =  res.data;
-          this.loading = false;
+          this.loading = false
+          this.checkIfCanCreateNewTeamUser()
         },
         error => {
           console.log(error);
+          this.loading = false
         }
       );
   }
+
+  checkIfCanCreateNewTeamUser() {
+    this.createNewTeam = false
+    this.authService.getCurrentUser().rightsInApp.forEach(rightInApp => {
+      rightInApp.detailRight.permissions.forEach(permission => {
+        if (permission.namePermission === 'user') {
+          permission.access.forEach(singleAccess => {
+            if (singleAccess.typeAccess === 'create5') {
+              if(this.fetchedUsers.length < 5) {
+                this.createNewTeam = true
+              }
+            }
+            if (singleAccess.typeAccess === 'create1') {
+              if(this.fetchedUsers.length < 1) {
+                this.createNewTeam = true
+              }
+            }
+          })
+        }
+      })
+    })
+  }
+
 
 }

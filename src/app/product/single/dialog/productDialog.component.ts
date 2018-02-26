@@ -1,11 +1,11 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialogRef} from '@angular/material';
-import { ProductSingleComponent }  from '../productSingle.component';
+import { ProductSingleComponent } from '../productSingle.component';
 
 
 
 @Component({
-  selector: 'edit-options-dialog',
+  selector: 'app-edit-options-dialog',
   templateUrl: './productDialog.component.html',
 })
 

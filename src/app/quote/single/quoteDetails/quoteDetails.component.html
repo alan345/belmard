@@ -1,0 +1,19 @@
+<div class="hideMobile">
+  <app-template-quote [fetchedQuote]="fetchedQuote"></app-template-quote>
+</div>
+<div *ngFor="let devisDetail of fetchedQuote.devisDetails; let i=index">
+  <div *ngIf="false" class="row">
+    <input [readonly]="fetchedQuote.statusQuote !== 'pending'" class=" col-2" type="text" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.devisDetails[i].nameBucketProducts" placeholder="Category">
+    <button *ngIf="fetchedQuote.statusQuote === 'pending'" type="button" class="btn btn-danger btn-sm" (click)="removeBucketProducts(i)"><i class="fa fa-times"></i></button>
+  </div>
+</div>
+<div class="showMobile">
+  <app-mobile-details [fetchedQuote]="fetchedQuote" (calculateQuoteEmit)="calculateQuote()"></app-mobile-details>
+</div>
+<div class="hideMobile">
+  <app-desktop-details [fetchedQuote]="fetchedQuote" (calculateQuoteEmit)="calculateQuote()"></app-desktop-details>
+</div>
+
+<app-add-elem [fetchedQuote]="fetchedQuote" (calculateQuoteEmit)="calculateQuote()"></app-add-elem>
+
+<app-total [myCompanie]="myCompanie" [fetchedQuote]="fetchedQuote" (calculateQuoteEmit)="calculateQuote()"></app-total>

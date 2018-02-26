@@ -33,6 +33,7 @@ router.use('/', function (req, res, next) {
       User
       .findById(decoded.user._id)
       .populate({ path: 'rights', model: 'Right'})
+      .populate({ path: 'ownerCompanies', model: 'Companie'})
       .exec(function (err, doc) {
         if (err) {
           return res.status(500).json({
@@ -111,7 +112,7 @@ router.post('/', function (req, res, next) {
       err: ''
     })
   }
-   console.log(req.user.companies)
+  //  console.log(req.user.companies)
   //var Product = new Product(req.body)
   var product = new Product(req.body)
   product.ownerCompanies = req.user.ownerCompanies
@@ -174,6 +175,7 @@ router.get('/page/:page', function (req, res, next) {
             currentPage : currentPage,
             itemsPerPage : itemsPerPage
           },
+          query: req.query,
           data: item
         })
       })
@@ -187,10 +189,10 @@ router.get('/page/:page', function (req, res, next) {
 router.get('/:id', function (req, res, next) {
   Product.findById((req.params.id), function(err, obj) {
     if (err) {
-      return res.status(500).json({message: 'An error occured', err: err})
+      return res.status(403).json({title: 'There was a problem', error: err});
     }
     if (!obj) {
-      return res.status(404).json({
+      return res.status(500).json({
         title: 'No obj found',
         error: {
           message: 'Obj not found!'

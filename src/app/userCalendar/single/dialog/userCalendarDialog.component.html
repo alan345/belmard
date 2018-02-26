@@ -1,7 +1,7 @@
 
-<!-- <app-userCalendar [showBackButton]="false"></app-userCalendar> -->
-<!-- <app-userCalendar></app-userCalendar> -->
+<!-- <app-user-calendar [showBackButton]="false"></app-user-calendar> -->
+<!-- <app-user-calendar></app-user-calendar> -->
 
 
-<app-userCalendar (saved)="saved()" [fetchedUserCalendar]="fetchedUserCalendar">
-</app-userCalendar>
+<app-user-calendar (saved)="saved()" (deleted)="deleted()" [search]="search" [fetchedUserCalendar]="fetchedUserCalendar">
+</app-user-calendar>

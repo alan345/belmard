@@ -1,27 +1,23 @@
+<div #mainScreen>
+  <app-navbar class="mat-elevation-z6"></app-navbar>
 
-<app-navbar></app-navbar>
+  <mat-sidenav-container class="matSidenavContainer" (backdropClick)="backdropClick()" #container>
 
-<mat-sidenav-container class="example-container">
+    <mat-sidenav #sidenav mode="{{modeSidenav}}" opened="false">
+      <!-- <div *ngIf="sidenav.opened"> -->
+        <app-sidebar [sidenav]="sidenav"></app-sidebar>
+      <!-- </div> -->
+    </mat-sidenav>
 
-  <mat-sidenav #sidenav mode="side" opened="false">
-    <div *ngIf="sidenav.opened">
-      <app-sidebar></app-sidebar>
+    <div class="docs-component-sidenav-content">
+    <!-- <div class="container width100perc"> -->
+      <!-- <div *ngIf="isLoggedIn" class="burger">
+        <i *ngIf="!sidenav.opened" (click)="openSideBar()" class="fa fa-bars" aria-hidden="true"></i>
+      </div> -->
+      <router-outlet></router-outlet>
     </div>
-  </mat-sidenav>
-
-  <div class="example-scrolling-content">
-    <div *ngIf="isLoggedIn" class="burger">
-      <i *ngIf="!sidenav.opened" (click)="openSideBar()" class="fa fa-bars" aria-hidden="true"></i>
-    </div>
-    <router-outlet></router-outlet>
-  </div>
-
-</mat-sidenav-container>
-
-<app-error></app-error>
-
-<app-footer></app-footer>
-
-<div *ngIf="loading">
-    <app-loading></app-loading>
+  </mat-sidenav-container>
+  <!-- <app-error></app-error> -->
+  <!-- <app-footer></app-footer> -->
+  <!-- <app-loadingInApp></app-loadingInApp> -->
 </div>

@@ -1,0 +1,120 @@
+<form [formGroup]="myForm" novalidate>
+  <div class="row">
+    <div class="col-sm-12 col-lg-4">
+      <mat-form-field>
+        <span matPrefix>{{myCompanie.quoteSettings.prefixIntervention}}</span>
+        <!-- <input matInput type="text" name="Search" placeholder="{{ title | translate}}" [(ngModel)]="autocompleteSearch" (ngModelChange)="searchData()"> -->
+        <input matInput [readonly]="fetchedQuote.statusQuote !== 'pending'" type="number" formControlName="quoteNumber" [(ngModel)]="fetchedQuote.quoteNumber" placeholder="{{'Number Id' | translate}}">
+      </mat-form-field>
+    </div>
+    <!-- <div class="form-group">
+          <input [readonly]="fetchedQuote.statusQuote !== 'pending'" class="form-control" name="EstimateCode" type="number" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.quoteNumber"/>
+        </div> -->
+    <div class="col-sm-12 col-lg-4">
+      <app-autocomplete [readonly]="fetchedQuote.statusQuote !== 'pending'" (clearAutocomplete)="clearAutocompleteClient()" [displayIfContentIsNull]=true [canDelete]=true [enableLink]=true [typeAutocomplete]="'user'" [title]="'Client'" [search]="{isExternalUser:true, userId: search.userId}"
+        [title]="" [singleChoice]="'true'" [arrayContent]="fetchedQuote.clients">
+      </app-autocomplete>
+    </div>
+    <div class="col-sm-12 col-lg-4">
+      <app-autocomplete [readonly]="fetchedQuote.statusQuote !== 'pending'" [displayIfContentIsNull]=true [canDelete]=true [enableLink]=true [typeAutocomplete]="'user'" [title]="'Assigned to'" [search]="{isExternalUser:false, userId: search.assignedToId}"
+        [title]="" [singleChoice]="'true'" [arrayContent]="fetchedQuote.assignedTos">
+      </app-autocomplete>
+    </div>
+    <!-- <app-autocomplete [search]="search" [displayIfContentIsNull]=true [canDelete]=false [enableLink]=true [typeAutocomplete]="'user'" [title]="'Contact'" [search]="{isExternalUser:true}" [title]="" [singleChoice]="'true'" [arrayContent]="fetchedQuote.clients"
+            (getResultAutocomplete)="selectUser($event[0])">
+          </app-autocomplete> -->
+
+    <!-- <div class="form-group">
+          <app-autocomplete
+            *ngIf="fetchedQuote.typeQuote === 'invoice'"
+            [displayIfContentIsNull]=true
+            [canDelete]=false
+            [enableLink]=true [typeAutocomplete]="'quote'" [title]="'Parent Quote'"
+            [search]="{typeQuote:'quote', quoteId: search.parentQuoteId}"
+            [singleChoice]=true
+            [arrayContent]="fetchedQuote.parentQuotes">
+          </app-autocomplete>
+        </div> -->
+    <!-- <div class="form-group">
+          <app-autocomplete [search]="search" [canDelete]=false [enableLink]=true [typeAutocomplete]="'project'" [title]="'Projet'" [singleChoice]="true" [arrayContent]="fetchedQuote.projects">
+          </app-autocomplete>
+        </div> -->
+
+
+
+
+
+    <div class="col-sm-12 col-lg-4">
+
+      <mat-form-field>
+        <input matInput [matDatepicker]="picker" placeholder="{{'Date' | translate}}" [readonly]="fetchedQuote.statusQuote !== 'pending'" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.detail.dateQuote.issueDate">
+        <mat-datepicker-toggle matSuffix *ngIf="fetchedQuote.statusQuote === 'pending'" [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+
+      <!-- <mat-form-field>
+            <input matInput [matDatepicker]="picker2" placeholder="{{'Expiry date' | translate}}" [readonly]="fetchedQuote.statusQuote !== 'pending'" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.detail.dateQuote.expiryDate">
+            <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+            <mat-datepicker #picker2></mat-datepicker>
+          </mat-form-field> -->
+      <!--
+        <div class="form-group">
+          {{'Quote validity date' | translate}}
+          <input [readonly]="fetchedQuote.statusQuote !== 'pending'" type="date" class="form-control" [ngModelOptions]="{standalone: true}" class="form-control" [(ngModel)]="fetchedQuote.detail.dateQuote.expiryDateString">
+        </div> -->
+      <!-- <mat-form-field *ngIf="fetchedQuote.typeQuote === 'quote'">
+          <mat-select [disabled]="fetchedQuote.statusQuote !== 'pending'" placeholder="{{'Status'| translate}}" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.statusQuote">
+            <mat-option *ngFor="let n of statusQuotes" [value]="n.indexStatus">{{n.label | translate}}</mat-option>
+          </mat-select>
+        </mat-form-field> -->
+
+
+
+
+      <!-- <mat-form-field *ngIf="fetchedQuote.typeQuote === 'invoice'">
+          <mat-select [disabled]="fetchedQuote.statusQuote !== 'pending'" placeholder="{{'Status'| translate}}" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.statusQuote">
+            <mat-option *ngFor="let n of statusQuotesInvoice" [value]="n.indexStatus">{{n.label | translate}}</mat-option>
+          </mat-select>
+        </mat-form-field> -->
+
+
+    </div>
+    <div class="col-sm-12 col-lg-4">
+      <div *ngFor="let client of fetchedQuote.historyClients">
+        <h4>
+            <div>{{client.profile.name}} {{client.profile.lastName}}</div>
+          </h4>
+        <div>{{client.profile.companyName}}</div>
+        <div>{{client.email}}</div>
+      </div>
+      <div *ngFor="let client of fetchedQuote.historyClientsCross">
+        <div *ngFor="let singleAddress of client.profile.address">
+
+          <div><b>{{'Address:' | translate}} </b>{{singleAddress.address}} {{singleAddress.address2}}</div>
+          <div>{{singleAddress.zip}} {{singleAddress.city}} {{singleAddress.state}}</div>
+          <div>{{client.profile.phoneNumber}}</div>
+
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-12 col-lg-4">
+      <mat-radio-group class="example-radio-group" [disabled]="fetchedQuote.statusQuote !== 'pending'" [ngModelOptions]="{standalone: true}" [(ngModel)]="fetchedQuote.typeIntervention" (change)="changetypeIntervention()">
+        <mat-radio-button class="example-radio-button" *ngFor="let typeIntervention of  myCompanie.typeInterventions;" [value]="typeIntervention">
+          {{typeIntervention}}
+        </mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <div class="col-12">
+      <mat-form-field>
+        <input matInput [readonly]="fetchedQuote.statusQuote !== 'pending'" type="text" formControlName="name" [(ngModel)]="fetchedQuote.name" placeholder="{{'Title' | translate}}">
+      </mat-form-field>
+    </div>
+    <div class="col-12">
+      <div class="ac">
+        <app-quote-status (quoteStatusChanged)="quoteStatusChanged()" *ngIf="fetchedQuote._id" [fetchedQuote]="fetchedQuote"></app-quote-status>
+      </div>
+    </div>
+
+  </div>
+</form>

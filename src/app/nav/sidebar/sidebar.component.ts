@@ -1,14 +1,12 @@
-import {Component, OnInit, Input, ViewChild} from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
 import {AuthService} from '../../auth/auth.service';
-import {AdminService} from '../../admin/services/admin.service';
 import {Router} from '@angular/router';
-import { UserService} from '../../user/user.service';
-import { User} from '../../user/user.model';
-import { CompanieGuardService} from '../../companie/companieGuard.service'
-import { PaiementGuardService} from '../../user/paiement/paiementGuard.service'
-import { ChangeDetectionStrategy} from '@angular/core';
 import {GlobalEventsManager} from '../../globalEventsManager';
-import {MatSidenav} from '@angular/material';
+// import { UserService} from '../../user/user.service';
+// import { User} from '../../user/user.model';
+// import { PaiementGuardService} from '../../companie/single/paiement/paiementGuard.service'
+// import { ChangeDetectionStrategy} from '@angular/core';
+// import {MatSidenav} from '@angular/material';
 
 @Component({
   selector: 'app-sidebar',
@@ -17,21 +15,20 @@ import {MatSidenav} from '@angular/material';
   styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
-  // @Input() sidenav: any;
+  @Input() sidenav: any;
   // @ViewChild('sidenav') public sidenav: MatSidenav;
-  showNavBar: boolean = false;
-  isLoggedIn: boolean = false;
+  showNavBar = false;
+  isLoggedIn = false;
  // private userId: string = localStorage.getItem('userId');
   // private userId: string;
-  fetchedUser: User = new User();
+  // fetchedUser: User = new User();
 
   constructor(
     private globalEventsManager: GlobalEventsManager,
-    private authService: AuthService,
-    private adminService: AdminService,
-    private userService: UserService,
+    public authService: AuthService,
     private router: Router,
-    // private companieGuardService: CompanieGuardService,
+    // private userService: UserService,
+    // private adminService: AdminService,
     // private paiementGuardService: PaiementGuardService,
   ) {
     this.globalEventsManager.isLoggedInEmitter.subscribe((mode) => {
@@ -53,17 +50,25 @@ export class SidebarComponent implements OnInit {
     //     }
     // });
   }
-  ngAfterViewInit() {}
+  // ngAfterViewInit() {}
   closeSideBar() {
     this.globalEventsManager.showNavBar(false);
   }
+  menuClick() {
+    if (this.sidenav.mode === 'over') {
+      // const this2 = this
+      setTimeout(() => this.globalEventsManager.showNavBar(false))
+    }
+  }
   ngOnInit() {
+    // console.log(this.authService.getCurrentUser())
     if (this.authService.isLoggedIn()) {
       this.globalEventsManager.showNavBar(true);
       this.showNavBar = true;
       //let userId = localStorage.getItem('userId');
 
-      this.fetchedUser = this.authService.getCurrentUser()
+      // this.fetchedUser = this.authService.getCurrentUser()
+      // console.log(this.fetchedUser)
     }
   }
   redirect(typeObj) {
@@ -87,25 +92,26 @@ export class SidebarComponent implements OnInit {
   // }
 
 
-  getUser(id: string) {
+  // getUser(id: string) {
+  //
+  //   this.fetchedUser = this.authService.getCurrentUser()
+  //
+  //   // console.log(this.fetchedUser)
+  //   // let this2 = this
+  //   // setTimeout(function(){
+  //   //     this2.fetchedUser = this2.authService.getCurrentUser()
+  //   // }, 2000);
+  //
+  //   // this.userService.getUser(id)
+  //   //   .subscribe(
+  //   //     res => { this.fetchedUser = res },
+  //   //     error => { console.log(error) }
+  //   //   )
+  // }
 
-    this.fetchedUser = this.authService.getCurrentUser()
-    // console.log(this.fetchedUser)
-    // let this2 = this
-    // setTimeout(function(){
-    //     this2.fetchedUser = this2.authService.getCurrentUser()
-    // }, 2000);
-
-    // this.userService.getUser(id)
-    //   .subscribe(
-    //     res => { this.fetchedUser = res },
-    //     error => { console.log(error) }
-    //   )
-  }
-
-  isCurrentUserIsInSubPeriod() {
-    return this.authService.isCurrentUserIsInSubPeriod()
-  }
+  // isCurrentUserIsInSubPeriod() {
+  //   return this.authService.isCurrentUserIsInSubPeriod()
+  // }
   // showObjHTML(nameObject, typeAccess) {
   //   return this.authService.showObjHTML(nameObject, typeAccess)
   // }
@@ -133,7 +139,7 @@ export class SidebarComponent implements OnInit {
   //   //this.sidenav.open()
   //   this.sidenav.toggle()
   // }
-  isAdmin() {
-    return this.adminService.isAdmin();
-  }
+  // isAdmin() {
+  //   return this.adminService.isAdmin();
+  // }
 }

@@ -1,47 +1,50 @@
-import {Component, OnInit, Input, Output, EventEmitter} from '@angular/core';
+import {Component, OnInit, OnChanges, Input, Output, EventEmitter} from '@angular/core';
 import {AuthService} from '../../auth/auth.service';
 import {UserCalendarService} from '../userCalendar.service';
-import {ProductService} from '../../product/product.service';
-// import { ProjectService} from '../../project/project.service';
-
-import {UserCalendar} from '../userCalendar.model';
-
-import {ToastsManager} from 'ng2-toastr';
-
 import {MatDialog } from '@angular/material';
-import {Router, ActivatedRoute, Params } from '@angular/router';
+import {Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { FormBuilder, FormGroup} from '@angular/forms';
 import { UserService} from '../../user/user.service';
-
-import { DeleteDialog } from '../../deleteDialog/deleteDialog.component';
+import { UserCross} from '../../user/user.model';
+import { DeleteDialogComponent } from '../../nav/deleteDialog/deleteDialog.component';
 import { User } from '../../user/user.model';
-import { Quote } from '../../quote/quote.model';
-import { Product } from '../../product/product.model';
-import { Project } from '../../project/project.model';
-
 import { Search } from '../../shared/shared.model';
+import {UserCalendar} from '../userCalendar.model';
+// import {ProductService} from '../../product/product.service';
+// import { ProjectService} from '../../project/project.service';
+
+
+// import {ToastsManager} from 'ng2-toastr';
+
+// import { Quote } from '../../quote/quote.model';
+// import { Product } from '../../product/product.model';
+// import { Project } from '../../project/project.model';
+
 
 
 
 
 @Component({
-  selector: 'app-userCalendar',
+  selector: 'app-user-calendar',
   templateUrl: './userCalendar.component.html',
   styleUrls: ['../userCalendar.component.css'],
 })
-export class UserCalendarComponent implements OnInit {
-  @Input() fetchedUserCalendar:UserCalendar = new UserCalendar()
+export class UserCalendarComponent implements OnInit, OnChanges {
+  @Input() fetchedUserCalendar: UserCalendar = new UserCalendar()
   @Output() saved: EventEmitter<any> = new EventEmitter();
-  search = new Search()
+  @Output() deleted: EventEmitter<any> = new EventEmitter();
+  @Input() search = new Search()
+  loading = false;
+  fetchedUserCross: UserCross = new UserCross()
   // fetchedUserCalendar: UserCalendar = new UserCalendar()
   myForm: FormGroup;
   constructor(
     private userCalendarService: UserCalendarService,
-    // private projectService: ProjectService,
-    private toastr: ToastsManager,
+    private userService: UserService,
+    // private toastr: ToastsManager,
     public dialog: MatDialog,
-    private activatedRoute: ActivatedRoute,
+    // private activatedRoute: ActivatedRoute,
     private router: Router,
     private location: Location,
     private _fb: FormBuilder,
@@ -49,8 +52,33 @@ export class UserCalendarComponent implements OnInit {
 
   ) {}
   ngOnChanges() {
+    // console.log(this.search)
+    this.fetchedUserCalendar.clients.forEach(client => {
+      this.getUserCross(client._id)
+    })
+    // console.log(this.fetchedUserCalendar)
+
+
     // this.fetchedUserCalendar.users.forEach(client => { this.search.userId = client._id })
     // this.fetchedUserCalendar.assignedTos.forEach(client => { this.search.assignedToId = client._id })
+  }
+  getUserCross(id: string) {
+    this.loading = true
+    this.userService.getUserCross(id)
+      .subscribe(
+        res => {
+          this.loading = false
+          this.fetchedUserCross = res
+          console.log(res)
+        },
+        error => {
+          this.loading = false
+          console.log(error);
+        }
+      )
+  }
+  removeClient() {
+    this.fetchedUserCross = new UserCross()
   }
   ngOnInit() {
     this.myForm = this._fb.group({
@@ -58,33 +86,22 @@ export class UserCalendarComponent implements OnInit {
       description: [''],
     })
 
-    this.activatedRoute.params.subscribe((params: Params) => {
-      if(params['idUserCalendar'])
-        this.getUserCalenddar(params['idUserCalendar'])
-    })
-  }
-  getResultAutocompleteUser(){
-    this.fetchedUserCalendar.clients.forEach(client => {
-      this.search.userId = client._id
-    })
-  }
-
-  getResultAutocompleteProject() {
-    this.fetchedUserCalendar.projects.forEach(project => {
-      this.search.projectId = project._id
-    })
+    // this.activatedRoute.params.subscribe((params: Params) => {
+    //   if(params['idUserCalendar'])
+    //     this.getUserCalenddar(params['idUserCalendar'])
+    // })
   }
   selectUser(user: User) {
     // this.fetchedUserCalendar.users.forEach(client => { this.search.userId = client._id })
     // this.fetchedUserCalendar.assignedTos.forEach(client => { this.search.assignedToId = client._id })
     // this.fetchedUserCalendar.users = [user]
   }
-  selectProject(project: Project) {
-    console.log(project)
-
-    // this.fetchedUserCalendar.clients = project.clients
-    // this.fetchedUserCalendar.projects = [project]
-  }
+  // selectProject(project: Project) {
+  //   console.log(project)
+  //
+  //   // this.fetchedUserCalendar.clients = project.clients
+  //   // this.fetchedUserCalendar.projects = [project]
+  // }
   removeProject() {
     // this.fetchedUserCalendar.clients = []
     // this.fetchedUserCalendar.projects.splice(i, 1);
@@ -92,28 +109,29 @@ export class UserCalendarComponent implements OnInit {
   removeUser() {
     // this.fetchedUserCalendar.users.splice(i, 1);
   }
-  getUserCalenddar(id: string) {
-    this.userCalendarService.getUserCalendar(id)
-      .subscribe(
-        res => {
-          this.fetchedUserCalendar = res
-          // this.fetchedUserCalendar.users.forEach(client => { this.search.userId = client._id })
-          // this.fetchedUserCalendar.assignedTos.forEach(client => { this.search.assignedToId = client._id })
-        },
-        error => {
-          console.log(error);
-        }
-      )
-  }
+  // getUserCalenddar(id: string) {
+  //   this.userCalendarService.getUserCalendar(id)
+  //     .subscribe(
+  //       res => {
+  //         this.fetchedUserCalendar = res
+  //         console.log(res)
+  //         // this.fetchedUserCalendar.users.forEach(client => { this.search.userId = client._id })
+  //         // this.fetchedUserCalendar.assignedTos.forEach(client => { this.search.assignedToId = client._id })
+  //       },
+  //       error => {
+  //         console.log(error);
+  //       }
+  //     )
+  // }
 
 
   openDialogDelete() {
-    let dialogRefDelete = this.dialog.open(DeleteDialog)
+    const dialogRefDelete = this.dialog.open(DeleteDialogComponent)
     dialogRefDelete.afterClosed().subscribe(result => {
       if (result) {
         let this2 = this;
         this.onDelete(this.fetchedUserCalendar._id).then(function(){
-          this2.saved.emit()
+          this2.deleted.emit()
           // this2.router.navigate(['paiementQuote']);
         })
 
@@ -127,7 +145,7 @@ export class UserCalendarComponent implements OnInit {
       this2.userCalendarService.deleteUserCalendar(id)
         .subscribe(
           res => {
-            this2.toastr.success('Great!', res.message);
+            this2.authService.successNotif(res.message);
 
             resolve(res)
           },
@@ -139,29 +157,37 @@ export class UserCalendarComponent implements OnInit {
       })
   }
 
+linkClicked() {
+  this.save()
+}
+
+// selectClient(result) {
+//   console.log(result)
+// }
+newInterventionCLicked() {
+  this.save()
+}
 
     save() {
-      // this.fetchedUserCalendar.projects.forEach(project => {
-      //   this.fetchedUserCalendar.clients = project.clients
-      //   this.fetchedUserCalendar.assignedTos = project.assignedTos
-      // })
 
       if(this.fetchedUserCalendar._id) {
         this.userCalendarService.updateUserCalendar(this.fetchedUserCalendar)
           .subscribe(
             res => {
-              this.toastr.success('Great!', res.message)
+              console.log(res)
+              this.authService.successNotif(res.message)
               this.saved.emit(res)
             },
             error => {
-              this.toastr.error('error!', error)
+              // this.toastr.error('error!', error)
             }
           )
       } else {
         this.userCalendarService.saveUserCalendar(this.fetchedUserCalendar)
           .subscribe(
             res => {
-              this.toastr.success('Great!', res.message)
+              console.log(res)
+              this.authService.successNotif(res.message)
               this.saved.emit(res)
             },
             error => {console.log(error)}

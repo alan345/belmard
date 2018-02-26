@@ -4,14 +4,16 @@ import {Response, Headers, Http, RequestOptions} from '@angular/http';
 import {ErrorService} from '../../errorHandler/error.service';
 import {Form} from './form.model';
 import {ToastsManager} from 'ng2-toastr';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
+// import 'rxjs/add/operator/map';
+// import 'rxjs/add/operator/catch';
 import { AuthService } from '../../auth/auth.service';
+import { Config } from '../../shared/config.model';
+
 
 @Injectable()
 export class FormService {
 
-  private url: string = '/';
+  private url = Config.backendURL;
   private token: string = localStorage.getItem('id_token');
   private userId: string = localStorage.getItem('userId');
   private forms: Form[] = [];
@@ -32,7 +34,7 @@ export class FormService {
     let options = new RequestOptions({ headers: headers, search: search });
 
     return this.http.get(this.url + 'forms/page/' + page, options)
-      .timeout(8000)
+      .timeout(15000)
       .map((response: Response) => {
 
         return response.json();
@@ -48,7 +50,7 @@ export class FormService {
   //   let headers = new Headers({'Content-Type': 'application/json'});
   //   headers.append('Authorization', '' + this.token);
   //   return this.http.get(this.url + 'forms/form/' + userId, {headers: headers})
-  //     .timeout(8000)
+  //     .timeout(15000)
   //     .map((response: Response) => {
   //
   //       const forms = response.json().forms;
@@ -67,11 +69,11 @@ export class FormService {
   // }
 
 
-  deleteForm(form: Form) {
-    this.forms.splice(this.forms.indexOf(form), 1);
-    let headers = new Headers({'Content-Type': 'application/json'});
+  deleteForm(formId: string) {
+    // this.forms.splice(this.forms.indexOf(formId), 1);
+    const headers = new Headers({'Content-Type': 'application/json'});
     headers.append('Authorization', '' + this.token);
-    return this.http.delete(this.url + 'forms/' + form, {headers: headers})
+    return this.http.delete(this.url + 'forms/' + formId, {headers: headers})
       .map((response: Response) => {
         this.toastr.success('Form deleted successfully!');
         response.json();

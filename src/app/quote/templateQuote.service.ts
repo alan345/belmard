@@ -3,24 +3,22 @@ import {Observable} from 'rxjs/Observable';
 import {Response, Headers, Http, RequestOptions} from '@angular/http';
 import {ErrorService} from '../errorHandler/error.service';
 import {TemplateQuote} from './templateQuote.model';
-import {ToastsManager} from 'ng2-toastr';
 import { AuthService } from '../auth/auth.service';
+import { Config } from '../shared/config.model';
 
 
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
+// import {ToastsManager} from 'ng2-toastr';
+// import 'rxjs/add/operator/map';
+// import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class TemplateQuoteService {
-
-
-  private url: string = '/';
-
+  private url = Config.backendURL;
 
   constructor(
     private http: Http,
     private errorService: ErrorService,
-    private toastr: ToastsManager,
+    // private toastr: ToastsManager,
     private authService: AuthService) {}
 
   getTemplateQuotes(page: number, search: any) {
@@ -28,7 +26,7 @@ export class TemplateQuoteService {
     headers.append('Authorization', '' + this.authService.currentUser.token)
     let options = new RequestOptions({ headers: headers, search: search});
     return this.http.get(this.url + 'templateQuote/page/' + page , options)
-      .timeout(5000)
+      .timeout(15000)
       .map((response: Response) => {
         const templateQuotes = response.json();
         return templateQuotes;
@@ -45,7 +43,7 @@ export class TemplateQuoteService {
       headers.append('Authorization', '' + this.authService.currentUser.token)
       let options = new RequestOptions({ headers: headers, search: search});
       return this.http.get(this.url + 'templateQuote/graph/' + year , options)
-        .timeout(5000)
+        .timeout(15000)
         .map((response: Response) => {
           const paiementTemplateQuotes = response.json();
           return paiementTemplateQuotes;

@@ -1,13 +1,13 @@
 import { Injectable, Inject, EventEmitter } from '@angular/core';
 import { TRANSLATIONS } from './translations'; // import our opaque token
-import { AuthService } from   '../auth/auth.service';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable()
 export class TranslateService {
 
-	private _currentLang: string;
+	// private _currentLang: string;
 	private PLACEHOLDER = '%';
-	private _defaultLang: string;
+	// private _defaultLang: string;
   private _fallback: boolean;
 
 	public onLangChanged: EventEmitter<string> = new EventEmitter<string>();
@@ -44,8 +44,8 @@ export class TranslateService {
 	// }
 
 	private translate(key: string): string {
-    let translation = key;
-		let langAuth = this.authService.getLanguage()
+    const translation = key;
+		const langAuth = this.authService.getLanguage()
     // found in current language
     if (this._translations[langAuth] && this._translations[langAuth][key]) {
       return this._translations[langAuth][key];
@@ -65,7 +65,7 @@ export class TranslateService {
     return translation;
   }
 
-  public replace(word: string = '', words: string | string[] = '') {
+  public replace(word = '', words: string | string[] = '') {
     let translation: string = word;
 
     const values: string[] = [].concat(words);

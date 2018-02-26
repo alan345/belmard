@@ -1,67 +1,72 @@
-import {Injectable} from '@angular/core';
-
-import {UserAuth} from './user.model';
-
-
-import {Observable} from 'rxjs/Observable';
-import {Response, Headers, Http, RequestOptions} from '@angular/http';
-
+import { Injectable } from '@angular/core';
+import { UserAuth } from './user.model';
+import { Observable } from 'rxjs/Observable';
+import { Response, Headers, Http } from '@angular/http';
 import 'rxjs/operator/map';
 import 'rxjs/operator/catch';
-import {ToastsManager} from 'ng2-toastr';
-import {ErrorService} from '../errorHandler/error.service';
-import {Reset} from './resetPassword';
-import {tokenNotExpired} from 'angular2-jwt';
-import {Router} from '@angular/router';
-import {JwtHelper} from 'angular2-jwt';
+import { ToastsManager } from 'ng2-toastr';
+import { Error2Service } from '../errorHandler/error2.service';
+import { Reset } from './resetPassword';
+import { tokenNotExpired } from 'angular2-jwt';
+import { JwtHelper } from 'angular2-jwt';
+import { User } from '../user/user.model';
+import { GlobalEventsManager } from '../globalEventsManager';
+import { Config } from '../shared/config.model';
 // import {UserService} from '../user/user.service'
-import {User} from '../user/user.model'
-import {GlobalEventsManager} from '../globalEventsManager';
+// import { Router } from '@angular/router';
 
 
 @Injectable()
 
 export class AuthService {
-  private url: string = '/';
+  private url = Config.backendURL;
+  private isMobileSizeScreen = false;
   public token: string;
-  public currentUser={
+  public langParam = 'fr';
+  public currentUser = {
     userId: '',
     token: '',
     // user: {}
-  //  companieId:[]
+    //  companieId:[]
 
   }
   jwtHelper: JwtHelper = new JwtHelper();
   //public userId: string;
-  user:User
+  user: User
 
   constructor(
     private http: Http,
-    private errorService: ErrorService,
+    private error2Service: Error2Service,
     private toastr: ToastsManager,
-    private router: Router,
     private globalEventsManager: GlobalEventsManager,
+    // private router: Router,
     // private userService: UserService,
   ) {
 
-      this.user = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')).user : null;
-      // set token if saved in local storage
-      //console.log('AuthService called')
-      var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-      this.token = currentUser && currentUser.token;
-      this.currentUser = currentUser;
+    this.user = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')).user : null;
 
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    this.token = currentUser && currentUser.token;
+    this.currentUser = currentUser;
+
+
+    this.globalEventsManager.isMobileSizeScreenEmitter.subscribe((mode) => {
+      if (mode !== null) {
+        // console.log(mode)
+        this.isMobileSizeScreen = mode;
+      }
+    });
 
   }
 
   // sending request to back end to register our user
   signup(user: UserAuth) {
     const body = JSON.stringify(user);
-    const headers = new Headers({'Content-Type': 'application/json'});
-    return this.http.post('/user/register', body, {headers: headers})
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    return this.http.post(this.url + 'user/register', body, { headers: headers })
       .map(response => response.json())
       .catch((error: Response) => {
-        this.errorService.handleError(error.json());
+        this.error2Service.handleError(error.json());
         return Observable.throw(error.json());
       });
   }
@@ -69,25 +74,30 @@ export class AuthService {
   // sending request to back end to login the user
   signin(user: UserAuth) {
     const body = JSON.stringify(user);
-    const headers = new Headers({'Content-Type': 'application/json'});
-    return this.http.post('/user/login', body, {headers: headers})
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    return this.http.post(this.url + 'user/login', body, { headers: headers })
       .map((response: Response) => {
-        let token = response.json() && response.json().token;
-        let userId = response.json() && response.json().userId;
+        const token = response.json() && response.json().token;
+        const userId = response.json() && response.json().userId;
         // let user = response.json() && response.json().user;
         if (token) {
 
-          let currentUser = {
+          const currentUser = {
             userId: userId,
             token: token,
             // user: user
           }
 
+
           this.token = token
           this.currentUser = currentUser
           this.user = this.jwtHelper.decodeToken(token).user
-          this.globalEventsManager.showNavBar(true);
-        //  console.log(this.currentUser)
+          console.log(this.user)
+          if (!this.isMobileSizeScreen) {
+            setTimeout(() => this.globalEventsManager.showNavBar(true), 700)
+          }
+          //  console.log(this.currentUser)
+          // console.log(this.user)
           localStorage.setItem('currentUser', JSON.stringify(currentUser))
         }
 
@@ -97,13 +107,17 @@ export class AuthService {
         // this.userId = userId
         //
         //
-        //console.log(response)
+
         return response.json()
       })
       .catch((error: Response) => {
-        this.errorService.handleError(error.json());
+        this.error2Service.handleError(error.json());
         return Observable.throw(error.json());
       });
+  }
+
+  successNotif(message: string) {
+    this.toastr.success('')
   }
   //
   // refreshCookiesOfCurrentUser() {
@@ -132,22 +146,22 @@ export class AuthService {
   //       return response.json().user;
   //     })
   //     .catch((error: Response) => {
-  //       this.errorService.handleError(error.json());
+  //       this.error2Service.handleError(error.json());
   //       return Observable.throw(error.json());
   //     });
   // }
 
 
+  // isAdmin() {
+  //   // let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
+  //   // if (this.user) {
+  //   //   if (this.user.role[0] === 'admin') {
+  //   //     return true;
+  //   //   }
+  //   // }
+  //   // return false;
+  // }
 
-  isAdmin() {
-    // let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
-    if (this.user) {
-      if (this.user.role[0] === 'admin') {
-        return true;
-      }
-    }
-    return false;
-  }
 
 
 
@@ -165,9 +179,15 @@ export class AuthService {
     // return false;
   }
 
+  setLangParam(langParam: string) {
+    this.langParam = langParam
+  }
+
+
   getLanguage() {
-    // let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
-    // console.log(userInfo.user.profile)
+    if (!this.user) {
+      return this.langParam
+    }
     return this.user.profile.language
   }
 
@@ -186,41 +206,73 @@ export class AuthService {
   }
   isCurrentUserIsInSubPeriod() {
     // console.log(this.user)
-    return true
+    // return true
 
-    // let itemFounded = false
-    // this.user.ownerCompanies.forEach(companie => {
-    //   if (new Date(companie.planDetail.current_period_end) > new Date())
-    //     itemFounded = true
-    // });
-    //
-    // return itemFounded
+    let itemFounded = false
+    this.user.ownerCompanies.forEach(companie => {
+      if (new Date(companie.planDetail.current_period_end) > new Date())
+        itemFounded = true
+    });
+
+    return itemFounded
   }
-  isCurrentUserHasCompanie(){
+  isCurrentUserHasCompanie() {
     // console.log(this.user)
     // let userInfo = localStorage.getItem('id_token') ? this.jwtHelper.decodeToken(localStorage.getItem('id_token')) : null;
-    if(this.user.ownerCompanies.length)
+    if (this.user.ownerCompanies.length) {
       return true
+    }
     return false
   }
 
+  getRightsToUse() {
+    if (this.user.rights.length) {
+      return this.user.rights
+    } else {
+      return this.user.rightsInApp
+    }
+  }
 
   isCurentUserHasAccess(nameObject, typeAccess) {
 
     // if(this.user.isAdminOfHisCompanie)
     //   return true
-    if(!this.user.rights.length)
-      return true
+    // if(!this.user.rights.length)
+    //   return true
 
 
-    return this.user.rights.some(right => {
+    // let rightCheck = this.user.rights.some(right => {
+    //   return right.detailRight.permissions.some(permission => {
+    //     if(permission.namePermission === nameObject)
+    //       return permission.access.some(access => {
+    //         return access.typeAccess === typeAccess
+    //       })
+    //   })
+    // })
+    // console.log(this.user)
+    // let rightsInAppCheck: any
+
+
+    // let rightToUse: any
+    // if (this.user.rights.length) {
+    //   rightToUse = this.user.rights
+    // } else {
+    //   rightToUse = this.user.rightsInApp
+    // }
+    // console.log(this.user.rightsInApp)
+    return this.user.rightsInApp.some(right => {
       return right.detailRight.permissions.some(permission => {
-        if(permission.namePermission === nameObject)
+        if (permission.namePermission === nameObject) {
           return permission.access.some(access => {
-            return access.typeAccess === typeAccess
+            return access.typeAccess === typeAccess;
           })
+        }
       })
     })
+
+    // return rightsInAppCheck
+
+
   }
 
   showObjHTML(nameObject, typeAccess) {
@@ -228,12 +280,23 @@ export class AuthService {
     // console.log(this.isCurentUserHasAccess(nameObject, typeAccess))
     // console.log(this.isCurrentUserIsInSubPeriod())
     // console.log(this.isCurrentUserHasCompanie())
-    if(
-      this.isCurentUserHasAccess(nameObject, typeAccess) &&
-      this.isCurrentUserIsInSubPeriod() &&
-      this.isCurrentUserHasCompanie()
-    )
-    return true
+
+    if (this.user.isExternalUser) {
+      if ( this.isCurentUserHasAccess(nameObject, typeAccess)) {
+        return true
+      }
+    } else {
+      if (nameObject === 'settings' && typeAccess === 'read') {
+        return true;
+      }
+      if (
+        this.isCurentUserHasAccess(nameObject, typeAccess)
+        && this.isCurrentUserIsInSubPeriod()
+        // && this.isCurrentUserHasCompanie()
+      ) {
+        return true
+      }
+    }
   }
 
   // isCurrentUserIsInSubPeriod(){
@@ -280,11 +343,11 @@ export class AuthService {
   // sending request for password reset
   forget(reset: Reset) {
     const body = JSON.stringify(reset);
-    const headers = new Headers({'Content-Type': 'application/json'});
-    return this.http.post('/user/forgot', body, {headers: headers})
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    return this.http.post('/user/forgot', body, { headers: headers })
       .map((response: Response) => response.json())
       .catch((error: Response) => {
-        this.errorService.handleError(error.json());
+        this.error2Service.handleError(error.json());
         return Observable.throw(error.json());
       });
   }
@@ -292,11 +355,11 @@ export class AuthService {
   // sending request with the newly created password
   reset(reset: Reset) {
     const body = JSON.stringify(reset);
-    const headers = new Headers({'Content-Type': 'application/json'});
-    return this.http.post('/user/reset/' + reset.token, body, {headers: headers})
+    const headers = new Headers({ 'Content-Type': 'application/json' });
+    return this.http.post('/user/reset/' + reset.token, body, { headers: headers })
       .map((response: Response) => response.json())
       .catch((error: Response) => {
-        this.errorService.handleError(error.json());
+        this.error2Service.handleError(error.json());
         return Observable.throw(error.json());
       });
   }
@@ -315,7 +378,7 @@ export class AuthService {
     //gooplus
     //location.reload();
 
-    this.toastr.info('You have been logged out');
+    this.toastr.info('Ok!');
   }
 
   // check if the user is logged in or not, if token is expired, token is deleted from localstorage
@@ -332,28 +395,28 @@ export class AuthService {
     return tokenNotExpired();
   }
 
-
-    HTMLDatetoIsoDate(htmlDate){
-      let year = Number(htmlDate.toString().substring(0, 4))
-      let month = Number(htmlDate.toString().substring(5, 7))
-      let day = Number(htmlDate.toString().substring(8, 10))
-      return new Date(year, month - 1, day)
-    }
-    isoDateToHtmlDate(isoDate){
-      let date = new Date(isoDate);
-      let dtString = ''
-      let monthString = ''
-      if (date.getDate() < 10) {
-        dtString = '0' + date.getDate();
-      } else {
-        dtString = String(date.getDate())
-      }
-      if (date.getMonth()+1 < 10) {
-        monthString = '0' + Number(date.getMonth()+1);
-      } else {
-        monthString = String(date.getMonth()+1);
-      }
-      return date.getFullYear()+'-' + monthString + '-'+dtString
-    }
+  //
+  // HTMLDatetoIsoDate(htmlDate){
+  //   let year = Number(htmlDate.toString().substring(0, 4))
+  //   let month = Number(htmlDate.toString().substring(5, 7))
+  //   let day = Number(htmlDate.toString().substring(8, 10))
+  //   return new Date(year, month - 1, day)
+  // }
+  // isoDateToHtmlDate(isoDate){
+  //   let date = new Date(isoDate);
+  //   let dtString = ''
+  //   let monthString = ''
+  //   if (date.getDate() < 10) {
+  //     dtString = '0' + date.getDate();
+  //   } else {
+  //     dtString = String(date.getDate())
+  //   }
+  //   if (date.getMonth()+1 < 10) {
+  //     monthString = '0' + Number(date.getMonth()+1);
+  //   } else {
+  //     monthString = String(date.getMonth()+1);
+  //   }
+  //   return date.getFullYear()+'-' + monthString + '-'+dtString
+  // }
 
 }

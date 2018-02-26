@@ -1,0 +1,13 @@
+<div class="ac">
+  <h5>Stripe vous permet de recevoir les paiements par carte bleue. Inscrivez-vous ou connectez-vous en cliquant sur le bouton.</h5>
+  <div *ngIf="!accountConnectStripe.id">
+    <img class="pointer" (click)="goToLinkAuthorizeConnect()" src="./assets/images/stripe/light-on-dark.png" />
+  </div>
+  <div *ngIf="accountConnectStripe.id">
+    <br>
+    <mat-icon color="accent" class="bigIcon">cloud_done</mat-icon>
+    <br>
+    <button mat-raised-button color="warn" (click)="deauthorizeConnect()">{{'Disconnect' | translate}}</button>
+  </div>
+</div>
+<app-loadingInApp [loading]="loading"></app-loadingInApp>

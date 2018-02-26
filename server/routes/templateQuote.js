@@ -38,6 +38,7 @@ router.use('/', function (req, res, next) {
       User
       .findById(decoded.user._id)
       .populate({ path: 'rights', model: 'Right'})
+      .populate({ path: 'ownerCompanies', model: 'Companie'})
       .exec(function (err, doc) {
         if (err) {
           return res.status(500).json({
@@ -167,7 +168,7 @@ router.post('/', function (req, res, next) {
     if (err) {
       return res.status(403).json({
         title: 'There was an issue',
-        error: {message: 'The email you entered already exists'}
+        error: {message: err}
       });
     }
     res.status(200).json({
@@ -241,6 +242,7 @@ router.get('/page/:page', function (req, res, next) {
             currentPage : currentPage,
             itemsPerPage : itemsPerPage
           },
+          query: req.query,
           data: item
         })
       })

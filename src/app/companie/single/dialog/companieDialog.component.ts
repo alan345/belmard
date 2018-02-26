@@ -1,11 +1,9 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialogRef} from '@angular/material';
 // import { EditCompanieComponent }  from '../editCompanie.component';
 
-
-
 @Component({
-  selector: 'edit-options-dialog',
+  selector: 'app-edit-options-dialog',
   templateUrl: './companieDialog.component.html',
 })
 

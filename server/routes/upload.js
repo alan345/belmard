@@ -60,7 +60,8 @@ router.use('/', function (req, res, next) {
 // setting up multer
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    var dest = 'server/uploads/forms/' + req.user._id;  // i know, i should use dirname blah blah :)
+    // var dest = 'server/uploads/forms/' + req.user._id;  // i know, i should use dirname blah blah :)
+    var dest = path.join(__dirname, '../..', 'server/uploads/forms/' + req.user._id)
     var stat = null;
     try {
       stat = fs.statSync(dest);

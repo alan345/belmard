@@ -16,6 +16,17 @@ export class GlobalEventsManager {
     public isLoggedInEmitter: Observable<boolean> = this._isLoggedIn.asObservable();
 
 
+    private _isLoadding: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
+    public isLoaddingEmitter: Observable<boolean> = this._isLoadding.asObservable();
+
+
+    private _showBackButton: BehaviorSubject<number> = new BehaviorSubject<number>(null);
+    public showBackButtonEmitter: Observable<number> = this._showBackButton.asObservable();
+
+
+    private _isMobileSizeScreen: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(null);
+    public isMobileSizeScreenEmitter: Observable<boolean> = this._isMobileSizeScreen.asObservable();
+
 
     constructor() {}
 
@@ -27,6 +38,15 @@ export class GlobalEventsManager {
     }
     isLoggedIn(ifShow: boolean) {
         this._isLoggedIn.next(ifShow);
+    }
+    isLoadding(ifShow: boolean) {
+        this._isLoadding.next(ifShow);
+    }
+    showBackButton(ifShow: number) {
+        this._showBackButton.next(ifShow);
+    }
+    isMobileSizeScreen(ifShow: boolean) {
+        this._isMobileSizeScreen.next(ifShow);
     }
 
 

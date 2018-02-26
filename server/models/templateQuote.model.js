@@ -14,17 +14,28 @@ var templateQuote = new Schema({
         bucketProducts:[
           {
             typeRow:{type: String},
-            title:{type: String, default: ['']},
-            // isProduct: {type: Boolean, default: [true]},
-            // title: {type: String},
+            title: {type: String, default: ['']},
             priceWithoutTaxes: {type: Number},
             priceWithTaxes: {type: Number},
-            totalPriceWithoutTaxes: {type: Number},
-            totalPriceWithTaxes: {type: Number},
+            priceWithQuantity: {type: Number},
+            priceWithTaxesWithQuantity: {type: Number},
+            priceWithQuantityWithDiscount: {type: Number},
+            priceWithTaxesWithQuantityWithDiscount: {type: Number},
             vat: {type: Number},
-            quantity: {type: Number},
+            quantity: {type: Number, default: 1},
+            length: {type: Number, default: 1},
+            width: {type: Number, default: 1},
+            surface: {type: Number, default: 1},
             discount: {type: Number},
             productInit: [{type: Schema.Types.ObjectId, ref: 'User'}],
+
+            priceWithDiscount: {type: Number},
+            priceWithQuantityWithDiscount: {type: Number},
+            priceWithTaxesWithQuantityWithDiscount: {type: Number},
+            priceWithTaxesWithDiscount: {type: Number},
+
+
+
 
           }
         ]

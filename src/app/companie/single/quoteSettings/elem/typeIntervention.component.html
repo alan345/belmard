@@ -1,0 +1,15 @@
+<mat-form-field>
+  <input matInput [(ngModel)]="valueToAdd" placeholder="{{'Type intervention' | translate}}">
+  <button matSuffix mat-raised-button color="primary" (click)="add()">
+    <mat-icon>add</mat-icon>
+  </button>
+</mat-form-field>
+
+<div *ngFor="let value of fetchedCompanie.typeInterventions; let i=index;">
+  {{value}}
+  <button mat-icon-button color="warn" (click)="remove(i)">
+    <mat-icon>clear</mat-icon>
+  </button>
+</div>
+
+<!-- <app-loginInApp *ngIf="showLoginInApp" (loginInAppDone)="loginInAppDone()"></app-loginInApp> -->

@@ -1,50 +1,53 @@
-<!-- <div *ngIf="showHeader" class="row">
-  <div class="col-md-1"></div>
-  <div class="col-md-2">
-    <button type="button" class="btn btn-warning" (click)="goBack()"><i class="fa fa-chevron-left"><a> Retour</a></i></button>
+<div class="container" style="width: 100%">
+  <app-header-title [showBack]=-1 [title]="'Home'" [icon]="'home'" [showBack]=false></app-header-title>
+  <div class="row">
+    <div class="col-12 ac">
+      <mat-button-toggle-group>
+        <mat-button-toggle (click)="previousYear()">
+          <mat-icon>keyboard_arrow_left</mat-icon>
+        </mat-button-toggle>
+        <mat-button-toggle value="center" disabled>
+          {{year}}
+        </mat-button-toggle>
+        <mat-button-toggle (click)="nextYear()">
+          <mat-icon>keyboard_arrow_right</mat-icon>
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
   </div>
-  <div class="col-md-6">
-    <h3 class="title">Paiement</h3></div>
-  <div class="col-md-3"></div>
-</div> -->
-
-<!-- <app-header [nameObject]="'reporting'"></app-header> -->
-
-
-<div class="container nopad"  style="width: 100%" >
-  <div class="hdform">
-      <h3> <i class="fa fa10 fa-bar-chart" aria-hidden="true"></i>{{'Reporting' | translate}}</h3>
-  
+  <div class="row">
+    <div *ngIf="ready" class="col-lg-6 col-12 marginTop">
+      <mat-card class="ac h100">
+        <mat-tab-group>
+          <mat-tab label="{{'Month' | translate}}">
+            <div class="bigNumber">{{emptyRowPaid.data[month] | round | currency}}</div>
+            {{'Interventions paid this month' | translate}}
+          </mat-tab>
+          <mat-tab label="{{'Year' | translate}}">
+            <div class="bigNumber">{{totalPaid | round | currency}}</div>
+            {{'Interventions paid this year' | translate}}
+          </mat-tab>
+        </mat-tab-group>
+      </mat-card>
     </div>
-
-  <div class="">
-    <div class="col-12">
-      <div *ngFor="let d of lineChartData; let i= index;">
-        <div *ngIf="i==0">
-          {{d.year}}
-        </div>
-      </div>
+    <div *ngIf="ready" class="col-lg-6 col-12 marginTop">
+      <mat-card class="ac">
+        <h4>{{'$ Interventions' | translate}}</h4>
+        <canvas baseChart style="height: 100%;" class="h50 bgw" [colors]="lineChartColors" [datasets]="graphData" [labels]="lineChartLabels" [options]="lineChartOptions" [legend]="lineChartLegend" [chartType]="'line'"></canvas>
+      </mat-card>
     </div>
-
-
-
-    <div class="col-12">
-
-      <canvas baseChart  style="height: 50%; width: 50%;" class="h50 bgw" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors" [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+    <div *ngIf="ready" class="col-lg-6 col-12 marginTop">
+      <mat-card class="ac">
+        <h4>{{'Interventions per year' | translate}}</h4>
+        <canvas baseChart style="height: 100%;" class="h50 bgw" [data]="donutChartDataGraph1.data" [colors]="doughnutChartColors" [labels]="donutChartDataGraph1.labels" [options]="lineChartOptions" [legend]="lineChartLegend" [chartType]="'doughnut'"></canvas>
+      </mat-card>
     </div>
-
-    <div class="col-12">
-      <table class="table table-responsive table-condensed  bgw">
-        <tr>
-          <th></th>
-          <th *ngFor="let label of lineChartLabels">{{label}}</th>
-        </tr>
-        <tr *ngFor="let d of lineChartData">
-          <td>{{d.label}}</td>
-          <td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
-        </tr>
-      </table>
-
+    <div *ngIf="ready" class="col-lg-6 col-12 marginTop">
+      <mat-card class="ac">
+        <h4>{{'# Interventions' | translate}}</h4>
+        <canvas baseChart style="height: 100%;" class="h50 bgw" [datasets]="graphDataCount" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColorsBar" [legend]="lineChartLegend" [chartType]="'bar'"></canvas>
+      </mat-card>
     </div>
   </div>
 </div>
+<app-loadingInApp [loading]="loading"></app-loadingInApp>
