@@ -280,23 +280,24 @@ export class AuthService {
     // console.log(this.isCurentUserHasAccess(nameObject, typeAccess))
     // console.log(this.isCurrentUserIsInSubPeriod())
     // console.log(this.isCurrentUserHasCompanie())
+    return true;
 
-    if (this.user.isExternalUser) {
-      if ( this.isCurentUserHasAccess(nameObject, typeAccess)) {
-        return true
-      }
-    } else {
-      if (nameObject === 'settings' && typeAccess === 'read') {
-        return true;
-      }
-      if (
-        this.isCurentUserHasAccess(nameObject, typeAccess)
-        && this.isCurrentUserIsInSubPeriod()
-        // && this.isCurrentUserHasCompanie()
-      ) {
-        return true
-      }
-    }
+    // if (this.user.isExternalUser) {
+    //   if ( this.isCurentUserHasAccess(nameObject, typeAccess)) {
+    //     return true
+    //   }
+    // } else {
+    //   if (nameObject === 'settings' && typeAccess === 'read') {
+    //     return true;
+    //   }
+    //   if (
+    //     this.isCurentUserHasAccess(nameObject, typeAccess)
+    //     && this.isCurrentUserIsInSubPeriod()
+    //     // && this.isCurrentUserHasCompanie()
+    //   ) {
+    //     return true
+    //   }
+    // }
   }
 
   // isCurrentUserIsInSubPeriod(){
