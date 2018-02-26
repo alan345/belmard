@@ -53,6 +53,8 @@ module.exports = {
         }
       })
 
+      // belmard only
+      typesRightToUse = TypeRights.gold
 
       var permissionGooplus = []
       typesRightToUse.forEach(typesRight => {
