@@ -40,7 +40,7 @@ export class AppComponent implements AfterViewInit {
     public toastr: ToastsManager,
     public vcr: ViewContainerRef
   ) {
-    console.log('%cMirabelle.io', 'font-size: 4.5em; font-weight: bolder; background: #ff4351; color: #222');
+    console.log('%cMirabelle.io', 'font-size: 4.5em; font-weight: bolder; background: #a81010; color: #222');
     console.log("http://mirabelle.io");
     // dateAdapter.setLocale('fr');
     // if (window.screen.width < 1000) {
