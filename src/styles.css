@@ -370,7 +370,7 @@ textarea::placeholder {
   margin-bottom: 20px;
   padding-top: 10px;
   padding-bottom: 10px;
-  color: #ff4351;
+  color: #a81010;
   text-align: center;
 }*/
 
@@ -437,15 +437,15 @@ app-root {
 }
 
 .bg-goo {
-  background: #ff4351;
+  background: #a81010;
   /* For browsers that do not support gradients */
-  background: -webkit-linear-gradient(left, #ff4351, #ffcb3d);
+  background: -webkit-linear-gradient(left, #a81010, #860000);
   /* For Safari 5.1 to 6.0 */
-  background: -o-linear-gradient(right, #ff4351, #ffcb3d);
+  background: -o-linear-gradient(right, #a81010, #860000);
   /* For Opera 11.1 to 12.0 */
-  background: -moz-linear-gradient(right, #ff4351, #ffcb3d);
+  background: -moz-linear-gradient(right, #a81010, #860000);
   /* For Firefox 3.6 to 15 */
-  background: linear-gradient(to right, #ff4351, #ffcb3d);
+  background: linear-gradient(to right, #a81010, #860000);
   /* Standard syntax */
 }
 
@@ -556,7 +556,7 @@ a {
 
 .active {
   color: #ffffff !important;
-  background-color: #ff4351;
+  background-color: #a81010;
 }
 
 .active2 {
