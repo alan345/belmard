@@ -33,7 +33,7 @@ module.exports = {
             <body style="margin: 0; padding: 0; font-family: 'Montserrat', sans-serif;">
               <table align="center" border="0" cellpadding="0" cellspacing="0" width="600" style="border: 1px solid #cccccc;">
                 <tr>
-                  <td align="center" bgcolor="#ff4351" height="150">
+                  <td align="center" bgcolor="#a81010" height="150">
                     <img
                       src="http://mirabelle.io/wp-content/uploads/2018/01/Logo-mail.png"
                       alt="Email de la part de Mirabelle" style="display: block; color: #ffffff;"
@@ -59,7 +59,7 @@ module.exports = {
                         <td align="center" style="background-color: #fff; padding: 10px 15px;">
                           <a
                             href="https://app.mirabelle.io"
-                            style="background-color: #ff4351; padding: 10px 15px; border: none; outline: none; color: #ffffff; text-decoration: none;"
+                            style="background-color: #a81010; padding: 10px 15px; border: none; outline: none; color: #ffffff; text-decoration: none;"
                           >
                             Se connecter
                           </a>
