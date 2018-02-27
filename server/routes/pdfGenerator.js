@@ -68,7 +68,7 @@ p, a {
   }
 
   .bgh {
-    background-color: #ff4351;
+    background-color: #a81010;
     color: #fff;
     height: 30px;
 
@@ -154,7 +154,7 @@ p, a {
     font-style: normal;
     font-variant: normal;
     font-weight: 300;
-    background-color: #ff4351;
+    background-color: #a81010;
     color: #fff;
 
   }
