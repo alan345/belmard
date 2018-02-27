@@ -131,7 +131,7 @@ module.exports = {
                 <tr>
                   <td align="center" bgcolor="#ff4351" height="150">
                     <img
-                      src="http://mirabelle.io/wp-content/uploads/2018/01/Logo-mail.png"
+                      src="/assets/images/BELMARD-noir-noir.png"
                       alt="Email de la part de Mirabelle" style="display: block; color: #ffffff;"
                     />
                   </td>
@@ -532,7 +532,7 @@ module.exports = {
                 <tr>
                   <td align="center" bgcolor="#ff4351" height="150">
                     <img
-                      src="http://mirabelle.io/wp-content/uploads/2018/01/Logo-mail.png"
+                      src="/assets/images/BELMARD-noir-noir.png"
                       alt="Email de la part de Mirabelle" style="display: block; color: #ffffff;"
                     />
                   </td>
