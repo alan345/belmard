@@ -487,7 +487,7 @@ router.post('/', function(req, res, next) {
   //                   </td>
   //                 </tr>
   //                 <tr>
-  //                   <td align="center" style="background-color: #ff4351; padding: 10px 15px; cursor: pointer;">
+  //                   <td align="center" style="background-color: #a81010; padding: 10px 15px; cursor: pointer;">
   //                     <a
   //                       href="http://${req.headers.host}/#/user/reset/${token}"
   //                       style="color: #ffffff; text-decoration: none;"
