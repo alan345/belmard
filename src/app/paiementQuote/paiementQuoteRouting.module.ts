@@ -23,7 +23,7 @@ export const routes: Routes = [
   // {path: ':id', component: PaiementQuoteDetailComponent, canActivate: [AuthGuardService, PaiementGuardService]},
   // {path: 'public/:idPaiementQuote', component: EditPaiementQuoteComponent},
   // {path: ':isExpense/:isGooplusPaiement', component: PaiementQuotesComponent, canActivate: [AuthGuardService, PaiementGuardService]},
-  {path: ':isExpense', component: PaiementQuotesComponent, canActivate: [AuthGuardService, PaiementGuardService]},
+  {path: ':isExpense', component: PaiementQuotesComponent, canActivate: [AuthGuardService]},
 
 ];
 
