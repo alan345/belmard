@@ -12,7 +12,7 @@ import { AuthGuardService} from '../auth/authguard.service';
 
 export const routes: Routes = [
 
-  {path: 'new', component: QuoteComponent, canActivate: [AuthGuardService, PaiementGuardService]},
+  {path: 'new', component: QuoteComponent, canActivate: [AuthGuardService]},
   {path: ':idQuote', component: QuoteComponent, canActivate: [AuthGuardService]},
   {path: 'list/:searchType', component: QuotesComponent, canActivate: [AuthGuardService]},
   // {path: 'new/:idClient', component: QuoteComponent, canActivate: [AuthGuardService, PaiementGuardService]},
