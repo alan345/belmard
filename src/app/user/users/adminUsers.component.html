@@ -14,10 +14,10 @@
       <table class="table table-hover">
         <thead>
           <tr>
-            <th class="centre tdunder">
+            <th *ngIf="search.isExternalUser" class="centre tdunder">
               {{'Type' | translate}}
             </th>
-            <th class="centre tdunder">
+            <th  *ngIf="search.isExternalUser" class="centre tdunder">
               Sociéte
             </th>
             <th class="centre tdunder">
@@ -38,8 +38,8 @@
         </thead>
         <tbody class="clienttbl">
           <tr *ngFor="let user of fetchedUsers" [routerLink]="['/user/' + user._id]" routerLinkActive="active">
-            <td class="centre tdunder">{{user.profile.typeClient}}</td>
-            <td class="centre tdunder">{{user.profile.companyName}}</td>
+            <td  *ngIf="search.isExternalUser" class="centre tdunder">{{user.profile.typeClient}}</td>
+            <td  *ngIf="search.isExternalUser" class="centre tdunder">{{user.profile.companyName}}</td>
             <td class="centre tdunder">{{user.profile.lastName}}</td>
             <td class="centre tdunder">
               <div *ngFor="let singleAddress of user.profile.address">
