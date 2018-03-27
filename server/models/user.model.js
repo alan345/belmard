@@ -45,6 +45,15 @@ var user = new Schema({
       phoneNumber:{type: String, default: ['']},
       typeClient:{type: String, default: ['']},
       colorCalendar:{type: String, default: ['#ad2121']},
+      address:[{
+        nameAddress:  {type: String, default: ['']},
+        address : {type: String, default: ['']},
+        address2 : {type: String, default: ['']},
+        city : {type: String, default: ['']},
+        state : {type: String, default: ['']},
+        zip : {type: String, default: ['']},
+        country : {type: String, default: ['']},
+      }],      
       // statusHouse:{type: String, default: ['']},
       // otherData:{type: String, default: ['']},
       // detailHouse:{
