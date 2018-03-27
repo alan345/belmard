@@ -73,6 +73,23 @@ export class Profile {
   phoneNumber = '';
   otherData = '';
   companyName = '';
+  typeMaison = '';
+  accessType = '';
+  source = '';
+  etage = '';
+  codeentree = '';
+  surface = '';
+  typeEscalier = '';
+
+
+  // accessType: [''],
+  // typeMaison: [''],
+  // source: [''],
+  // etage: [''],
+  // codeentree: [''],
+  // surface: [''],
+  // typeEscalier: [''],
+
 
   // parentUser: User[] = [];
   profilePicture: Form[] = [];

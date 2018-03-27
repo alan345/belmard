@@ -69,7 +69,7 @@ export class DetailsUserComponent implements OnInit {
 
   // fetchedCompanies: Companie[] = []
   // autocompleteCompanie = '';
-
+  typeClientArray = ['Individual', 'Company']
   fetchedTypeUsers = []
   // autocompleteTypeUser = '';
 

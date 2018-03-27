@@ -34,19 +34,19 @@
           <mat-icon>phone</mat-icon>
         </a>
       </mat-form-field>
-      <!-- <div *ngIf="fetchedUser.isExternalUser">
+      <div *ngIf="fetchedUser.isExternalUser">
         <mat-form-field>
           <mat-select placeholder="{{'Type Client' | translate}}" [(ngModel)]="fetchedUser.profile.typeClient" formControlName="typeClient">
             <mat-option [value]="" disabled selected>Type</mat-option>
             <mat-option *ngFor="let n of typeClientArray" [value]="n">{{n | translate}}</mat-option>
           </mat-select>
         </mat-form-field>
-      </div> -->
-      <!-- <div *ngIf="fetchedUser.isExternalUser">
+      </div>
+      <div *ngIf="fetchedUser.isExternalUser">
         <mat-form-field *ngIf="fetchedUser.profile.typeClient ==='Company'">
           <input matInput type="text" formControlName="accessType" [(ngModel)]="fetchedUser.profile.companyName" placeholder="{{'Company name' | translate}}">
         </mat-form-field>
-      </div> -->
+      </div>
     </div>
     <div class="col-4">
       <mat-form-field *ngIf="isUserIsMyself()">
@@ -56,21 +56,55 @@
       </mat-form-field>
       <app-loginInApp style="width:100%;" *ngIf="showLoginInApp" (loginInAppDone)="showLoginInApp=false"></app-loginInApp>
 
-      <div class="col-sm-12 col-lg-6 col-lg-4">
+      <div class="col-12">
         <app-address [isSingleAddress]="!fetchedUser.isExternalUser" [addresses]="fetchedUser.profile.address"></app-address>
       </div>
     </div>
 
     <div class="col-4">
-      <div class="col-sm-12 col-lg-6 col-lg-4">
+      <div class="col-12">
         <h5>{{'Divers' | translate}}</h5>
-        <div *ngIf="fetchedUser.isExternalUser">
-        </div>
+        <!-- <div *ngIf="fetchedUser.isExternalUser">
+        </div> -->
         <div class="row" *ngIf="authService.showObjHTML('right', 'read') && !fetchedUser.isExternalUser && !fetchedUser.isAdminOfHisCompanie">
           <app-autocomplete [title]="'Right'" (getResultAutocomplete)="getResultAutocompleteRights()" (clearAutocomplete)="clearAutocompleteRight()" [typeAutocomplete]="'right'" [arrayContent]="fetchedUser.rights">
           </app-autocomplete>
           <app-loginInApp *ngIf="showLoginInApp" [infoOnly]=true (loginInAppDone)="loginInAppDone()"></app-loginInApp>
         </div>
+
+
+        <div *ngIf="fetchedUser.isExternalUser">
+          <mat-form-field>
+            <mat-select placeholder="Maison/appartement" [(ngModel)]="fetchedUser.profile.typeMaison" formControlName="typeMaison">
+              <mat-option [value]="'maison'">Maison</mat-option>
+              <mat-option [value]="'appartement'">Appartement</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <mat-form-field>
+            <input matInput type="text" formControlName="surface" [(ngModel)]="fetchedUser.profile.surface" placeholder="Surface">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput type="text" formControlName="codeentree" [(ngModel)]="fetchedUser.profile.codeentree" placeholder="Code Entree">
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput type="text" formControlName="etage" [(ngModel)]="fetchedUser.profile.etage" placeholder="Etage">
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select placeholder="Escalier/ascenseur" [(ngModel)]="fetchedUser.profile.typeEscalier" formControlName="typeEscalier">
+              <mat-option [value]="'escalier'">Escalier</mat-option>
+              <mat-option [value]="'ascenseur'">Ascenseur</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field>
+            <input matInput type="text" formControlName="source" [(ngModel)]="fetchedUser.profile.source" placeholder="source">
+          </mat-form-field>
+
+
+
+        </div>
+
+
         <div>
           <mat-form-field>
             <textarea matInput formControlName="otherData" [(ngModel)]="fetchedUser.profile.otherData" placeholder="{{'Other' | translate}}">

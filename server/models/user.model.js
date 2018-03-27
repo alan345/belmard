@@ -39,6 +39,22 @@ var user = new Schema({
       name: {type: String, default: ['']},
       // sourceContact: {type: String, default: ['']},
       companyName: {type: String, default: ['']},
+
+
+
+      lastName: {type: String, default: ['']},
+      phoneNumber: {type: String, default: ['']},
+      otherData: {type: String, default: ['']},
+      typeMaison: {type: String, default: ['']},
+      accessType: {type: String, default: ['']},
+      source: {type: String, default: ['']},
+      etage: {type: String, default: ['']},
+      codeentree: {type: String, default: ['']},
+      surface: {type: String, default: ['']},
+      typeEscalier: {type: String, default: ['']},
+
+
+
       // fax:{type: String, default: ['']},
       title: {type: String, default: ['']},
       lastName: {type: String, default: ['']},
