@@ -58,7 +58,6 @@ var user = new Schema({
       // fax:{type: String, default: ['']},
       title: {type: String, default: ['']},
       lastName: {type: String, default: ['']},
-      phoneNumber:{type: String, default: ['']},
       typeClient:{type: String, default: ['']},
       colorCalendar:{type: String, default: ['#ad2121']},
       address:[{

@@ -15,15 +15,20 @@
         <thead>
           <tr>
             <th class="centre tdunder">
-              {{'Firstname' | translate}}
-              <app-sort (orderBy)="orderBy($event)" [search]="search" [filedToOrder]="'profile.name'"></app-sort>
+              {{'Type' | translate}}
+            </th>
+            <th class="centre tdunder">
+              Sociéte
             </th>
             <th class="centre tdunder">
               {{'Name' | translate}}
               <app-sort (orderBy)="orderBy($event)" [search]="search" [filedToOrder]="'profile.lastName'"></app-sort>
             </th>
             <th class="centre tdunder hideMobile">
-              {{'Title' | translate}}
+              Ville
+            </th>
+            <th class="centre tdunder hideMobile">
+              Tel
             </th>
             <th class="centre tdunder hideMobile">
               {{'Email' | translate}}
@@ -33,10 +38,16 @@
         </thead>
         <tbody class="clienttbl">
           <tr *ngFor="let user of fetchedUsers" [routerLink]="['/user/' + user._id]" routerLinkActive="active">
-            <td class="centre tdunder">{{user.profile.name}}</td>
+            <td class="centre tdunder">{{user.profile.typeClient}}</td>
+            <td class="centre tdunder">{{user.profile.companyName}}</td>
             <td class="centre tdunder">{{user.profile.lastName}}</td>
+            <td class="centre tdunder">
+              <div *ngFor="let singleAddress of user.profile.address">
+                {{singleAddress.city}}
+              </div>
+            </td>
             <td class="centre tdunder hideMobile">
-              {{user.profile.title | translate}}
+              {{user.profile.phoneNumber}}
             </td>
             <td class="centre tdunder hideMobile">
               {{user.email}}
