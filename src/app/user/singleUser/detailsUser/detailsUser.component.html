@@ -49,12 +49,6 @@
       </div>
     </div>
     <div class="col-4">
-      <mat-form-field *ngIf="isUserIsMyself()">
-        <mat-select (change)="onChangeLang()" [(ngModel)]="fetchedUser.profile.language" name="language" formControlName="language">
-          <mat-option *ngFor="let n of languageArray" [value]="n">{{n}}</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <app-loginInApp style="width:100%;" *ngIf="showLoginInApp" (loginInAppDone)="showLoginInApp=false"></app-loginInApp>
 
       <div class="col-12">
         <app-address [isSingleAddress]="!fetchedUser.isExternalUser" [addresses]="fetchedUser.profile.address"></app-address>
