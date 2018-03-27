@@ -28,6 +28,9 @@ export class newObjDialogComponent implements OnInit {
   @Input() typeObj = '';
   @Input() title = '';
   @Input() icon = '';
+  @Input() labelButton = '';
+  // @Input() showOnlyButton = '';
+
   @Output() saved: EventEmitter<any> = new EventEmitter();
   @Output() cliked: EventEmitter<any> = new EventEmitter();
 

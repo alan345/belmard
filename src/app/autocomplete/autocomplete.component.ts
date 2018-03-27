@@ -35,6 +35,7 @@ export class AutocompleteComponent implements OnChanges{
   @Input() enableLink = true;
   @Input() displayIfContentIsNull = true;
   @Input() readonly = false;
+  @Input() showOnlyButton = false;
 
   @Output() getResultAutocomplete: EventEmitter<any> = new EventEmitter();
   @Output() linkClicked: EventEmitter<any> = new EventEmitter();
