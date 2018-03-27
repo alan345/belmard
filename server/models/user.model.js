@@ -55,9 +55,9 @@ var user = new Schema({
         country : {type: String, default: ['']},
       }],
 
-            
+
       // statusHouse:{type: String, default: ['']},
-      // otherData:{type: String, default: ['']},
+      otherData:{type: String, default: ['']},
       // detailHouse:{
       //   typeHouse:{type: String, default: ['']},
       //   surface:{type: Number, default: 0},
