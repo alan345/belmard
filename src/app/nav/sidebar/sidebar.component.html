@@ -19,6 +19,21 @@
       </mat-expansion-panel-header>
     </mat-expansion-panel>
     <mat-expansion-panel
+      (click)="menuClick()"
+      class="noOutline"
+      *ngIf="authService.showObjHTML('userCalendar', 'read')"
+      [routerLink]="['/userCalendar']" routerLinkActive="active"
+      hideToggle="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <mat-icon>event_available</mat-icon>
+        </mat-panel-title>
+        <mat-panel-description>
+          {{'Planning' | translate}}
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+    </mat-expansion-panel>    
+    <mat-expansion-panel
       class="noOutline"
       *ngIf="authService.showObjHTML('client', 'read')"
       (click)="menuClick()"
@@ -33,21 +48,7 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
     </mat-expansion-panel>
-    <mat-expansion-panel
-      (click)="menuClick()"
-      class="noOutline"
-      *ngIf="authService.showObjHTML('userCalendar', 'read')"
-      [routerLink]="['/userCalendar']" routerLinkActive="active"
-      hideToggle="true">
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          <mat-icon>event_available</mat-icon>
-        </mat-panel-title>
-        <mat-panel-description>
-          {{'Planning' | translate}}
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-    </mat-expansion-panel>
+
     <mat-expansion-panel
       (click)="menuClick()"
       class="noOutline"
