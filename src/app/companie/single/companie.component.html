@@ -21,7 +21,7 @@
       </mat-action-row>
     </mat-expansion-panel>
 
-    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
+<!--    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)">
       <mat-expansion-panel-header>
         <mat-panel-title>
           <mat-icon>explore</mat-icon>
@@ -32,9 +32,9 @@
       </mat-expansion-panel-header>
       <app-debug *ngIf="debugMode" [fetchedCompanie]="fetchedCompanie"></app-debug>
       <app-paiement [fetchedCompanie]="fetchedCompanie" *ngIf="step === 1"></app-paiement>
-    </mat-expansion-panel>
+    </mat-expansion-panel>  -->
 
-    <mat-expansion-panel *ngIf="authService.isCurrentUserIsInSubPeriod()" [expanded]="step === 2" (opened)="setStep(2)">
+    <mat-expansion-panel [expanded]="step === 2" (opened)="setStep(2)">
       <mat-expansion-panel-header>
         <mat-panel-title>
           <mat-icon>credit_card</mat-icon>
@@ -46,7 +46,7 @@
       <app-connect-stripe *ngIf="step === 2" [fetchedCompanie]="fetchedCompanie"></app-connect-stripe>
     </mat-expansion-panel>
 
-    <mat-expansion-panel *ngIf="authService.isCurrentUserIsInSubPeriod()"  [expanded]="step === 3" (opened)="setStep(3)">
+    <mat-expansion-panel [expanded]="step === 3" (opened)="setStep(3)">
       <mat-expansion-panel-header>
         <mat-panel-title>
           <mat-icon>dns</mat-icon>
@@ -63,7 +63,7 @@
       </mat-action-row>
     </mat-expansion-panel>
 
-    <mat-expansion-panel *ngIf="authService.isCurrentUserIsInSubPeriod()"  [expanded]="step === 4" (opened)="setStep(4)">
+    <mat-expansion-panel [expanded]="step === 4" (opened)="setStep(4)">
       <mat-expansion-panel-header>
         <mat-panel-title>
           <mat-icon>event</mat-icon>
@@ -80,7 +80,7 @@
       </mat-action-row>
     </mat-expansion-panel>
 
-    <mat-expansion-panel *ngIf="authService.isCurrentUserIsInSubPeriod()"  [expanded]="step === 5" (opened)="setStep(5)">
+    <mat-expansion-panel  [expanded]="step === 5" (opened)="setStep(5)">
       <mat-expansion-panel-header>
         <mat-panel-title>
           <mat-icon>build</mat-icon>
