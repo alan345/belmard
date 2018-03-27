@@ -24,9 +24,13 @@
               <mat-icon>delete</mat-icon>
             </button>
           </div>
+
+          <button *ngIf="step === 0" [disabled]="!myForm.valid" mat-mini-fab color="primary" (click)="saveAndCreateQuote()">
+            <mat-icon aria-label="Next">forward</mat-icon> Enregistrer et créer devis
+          </button>
           <button *ngIf="step === 0" [disabled]="!myForm.valid" mat-mini-fab color="primary" (click)="saveAndNextStep()">
-          <mat-icon aria-label="Next">forward</mat-icon>
-        </button>
+            <mat-icon aria-label="Next">forward</mat-icon>
+          </button>
         </div>
       </mat-action-row>
     </mat-expansion-panel>

@@ -217,6 +217,15 @@ export class UserComponent implements OnInit {
   // }
 
 
+  saveAndCreateQuote() {
+    this.save()
+    const this2=this
+    setTimeout(_=> {
+      if (this2.fetchedUser._id) {
+        this.router.navigate(['/quote/new', {quoteId: '', userId: '', assignedToId: this2.fetchedUser._id}])
+      }
+    }, 300)
+  }
   saveAndNextStep() {
     this.save()
     this.nextStep()
