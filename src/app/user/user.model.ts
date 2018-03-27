@@ -28,6 +28,7 @@ export class User {
 export class UserRegister {
 
   email = '';
+  phoneNumber = '';
 
   profile: Profile = new Profile();
   password = '';

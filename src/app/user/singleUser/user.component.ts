@@ -184,6 +184,7 @@ export class UserComponent implements OnInit {
         colorCalendar: [''],
         otherData: [''],
         name: [''],
+        phoneNumber: [''],
         lastName: ['', [Validators.required, Validators.minLength(2)]],
         title: ['', [Validators.required, Validators.minLength(1)]],
       })
@@ -245,6 +246,7 @@ export class UserComponent implements OnInit {
           res => {
             this.authService.successNotif(res.message)
             this.loading = false
+            this.saved.emit(res.obj)
             // this.nextStep()
           },
           error => {
@@ -261,6 +263,7 @@ export class UserComponent implements OnInit {
           this.authService.successNotif(res.message)
           this.fetchedUser = res.obj
           this.loading = false
+          this.saved.emit(res.obj)
           // this.nextStep()
           // this.saved.emit(res.obj)
           // if(redirect == 'profile')

@@ -31,7 +31,7 @@
       </mat-action-row>
     </mat-expansion-panel>
 
-    <mat-expansion-panel *ngIf="authService.showObjHTML('client', 'read') && fetchedUser._id" [expanded]="step === 1" (opened)="setStep(1)">
+    <!-- <mat-expansion-panel *ngIf="authService.showObjHTML('client', 'read') && fetchedUser._id" [expanded]="step === 1" (opened)="setStep(1)">
       <mat-expansion-panel-header>
         <mat-panel-title>
           <mat-icon>assignment_ind</mat-icon>
@@ -41,7 +41,7 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <app-user-cross *ngIf="step === 1" [fetchedUser]="fetchedUser" (saved)=savedCrossUser($event)></app-user-cross>
-    </mat-expansion-panel>
+    </mat-expansion-panel> -->
 
     <mat-expansion-panel *ngIf="fetchedUser._id && fetchedUser.isExternalUser && !search.isFromAutocomplete" [expanded]="step === 2" (opened)="setStep(2)">
       <mat-expansion-panel-header>
