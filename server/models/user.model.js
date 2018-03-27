@@ -53,7 +53,9 @@ var user = new Schema({
         state : {type: String, default: ['']},
         zip : {type: String, default: ['']},
         country : {type: String, default: ['']},
-      }],      
+      }],
+
+            
       // statusHouse:{type: String, default: ['']},
       // otherData:{type: String, default: ['']},
       // detailHouse:{
