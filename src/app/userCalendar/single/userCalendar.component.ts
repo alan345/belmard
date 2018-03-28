@@ -78,7 +78,7 @@ export class UserCalendarComponent implements OnInit, OnChanges {
   //     )
   // }
   removeClient() {
-    this.fetchedUserCross = new UserCross()
+    // this.fetchedUserCross = new UserCross()
   }
   ngOnInit() {
     this.myForm = this._fb.group({
