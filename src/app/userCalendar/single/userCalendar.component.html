@@ -20,8 +20,6 @@
           <mat-icon>flight_land</mat-icon>
           {{fetchedUserCalendar.end | date:'medium'}}
         </div>
-
-
       </div>
       <div class="row">
         <div class="col-lg-6">
@@ -29,7 +27,6 @@
             <br>
             <h5>Client existant</h5>
           </div>
-
           <div class="col-lg-12">
             <app-autocomplete [canCreateNewObj]=false [typeAutocomplete]="'user'" [search]="{userId:search.clientId, isExternalUser:true}" (linkClicked)="linkClicked()" [title]="'Client'" [singleChoice]="'true'" [arrayContent]="fetchedUserCalendar.clients" (clearAutocomplete)="removeClient()">
             </app-autocomplete>
@@ -53,7 +50,7 @@
             <h5>Nouveau client</h5>
           </div>
           <div *ngIf="!fetchedUserCalendar.clients.length" class="col-lg-12 tac">
-            <app-autocomplete [showOnlyButton]=true [typeAutocomplete]="'user'" [search]="{userId:search.clientId, isExternalUser:true}" (linkClicked)="linkClicked()" [title]="'Client'" [singleChoice]="'true'" [arrayContent]="fetchedUserCalendar.clients" (clearAutocomplete)="removeClient()">
+            <app-autocomplete [showOnlyButton]=true [typeAutocomplete]="'user'" [search]="{userId:search.clientId, isExternalUser:true, userCalendarId:fetchedUserCalendar._id}" (linkClicked)="linkClicked()" [title]="'Client'" [singleChoice]="'true'" [arrayContent]="fetchedUserCalendar.clients" (clearAutocomplete)="removeClient()">
             </app-autocomplete>
           </div>
           <div class="col-lg-12">
@@ -66,33 +63,36 @@
         </div>
 
       </div>
-      <div class="row">
-        <div class="tac col-lg-6" *ngFor="let address of fetchedUserCross.profile.address">
-          <div>
-            <a target="_blank" href="https://www.google.com/maps/dir/?api=1&destination={{address.address}}+{{address.address2}}+{{address.zip}}+{{address.city}}+{{address.state}}+{{address.country}}">
-              <mat-icon class="bigIcon" color="primary">map</mat-icon>
+      <div *ngFor="let client of fetchedUserCalendar.clients">
+        <div class="row">
+          <!-- {{client.profile.address|json}} -->
+          <div class="tac col-lg-6" *ngFor="let address of client.profile.address">
+            <div>
+              <a target="_blank" href="https://www.google.com/maps/dir/?api=1&destination={{address.address}}+{{address.address2}}+{{address.zip}}+{{address.city}}+{{address.state}}+{{address.country}}">
+                <mat-icon class="bigIcon" color="primary">map</mat-icon>
+              </a>
+            </div>
+            <div>
+              <a target="_blank" href="https://www.google.com/maps/dir/?api=1&destination={{address.address}}+{{address.address2}}+{{address.zip}}+{{address.city}}+{{address.state}}+{{address.country}}">
+              {{'Go to destination' | translate}}
             </a>
+            </div>
           </div>
-          <div>
-            <a target="_blank" href="https://www.google.com/maps/dir/?api=1&destination={{address.address}}+{{address.address2}}+{{address.zip}}+{{address.city}}+{{address.state}}+{{address.country}}">
-            {{'Go to destination' | translate}}
-          </a>
-          </div>
-        </div>
-        <div class="tac col-lg-6" *ngIf="fetchedUserCross.profile.phoneNumber">
-          <div>
-            <a href="tel:{{fetchedUserCross.profile.phoneNumber}}">
-              <mat-icon class="bigIcon" color="primary">phone</mat-icon>
+          <div class="tac col-lg-6" *ngIf="client.profile.phoneNumber">
+            <div>
+              <a href="tel:{{client.profile.phoneNumber}}">
+                <mat-icon class="bigIcon" color="primary">phone</mat-icon>
+              </a>
+            </div>
+            <div>
+              <a href="tel:{{client.profile.phoneNumber}}">
+              {{'Call client' | translate}}
             </a>
+            </div>
           </div>
-          <div>
-            <a href="tel:{{fetchedUserCross.profile.phoneNumber}}">
-            {{'Call client' | translate}}
-          </a>
-          </div>
-        </div>
 
 
+        </div>
       </div>
     </form>
 

@@ -38,7 +38,7 @@
         </thead>
         <tbody class="clienttbl">
           <tr *ngFor="let user of fetchedUsers" [routerLink]="['/user/' + user._id]" routerLinkActive="active">
-            <td  *ngIf="search.isExternalUser" class="centre tdunder">{{user.profile.typeClient}}</td>
+            <td  *ngIf="search.isExternalUser" class="centre tdunder">{{user.profile.typeClient | translate}}</td>
             <td  *ngIf="search.isExternalUser" class="centre tdunder">{{user.profile.companyName}}</td>
             <td class="centre tdunder">{{user.profile.lastName}}</td>
             <td class="centre tdunder">

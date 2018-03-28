@@ -36,7 +36,7 @@ export class UserCalendarComponent implements OnInit, OnChanges {
   @Output() deleted: EventEmitter<any> = new EventEmitter();
   @Input() search = new Search()
   loading = false;
-  fetchedUserCross: UserCross = new UserCross()
+  // fetchedUserCross: UserCross = new UserCross()
   // fetchedUserCalendar: UserCalendar = new UserCalendar()
   myForm: FormGroup;
   constructor(
@@ -53,30 +53,30 @@ export class UserCalendarComponent implements OnInit, OnChanges {
   ) {}
   ngOnChanges() {
     // console.log(this.search)
-    this.fetchedUserCalendar.clients.forEach(client => {
-      this.getUserCross(client._id)
-    })
+    // this.fetchedUserCalendar.clients.forEach(client => {
+    //   this.getUserCross(client._id)
+    // })
     // console.log(this.fetchedUserCalendar)
 
 
     // this.fetchedUserCalendar.users.forEach(client => { this.search.userId = client._id })
     // this.fetchedUserCalendar.assignedTos.forEach(client => { this.search.assignedToId = client._id })
   }
-  getUserCross(id: string) {
-    this.loading = true
-    this.userService.getUserCross(id)
-      .subscribe(
-        res => {
-          this.loading = false
-          this.fetchedUserCross = res
-          console.log(res)
-        },
-        error => {
-          this.loading = false
-          console.log(error);
-        }
-      )
-  }
+  // getUserCross(id: string) {
+  //   this.loading = true
+  //   this.userService.getUserCross(id)
+  //     .subscribe(
+  //       res => {
+  //         this.loading = false
+  //         this.fetchedUserCross = res
+  //         console.log(res)
+  //       },
+  //       error => {
+  //         this.loading = false
+  //         console.log(error);
+  //       }
+  //     )
+  // }
   removeClient() {
     this.fetchedUserCross = new UserCross()
   }

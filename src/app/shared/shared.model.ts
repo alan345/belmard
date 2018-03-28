@@ -10,6 +10,7 @@ export class Search {
   quoteId = '';
   userId = '';
   clientId = '';
+  userCalendarId = '';
   paiementQuoteId = '';
   endDate: Date = new Date();
   startDate: Date = new Date();

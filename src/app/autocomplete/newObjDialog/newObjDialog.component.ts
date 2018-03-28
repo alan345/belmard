@@ -86,7 +86,7 @@ export class newObjDialogComponent implements OnInit {
       if (typeObj == 'product')
         dialogComp = ProductDialogComponent
 
-
+        // console.log(this.search)
       const dialogRef = this.mdDialog.open(dialogComp, {
         data: {
           search: this.search
