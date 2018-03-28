@@ -50,7 +50,7 @@
             <h5>Nouveau client</h5>
           </div>
           <div *ngIf="!fetchedUserCalendar.clients.length" class="col-lg-12 tac">
-            <app-autocomplete [showOnlyButton]=true [typeAutocomplete]="'user'" [search]="{userId:search.clientId, isExternalUser:true, userCalendarId:fetchedUserCalendar._id}" (linkClicked)="linkClicked()" [title]="'Client'" [singleChoice]="'true'" [arrayContent]="fetchedUserCalendar.clients" (clearAutocomplete)="removeClient()">
+            <app-autocomplete [showOnlyButton]=true [typeAutocomplete]="'user'" [search]="{userId:search.clientId, isExternalUser:true, userCalendarId:fetchedUserCalendar._id, isDialog:true}" (linkClicked)="linkClicked()" [title]="'Client'" [singleChoice]="'true'" [arrayContent]="fetchedUserCalendar.clients" (clearAutocomplete)="removeClient()">
             </app-autocomplete>
           </div>
           <div class="col-lg-12">

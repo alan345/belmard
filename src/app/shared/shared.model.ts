@@ -23,7 +23,7 @@ export class Search {
   year = 0;
   isFromAutocomplete = false;
   isAdmin = false;
-  // isSigned = false;
+  isDialog = false;
   statusQuote = '';
 };
 
