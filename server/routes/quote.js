@@ -398,7 +398,9 @@ router.put('/:id/signature', function(req, res, next) {
       item.statusQuote = 'signed'
       var base64Data = req.body.drawingSignature.base64.replace(/^data:image\/png;base64,/, '');
       const namePicture = item._id + '_' + new Date().getTime() + '.png'
-      require('fs').writeFile('./server/uploads/signature/' + namePicture, base64Data, 'base64', function(err) {
+      // require('fs').writeFile('./server/uploads/signature/' + namePicture, base64Data, 'base64', function(err) {
+      require('fs').writeFile(path.join(__dirname, '../..', 'server/uploads/signature/' + namePicture), base64Data, 'base64', function(err) {
+
 
         if(err) {
           console.log(err);
