@@ -469,7 +469,7 @@ router.post('/', function(req, res, next) {
   //       <head>
   //         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   //         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  //         <title>Email d'invitation à Mirabelle</title>
+  //         <title>Email d'invitation à Belmard</title>
   //         <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"></link>
   //       </head>
   //       <body style="margin: 0; padding: 0; font-family: 'Montserrat', sans-serif;">
@@ -483,7 +483,7 @@ router.post('/', function(req, res, next) {
   //                 </tr>
   //                 <tr>
   //                   <td style="padding: 15px 0 30px 0;">
-  //                     Vous êtes invité à rejoindre l'application Mirabelle
+  //                     Vous êtes invité à rejoindre l'application Belmard
   //                   </td>
   //                 </tr>
   //                 <tr>
@@ -506,7 +506,7 @@ router.post('/', function(req, res, next) {
   //       var mailOptions = {
   //         to: user.email,
   //         from: config.userGmail,
-  //         subject: 'Mirabelle | Invitation',
+  //         subject: 'Belmard | Invitation',
   //         html: html
   //       };
   //       mailer.sendMail(mailOptions, function(err) {

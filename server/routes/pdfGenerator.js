@@ -321,7 +321,7 @@ module.exports = {
 
                       // html +=  'http://localhost/uploads/forms/' + form.owner + '/' + form.imagePath
                       // html +=  '<img class="imglogo" src="http://belmard-renovation.fr/wp-content/uploads/2017/10/belmard_logo_100.png">'
-                      // html +=  '<img class="imglogo" src="' + 'https://app.mirabelle.io/uploads/forms/' + form.owner + '/' + form.imagePath + '">'
+                      // html +=  '<img class="imglogo" src="' + 'https://app.belmard-batiment.fr/uploads/forms/' + form.owner + '/' + form.imagePath + '">'
                       html +=  '<img class="imglogo" src="file:///' + path.join(__dirname,  '..') + '/uploads/forms/' + form.owner + '/' + form.imagePath + '">'
                       // html +=  '<img class="imglogo" src="file:///Users/alan/app/saas/server/uploads/forms/5a15d4b688f48195f24e0345/5de6.alan.jpeg">'
                       // html +=   __dirname + '/uploads/forms/' + form.owner + '/' + form.imagePath

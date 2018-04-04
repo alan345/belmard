@@ -35,8 +35,8 @@ module.exports = {
                 <tr>
                   <td align="center" bgcolor="#a81010" height="150">
                     <img
-                      src="http://mirabelle.io/wp-content/uploads/2018/01/Logo-mail.png"
-                      alt="Email de la part de Mirabelle" style="display: block; color: #ffffff;"
+                      src="http://belmard-batiment.fr/wp-content/uploads/2018/01/Logo-mail.png"
+                      alt="Email de la part de Belmard" style="display: block; color: #ffffff;"
                     />
                   </td>
                 </tr>
@@ -51,14 +51,14 @@ module.exports = {
                       <tr>
                         <td style="padding: 15px 0 30px 0;">
 
-                              Bienvenue sur Mirabelle.io. Votre inscription s'est déroulée avec succès. Vous pouvez désormais accéder aux fonctionnalités de Mirabelle.io.
+                              Bienvenue sur belmard-batiment.fr. Votre inscription s'est déroulée avec succès. Vous pouvez désormais accéder aux fonctionnalités de belmard-batiment.fr.
                               Votre email de connexion est <b>${user.email}</b>, vous êtes le seul à connaître votre mot de passe.
                         </td>
                       </tr>
                       <tr>
                         <td align="center" style="background-color: #fff; padding: 10px 15px;">
                           <a
-                            href="https://app.mirabelle.io"
+                            href="https://app.belmard-batiment.fr"
                             style="background-color: #a81010; padding: 10px 15px; border: none; outline: none; color: #ffffff; text-decoration: none;"
                           >
                             Se connecter
@@ -67,13 +67,13 @@ module.exports = {
                       </tr>
                       <tr>
                         <td style="padding: 15px 0 30px 0;">
-                          L'équipe Mirabelle vous remercie de votre confiance.
+                          L'équipe Belmard vous remercie de votre confiance.
 
                         </td>
                       </tr>
                       <tr>
                         <td style="padding: 15px 0 30px 0;">
-                           Mirabelle, Faites vos devis chez vos clients!
+                           Belmard,
                         </td>
                       </tr>
                     </table>
@@ -84,10 +84,10 @@ module.exports = {
                     <table border="0" cellpadding="0" cellspacing="0" width="100%">
                      <tr>
                       <td style="padding: 15px 15px 15px 15px;">
-                        <a href="https://www.mirabelle.io/" style="text-decoration: none;">Site Web Mirabelle</a>
+                        <a href="https://www.belmard-batiment.fr/" style="text-decoration: none;">Site Web Belmard</a>
                       </td>
                       <td style="padding: 15px 15px 15px 15px;">
-                        <a href="mailto:hello@mirabelle.io?Subject=false%reset" style="text-decoration: none;">Nous contacter</a>
+                        <a href="mailto:hello@belmard-batiment.fr?Subject=false%reset" style="text-decoration: none;">Nous contacter</a>
                       </td>
                      </tr>
                     </table>
@@ -103,8 +103,8 @@ module.exports = {
 
     var mailOptions = {
       to: user.email,
-      from: 'hello@mirabelle.io',
-      subject: 'Bienvenue sur Mirabelle!',
+      from: 'hello@belmard-batiment.fr',
+      subject: 'Bienvenue sur Belmard!',
       html: html
     };
     mailer.sendMail(mailOptions, function(err) {
@@ -132,7 +132,7 @@ module.exports = {
                   <td align="center" bgcolor="#ff4351" height="150">
                     <img
                       src="/assets/images/BELMARD-noir-noir.png"
-                      alt="Email de la part de Mirabelle" style="display: block; color: #ffffff;"
+                      alt="Email de la part de Belmard" style="display: block; color: #ffffff;"
                     />
                   </td>
                 </tr>
@@ -155,9 +155,9 @@ module.exports = {
     var mailer = nodemailer.createTransport(transportOptions);
 
     var mailOptions = {
-      to: 'hello@mirabelle.io',
-      from: 'hello@mirabelle.io',
-      subject: 'Bienvenue sur Mirabelle!',
+      to: 'hello@belmard-batiment.fr',
+      from: 'hello@belmard-batiment.fr',
+      subject: 'Bienvenue sur Belmard!',
       html: html
     };
     mailer.sendMail(mailOptions, function(err) {
@@ -216,7 +216,7 @@ module.exports = {
             <head>
               <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
               <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-              <title>Email depuis Mirabelle</title>
+              <title>Email depuis Belmard</title>
               <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"></link>
             </head>
             <body style="margin: 0; padding: 0; font-family: 'Montserrat', sans-serif;">
@@ -239,7 +239,7 @@ module.exports = {
                             }
 
                           html += `
-                          de votre prestataire est disponible sur Mirabelle.
+                          de votre prestataire est disponible sur Belmard.
                         </td>
                       </tr>
 
@@ -263,7 +263,7 @@ module.exports = {
           var mailOptions = {
             to: user.email,
             from: config.userGmail,
-            subject: 'Mirabelle.io | Invitation',
+            subject: 'belmard-batiment.fr | Invitation',
             html: html
           };
           mailer.sendMail(mailOptions, function(err) {
@@ -321,7 +321,7 @@ module.exports = {
 //               <head>
 //                 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 //                 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-//                 <title>Email de Mirabelle.io</title>
+//                 <title>Email de belmard-batiment.fr</title>
 //                 <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"></link>
 //               </head>
 //               <body style="margin: 0; padding: 0; font-family: 'Montserrat', sans-serif;">
@@ -464,8 +464,8 @@ module.exports = {
 
         var mailOptions = {
           to: user.email,
-          from: 'contact@mirabelle.io',
-          subject: 'Modification du mot de passe sur Mirabelle',
+          from: 'contact@belmard-batiment.fr',
+          subject: 'Modification du mot de passe sur Belmard',
           text: 'Bonjour,\n\n' +
           'Vous recevez cet email pour vous informer que la mot de passe pour du compte ' + user.email + ' a bien été modifié.\n'
         };
@@ -533,7 +533,7 @@ module.exports = {
                   <td align="center" bgcolor="#ff4351" height="150">
                     <img
                       src="/assets/images/BELMARD-noir-noir.png"
-                      alt="Email de la part de Mirabelle" style="display: block; color: #ffffff;"
+                      alt="Email de la part de Belmard" style="display: block; color: #ffffff;"
                     />
                   </td>
                 </tr>
@@ -542,7 +542,7 @@ module.exports = {
                     <table border="0" cellpadding="0" cellspacing="0" width="100%">
                       <tr>
                         <td style="padding: 15px 0 30px 0;">
-                          Vous recevez cet email car vous avez fait une demande de "mot de passe oublié" pour votre compte sur Mirabelle. Veuillez, s'il vous plait cliquer sur le bouton ci-dessous ou copier/coller le lien directement dans votre navigateur pour réinitialiser votre mot de passe :
+                          Vous recevez cet email car vous avez fait une demande de "mot de passe oublié" pour votre compte sur Belmard. Veuillez, s'il vous plait cliquer sur le bouton ci-dessous ou copier/coller le lien directement dans votre navigateur pour réinitialiser votre mot de passe :
                         </td>
                       </tr>
                       <tr>
@@ -569,10 +569,10 @@ module.exports = {
                     <table border="0" cellpadding="0" cellspacing="0" width="100%">
                      <tr>
                       <td style="padding: 15px 15px 15px 15px;">
-                        <a href="https://www.mirabelle.io/" style="text-decoration: none;">Site Web Mirabelle</a>
+                        <a href="https://www.belmard-batiment.fr/" style="text-decoration: none;">Site Web Belmard</a>
                       </td>
                       <td style="padding: 15px 15px 15px 15px;">
-                        <a href="mailto:hello@mirabelle.io?Subject=Oubli de mot de passe" style="text-decoration: none;">Nous sontacter</a>
+                        <a href="mailto:hello@belmard-batiment.fr?Subject=Oubli de mot de passe" style="text-decoration: none;">Nous sontacter</a>
                       </td>
                      </tr>
                     </table>
@@ -585,7 +585,7 @@ module.exports = {
           var mailOptions = {
             to: user.email,
             from: config.userGmail,
-            subject: 'Mirabelle | Demande de changement de mot de passe  ',
+            subject: 'Belmard | Demande de changement de mot de passe  ',
             html: html
           };
           mailer.sendMail(mailOptions, function (err) {
@@ -625,7 +625,7 @@ module.exports = {
           <head>
             <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
             <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-            <title>Email depuis Mirabelle</title>
+            <title>Email depuis Belmard</title>
             <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"></link>
           </head>
           <body style="margin: 0; padding: 0; font-family: 'Montserrat', sans-serif;">
@@ -639,7 +639,7 @@ module.exports = {
                     </tr>
                     <tr>
                       <td style="padding: 15px 0 30px 0;">
-                        Vous êtes invité à rejoindre l'application Mirabelle.io
+                        Vous êtes invité à rejoindre l'application belmard-batiment.fr
                       </td>
                     </tr>
                     <tr>
@@ -662,7 +662,7 @@ module.exports = {
         var mailOptions = {
           to: user.email,
           from: config.userGmail,
-          subject: 'Mirabelle.io | Invitation',
+          subject: 'belmard-batiment.fr | Invitation',
           html: html
         };
         mailer.sendMail(mailOptions, function(err) {
