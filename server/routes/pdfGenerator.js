@@ -9,174 +9,6 @@ var Notification = require('../models/notification.model'),
 
 
 
-  let styleCSS = `
-p, a {
-	font-family: 'Lato', sans-serif;
-  font-style: normal;
-	font-variant: normal;
-	font-weight: 200;
-  font-size: 10px;
-}
-  .col-1 {
-    width: 8.33%;
-  }
-  .col-2 {
-    width: 16.66%;
-  }
-  .col-3 {
-    width: 25%;
-  }
-  .col-4 {
-    width: 33.33%;
-  }
-  .col-5 {
-    width: 41.66%;
-  }
-  .col-6 {
-    width: 50%;
-  }
-  .col-7 {
-    width: 58.33%;
-  }
-  .col-8 {
-    width: 66.66%;
-  }
-  .col-9 {
-    width: 75%;
-  }
-  .col-10 {
-    width: 83.33%;
-  }
-  .col-11 {
-    width: 91.66%;
-  }
-  .col-12 {
-    width: 100%;
-  }
-  .img {
-    height: 20px;
-  }
-  .imgSignature {
-    height: 80px;
-  }
-  .imglogo {
-    height: 100px;
-    text-align: center;
-   display: block;
-   margin-left: auto;
-   margin-right: auto
-  }
-
-  .bgh {
-    background-color: #a81010;
-    color: #fff;
-    height: 30px;
-
-  }
-  .bghFree {
-    height: 5px!important;
-
-  }
-  .desc {
-    font-family: 'Lato', sans-serif;
-  	font-style: normal;
-  	font-variant: normal;
-  	font-weight: 200;
-    text-align: left;
-  }
-  .elem {
-    font-family: 'Lato', sans-serif;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: 200;
-    text-align: center;
-    font-size: 9px;
-  }
-  .smallSize {
-    font-family: 'Lato', sans-serif;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: 200;
-    font-size: 9px;
-  }
-  .titleGooplus1 {
-    font-family: 'Lato', sans-serif;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: 200;
-    font-size: 11px;
-  }
-  .alright {
-    text-align: right;
-  }
-
-  .alctr {
-    text-align: center;
-  }
-
-  .inf {
-    font-family: 'Lato', sans-serif;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: 200;
-    font-size: 10px;
-  }
-  .inf2 {
-    font-family: 'Lato', sans-serif;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: 200;
-    font-size: 9px;
-  }
-
-  table {
-    font-family: 'Lato', sans-serif;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: 200;
-    border-collapse: collapse;
-    width: 100%;
-  }
-  td {
-    height: 20px;
-    vertical-align: center;
-  }
-  .cgv {
-    font-family: 'Lato', sans-serif;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: 200;
-    font-size: 6px;
-    text-align: center!important;
-  }
-  .ts {
-    font-family: 'Lato', sans-serif;
-    font-style: normal;
-    font-variant: normal;
-    font-weight: 300;
-    background-color: #a81010;
-    color: #fff;
-
-  }
-  #pageHeader {
-    width:100%;
-    height: 50px;
-  }
-  .avoid {
-     page-break-inside: avoid !important;
-     margin: 4px 0 4px 0;  /* to keep the page break from cutting too close to the text in the div */
-   }
-
-.data {
-     margin: 4px 0 4px 0;
-   }
-  #pageBody {
-    height: 0px;
-  }
-  .test2 {
-    margin-bottom: -50px;
-  }
-`;
 
 
 module.exports = {
@@ -303,7 +135,133 @@ module.exports = {
                   html += `
                  <head><link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato" />
                  <style type="text/css">
-                  ` + styleCSS +`
+
+                                          .col-1 {
+                                            width: 8.33%;
+                                          }
+                                          .col-2 {
+                                            width: 16.66%;
+                                          }
+                                          .col-3 {
+                                            width: 25%;
+                                          }
+                                          .col-4 {
+                                            width: 33.33%;
+                                          }
+                                          .col-5 {
+                                            width: 41.66%;
+                                          }
+                                          .col-6 {
+                                            width: 50%;
+                                          }
+                                          .col-7 {
+                                            width: 58.33%;
+                                          }
+                                          .col-8 {
+                                            width: 66.66%;
+                                          }
+                                          .col-9 {
+                                            width: 75%;
+                                          }
+                                          .col-10 {
+                                            width: 83.33%;
+                                          }
+                                          .col-11 {
+                                            width: 91.66%;
+                                          }
+                                          .col-12 {
+                                            width: 100%;
+                                          }
+                                          .img {
+                                            height: 20px;
+                                          }
+                                          .imgSignature {
+                                            height: 45px;
+                                          }
+                                          .imglogo {
+                                            height: 50px;
+                                            text-align: center;
+                                           display: block;
+                                           margin-left: auto;
+                                           margin-right: auto
+                                          }
+                                          .tabo {
+                                            border: 1px solid #ddd;
+                                          }
+                                          .bgh {
+                                            background-color: #595959;
+                                            color: white;
+                                            border: 1px solid #ddd;
+                                          }
+                                          .bghFree {
+                                            /*background-color: #595959;
+                                            color: #595959;
+                                            border: 1px solid #ddd; */
+                                          }
+                                          .desc {
+                                            text-align: left;
+                                          }
+                                          .elem {
+                                            text-align: center;
+                                            font-size: 9px;
+                                          }
+                                          .smallSize {
+                                            font-size: 9px;
+                                          }
+                                          .titleGooplus1 {
+                                            font-size: 11px;
+                                          }
+                                          .alright {
+                                            text-align: right;
+                                          }
+                                          .inf {
+                                            font-size: 10px;
+                                          }
+                                          .inf2 {
+                                            font-size: 9px;
+                                          }
+                                          .nobo {
+                                            border-top: none!important;
+                                            border-bottom: none!important;
+                                          }
+                                          .cobo {
+                                            border: 1px solid #ddd;
+                                          }
+                                          table {
+                                            border-collapse: collapse;
+                                            width: 100%;
+                                          }
+                                          td {
+                                            height: 20px;
+                                            vertical-align: center;
+                                            border-left: 1px solid #ddd;
+                                            border-right: 1px solid #ddd;
+                                          }
+                                          th {
+                                            /*font-size: 10px;*/
+                                          }
+                                           .cgv {
+                                            font-size: 6px;
+                                           text-align: center!important;
+                                          }
+                                           p  {
+                                            font-size: 9px;
+                                             font-weight: 300;
+                                          }
+                                          .ts {
+                                            background-color: #aba4a4;
+                                            font-weight: bold;
+                                          }
+                                          #pageHeader {
+                                            width:100%;
+                                            height: 50px;
+                                         }
+                                         .avoid {
+                                             page-break-inside: avoid !important;
+                                             margin: 4px 0 4px 0;  /* to keep the page break from cutting too close to the text in the div */
+                                           }
+                                        #pageBody {height: 0px;}
+                                        .test2 {margin-bottom: -50px; }
                  </style>
                   </head>`
                   // html += '<div id="pageHeader" class="col-12">'
