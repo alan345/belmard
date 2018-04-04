@@ -7,7 +7,7 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
       <div *ngIf="!stripeCust.id">
-        <mat-checkbox [(ngModel)]="approveTnC">{{'I approve the' | translate}} <a target="_blank" href="http://mirabelle.io/conditions-generales-dutilisation">{{'TandC' | translate}}</a></mat-checkbox>
+        <mat-checkbox [(ngModel)]="approveTnC">{{'I approve the' | translate}} </mat-checkbox>
         <br>
         <button *ngIf="approveTnC" mat-raised-button color="primary" color="primary" (click)="saveCustInStripe()">
           {{'Welcome!' | translate}}
