@@ -312,22 +312,22 @@ module.exports = {
                              item.ownerCompanies.forEach(companie => {
                                html += '<th class="col-4 desc cobo">'
                                  html += '<p><b>'
-                                 html += companie.nameCompanie
+                                 html += 'Belmard Rénovation'
                                  html += '</b></p>'
                                  companie.address.forEach(singleAddress => {
                                    html += '<p>'
-                                   html += singleAddress.address + ' ' + singleAddress.address2
+                                   html += '30, rue Belgrand'
                                    html += '</p>'
                                    html += '<p>'
-                                   html += singleAddress.zip + ' ' + singleAddress.city
+                                   html += '75020 Paris'
                                    html += '</p>'
                                    html += '<p>'
-                                   html += singleAddress.country
+                                   html += 'Tel : 01 40 33 88 33'
                                    html += '</p>'
                                  })
 
                                  html += '<p>'
-                                 html += 'Mail : ' + companie.email
+                                 html += 'Mail : contact@belmard-renovation.fr '
                                  html += '</p>'
                                html += '</th>'
                             })
