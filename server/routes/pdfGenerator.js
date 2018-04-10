@@ -381,7 +381,7 @@ module.exports = {
                            </thead>
                          </table>
                          <br>
-                         <table>
+                         <table class="cobo">
                            <thead>
                              <tr>
                                <th class="col-12 desc smallSize"><b>Objet :</b> ` + item.name + `
