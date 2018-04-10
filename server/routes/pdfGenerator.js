@@ -384,10 +384,10 @@ module.exports = {
                            </thead>
                          </table>
                          <br>
-                         <table class="cobo marboto">
+                         <table class="cobo">
                            <thead>
                              <tr>
-                               <th class="col-12 desc smallSize"><b>Objet :</b> ` + item.name + `
+                               <th class="col-12 desc smallSize marboto"><b>Objet :</b> ` + item.name + `
                                </th>
                              </tr>
                            </thead>
