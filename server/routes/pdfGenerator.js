@@ -262,6 +262,9 @@ module.exports = {
                                            }
                                         #pageBody {height: 0px;}
                                         .test2 {margin-bottom: -50px; }
+                                          
+                                         .padboto { padding-top: 10px;
+                                                    padding-bottom: 10px; }
                  </style>
                   </head>`
                   // html += '<div id="pageHeader" class="col-12">'
@@ -381,7 +384,7 @@ module.exports = {
                            </thead>
                          </table>
                          <br>
-                         <table class="cobo">
+                         <table class="cobo padboto">
                            <thead>
                              <tr>
                                <th class="col-12 desc smallSize"><b>Objet :</b> ` + item.name + `
