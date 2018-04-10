@@ -475,17 +475,17 @@ module.exports = {
     </tr>`
     html += `
     <tr>
-      <td class="col-6 alright">Montant de TVA</td>>
-      <td class="col-2 alctr ts elem"></td>
-      <td class="col-2 alctr ts elem"></td>
+      <td class="col-6 alright ts elem">Montant de TVA</td>>
+      <td class="col-2 alctr elem"></td>
+      <td class="col-2 alctr elem"></td>
       <td class="col-2 elem"><b>` + item.priceQuote.discountGlobal + `%</b></td>
     </tr>`
   }
   html += `
   <tr>
-      <td class="col-6 alright">TOTAL TTC</td>>
-      <td class="col-2 alctr ts elem"></td>
-      <td class="col-2 alctr ts elem"></td>
+      <td class="col-6 alright ts elem">TOTAL TTC</td>>
+      <td class="col-2 alctr elem"></td>
+      <td class="col-2 alctr elem"></td>
     <td class="col-2 elem">
       <b>`
         html += Math.round(item.priceQuote.priceGlobalWithDiscount)
@@ -503,9 +503,9 @@ module.exports = {
     <td class="col-12"></td>
    </tr>
   <tr>
-      <td class="col-6 alright">Acompte à la commande 40%</td>>
-      <td class="col-2 alctr ts elem"></td>
-      <td class="col-2 alctr ts elem"></td>
+      <td class="col-6 alright ts elem">Acompte à la commande 40%</td>>
+      <td class="col-2 alctr elem"></td>
+      <td class="col-2 alctr elem"></td>
     <td class="col-2 elem">
       <b>`
         html += Math.round(item.priceQuote.priceGlobalWithTaxesWithDiscount)
@@ -520,16 +520,16 @@ module.exports = {
     </td>
   </tr>
   <tr>
-      <td class="col-6 alright">Acompte intermédiaire</td>>
-      <td class="col-2 alctr ts elem"></td>
-      <td class="col-2 alctr ts elem"></td>
+      <td class="col-6 alright ts elem">Acompte intermédiaire</td>>
+      <td class="col-2 alctr elem"></td>
+      <td class="col-2 alctr elem"></td>
     <td class="col-2 elem"><b>` + item.priceQuote.vatGlobal + `%</b></td>
   </tr>
 
   <tr>
-      <td class="col-6 alright">Solde</td>>
-      <td class="col-2 alctr ts elem"></td>
-      <td class="col-2 alctr ts elem"></td>
+      <td class="col-6 alright ts elem">Solde</td>>
+      <td class="col-2 alctr elem"></td>
+      <td class="col-2 alctr elem"></td>
     <td class="col-2 elem"><b>` + item.priceQuote.vatGlobal + `%</b></td>
   </tr>
   
