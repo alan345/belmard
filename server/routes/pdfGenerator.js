@@ -447,12 +447,15 @@ module.exports = {
 
 
 <table class="cobo">
-  <tr>
-    <td class="col-6 alright cobo"></td>
-    <td class="col-2 ts elem ">TVA 5,5%</td>
-    <td class="col-2 ts elem">TVA 10%</td>
-    <td class="col-2 ts elem">TOTAL</td>
-  </tr>`
+  </thead>
+    <tr>
+     <th class="col-6"></th>
+     <th class="col-2 ts elem ">TVA 5,5%</th>
+     <th class="col-2 ts elem">TVA 10%</th>
+     <th class="col-2 ts elem">TOTAL</th>
+    </tr>
+   </thead>
+`
 
   if (item.priceQuote.discountGlobal !== 0) {
     html += `
