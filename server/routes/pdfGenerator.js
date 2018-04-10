@@ -446,9 +446,9 @@ module.exports = {
 
 
 
-<table>
+<table class="cobo">
   <tr>
-    <td class="col-6 alright"></td>
+    <td class="col-6 alright cobo"></td>
     <td class="col-2 ">TVA 5,5%</td>
     <td class="col-2 ts elem">TVA 10%</td>
     <td class="col-2 ts elem">TOTAL</td>
