@@ -455,15 +455,16 @@ module.exports = {
      <th class="col-2 ts elem">TOTAL</th>
     </tr>
    </thead>
+   <tbody>
 `
 
   if (item.priceQuote.discountGlobal !== 0) {
     html += `
     <tr>
-      <td class="col-6 alright ts elem">Sous-Total HT</td>
-      <td class="col-2 alctr elem"></td>
-      <td class="col-2 alctr elem"></td>
-      <td class="col-2 elem">
+      <td class="alright ts elem">Sous-Total HT</td>
+      <td class="alctr elem"></td>
+      <td class="alctr elem"></td>
+      <td class="elem">
         <b>`
         html += Math.round(item.priceQuote.priceQuoteWithoutTaxes)
         html += item.detail.currency
@@ -478,18 +479,18 @@ module.exports = {
     </tr>`
     html += `
     <tr>
-      <td class="col-6 alright ts elem">Montant de TVA</td>>
-      <td class="col-2 alctr elem"></td>
-      <td class="col-2 alctr elem"></td>
-      <td class="col-2 elem"><b>` + item.priceQuote.discountGlobal + `%</b></td>
+      <td class="alright ts elem">Montant de TVA</td>>
+      <td class="alctr elem"></td>
+      <td class="alctr elem"></td>
+      <td class="elem"><b>` + item.priceQuote.discountGlobal + `%</b></td>
     </tr>`
   }
   html += `
   <tr>
-      <td class="col-6 alright ts elem">TOTAL TTC</td>>
-      <td class="col-2 alctr elem"></td>
-      <td class="col-2 alctr elem"></td>
-    <td class="col-2 elem">
+      <td class="alright ts elem">TOTAL TTC</td>>
+      <td class="alctr elem"></td>
+      <td class="alctr elem"></td>
+    <td class="elem">
       <b>`
         html += Math.round(item.priceQuote.priceGlobalWithDiscount)
         html += item.detail.currency
@@ -503,13 +504,13 @@ module.exports = {
     </td>
   </tr>
   <tr>
-    <td class="col-12"></td>
+    <td></td>
    </tr>
   <tr>
-      <td class="col-6 alright ts elem">Acompte à la commande 40%</td>>
-      <td class="col-2 alctr elem"></td>
-      <td class="col-2 alctr elem"></td>
-    <td class="col-2 elem">
+      <td class="alright ts elem">Acompte à la commande 40%</td>>
+      <td class="alctr elem"></td>
+      <td class="alctr elem"></td>
+    <td class="elem">
       <b>`
         html += Math.round(item.priceQuote.priceGlobalWithTaxesWithDiscount)
         html += item.detail.currency
@@ -523,19 +524,19 @@ module.exports = {
     </td>
   </tr>
   <tr>
-      <td class="col-6 alright ts elem">Acompte intermédiaire</td>>
-      <td class="col-2 alctr elem"></td>
-      <td class="col-2 alctr elem"></td>
-    <td class="col-2 elem"><b>` + item.priceQuote.vatGlobal + `%</b></td>
+      <td class="alright ts elem">Acompte intermédiaire</td>>
+      <td class="alctr elem"></td>
+      <td class="alctr elem"></td>
+    <td class="elem"><b>` + item.priceQuote.vatGlobal + `%</b></td>
   </tr>
 
   <tr>
-      <td class="col-6 alright ts elem">Solde</td>>
-      <td class="col-2 alctr elem"></td>
-      <td class="col-2 alctr elem"></td>
-    <td class="col-2 elem"><b>` + item.priceQuote.vatGlobal + `%</b></td>
+      <td class="alright ts elem">Solde</td>>
+      <td class="alctr elem"></td>
+      <td class="alctr elem"></td>
+    <td class="elem"><b>` + item.priceQuote.vatGlobal + `%</b></td>
   </tr>
-  
+ </tbody> 
 </table>
 
 
