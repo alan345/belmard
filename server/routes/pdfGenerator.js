@@ -265,7 +265,7 @@ module.exports = {
                                           
                                          .marboto { margin-top: 10px;
                                                     margin-bottom: 10px;
-                                                    height: 50px;      }
+                                                    height: 30px;      }
                  </style>
                   </head>`
                   // html += '<div id="pageHeader" class="col-12">'
