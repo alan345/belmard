@@ -449,7 +449,7 @@ module.exports = {
 <table class="cobo">
   <tr>
     <td class="col-6 alright cobo"></td>
-    <td class="col-2 ">TVA 5,5%</td>
+    <td class="col-2 ts elem ">TVA 5,5%</td>
     <td class="col-2 ts elem">TVA 10%</td>
     <td class="col-2 ts elem">TOTAL</td>
   </tr>`
@@ -457,9 +457,9 @@ module.exports = {
   if (item.priceQuote.discountGlobal !== 0) {
     html += `
     <tr>
-      <td class="col-6 alright">Sous-Total HT</td>
-      <td class="col-2 alctr ts elem"></td>
-      <td class="col-2 alctr ts elem"></td>
+      <td class="col-6 alright ts elem">Sous-Total HT</td>
+      <td class="col-2 alctr elem"></td>
+      <td class="col-2 alctr elem"></td>
       <td class="col-2 elem">
         <b>`
         html += Math.round(item.priceQuote.priceQuoteWithoutTaxes)
