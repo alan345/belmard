@@ -525,44 +525,14 @@ module.exports = {
       <td class="col-2 alctr ts elem"></td>
     <td class="col-2 elem"><b>` + item.priceQuote.vatGlobal + `%</b></td>
   </tr>
-  <tr>
-    <td class="col-8"></td>
-    <td class="col-2 alctr ts elem">TOTAL TTC</td>
-    <td class="col-2 elem">
-      <b>`
-        html += Math.round(item.priceQuote.priceGlobalWithTaxesWithDiscount)
-        html += item.detail.currency
-        // item.ownerCompanies.forEach(companie => {
-        //   if (companie.option.currency) {
-        //     html += companie.option.currency
-        //   }
-        // })
-        html += `
-      </b>
-    </td>
-  </tr>
+
   <tr>
       <td class="col-6 alright">Solde</td>>
       <td class="col-2 alctr ts elem"></td>
       <td class="col-2 alctr ts elem"></td>
     <td class="col-2 elem"><b>` + item.priceQuote.vatGlobal + `%</b></td>
   </tr>
-  <tr>
-    <td class="col-8"></td>
-    <td class="col-2 alctr ts elem">TOTAL TTC</td>
-    <td class="col-2 elem">
-      <b>`
-        html += Math.round(item.priceQuote.priceGlobalWithTaxesWithDiscount)
-        html += item.detail.currency
-        // item.ownerCompanies.forEach(companie => {
-        //   if (companie.option.currency) {
-        //     html += companie.option.currency
-        //   }
-        // })
-        html += `
-      </b>
-    </td>
-  </tr>
+  
 </table>
 
 
