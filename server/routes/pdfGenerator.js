@@ -310,7 +310,7 @@ module.exports = {
                               }
                              }
                              item.ownerCompanies.forEach(companie => {
-                               html += '<th class="col-4 desc cobo">'
+                               html += '<th class="col-5 desc cobo">'
                                  html += '<p><b>'
                                  html += 'Belmard Rénovation'
                                  html += '</b></p>'
@@ -333,8 +333,8 @@ module.exports = {
                             })
 
 
-            html += `         <th class="col-4"></th>
-                               <th class="col-4 desc cobo">`
+            html += `         <th class="col-2"></th>
+                               <th class="col-5 desc cobo">`
 
 
 
