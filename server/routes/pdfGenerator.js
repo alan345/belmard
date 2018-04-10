@@ -310,7 +310,7 @@ module.exports = {
                               }
                              }
                              item.ownerCompanies.forEach(companie => {
-                               html += '<th class="col-4 desc">'
+                               html += '<th class="col-4 desc cobo">'
                                  html += '<p><b>'
                                  html += companie.nameCompanie
                                  html += '</b></p>'
@@ -334,7 +334,7 @@ module.exports = {
 
 
             html += `         <th class="col-4"></th>
-                               <th class="col-4 desc">`
+                               <th class="col-4 desc cobo">`
 
 
 
@@ -393,11 +393,16 @@ module.exports = {
                          <table class="tabo">
                            <thead>
                              <tr>
-                             <th class="col-6 bgh titleGooplus1">Description</th>
-                             <th class="col-1 bgh titleGooplus1">Unité</th>
-                             <th class="col-1 bgh titleGooplus1">Quantité</th>
-                             <th class="col-2 bgh titleGooplus1">PU HT</th>
-                             <th class="col-2 bgh titleGooplus1">PT HT</th>
+                             <th class="col-4 bgh titleGooplus1">Description</th>
+                             <th class="col-2 bgh titleGooplus1">Illustration</th>
+                             <th class="col-1 bgh titleGooplus1">UNIT.</th>
+                             <th class="col-1 bgh titleGooplus1">Qté</th>
+                             <th class="col-1 bgh titleGooplus1">PU</th>
+                             <th class="col-1 bgh titleGooplus1">Total HT</th>
+                             <th class="col-2 bgh titleGooplus1">TVA
+                             <td>0.06</td>
+                             <td>0.10</td>
+                             </th>
                              </tr>
                            </thead>
                            <tbody>`
@@ -421,9 +426,9 @@ module.exports = {
                         })
                       }
                       html += '<td class="desc bghFree"><div class="avoid bghFree"><p>' + description + '</p></div></td>'
-                      // html += '<td class="elem">' + img + '</td>'
-                      // html += '<td class="desc">' + bucketProduct.typeRow + '</td>'
-                      // html += '<td class="elem">' + bucketProduct.title + '</td>'
+                      html += '<td class="elem">' + img + '</td>'
+                      html += '<td class="desc">' + bucketProduct.typeRow + '</td>'
+                      html += '<td class="elem">' + bucketProduct.title + '</td>'
                       html += '<td class="elem bghFree"><div class="data bghFree"><p>' + unit + '</p></div></div></td>'
                       html += '<td class="elem bghFree"><div class="data bghFree"><p>' + bucketProduct.quantity + '</p></div></td>'
                       html += '<td class="elem bghFree"><div class="data bghFree"><p>' + bucketProduct.priceWithoutTaxes + '</p></div></td>'
