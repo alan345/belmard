@@ -264,7 +264,8 @@ module.exports = {
                                         .test2 {margin-bottom: -50px; }
                                           
                                          .marboto { margin-top: 10px;
-                                                    margin-bottom: 10px; }
+                                                    margin-bottom: 10px;
+                                                    height: 50px;      }
                  </style>
                   </head>`
                   // html += '<div id="pageHeader" class="col-12">'
