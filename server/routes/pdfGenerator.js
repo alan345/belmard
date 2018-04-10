@@ -327,7 +327,7 @@ module.exports = {
                                  })
 
                                  html += '<p>'
-                                 html += 'Mail : contact@belmard-renovation.fr '
+                                 html += 'contact@belmard-renovation.fr'
                                  html += '</p>'
                                html += '</th>'
                             })
@@ -393,13 +393,13 @@ module.exports = {
                          <table class="tabo">
                            <thead>
                              <tr>
-                             <th class="col-4 bgh titleGooplus1">Description</th>
+                             <th class="col-5 bgh titleGooplus1">Description</th>
                              <th class="col-2 bgh titleGooplus1">Illustration</th>
                              <th class="col-1 bgh titleGooplus1">UNIT.</th>
                              <th class="col-1 bgh titleGooplus1">Qté</th>
                              <th class="col-1 bgh titleGooplus1">PU</th>
                              <th class="col-1 bgh titleGooplus1">Total HT</th>
-                             <th class="col-2 bgh titleGooplus1">TVA</th>
+                             <th class="col-1 bgh titleGooplus1">TVA</th>
                              </tr>
                            </thead>
                            <tbody>`
@@ -429,7 +429,6 @@ module.exports = {
                       html += '<td class="elem bghFree"><div class="data bghFree"><p>' + bucketProduct.priceWithoutTaxes + '</p></div></div></td>'
                       html += '<td class="elem bghFree"><div class="data bghFree"><p>' + bucketProduct.priceWithoutTaxes + '</p></div></td>'
                       html += '<td class="elem bghFree"><div class="data bghFree"><p>TVA</p></div></td>'
-                      html += '<td class="elem bghFree"><div class="data bghFree"><p>' + bucketProduct.vat + '</p></div></td>'
                       // html += '<td class="elem">' + bucketProduct.vat + '%</td>'
                       html += '</tr>'
 
