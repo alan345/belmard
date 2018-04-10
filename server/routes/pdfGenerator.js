@@ -399,10 +399,7 @@ module.exports = {
                              <th class="col-1 bgh titleGooplus1">Qté</th>
                              <th class="col-1 bgh titleGooplus1">PU</th>
                              <th class="col-1 bgh titleGooplus1">Total HT</th>
-                             <th class="col-2 bgh titleGooplus1">TVA
-                             <td>0.06</td>
-                             <td>0.10</td>
-                             </th>
+                             <th class="col-2 bgh titleGooplus1">TVA</th>
                              </tr>
                            </thead>
                            <tbody>`
@@ -427,12 +424,12 @@ module.exports = {
                       }
                       html += '<td class="desc bghFree"><div class="avoid bghFree"><p>' + description + '</p></div></td>'
                       html += '<td class="elem">' + img + '</td>'
-                      html += '<td class="desc">' + bucketProduct.typeRow + '</td>'
-                      html += '<td class="elem">' + bucketProduct.title + '</td>'
-                      html += '<td class="elem bghFree"><div class="data bghFree"><p>' + unit + '</p></div></div></td>'
-                      html += '<td class="elem bghFree"><div class="data bghFree"><p>' + bucketProduct.quantity + '</p></div></td>'
+                      html += '<td class="desc bghFree">' + unit + '</td>'
+                      html += '<td class="elem">' + bucketProduct.quantity + '</td>'
+                      html += '<td class="elem bghFree"><div class="data bghFree"><p>' + bucketProduct.priceWithoutTaxes + '</p></div></div></td>'
                       html += '<td class="elem bghFree"><div class="data bghFree"><p>' + bucketProduct.priceWithoutTaxes + '</p></div></td>'
-                      html += '<td class="elem bghFree"><div class="data bghFree"><p>' + bucketProduct.priceWithQuantity + '</p></div></td>'
+                      html += '<td class="elem bghFree"><div class="data bghFree"><p>TVA</p></div></td>'
+                      html += '<td class="elem bghFree"><div class="data bghFree"><p>' + bucketProduct.vat + '</p></div></td>'
                       // html += '<td class="elem">' + bucketProduct.vat + '%</td>'
                       html += '</tr>'
 
