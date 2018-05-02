@@ -262,6 +262,10 @@ module.exports = {
                                            }
                                         #pageBody {height: 0px;}
                                         .test2 {margin-bottom: -50px; }
+                                          
+                                         .marboto { margin-top: 10px;
+                                                    margin-bottom: 10px;
+                                                    height: 30px;      }
                  </style>
                   </head>`
                   // html += '<div id="pageHeader" class="col-12">'
@@ -310,31 +314,31 @@ module.exports = {
                               }
                              }
                              item.ownerCompanies.forEach(companie => {
-                               html += '<th class="col-4 desc">'
+                               html += '<th class="col-5 desc cobo">'
                                  html += '<p><b>'
-                                 html += companie.nameCompanie
+                                 html += 'Belmard Rénovation'
                                  html += '</b></p>'
                                  companie.address.forEach(singleAddress => {
                                    html += '<p>'
-                                   html += singleAddress.address + ' ' + singleAddress.address2
+                                   html += '30, rue Belgrand'
                                    html += '</p>'
                                    html += '<p>'
-                                   html += singleAddress.zip + ' ' + singleAddress.city
+                                   html += '75020 Paris'
                                    html += '</p>'
                                    html += '<p>'
-                                   html += singleAddress.country
+                                   html += 'Tel : 01 40 33 88 33'
                                    html += '</p>'
                                  })
 
                                  html += '<p>'
-                                 html += 'Mail : ' + companie.email
+                                 html += 'contact@belmard-renovation.fr'
                                  html += '</p>'
                                html += '</th>'
                             })
 
 
-            html += `         <th class="col-4"></th>
-                               <th class="col-4 desc">`
+            html += `         <th class="col-2"></th>
+                               <th class="col-5 desc cobo">`
 
 
 
@@ -381,10 +385,10 @@ module.exports = {
                            </thead>
                          </table>
                          <br>
-                         <table>
-                           <thead>
-                             <tr>
-                               <th class="col-12 desc smallSize"><b>Objet :</b> ` + item.name + `
+                         <table class="cobo">
+                           <thead class="marboto">
+                             <tr class="marboto">
+                               <th class="col-12 desc smallSize marboto"><b>Objet :</b> ` + item.name + `
                                </th>
                              </tr>
                            </thead>
@@ -393,11 +397,13 @@ module.exports = {
                          <table class="tabo">
                            <thead>
                              <tr>
-                             <th class="col-6 bgh titleGooplus1">Description</th>
-                             <th class="col-1 bgh titleGooplus1">Unité</th>
-                             <th class="col-1 bgh titleGooplus1">Quantité</th>
-                             <th class="col-2 bgh titleGooplus1">PU HT</th>
-                             <th class="col-2 bgh titleGooplus1">PT HT</th>
+                             <th class="col-5 bgh titleGooplus1">Description</th>
+                             <th class="col-2 bgh titleGooplus1">Illustration</th>
+                             <th class="col-1 bgh titleGooplus1">UNIT.</th>
+                             <th class="col-1 bgh titleGooplus1">Qté</th>
+                             <th class="col-1 bgh titleGooplus1">PU</th>
+                             <th class="col-1 bgh titleGooplus1">Total HT</th>
+                             <th class="col-1 bgh titleGooplus1">TVA</th>
                              </tr>
                            </thead>
                            <tbody>`
@@ -421,13 +427,12 @@ module.exports = {
                         })
                       }
                       html += '<td class="desc bghFree"><div class="avoid bghFree"><p>' + description + '</p></div></td>'
-                      // html += '<td class="elem">' + img + '</td>'
-                      // html += '<td class="desc">' + bucketProduct.typeRow + '</td>'
-                      // html += '<td class="elem">' + bucketProduct.title + '</td>'
-                      html += '<td class="elem bghFree"><div class="data bghFree"><p>' + unit + '</p></div></div></td>'
-                      html += '<td class="elem bghFree"><div class="data bghFree"><p>' + bucketProduct.quantity + '</p></div></td>'
+                      html += '<td class="elem">' + img + '</td>'
+                      html += '<td class="desc bghFree">' + unit + '</td>'
+                      html += '<td class="elem">' + bucketProduct.quantity + '</td>'
+                      html += '<td class="elem bghFree"><div class="data bghFree"><p>' + bucketProduct.priceWithoutTaxes + '</p></div></div></td>'
                       html += '<td class="elem bghFree"><div class="data bghFree"><p>' + bucketProduct.priceWithoutTaxes + '</p></div></td>'
-                      html += '<td class="elem bghFree"><div class="data bghFree"><p>' + bucketProduct.priceWithQuantity + '</p></div></td>'
+                      html += '<td class="elem bghFree"><div class="data bghFree"><p>TVA</p></div></td>'
                       // html += '<td class="elem">' + bucketProduct.vat + '%</td>'
                       html += '</tr>'
 
@@ -441,19 +446,25 @@ module.exports = {
 
 
 
-<table>
-  <tr>
-    <td class="col-8"></td>
-    <td class="col-2 alright"></td>
-    <td class="col-2 ts elem">TOTAL</td>
-  </tr>`
+<table class="cobo">
+  </thead>
+    <tr>
+     <th class="col-6"></th>
+     <th class="col-2 ts elem ">TVA 5,5%</th>
+     <th class="col-2 ts elem">TVA 10%</th>
+     <th class="col-2 ts elem">TOTAL</th>
+    </tr>
+   </thead>
+   <tbody>
+`
 
   if (item.priceQuote.discountGlobal !== 0) {
     html += `
     <tr>
-      <td class="col-8"></td>
-      <td class="col-2 alctr ts elem">Sous-Total HT</td>
-      <td class="col-2 elem">
+      <td class="alright ts elem">Sous-Total HT</td>
+      <td class="alctr elem"></td>
+      <td class="alctr elem"></td>
+      <td class="elem">
         <b>`
         html += Math.round(item.priceQuote.priceQuoteWithoutTaxes)
         html += item.detail.currency
@@ -468,16 +479,18 @@ module.exports = {
     </tr>`
     html += `
     <tr>
-      <td class="col-8"></td>
-      <td class="col-2 alctr ts elem">Remise</td>
-      <td class="col-2 elem"><b>` + item.priceQuote.discountGlobal + `%</b></td>
+      <td class="alright ts elem">Montant de TVA</td>>
+      <td class="alctr elem"></td>
+      <td class="alctr elem"></td>
+      <td class="elem"><b>` + item.priceQuote.discountGlobal + `%</b></td>
     </tr>`
   }
   html += `
   <tr>
-    <td class="col-8"></td>
-    <td class="col-2 alctr ts elem">TotaL HT</td>
-    <td class="col-2 elem">
+      <td class="alright ts elem">TOTAL TTC</td>>
+      <td class="alctr elem"></td>
+      <td class="alctr elem"></td>
+    <td class="elem">
       <b>`
         html += Math.round(item.priceQuote.priceGlobalWithDiscount)
         html += item.detail.currency
@@ -491,14 +504,13 @@ module.exports = {
     </td>
   </tr>
   <tr>
-    <td class="col-8"></td>
-    <td class="col-2 alctr ts elem">TVA</td>
-    <td class="col-2 elem"><b>` + item.priceQuote.vatGlobal + `%</b></td>
-  </tr>
+    <td></td>
+   </tr>
   <tr>
-    <td class="col-8"></td>
-    <td class="col-2 alctr ts elem">TOTAL TTC</td>
-    <td class="col-2 elem">
+      <td class="alright ts elem">Acompte à la commande 40%</td>>
+      <td class="alctr elem"></td>
+      <td class="alctr elem"></td>
+    <td class="elem">
       <b>`
         html += Math.round(item.priceQuote.priceGlobalWithTaxesWithDiscount)
         html += item.detail.currency
@@ -511,6 +523,20 @@ module.exports = {
       </b>
     </td>
   </tr>
+  <tr>
+      <td class="alright ts elem">Acompte intermédiaire</td>>
+      <td class="alctr elem"></td>
+      <td class="alctr elem"></td>
+    <td class="elem"><b>` + item.priceQuote.vatGlobal + `%</b></td>
+  </tr>
+
+  <tr>
+      <td class="alright ts elem">Solde</td>>
+      <td class="alctr elem"></td>
+      <td class="alctr elem"></td>
+    <td class="elem"><b>` + item.priceQuote.vatGlobal + `%</b></td>
+  </tr>
+ </tbody> 
 </table>
 
 
